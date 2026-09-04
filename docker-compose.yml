@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  server:
+    image: judge0/judge0:1.13.1
+    ports:
+      - "2358:2358"
+    privileged: true
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=db
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13.0
+    environment:
+      - POSTGRES_USER=judge0
+      - POSTGRES_PASSWORD=judge0
+      - POSTGRES_DB=judge0
+
+  redis:
+    image: redis:6.0
