@@ -64,4 +64,48 @@ public class WelcomeController {
         System.out.println("Registering: " + username + " (" + email + ")");
         // Future HTTP POST to /api/register
     }
+
+    @FXML
+    private void handleGoogleSignUp() {
+        System.out.println("Opening browser for Google Registration...");
+
+        GoogleAuthService.startGoogleLogin(authCode -> {
+            System.out.println("Received Google Code (Register): " + authCode);
+
+            // POST code to Flask backend to verify and create account in platform.db
+            sendAuthCodeToFlask(authCode);
+        });
+    }
+
+    private void sendAuthCodeToFlask(String authCode) {
+        System.out.println("Testing Flask authentication with code: " + authCode);
+
+        // Send code to backend
+        boolean success = ApiClient.sendGoogleAuthCode(authCode);
+
+        if (success) {
+            UserSession session = UserSession.getInstance();
+
+            // Success dialog verifying data from platform.db
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Google Auth Test Passed!");
+            alert.setHeaderText("Successfully Logged In / Registered!");
+            alert.setContentText(String.format(
+                    "User Data Saved in Session:\n\n" +
+                            "• User ID: %d\n" +
+                            "• Name: %s\n" +
+                            "• Email: %s",
+                    session.getUserId(), session.getName(), session.getEmail()
+            ));
+            alert.showAndWait();
+
+        } else {
+            // Failure dialog if backend/Google verification fails
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Auth Test Failed");
+            alert.setHeaderText("Google Authentication Failed");
+            alert.setContentText("Could not exchange authorization code with Flask API. Check server logs.");
+            alert.showAndWait();
+        }
+    }
 }
