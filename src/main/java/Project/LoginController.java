@@ -63,4 +63,22 @@ public class LoginController {
         System.out.println("Attempting login for: " + email);
         // Future HTTP POST to Flask /api/login endpoint
     }
+
+    @FXML
+    private void handleGoogleLogin() {
+        System.out.println("Opening browser for Google Authentication...");
+
+        GoogleAuthService.startGoogleLogin(authCode -> {
+            System.out.println("Received Google Code: " + authCode);
+
+            // POST authorization code to Flask API
+            sendAuthCodeToFlask(authCode);
+        });
+    }
+
+    private void sendAuthCodeToFlask(String code) {
+        // Make HTTP POST request to your backend: /api/auth/google
+        // Once verified, transition user to Dashboard view
+        SceneManager.switchScene("/DashboardView.fxml", "Mimo Platform - Dashboard");
+    }
 }

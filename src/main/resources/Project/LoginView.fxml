@@ -25,6 +25,7 @@
                 <Button fx:id="aboutBtn" onAction="#handleAbout" text="About" />
                 <Button fx:id="helpBtn" onAction="#handleHelp" text="Help" />
                 <Button fx:id="registerBtn" onAction="#handleRegister" text="Register" />
+                <Button fx:id="googleLoginBtn" onAction="#handleGoogleLogin" text="Sign in with Google" />
             </children>
         </HBox>
     </top>
