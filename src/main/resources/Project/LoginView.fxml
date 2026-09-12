@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- TOP NAVIGATION BAR -->
+    <top>
+        <HBox alignment="TOP_RIGHT" spacing="25.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="10.0" right="40.0" top="10.0" />
+            </padding>
+            <children>
+                <Label style="-fx-cursor: hand;" text="About" />
+                <Label style="-fx-cursor: hand;" text="Help" />
+                <Label style="-fx-cursor: hand;" text="Register" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- CENTER LOGIN FORM (Stays locked in center) -->
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" fillWidth="false" maxHeight="300.0" maxWidth="400.0" prefHeight="300.0" prefWidth="400.0" spacing="15.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
+                    <padding>
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                    </padding>
+                    <children>
+                        <Label text="Login" />
+                        <TextField fx:id="emailField" maxWidth="280.0" promptText="Email or Username" />
+                        <PasswordField fx:id="passwordField" maxWidth="280.0" promptText="Password" />
+                        <Button fx:id="loginBtn" text="Sign In" />
+                        <Hyperlink fx:id="registerLink" text="Don't have an account? Register" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
