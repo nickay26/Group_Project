@@ -16,24 +16,24 @@
 
     <!-- 1. TOP NAVIGATION BAR -->
     <top>
-        <HBox alignment="TOP_RIGHT" spacing="25.0" BorderPane.alignment="CENTER">
+        <HBox alignment="TOP_RIGHT" spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="10.0" right="40.0" top="10.0" />
             </padding>
             <children>
-                <Label style="-fx-cursor: hand;" text="About" />
-                <Label style="-fx-cursor: hand;" text="Help" />
-                <Label style="-fx-cursor: hand;" text="Login" />
+                <Button fx:id="aboutBtn" onAction="#handleAbout" text="About" />
+                <Button fx:id="helpBtn" onAction="#handleHelp" text="Help" />
+                <Button fx:id="loginBtn" onAction="#handleLogin" text="Login" />
             </children>
         </HBox>
     </top>
 
-    <!-- 2. CENTER CONTAINER (Stays locked in the middle) -->
+    <!-- 2. CENTER CONTAINER -->
     <center>
         <VBox alignment="CENTER" spacing="40.0" BorderPane.alignment="CENTER">
             <children>
 
-                <!-- REGISTER FORM CARD (Max width/height prevents resizing stretch) -->
+                <!-- REGISTER FORM CARD -->
                 <VBox alignment="CENTER" fillWidth="false" maxHeight="260.0" maxWidth="420.0" prefHeight="260.0" prefWidth="420.0" spacing="12.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
                     <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

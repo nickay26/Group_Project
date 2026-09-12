@@ -1,100 +1,67 @@
 package Project;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-public class WelcomeController extends BorderPane {
+public class WelcomeController {
 
-    public WelcomeController() {
-        this.setPadding(new Insets(20));
+    @FXML private Button aboutBtn;
+    @FXML private Button helpBtn;
+    @FXML private Button loginBtn;
+    @FXML private Button signUpButton;
 
-        // 1. TOP NAVIGATION BAR
-        HBox navBar = new HBox(25);
-        navBar.setAlignment(Pos.TOP_RIGHT);
-        navBar.setPadding(new Insets(10, 40, 20, 10));
+    @FXML private TextField usernameField;
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
 
-        Label aboutBtn = new Label("About");
-        Label helpBtn = new Label("Help");
-        Label loginBtn = new Label("Login");
-
-        navBar.getChildren().addAll(aboutBtn, helpBtn, loginBtn);
-        this.setTop(navBar);
-
-        // 2. CENTER CONTENT CONTAINER
-        VBox centerContainer = new VBox(40);
-        centerContainer.setAlignment(Pos.CENTER);
-
-        // Register Form Card (Structural Outline)
-        VBox registerCard = createRegisterForm();
-
-        // Language Cards Row (Structural Outlines)
-        HBox languageCardsRow = new HBox(35);
-        languageCardsRow.setAlignment(Pos.CENTER);
-
-        VBox javaCard = createLanguageCard("Java", () -> onLanguageSelected("Java"));
-        VBox cppCard = createLanguageCard("C++", () -> onLanguageSelected("C++"));
-        VBox pythonCard = createLanguageCard("Python", () -> onLanguageSelected("Python"));
-
-        languageCardsRow.getChildren().addAll(javaCard, cppCard, pythonCard);
-
-        centerContainer.getChildren().addAll(registerCard, languageCardsRow);
-        this.setCenter(centerContainer);
+    // Switch to Login View
+    @FXML
+    private void handleLogin() {
+        SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
     }
 
-    private VBox createRegisterForm() {
-        VBox formBox = new VBox(12);
-        formBox.setAlignment(Pos.CENTER);
-        formBox.setPrefSize(420, 260);
-        formBox.setMaxSize(420, 260);
-        formBox.setPadding(new Insets(20));
-
-        // Outline border only (No background colors)
-        formBox.setStyle("-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;");
-
-        Label title = new Label("Register form");
-
-        TextField nameField = new TextField();
-        nameField.setPromptText("Username");
-        nameField.setMaxWidth(300);
-
-        TextField emailField = new TextField();
-        emailField.setPromptText("Email");
-        emailField.setMaxWidth(300);
-
-        PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText("Password");
-        passwordField.setMaxWidth(300);
-
-        Button submitBtn = new Button("Sign Up");
-
-        formBox.getChildren().addAll(title, nameField, emailField, passwordField, submitBtn);
-        return formBox;
+    // Open About Information Dialog
+    @FXML
+    private void handleAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About Mimo Platform");
+        alert.setHeaderText("Mimo-style Gamified Coding App");
+        alert.setContentText("Learn Java, C++, and Python through interactive micro-lessons, live execution, and instant AI code reviews!");
+        alert.showAndWait();
     }
 
-    private VBox createLanguageCard(String languageName, Runnable onClick) {
-        VBox card = new VBox();
-        card.setAlignment(Pos.CENTER);
-        card.setPrefSize(200, 200);
-
-        // Outline border only (No background colors)
-        card.setStyle("-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 12px; -fx-cursor: hand;");
-
-        Label label = new Label(languageName);
-        card.getChildren().add(label);
-
-        card.setOnMouseClicked(e -> onClick.run());
-
-        return card;
+    // Open Help & Guidance Dialog
+    @FXML
+    private void handleHelp() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help & Support");
+        alert.setHeaderText("Getting Started");
+        alert.setContentText("• Register an account to track your learning progress.\n" +
+                "• Click on Java, C++, or Python to preview language courses.\n" +
+                "• Already have an account? Click Login at the top right.");
+        alert.showAndWait();
     }
 
-    private void onLanguageSelected(String language) {
-        System.out.println("Language selected: " + language);
+    // Handle Form Submission
+    @FXML
+    private void handleSignUp() {
+        String username = usernameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Form Incomplete");
+            warning.setHeaderText(null);
+            warning.setContentText("Please fill in all fields to complete registration.");
+            warning.showAndWait();
+            return;
+        }
+
+        System.out.println("Registering: " + username + " (" + email + ")");
+        // Future HTTP POST to /api/register
     }
 }

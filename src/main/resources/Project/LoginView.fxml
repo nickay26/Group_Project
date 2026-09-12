@@ -15,21 +15,21 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <!-- TOP NAVIGATION BAR -->
+    <!-- 1. TOP NAVIGATION BAR -->
     <top>
-        <HBox alignment="TOP_RIGHT" spacing="25.0" BorderPane.alignment="CENTER">
+        <HBox alignment="TOP_RIGHT" spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="10.0" right="40.0" top="10.0" />
             </padding>
             <children>
-                <Label style="-fx-cursor: hand;" text="About" />
-                <Label style="-fx-cursor: hand;" text="Help" />
-                <Label style="-fx-cursor: hand;" text="Register" />
+                <Button fx:id="aboutBtn" onAction="#handleAbout" text="About" />
+                <Button fx:id="helpBtn" onAction="#handleHelp" text="Help" />
+                <Button fx:id="registerBtn" onAction="#handleRegister" text="Register" />
             </children>
         </HBox>
     </top>
 
-    <!-- CENTER LOGIN FORM (Stays locked in center) -->
+    <!-- 2. CENTER LOGIN FORM -->
     <center>
         <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
             <children>
@@ -41,8 +41,8 @@
                         <Label text="Login" />
                         <TextField fx:id="emailField" maxWidth="280.0" promptText="Email or Username" />
                         <PasswordField fx:id="passwordField" maxWidth="280.0" promptText="Password" />
-                        <Button fx:id="loginBtn" text="Sign In" />
-                        <Hyperlink fx:id="registerLink" text="Don't have an account? Register" />
+                        <Button fx:id="loginBtn" onAction="#handleLogin" text="Sign In" />
+                        <Hyperlink fx:id="registerLink" onAction="#handleRegister" text="Don't have an account? Register" />
                     </children>
                 </VBox>
             </children>
