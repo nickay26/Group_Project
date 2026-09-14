@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
+
+    <!-- 1. LEFT SIDEBAR NAVIGATION MENU -->
+    <left>
+        <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-width: 0 1px 0 0;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="15.0" right="15.0" top="25.0" />
+            </padding>
+            <children>
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="Mimo Platform" />
+
+                <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets top="15.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="learnBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Learn" />
+                        <Button fx:id="coursesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Courses" />
+                        <Button fx:id="playgroundBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Playground" />
+                        <Button fx:id="leaderboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Leaderboard" />
+                        <Button fx:id="practiceBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Practice or Review" />
+                        <Button fx:id="gamesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Games" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- 2. CENTER GAMIFIED ROADMAP -->
+    <center>
+        <VBox spacing="20.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+            </padding>
+            <children>
+
+                <!-- TOP HEADER STATS & PROFILE -->
+                <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-border-color: #000000; -fx-border-width: 0 0 1px 0;">
+                    <padding>
+                        <Insets bottom="15.0" />
+                    </padding>
+                    <children>
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="🔥 0" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="🧠 0" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="💎 0" />
+                        <Button style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Premium" />
+                        <Button style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5px; -fx-text-fill: #000000; -fx-cursor: hand;" text="👤 Profile" />
+                    </children>
+                </HBox>
+
+                <!-- SCROLLABLE ROADMAP CONTAINER -->
+                <ScrollPane fitToWidth="true" style="-fx-background-color: #FFFFFF; -fx-viewport-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox alignment="TOP_CENTER" spacing="15.0" style="-fx-background-color: #FFFFFF;">
+                            <padding>
+                                <Insets bottom="40.0" top="10.0" />
+                            </padding>
+                            <children>
+                                <VBox alignment="CENTER" maxWidth="240.0" prefHeight="45.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
+                                    <children>
+                                        <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #000000;" text="Intermediate C++" />
+                                    </children>
+                                </VBox>
+
+                                <!-- DYNAMIC DRAWING CANVAS PANE -->
+                                <Pane fx:id="roadmapPane" maxWidth="400.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;" />
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

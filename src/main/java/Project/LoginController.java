@@ -79,6 +79,6 @@ public class LoginController {
     private void sendAuthCodeToFlask(String code) {
         // Make HTTP POST request to your backend: /api/auth/google
         // Once verified, transition user to Dashboard view
-        SceneManager.switchScene("/DashboardView.fxml", "Mimo Platform - Dashboard");
+        SceneManager.switchScene("LearnPage.fxml", "Mimo Platform - Dashboard");
     }
 }
