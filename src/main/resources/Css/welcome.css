@@ -1,0 +1,115 @@
+/* Background & Fonts */
+.root {
+    -fx-background-image: url("../Images/signup.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Glassmorphism Card (Register Form) - နောက်ခံကို အပြာရင့်လင်းလင်း ရေးထားပါသည် */
+.glass-panel {
+    -fx-background-color: linear-gradient(to bottom, rgba(14, 42, 71, 0.85), rgba(20, 50, 90, 0.85));
+    -fx-background-radius: 20px;
+    -fx-border-color: #38bdf8;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.5), 25, 0, 0, 0);
+    -fx-padding: 25px;
+}
+
+/* Title Label - စာလုံး အဖြူရောင် တောက်ပအောင် လုပ်ထားပါသည် */
+.form-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 8, 0, 0, 0);
+}
+
+/* Input Fields (Solid Dark Blue/Pill Shape) */
+.text-field, .password-field {
+    -fx-background-color: #0b1e36;
+    -fx-background-radius: 25px;
+    -fx-border-color: #2563eb;
+    -fx-border-radius: 25px;
+    -fx-padding: 10px 18px;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #38bdf8;
+    -fx-background-color: #0f294a;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 12, 0, 0, 0);
+}
+
+/* Sign Up Button */
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
+    -fx-background-radius: 25px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 28px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.9), 20, 0, 0, 0);
+}
+
+/* Language Selection Cards (Java, C++, Python) - ပေါ်လွင်အောင် အပြာရောင် ထည့်ထားပါသည် */
+.language-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(14, 42, 71, 0.9), rgba(30, 64, 110, 0.9));
+    -fx-background-radius: 16px;
+    -fx-border-color: #38bdf8;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1.5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.4), 15, 0, 0, 0);
+}
+
+.language-card:hover {
+    -fx-background-color: linear-gradient(to bottom right, rgba(2, 132, 199, 0.9), rgba(37, 99, 235, 0.9));
+    -fx-border-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 20, 0, 0, 0);
+}
+
+.language-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 5, 0, 0, 0);
+}
+
+/* Top Navigation Buttons */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-text-fill: #38bdf8;
+}
+
+.nav-button-primary {
+    -fx-background-color: #2563eb;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+    -fx-border-color: #38bdf8;
+    -fx-border-radius: 20px;
+}
+
+.nav-button-primary:hover {
+    -fx-background-color: #0284c7;
+}

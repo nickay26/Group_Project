@@ -10,10 +10,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+    <stylesheets>
+        <URL value="@../Css/login.css" />
+    </stylesheets>
 
     <!-- 1. TOP NAVIGATION BAR -->
     <top>
