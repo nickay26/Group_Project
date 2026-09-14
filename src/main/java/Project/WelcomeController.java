@@ -1,6 +1,7 @@
 package Project;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -108,4 +109,43 @@ public class WelcomeController {
             alert.showAndWait();
         }
     }
-}
+
+    private void navigateToDetail(String title, String subtitle, String details, String codeSample) {
+        FXMLLoader loader = SceneManager.switchScene("LanguageDetailView.fxml", "Mimo Platform - " + title + " Overview");
+
+        if (loader != null) {
+            LanguageDetailController controller = loader.getController();
+            controller.setLanguageData(title, subtitle, details, codeSample);
+        }
+    }
+
+    @FXML
+    private void handleJavaCard() {
+        navigateToDetail(
+                "Java",
+                "Strongly Typed & Object-Oriented",
+                "Java powers backend enterprise systems, Android applications, and high-scale infrastructure. Learn core OOP principles, memory management, and class design.",
+                "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Mimo!\");\n    }\n}"
+        );
+    }
+
+    @FXML
+    private void handleCppCard() {
+        navigateToDetail(
+                "C++",
+                "High-Performance System Programming",
+                "C++ provides low-level memory access, high-speed execution, and full manual control over system hardware.",
+                "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, Mimo!\" << std::endl;\n    return 0;\n}"
+        );
+    }
+
+    @FXML
+    private void handlePythonCard() {
+        navigateToDetail(
+                "Python",
+                "Beginner-Friendly & Powerful",
+                "Python features clean syntax optimized for rapid development, data science, machine learning, and automation scripts.",
+                "def greet():\n    print(\"Hello, Mimo!\")\n\ngreet()"
+        );
+    }
+    }

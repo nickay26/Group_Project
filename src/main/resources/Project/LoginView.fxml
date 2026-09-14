@@ -24,25 +24,28 @@
             <children>
                 <Button fx:id="aboutBtn" onAction="#handleAbout" text="About" />
                 <Button fx:id="helpBtn" onAction="#handleHelp" text="Help" />
-                <Button fx:id="registerBtn" onAction="#handleRegister" text="Register" />
-                <Button fx:id="googleLoginBtn" onAction="#handleGoogleLogin" text="Sign in with Google" />
+                <Button fx:id="registerNavBtn" onAction="#handleRegister" text="Register" />
             </children>
         </HBox>
     </top>
 
-    <!-- 2. CENTER LOGIN FORM -->
+    <!-- 2. CENTER LOGIN CARD -->
     <center>
-        <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <children>
-                <VBox alignment="CENTER" fillWidth="false" maxHeight="300.0" maxWidth="400.0" prefHeight="300.0" prefWidth="400.0" spacing="15.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
+                <VBox alignment="CENTER" fillWidth="false" maxHeight="340.0" maxWidth="420.0" prefHeight="340.0" prefWidth="420.0" spacing="12.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
                     <padding>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </padding>
                     <children>
-                        <Label text="Login" />
-                        <TextField fx:id="emailField" maxWidth="280.0" promptText="Email or Username" />
-                        <PasswordField fx:id="passwordField" maxWidth="280.0" promptText="Password" />
-                        <Button fx:id="loginBtn" onAction="#handleLogin" text="Sign In" />
+                        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Login" />
+
+                        <TextField fx:id="emailField" prefWidth="300.0" promptText="Email or Username" />
+                        <PasswordField fx:id="passwordField" prefWidth="300.0" promptText="Password" />
+
+                        <Button fx:id="signInBtn" onAction="#handleLogin" text="Sign In" />
+                        <Button fx:id="googleSignInBtn" onAction="#handleGoogleLogin" text="Sign in with Google" />
+
                         <Hyperlink fx:id="registerLink" onAction="#handleRegister" text="Don't have an account? Register" />
                     </children>
                 </VBox>
