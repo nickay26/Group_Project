@@ -1,0 +1,206 @@
+package Project;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+
+public class CoursesPageController {
+
+    @FXML
+    private FlowPane coursesContainer;
+
+    // Cache loaded images to prevent re-reading files on re-navigation
+    private static final Map<String, Image> LOGO_CACHE = new HashMap<>();
+
+    @FXML
+    public void initialize() {
+        int currentUserId = (UserSession.getInstance() != null)
+                ? UserSession.getInstance().getUserId()
+                : 1;
+
+        loadCourses(currentUserId);
+    }
+
+    private void loadCourses(int userId) {
+        CompletableFuture.supplyAsync(() -> DatabaseManager.getCoursesForUser(userId))
+                .thenAccept(courses -> Platform.runLater(() -> renderCourseCards(courses)))
+                .exceptionally(ex -> {
+                    System.err.println("Error loading courses:");
+                    ex.printStackTrace();
+                    return null;
+                });
+    }
+
+    private void renderCourseCards(List<Course> courses) {
+        coursesContainer.getChildren().clear();
+
+        if (courses.isEmpty()) {
+            Label emptyLabel = new Label("No courses available at the moment.");
+            emptyLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #888888;");
+            coursesContainer.getChildren().add(emptyLabel);
+            return;
+        }
+
+        for (Course course : courses) {
+            Node cardNode = createCourseCard(course);
+            coursesContainer.getChildren().add(cardNode);
+        }
+    }
+
+    private Node createCourseCard(Course course) {
+        AnchorPane card = new AnchorPane();
+        card.setPrefSize(360, 240);
+        card.setStyle("-fx-background-color: #DCDCDC; -fx-background-radius: 24px;");
+
+        Rectangle clip = new Rectangle(360, 240);
+        clip.setArcWidth(48);
+        clip.setArcHeight(48);
+        card.setClip(clip);
+
+        // 1. Header with Offline-Safe Badge
+        HBox header = new HBox(12);
+        header.setAlignment(Pos.CENTER_LEFT);
+        AnchorPane.setTopAnchor(header, 20.0);
+        AnchorPane.setLeftAnchor(header, 20.0);
+
+        Node logoNode = getLanguageLogoNode(course.getLanguage());
+
+        Label titleLabel = new Label(course.getTitle());
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+        header.getChildren().addAll(logoNode, titleLabel);
+
+        // 2. Center Description
+        Label descLabel = new Label(course.getDescription());
+        descLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #222222; -fx-alignment: center;");
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(280);
+        descLabel.setAlignment(Pos.CENTER);
+        AnchorPane.setTopAnchor(descLabel, 95.0);
+        AnchorPane.setLeftAnchor(descLabel, 40.0);
+        AnchorPane.setRightAnchor(descLabel, 40.0);
+
+        // 3. Bottom-Left Ribbon
+        Polygon ribbon = new Polygon();
+        ribbon.getPoints().addAll(new Double[]{
+                0.0, 240.0,
+                130.0, 240.0,
+                0.0, 110.0
+        });
+        ribbon.setStyle("-fx-fill: #1E1B68;");
+
+        Label ribbonText = new Label("Start Learning");
+        ribbonText.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        ribbonText.setRotate(45.0);
+        ribbonText.setLayoutX(10);
+        ribbonText.setLayoutY(188);
+
+        Group cornerButton = new Group(ribbon, ribbonText);
+        cornerButton.setCursor(Cursor.HAND);
+        cornerButton.setOnMouseClicked(e -> launchLessonView(course));
+
+        // 4. Bottom-Right Progress Ring
+        StackPane progressRing = createProgressRing(course.getCompletedLessons(), course.getTotalLessons());
+        AnchorPane.setBottomAnchor(progressRing, 20.0);
+        AnchorPane.setRightAnchor(progressRing, 25.0);
+
+        card.getChildren().addAll(header, descLabel, cornerButton, progressRing);
+        return card;
+    }
+
+    private Node getLanguageLogoNode(String language) {
+        String langKey = language.toLowerCase();
+
+        // Return cached Image view if available
+        if (LOGO_CACHE.containsKey(langKey)) {
+            ImageView cachedView = new ImageView(LOGO_CACHE.get(langKey));
+            cachedView.setFitWidth(100);
+            cachedView.setFitHeight(100);
+            cachedView.setPreserveRatio(true);
+            return cachedView;
+        }
+
+        String fileName = switch (langKey) {
+            case "java" -> "Java-Logo-removebg-preview.png";
+            case "cpp" -> "CPP_logo.png";
+            case "python" -> "Python-Logo-removebg-preview.png";
+            default -> "code-logo.png";
+        };
+
+        InputStream is = getClass().getResourceAsStream("/images/" + fileName);
+        if (is != null) {
+            Image img = new Image(is);
+            LOGO_CACHE.put(langKey, img);
+            ImageView logoView = new ImageView(img);
+            logoView.setFitWidth(100);
+            logoView.setFitHeight(100);
+            logoView.setPreserveRatio(true);
+            return logoView;
+        }
+
+        // OFFLINE FALLBACK: Programmatically drawn hexagon badge (Zero Network/UI Blocking)
+        return createVectorBadge(language);
+    }
+
+    private Node createVectorBadge(String language) {
+        StackPane badge = new StackPane();
+        badge.setPrefSize(100, 100);
+
+        Polygon hex = new Polygon();
+        hex.getPoints().addAll(new Double[]{
+                27.5, 0.0,
+                55.0, 15.0,
+                55.0, 40.0,
+                27.5, 55.0,
+                0.0, 40.0,
+                0.0, 15.0
+        });
+        hex.setStyle("-fx-fill: #1E1B68; -fx-stroke: #FFA500; -fx-stroke-width: 2;");
+
+        String labelText = language.length() > 3 ? language.substring(0, 3).toUpperCase() : language.toUpperCase();
+        Label langText = new Label(labelText);
+        langText.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;");
+
+        badge.getChildren().addAll(hex, langText);
+        return badge;
+    }
+
+    private StackPane createProgressRing(int completed, int total) {
+        StackPane container = new StackPane();
+
+        Circle ring = new Circle(30);
+        ring.setFill(Color.WHITE);
+        ring.setStroke(Color.BLACK);
+        ring.setStrokeWidth(6);
+
+        int percentage = total > 0 ? (int) (((double) completed / total) * 100) : 0;
+        Label text = new Label(completed > 0 ? percentage + "%" : "Progress");
+        text.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+
+        container.getChildren().addAll(ring, text);
+        return container;
+    }
+
+    private void launchLessonView(Course course) {
+        System.out.println("Navigating to course: " + course.getCourseId());
+    }
+}

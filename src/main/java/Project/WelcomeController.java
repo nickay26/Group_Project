@@ -1,11 +1,18 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class WelcomeController {
 
@@ -18,13 +25,11 @@ public class WelcomeController {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
 
-    // Switch to Login View
     @FXML
     private void handleLogin() {
         SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
     }
 
-    // Open About Information Dialog
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -34,7 +39,6 @@ public class WelcomeController {
         alert.showAndWait();
     }
 
-    // Open Help & Guidance Dialog
     @FXML
     private void handleHelp() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -46,26 +50,48 @@ public class WelcomeController {
         alert.showAndWait();
     }
 
-    // Handle Form Submission
+    // Manual Form Registration in MySQL
     @FXML
     private void handleSignUp() {
-        String username = usernameField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().trim();
+        String email = emailField.getText().trim();
+        String password = passwordField.getText().trim();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Form Incomplete");
-            warning.setHeaderText(null);
-            warning.setContentText("Please fill in all fields to complete registration.");
-            warning.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Form Incomplete", "Please fill in all fields to complete registration.");
             return;
         }
 
-        System.out.println("Registering: " + username + " (" + email + ")");
-        // Future HTTP POST to /api/register
+        String insertSql = "INSERT INTO User_table (Name, Email, Password, last_login_date) VALUES (?, ?, ?, CURRENT_DATE())";
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, email);
+            stmt.setString(3, password);
+            stmt.executeUpdate();
+
+            ResultSet keys = stmt.getGeneratedKeys();
+            if (keys.next()) {
+                int newUserId = keys.getInt(1);
+                User newUser = new User(newUserId, username, email, null, 0, 0, 0, 5);
+                UserSession.initSession(newUser);
+
+                SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+            }
+
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1062) { // Duplicate email error code
+                showAlert(Alert.AlertType.ERROR, "Registration Error", "This email is already registered.");
+            } else {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to connect to local database.");
+            }
+        }
     }
 
+    // Google Authentication Flow using direct MySQL Sync
     @FXML
     private void handleGoogleSignUp() {
         System.out.println("Opening browser for Google Registration...");
@@ -73,41 +99,24 @@ public class WelcomeController {
         GoogleAuthService.startGoogleLogin(authCode -> {
             System.out.println("Received Google Code (Register): " + authCode);
 
-            // POST code to Flask backend to verify and create account in platform.db
-            sendAuthCodeToFlask(authCode);
+            // 1. Fetch real user profile from Google using the authorization code
+            GoogleAuthService.fetchUserProfile(authCode, (email, name, picture) -> {
+                System.out.println("Authenticated Real User: " + email + " (" + name + ")");
+
+                // 2. Save or fetch actual credentials in MySQL User_table
+                User user = DatabaseManager.findOrCreateGoogleUser(email, name, picture);
+
+                // 3. Update UI on JavaFX application thread
+                Platform.runLater(() -> {
+                    if (user != null) {
+                        UserSession.initSession(user);
+                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Auth Failed", "Could not save user data to MySQL.");
+                    }
+                });
+            });
         });
-    }
-
-    private void sendAuthCodeToFlask(String authCode) {
-        System.out.println("Testing Flask authentication with code: " + authCode);
-
-        // Send code to backend
-        boolean success = ApiClient.sendGoogleAuthCode(authCode);
-
-        if (success) {
-            UserSession session = UserSession.getInstance();
-
-            // Success dialog verifying data from platform.db
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Google Auth Test Passed!");
-            alert.setHeaderText("Successfully Logged In / Registered!");
-            alert.setContentText(String.format(
-                    "User Data Saved in Session:\n\n" +
-                            "• User ID: %d\n" +
-                            "• Name: %s\n" +
-                            "• Email: %s",
-                    session.getUserId(), session.getName(), session.getEmail()
-            ));
-            alert.showAndWait();
-
-        } else {
-            // Failure dialog if backend/Google verification fails
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Auth Test Failed");
-            alert.setHeaderText("Google Authentication Failed");
-            alert.setContentText("Could not exchange authorization code with Flask API. Check server logs.");
-            alert.showAndWait();
-        }
     }
 
     private void navigateToDetail(String title, String subtitle, String details, String codeSample) {
@@ -148,4 +157,12 @@ public class WelcomeController {
                 "def greet():\n    print(\"Hello, Mimo!\")\n\ngreet()"
         );
     }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
+}
