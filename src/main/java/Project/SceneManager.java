@@ -6,21 +6,33 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class SceneManager {
 
     private static Stage primaryStage;
     private static Scene mainScene;
 
-    // Initialize with the primary stage inside App.java start()
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
     }
 
-    // Switch view by FXML path and optional window title
     public static FXMLLoader switchScene(String fxmlFileName, String windowTitle) {
         try {
-            FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlFileName));
+            // Path ကို အဆင်ပြေအောင် ရှာဖွေခြင်း
+            URL resource = SceneManager.class.getResource(fxmlFileName);
+            if (resource == null) {
+                resource = SceneManager.class.getResource("/Project/" + fxmlFileName);
+            }
+            if (resource == null) {
+                resource = SceneManager.class.getResource("/" + fxmlFileName);
+            }
+
+            if (resource == null) {
+                throw new IOException("Cannot find FXML file: " + fxmlFileName);
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
             Parent root = loader.load();
 
             if (mainScene == null) {
@@ -35,7 +47,8 @@ public class SceneManager {
             }
 
             primaryStage.show();
-            return loader; // Returns FXMloader in case you need to pass data to the target controller
+            return loader;
+
         } catch (IOException e) {
             System.err.println("Error loading FXML view: " + fxmlFileName);
             e.printStackTrace();
