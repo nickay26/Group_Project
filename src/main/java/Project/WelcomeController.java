@@ -97,23 +97,16 @@ public class WelcomeController {
         System.out.println("Opening browser for Google Registration...");
 
         GoogleAuthService.startGoogleLogin(authCode -> {
-            System.out.println("Received Google Code (Register): " + authCode);
+            System.out.println("Received Google Code: " + authCode);
 
-            // 1. Fetch real user profile from Google using the authorization code
-            GoogleAuthService.fetchUserProfile(authCode, (email, name, picture) -> {
+            GoogleAuthService.fetchUserProfile(authCode, (userId, name, email) -> {
                 System.out.println("Authenticated Real User: " + email + " (" + name + ")");
 
-                // 2. Save or fetch actual credentials in MySQL User_table
-                User user = DatabaseManager.findOrCreateGoogleUser(email, name, picture);
+                User user = new User(userId, email, name, "", 0, 0, 0, 0);
 
-                // 3. Update UI on JavaFX application thread
                 Platform.runLater(() -> {
-                    if (user != null) {
-                        UserSession.initSession(user);
-                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
-                    } else {
-                        showAlert(Alert.AlertType.ERROR, "Auth Failed", "Could not save user data to MySQL.");
-                    }
+                    UserSession.initSession(user);
+                    SceneManager.switchScene("MainLayoutView.fxml");
                 });
             });
         });

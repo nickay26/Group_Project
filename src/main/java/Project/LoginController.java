@@ -95,26 +95,12 @@ public class LoginController {
     // Direct Google Auth Flow using local MySQL
     @FXML
     private void handleGoogleLogin() {
-        System.out.println("Opening browser for Google Authentication...");
-
         GoogleAuthService.startGoogleLogin(authCode -> {
-            System.out.println("Received Google Code: " + authCode);
-
-            // 1. Fetch real user profile from Google
-            GoogleAuthService.fetchUserProfile(authCode, (email, name, picture) -> {
-                System.out.println("Authenticated Real User: " + email + " (" + name + ")");
-
-                // 2. Save or fetch actual credentials in MySQL User_table
-                User user = DatabaseManager.findOrCreateGoogleUser(email, name, picture);
-
-                // 3. Update UI on JavaFX application thread
+            GoogleAuthService.fetchUserProfile(authCode, (userId, name, email) -> {
+                User user = new User(userId, email, name, "", 0, 0, 0, 0);
                 Platform.runLater(() -> {
-                    if (user != null) {
-                        UserSession.initSession(user);
-                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
-                    } else {
-                        showAlert(Alert.AlertType.ERROR, "Auth Failed", "Google authentication failed.");
-                    }
+                    UserSession.initSession(user);
+                    SceneManager.switchScene("MainLayoutView.fxml");
                 });
             });
         });

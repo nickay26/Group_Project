@@ -21,6 +21,12 @@ public class User {
         this.brainCount = brainCount;
     }
 
+    // Add this inside User.java
+    public User(int userId, String name, String email) {
+        // Fill in default values for the remaining 5 fields required by your 8-arg constructor
+        this(userId, name, email, "", 0, 0, 0, 0);
+    }
+
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }

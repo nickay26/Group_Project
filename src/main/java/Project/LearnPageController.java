@@ -12,7 +12,6 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.SVGPath;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LearnPageController {
@@ -26,20 +25,13 @@ public class LearnPageController {
 
     @FXML private Pane roadmapPane;
 
-    public static class LessonData {
-        private String title;
-        private String icon;
+    // Node dimensions & spacing configuration
+    private static final double NODE_WIDTH = 100.0;
+    private static final double NODE_HEIGHT = 116.0;
+    private static final double VERTICAL_SPACING = 160.0;
+    private static final double AMPLITUDE = 85.0;
 
-        public LessonData(String title, String icon) {
-            this.title = title;
-            this.icon = icon;
-        }
-
-        public String getTitle() { return title; }
-        public String getIcon() { return icon; }
-    }
-
-    // Tracks coordinates during mouse drag operations
+    // Drag tracking helper
     private static class DragContext {
         double mouseAnchorX;
         double mouseAnchorY;
@@ -49,54 +41,57 @@ public class LearnPageController {
 
     @FXML
     public void initialize() {
-        List<LessonData> lessons = Arrays.asList(
-                new LessonData("Level Test", "📝"),
-                new LessonData("Lesson 1", "⭐"),
-                new LessonData("Lesson 2", "⭐"),
-                new LessonData("Premium", "👑"),
-                new LessonData("Lesson 3", "⭐"),
-                new LessonData("Lesson 4", "⭐"),
-                new LessonData("Final Test", "🏆")
-        );
+        // Default course track (replace with active session course if available)
+        loadCoursePath("CPP_BASIC");
+    }
+
+    public void loadCoursePath(String courseId) {
+        // Fetch real lessons from database
+        List<Lesson> lessons = DatabaseManager.getLessonsForCourse(courseId);
+
+        if (lessons == null || lessons.isEmpty()) {
+            roadmapPane.getChildren().clear();
+            Label emptyMsg = new Label("No lessons found in database for course: " + courseId);
+            emptyMsg.setStyle("-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 30px;");
+            roadmapPane.getChildren().add(emptyMsg);
+            return;
+        }
 
         renderRoadmap(lessons);
     }
 
-    private void renderRoadmap(List<LessonData> lessons) {
+    private void renderRoadmap(List<Lesson> lessons) {
         roadmapPane.getChildren().clear();
 
         double centerX = 200.0;
-        double verticalSpacing = 110.0;
-        double amplitude = 75.0;
-
         List<StackPane> nodes = new ArrayList<>();
         List<CubicCurve> curves = new ArrayList<>();
 
-        // 1. Instantiate nodes and calculate starting positions
+        // 1. Generate Hexagon Nodes for database rows
         for (int i = 0; i < lessons.size(); i++) {
-            LessonData lesson = lessons.get(i);
-            double currentX = centerX + Math.sin(i * 0.95) * amplitude;
-            double currentY = 50.0 + (i * verticalSpacing);
+            Lesson lesson = lessons.get(i);
+            double currentX = centerX + Math.sin(i * 0.95) * AMPLITUDE;
+            double currentY = 60.0 + (i * VERTICAL_SPACING);
 
             StackPane hexNode = createHexagonNode(lesson);
-            hexNode.setLayoutX(currentX - 35.0);
-            hexNode.setLayoutY(currentY - 40.0);
+            hexNode.setLayoutX(currentX - (NODE_WIDTH / 2.0));
+            hexNode.setLayoutY(currentY - (NODE_HEIGHT / 2.0));
             nodes.add(hexNode);
         }
 
-        // 2. Build curve connections between consecutive nodes
+        // 2. Connect Nodes with Bezier Curves
         for (int i = 0; i < nodes.size() - 1; i++) {
             CubicCurve curve = new CubicCurve();
             curve.setFill(null);
             curve.setStroke(Color.BLACK);
-            curve.setStrokeWidth(1.5);
+            curve.setStrokeWidth(2.0);
 
             curves.add(curve);
             roadmapPane.getChildren().add(curve);
             updateCurve(curve, nodes.get(i), nodes.get(i + 1));
         }
 
-        // 3. Attach drag listeners & update curves live on movement
+        // 3. Attach Drag & Click Listeners
         for (int i = 0; i < nodes.size(); i++) {
             StackPane node = nodes.get(i);
             final int index = i;
@@ -108,7 +103,7 @@ public class LearnPageController {
                 dragContext.mouseAnchorY = e.getSceneY();
                 dragContext.initialLayoutX = node.getLayoutX();
                 dragContext.initialLayoutY = node.getLayoutY();
-                node.toFront(); // Keep dragged node above curve lines
+                node.toFront();
             });
 
             node.setOnMouseDragged(e -> {
@@ -118,11 +113,9 @@ public class LearnPageController {
                 node.setLayoutX(dragContext.initialLayoutX + deltaX);
                 node.setLayoutY(dragContext.initialLayoutY + deltaY);
 
-                // Live-update incoming bezier curve
                 if (index > 0) {
                     updateCurve(curves.get(index - 1), nodes.get(index - 1), node);
                 }
-                // Live-update outgoing bezier curve
                 if (index < curves.size()) {
                     updateCurve(curves.get(index), node, nodes.get(index + 1));
                 }
@@ -131,19 +124,18 @@ public class LearnPageController {
             roadmapPane.getChildren().add(node);
         }
 
-        roadmapPane.setPrefHeight(100.0 + (lessons.size() * verticalSpacing));
+        roadmapPane.setPrefHeight(120.0 + (lessons.size() * VERTICAL_SPACING));
     }
 
     private void updateCurve(CubicCurve curve, StackPane fromNode, StackPane toNode) {
-        double startX = fromNode.getLayoutX() + 35.0;
-        double startY = fromNode.getLayoutY() + 80.0; // Bottom point of upper hexagon
-        double endX = toNode.getLayoutX() + 35.0;
-        double endY = toNode.getLayoutY();             // Top point of lower hexagon
+        double startX = fromNode.getLayoutX() + (NODE_WIDTH / 2.0);
+        double startY = fromNode.getLayoutY() + NODE_HEIGHT; // Bottom vertex of upper node
+        double endX = toNode.getLayoutX() + (NODE_WIDTH / 2.0);
+        double endY = toNode.getLayoutY();                  // Top vertex of lower node
 
         curve.setStartX(startX);
         curve.setStartY(startY);
 
-        // Control points recalculate dynamically to keep curve smooth
         double midY = startY + (endY - startY) * 0.5;
         curve.setControlX1(startX);
         curve.setControlY1(midY);
@@ -154,28 +146,37 @@ public class LearnPageController {
         curve.setEndY(endY);
     }
 
-    private StackPane createHexagonNode(LessonData lesson) {
+    private StackPane createHexagonNode(Lesson lesson) {
         StackPane stack = new StackPane();
-        stack.setStyle("-fx-cursor: move;");
+        stack.setStyle("-fx-cursor: hand;");
 
+        // Enlarged SVG Path (100px W x 116px H)
         SVGPath hexPath = new SVGPath();
-        hexPath.setContent("M 35 0 L 70 20 L 70 60 L 35 80 L 0 60 L 0 20 Z");
+        hexPath.setContent("M 50 0 L 100 29 L 100 87 L 50 116 L 0 87 L 0 29 Z");
         hexPath.setFill(Color.WHITE);
         hexPath.setStroke(Color.BLACK);
-        hexPath.setStrokeWidth(1.5);
+        hexPath.setStrokeWidth(2.0);
 
-        VBox content = new VBox(2);
+        VBox content = new VBox(4);
         content.setAlignment(Pos.CENTER);
-        content.setMaxSize(60, 60);
+        content.setMaxSize(85, 85);
 
-        Label iconLabel = new Label(lesson.getIcon());
-        iconLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #000000;");
+        // Icon selected by lesson_type column
+        String icon = "EXAM".equalsIgnoreCase(lesson.getLessonType()) ? "📝" : "⭐";
+        Label iconLabel = new Label(icon);
+        iconLabel.setStyle("-fx-font-size: 22px; -fx-text-fill: #000000;");
 
         Label textLabel = new Label(lesson.getTitle());
-        textLabel.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #000000;");
+        textLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-alignment: center;");
+        textLabel.setWrapText(true);
 
         content.getChildren().addAll(iconLabel, textLabel);
         stack.getChildren().addAll(hexPath, content);
+
+        stack.setOnMouseClicked(e -> {
+            if (!e.isStillSincePress()) return; // Ignore drag clicks
+            System.out.println("Opening Lesson JSON content for: " + lesson.getLessonId());
+        });
 
         return stack;
     }

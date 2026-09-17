@@ -209,4 +209,32 @@ public class DatabaseManager {
                 rs.getInt("brain_count")
         );
     }
+
+    public static List<Lesson> getLessonsForCourse(String courseId) {
+        List<Lesson> lessons = new ArrayList<>();
+        String query = "SELECT Lesson_ID, Course_ID, Lesson_order, Title, XP, content, lesson_type " +
+                "FROM lesson_table WHERE Course_ID = ? ORDER BY Lesson_order ASC";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, courseId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                lessons.add(new Lesson(
+                        rs.getString("Lesson_ID"),
+                        rs.getString("Course_ID"),
+                        rs.getInt("Lesson_order"),
+                        rs.getString("Title"),
+                        rs.getInt("XP"),
+                        rs.getString("content"),
+                        rs.getString("lesson_type")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lessons;
+    }
 }

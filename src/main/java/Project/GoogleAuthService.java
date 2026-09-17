@@ -15,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +24,15 @@ import java.util.function.Consumer;
 public class GoogleAuthService {
 
     private static final int PORT = 8888;
-    private static final String CLIENT_ID = "929038060577-2510s6pu89lm46rtl9btpbsvrhq7h862.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
+    // Must match GOOGLE_CLIENT_ID in your flask_app.py
+    private static final String CLIENT_ID = "784664347763-vvt49ns53p2gau9afp6sdn5hpobo265h.apps.googleusercontent.com";
     private static final String REDIRECT_URI = "http://localhost:" + PORT + "/callback";
 
+    // Replace with your actual PythonAnywhere URL
+    private static final String BACKEND_AUTH_URL = "https://NickayJohn26.pythonanywhere.com/api/auth/google";
+
     public interface GoogleUserCallback {
-        void onAuthenticated(String email, String name, String picture);
+        void onAuthenticated(int userId, String email, String name);
     }
 
     public static void startGoogleLogin(Consumer<String> onCodeReceived) {
@@ -46,7 +48,7 @@ public class GoogleAuthService {
 
                     String responseHtml = "<html><body style='font-family:sans-serif; text-align:center; padding-top:50px;'>"
                             + "<h2>Authentication Successful!</h2>"
-                            + "<p>You can close this browser window and return to the application.</p>"
+                            + "<p>You can close this window and return to the application.</p>"
                             + "</body></html>";
 
                     exchange.sendResponseHeaders(200, responseHtml.getBytes().length);
@@ -83,50 +85,35 @@ public class GoogleAuthService {
     public static void fetchUserProfile(String authCode, GoogleUserCallback callback) {
         CompletableFuture.runAsync(() -> {
             try {
-                // 1. Exchange OAuth Code for Access Token
-                URL tokenUrl = new URL("https://oauth2.googleapis.com/token");
-                HttpURLConnection tokenConn = (HttpURLConnection) tokenUrl.openConnection();
-                tokenConn.setRequestMethod("POST");
-                tokenConn.setDoOutput(true);
-                tokenConn.setConnectTimeout(10000);
-                tokenConn.setReadTimeout(10000);
-                tokenConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                URL backendUrl = new URL(BACKEND_AUTH_URL);
+                HttpURLConnection conn = (HttpURLConnection) backendUrl.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                conn.setConnectTimeout(10000);
+                conn.setReadTimeout(10000);
+                conn.setRequestProperty("Content-Type", "application/json");
 
-                String tokenBody = "code=" + URLEncoder.encode(authCode, StandardCharsets.UTF_8)
-                        + "&client_id=" + URLEncoder.encode(CLIENT_ID, StandardCharsets.UTF_8)
-                        + "&client_secret=" + URLEncoder.encode(CLIENT_SECRET, StandardCharsets.UTF_8)
-                        + "&redirect_uri=" + URLEncoder.encode(REDIRECT_URI, StandardCharsets.UTF_8)
-                        + "&grant_type=authorization_code";
+                String jsonPayload = "{\"code\":\"" + authCode + "\"}";
 
-                try (OutputStream os = tokenConn.getOutputStream()) {
-                    os.write(tokenBody.getBytes(StandardCharsets.UTF_8));
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(jsonPayload.getBytes(StandardCharsets.UTF_8));
                     os.flush();
                 }
 
-                String tokenResponseBody = readStream(tokenConn);
-                String accessToken = JsonUtils.extractKey(tokenResponseBody, "access_token");
+                String responseBody = readStream(conn);
 
-                if (accessToken != null && !accessToken.isEmpty()) {
-                    // 2. Fetch User Profile Info
-                    URL userUrl = new URL("https://www.googleapis.com/oauth2/v3/userinfo");
-                    HttpURLConnection userConn = (HttpURLConnection) userUrl.openConnection();
-                    userConn.setRequestMethod("GET");
-                    userConn.setConnectTimeout(10000);
-                    userConn.setReadTimeout(10000);
-                    userConn.setRequestProperty("Authorization", "Bearer " + accessToken);
+                if (conn.getResponseCode() == 200) {
+                    String userIdStr = JsonUtils.extractKey(responseBody, "user_id");
+                    int userId = userIdStr != null ? Integer.parseInt(userIdStr) : 1;
+                    String email = JsonUtils.extractKey(responseBody, "email");
+                    String name = JsonUtils.extractKey(responseBody, "name");
 
-                    String userResponseBody = readStream(userConn);
-
-                    String email = JsonUtils.extractKey(userResponseBody, "email");
-                    String name = JsonUtils.extractKey(userResponseBody, "name");
-                    String picture = JsonUtils.extractKey(userResponseBody, "picture");
-
-                    callback.onAuthenticated(email, name, picture);
+                    Platform.runLater(() -> callback.onAuthenticated(userId, email, name));
                 } else {
-                    System.err.println("Token Exchange Failed: " + tokenResponseBody);
+                    System.err.println("Backend OAuth Error: " + responseBody);
                 }
             } catch (Exception e) {
-                System.err.println("Error fetching Google profile:");
+                System.err.println("Error authenticating with backend:");
                 e.printStackTrace();
             }
         });
