@@ -1,4 +1,6 @@
-/* Background & Fonts */
+/* ==========================================================================
+   1. GLOBAL & ROOT STYLES
+   ========================================================================== */
 .root {
     -fx-background-image: url("../Images/signup.jpg");
     -fx-background-size: cover;
@@ -7,7 +9,9 @@
     -fx-font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* Glassmorphism Card (Register Form) - နောက်ခံကို အပြာရင့်လင်းလင်း ရေးထားပါသည် */
+/* ==========================================================================
+   2. CONTAINERS & PANELS
+   ========================================================================== */
 .glass-panel {
     -fx-background-color: linear-gradient(to bottom, rgba(14, 42, 71, 0.85), rgba(20, 50, 90, 0.85));
     -fx-background-radius: 20px;
@@ -18,7 +22,9 @@
     -fx-padding: 25px;
 }
 
-/* Title Label - စာလုံး အဖြူရောင် တောက်ပအောင် လုပ်ထားပါသည် */
+/* ==========================================================================
+   3. TYPOGRAPHY & LABELS
+   ========================================================================== */
 .form-title {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
@@ -26,7 +32,15 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 8, 0, 0, 0);
 }
 
-/* Input Fields (Solid Dark Blue/Pill Shape) */
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+
+/* ==========================================================================
+   4. INPUT FIELDS
+   ========================================================================== */
 .text-field, .password-field {
     -fx-background-color: #0b1e36;
     -fx-background-radius: 25px;
@@ -44,72 +58,78 @@
     -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 12, 0, 0, 0);
 }
 
-/* Sign Up Button */
-.btn-primary {
+/* ==========================================================================
+   5. BUTTONS (Google & Sign Up Matching Blue Style)
+   ========================================================================== */
+/* Main Primary Button (Sign Up) */
+.btn-primary, .primary-btn {
     -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
     -fx-background-radius: 25px;
     -fx-text-fill: #ffffff;
-    -fx-font-size: 15px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 10px 28px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .primary-btn:hover {
     -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
     -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.9), 20, 0, 0, 0);
 }
 
-/* Language Selection Cards (Java, C++, Python) - ပေါ်လွင်အောင် အပြာရောင် ထည့်ထားပါသည် */
-.language-card {
-    -fx-background-color: linear-gradient(to bottom right, rgba(14, 42, 71, 0.9), rgba(30, 64, 110, 0.9));
-    -fx-background-radius: 16px;
-    -fx-border-color: #38bdf8;
-    -fx-border-radius: 16px;
-    -fx-border-width: 1.5px;
+/* Google Sign Up Button */
+.google-btn {
+    -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
+    -fx-background-radius: 25px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.4), 15, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
 }
 
-.language-card:hover {
-    -fx-background-color: linear-gradient(to bottom right, rgba(2, 132, 199, 0.9), rgba(37, 99, 235, 0.9));
-    -fx-border-color: #ffffff;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 20, 0, 0, 0);
+.google-btn:hover {
+    -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.9), 20, 0, 0, 0);
 }
 
-.language-label {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 5, 0, 0, 0);
-}
-
-/* Top Navigation Buttons */
+/* Navigation Buttons */
 .nav-button {
-    -fx-background-color: transparent;
+    -fx-background-color: #0f172a;
     -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-border-color: #1e3a8a;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 8px 20px;
     -fx-cursor: hand;
 }
 
 .nav-button:hover {
-    -fx-text-fill: #38bdf8;
-}
-
-.nav-button-primary {
-    -fx-background-color: #2563eb;
-    -fx-background-radius: 20px;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 8px 18px;
-    -fx-cursor: hand;
+    -fx-background-color: #1e40af;
     -fx-border-color: #38bdf8;
-    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 12, 0, 0, 0);
 }
 
-.nav-button-primary:hover {
-    -fx-background-color: #0284c7;
+/* ==========================================================================
+   6. LANGUAGE SELECTION CARDS
+   ========================================================================== */
+.language-card, .lang-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(14, 42, 71, 0.85), rgba(30, 64, 110, 0.85));
+    -fx-background-radius: 20px;
+    -fx-border-color: rgba(56, 189, 248, 0.5);
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
+}
+
+.language-card:hover, .lang-card:hover {
+    -fx-background-color: linear-gradient(to bottom right, rgba(2, 132, 199, 0.9), rgba(37, 99, 235, 0.9));
+    -fx-border-color: #38bdf8;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 20, 0, 0, 0);
 }
