@@ -49,6 +49,12 @@ public class MainLayoutController {
         loadView("PlaygroundDashboardView.fxml");
     }
 
+    @FXML
+    public void handleLeaderBoard(){
+        setActiveButton(leaderboardBtn);
+        loadView("LeaderboardView.fxml");
+    }
+
     private void loadView(String fxmlPath) {
         try {
             Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));

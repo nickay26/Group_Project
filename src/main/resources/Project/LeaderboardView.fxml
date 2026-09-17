@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" style="-fx-background: #FFFFFF; -fx-background-color: #FFFFFF; -fx-padding: 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LeaderboardController">
+    <content>
+        <VBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;">
+            <children>
+                <HBox alignment="TOP_CENTER" spacing="40.0" style="-fx-background-color: #FFFFFF;">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                    </padding>
+                    <children>
+                        <!-- Teal Main Container (Left) -->
+                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="520.0" spacing="20.0" style="-fx-background-color: #38B2AC; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);">
+                            <padding>
+                                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                            </padding>
+                            <children>
+                                <Label text="🏆" textFill="WHITE">
+                                    <font>
+                                        <Font size="70.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Complete a lesson or earn XP to&#10;join this week's Leaderboard!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+
+                                <!-- START LEARNING Button with Scroll Action -->
+                                <Button onAction="#handleStartLearning" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 6px; -fx-cursor: hand;" text="START LEARNING">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="10.0" left="24.0" right="24.0" top="10.0" />
+                                    </padding>
+                                </Button>
+                            </children>
+                        </VBox>
+
+                        <!-- Right Side Cards Container -->
+                        <VBox prefWidth="320.0" spacing="20.0">
+                            <children>
+                                <!-- Top Card: Venus League -->
+                                <VBox spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 12, 0, 0, 4);">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <children>
+                                        <Label text="Venus league" textFill="#1A202C">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="leagueListLabel" text="Nebula, Protostar, Supernova" textFill="#4A5568" wrapText="true">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <!-- Bottom Card: Earn XP Section -->
+                                <VBox spacing="12.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 12, 0, 0, 4);">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <children>
+                                        <Label text="Earn XP" textFill="#1A202C">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+
+                                        <!-- Task Box 1 -->
+                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #F0F4F8; -fx-background-radius: 10px;">
+                                            <padding>
+                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                                            </padding>
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Complete a lesson" textFill="#2D3748">
+                                                            <font>
+                                                                <Font name="System Bold" size="13.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="+10 XP" textFill="#718096">
+                                                            <font>
+                                                                <Font size="12.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Task Box 2 -->
+                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #F0F4F8; -fx-background-radius: 10px;">
+                                            <padding>
+                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                                            </padding>
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Achieve your Daily Learning Goal" textFill="#2D3748">
+                                                            <font>
+                                                                <Font name="System Bold" size="13.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="+6 XP" textFill="#718096">
+                                                            <font>
+                                                                <Font size="12.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Task Box 3 -->
+                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #EBF8FF; -fx-background-radius: 10px;">
+                                            <padding>
+                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
+                                            </padding>
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Solve a Code Coach" textFill="#2D3748">
+                                                            <font>
+                                                                <Font name="System Bold" size="13.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label text="+5 XP" textFill="#718096">
+                                                            <font>
+                                                                <Font size="12.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
