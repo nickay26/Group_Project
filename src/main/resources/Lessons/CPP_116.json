@@ -1,0 +1,75 @@
+{
+  "lessonId": "CPP_116",
+  "title": "C++ Functions ",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_116_S1",
+      "type": "CONCEPT",
+      "title": "Creating and Calling Functions",
+      "prompt": "A function is a block of code which only runs when it is called.",
+      "codeSnippet": "void myFunction() {\n    std::cout << \"Executed!\";\n}\n\nint main() {\n    myFunction();\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_116_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Void Return Type",
+      "prompt": "Fill in the return type used when a function does not return any value.",
+      "codeSnippet": "___ printMessage() {\n    std::cout << \"Hello\";\n}",
+      "options": ["void", "null", "int", "empty"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "CPP_116_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Returning Values",
+      "prompt": "Which keyword returns a value back from a function?",
+      "options": ["return", "send", "give", "output"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "CPP_116_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Parameter",
+      "prompt": "Fill in the data type for the parameter inside function definition.",
+      "codeSnippet": "void printAge(___ age) {\n    std::cout << age;\n}",
+      "options": ["int", "val", "var", "num"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_116_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Overloading",
+      "prompt": "What is it called when multiple functions have the same name but different parameters?",
+      "options": [
+        "Function Overloading",
+        "Function Overriding",
+        "Function Duplication",
+        "Function Shadowing"
+      ],
+      "correctAnswer": "Function Overloading"
+    },
+    {
+      "slideId": "CPP_116_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass by Reference",
+      "prompt": "Fill in the symbol to pass a variable by reference in function parameters.",
+      "codeSnippet": "void swap(int ___x, int ___y) {}",
+      "options": ["&", "*", "%", "@"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_116_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Argument Location",
+      "prompt": "Where must default parameter values be declared in a function signature?",
+      "options": [
+        "At the end of the parameter list",
+        "At the beginning of the parameter list",
+        "Inside the function body only",
+        "In any order regardless of location"
+      ],
+      "correctAnswer": "At the end of the parameter list"
+    }
+  ]
+}

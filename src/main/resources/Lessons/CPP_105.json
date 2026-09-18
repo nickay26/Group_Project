@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_105",
+  "title": "C++ Data Types",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_105_S1",
+      "type": "CONCEPT",
+      "title": "Basic Data Types",
+      "prompt": "C++ provides types like int, double, char, string, and bool to hold different data forms.",
+      "codeSnippet": "int a = 5;\ndouble b = 5.99;\nchar c = 'D';\nstd::string d = \"Hello\";\nbool e = true;"
+    },
+    {
+      "slideId": "CPP_105_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Data Type",
+      "prompt": "Which data type stores true or false values?",
+      "codeSnippet": "___ isReady = false;",
+      "options": ["bool", "boolean", "int", "bit"],
+      "correctAnswer": "bool"
+    },
+    {
+      "slideId": "CPP_105_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Character Literal Enclosure",
+      "prompt": "How are single character literals (char) written in C++?",
+      "options": ["Single quotes ('a')", "Double quotes (\"a\")", "Backticks (`a`)", "Parentheses ((a))"],
+      "correctAnswer": "Single quotes ('a')"
+    },
+    {
+      "slideId": "CPP_105_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Float vs Double",
+      "prompt": "What is the primary difference between 'float' and 'double' in C++?",
+      "options": ["'double' has higher precision than 'float'", "'float' holds larger whole numbers", "'double' holds characters", "'float' cannot store decimals"],
+      "correctAnswer": "'double' has higher precision than 'float'"
+    },
+    {
+      "slideId": "CPP_105_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Floating Point Type",
+      "prompt": "Fill in the keyword to store a fractional number up to 7 decimal digits precision.",
+      "codeSnippet": "___ myNum = 5.75f;",
+      "options": ["float", "int", "char", "bool"],
+      "correctAnswer": "float"
+    },
+    {
+      "slideId": "CPP_105_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Size of Operator",
+      "prompt": "Which operator returns the memory size of a data type in bytes?",
+      "options": ["sizeof", "length", "size", "bytesof"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_105_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "ASCII Character Assignment",
+      "prompt": "Complete the code to assign an ASCII value to a char variable.",
+      "codeSnippet": "char letter = ___; // Assigns 'A'",
+      "options": ["65", "'65'", "\"65\"", "A"],
+      "correctAnswer": "65"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_102",
+  "title": "C++ Output (std::cout)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_102_S1",
+      "type": "CONCEPT",
+      "title": "Printing Multiple Lines",
+      "prompt": "In C++, std::endl or '\\n' is used to create a new line in the output.",
+      "codeSnippet": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello World!\" << std::endl;\n    std::cout << \"Welcome to C++\\n\";\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_102_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "New Line Character",
+      "prompt": "Complete the code to insert a newline using the special character escape sequence.",
+      "codeSnippet": "std::cout << \"Line 1___Line 2\";",
+      "options": ["\\n", "\\t", "\\r", "\\\\"],
+      "correctAnswer": "\\n"
+    },
+    {
+      "slideId": "CPP_102_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output Statement End",
+      "prompt": "What symbol must be used at the end of every C++ output statement?",
+      "options": ["; (Semicolon)", ": (Colon)", ". (Period)", ", (Comma)"],
+      "correctAnswer": "; (Semicolon)"
+    },
+    {
+      "slideId": "CPP_102_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Using std::endl",
+      "prompt": "Fill in the blank to print a new line using std stream manipulator.",
+      "codeSnippet": "std::cout << \"Hello\" << std::___;",
+      "options": ["endl", "newline", "break", "flush"],
+      "correctAnswer": "endl"
+    },
+    {
+      "slideId": "CPP_102_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Tab Space Escape Character",
+      "prompt": "Which escape sequence inserts a horizontal tab space in the printed output?",
+      "options": ["\\t", "\\n", "\\a", "\\v"],
+      "correctAnswer": "\\t"
+    },
+    {
+      "slideId": "CPP_102_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Chaining Outputs",
+      "prompt": "Fill in the operator to chain multiple items in one std::cout statement.",
+      "codeSnippet": "std::cout << \"Age: \" ___ 20;",
+      "options": ["<<", ">>", "+", ","],
+      "correctAnswer": "<<"
+    },
+    {
+      "slideId": "CPP_102_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Escaping Double Quotes",
+      "prompt": "How do you display literal double quotes inside a string literal?",
+      "options": ["\\\"text\\\"", "\"\"text\"\"", "'text'", "/\"text/\""],
+      "correctAnswer": "\\\"text\\\""
+    }
+  ]
+}

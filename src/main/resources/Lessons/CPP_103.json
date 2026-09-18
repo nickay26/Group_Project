@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_103",
+  "title": "C++ Variables",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_103_S1",
+      "type": "CONCEPT",
+      "title": "Declaring Variables",
+      "prompt": "A variable in C++ must be declared with a type before it can be used.",
+      "codeSnippet": "int myNum = 15;\nmyNum = 20; // myNum is now 20"
+    },
+    {
+      "slideId": "CPP_103_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Assigning Values",
+      "prompt": "Complete the code to assign 50 to the integer variable x.",
+      "codeSnippet": "int x ___ 50;",
+      "options": ["=", "==", "->", ":="],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_103_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constant Variables",
+      "prompt": "Which keyword makes a variable unchangeable and read-only?",
+      "options": ["const", "final", "static", "fixed"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_103_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Variable Declaration",
+      "prompt": "Fill in the operator to declare multiple variables of the same type in one line.",
+      "codeSnippet": "int x = 5___ y = 6, z = 50;",
+      "options": [",", ";", ":", "&"],
+      "correctAnswer": ","
+    },
+    {
+      "slideId": "CPP_103_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid Variable Names",
+      "prompt": "Which of the following is a valid variable name in C++?",
+      "options": ["my_var1", "1var", "int", "my var"],
+      "correctAnswer": "my_var1"
+    },
+    {
+      "slideId": "CPP_103_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding Variables",
+      "prompt": "Complete the code to assign the sum of x and y to z.",
+      "codeSnippet": "int z = x ___ y;",
+      "options": ["+", "-", "*", "="],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_103_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Case Sensitivity",
+      "prompt": "Are variable names 'myVar' and 'myvar' treated as the same variable in C++?",
+      "options": ["No, C++ is case-sensitive", "Yes, C++ ignores case", "Only if declared as const", "Depends on the compiler"],
+      "correctAnswer": "No, C++ is case-sensitive"
+    }
+  ]
+}

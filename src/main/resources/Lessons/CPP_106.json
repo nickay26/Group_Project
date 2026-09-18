@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_106",
+  "title": "C++ Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_106_S1",
+      "type": "CONCEPT",
+      "title": "Arithmetic Operators",
+      "prompt": "C++ uses standard arithmetic operators (+, -, *, /, %) to perform mathematical operations.",
+      "codeSnippet": "int sum = 100 + 50;\nint remainder = 10 % 3; // remainder is 1"
+    },
+    {
+      "slideId": "CPP_106_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Modulus Operator",
+      "prompt": "Complete the code to find the remainder of division between x and y.",
+      "codeSnippet": "int remainder = x ___ y;",
+      "options": ["%", "/", "#", "&"],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "CPP_106_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Increment Operator",
+      "prompt": "Which operator increases the value of a variable by 1?",
+      "options": ["++", "+=", "==", "**"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_106_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical AND Operator",
+      "prompt": "Fill in the logical operator used to check if both conditions are true.",
+      "codeSnippet": "if (x > 5 ___ y < 10) {}",
+      "options": ["&&", "||", "!", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_106_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compound Assignment",
+      "prompt": "What is the equivalent shorthand for x = x + 5?",
+      "options": ["x += 5", "x =+ 5", "x ++ 5", "x +== 5"],
+      "correctAnswer": "x += 5"
+    },
+    {
+      "slideId": "CPP_106_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical OR Operator",
+      "prompt": "Fill in the logical operator to check if at least one condition is true.",
+      "codeSnippet": "if (x > 5 ___ y < 10) {}",
+      "options": ["||", "&&", "!", "|"],
+      "correctAnswer": "||"
+    },
+    {
+      "slideId": "CPP_106_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Not Equal Operator",
+      "prompt": "Which comparison operator checks if two values are not equal?",
+      "options": ["!=", "<>", "==", "!=="],
+      "correctAnswer": "!="
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "lessonId": "CPP_113",
+  "title": "C++ Break and Continue",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_113_S1",
+      "type": "CONCEPT",
+      "title": "Loop Control Statements",
+      "prompt": "'break' stops the loop, whereas 'continue' skips the current iteration and jumps to the next.",
+      "codeSnippet": "for (int i = 0; i < 10; i++) {\n    if (i == 4) break;\n    std::cout << i;\n}"
+    },
+    {
+      "slideId": "CPP_113_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Skipping Iteration",
+      "prompt": "Fill in the keyword to skip current iteration when i equals 3.",
+      "codeSnippet": "if (i == 3) {\n    ___;\n}",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "CPP_113_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Terminating Loops",
+      "prompt": "Which keyword completely exits a loop early?",
+      "options": ["break", "continue", "exit", "return"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_113_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Break in Switch vs Loop",
+      "prompt": "What does the 'break' statement do inside a loop structure?",
+      "options": ["Exits the loop immediately", "Skips to the next iteration", "Restarts the loop from 0", "Pauses execution for 1 second"],
+      "correctAnswer": "Exits the loop immediately"
+    },
+    {
+      "slideId": "CPP_113_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Exiting Outer Loop",
+      "prompt": "Complete the statement to immediately terminate the running loop.",
+      "codeSnippet": "if (found) {\n    ___;\n}",
+      "options": ["break", "continue", "stop", "goto"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_113_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Loop Break Scope",
+      "prompt": "When 'break' is executed inside an inner loop, which loop does it break out of?",
+      "options": [
+        "Only the innermost loop",
+        "All nested loops simultaneously",
+        "The outermost loop only",
+        "The main function execution"
+      ],
+      "correctAnswer": "Only the innermost loop"
+    },
+    {
+      "slideId": "CPP_113_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Filtering Output",
+      "prompt": "Fill in the keyword to skip printing negative values.",
+      "codeSnippet": "if (val < 0) {\n    ___;\n}\nstd::cout << val;",
+      "options": ["continue", "break", "return", "else"],
+      "correctAnswer": "continue"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "lessonId": "CPP_104",
+  "title": "C++ User Input (std::cin)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_104_S1",
+      "type": "CONCEPT",
+      "title": "Reading Input",
+      "prompt": "std::cin is used together with the extraction operator (>>) to get user input.",
+      "codeSnippet": "int x;\nstd::cout << \"Type a number: \";\nstd::cin >> x;"
+    },
+    {
+      "slideId": "CPP_104_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Taking Input",
+      "prompt": "Fill in the blank to read user input into variable 'age'.",
+      "codeSnippet": "std::___ >> age;",
+      "options": ["cin", "cout", "input", "read"],
+      "correctAnswer": "cin"
+    },
+    {
+      "slideId": "CPP_104_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Extraction Operator",
+      "prompt": "Which operator is used with std::cin to read input?",
+      "options": [">>", "<<", "->", "::"],
+      "correctAnswer": ">>"
+    },
+    {
+      "slideId": "CPP_104_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Inputs",
+      "prompt": "Complete the code to take input for two variables x and y sequentially.",
+      "codeSnippet": "std::cin >> x ___ y;",
+      "options": [">>", "<<", ",", "+"],
+      "correctAnswer": ">>"
+    },
+    {
+      "slideId": "CPP_104_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "cin Stream Type",
+      "prompt": "std::cin is an instance of which C++ stream class?",
+      "options": ["istream", "ostream", "fstream", "stringstream"],
+      "correctAnswer": "istream"
+    },
+    {
+      "slideId": "CPP_104_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Prompting User",
+      "prompt": "Complete the code to output a prompt before receiving input.",
+      "codeSnippet": "std::___ << \"Enter name: \";\nstd::cin >> name;",
+      "options": ["cout", "cin", "print", "write"],
+      "correctAnswer": "cout"
+    },
+    {
+      "slideId": "CPP_104_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Whitespace Handling",
+      "prompt": "How does std::cin >> stringVar handle whitespace (spaces, tabs, newlines)?",
+      "options": [
+        "It stops reading at the first whitespace",
+        "It reads the entire line including spaces",
+        "It throws an execution error",
+        "It automatically converts spaces to underscores"
+      ],
+      "correctAnswer": "It stops reading at the first whitespace"
+    }
+  ]
+}

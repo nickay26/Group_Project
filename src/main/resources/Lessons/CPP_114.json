@@ -1,0 +1,75 @@
+{
+  "lessonId": "CPP_114",
+  "title": "C++ Arrays (Premium)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_114_S1",
+      "type": "CONCEPT",
+      "title": "Declaring and Accessing Arrays",
+      "prompt": "Arrays are used to store multiple values of the same type in a single variable.",
+      "codeSnippet": "std::string cars[4] = {\"Volvo\", \"BMW\", \"Ford\", \"Mazda\"};\nstd::cout << cars[0]; // Outputs Volvo"
+    },
+    {
+      "slideId": "CPP_114_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Indexing",
+      "prompt": "Fill in the index to access the third element in array 'nums'.",
+      "codeSnippet": "int myNum = nums[___];",
+      "options": ["2", "3", "1", "0"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "CPP_114_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Index Start",
+      "prompt": "What is the index of the first element in a C++ array?",
+      "options": ["0", "1", "-1", "Depends on size"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_114_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Foreach Loop over Array",
+      "prompt": "Fill in the keyword to iterate easily through array elements in C++11.",
+      "codeSnippet": "for (int i ___ myNumbers) {\n    std::cout << i;\n}",
+      "options": [":", "in", "of", "->"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_114_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Size Calculation",
+      "prompt": "How do you calculate the number of elements in an array 'arr'?",
+      "options": [
+        "sizeof(arr) / sizeof(arr[0])",
+        "arr.length()",
+        "arr.size()",
+        "sizeof(arr)"
+      ],
+      "correctAnswer": "sizeof(arr) / sizeof(arr[0])"
+    },
+    {
+      "slideId": "CPP_114_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Changing Array Element",
+      "prompt": "Complete the code to set the first element of 'cars' to 'Tesla'.",
+      "codeSnippet": "cars[___] = \"Tesla\";",
+      "options": ["0", "1", "first", "start"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_114_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multidimensional Array Declaration",
+      "prompt": "Which syntax correctly declares a 2D integer array with 2 rows and 3 columns?",
+      "options": [
+        "int matrix[2][3];",
+        "int matrix[2, 3];",
+        "int matrix(2)(3);",
+        "array<int, 2, 3> matrix;"
+      ],
+      "correctAnswer": "int matrix[2][3];"
+    }
+  ]
+}

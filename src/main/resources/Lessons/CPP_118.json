@@ -1,0 +1,80 @@
+{
+  "lessonId": "CPP_118",
+  "title": "C++ References ",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_118_S1",
+      "type": "CONCEPT",
+      "title": "Reference Variable Concept",
+      "prompt": "A reference variable is an alias for an existing variable, created with the & operator.",
+      "codeSnippet": "string food = \"Pizza\";\nstring &meal = food;\nstd::cout << meal; // Outputs Pizza"
+    },
+    {
+      "slideId": "CPP_118_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating a Reference",
+      "prompt": "Fill in the operator to create a reference variable named 'ref'.",
+      "codeSnippet": "int original = 100;\nint ___ref = original;",
+      "options": ["&", "*", "ref", "alias"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_118_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reference Initializing Rule",
+      "prompt": "Must a C++ reference variable be initialized at the time of declaration?",
+      "options": [
+        "Yes, always required",
+        "No, it can be assigned later",
+        "Only if declared as const",
+        "Only inside functions"
+      ],
+      "correctAnswer": "Yes, always required"
+    },
+    {
+      "slideId": "CPP_118_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Reference",
+      "prompt": "Fill in the keyword to create a read-only reference that cannot alter the original value.",
+      "codeSnippet": "___ int &ref = x;",
+      "options": ["const", "final", "static", "readonly"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_118_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reference Rebinding",
+      "prompt": "Can a reference variable be changed to refer to a different variable after declaration?",
+      "options": [
+        "No, references cannot be reassigned to refer to another object",
+        "Yes, using the = operator",
+        "Yes, using the & operator again",
+        "Only inside a loop"
+      ],
+      "correctAnswer": "No, references cannot be reassigned to refer to another object"
+    },
+    {
+      "slideId": "CPP_118_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Modifying via Reference",
+      "prompt": "Complete the code to change 'original' to 200 through 'ref'.",
+      "codeSnippet": "int original = 100;\nint &ref = original;\n___ = 200;",
+      "options": ["ref", "*ref", "&ref", "original.ref"],
+      "correctAnswer": "ref"
+    },
+    {
+      "slideId": "CPP_118_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer vs Reference Memory Address",
+      "prompt": "What is the key functional difference between a Reference and a Pointer?",
+      "options": [
+        "References cannot be null and don't need pointer syntax like *",
+        "References store raw memory addresses directly",
+        "Pointers are faster than references in execution",
+        "References require explicit memory allocation with new"
+      ],
+      "correctAnswer": "References cannot be null and don't need pointer syntax like *"
+    }
+  ]
+}

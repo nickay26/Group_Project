@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_108",
+  "title": "C++ Math Functions(Premium)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_108_S1",
+      "type": "CONCEPT",
+      "title": "cmath Header",
+      "prompt": "Header <cmath> allows performing mathematical functions on numbers.",
+      "codeSnippet": "#include <cmath>\n\nint x = std::max(5, 10);\ndouble y = sqrt(64); // returns 8"
+    },
+    {
+      "slideId": "CPP_108_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Square Root Function",
+      "prompt": "Fill in the math function name to calculate square root.",
+      "codeSnippet": "double result = ___(16);",
+      "options": ["sqrt", "square", "root", "pow"],
+      "correctAnswer": "sqrt"
+    },
+    {
+      "slideId": "CPP_108_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rounding Numbers",
+      "prompt": "Which function rounds a floating-point number up to the nearest integer?",
+      "options": ["ceil()", "floor()", "round()", "abs()"],
+      "correctAnswer": "ceil()"
+    },
+    {
+      "slideId": "CPP_108_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Power Function",
+      "prompt": "Fill in the function used to calculate 2 raised to the power of 3 (2^3).",
+      "codeSnippet": "double res = ___(2, 3);",
+      "options": ["pow", "power", "exp", "sqr"],
+      "correctAnswer": "pow"
+    },
+    {
+      "slideId": "CPP_108_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Round Down Function",
+      "prompt": "Which function rounds a floating-point number down to the nearest integer?",
+      "options": ["floor()", "ceil()", "min()", "trunc()"],
+      "correctAnswer": "floor()"
+    },
+    {
+      "slideId": "CPP_108_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Absolute Value",
+      "prompt": "Complete the code to get the absolute value of -5.5.",
+      "codeSnippet": "double val = ___(-5.5);",
+      "options": ["abs", "absolute", "pos", "val"],
+      "correctAnswer": "abs"
+    },
+    {
+      "slideId": "CPP_108_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Max Value Function",
+      "prompt": "Which function can be used to find the highest value of two numbers?",
+      "options": ["std::max(x, y)", "std::highest(x, y)", "std::greater(x, y)", "std::top(x, y)"],
+      "correctAnswer": "std::max(x, y)"
+    }
+  ]
+}

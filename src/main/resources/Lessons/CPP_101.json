@@ -1,6 +1,7 @@
 {
   "lessonId": "CPP_101",
-  "title": "Hello C++",
+  "title": "C++ Introduction & Hello World",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_101_S1",
@@ -22,9 +23,43 @@
       "slideId": "CPP_101_S3",
       "type": "MULTIPLE_CHOICE",
       "title": "Output Stream Operator",
-      "prompt": "Which operator is used with std::cout to send output to the screen in C++?",
+      "prompt": "Which operator is used with std::cout to send output to the screen?",
       "options": ["<<", ">>", "==", "->"],
       "correctAnswer": "<<"
+    },
+    {
+      "slideId": "CPP_101_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Main Function Return Type",
+      "prompt": "What return type does the main() function strictly require in standard C++?",
+      "options": ["int", "void", "double", "string"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_101_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Header Inclusion",
+      "prompt": "Fill in the header file required for input and output operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["iostream", "stdio.h", "conio.h", "string"],
+      "correctAnswer": "iostream"
+    },
+    {
+      "slideId": "CPP_101_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Statement Terminator",
+      "prompt": "Which symbol marks the end of a execution statement in C++?",
+      "options": [";", ":", ".", ","],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_101_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Success Code",
+      "prompt": "Complete the statement that indicates successful program execution.",
+      "codeSnippet": "return ___;",
+      "options": ["0", "1", "-1", "null"],
+      "correctAnswer": "0"
     }
   ]
 }

@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_109",
+  "title": "C++ If...Else Logic",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_109_S1",
+      "type": "CONCEPT",
+      "title": "Conditional Execution",
+      "prompt": "Use the if statement to specify a block of C++ code to be executed if a condition is true.",
+      "codeSnippet": "if (20 > 18) {\n    std::cout << \"20 is greater than 18\";\n}"
+    },
+    {
+      "slideId": "CPP_109_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Else Statement",
+      "prompt": "Complete the code to execute a fallback block when condition is false.",
+      "codeSnippet": "if (x > y) {\n    std::cout << \"X\";\n} ___ {\n    std::cout << \"Y\";\n}",
+      "options": ["else", "then", "otherwise", "elif"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "CPP_109_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Equality Comparison Operator",
+      "prompt": "Which operator compares if two values are equal in an if statement?",
+      "options": ["==", "=", "equals", "==="],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "CPP_109_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary Operator",
+      "prompt": "Fill in the symbol for short-hand if...else (ternary operator).",
+      "codeSnippet": "string result = (time < 18) ___ \"Good day.\" : \"Good evening.\";",
+      "options": ["?", ":", "if", "then"],
+      "correctAnswer": "?"
+    },
+    {
+      "slideId": "CPP_109_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical NOT Operator",
+      "prompt": "Which symbol reverses the boolean state of a condition?",
+      "options": ["!", "~", "NOT", "^"],
+      "correctAnswer": "!"
+    },
+    {
+      "slideId": "CPP_109_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Else If Condition",
+      "prompt": "Fill in the keywords to test a new condition if the first condition is false.",
+      "codeSnippet": "if (x == 1) {}\n___ (x == 2) {}",
+      "options": ["else if", "elif", "or if", "case"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "CPP_109_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Conditionals",
+      "prompt": "What is an 'if' statement placed inside another 'if' statement called?",
+      "options": ["Nested if", "Inner if", "Double if", "Chained if"],
+      "correctAnswer": "Nested if"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "lessonId": "CPP_115",
+  "title": "C++ Structures (struct) ",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_115_S1",
+      "type": "CONCEPT",
+      "title": "Structure Concept",
+      "prompt": "Structures (struct) are a way to group several related variables into one place.",
+      "codeSnippet": "struct Person {\n    std::string name;\n    int age;\n};\n\nPerson p1;\np1.age = 20;"
+    },
+    {
+      "slideId": "CPP_115_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Access",
+      "prompt": "Fill in the operator used to access members of a structure.",
+      "codeSnippet": "myCar___brand = \"Toyota\";",
+      "options": [".", "->", "::", ":"],
+      "correctAnswer": "."
+    },
+    {
+      "slideId": "CPP_115_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Struct Declaration Keyword",
+      "prompt": "Which keyword is used to define a structure in C++?",
+      "options": ["struct", "structure", "class", "object"],
+      "correctAnswer": "struct"
+    },
+    {
+      "slideId": "CPP_115_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Named Structure Instantiation",
+      "prompt": "Complete the creation of a struct instance named 's1'.",
+      "codeSnippet": "Student ___;",
+      "options": ["s1", "struct", "new Student", "Student()"],
+      "correctAnswer": "s1"
+    },
+    {
+      "slideId": "CPP_115_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Member Accessability",
+      "prompt": "By default, what is the access specifier for members inside a C++ struct?",
+      "options": ["public", "private", "protected", "internal"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_115_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pointer Member Access Operator",
+      "prompt": "Fill in the operator used to access struct members through a pointer.",
+      "codeSnippet": "ptr___age = 25;",
+      "options": ["->", ".", "::", "=>"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_115_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Struct Syntax Requirement",
+      "prompt": "What character must follow the closing curly brace '}' of a struct definition?",
+      "options": ["; (Semicolon)", ": (Colon)", ". (Period)", "Nothing"],
+      "correctAnswer": "; (Semicolon)"
+    }
+  ]
+}

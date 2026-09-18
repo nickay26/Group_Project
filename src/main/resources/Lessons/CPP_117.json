@@ -1,0 +1,70 @@
+{
+  "lessonId": "CPP_117",
+  "title": "C++ Pointers (Premium)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_117_S1",
+      "type": "CONCEPT",
+      "title": "What is a Pointer?",
+      "prompt": "A pointer is a variable that stores the memory address of another variable as its value.",
+      "codeSnippet": "string food = \"Pizza\";\nstring* ptr = &food;\nstd::cout << ptr; // Outputs memory address"
+    },
+    {
+      "slideId": "CPP_117_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Address-of Operator",
+      "prompt": "Fill in the operator used to get the memory address of a variable.",
+      "codeSnippet": "string food = \"Pizza\";\nstd::cout << ___food;",
+      "options": ["&", "*", "->", "ptr"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_117_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Declaration Syntax",
+      "prompt": "Which symbol is used to declare a pointer variable in C++?",
+      "options": ["*", "&", "#", "->"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_117_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Dereferencing Pointer",
+      "prompt": "Fill in the symbol to dereference a pointer and get the value stored at the memory address.",
+      "codeSnippet": "std::cout << ___ptr; // Outputs 'Pizza'",
+      "options": ["*", "&", "val", "->"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_117_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Null Pointer Concept",
+      "prompt": "What is a pointer that does not point to any memory location called?",
+      "options": ["Null pointer (nullptr)", "Void pointer", "Dangling pointer", "Wild pointer"],
+      "correctAnswer": "Null pointer (nullptr)"
+    },
+    {
+      "slideId": "CPP_117_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Modifying Value via Pointer",
+      "prompt": "Complete the code to change the value of 'food' to 'Burger' using its pointer.",
+      "codeSnippet": "___ptr = \"Burger\";",
+      "options": ["*", "&", "ptr", "->"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_117_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer and Array Relationship",
+      "prompt": "In C++, what does the name of an array act as when evaluated as a value?",
+      "options": [
+        "A pointer to its first element",
+        "A constant string value",
+        "A reference to the entire array size",
+        "An integer count of elements"
+      ],
+      "correctAnswer": "A pointer to its first element"
+    }
+  ]
+}
