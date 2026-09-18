@@ -22,185 +22,227 @@
         <URL value="@../Css/welcome.css" />
     </stylesheets>
 
-
-    <!-- 1. TOP NAVIGATION BAR -->
+    <!-- TOP NAVIGATION BAR (Button 3 ခုကိုပဲ nav-button Class ပြောင်းထားပါသည်) -->
     <top>
         <HBox alignment="TOP_RIGHT" spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" top="10.0" />
             </padding>
             <children>
-                <Button fx:id="aboutBtn" onAction="#handleAbout" text="About" />
-                <Button fx:id="helpBtn" onAction="#handleHelp" text="Help" />
-                <Button fx:id="loginBtn" onAction="#handleLogin" text="Login">
-               <HBox.margin>
-                  <Insets right="70.0" />
-               </HBox.margin></Button>
+                <Button fx:id="aboutBtn" onAction="#handleAbout" styleClass="nav-button" text="About" />
+                <Button fx:id="helpBtn" onAction="#handleHelp" styleClass="nav-button" text="Help" />
+                <Button fx:id="loginBtn" onAction="#handleLogin" styleClass="nav-button" text="Login">
+                    <HBox.margin>
+                        <Insets right="70.0" />
+                    </HBox.margin>
+                </Button>
             </children>
         </HBox>
     </top>
-   <left>
+
+    <left>
         <VBox alignment="CENTER_LEFT" spacing="40.0" BorderPane.alignment="CENTER">
             <children>
 
-                <!-- TOP ROW: REGISTER FORM (LEFT ALIGNED, NO BORDER) -->
+                <!-- REGISTER FORM SECTION (မူလ အတိုင်း ပြန်ထားပေးပါသည်) -->
                 <VBox alignment="CENTER_LEFT" fillWidth="false" spacing="12.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Register form" textFill="#e9e153">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <StackPane>
-                     <children>
-                              <TextField fx:id="usernameField" prefWidth="300.0" />
-                        <Label fx:id="usernameLabel" text="Username" textFill="#dee1e4">
-                           <padding>
-                              <Insets left="-140.0" />
-                           </padding>
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Register form" textFill="#adc7ed">
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="Calibri Bold" size="12.0" />
+                            </font>
                         </Label>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/pythonphoto.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="540.0" top="-130.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <StackPane>
-                     <children>
-                              <TextField fx:id="emailField" prefWidth="300.0" />
-                        <Label fx:id="emailLabel" text="Email" textFill="#ced8e6">
-                           <padding>
-                              <Insets left="-140.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane>
-                     <children>
-                              <PasswordField fx:id="passwordField" prefWidth="300.0" />
-                        <Label fx:id="passwordLabel" text="Password" textFill="#ccdeeb">
-                           <padding>
-                              <Insets left="-140.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/c++photo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="-50.0" left="850.0" top="-200.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets bottom="-400.0" left="630.0" top="100.0" />
-                     </VBox.margin>
-                     <image>
-                        <Image url="@../Images/javaphoto.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets left="780.0" top="250.0" />
-                     </VBox.margin>
-                     <image>
-                        <Image url="@../Images/laptop.gif" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="100.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets bottom="200.0" left="750.0" right="100.0" top="-200.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets bottom="-80.0" left="700.0" top="-350.0" />
-                     </VBox.margin>
-                     <image>
-                        <Image url="@../Images/gprobot.gif" />
-                     </image>
-                  </ImageView>
+                        <StackPane>
+                            <children>
+                                <TextField fx:id="usernameField" prefHeight="55.0" prefWidth="300.0">
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </TextField>
+                                <Label fx:id="usernameLabel" text="Username" textFill="#dee1e4">
+                                    <padding>
+                                        <Insets left="-140.0" />
+                                    </padding>
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="50.0" />
+                            </VBox.margin>
+                        </StackPane>
+
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Images/pythonphoto.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="-50.0" left="540.0" top="-130.0" />
+                            </VBox.margin>
+                        </ImageView>
+
+                        <StackPane>
+                            <children>
+                                <TextField fx:id="emailField" prefHeight="55.0" prefWidth="300.0">
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </TextField>
+                                <Label fx:id="emailLabel" text="Email" textFill="#ced8e6">
+                                    <padding>
+                                        <Insets left="-140.0" />
+                                    </padding>
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </Label>
+                            </children>
+                        </StackPane>
+
+                        <StackPane>
+                            <children>
+                                <PasswordField fx:id="passwordField" prefHeight="55.0" prefWidth="300.0">
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </PasswordField>
+                                <Label fx:id="passwordLabel" text="Password" textFill="#ccdeeb">
+                                    <padding>
+                                        <Insets left="-140.0" />
+                                    </padding>
+                                    <StackPane.margin>
+                                        <Insets left="50.0" />
+                                    </StackPane.margin>
+                                </Label>
+                            </children>
+                        </StackPane>
+
+                        <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Images/c++photo.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="-50.0" left="850.0" top="-200.0" />
+                            </VBox.margin>
+                        </ImageView>
+
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="-400.0" left="630.0" top="100.0" />
+                            </VBox.margin>
+                            <image>
+                                <Image url="@../Images/javaphoto.png" />
+                            </image>
+                        </ImageView>
+
+                        <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets left="780.0" top="250.0" />
+                            </VBox.margin>
+                            <image>
+                                <Image url="@../Images/laptop.gif" />
+                            </image>
+                        </ImageView>
+
+                        <ImageView fitHeight="100.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="200.0" left="750.0" right="100.0" top="-200.0" />
+                            </VBox.margin>
+                        </ImageView>
+
+                        <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="-80.0" left="700.0" top="-350.0" />
+                            </VBox.margin>
+                            <image>
+                                <Image url="@../Images/gprobot.gif" />
+                            </image>
+                        </ImageView>
+
                         <HBox spacing="10.0" />
-                          <Button fx:id="googleSignUpBtn" onAction="#handleGoogleSignUp" text="Sign up with Google" />
-                          <Button fx:id="signUpButton" onAction="#handleSignUp" text="Sign Up" />
+                        <Button fx:id="googleSignUpBtn" onAction="#handleGoogleSignUp" styleClass="google-btn" text="Sign up with Google">
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </Button>
+
+                        <Button fx:id="signUpButton" onAction="#handleSignUp" styleClass="primary-btn" text="Sign Up">
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </Button>
                     </children>
                 </VBox>
 
-                <!-- BOTTOM ROW: RESPONSIVE EXPANDING LANGUAGE CARDS -->
-                <!-- BOTTOM ROW: CENTERED LANGUAGE CARDS -->
+                <!-- LANGUAGE CARDS SECTION (မူလ မူရင်းအတိုင်း ပြန်ထားပေးပါသည်) -->
                 <HBox alignment="CENTER" spacing="25.0" VBox.vgrow="ALWAYS">
                     <children>
                         <VBox alignment="CENTER" onMouseClicked="#handleJavaCard" prefHeight="180.0" style="-fx-border-color: #38bdf8; -fx-border-width: 1px; -fx-border-radius: 25px; -fx-cursor: hand; -fx-background-color: #cbd6e2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 5); -fx-background-radius: 25px;" HBox.hgrow="ALWAYS">
                             <children>
-                        <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/java.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="-140.0" top="-110.0" />
-                           </VBox.margin>
-                        </ImageView>
+                                <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/java.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets left="-140.0" top="-80.0" />
+                                    </VBox.margin>
+                                </ImageView>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Java" />
                             </children>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="100.0" right="100.0" />
-                     </padding>
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="100.0" right="100.0" />
+                            </padding>
                         </VBox>
                         <VBox alignment="CENTER" onMouseClicked="#handleCppCard" prefHeight="180.0" style="-fx-border-color: #38bdf8; -fx-border-width: 1px; -fx-border-radius: 25px; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 5); -fx-background-color: #cbd6e2; -fx-background-radius: 25px;" HBox.hgrow="ALWAYS">
                             <children>
-                        <ImageView fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/c++.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="-140.0" top="-110.0" />
-                           </VBox.margin>
-                        </ImageView>
+                                <ImageView fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/c++.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets left="-140.0" top="-80.0" />
+                                    </VBox.margin>
+                                </ImageView>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="C++" />
                             </children>
-                     <padding>
-                        <Insets left="100.0" right="100.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
+                            <padding>
+                                <Insets left="100.0" right="100.0" />
+                            </padding>
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
                         </VBox>
                         <VBox alignment="CENTER" onMouseClicked="#handlePythonCard" prefHeight="180.0" style="-fx-border-color: #38bdf8; -fx-border-width: 1px; -fx-border-radius: 25px; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 5); -fx-background-color: #cbd6e2; -fx-background-radius: 25px;" HBox.hgrow="ALWAYS">
                             <children>
-                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/python.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="-140.0" top="-110.0" />
-                           </VBox.margin>
-                        </ImageView>
+                                <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/python.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets left="-140.0" top="-80.0" />
+                                    </VBox.margin>
+                                </ImageView>
                                 <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Python" />
                             </children>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="90.0" right="90.0" />
-                     </padding>
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="90.0" right="90.0" />
+                            </padding>
                         </VBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </HBox>
 
             </children>
         </VBox>
-   </left>
+    </left>
 </BorderPane>
