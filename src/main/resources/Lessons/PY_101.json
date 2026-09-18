@@ -1,0 +1,30 @@
+{
+  "lessonId": "PY_101",
+  "title": "Hello Python",
+  "slides": [
+    {
+      "slideId": "PY_101_S1",
+      "type": "CONCEPT",
+      "title": "Printing Text",
+      "prompt": "In Python, we use the print() function to display text on the screen.",
+      "codeSnippet": "print(\"Hello, World!\")"
+    },
+    {
+      "slideId": "PY_101_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Your First Code",
+      "prompt": "Complete the code to output 'Welcome!'",
+      "codeSnippet": "___(\"Welcome!\")",
+      "options": ["print", "output", "display", "log"],
+      "correctAnswer": "print"
+    },
+    {
+      "slideId": "PY_101_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Enclosure",
+      "prompt": "Which character must surround text strings in Python?",
+      "options": ["Quotes (\" or ')", "Parentheses ( )", "Brackets [ ]"],
+      "correctAnswer": "Quotes (\" or ')"
+    }
+  ]
+}
