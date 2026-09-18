@@ -5,29 +5,13 @@
     {
       "slideId": "JAVA_101_S1",
       "type": "CONCEPT",
-      "title": "Introduction to Java",
-      "prompt": "Java is a popular programming language created by James Gosling in 1995. It is an Object-Oriented Programming Language. Java's slogan is \"Write Once, Run Anywhere\".",
-      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Welcome to Java!\");\n    }\n}",
-      "output": "Welcome to Java!"
-    },
-    {
-      "slideId": "JAVA_101_S2",
-      "type": "CONCEPT",
-      "title": "Multiple Statements",
-      "prompt": "You can add as many statements (lines of code) as you need. The following piece of code consists of 2 statements. It outputs two messages in different lines.",
-      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Name:\");\n        System.out.println(\"Surname:\");\n    }\n}",
-      "output": "Name:\nSurname:"
-    },
-    {
-      "slideId": "JAVA_101_S3",
-      "type": "CONCEPT",
       "title": "Print vs Println",
       "prompt": "The println() method is used to print text to the screen. Each println() statement adds a new line after printing. You can also use print() if you don't want a new line.",
       "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.print(\"Hello \");\n        System.out.print(\"World\");\n    }\n}",
       "output": "Hello World"
     },
     {
-      "slideId": "JAVA_101_S4",
+      "slideId": "JAVA_101_S2",
       "type": "MULTIPLE_CHOICE",
       "title": "Who Invented Java?",
       "prompt": "Who Invented Java?",
@@ -35,7 +19,7 @@
       "correctAnswer": "James Gosling"
     },
     {
-      "slideId": "JAVA_101_S5",
+      "slideId": "JAVA_101_S3",
       "type": "FILL_IN_BLANK",
       "title": "Class Name",
       "prompt": "Drag and drop the correct class name to match the file name Main.java.",
@@ -44,7 +28,7 @@
       "correctAnswer": "Main"
     },
     {
-      "slideId": "JAVA_101_S6",
+      "slideId": "JAVA_101_S4",
       "type": "FILL_IN_BLANK",
       "title": "Output 15",
       "prompt": "Drag and drop the correct number so the program prints 15.",
@@ -53,7 +37,7 @@
       "correctAnswer": "15"
     },
     {
-      "slideId": "JAVA_101_S7",
+      "slideId": "JAVA_101_S5",
       "type": "MULTIPLE_CHOICE",
       "title": "Primitive Data Types",
       "prompt": "Number of primitive data types in Java are?",
@@ -61,101 +45,391 @@
       "correctAnswer": "8"
     },
     {
-      "slideId": "JAVA_101_S8",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Semicolon",
-      "prompt": "In Java, each code statement must end with a semicolon (;)",
-      "options": ["True", "False"],
-      "correctAnswer": "True"
-    },
-    {
-      "slideId": "JAVA_101_S9",
-      "type": "MULTIPLE_CHOICE",
-      "title": "File Naming",
-      "prompt": "A file containing a class called MyClass should be saved as:",
-      "options": ["MyClass.jv", "MyClass.java", "MyClass.js"],
-      "correctAnswer": "MyClass.java"
-    },
-    {
-      "slideId": "JAVA_101_S10",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Increment Output",
-      "prompt": "What will be the output of the following Java code?",
-      "codeSnippet": "class increment {\n  public static void main(String args[]) {\n    int g = 3;\n    System.out.print(++g * 8);\n  }\n}",
-      "options": ["32", "33", "24", "25"],
-      "correctAnswer": "32"
-    },
-    {
-      "slideId": "JAVA_101_S11",
-      "type": "FILL_IN_BLANK",
-      "title": "Main Method Parameter",
-      "prompt": "Drag and drop the correct parameter for the main method.",
-      "codeSnippet": "public class MyClass {\n  public static void main(________) {\n    System.out.println(\"Hello\");\n  }\n}",
-      "options": ["String[] args", "int main", "args[]String", "main()"],
-      "correctAnswer": "String[] args"
-    },
-    {
-      "slideId": "JAVA_101_S12",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Print vs Println Difference",
-      "prompt": "The difference between println() and print() is that:",
-      "options": [
-        "The println() method adds a line break after printing, while print() does not",
-        "The print() method adds a line break after printing, while println() does not"
-      ],
-      "correctAnswer": "The println() method adds a line break after printing, while print() does not"
-    },
-    {
-      "slideId": "JAVA_101_S13",
-      "type": "FILL_IN_BLANK",
-      "title": "Output 21",
-      "prompt": "Drag and drop the correct number so the program prints 21.",
-      "codeSnippet": "System.out.println(7 * ______);",
-      "options": ["2", "3", "7", "\"3\""],
-      "correctAnswer": "3"
-    },
-    {
-      "slideId": "JAVA_101_S14",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Case Sensitivity",
-      "prompt": "Is Java case-sensitive?",
-      "options": ["Yes", "No"],
-      "correctAnswer": "Yes"
-    },
-    {
-      "slideId": "JAVA_101_S15",
+      "slideId": "JAVA_101_S6",
       "type": "MULTIPLE_CHOICE",
       "title": "Running Java",
       "prompt": "What is needed to run Java code?",
       "options": ["JDK", "JRE", "JVM", "All of the above"],
       "correctAnswer": "All of the above"
     },
+
     {
-      "slideId": "JAVA_101_S16",
-      "type": "FILL_IN_BLANK",
-      "title": "Character Assignment",
-      "prompt": "Drag and drop the correct character to assign the letter A to grade.",
-      "codeSnippet": "char grade = ______;",
-      "options": ["A", "'A'", "\"A\"", "grade"],
-      "correctAnswer": "'A'"
+      "slideId": "JAVA_101_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Semicolon",
+      "prompt": "In Java, each code statement must end with a semicolon (;)",
+      "options": ["True", "False"],
+      "correctAnswer": "True"
+    }
+  ],
+
+
+  "lessonId": "JAVA_102",
+  "title": "Types & Comparisons",
+  "slides": [
+    {
+      "slideId": "JAVA_102_S1",
+      "type": "CONCEPT",
+      "title": "What is a Variable?",
+      "prompt": "A variable is a container for storing data. In Java, you must declare a variable before using it.",
+      "codeSnippet": "int age = 25;",
+      "output": "25"
     },
     {
-      "slideId": "JAVA_101_S17",
-      "type": "FILL_IN_BLANK",
-      "title": "Print Hello World",
-      "prompt": "Insert the missing part of the code below to output \"Hello World\".",
-      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ____.____.____(\"Hello World\");\n  }\n}",
-      "options": ["System.out.println", "print", "console.log", "echo"],
-      "correctAnswer": "System.out.println"
+      "slideId": "JAVA_102_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Integer Data Type",
+      "prompt": "Which data type is used to store whole numbers?",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "int"
     },
     {
-      "slideId": "JAVA_101_S18",
+      "slideId": "JAVA_102_S3",
       "type": "FILL_IN_BLANK",
-      "title": "String Concatenation Output",
+      "title": "Declare Integer",
+      "prompt": "Complete the code to declare an integer variable 'age' with value 25.",
+      "codeSnippet": "____ age = 25;",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_102_S4",
+      "type": "CONCEPT",
+      "title": "Comments",
+      "prompt": "Comments are used to explain code. They are ignored by the compiler. Java supports single-line comments (//) and multi-line comments (/* */).",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        // This is a single-line comment\n        System.out.println(\"Hello\");\n        \n        /* This is a \n           multi-line comment */\n        System.out.println(\"World\");\n    }\n}",
+      "output": "Hello\nWorld"
+    },
+    {
+      "slideId": "JAVA_102_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of Comparison",
       "prompt": "What is the output?",
-      "codeSnippet": "System.out.println(\"5\" + 3);",
-      "options": ["53", "8", "5 3", "Error"],
-      "correctAnswer": "53"
+      "codeSnippet": "System.out.println(5 < 3);",
+      "options": ["true", "false", "5", "3"],
+      "correctAnswer": "false"
+    },
+    {
+      "slideId": "JAVA_102_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Double",
+      "prompt": "Complete the code to declare a double variable 'price' with value 19.99.",
+      "codeSnippet": "____ price = 19.99;",
+      "options": ["double", "int", "float", "decimal"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "JAVA_102_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of Comparison",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 > 3);",
+      "options": ["true", "false", "5", "3"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "JAVA_102_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Char",
+      "prompt": "Complete the code to declare a char variable 'grade' with value 'A'.",
+      "codeSnippet": "____ grade = 'A';",
+      "options": ["char", "String", "int", "letter"],
+      "correctAnswer": "char"
+    }
+  ],
+  "lessonId": "JAVA_102",
+  "title": "Conditional Statements",
+  "slides": [
+    {
+      "slideId": "JAVA_103_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If Statement Keyword",
+      "prompt": "Which keyword is used for a conditional statement?",
+      "options": ["if", "for", "while", "do"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "JAVA_103_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is greater than 5.",
+      "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
+      "options": [">", "<", "==", "!="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "JAVA_103_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Addition",
+      "prompt": "Complete the code to output 8.",
+      "codeSnippet": "System.out.println(5 __ 3);",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "JAVA_103_S4",
+      "type": "CONCEPT",
+      "title": "Increment and Decrement",
+      "prompt": "The ++ operator increases a value by 1. The -- operator decreases a value by 1.",
+      "codeSnippet": "int x = 5;\nSystem.out.println(x++);\nSystem.out.println(++x);",
+      "output": "5\n7"
+    },
+    {
+      "slideId": "JAVA_103_S5",
+      "type": "CONCEPT",
+      "title": "Else If Statement",
+      "prompt": "Use else if to check multiple conditions. The program checks each condition in order.",
+      "codeSnippet": "int score = 75;\nif (score >= 90) {\n    System.out.println(\"Grade A\");\n} else if (score >= 80) {\n    System.out.println(\"Grade B\");\n} else if (score >= 70) {\n    System.out.println(\"Grade C\");\n} else {\n    System.out.println(\"Grade F\");\n}",
+      "output": "Grade C"
+    },
+    {
+      "slideId": "JAVA_103_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else Keyword",
+      "prompt": "Which keyword is used for an alternative condition?",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_103_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else",
+      "prompt": "Complete the code to output 'B'.",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_103_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of If",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nif (x > 5) {\n  System.out.println(\"Big\");\n}",
+      "options": ["Big", "Small", "10", "5"],
+      "correctAnswer": "Big"
+    }
+  ],
+  "lessonId": "JAVA_102",
+  "title": "Loops",
+  "slides": [
+    {
+      "slideId": "JAVA_104_S1",
+      "type": "CONCEPT",
+      "title": "For Loop",
+      "prompt": "Loops are used to repeat code multiple times. The for loop runs a fixed number of times.",
+      "codeSnippet": "for (int i = 1; i <= 5; i++) {\n    System.out.println(i);\n}",
+      "output": "1\n2\n3\n4\n5"
+    },
+    {
+      "slideId": "JAVA_104_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "For Loop Keyword",
+      "prompt": "Which loop runs a fixed number of times?",
+      "options": ["for", "while", "do-while", "if"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "JAVA_104_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the For Loop",
+      "prompt": "Complete the loop to print 1 to 5.",
+      "codeSnippet": "for (int i = 1; i <= 5; i__) {\n  System.out.println(i);\n}",
+      "options": ["++", "--", "+", "-"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "JAVA_104_S4",
+      "type": "CONCEPT",
+      "title": "While Loop",
+      "prompt": "The while loop repeats code as long as a condition is true.",
+      "codeSnippet": "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}",
+      "output": "1\n2\n3\n4\n5"
+    },
+    {
+      "slideId": "JAVA_104_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the While Loop",
+      "prompt": "Complete the while loop.",
+      "codeSnippet": "int i = 1;\n_____ (i <= 5) {\n  System.out.println(i);\n  i++;\n}",
+      "options": ["while", "for", "do", "if"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "JAVA_104_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Do-While Loop",
+      "prompt": "Which loop runs at least once?",
+      "options": ["do-while", "while", "for", "if"],
+      "correctAnswer": "do-while"
+    },
+    {
+      "slideId": "JAVA_104_S7",
+      "type": "CONCEPT",
+      "title": "Do-While Loop",
+      "prompt": "The do-while loop runs the code at least once before checking the condition.",
+      "codeSnippet": "int i = 1;\ndo {\n    System.out.println(i);\n    i++;\n} while (i <= 5);",
+      "output": "1\n2\n3\n4\n5"
+    },
+    {
+      "slideId": "JAVA_104_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Break Keyword",
+      "prompt": "Which keyword exits a loop immediately?",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_104_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Break",
+      "prompt": "Complete the code to stop the loop at 3.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) _____;\n  System.out.println(i);\n}",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_104_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Continue Keyword",
+      "prompt": "Which keyword skips the current iteration?",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "JAVA_104_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Continue",
+      "prompt": "Complete the code to skip 3.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) _____;\n  System.out.println(i);\n}",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "JAVA_104_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "For Loop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "for (int i = 0; i < 3; i++) {\n  System.out.println(i);\n}",
+      "options": ["0 1 2", "1 2 3", "0 1 2 3", "1 2"],
+      "correctAnswer": "0 1 2"
+    },
+    {
+      "slideId": "JAVA_104_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "While Loop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int i = 0;\nwhile (i < 3) {\n  System.out.println(i);\n  i++;\n}",
+      "options": ["0 1 2", "1 2 3", "0 1 2 3", "1 2"],
+      "correctAnswer": "0 1 2"
+    },
+    {
+      "slideId": "JAVA_104_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Break Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) break;\n  System.out.println(i);\n}",
+      "options": ["0 1 2", "0 1 2 3", "0 1 2 3 4", "3"],
+      "correctAnswer": "0 1 2"
+    },
+    {
+      "slideId": "JAVA_104_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Continue Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) continue;\n  System.out.println(i);\n}",
+      "options": ["0 1 2 4", "0 1 2 3 4", "0 1 2", "3"],
+      "correctAnswer": "0 1 2 4"
+    }
+  ],
+  "lessonId": "JAVA_102",
+  "title": "Arrays",
+  "slides": [
+    {
+      "slideId": "JAVA_105_S1",
+      "type": "CONCEPT",
+      "title": "Arrays",
+      "prompt": "An array is a collection of elements of the same data type. Array indices start at 0. You can access elements using array[index].",
+      "codeSnippet": "int[] numbers = {10, 20, 30, 40, 50};\nSystem.out.println(numbers[0]);\nSystem.out.println(numbers[2]);\nSystem.out.println(numbers.length);",
+      "output": "10\n30\n5"
+    },
+    {
+      "slideId": "JAVA_105_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Index",
+      "prompt": "Array indices start at:",
+      "options": ["0", "1", "-1", "10"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_105_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Access",
+      "prompt": "Complete the code to access the first element.",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
+      "options": ["0", "1", "2", "3"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_105_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Length",
+      "prompt": "How do you get the length of an array?",
+      "options": ["arr.length", "arr.size()", "arr.count()", "arr.length()"],
+      "correctAnswer": "arr.length"
+    },
+    {
+      "slideId": "JAVA_105_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Length",
+      "prompt": "Complete the code to get the length.",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.______);",
+      "options": ["length", "size", "count", "len"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "JAVA_105_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr[1]);",
+      "options": ["1", "2", "3", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_105_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Loop",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.length; i++) {\n  System.out.println(arr[i]);\n}",
+      "options": ["1 2 3", "0 1 2", "1 2", "3 2 1"],
+      "correctAnswer": "1 2 3"
+    },
+    {
+      "slideId": "JAVA_105_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Declaration",
+      "prompt": "Complete the code to declare an array of 5 integers.",
+      "codeSnippet": "int[] arr = new int[__];",
+      "options": ["5", "4", "6", "10"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_105_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[1] + arr[2]);",
+      "options": ["25", "20", "15", "30"],
+      "correctAnswer": "25"
+    },
+    {
+      "slideId": "JAVA_105_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Sum",
+      "prompt": "Complete the code to output 15.",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum __ arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["+=", "-=", "*=", "/="],
+      "correctAnswer": "+="
     }
   ]
 }
