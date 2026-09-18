@@ -1,0 +1,30 @@
+{
+  "lessonId": "CPP_101",
+  "title": "Hello C++",
+  "slides": [
+    {
+      "slideId": "CPP_101_S1",
+      "type": "CONCEPT",
+      "title": "Printing Text",
+      "prompt": "In C++, we use std::cout to display text on the screen.",
+      "codeSnippet": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\";\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_101_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Your First Code",
+      "prompt": "Complete the code to output 'Welcome!'",
+      "codeSnippet": "std::___ << \"Welcome!\";",
+      "options": ["cout", "print", "output", "log"],
+      "correctAnswer": "cout"
+    },
+    {
+      "slideId": "CPP_101_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output Stream Operator",
+      "prompt": "Which operator is used with std::cout to send output to the screen in C++?",
+      "options": ["<<", ">>", "==", "->"],
+      "correctAnswer": "<<"
+    }
+  ]
+}
