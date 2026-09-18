@@ -137,7 +137,7 @@
       "correctAnswer": "char"
     }
   ],
-  "lessonId": "JAVA_102",
+  "lessonId": "JAVA_103",
   "title": "Conditional Statements",
   "slides": [
     {
@@ -209,7 +209,7 @@
       "correctAnswer": "Big"
     }
   ],
-  "lessonId": "JAVA_102",
+  "lessonId": "JAVA_104",
   "title": "Loops",
   "slides": [
     {
@@ -341,7 +341,7 @@
       "correctAnswer": "0 1 2 4"
     }
   ],
-  "lessonId": "JAVA_102",
+  "lessonId": "JAVA_105",
   "title": "Arrays",
   "slides": [
     {
