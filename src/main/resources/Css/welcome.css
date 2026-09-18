@@ -12,13 +12,14 @@
 /* ==========================================================================
    2. CONTAINERS & PANELS
    ========================================================================== */
+/* Glassmorphic Panel/Card */
 .glass-panel {
-    -fx-background-color: linear-gradient(to bottom, rgba(14, 42, 71, 0.85), rgba(20, 50, 90, 0.85));
+    -fx-background-color: linear-gradient(to bottom, rgba(14, 30, 52, 0.90), rgba(20, 42, 70, 0.90));
     -fx-background-radius: 20px;
-    -fx-border-color: #38bdf8;
+    -fx-border-color: rgba(56, 189, 248, 0.35);
     -fx-border-radius: 20px;
     -fx-border-width: 1.5px;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.5), 25, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 20, 0, 0, 5);
     -fx-padding: 25px;
 }
 
@@ -29,7 +30,6 @@
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 8, 0, 0, 0);
 }
 
 .card-title {
@@ -42,62 +42,65 @@
    4. INPUT FIELDS
    ========================================================================== */
 .text-field, .password-field {
-    -fx-background-color: #0b1e36;
+    -fx-background-color: #081426;
     -fx-background-radius: 25px;
-    -fx-border-color: #2563eb;
+    -fx-border-color: #1d4ed8;
     -fx-border-radius: 25px;
     -fx-padding: 10px 18px;
     -fx-text-fill: #ffffff;
-    -fx-prompt-text-fill: #94a3b8;
+    -fx-prompt-text-fill: #64748b;
     -fx-font-size: 13px;
 }
 
 .text-field:focused, .password-field:focused {
     -fx-border-color: #38bdf8;
-    -fx-background-color: #0f294a;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 12, 0, 0, 0);
+    -fx-background-color: #0d213a;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.4), 10, 0, 0, 0);
 }
 
 /* ==========================================================================
-   5. BUTTONS (Google & Sign Up Matching Blue Style)
+   5. BUTTONS (Subtle Deep Blue & Glow Reduced)
    ========================================================================== */
 /* Main Primary Button (Sign Up) */
 .btn-primary, .primary-btn {
-    -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
+    -fx-background-color: linear-gradient(to right, #1d4ed8, #2563eb);
     -fx-background-radius: 25px;
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 10px 28px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 2);
 }
 
 .btn-primary:hover, .primary-btn:hover {
-    -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.9), 20, 0, 0, 0);
+    -fx-background-color: linear-gradient(to right, #1e40af, #1d4ed8);
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 99, 235, 0.5), 12, 0, 0, 0);
 }
 
-/* Google Sign Up Button */
+/* Google Sign Up Button (Matching Tone) */
 .google-btn {
-    -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
+    -fx-background-color: linear-gradient(to right, #1e3a8a, #1d4ed8);
     -fx-background-radius: 25px;
     -fx-text-fill: #ffffff;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-padding: 10px 20px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.6), 15, 0, 0, 0);
+    -fx-border-color: rgba(56, 189, 248, 0.3);
+    -fx-border-radius: 25px;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 2);
 }
 
 .google-btn:hover {
-    -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.9), 20, 0, 0, 0);
+    -fx-background-color: linear-gradient(to right, #1e40af, #2563eb);
+    -fx-border-color: #38bdf8;
 }
 
 /* Navigation Buttons */
 .nav-button {
-    -fx-background-color: #0f172a;
+    -fx-background-color: #0b172a;
     -fx-text-fill: #ffffff;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
@@ -110,18 +113,18 @@
 }
 
 .nav-button:hover {
-    -fx-background-color: #1e40af;
+    -fx-background-color: #1e3a8a;
     -fx-border-color: #38bdf8;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 12, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.4), 8, 0, 0, 0);
 }
 
 /* ==========================================================================
    6. LANGUAGE SELECTION CARDS
    ========================================================================== */
 .language-card, .lang-card {
-    -fx-background-color: linear-gradient(to bottom right, rgba(14, 42, 71, 0.85), rgba(30, 64, 110, 0.85));
+    -fx-background-color: linear-gradient(to bottom right, rgba(14, 30, 52, 0.85), rgba(24, 48, 80, 0.85));
     -fx-background-radius: 20px;
-    -fx-border-color: rgba(56, 189, 248, 0.5);
+    -fx-border-color: rgba(56, 189, 248, 0.3);
     -fx-border-radius: 20px;
     -fx-border-width: 1.5px;
     -fx-cursor: hand;
@@ -129,7 +132,7 @@
 }
 
 .language-card:hover, .lang-card:hover {
-    -fx-background-color: linear-gradient(to bottom right, rgba(2, 132, 199, 0.9), rgba(37, 99, 235, 0.9));
+    -fx-background-color: linear-gradient(to bottom right, rgba(30, 64, 110, 0.9), rgba(29, 78, 216, 0.9));
     -fx-border-color: #38bdf8;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.8), 20, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.5), 15, 0, 0, 0);
 }
