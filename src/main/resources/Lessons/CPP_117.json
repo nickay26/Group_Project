@@ -56,6 +56,23 @@
     {
       "slideId": "CPP_117_S7",
       "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Arithmetic Increment",
+      "prompt": "If int pointer 'p' points to address 0x1000, what address does 'p + 1' point to on 32-bit int (4 bytes)?",
+      "options": ["0x1004", "0x1001", "0x1002", "0x1008"],
+      "correctAnswer": "0x1004"
+    },
+    {
+      "slideId": "CPP_117_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Void Pointer Type",
+      "prompt": "Fill in generic pointer keyword that points to data of any type.",
+      "codeSnippet": "___* genericPtr = &data;",
+      "options": ["void", "auto", "generic", "any"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "CPP_117_S9",
+      "type": "MULTIPLE_CHOICE",
       "title": "Pointer and Array Relationship",
       "prompt": "In C++, what does the name of an array act as when evaluated as a value?",
       "options": [

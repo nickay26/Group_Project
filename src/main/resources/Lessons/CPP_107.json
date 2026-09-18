@@ -1,65 +1,65 @@
 {
   "lessonId": "CPP_107",
-  "title": "C++ Strings",
+  "title": "C++ Operators",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_107_S1",
       "type": "CONCEPT",
-      "title": "String Concatenation",
-      "prompt": "The + operator can be used between strings to join them together.",
-      "codeSnippet": "#include <string>\n\nstd::string firstName = \"John \";\nstd::string lastName = \"Doe\";\nstd::string fullName = firstName + lastName;"
+      "title": "Arithmetic & Logical Operators",
+      "prompt": "Operators perform operations on variables and values (+, -, *, /, %, &&, ||, !).",
+      "codeSnippet": "int sum = 10 + 5;\nint mod = 10 % 3; // Output: 1\nbool check = (x > 5 && y < 10);"
     },
     {
       "slideId": "CPP_107_S2",
       "type": "FILL_IN_BLANK",
-      "title": "String Length",
-      "prompt": "Fill in the function to get the length of a string.",
-      "codeSnippet": "int len = txt.___();",
-      "options": ["length", "size_of", "count", "capacity"],
-      "correctAnswer": "length"
+      "title": "Modulus Operator",
+      "prompt": "Fill in operator to calculate remainder of integer division.",
+      "codeSnippet": "int remainder = 10 ___ 3;",
+      "options": ["%", "/", "#", "mod"],
+      "correctAnswer": "%"
     },
     {
       "slideId": "CPP_107_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Accessing Characters",
-      "prompt": "How do you access the first character of string 'txt'?",
-      "options": ["txt[0]", "txt[1]", "txt(0)", "txt.first()"],
-      "correctAnswer": "txt[0]"
+      "title": "Integer Division Behavior",
+      "prompt": "What is the result of '7 / 2' in integer arithmetic in C++?",
+      "options": ["3", "3.5", "4", "3.0"],
+      "correctAnswer": "3"
     },
     {
       "slideId": "CPP_107_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Reading Full Line of Text",
-      "prompt": "Fill in the function name used to read a whole line of string including spaces.",
-      "codeSnippet": "___(std::cin, myString);",
-      "options": ["getline", "readline", "cin_line", "get_string"],
-      "correctAnswer": "getline"
+      "title": "Increment Operator",
+      "prompt": "Fill in increment operator to increase x value by 1.",
+      "codeSnippet": "x___;",
+      "options": ["++", "+=", "+1", "=="],
+      "correctAnswer": "++"
     },
     {
       "slideId": "CPP_107_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Append Function",
-      "prompt": "Which string method can also be used to concatenate text besides + operator?",
-      "options": ["append()", "add()", "concat()", "push()"],
-      "correctAnswer": "append()"
+      "title": "Logical AND Operator",
+      "prompt": "Which symbol represents logical AND in C++?",
+      "options": ["&&", "||", "!", "&"],
+      "correctAnswer": "&&"
     },
     {
       "slideId": "CPP_107_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Modifying Characters",
-      "prompt": "Complete the code to change the first character of 'myString' to 'J'.",
-      "codeSnippet": "myString[___] = 'J';",
-      "options": ["0", "1", "first", "-1"],
-      "correctAnswer": "0"
+      "title": "Compound Addition Operator",
+      "prompt": "Fill in operator shorthand for 'x = x + 5'.",
+      "codeSnippet": "x ___ 5;",
+      "options": ["+=", "=+=", "++=", "+"],
+      "correctAnswer": "+="
     },
     {
       "slideId": "CPP_107_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Required Header for String",
-      "prompt": "Which library must be included to work with std::string objects in standard C++?",
-      "options": ["<string>", "<text>", "<cstring>", "<strstream>"],
-      "correctAnswer": "<string>"
+      "title": "Pre-increment vs Post-increment",
+      "prompt": "If x=5, what value is assigned to y in 'int y = ++x;'?",
+      "options": ["6", "5", "7", "0"],
+      "correctAnswer": "6"
     }
   ]
 }

@@ -1,0 +1,104 @@
+{
+  "lessonId": "CPP_214",
+  "title": "C++ Lambda Expressions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_214_S1",
+      "type": "CONCEPT",
+      "title": "Anonymous Lambda Functions",
+      "prompt": "Lambdas let you write inline, anonymous functions: [capture](params) { body }.",
+      "codeSnippet": "auto add = [](int a, int b) {\n    return a + b;\n};\nstd::cout << add(3, 4);"
+    },
+    {
+      "slideId": "CPP_214_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Capture Clause Bracket",
+      "prompt": "Fill in bracket symbol starting lambda capture clause.",
+      "codeSnippet": "___=](int x) { return x + a; };",
+      "options": ["[", "(", "{", "<"],
+      "correctAnswer": "["
+    },
+    {
+      "slideId": "CPP_214_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Capture by Reference Symbol",
+      "prompt": "Which capture specification captures ALL outer variables by reference?",
+      "options": ["[&]", "[=]", "[this]", "[&, =]"],
+      "correctAnswer": "[&]"
+    },
+    {
+      "slideId": "CPP_214_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Capture by Value Symbol",
+      "prompt": "Fill in symbol capturing all outer variables by value copy.",
+      "codeSnippet": "[___](int n) { return n * factor; };",
+      "options": ["=", "&", "*", "auto"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_214_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mutable Lambda Keyword",
+      "prompt": "Which keyword allows modifying captured-by-value variables inside lambda body?",
+      "options": ["mutable", "volatile", "static", "override"],
+      "correctAnswer": "mutable"
+    },
+    {
+      "slideId": "CPP_214_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Trailing Return Type Arrow",
+      "prompt": "Fill in arrow syntax for explicit lambda return type.",
+      "codeSnippet": "[](double x) ___ double { return x * 2.0; }",
+      "options": ["->", "=>", ":", "as"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_214_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Storage Header",
+      "prompt": "Which standard header provides std::function to store lambdas as variables?",
+      "options": ["<functional>", "<utility>", "<algorithm>", "<memory>"],
+      "correctAnswer": "<functional>"
+    },
+    {
+      "slideId": "CPP_214_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Lambda Auto Keyword",
+      "prompt": "Fill in keyword enabling generic lambda parameters (C++14).",
+      "codeSnippet": "[]( ___ x, ___ y) { return x + y; }",
+      "options": ["auto", "typename", "template", "var"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_214_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Capture Specific Variable by Ref",
+      "prompt": "How do you capture ONLY variable 'x' by reference and variable 'y' by value?",
+      "options": ["[&x, y]", "[x, &y]", "[&x, &y]", "[=x, &y]"],
+      "correctAnswer": "[&x, y]"
+    },
+    {
+      "slideId": "CPP_214_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Call Operator Syntax",
+      "prompt": "Fill in parentheses for invoking lambda 'sum' with argument 5.",
+      "codeSnippet": "int res = sum___5___;",
+      "options": ["( )", "[ ]", "{ }", "< >"],
+      "correctAnswer": "( )"
+    },
+    {
+      "slideId": "CPP_214_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stateless Lambda Pointer Conversion",
+      "prompt": "Can a stateless lambda (empty capture list []) be converted to a raw function pointer?",
+      "options": [
+        "Yes, stateless lambdas convert implicitly to function pointers",
+        "No, lambdas can never convert to function pointers",
+        "Only in C++20",
+        "Only if return type is void"
+      ],
+      "correctAnswer": "Yes, stateless lambdas convert implicitly to function pointers"
+    }
+  ]
+}

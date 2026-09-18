@@ -1,65 +1,74 @@
 {
   "lessonId": "CPP_108",
-  "title": "C++ Math Functions(Premium)",
+  "title": "C++ Strings",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_108_S1",
       "type": "CONCEPT",
-      "title": "cmath Header",
-      "prompt": "Header <cmath> allows performing mathematical functions on numbers.",
-      "codeSnippet": "#include <cmath>\n\nint x = std::max(5, 10);\ndouble y = sqrt(64); // returns 8"
+      "title": "std::string Basics",
+      "prompt": "Strings store sequences of characters and require inclusion of <string> header.",
+      "codeSnippet": "#include <string>\nstd::string greeting = \"Hello\";\nstd::cout << greeting.length();"
     },
     {
       "slideId": "CPP_108_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Square Root Function",
-      "prompt": "Fill in the math function name to calculate square root.",
-      "codeSnippet": "double result = ___(16);",
-      "options": ["sqrt", "square", "root", "pow"],
-      "correctAnswer": "sqrt"
+      "title": "String Concatenation",
+      "prompt": "Fill in operator to join two string variables.",
+      "codeSnippet": "std::string full = firstName ___ lastName;",
+      "options": ["+", "&", ".", "concat"],
+      "correctAnswer": "+"
     },
     {
       "slideId": "CPP_108_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Rounding Numbers",
-      "prompt": "Which function rounds a floating-point number up to the nearest integer?",
-      "options": ["ceil()", "floor()", "round()", "abs()"],
-      "correctAnswer": "ceil()"
+      "title": "String Length Method",
+      "prompt": "Which method returns the number of characters in std::string 'str'?",
+      "options": ["str.length()", "str.count()", "sizeof(str)", "str.capacity()"],
+      "correctAnswer": "str.length()"
     },
     {
       "slideId": "CPP_108_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Power Function",
-      "prompt": "Fill in the function used to calculate 2 raised to the power of 3 (2^3).",
-      "codeSnippet": "double res = ___(2, 3);",
-      "options": ["pow", "power", "exp", "sqr"],
-      "correctAnswer": "pow"
+      "title": "Accessing Character Index",
+      "prompt": "Fill in brackets to access the first character of string 's'.",
+      "codeSnippet": "char first = s___0___;",
+      "options": ["[ ]", "( )", "{ }", "< >"],
+      "correctAnswer": "[ ]"
     },
     {
       "slideId": "CPP_108_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Round Down Function",
-      "prompt": "Which function rounds a floating-point number down to the nearest integer?",
-      "options": ["floor()", "ceil()", "min()", "trunc()"],
-      "correctAnswer": "floor()"
+      "title": "String Indexing Base",
+      "prompt": "What is the index position of the first character in a C++ string?",
+      "options": ["0", "1", "-1", "Depends on OS"],
+      "correctAnswer": "0"
     },
     {
       "slideId": "CPP_108_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Absolute Value",
-      "prompt": "Complete the code to get the absolute value of -5.5.",
-      "codeSnippet": "double val = ___(-5.5);",
-      "options": ["abs", "absolute", "pos", "val"],
-      "correctAnswer": "abs"
+      "title": "String Append Method",
+      "prompt": "Fill in method name that appends text to existing string.",
+      "codeSnippet": "txt.___(\" World\");",
+      "options": ["append", "push", "add", "concat"],
+      "correctAnswer": "append"
     },
     {
       "slideId": "CPP_108_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Max Value Function",
-      "prompt": "Which function can be used to find the highest value of two numbers?",
-      "options": ["std::max(x, y)", "std::highest(x, y)", "std::greater(x, y)", "std::top(x, y)"],
-      "correctAnswer": "std::max(x, y)"
+      "title": "Modifying String Character",
+      "prompt": "Given std::string s = \"Cat\", what is result of s[0] = 'B'?",
+      "options": ["\"Bat\"", "\"CatB\"", "Error", "\"B\""],
+      "correctAnswer": "\"Bat\""
+    },
+    {
+      "slideId": "CPP_108_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "C-style String Null Terminator",
+      "prompt": "C-strings end with character byte value ___.",
+      "codeSnippet": "char str[] = \"Hi\\0\"; // ends with ___",
+      "options": ["\\0", "\\n", "null", "0x1"],
+      "correctAnswer": "\\0"
     }
   ]
 }

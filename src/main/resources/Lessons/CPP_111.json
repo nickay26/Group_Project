@@ -1,70 +1,79 @@
 {
   "lessonId": "CPP_111",
-  "title": "C++ While and For Loops",
-  "isPremium": true,
+  "title": "C++ Switch Statement",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_111_S1",
       "type": "CONCEPT",
-      "title": "Loops Overview",
-      "prompt": "Loops execute a block of code as long as a specified condition is reached.",
-      "codeSnippet": "for (int i = 0; i < 5; i++) {\n    std::cout << i << \"\\n\";\n}"
+      "title": "Switch Statement Overview",
+      "prompt": "Switch selects one of many code blocks to execute based on a single discrete expression.",
+      "codeSnippet": "switch(day) {\n  case 1: std::cout << \"Mon\"; break;\n  default: std::cout << \"Other\";\n}"
     },
     {
       "slideId": "CPP_111_S2",
       "type": "FILL_IN_BLANK",
-      "title": "While Loop Condition",
-      "prompt": "Fill in the missing keyword to create a while loop.",
-      "codeSnippet": "___ (i < 5) {\n    std::cout << i;\n    i++;\n}",
-      "options": ["while", "until", "for", "repeat"],
-      "correctAnswer": "while"
+      "title": "Switch Keyword",
+      "prompt": "Fill in keyword to evaluate expression.",
+      "codeSnippet": "___ (grade) { case 'A': break; }",
+      "options": ["switch", "match", "select", "check"],
+      "correctAnswer": "switch"
     },
     {
       "slideId": "CPP_111_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "For Loop Structure",
-      "prompt": "How many main expressions are separated by semicolons in a standard for loop header?",
-      "options": ["3", "2", "1", "4"],
-      "correctAnswer": "3"
+      "title": "Break Statement Purpose",
+      "prompt": "What happens if a 'break' statement is omitted from a matching case block?",
+      "options": [
+        "Execution falls through to subsequent case blocks automatically",
+        "Program halts immediately with error",
+        "Switch restarts from beginning",
+        "Default block is executed"
+      ],
+      "correctAnswer": "Execution falls through to subsequent case blocks automatically"
     },
     {
       "slideId": "CPP_111_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Do...While Loop",
-      "prompt": "Which loop variant always executes the code block at least once before testing the condition?",
-      "codeSnippet": "___ {\n    std::cout << i;\n    i++;\n} while (i < 5);",
-      "options": ["do", "loop", "repeat", "run"],
-      "correctAnswer": "do"
+      "title": "Default Case Keyword",
+      "prompt": "Fill in keyword for default fallback block.",
+      "codeSnippet": "___: std::cout << \"Invalid input\";",
+      "options": ["default", "else", "otherwise", "catch"],
+      "correctAnswer": "default"
     },
     {
       "slideId": "CPP_111_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Infinite Loop Cause",
-      "prompt": "What causes an infinite while loop to occur?",
-      "options": [
-        "The condition never evaluates to false",
-        "Forgetting to include iostream",
-        "Using a floating point variable as counter",
-        "Missing the break statement inside loop"
-      ],
-      "correctAnswer": "The condition never evaluates to false"
+      "title": "Valid Switch Expression Types",
+      "prompt": "Which type CANNOT be evaluated directly inside standard C++ switch() expression?",
+      "options": ["std::string", "int", "char", "enum"],
+      "correctAnswer": "std::string"
     },
     {
       "slideId": "CPP_111_S6",
       "type": "FILL_IN_BLANK",
-      "title": "For Loop Increment Expression",
-      "prompt": "Fill in the increment expression to increase counter by 1 each iteration.",
-      "codeSnippet": "for (int i = 0; i < 10; ___) {}",
-      "options": ["i++", "i+1", "i = 1", "++"],
-      "correctAnswer": "i++"
+      "title": "Case Keyword Syntax",
+      "prompt": "Fill in label keyword for value match.",
+      "codeSnippet": "___ 10: std::cout << \"Ten\"; break;",
+      "options": ["case", "when", "val", "match"],
+      "correctAnswer": "case"
     },
     {
       "slideId": "CPP_111_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Do...While Syntax Ending",
-      "prompt": "What character is required right after the while condition in a do...while loop?",
-      "options": ["; (Semicolon)", ": (Colon)", "} (Brace)", "No character"],
-      "correctAnswer": "; (Semicolon)"
+      "title": "Case Delimiter Character",
+      "prompt": "Which character follows every case value expression label in a switch block?",
+      "options": [": (Colon)", "; (Semicolon)", "-> (Arrow)", "=> (Fat Arrow)"],
+      "correctAnswer": ": (Colon)"
+    },
+    {
+      "slideId": "CPP_111_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Breaking Case Loop",
+      "prompt": "Fill in statement to exit switch.",
+      "codeSnippet": "case 5: print(); ___;",
+      "options": ["break", "stop", "exit", "return"],
+      "correctAnswer": "break"
     }
   ]
 }

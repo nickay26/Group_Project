@@ -1,0 +1,136 @@
+{
+  "lessonId": "CPP_203",
+  "title": "C++ Access Specifiers & Encapsulation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_203_S1",
+      "type": "CONCEPT",
+      "title": "Encapsulation Basics",
+      "prompt": "Encapsulation hides internal data using private members and public getters/setters.",
+      "codeSnippet": "class BankAccount {\n  private:\n    double balance;\n  public:\n    void setBalance(double b) { balance = b; }\n    double getBalance() { return balance; }\n};"
+    },
+    {
+      "slideId": "CPP_203_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Private Keyword",
+      "prompt": "Fill in the access specifier that restricts direct external access.",
+      "codeSnippet": "class User {\n  ___:\n    string password;\n};",
+      "options": [
+        "private",
+        "protected",
+        "public",
+        "hidden"
+      ],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "CPP_203_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protected Access Scope",
+      "prompt": "Where can protected members be accessed?",
+      "options": [
+        "Inside the class and derived (child) classes",
+        "Anywhere in the entire program",
+        "Only strictly inside the class itself",
+        "Only in external main function"
+      ],
+      "correctAnswer": "Inside the class and derived (child) classes"
+    },
+    {
+      "slideId": "CPP_203_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Getter Function Prefix",
+      "prompt": "Fill in the standard prefix convention for reading a variable.",
+      "codeSnippet": "int ___Age() { return age; }",
+      "options": [
+        "get",
+        "set",
+        "read",
+        "fetch"
+      ],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_203_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Benefit",
+      "prompt": "What is the primary benefit of encapsulation?",
+      "options": [
+        "Protects internal state integrity and controls data modifications",
+        "Increases program execution speed drastically",
+        "Eliminates the use of pointers",
+        "Replaces compilers with interpreters"
+      ],
+      "correctAnswer": "Protects internal state integrity and controls data modifications"
+    },
+    {
+      "slideId": "CPP_203_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Setter Function Prefix",
+      "prompt": "Fill in standard prefix convention for modifying a variable.",
+      "codeSnippet": "void ___Age(int a) { age = a; }",
+      "options": [
+        "set",
+        "get",
+        "write",
+        "change"
+      ],
+      "correctAnswer": "set"
+    },
+    {
+      "slideId": "CPP_203_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Friend Function Access",
+      "prompt": "What access rights does a friend function have?",
+      "options": [
+        "Can access private and protected members of the class",
+        "Can only access public members",
+        "Can only modify static variables",
+        "No special access rights"
+      ],
+      "correctAnswer": "Can access private and protected members of the class"
+    },
+    {
+      "slideId": "CPP_203_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Keyword",
+      "prompt": "Fill in keyword to grant an external function access to private members.",
+      "codeSnippet": "class Box {\n  ___ void printWidth(Box b);\n};",
+      "options": [
+        "friend",
+        "public",
+        "extern",
+        "virtual"
+      ],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_203_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Struct vs Class Access Specifier",
+      "prompt": "What is the default access specifier for members in a struct?",
+      "options": [
+        "public",
+        "private",
+        "protected",
+        "internal"
+      ],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_203_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Class Declaration",
+      "prompt": "Fill in keyword declaring another class as a friend.",
+      "codeSnippet": "class A {\n  ___ class B;\n};",
+      "options": [
+        "friend",
+        "public",
+        "using",
+        "export"
+      ],
+      "correctAnswer": "friend"
+    }
+  ]
+}

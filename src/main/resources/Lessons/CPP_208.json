@@ -1,0 +1,114 @@
+{
+  "lessonId": "CPP_208",
+  "title": "C++ Exception Handling (try...catch)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_208_S1",
+      "type": "CONCEPT",
+      "title": "Exception Handling Overview",
+      "prompt": "Exceptions handle runtime errors gracefully using try, throw, and catch blocks.",
+      "codeSnippet": "try {\n    if (denom == 0) throw std::runtime_error(\"Div zero\");\n} catch (const std::exception& e) {\n    std::cout << e.what();\n}"
+    },
+    {
+      "slideId": "CPP_208_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Try Block Keyword",
+      "prompt": "Fill in keyword opening code block monitored for exceptions.",
+      "codeSnippet": "___ { doTask(); } catch(...) {}",
+      "options": ["try", "check", "test", "attempt"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "CPP_208_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw Execution Action",
+      "prompt": "What happens when a throw statement executes?",
+      "options": [
+        "Execution jumps to nearest matching catch handler",
+        "Program terminates with return code 0",
+        "Prints warning to console and continues next line",
+        "Resets variables to zero"
+      ],
+      "correctAnswer": "Execution jumps to nearest matching catch handler"
+    },
+    {
+      "slideId": "CPP_208_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Catch All Handler Syntax",
+      "prompt": "Fill in ellipsis operator catching all exception types.",
+      "codeSnippet": "catch (___) { std::cout << \"Error\"; }",
+      "options": ["...", "etc", "auto", "all"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_208_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Standard Exception Base Class",
+      "prompt": "What is the base class for standard C++ library exceptions?",
+      "options": ["std::exception", "std::error", "std::fault", "std::runtime_issue"],
+      "correctAnswer": "std::exception"
+    },
+    {
+      "slideId": "CPP_208_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Exception message Method",
+      "prompt": "Fill in method returning exception error string.",
+      "codeSnippet": "std::cout << e.___();",
+      "options": ["what", "getMessage", "str", "print"],
+      "correctAnswer": "what"
+    },
+    {
+      "slideId": "CPP_208_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uncaught Exception Result",
+      "prompt": "What happens if an exception is thrown but no catch handler matches?",
+      "options": [
+        "std::terminate() is invoked, aborting execution",
+        "Program ignores error and continues",
+        "Memory is cleared automatically",
+        "Code restarts main()"
+      ],
+      "correctAnswer": "std::terminate() is invoked, aborting execution"
+    },
+    {
+      "slideId": "CPP_208_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Noexcept Specifier",
+      "prompt": "Fill in specifier guaranteeing a function will not throw exceptions.",
+      "codeSnippet": "void safeFunc() ___;",
+      "options": ["noexcept", "nothrow", "final", "const"],
+      "correctAnswer": "noexcept"
+    },
+    {
+      "slideId": "CPP_208_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rethrowing Exception Syntax",
+      "prompt": "How do you rethrow an exception inside a catch block?",
+      "options": ["throw;", "throw e;", "rethrow;", "catch.throw()"],
+      "correctAnswer": "throw;"
+    },
+    {
+      "slideId": "CPP_208_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Standard Exception Header",
+      "prompt": "Fill in header file for std::runtime_error.",
+      "codeSnippet": "#include <___>",
+      "options": ["stdexcept", "exception", "cerror", "stdlib.h"],
+      "correctAnswer": "stdexcept"
+    },
+    {
+      "slideId": "CPP_208_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Catch Blocks Evaluation",
+      "prompt": "How are multiple catch blocks evaluated when an exception is thrown?",
+      "options": [
+        "In order from top to bottom; first matching block executes",
+        "In random order",
+        "All matching catch blocks run sequentially",
+        "In reverse order from bottom to top"
+      ],
+      "correctAnswer": "In order from top to bottom; first matching block executes"
+    }
+  ]
+}

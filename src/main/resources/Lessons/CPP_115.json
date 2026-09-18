@@ -1,65 +1,79 @@
 {
   "lessonId": "CPP_115",
-  "title": "C++ Structures (struct) ",
-  "isPremium": true,
+  "title": "C++ Functions Basics",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_115_S1",
       "type": "CONCEPT",
-      "title": "Structure Concept",
-      "prompt": "Structures (struct) are a way to group several related variables into one place.",
-      "codeSnippet": "struct Person {\n    std::string name;\n    int age;\n};\n\nPerson p1;\np1.age = 20;"
+      "title": "Function Declaration & Definition",
+      "prompt": "Functions are reusable code blocks that execute when called.",
+      "codeSnippet": "void myFunction() {\n    std::cout << \"I got executed!\";\n}\nint main() {\n    myFunction();\n}"
     },
     {
       "slideId": "CPP_115_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Member Access",
-      "prompt": "Fill in the operator used to access members of a structure.",
-      "codeSnippet": "myCar___brand = \"Toyota\";",
-      "options": [".", "->", "::", ":"],
-      "correctAnswer": "."
+      "title": "Void Return Type",
+      "prompt": "Fill in keyword for functions that return no value.",
+      "codeSnippet": "___ sayHello() { std::cout << \"Hi\"; }",
+      "options": ["void", "null", "empty", "int"],
+      "correctAnswer": "void"
     },
     {
       "slideId": "CPP_115_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Struct Declaration Keyword",
-      "prompt": "Which keyword is used to define a structure in C++?",
-      "options": ["struct", "structure", "class", "object"],
-      "correctAnswer": "struct"
+      "title": "Function Prototype Purpose",
+      "prompt": "Why do developers place function prototypes above main() function?",
+      "options": [
+        "To declare function signature to compiler before actual usage",
+        "To speed up runtime CPU execution",
+        "To force function to execute automatically",
+        "To convert function to inline assembly"
+      ],
+      "correctAnswer": "To declare function signature to compiler before actual usage"
     },
     {
       "slideId": "CPP_115_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Named Structure Instantiation",
-      "prompt": "Complete the creation of a struct instance named 's1'.",
-      "codeSnippet": "Student ___;",
-      "options": ["s1", "struct", "new Student", "Student()"],
-      "correctAnswer": "s1"
+      "title": "Return Statement",
+      "prompt": "Fill in keyword to pass computed value back from function.",
+      "codeSnippet": "int add(int a, int b) { ___ a + b; }",
+      "options": ["return", "send", "yield", "output"],
+      "correctAnswer": "return"
     },
     {
       "slideId": "CPP_115_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Default Member Accessability",
-      "prompt": "By default, what is the access specifier for members inside a C++ struct?",
-      "options": ["public", "private", "protected", "internal"],
-      "correctAnswer": "public"
+      "title": "Calling Function",
+      "prompt": "How do you execute function named 'calculate()'?",
+      "options": ["calculate();", "call calculate();", "calculate[];", "run calculate();"],
+      "correctAnswer": "calculate();"
     },
     {
       "slideId": "CPP_115_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Pointer Member Access Operator",
-      "prompt": "Fill in the operator used to access struct members through a pointer.",
-      "codeSnippet": "ptr___age = 25;",
-      "options": ["->", ".", "::", "=>"],
-      "correctAnswer": "->"
+      "title": "Default Parameter Value",
+      "prompt": "Fill in assignment default country value 'Myanmar'.",
+      "codeSnippet": "void myFunc(string country ___ \"Myanmar\") {}",
+      "options": ["=", "==", "default", ":="],
+      "correctAnswer": "="
     },
     {
       "slideId": "CPP_115_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Struct Syntax Requirement",
-      "prompt": "What character must follow the closing curly brace '}' of a struct definition?",
-      "options": ["; (Semicolon)", ": (Colon)", ". (Period)", "Nothing"],
-      "correctAnswer": "; (Semicolon)"
+      "title": "Multiple Parameters Syntax",
+      "prompt": "Which signature correctly accepts integer x and double y?",
+      "options": ["void check(int x, double y)", "void check(int x; double y)", "void check(x: int, y: double)", "void check(int x and double y)"],
+      "correctAnswer": "void check(int x, double y)"
+    },
+    {
+      "slideId": "CPP_115_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Formal Parameter Placement",
+      "prompt": "Parameters declared in function signature header are called ___ parameters.",
+      "codeSnippet": "void fn(int p); // 'p' is ___ parameter",
+      "options": ["formal", "actual", "global", "static"],
+      "correctAnswer": "formal"
     }
   ]
 }

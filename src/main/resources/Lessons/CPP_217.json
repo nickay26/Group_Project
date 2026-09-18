@@ -1,0 +1,124 @@
+{
+  "lessonId": "CPP_217",
+  "title": "C++ Move Semantics & Rvalue References (Premium)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_217_S1",
+      "type": "CONCEPT",
+      "title": "Rvalues & Move Semantics",
+      "prompt": "Move semantics transfer resource ownership from temporary objects instead of copying.",
+      "codeSnippet": "std::string a = \"Hello\";\nstd::string b = std::move(a); // Transfers buffer ownership"
+    },
+    {
+      "slideId": "CPP_217_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Rvalue Reference Symbol",
+      "prompt": "Fill in operator declaring an rvalue reference (T&&).",
+      "codeSnippet": "void process(std::string___ str);",
+      "options": ["&&", "&", "*", "**"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_217_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::move Function Role",
+      "prompt": "What does std::move(x) do at runtime?",
+      "options": [
+        "Casts x to rvalue reference without copying data",
+        "Physically moves data memory instantly",
+        "Deletes x variable completely",
+        "Frees heap allocation"
+      ],
+      "correctAnswer": "Casts x to rvalue reference without copying data"
+    },
+    {
+      "slideId": "CPP_217_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Constructor Signature",
+      "prompt": "Fill in parameter operator for move constructor.",
+      "codeSnippet": "Widget(Widget___ other) noexcept;",
+      "options": ["&&", "&", "*", "const &"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_217_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rule of Five Functions",
+      "prompt": "Which functions make up C++ Rule of Five?",
+      "options": [
+        "Destructor, Copy Constructor, Copy Assignment, Move Constructor, Move Assignment",
+        "Constructor, Destructor, Getter, Setter, Print",
+        "New, Delete, Alloc, Free, Clear",
+        "Default Constructor, Copy, Move, Virtual, Pure Virtual"
+      ],
+      "correctAnswer": "Destructor, Copy Constructor, Copy Assignment, Move Constructor, Move Assignment"
+    },
+    {
+      "slideId": "CPP_217_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Perfect Forwarding Function",
+      "prompt": "Fill in function used for perfect forwarding inside templates.",
+      "codeSnippet": "std::___<T>(arg);",
+      "options": ["forward", "move", "cast", "pass"],
+      "correctAnswer": "forward"
+    },
+    {
+      "slideId": "CPP_217_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Moved-from Object State",
+      "prompt": "What is state of object after content moved away?",
+      "options": [
+        "Valid but unspecified state (safe to reassign or destroy)",
+        "Null / deleted pointer",
+        "Undefined memory access crash",
+        "Exact duplicate of initial data"
+      ],
+      "correctAnswer": "Valid but unspecified state (safe to reassign or destroy)"
+    },
+    {
+      "slideId": "CPP_217_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Constructor Noexcept",
+      "prompt": "Move constructors should be marked ___ for vector optimizations.",
+      "codeSnippet": "MyClass(MyClass&&) ___;",
+      "options": ["noexcept", "const", "final", "static"],
+      "correctAnswer": "noexcept"
+    },
+    {
+      "slideId": "CPP_217_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lvalue vs Rvalue Definition",
+      "prompt": "Which statement accurately describes lvalue vs rvalue?",
+      "options": [
+        "Lvalue has identifiable memory location/name; rvalue is temporary value",
+        "Lvalue is left of +; rvalue is right of +",
+        "Lvalue is integer; rvalue is string",
+        "Represent stack vs heap variables"
+      ],
+      "correctAnswer": "Lvalue has identifiable memory location/name; rvalue is temporary value"
+    },
+    {
+      "slideId": "CPP_217_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Assignment Operator Symbol",
+      "prompt": "Fill in assignment operator symbol in move assignment definition.",
+      "codeSnippet": "Widget& operator___(Widget&& other) noexcept;",
+      "options": ["=", "==", "->", ":="],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_217_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Universal / Forwarding Reference Condition",
+      "prompt": "When does 'T&&' act as a Universal (Forwarding) Reference?",
+      "options": [
+        "When T is a deduced template parameter in function template",
+        "Inside every concrete class definition",
+        "Only when const specifier is added",
+        "When allocating array with new operator"
+      ],
+      "correctAnswer": "When T is a deduced template parameter in function template"
+    }
+  ]
+}

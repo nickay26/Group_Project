@@ -1,0 +1,133 @@
+{
+  "lessonId": "CPP_205",
+  "title": "C++ Polymorphism & Virtual Functions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_205_S1",
+      "type": "CONCEPT",
+      "title": "Polymorphism Overview",
+      "prompt": "Polymorphism allows derived classes to override methods defined in base classes using virtual functions.",
+      "codeSnippet": "class Animal {\n  public:\n    virtual void sound() { std::cout << \"Animal sound\"; }\n};\nclass Cat : public Animal {\n  public:\n    void sound() override { std::cout << \"Meow\"; }\n};"
+    },
+    {
+      "slideId": "CPP_205_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Keyword",
+      "prompt": "Fill in keyword enabling dynamic dispatch for a base class method.",
+      "codeSnippet": "class Shape {\n  ___ void draw();\n};",
+      "options": ["virtual", "override", "abstract", "dynamic"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_205_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Override Keyword Specifier",
+      "prompt": "What is the purpose of the 'override' specifier in derived methods?",
+      "options": [
+        "Ensures the method overrides a matching virtual function in base class",
+        "Makes function execution twice as fast",
+        "Prevents child classes from redefining it",
+        "Allocates dynamic heap memory"
+      ],
+      "correctAnswer": "Ensures the method overrides a matching virtual function in base class"
+    },
+    {
+      "slideId": "CPP_205_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pure Virtual Function Syntax",
+      "prompt": "Fill in value assigned to make a virtual function pure virtual.",
+      "codeSnippet": "virtual void calculate() = ___;",
+      "options": ["0", "null", "nullptr", "default"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_205_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Class Definition",
+      "prompt": "What makes a class an Abstract Class in C++?",
+      "options": [
+        "Having at least one pure virtual function (= 0)",
+        "Having all members declared private",
+        "Having no constructor definitions",
+        "Using the abstract keyword"
+      ],
+      "correctAnswer": "Having at least one pure virtual function (= 0)"
+    },
+    {
+      "slideId": "CPP_205_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Destructor Symbol",
+      "prompt": "Base classes with virtual functions should have a virtual ___.",
+      "codeSnippet": "virtual ___Shape() {}",
+      "options": ["~", "!", "*", "&"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_205_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "VTable Mechanism",
+      "prompt": "What underlying mechanism implements dynamic dispatch in C++?",
+      "options": [
+        "Virtual Table (VTable) and vptr",
+        "Compile-time hash maps",
+        "Garbage collector",
+        "Global string comparison"
+      ],
+      "correctAnswer": "Virtual Table (VTable) and vptr"
+    },
+    {
+      "slideId": "CPP_205_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Final Method Specifier",
+      "prompt": "Fill in specifier that stops further virtual function overriding.",
+      "codeSnippet": "void speak() override ___ ;",
+      "options": ["final", "stop", "sealed", "static"],
+      "correctAnswer": "final"
+    },
+    {
+      "slideId": "CPP_205_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compile-time Polymorphism Example",
+      "prompt": "Which of the following is an example of compile-time polymorphism?",
+      "options": [
+        "Function Overloading",
+        "Virtual Function Overriding",
+        "Abstract Class Interface",
+        "Dynamic Casting"
+      ],
+      "correctAnswer": "Function Overloading"
+    },
+    {
+      "slideId": "CPP_205_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Function Default Argument",
+      "prompt": "Default argument values for virtual functions are bound at ___ time.",
+      "codeSnippet": "// Default arguments are bound at ___ time",
+      "options": ["compile", "run", "link", "load"],
+      "correctAnswer": "compile"
+    },
+    {
+      "slideId": "CPP_205_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Class Instantiation",
+      "prompt": "Can you directly instantiate an object of an abstract class?",
+      "options": [
+        "No, abstract classes cannot be instantiated",
+        "Yes, freely like normal classes",
+        "Yes, but only using pointers",
+        "Only inside main()"
+      ],
+      "correctAnswer": "No, abstract classes cannot be instantiated"
+    },
+    {
+      "slideId": "CPP_205_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Pure Virtual Function Implementation",
+      "prompt": "A pure virtual function ___ be provided a default implementation body in base class.",
+      "codeSnippet": "// Pure virtual function ___ have a body in C++",
+      "options": ["can", "cannot", "must", "always"],
+      "correctAnswer": "can"
+    }
+  ]
+}

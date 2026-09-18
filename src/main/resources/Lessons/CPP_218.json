@@ -1,0 +1,114 @@
+{
+  "lessonId": "CPP_218",
+  "title": "C++ Concurrency & Multithreading (Premium)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "CPP_218_S1",
+      "type": "CONCEPT",
+      "title": "Multithreading with std::thread",
+      "prompt": "std::thread enables concurrent task execution; std::mutex synchronizes access.",
+      "codeSnippet": "#include <thread>\nvoid task() { std::cout << \"Work\"; }\nstd::thread t(task);\nt.join();"
+    },
+    {
+      "slideId": "CPP_218_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Thread Join Method",
+      "prompt": "Fill in method pausing main thread until sub-thread completes.",
+      "codeSnippet": "t.___();",
+      "options": ["join", "wait", "detach", "stop"],
+      "correctAnswer": "join"
+    },
+    {
+      "slideId": "CPP_218_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Detach Function",
+      "prompt": "What happens when calling t.detach() on thread object?",
+      "options": [
+        "Separates thread execution to run independently in background",
+        "Terminates thread execution immediately",
+        "Pauses execution for 1 second",
+        "Passes thread ownership to CPU core 0"
+      ],
+      "correctAnswer": "Separates thread execution to run independently in background"
+    },
+    {
+      "slideId": "CPP_218_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Lock Guard RAII Wrapper",
+      "prompt": "Fill in RAII wrapper locking mutex on creation and unlocking on destruction.",
+      "codeSnippet": "std::___<std::mutex> lock(mtx);",
+      "options": ["lock_guard", "unique_lock", "scoped_lock", "auto_lock"],
+      "correctAnswer": "lock_guard"
+    },
+    {
+      "slideId": "CPP_218_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Data Race Definition",
+      "prompt": "What causes a Data Race condition?",
+      "options": [
+        "Two threads access same memory concurrently with at least one write without synchronization",
+        "Threads executing on different CPU cores",
+        "Calling join() on already joined thread",
+        "Using smart pointers across threads"
+      ],
+      "correctAnswer": "Two threads access same memory concurrently with at least one write without synchronization"
+    },
+    {
+      "slideId": "CPP_218_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Atomic Variable Header",
+      "prompt": "Fill in header for lock-free atomic variables.",
+      "codeSnippet": "#include <___>",
+      "options": ["atomic", "mutex", "thread", "future"],
+      "correctAnswer": "atomic"
+    },
+    {
+      "slideId": "CPP_218_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Async Task Execution Function",
+      "prompt": "Which function runs task asynchronously and returns value via std::future?",
+      "options": ["std::async", "std::thread", "std::launch", "std::promise"],
+      "correctAnswer": "std::async"
+    },
+    {
+      "slideId": "CPP_218_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Condition Variable Wait",
+      "prompt": "Fill in method causing condition variable to sleep until notified.",
+      "codeSnippet": "cv.___ (lock);",
+      "options": ["wait", "sleep", "pause", "block"],
+      "correctAnswer": "wait"
+    },
+    {
+      "slideId": "CPP_218_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Joinable Thread Check",
+      "prompt": "Which method checks if std::thread object can still be joined?",
+      "options": ["t.joinable()", "t.is_active()", "t.valid()", "t.running()"],
+      "correctAnswer": "t.joinable()"
+    },
+    {
+      "slideId": "CPP_218_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Condition Variable Notify One",
+      "prompt": "Fill in method waking up one thread waiting on condition variable.",
+      "codeSnippet": "cv.___();",
+      "options": ["notify_one", "wake_one", "signal", "notify_all"],
+      "correctAnswer": "notify_one"
+    },
+    {
+      "slideId": "CPP_218_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Future Get Method Behavior",
+      "prompt": "What happens when you call fut.get() on std::future object?",
+      "options": [
+        "Blocks current thread until asynchronous result is ready, then returns value",
+        "Returns immediately with default value if task isn't ready",
+        "Cancels asynchronous task execution",
+        "Launches thread on new CPU core"
+      ],
+      "correctAnswer": "Blocks current thread until asynchronous result is ready, then returns value"
+    }
+  ]
+}

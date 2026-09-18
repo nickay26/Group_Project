@@ -1,0 +1,104 @@
+{
+  "lessonId": "CPP_215",
+  "title": "C++ File Handling (fstream)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_215_S1",
+      "type": "CONCEPT",
+      "title": "File I/O with fstream",
+      "prompt": "fstream header provides ifstream (reading), ofstream (writing), and fstream (both).",
+      "codeSnippet": "#include <fstream>\nstd::ofstream outFile(\"data.txt\");\noutFile << \"Hello File!\";\noutFile.close();"
+    },
+    {
+      "slideId": "CPP_215_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Output File Stream Class",
+      "prompt": "Fill in stream class used for writing data to files.",
+      "codeSnippet": "std::___ writer(\"log.txt\");",
+      "options": ["ofstream", "ifstream", "fstream", "file"],
+      "correctAnswer": "ofstream"
+    },
+    {
+      "slideId": "CPP_215_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Input File Stream Class",
+      "prompt": "Which class is specifically designed for reading files?",
+      "options": ["std::ifstream", "std::ofstream", "std::iostream", "std::filein"],
+      "correctAnswer": "std::ifstream"
+    },
+    {
+      "slideId": "CPP_215_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Close File Method",
+      "prompt": "Fill in method closing an open file stream.",
+      "codeSnippet": "file.___();",
+      "options": ["close", "flush", "end", "finish"],
+      "correctAnswer": "close"
+    },
+    {
+      "slideId": "CPP_215_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Append Mode Flag",
+      "prompt": "Which open mode flag appends new content without truncating existing data?",
+      "options": ["std::ios::app", "std::ios::ate", "std::ios::in", "std::ios::trunc"],
+      "correctAnswer": "std::ios::app"
+    },
+    {
+      "slideId": "CPP_215_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Is Open Check Method",
+      "prompt": "Fill in method verifying file stream opened successfully.",
+      "codeSnippet": "if (file.___()) { /* work */ }",
+      "options": ["is_open", "isOpen", "valid", "ready"],
+      "correctAnswer": "is_open"
+    },
+    {
+      "slideId": "CPP_215_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reading Line by Line Function",
+      "prompt": "Which function reads an entire text line including spaces into std::string?",
+      "options": ["std::getline(file, line)", "file >> line", "file.read(line)", "file.getline_str(line)"],
+      "correctAnswer": "std::getline(file, line)"
+    },
+    {
+      "slideId": "CPP_215_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Binary Mode Flag",
+      "prompt": "Fill in mode flag opening file in binary mode.",
+      "codeSnippet": "std::fstream f(\"data.bin\", std::ios::___);",
+      "options": ["binary", "raw", "bin", "data"],
+      "correctAnswer": "binary"
+    },
+    {
+      "slideId": "CPP_215_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Pointer Seek Method",
+      "prompt": "Which method moves the read position pointer in an input file stream?",
+      "options": ["seekg()", "seekp()", "tellg()", "tellp()"],
+      "correctAnswer": "seekg()"
+    },
+    {
+      "slideId": "CPP_215_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Tell Write Position Method",
+      "prompt": "Fill in method returning current write position in output stream.",
+      "codeSnippet": "std::streampos pos = outFile.___();",
+      "options": ["tellp", "tellg", "getp", "pos"],
+      "correctAnswer": "tellp"
+    },
+    {
+      "slideId": "CPP_215_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Flush Operation",
+      "prompt": "What does calling file.flush() do?",
+      "options": [
+        "Forces unwritten buffer data to write directly to physical disk immediately",
+        "Clears file contents to zero bytes",
+        "Closes file stream permanently",
+        "Deletes target file from disk"
+      ],
+      "correctAnswer": "Forces unwritten buffer data to write directly to physical disk immediately"
+    }
+  ]
+}

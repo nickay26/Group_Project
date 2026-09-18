@@ -6,15 +6,15 @@
     {
       "slideId": "CPP_105_S1",
       "type": "CONCEPT",
-      "title": "Basic Data Types",
-      "prompt": "C++ provides types like int, double, char, string, and bool to hold different data forms.",
-      "codeSnippet": "int a = 5;\ndouble b = 5.99;\nchar c = 'D';\nstd::string d = \"Hello\";\nbool e = true;"
+      "title": "Data Types Overview",
+      "prompt": "C++ provides primitive types: int, float, double, char, and bool for storing varied data.",
+      "codeSnippet": "int age = 20;            // Whole number\nfloat temperature = 36.6f; // Floating point\nbool isPassed = true;      // Boolean"
     },
     {
       "slideId": "CPP_105_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Boolean Data Type",
-      "prompt": "Which data type stores true or false values?",
+      "title": "Boolean Type",
+      "prompt": "Fill in data type used for true/false values.",
       "codeSnippet": "___ isReady = false;",
       "options": ["bool", "boolean", "int", "bit"],
       "correctAnswer": "bool"
@@ -22,44 +22,58 @@
     {
       "slideId": "CPP_105_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Character Literal Enclosure",
-      "prompt": "How are single character literals (char) written in C++?",
-      "options": ["Single quotes ('a')", "Double quotes (\"a\")", "Backticks (`a`)", "Parentheses ((a))"],
-      "correctAnswer": "Single quotes ('a')"
+      "title": "Float vs Double Precision",
+      "prompt": "What is the primary difference between 'float' and 'double'?",
+      "options": [
+        "Double has higher precision (usually 64-bit) than float (32-bit)",
+        "Float is for integers; double is for decimals",
+        "Float uses more memory than double",
+        "Double can only store positive numbers"
+      ],
+      "correctAnswer": "Double has higher precision (usually 64-bit) than float (32-bit)"
     },
     {
       "slideId": "CPP_105_S4",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Float vs Double",
-      "prompt": "What is the primary difference between 'float' and 'double' in C++?",
-      "options": ["'double' has higher precision than 'float'", "'float' holds larger whole numbers", "'double' holds characters", "'float' cannot store decimals"],
-      "correctAnswer": "'double' has higher precision than 'float'"
-    },
-    {
-      "slideId": "CPP_105_S5",
       "type": "FILL_IN_BLANK",
-      "title": "Floating Point Type",
-      "prompt": "Fill in the keyword to store a fractional number up to 7 decimal digits precision.",
-      "codeSnippet": "___ myNum = 5.75f;",
-      "options": ["float", "int", "char", "bool"],
-      "correctAnswer": "float"
-    },
-    {
-      "slideId": "CPP_105_S6",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Size of Operator",
-      "prompt": "Which operator returns the memory size of a data type in bytes?",
+      "title": "Sizeof Operator",
+      "prompt": "Fill in operator to check memory size of a data type in bytes.",
+      "codeSnippet": "std::cout << ___(int);",
       "options": ["sizeof", "length", "size", "bytesof"],
       "correctAnswer": "sizeof"
     },
     {
-      "slideId": "CPP_105_S7",
+      "slideId": "CPP_105_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Boolean Numeric Value",
+      "prompt": "When evaluated as integer output, what does 'true' print as?",
+      "options": ["1", "0", "true", "-1"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_105_S6",
       "type": "FILL_IN_BLANK",
-      "title": "ASCII Character Assignment",
-      "prompt": "Complete the code to assign an ASCII value to a char variable.",
-      "codeSnippet": "char letter = ___; // Assigns 'A'",
-      "options": ["65", "'65'", "\"65\"", "A"],
-      "correctAnswer": "65"
+      "title": "Float Suffix",
+      "prompt": "Fill in character suffix required for float numeric literals.",
+      "codeSnippet": "float pi = 3.14___;",
+      "options": ["f", "d", "l", "m"],
+      "correctAnswer": "f"
+    },
+    {
+      "slideId": "CPP_105_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Character ASCII Storage",
+      "prompt": "How does C++ internally store char values like 'A'?",
+      "options": ["As its ASCII integer value (65)", "As raw text", "As string pointers", "As binary pixels"],
+      "correctAnswer": "As its ASCII integer value (65)"
+    },
+    {
+      "slideId": "CPP_105_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Void Keyword Type",
+      "prompt": "Fill in the type representing absence of value or return.",
+      "codeSnippet": "___ printMessage() {}",
+      "options": ["void", "null", "empty", "none"],
+      "correctAnswer": "void"
     }
   ]
 }

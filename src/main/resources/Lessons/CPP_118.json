@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_118",
-  "title": "C++ References ",
+  "title": "C++ References (Premium)",
   "isPremium": true,
   "slides": [
     {
@@ -66,7 +66,15 @@
     {
       "slideId": "CPP_118_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Pointer vs Reference Memory Address",
+      "title": "Null Reference State",
+      "prompt": "Can a reference variable in C++ be initialized to null / nullptr legally?",
+      "options": ["No, references must always refer to valid object", "Yes, using nullptr", "Yes, if using const", "Only inside struct"],
+      "correctAnswer": "No, references must always refer to valid object"
+    },
+    {
+      "slideId": "CPP_118_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer vs Reference Difference",
       "prompt": "What is the key functional difference between a Reference and a Pointer?",
       "options": [
         "References cannot be null and don't need pointer syntax like *",

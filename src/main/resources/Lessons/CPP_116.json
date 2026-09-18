@@ -1,75 +1,84 @@
 {
   "lessonId": "CPP_116",
-  "title": "C++ Functions ",
-  "isPremium": true,
+  "title": "C++ Function Parameters & Overloading",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_116_S1",
       "type": "CONCEPT",
-      "title": "Creating and Calling Functions",
-      "prompt": "A function is a block of code which only runs when it is called.",
-      "codeSnippet": "void myFunction() {\n    std::cout << \"Executed!\";\n}\n\nint main() {\n    myFunction();\n    return 0;\n}"
+      "title": "Pass by Value vs Reference & Overloading",
+      "prompt": "Pass by reference uses & to modify original variable. Overloading allows multiple functions with same name but different parameters.",
+      "codeSnippet": "void swap(int &x, int &y);\nint plusFunc(int x, int y);\ndouble plusFunc(double x, double y);"
     },
     {
       "slideId": "CPP_116_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Void Return Type",
-      "prompt": "Fill in the return type used when a function does not return any value.",
-      "codeSnippet": "___ printMessage() {\n    std::cout << \"Hello\";\n}",
-      "options": ["void", "null", "int", "empty"],
-      "correctAnswer": "void"
+      "title": "Pass-by-Reference Symbol",
+      "prompt": "Fill in operator symbol for passing parameter by reference.",
+      "codeSnippet": "void updateVal(int ___num) { num = 100; }",
+      "options": ["&", "*", "ref", "->"],
+      "correctAnswer": "&"
     },
     {
       "slideId": "CPP_116_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Returning Values",
-      "prompt": "Which keyword returns a value back from a function?",
-      "options": ["return", "send", "give", "output"],
-      "correctAnswer": "return"
+      "title": "Function Overloading Rule",
+      "prompt": "What MUST differ between overloaded functions sharing the exact same name?",
+      "options": [
+        "Parameter list (number, type, or order of arguments)",
+        "Return type only",
+        "Function body comment descriptions",
+        "Variable name inside body"
+      ],
+      "correctAnswer": "Parameter list (number, type, or order of arguments)"
     },
     {
       "slideId": "CPP_116_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Function Parameter",
-      "prompt": "Fill in the data type for the parameter inside function definition.",
-      "codeSnippet": "void printAge(___ age) {\n    std::cout << age;\n}",
-      "options": ["int", "val", "var", "num"],
-      "correctAnswer": "int"
+      "title": "Array Parameter Passing",
+      "prompt": "Fill in brackets to pass integer array parameter.",
+      "codeSnippet": "void printArray(int myArr___)",
+      "options": ["[ ]", "( )", "*", "{ }"],
+      "correctAnswer": "[ ]"
     },
     {
       "slideId": "CPP_116_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Function Overloading",
-      "prompt": "What is it called when multiple functions have the same name but different parameters?",
-      "options": [
-        "Function Overloading",
-        "Function Overriding",
-        "Function Duplication",
-        "Function Shadowing"
-      ],
-      "correctAnswer": "Function Overloading"
+      "title": "Pass-by-Value Effect",
+      "prompt": "If variable is passed by value (int x) to function and modified inside, does main's variable change?",
+      "options": ["No, function operates on a copy", "Yes, original changes", "Causes runtime error", "Converts to reference"],
+      "correctAnswer": "No, function operates on a copy"
     },
     {
       "slideId": "CPP_116_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Pass by Reference",
-      "prompt": "Fill in the symbol to pass a variable by reference in function parameters.",
-      "codeSnippet": "void swap(int ___x, int ___y) {}",
-      "options": ["&", "*", "%", "@"],
-      "correctAnswer": "&"
+      "title": "Const Reference Guard",
+      "prompt": "Fill in keyword to pass large object by reference safely without allowing modifications.",
+      "codeSnippet": "void printData(___ std::string &s) {}",
+      "options": ["const", "final", "static", "readonly"],
+      "correctAnswer": "const"
     },
     {
       "slideId": "CPP_116_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Default Argument Location",
-      "prompt": "Where must default parameter values be declared in a function signature?",
+      "title": "Return Type Overloading",
+      "prompt": "Can two functions be overloaded differing ONLY by their return type (e.g. int fn() vs double fn())?",
       "options": [
-        "At the end of the parameter list",
-        "At the beginning of the parameter list",
-        "Inside the function body only",
-        "In any order regardless of location"
+        "No, compiler error occurs",
+        "Yes, completely allowed",
+        "Only inside template functions",
+        "Yes, if marked inline"
       ],
-      "correctAnswer": "At the end of the parameter list"
+      "correctAnswer": "No, compiler error occurs"
+    },
+    {
+      "slideId": "CPP_116_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Keyword",
+      "prompt": "Fill in keyword suggesting compiler copy function code inline.",
+      "codeSnippet": "___ int add(int a, int b) { return a + b; }",
+      "options": ["inline", "static", "fast", "macro"],
+      "correctAnswer": "inline"
     }
   ]
 }

@@ -1,65 +1,65 @@
 {
   "lessonId": "CPP_101",
-  "title": "C++ Introduction & Hello World",
+  "title": "C++ Introduction & Syntax",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_101_S1",
       "type": "CONCEPT",
-      "title": "Printing Text",
-      "prompt": "In C++, we use std::cout to display text on the screen.",
-      "codeSnippet": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\";\n    return 0;\n}"
+      "title": "Basic Syntax Overview",
+      "prompt": "Every C++ program starts with a main() function and uses standard header files like iostream.",
+      "codeSnippet": "#include <iostream>\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}"
     },
     {
       "slideId": "CPP_101_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Your First Code",
-      "prompt": "Complete the code to output 'Welcome!'",
-      "codeSnippet": "std::___ << \"Welcome!\";",
-      "options": ["cout", "print", "output", "log"],
-      "correctAnswer": "cout"
+      "title": "Header File Inclusion",
+      "prompt": "Fill in the correct header file for input/output operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["iostream", "stdio.h", "string", "cmath"],
+      "correctAnswer": "iostream"
     },
     {
       "slideId": "CPP_101_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Output Stream Operator",
-      "prompt": "Which operator is used with std::cout to send output to the screen?",
-      "options": ["<<", ">>", "==", "->"],
-      "correctAnswer": "<<"
+      "title": "Program Entry Point",
+      "prompt": "Which function is mandatory for executing any C++ program?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "correctAnswer": "main()"
     },
     {
       "slideId": "CPP_101_S4",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Main Function Return Type",
-      "prompt": "What return type does the main() function strictly require in standard C++?",
-      "options": ["int", "void", "double", "string"],
-      "correctAnswer": "int"
-    },
-    {
-      "slideId": "CPP_101_S5",
       "type": "FILL_IN_BLANK",
-      "title": "Header Inclusion",
-      "prompt": "Fill in the header file required for input and output operations.",
-      "codeSnippet": "#include <___>",
-      "options": ["iostream", "stdio.h", "conio.h", "string"],
-      "correctAnswer": "iostream"
-    },
-    {
-      "slideId": "CPP_101_S6",
-      "type": "MULTIPLE_CHOICE",
       "title": "Statement Terminator",
-      "prompt": "Which symbol marks the end of a execution statement in C++?",
+      "prompt": "Fill in the required character that ends almost every statement in C++.",
+      "codeSnippet": "std::cout << \"C++\"___",
       "options": [";", ":", ".", ","],
       "correctAnswer": ";"
     },
     {
-      "slideId": "CPP_101_S7",
+      "slideId": "CPP_101_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Extension",
+      "prompt": "What is the standard file extension for C++ source code files?",
+      "options": [".cpp", ".c", ".java", ".exe"],
+      "correctAnswer": ".cpp"
+    },
+    {
+      "slideId": "CPP_101_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Return Success Code",
-      "prompt": "Complete the statement that indicates successful program execution.",
+      "title": "Return Value",
+      "prompt": "Complete the return statement indicating successful execution.",
       "codeSnippet": "return ___;",
-      "options": ["0", "1", "-1", "null"],
+      "options": ["0", "1", "null", "true"],
       "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_101_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Case Sensitivity",
+      "prompt": "Is C++ a case-sensitive programming language?",
+      "options": ["Yes, uppercase and lowercase matter", "No, it ignores case", "Only for variable names", "Only for keywords"],
+      "correctAnswer": "Yes, uppercase and lowercase matter"
     }
   ]
 }

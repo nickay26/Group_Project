@@ -1,65 +1,82 @@
 {
   "lessonId": "CPP_109",
-  "title": "C++ If...Else Logic",
-  "isPremium": true,
+  "title": "C++ Math Functions",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_109_S1",
       "type": "CONCEPT",
-      "title": "Conditional Execution",
-      "prompt": "Use the if statement to specify a block of C++ code to be executed if a condition is true.",
-      "codeSnippet": "if (20 > 18) {\n    std::cout << \"20 is greater than 18\";\n}"
+      "title": "C++ Math Operations",
+      "prompt": "<cmath> header provides mathematical functions like sqrt(), pow(), round(), and abs().",
+      "codeSnippet": "#include <cmath>\nstd::cout << sqrt(64); // 8\nstd::cout << pow(2, 3); // 8"
     },
     {
       "slideId": "CPP_109_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Else Statement",
-      "prompt": "Complete the code to execute a fallback block when condition is false.",
-      "codeSnippet": "if (x > y) {\n    std::cout << \"X\";\n} ___ {\n    std::cout << \"Y\";\n}",
-      "options": ["else", "then", "otherwise", "elif"],
-      "correctAnswer": "else"
+      "title": "Square Root Function",
+      "prompt": "Fill in function to calculate square root.",
+      "codeSnippet": "double res = ___(16.0);",
+      "options": ["sqrt", "root", "sqr", "power"],
+      "correctAnswer": "sqrt"
     },
     {
       "slideId": "CPP_109_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Equality Comparison Operator",
-      "prompt": "Which operator compares if two values are equal in an if statement?",
-      "options": ["==", "=", "equals", "==="],
-      "correctAnswer": "=="
+      "title": "Power Function Syntax",
+      "prompt": "Which function call correctly calculates 3 raised to power of 4 (3^4)?",
+      "options": ["pow(3, 4)", "power(3, 4)", "pow(4, 3)", "3 ^ 4"],
+      "correctAnswer": "pow(3, 4)"
     },
     {
       "slideId": "CPP_109_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Ternary Operator",
-      "prompt": "Fill in the symbol for short-hand if...else (ternary operator).",
-      "codeSnippet": "string result = (time < 18) ___ \"Good day.\" : \"Good evening.\";",
-      "options": ["?", ":", "if", "then"],
-      "correctAnswer": "?"
+      "title": "Math Header Inclusion",
+      "prompt": "Fill in required header for advanced math operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["cmath", "math.cpp", "algorithm", "numbers"],
+      "correctAnswer": "cmath"
     },
     {
       "slideId": "CPP_109_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Logical NOT Operator",
-      "prompt": "Which symbol reverses the boolean state of a condition?",
-      "options": ["!", "~", "NOT", "^"],
-      "correctAnswer": "!"
+      "title": "Rounding Function",
+      "prompt": "Which function rounds 3.7 to nearest whole integer 4?",
+      "options": ["round(3.7)", "floor(3.7)", "ceil(3.7)", "trunc(3.7)"],
+      "correctAnswer": "round(3.7)"
     },
     {
       "slideId": "CPP_109_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Else If Condition",
-      "prompt": "Fill in the keywords to test a new condition if the first condition is false.",
-      "codeSnippet": "if (x == 1) {}\n___ (x == 2) {}",
-      "options": ["else if", "elif", "or if", "case"],
-      "correctAnswer": "else if"
+      "title": "Ceiling Function",
+      "prompt": "Fill in function that rounds 2.1 UP to 3.0.",
+      "codeSnippet": "double result = ___(2.1);",
+      "options": ["ceil", "floor", "round", "top"],
+      "correctAnswer": "ceil"
     },
     {
       "slideId": "CPP_109_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Nested Conditionals",
-      "prompt": "What is an 'if' statement placed inside another 'if' statement called?",
-      "options": ["Nested if", "Inner if", "Double if", "Chained if"],
-      "correctAnswer": "Nested if"
+      "title": "Absolute Value",
+      "prompt": "What does abs(-15) return?",
+      "options": ["15", "-15", "0", "Undefined"],
+      "correctAnswer": "15"
+    },
+    {
+      "slideId": "CPP_109_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Maximum Value Function",
+      "prompt": "Fill in standard function to get larger of two numbers.",
+      "codeSnippet": "int bigger = std::___(10, 20);",
+      "options": ["max", "greater", "top", "highest"],
+      "correctAnswer": "max"
+    },
+    {
+      "slideId": "CPP_109_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floor Function Result",
+      "prompt": "What value is returned by floor(4.9)?",
+      "options": ["4.0", "5.0", "4.9", "4.5"],
+      "correctAnswer": "4.0"
     }
   ]
 }

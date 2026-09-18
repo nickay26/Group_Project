@@ -1,70 +1,96 @@
 {
   "lessonId": "CPP_113",
-  "title": "C++ Break and Continue",
-  "isPremium": true,
+  "title": "C++ For Loops & Break/Continue",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_113_S1",
       "type": "CONCEPT",
-      "title": "Loop Control Statements",
-      "prompt": "'break' stops the loop, whereas 'continue' skips the current iteration and jumps to the next.",
-      "codeSnippet": "for (int i = 0; i < 10; i++) {\n    if (i == 4) break;\n    std::cout << i;\n}"
+      "title": "For Loop Structure",
+      "prompt": "For loops combine initialization, condition, and increment step in one line.",
+      "codeSnippet": "for(int i = 0; i < 5; i++) {\n    if (i == 2) continue;\n    if (i == 4) break;\n}"
     },
     {
       "slideId": "CPP_113_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Skipping Iteration",
-      "prompt": "Fill in the keyword to skip current iteration when i equals 3.",
-      "codeSnippet": "if (i == 3) {\n    ___;\n}",
-      "options": ["continue", "break", "skip", "pass"],
-      "correctAnswer": "continue"
+      "title": "For Keyword",
+      "prompt": "Fill in loop keyword.",
+      "codeSnippet": "___ (int i = 0; i < 10; i++) {}",
+      "options": ["for", "loop", "foreach", "repeat"],
+      "correctAnswer": "for"
     },
     {
       "slideId": "CPP_113_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Terminating Loops",
-      "prompt": "Which keyword completely exits a loop early?",
-      "options": ["break", "continue", "exit", "return"],
-      "correctAnswer": "break"
+      "title": "Continue Statement Action",
+      "prompt": "What does 'continue;' do when executed inside a loop?",
+      "options": [
+        "Skips the rest of current iteration and jumps to next iteration step",
+        "Terminates loop execution completely",
+        "Restarts loop from i = 0",
+        "Exits main function"
+      ],
+      "correctAnswer": "Skips the rest of current iteration and jumps to next iteration step"
     },
     {
       "slideId": "CPP_113_S4",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Break in Switch vs Loop",
-      "prompt": "What does the 'break' statement do inside a loop structure?",
-      "options": ["Exits the loop immediately", "Skips to the next iteration", "Restarts the loop from 0", "Pauses execution for 1 second"],
-      "correctAnswer": "Exits the loop immediately"
-    },
-    {
-      "slideId": "CPP_113_S5",
       "type": "FILL_IN_BLANK",
-      "title": "Exiting Outer Loop",
-      "prompt": "Complete the statement to immediately terminate the running loop.",
-      "codeSnippet": "if (found) {\n    ___;\n}",
-      "options": ["break", "continue", "stop", "goto"],
+      "title": "Break Keyword",
+      "prompt": "Fill in keyword to exit loop prematurely.",
+      "codeSnippet": "if (found) ___;",
+      "options": ["break", "continue", "stop", "exit"],
       "correctAnswer": "break"
     },
     {
-      "slideId": "CPP_113_S6",
+      "slideId": "CPP_113_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Nested Loop Break Scope",
-      "prompt": "When 'break' is executed inside an inner loop, which loop does it break out of?",
-      "options": [
-        "Only the innermost loop",
-        "All nested loops simultaneously",
-        "The outermost loop only",
-        "The main function execution"
-      ],
-      "correctAnswer": "Only the innermost loop"
+      "title": "Range-Based For Loop Syntax",
+      "prompt": "Which syntax demonstrates modern C++ range-based for loop over vector/array 'nums'?",
+      "options": ["for(int n : nums)", "for(int n in nums)", "for(nums as n)", "foreach(n, nums)"],
+      "correctAnswer": "for(int n : nums)"
+    },
+    {
+      "slideId": "CPP_113_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Separator Character",
+      "prompt": "Fill in character separating three parts of standard for loop header.",
+      "codeSnippet": "for(int i = 0 ___ i < 5 ___ i++)",
+      "options": [";", ",", ":", "|"],
+      "correctAnswer": ";"
     },
     {
       "slideId": "CPP_113_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Loop Count",
+      "prompt": "Outer loop runs 3 times; inner loop runs 4 times. Total inner iterations?",
+      "options": ["12", "7", "3", "4"],
+      "correctAnswer": "12"
+    },
+    {
+      "slideId": "CPP_113_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Filtering Output",
-      "prompt": "Fill in the keyword to skip printing negative values.",
-      "codeSnippet": "if (val < 0) {\n    ___;\n}\nstd::cout << val;",
-      "options": ["continue", "break", "return", "else"],
-      "correctAnswer": "continue"
+      "title": "Range Loop Colon Operator",
+      "prompt": "Fill in separator operator in range-based for loop.",
+      "codeSnippet": "for(auto x ___ myArr) {}",
+      "options": [":", "in", "->", "::"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_113_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decrementation in Loop",
+      "prompt": "Which loop header counts down from 10 to 1 inclusive?",
+      "options": ["for(int i = 10; i >= 1; i--)", "for(int i = 10; i == 1; i--)", "for(int i = 1; i <= 10; i--)", "for(int i = 10; i > 1; i++)"],
+      "correctAnswer": "for(int i = 10; i >= 1; i--)"
+    },
+    {
+      "slideId": "CPP_113_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Type Deduction in Range Loop",
+      "prompt": "Fill in type keyword for automatic item type deduction in range loops.",
+      "codeSnippet": "for(___ elem : container) {}",
+      "options": ["auto", "var", "generic", "any"],
+      "correctAnswer": "auto"
     }
   ]
 }

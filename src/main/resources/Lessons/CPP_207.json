@@ -1,0 +1,124 @@
+{
+  "lessonId": "CPP_207",
+  "title": "C++ Templates (Function & Class)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_207_S1",
+      "type": "CONCEPT",
+      "title": "Generic Programming Templates",
+      "prompt": "Templates enable writing generic functions and classes that work with any data type.",
+      "codeSnippet": "template <typename T>\nT getMax(T a, T b) {\n    return (a > b) ? a : b;\n}"
+    },
+    {
+      "slideId": "CPP_207_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Declaration Keyword",
+      "prompt": "Fill in keyword that begins a template definition.",
+      "codeSnippet": "___ <typename T>",
+      "options": ["template", "generic", "typename", "type"],
+      "correctAnswer": "template"
+    },
+    {
+      "slideId": "CPP_207_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Typename vs Class in Templates",
+      "prompt": "In template declaration list <template <class T>>, is 'class' interchangeable with 'typename'?",
+      "options": [
+        "Yes, interchangeable in type parameters",
+        "No, 'class' accepts only objects",
+        "No, 'typename' is deprecated",
+        "Yes, but only for class templates"
+      ],
+      "correctAnswer": "Yes, interchangeable in type parameters"
+    },
+    {
+      "slideId": "CPP_207_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Template Instantiation Brackets",
+      "prompt": "Fill in angle brackets for template type argument.",
+      "codeSnippet": "MyStack___int___ s1;",
+      "options": ["< >", "[ ]", "( )", "{ }"],
+      "correctAnswer": "< >"
+    },
+    {
+      "slideId": "CPP_207_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Template Specialization Purpose",
+      "prompt": "What is the primary purpose of Template Specialization?",
+      "options": [
+        "To provide custom implementation for a specific data type",
+        "To force slower compilation",
+        "To disable templates in main",
+        "To restrict templates to integers"
+      ],
+      "correctAnswer": "To provide custom implementation for a specific data type"
+    },
+    {
+      "slideId": "CPP_207_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Template Parameters",
+      "prompt": "Fill in separator for multiple template type parameters.",
+      "codeSnippet": "template <typename T___ typename U>",
+      "options": [",", ";", "&", "|"],
+      "correctAnswer": ","
+    },
+    {
+      "slideId": "CPP_207_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-Type Template Parameters",
+      "prompt": "Can non-type parameters (such as integer constants) be passed into template parameter lists?",
+      "options": [
+        "Yes, passed as compile-time constants",
+        "No, templates strictly accept data types only",
+        "Only if declared global",
+        "Only in dynamic libraries"
+      ],
+      "correctAnswer": "Yes, passed as compile-time constants"
+    },
+    {
+      "slideId": "CPP_207_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Full Template Specialization Syntax",
+      "prompt": "Fill in empty template brackets used for full template specialization.",
+      "codeSnippet": "template ___ class Printer<char> {};",
+      "options": ["<>", "<char>", "<T>", "<void>"],
+      "correctAnswer": "<>"
+    },
+    {
+      "slideId": "CPP_207_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Template Compilation Stage",
+      "prompt": "When is template code generated/instantiated for specific types?",
+      "options": [
+        "At compile time",
+        "At runtime",
+        "At linking time only",
+        "At program termination"
+      ],
+      "correctAnswer": "At compile time"
+    },
+    {
+      "slideId": "CPP_207_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Template Argument",
+      "prompt": "Fill in assignment operator symbol for default template type argument.",
+      "codeSnippet": "template <typename T ___ int>",
+      "options": ["=", ":", "->", "::"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_207_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Template Argument Deduction",
+      "prompt": "Can the compiler automatically deduce template arguments for function templates?",
+      "options": [
+        "Yes, if function arguments match template parameters",
+        "No, type arguments must always be explicitly written in angle brackets",
+        "Only for string types",
+        "Only in C++20 and later"
+      ],
+      "correctAnswer": "Yes, if function arguments match template parameters"
+    }
+  ]
+}

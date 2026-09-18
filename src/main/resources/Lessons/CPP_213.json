@@ -1,0 +1,136 @@
+{
+  "lessonId": "CPP_213",
+  "title": "C++ STL Iterators & Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_213_S1",
+      "type": "CONCEPT",
+      "title": "Iterators & <algorithm>",
+      "prompt": "Iterators act as generalized pointers to elements. <algorithm> offers sort, find, count, and transform.",
+      "codeSnippet": "#include <algorithm>\nstd::vector<int> v = {4, 1, 3};\nstd::sort(v.begin(), v.end());"
+    },
+    {
+      "slideId": "CPP_213_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Begin Function",
+      "prompt": "Fill in function returning iterator to container start.",
+      "codeSnippet": "auto it = v.___();",
+      "options": [
+        "begin",
+        "start",
+        "front",
+        "first"
+      ],
+      "correctAnswer": "begin"
+    },
+    {
+      "slideId": "CPP_213_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Sort Algorithm Syntax",
+      "prompt": "Which code snippet sorts vector 'v' in ascending order?",
+      "options": [
+        "std::sort(v.begin(), v.end());",
+        "v.sort();",
+        "std::sort(v);",
+        "sort(v.first, v.last);"
+      ],
+      "correctAnswer": "std::sort(v.begin(), v.end());"
+    },
+    {
+      "slideId": "CPP_213_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "End Iterator Position",
+      "prompt": "v.end() points to position immediately ___ last element.",
+      "codeSnippet": "// v.end() points ___ last element",
+      "options": [
+        "after",
+        "at",
+        "before",
+        "inside"
+      ],
+      "correctAnswer": "after"
+    },
+    {
+      "slideId": "CPP_213_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Find Algorithm Return",
+      "prompt": "What does std::find(v.begin(), v.end(), val) return if val exists?",
+      "options": [
+        "Iterator pointing to matching element",
+        "Boolean true",
+        "Integer index",
+        "Pointer to copy"
+      ],
+      "correctAnswer": "Iterator pointing to matching element"
+    },
+    {
+      "slideId": "CPP_213_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Dereferencing Iterator",
+      "prompt": "Fill in operator to access value pointed by iterator.",
+      "codeSnippet": "int val = ___it;",
+      "options": [
+        "*",
+        "&",
+        "->",
+        "val"
+      ],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_213_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reverse Iterators",
+      "prompt": "Which methods return iterators for iterating backward?",
+      "options": [
+        "rbegin() and rend()",
+        "back() and front()",
+        "reverse_begin() and reverse_end()",
+        "end() and begin()"
+      ],
+      "correctAnswer": "rbegin() and rend()"
+    },
+    {
+      "slideId": "CPP_213_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Header for Algorithms",
+      "prompt": "Fill in header for std::sort and std::find.",
+      "codeSnippet": "#include <___>",
+      "options": [
+        "algorithm",
+        "numeric",
+        "iterator",
+        "utility"
+      ],
+      "correctAnswer": "algorithm"
+    },
+    {
+      "slideId": "CPP_213_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Binary Search Pre-condition",
+      "prompt": "What pre-condition MUST be met before calling std::binary_search?",
+      "options": [
+        "Elements in range must be sorted",
+        "Range size must be even",
+        "Container must be vector",
+        "Elements must be positive"
+      ],
+      "correctAnswer": "Elements in range must be sorted"
+    },
+    {
+      "slideId": "CPP_213_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Iterator Keyword",
+      "prompt": "Fill in method returning const iterator to start of container.",
+      "codeSnippet": "auto it = v.___();",
+      "options": [
+        "cbegin",
+        "const_begin",
+        "begin_const",
+        "cstart"
+      ],
+      "correctAnswer": "cbegin"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "lessonId": "CPP_211",
+  "title": "C++ STL Vectors (std::vector)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_211_S1",
+      "type": "CONCEPT",
+      "title": "Dynamic Array Vector",
+      "prompt": "std::vector is a dynamic array that automatically resizes as elements are added/removed.",
+      "codeSnippet": "#include <vector>\nstd::vector<int> nums = {1, 2, 3};\nnums.push_back(4);"
+    },
+    {
+      "slideId": "CPP_211_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Push Back Method",
+      "prompt": "Fill in vector method name appending element to end.",
+      "codeSnippet": "v.___ (100);",
+      "options": ["push_back", "append", "add", "insert"],
+      "correctAnswer": "push_back"
+    },
+    {
+      "slideId": "CPP_211_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Vector Size vs Capacity",
+      "prompt": "What is distinction between vector.size() and vector.capacity()?",
+      "options": [
+        "size() is number of stored elements; capacity() is total allocated buffer space",
+        "Values are identical at all times",
+        "size() is bytes; capacity() is element count",
+        "capacity() can never exceed size()"
+      ],
+      "correctAnswer": "size() is number of stored elements; capacity() is total allocated buffer space"
+    },
+    {
+      "slideId": "CPP_211_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pop Back Method",
+      "prompt": "Fill in method that removes last element.",
+      "codeSnippet": "v.___();",
+      "options": ["pop_back", "remove_last", "delete", "erase"],
+      "correctAnswer": "pop_back"
+    },
+    {
+      "slideId": "CPP_211_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "At Method Bounds Safety",
+      "prompt": "What benefit does v.at(index) offer over v[index]?",
+      "options": [
+        "Performs bounds checking and throws std::out_of_range exception",
+        "Executes faster",
+        "Supports negative indexing",
+        "Returns string copy"
+      ],
+      "correctAnswer": "Performs bounds checking and throws std::out_of_range exception"
+    },
+    {
+      "slideId": "CPP_211_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Clear Method",
+      "prompt": "Fill in method removing all elements from vector.",
+      "codeSnippet": "v.___();",
+      "options": ["clear", "reset", "erase_all", "empty"],
+      "correctAnswer": "clear"
+    },
+    {
+      "slideId": "CPP_211_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Emplace Back Advantage",
+      "prompt": "Why preference v.emplace_back(...) over push_back()?",
+      "options": [
+        "Constructs object in-place inside container, avoiding copies",
+        "Runs asynchronously",
+        "Uses 50% less RAM",
+        "Sorts vector automatically"
+      ],
+      "correctAnswer": "Constructs object in-place inside container, avoiding copies"
+    },
+    {
+      "slideId": "CPP_211_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Vector Reserve Method",
+      "prompt": "Fill in method pre-allocating buffer memory capacity.",
+      "codeSnippet": "v.___ (1000);",
+      "options": ["reserve", "resize", "allocate", "set_capacity"],
+      "correctAnswer": "reserve"
+    },
+    {
+      "slideId": "CPP_211_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Vector Empty Check Method",
+      "prompt": "Which method checks whether a vector contains no elements?",
+      "options": ["v.empty()", "v.is_empty()", "v.size() == -1", "v.clear()"],
+      "correctAnswer": "v.empty()"
+    },
+    {
+      "slideId": "CPP_211_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Vector Front Method",
+      "prompt": "Fill in method returning reference to first element.",
+      "codeSnippet": "int first = v.___();",
+      "options": ["front", "begin", "head", "first"],
+      "correctAnswer": "front"
+    },
+    {
+      "slideId": "CPP_211_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Vector Memory Contiguity",
+      "prompt": "Are elements in std::vector stored in contiguous memory?",
+      "options": [
+        "Yes, elements are stored in contiguous memory blocks",
+        "No, stored as linked nodes across heap",
+        "Only if size is under 100",
+        "No, stored as tree structures"
+      ],
+      "correctAnswer": "Yes, elements are stored in contiguous memory blocks"
+    }
+  ]
+}

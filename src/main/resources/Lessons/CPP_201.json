@@ -1,0 +1,109 @@
+{
+  "lessonId": "CPP_201",
+  "title": "C++ Classes & Objects",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_201_S1",
+      "type": "CONCEPT",
+      "title": "Classes and Objects Overview",
+      "prompt": "A class is a blueprint for objects, grouping attributes and methods together.",
+      "codeSnippet": "class Car {\n  public:\n    string brand;\n    void honk() { std::cout << \"Beep!\"; }\n};\nCar myCar;\nmyCar.brand = \"Toyota\";"
+    },
+    {
+      "slideId": "CPP_201_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration Syntax",
+      "prompt": "Fill in the keyword used to define a class template.",
+      "codeSnippet": "___ Person {\n  public:\n    string name;\n};",
+      "options": ["class", "struct", "object", "type"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "CPP_201_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Access Specifier",
+      "prompt": "What is the default access specifier for class members?",
+      "options": ["private", "public", "protected", "internal"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "CPP_201_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Dot Operator Member Access",
+      "prompt": "Fill in the operator used to access members of an object.",
+      "codeSnippet": "Car c1;\nc1___brand = \"Honda\";",
+      "options": [".", "->", "::", ":"],
+      "correctAnswer": "."
+    },
+    {
+      "slideId": "CPP_201_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class vs Object Concept",
+      "prompt": "Which statement correctly describes a class and an object?",
+      "options": [
+        "A class is a blueprint; an object is an instance of a class",
+        "An object is a blueprint; a class is an instance",
+        "Class and object are identical terms",
+        "Classes exist only at runtime"
+      ],
+      "correctAnswer": "A class is a blueprint; an object is an instance of a class"
+    },
+    {
+      "slideId": "CPP_201_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Semicolon Termination",
+      "prompt": "Fill in the character that terminates a class declaration.",
+      "codeSnippet": "class Dog {\n  // members\n}___",
+      "options": [";", ":", ".", "}"],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_201_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Instantiating Objects",
+      "prompt": "Which code snippet correctly instantiates an object?",
+      "options": ["Person p1;", "new Person p1;", "class Person = p1;", "Person.p1();"],
+      "correctAnswer": "Person p1;"
+    },
+    {
+      "slideId": "CPP_201_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Arrow Operator Access",
+      "prompt": "Fill in the operator used to access members through an object pointer.",
+      "codeSnippet": "Person* ptr = &p1;\nptr___name = \"Aung\";",
+      "options": ["->", ".", "::", "*"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_201_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Member Function Definition Outside",
+      "prompt": "Which operator is used to define a class method outside the class body?",
+      "options": [":: (Scope Resolution Operator)", ". (Dot Operator)", "-> (Arrow Operator)", ": (Colon Operator)"],
+      "correctAnswer": ":: (Scope Resolution Operator)"
+    },
+    {
+      "slideId": "CPP_201_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Public Keyword",
+      "prompt": "Fill in the access specifier that makes members accessible from outside.",
+      "codeSnippet": "class Book {\n  ___:\n    string title;\n};",
+      "options": ["public", "private", "protected", "global"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_201_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Memory Allocation",
+      "prompt": "When is memory for a local object variable allocated?",
+      "options": [
+        "When the object variable is declared/instantiated",
+        "When the class definition is written",
+        "At compilation time for all objects",
+        "Only when using the new keyword"
+      ],
+      "correctAnswer": "When the object variable is declared/instantiated"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "lessonId": "CPP_216",
+  "title": "C++ Namespaces & Type Aliasing",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_216_S1",
+      "type": "CONCEPT",
+      "title": "Namespaces & Aliases",
+      "prompt": "Namespaces prevent naming collisions. Type aliases (using/typedef) simplify long types.",
+      "codeSnippet": "namespace Custom {\n    int val = 10;\n}\nusing StringList = std::vector<std::string>;"
+    },
+    {
+      "slideId": "CPP_216_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Keyword",
+      "prompt": "Fill in keyword used to group identifiers into scope boundaries.",
+      "codeSnippet": "___ MyLib {\n    void init();\n}",
+      "options": [
+        "namespace",
+        "package",
+        "module",
+        "scope"
+      ],
+      "correctAnswer": "namespace"
+    },
+    {
+      "slideId": "CPP_216_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Scope Resolution Operator",
+      "prompt": "Which operator accesses members inside a namespace?",
+      "options": [
+        "::",
+        ".",
+        "->",
+        ":"
+      ],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_216_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Using Alias Keyword",
+      "prompt": "Fill in modern C++ keyword creating type alias 'IntVec'.",
+      "codeSnippet": "___ IntVec = std::vector<int>;",
+      "options": [
+        "using",
+        "typedef",
+        "alias",
+        "type"
+      ],
+      "correctAnswer": "using"
+    },
+    {
+      "slideId": "CPP_216_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Anonymous Namespace Scope",
+      "prompt": "What is the primary effect of an anonymous namespace (namespace {})?",
+      "options": [
+        "Restricts member linkage to current translation unit (file-local scope)",
+        "Accelerates compilation speed",
+        "Makes variables static const automatically",
+        "Allows public external access"
+      ],
+      "correctAnswer": "Restricts member linkage to current translation unit (file-local scope)"
+    },
+    {
+      "slideId": "CPP_216_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Typedef Keyword",
+      "prompt": "Fill in traditional C-style type definition keyword.",
+      "codeSnippet": "___ unsigned long ulong;",
+      "options": [
+        "typedef",
+        "using",
+        "alias",
+        "type"
+      ],
+      "correctAnswer": "typedef"
+    },
+    {
+      "slideId": "CPP_216_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inline Namespace Behavior",
+      "prompt": "What happens when a nested namespace is declared 'inline namespace'?",
+      "options": [
+        "Its members are automatically exposed to enclosing outer parent scope",
+        "Functions execute at compile time",
+        "Cannot contain template classes",
+        "Code generated without function calls"
+      ],
+      "correctAnswer": "Its members are automatically exposed to enclosing outer parent scope"
+    },
+    {
+      "slideId": "CPP_216_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Using Directive Keyword",
+      "prompt": "Fill in directive keyword importing namespace identifiers.",
+      "codeSnippet": "___ namespace std;",
+      "options": [
+        "using",
+        "import",
+        "include",
+        "use"
+      ],
+      "correctAnswer": "using"
+    },
+    {
+      "slideId": "CPP_216_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Global Scope Resolution Operator",
+      "prompt": "How do you access a global variable 'x' when shadowed by local variable 'x'?",
+      "options": [
+        "::x",
+        "global.x",
+        "this->x",
+        "super.x"
+      ],
+      "correctAnswer": "::x"
+    },
+    {
+      "slideId": "CPP_216_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Alias Definition",
+      "prompt": "Fill in equals sign operator for namespace aliasing.",
+      "codeSnippet": "namespace ShortName ___ VeryLongModuleName;",
+      "options": [
+        "=",
+        ":",
+        "::",
+        "->"
+      ],
+      "correctAnswer": "="
+    }
+  ]
+}

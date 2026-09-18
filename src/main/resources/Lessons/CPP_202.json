@@ -1,0 +1,119 @@
+{
+  "lessonId": "CPP_202",
+  "title": "C++ Constructors & Destructors",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_202_S1",
+      "type": "CONCEPT",
+      "title": "Constructors & Destructors",
+      "prompt": "Constructors initialize objects; destructors clean up resources when objects are destroyed.",
+      "codeSnippet": "class Book {\n  public:\n    Book() { std::cout << \"Created\"; }\n    ~Book() { std::cout << \"Destroyed\"; }\n};"
+    },
+    {
+      "slideId": "CPP_202_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Destructor Prefix Symbol",
+      "prompt": "Fill in the character prefix used to declare a destructor.",
+      "codeSnippet": "class Student {\n  public:\n    ___Student() {}\n};",
+      "options": ["~", "!", "#", "*"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_202_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Return Type",
+      "prompt": "What is the return type of a C++ constructor?",
+      "options": [
+        "Constructors have no return type, not even void",
+        "void",
+        "int",
+        "Pointer to class"
+      ],
+      "correctAnswer": "Constructors have no return type, not even void"
+    },
+    {
+      "slideId": "CPP_202_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Initializer List Syntax",
+      "prompt": "Fill in the character used to start a member initializer list.",
+      "codeSnippet": "Car(string b) ___ brand(b) {}",
+      "options": [":", ";", "=", "->"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_202_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destructor Parameters",
+      "prompt": "How many arguments can a destructor accept?",
+      "options": ["Zero (destructors cannot accept parameters)", "One", "Unlimited", "Depends on constructor"],
+      "correctAnswer": "Zero (destructors cannot accept parameters)"
+    },
+    {
+      "slideId": "CPP_202_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Constructor",
+      "prompt": "Fill in the term for a constructor that takes no arguments.",
+      "codeSnippet": "// A constructor with no arguments is a ___ constructor.",
+      "options": ["default", "copy", "explicit", "virtual"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_202_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copy Constructor Signature",
+      "prompt": "Which of the following is a valid copy constructor signature for 'Widget'?",
+      "options": [
+        "Widget(const Widget &other)",
+        "Widget(Widget other)",
+        "Widget copy(Widget &other)",
+        "void Widget(const Widget *other)"
+      ],
+      "correctAnswer": "Widget(const Widget &other)"
+    },
+    {
+      "slideId": "CPP_202_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Keyword",
+      "prompt": "Fill in the keyword used to prevent implicit constructor conversions.",
+      "codeSnippet": "___ Device(int id);",
+      "options": ["explicit", "inline", "static", "virtual"],
+      "correctAnswer": "explicit"
+    },
+    {
+      "slideId": "CPP_202_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Overloading",
+      "prompt": "Can a class have multiple constructors?",
+      "options": [
+        "Yes, constructors can be overloaded with different parameter lists",
+        "No, a class can have only one constructor",
+        "Yes, but only up to two constructors",
+        "Only if they are virtual"
+      ],
+      "correctAnswer": "Yes, constructors can be overloaded with different parameter lists"
+    },
+    {
+      "slideId": "CPP_202_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Delegating Constructor",
+      "prompt": "Fill in the missing symbol in delegating constructor syntax.",
+      "codeSnippet": "Car() ___ Car(\"Default\") {}",
+      "options": [":", "=", "->", "::"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_202_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destructor Execution Order",
+      "prompt": "In what order are destructors called for local objects?",
+      "options": [
+        "In reverse order of their construction (LIFO)",
+        "In exact order of their construction (FIFO)",
+        "In random order at program termination",
+        "Alphabetically by variable name"
+      ],
+      "correctAnswer": "In reverse order of their construction (LIFO)"
+    }
+  ]
+}

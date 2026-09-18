@@ -1,0 +1,119 @@
+{
+  "lessonId": "CPP_210",
+  "title": "C++ Smart Pointers (unique_ptr & shared_ptr)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_210_S1",
+      "type": "CONCEPT",
+      "title": "RAII & Smart Pointers",
+      "prompt": "Smart pointers manage lifetime automatically using RAII, avoiding explicit delete.",
+      "codeSnippet": "#include <memory>\nstd::unique_ptr<int> u = std::make_unique<int>(10);\nstd::shared_ptr<int> s = std::make_shared<int>(20);"
+    },
+    {
+      "slideId": "CPP_210_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Make Unique Helper Function",
+      "prompt": "Fill in helper function to safely create unique_ptr.",
+      "codeSnippet": "auto p = std::___<int>(100);",
+      "options": ["make_unique", "make_shared", "create_unique", "new_unique"],
+      "correctAnswer": "make_unique"
+    },
+    {
+      "slideId": "CPP_210_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unique Pointer Copying",
+      "prompt": "Can std::unique_ptr be copied to another variable?",
+      "options": [
+        "No, unique_ptr cannot be copied; it can only be moved with std::move()",
+        "Yes, copied freely with assignment operator",
+        "Yes, inside loops only",
+        "Only if target is float"
+      ],
+      "correctAnswer": "No, unique_ptr cannot be copied; it can only be moved with std::move()"
+    },
+    {
+      "slideId": "CPP_210_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Shared Pointer Reference Counter Method",
+      "prompt": "Fill in method returning reference count on shared_ptr.",
+      "codeSnippet": "long count = ptr.___();",
+      "options": ["use_count", "ref_count", "size", "get_count"],
+      "correctAnswer": "use_count"
+    },
+    {
+      "slideId": "CPP_210_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Weak Pointer Purpose",
+      "prompt": "What is the primary purpose of std::weak_ptr?",
+      "options": [
+        "To break cyclic reference dependencies between shared_ptr instances",
+        "To allocate faster memory on stack",
+        "To replace raw pointers in old C code",
+        "To manage global variables"
+      ],
+      "correctAnswer": "To break cyclic reference dependencies between shared_ptr instances"
+    },
+    {
+      "slideId": "CPP_210_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Header Inclusion",
+      "prompt": "Fill in header required for smart pointers.",
+      "codeSnippet": "#include <___>",
+      "options": ["memory", "smart_ptr", "utility", "allocator"],
+      "correctAnswer": "memory"
+    },
+    {
+      "slideId": "CPP_210_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Raw Pointer Extraction Method",
+      "prompt": "Which method extracts underlying raw pointer from smart pointer?",
+      "options": ["ptr.get()", "ptr.raw()", "ptr.pointer()", "ptr.address()"],
+      "correctAnswer": "ptr.get()"
+    },
+    {
+      "slideId": "CPP_210_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Smart Pointer Reset Method",
+      "prompt": "Fill in method that releases ownership and sets smart pointer to nullptr.",
+      "codeSnippet": "ptr.___();",
+      "options": ["reset", "clear", "release", "free"],
+      "correctAnswer": "reset"
+    },
+    {
+      "slideId": "CPP_210_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unique Pointer Move Ownership",
+      "prompt": "Which standard function transfers ownership of unique_ptr p1 to p2?",
+      "options": [
+        "p2 = std::move(p1);",
+        "p2 = p1;",
+        "p2 = std::copy(p1);",
+        "p2.transfer(p1);"
+      ],
+      "correctAnswer": "p2 = std::move(p1);"
+    },
+    {
+      "slideId": "CPP_210_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Make Shared Helper Function",
+      "prompt": "Fill in helper function to create shared_ptr efficiently.",
+      "codeSnippet": "auto s = std::___<int>(50);",
+      "options": ["make_shared", "make_unique", "create_shared", "new_shared"],
+      "correctAnswer": "make_shared"
+    },
+    {
+      "slideId": "CPP_210_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Weak Pointer Lock Method",
+      "prompt": "How do you access the managed object from std::weak_ptr wptr?",
+      "options": [
+        "Convert to shared_ptr using wptr.lock()",
+        "Use operator* directly",
+        "Use operator-> directly",
+        "Call wptr.get_shared()"
+      ],
+      "correctAnswer": "Convert to shared_ptr using wptr.lock()"
+    }
+  ]
+}

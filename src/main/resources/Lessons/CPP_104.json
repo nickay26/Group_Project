@@ -1,70 +1,74 @@
 {
   "lessonId": "CPP_104",
-  "title": "C++ User Input (std::cin)",
+  "title": "C++ Variables & Identifiers",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_104_S1",
       "type": "CONCEPT",
-      "title": "Reading Input",
-      "prompt": "std::cin is used together with the extraction operator (>>) to get user input.",
-      "codeSnippet": "int x;\nstd::cout << \"Type a number: \";\nstd::cin >> x;"
+      "title": "Variable Concept",
+      "prompt": "Variables store data values in memory. Every variable has a specific data type and name.",
+      "codeSnippet": "int age = 25;\ndouble price = 19.99;\nchar grade = 'A';"
     },
     {
       "slideId": "CPP_104_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Taking Input",
-      "prompt": "Fill in the blank to read user input into variable 'age'.",
-      "codeSnippet": "std::___ >> age;",
-      "options": ["cin", "cout", "input", "read"],
-      "correctAnswer": "cin"
+      "title": "Integer Variable",
+      "prompt": "Fill in the type for storing whole numbers.",
+      "codeSnippet": "___ score = 100;",
+      "options": ["int", "double", "string", "bool"],
+      "correctAnswer": "int"
     },
     {
       "slideId": "CPP_104_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Extraction Operator",
-      "prompt": "Which operator is used with std::cin to read input?",
-      "options": [">>", "<<", "->", "::"],
-      "correctAnswer": ">>"
+      "title": "Valid Identifier Rules",
+      "prompt": "Which of the following is a VALID variable identifier in C++?",
+      "options": ["_userScore", "2ndPlace", "class", "total-amount"],
+      "correctAnswer": "_userScore"
     },
     {
       "slideId": "CPP_104_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Multiple Inputs",
-      "prompt": "Complete the code to take input for two variables x and y sequentially.",
-      "codeSnippet": "std::cin >> x ___ y;",
-      "options": [">>", "<<", ",", "+"],
-      "correctAnswer": ">>"
+      "title": "Assigning Initial Value",
+      "prompt": "Fill in the assignment operator.",
+      "codeSnippet": "int count ___ 0;",
+      "options": ["=", "==", "->", ":="],
+      "correctAnswer": "="
     },
     {
       "slideId": "CPP_104_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "cin Stream Type",
-      "prompt": "std::cin is an instance of which C++ stream class?",
-      "options": ["istream", "ostream", "fstream", "stringstream"],
-      "correctAnswer": "istream"
+      "title": "Multiple Variable Declaration",
+      "prompt": "Which syntax correctly declares three integer variables at once?",
+      "options": ["int a = 1, b = 2, c = 3;", "int a = 1; int b = 2; c = 3", "int a, int b, int c;", "int (a=1, b=2, c=3);"],
+      "correctAnswer": "int a = 1, b = 2, c = 3;"
     },
     {
       "slideId": "CPP_104_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Prompting User",
-      "prompt": "Complete the code to output a prompt before receiving input.",
-      "codeSnippet": "std::___ << \"Enter name: \";\nstd::cin >> name;",
-      "options": ["cout", "cin", "print", "write"],
-      "correctAnswer": "cout"
+      "title": "Char Literal Delimiter",
+      "prompt": "Fill in quotes used for single character literals.",
+      "codeSnippet": "char letter = ___B___;",
+      "options": ["'", "\"", "`", "/"],
+      "correctAnswer": "'"
     },
     {
       "slideId": "CPP_104_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Whitespace Handling",
-      "prompt": "How does std::cin >> stringVar handle whitespace (spaces, tabs, newlines)?",
-      "options": [
-        "It stops reading at the first whitespace",
-        "It reads the entire line including spaces",
-        "It throws an execution error",
-        "It automatically converts spaces to underscores"
-      ],
-      "correctAnswer": "It stops reading at the first whitespace"
+      "title": "Reserved Keywords",
+      "prompt": "Can keywords like 'double', 'for', or 'return' be used as variable names?",
+      "options": ["No, keywords are reserved", "Yes, if prefixed with _", "Yes, always", "Only in functions"],
+      "correctAnswer": "No, keywords are reserved"
+    },
+    {
+      "slideId": "CPP_104_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Uninitialized Variable Value",
+      "prompt": "Local variables declared without initialization contain undefined ___ values.",
+      "codeSnippet": "int x; // contains ___ data",
+      "options": ["garbage", "zero", "null", "default"],
+      "correctAnswer": "garbage"
     }
   ]
 }

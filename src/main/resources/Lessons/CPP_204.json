@@ -1,0 +1,118 @@
+{
+  "lessonId": "CPP_204",
+  "title": "C++ Inheritance",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_204_S1",
+      "type": "CONCEPT",
+      "title": "Inheritance Concept",
+      "prompt": "Inheritance allows a child class to derive properties and behaviors from a parent class.",
+      "codeSnippet": "class Vehicle {\n  public:\n    string brand = \"Ford\";\n};\nclass Car : public Vehicle {\n  public:\n    string model = \"Mustang\";\n};"
+    },
+    {
+      "slideId": "CPP_204_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Colon Operator",
+      "prompt": "Fill in the symbol used to declare inheritance.",
+      "codeSnippet": "class Dog ___ public Animal {};",
+      "options": [":", "::", "->", "="],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_204_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Public Inheritance Access",
+      "prompt": "Under public inheritance, public members of the base class become what in the derived class?",
+      "options": ["public", "private", "protected", "inaccessible"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_204_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Inheritance Syntax",
+      "prompt": "Fill in the comma separator for multiple base classes.",
+      "codeSnippet": "class Child : public Father___ public Mother {};",
+      "options": [",", ";", "&", "+"],
+      "correctAnswer": ","
+    },
+    {
+      "slideId": "CPP_204_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multilevel Inheritance",
+      "prompt": "Class C inherits from Class B, which inherits from Class A. What is this hierarchy?",
+      "options": ["Multilevel Inheritance", "Multiple Inheritance", "Hierarchical Inheritance", "Hybrid Inheritance"],
+      "correctAnswer": "Multilevel Inheritance"
+    },
+    {
+      "slideId": "CPP_204_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Base Class Keyword",
+      "prompt": "Fill in keyword used to solve the Diamond Problem in multiple inheritance.",
+      "codeSnippet": "class B : ___ public A {};",
+      "options": ["virtual", "override", "explicit", "static"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_204_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Execution Order",
+      "prompt": "In what order are constructors executed during derived object creation?",
+      "options": [
+        "Base class constructor first, then derived class constructor",
+        "Derived class constructor first, then base class constructor",
+        "Executes simultaneously",
+        "Only derived class constructor runs"
+      ],
+      "correctAnswer": "Base class constructor first, then derived class constructor"
+    },
+    {
+      "slideId": "CPP_204_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Final Class Specifier",
+      "prompt": "Fill in specifier that prevents further inheritance of a class.",
+      "codeSnippet": "class Base ___ {};",
+      "options": ["final", "sealed", "static", "const"],
+      "correctAnswer": "final"
+    },
+    {
+      "slideId": "CPP_204_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Private Inheritance Behavior",
+      "prompt": "Under private inheritance, public members of base class become what in derived class?",
+      "options": ["private", "public", "protected", "deleted"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "CPP_204_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Class Constructor Invocation",
+      "prompt": "Fill in symbol used in derived constructor to call base constructor.",
+      "codeSnippet": "Derived(int x) ___ Base(x) {}",
+      "options": [":", "::", ".", "->"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_204_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destructor Execution Order in Inheritance",
+      "prompt": "In what order are destructors called when a derived object is destroyed?",
+      "options": [
+        "Derived class destructor first, then base class destructor",
+        "Base class destructor first, then derived class destructor",
+        "Random order",
+        "Only base class destructor runs"
+      ],
+      "correctAnswer": "Derived class destructor first, then base class destructor"
+    },
+    {
+      "slideId": "CPP_204_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Protected Access Specifier",
+      "prompt": "Fill in specifier that keeps members hidden from outside but accessible to derived classes.",
+      "codeSnippet": "class Parent {\n  ___:\n    int secret;\n};",
+      "options": ["protected", "private", "public", "internal"],
+      "correctAnswer": "protected"
+    }
+  ]
+}

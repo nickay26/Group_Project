@@ -1,0 +1,104 @@
+{
+  "lessonId": "CPP_206",
+  "title": "C++ Operator Overloading",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_206_S1",
+      "type": "CONCEPT",
+      "title": "Operator Overloading Basics",
+      "prompt": "Operator overloading allows standard operators (+, -, ==) to work on custom objects.",
+      "codeSnippet": "Complex operator+(const Complex& obj) {\n    Complex res;\n    res.real = real + obj.real;\n    return res;\n}"
+    },
+    {
+      "slideId": "CPP_206_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Operator Keyword",
+      "prompt": "Fill in keyword used to define custom operator function.",
+      "codeSnippet": "Point ___+(const Point& p);",
+      "options": ["operator", "overload", "op", "func"],
+      "correctAnswer": "operator"
+    },
+    {
+      "slideId": "CPP_206_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-overloadable Operators",
+      "prompt": "Which operator CANNOT be overloaded in C++?",
+      "options": [":: (Scope Resolution)", "+ (Addition)", "== (Equality)", "[] (Subscript)"],
+      "correctAnswer": ":: (Scope Resolution)"
+    },
+    {
+      "slideId": "CPP_206_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Insertion Operator",
+      "prompt": "Fill in operator symbol commonly overloaded for printing objects.",
+      "codeSnippet": "ostream& operator___(ostream& os, const Point& p);",
+      "options": ["<<", ">>", "+=", "<="],
+      "correctAnswer": "<<"
+    },
+    {
+      "slideId": "CPP_206_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Assignment Operator Return Type",
+      "prompt": "What should operator= return to support chained assignment (a = b = c)?",
+      "options": ["Reference to self (*this)", "void", "Copy of object", "bool"],
+      "correctAnswer": "Reference to self (*this)"
+    },
+    {
+      "slideId": "CPP_206_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Post-increment Dummy Parameter",
+      "prompt": "Post-increment operator++ overload takes a dummy ___ parameter.",
+      "codeSnippet": "Number operator++(_________);",
+      "options": ["int", "void", "double", "bool"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_206_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Subscript Operator Overload",
+      "prompt": "Which operator MUST be overloaded as a member function?",
+      "options": ["[] (Subscript)", "+ (Addition)", ">> (Stream extraction)", "== (Equality)"],
+      "correctAnswer": "[] (Subscript)"
+    },
+    {
+      "slideId": "CPP_206_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Function Overloading",
+      "prompt": "Overloading stream operators for custom classes typically requires a ___ function.",
+      "codeSnippet": "___ ostream& operator<<(ostream& os, const Point& p);",
+      "options": ["friend", "virtual", "explicit", "static"],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_206_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Operator Overloading",
+      "prompt": "Can the ternary conditional operator (?:) be overloaded?",
+      "options": [
+        "No, conditional operator cannot be overloaded",
+        "Yes, freely overloaded",
+        "Yes, but only for boolean types",
+        "Only as a friend function"
+      ],
+      "correctAnswer": "No, conditional operator cannot be overloaded"
+    },
+    {
+      "slideId": "CPP_206_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Extraction Operator Symbol",
+      "prompt": "Fill in stream extraction operator symbol overloaded for input.",
+      "codeSnippet": "istream& operator___(istream& is, Point& p);",
+      "options": [">>", "<<", "->", ">="],
+      "correctAnswer": ">>"
+    },
+    {
+      "slideId": "CPP_206_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Call Operator Overloading",
+      "prompt": "An object that overloads operator() is commonly referred to as a what?",
+      "options": ["Functor (Function Object)", "Lambda", "Pointer", "Virtual function"],
+      "correctAnswer": "Functor (Function Object)"
+    }
+  ]
+}
