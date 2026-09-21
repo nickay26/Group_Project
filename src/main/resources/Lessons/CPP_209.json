@@ -1,119 +1,111 @@
 {
   "lessonId": "CPP_209",
-  "title": "C++ Dynamic Memory (new & delete)",
+  "title": "Inheritance Basics & Access Specifiers",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_209_S1",
       "type": "CONCEPT",
-      "title": "Heap Memory Allocation",
-      "prompt": "new allocates memory dynamically on heap; delete frees memory to prevent memory leaks.",
-      "codeSnippet": "int* ptr = new int(42);\nstd::cout << *ptr;\ndelete ptr;\nptr = nullptr;"
+      "title": "Inheritance Mechanics",
+      "prompt": "Inheritance allows a derived class to inherit members from a base class. Public inheritance represents an 'IS-A' relationship.",
+      "codeSnippet": "class Animal {\npublic:\n    void eat() {}\n};\nclass Dog : public Animal {}; // Dog IS-A Animal"
     },
     {
       "slideId": "CPP_209_S2",
       "type": "FILL_IN_BLANK",
-      "title": "New Allocation Operator",
-      "prompt": "Fill in operator used for heap allocation.",
-      "codeSnippet": "int* p = ___ int;",
-      "options": ["new", "alloc", "malloc", "create"],
-      "correctAnswer": "new"
+      "title": "Public Inheritance Syntax",
+      "prompt": "Fill in the access specifier used for standard public inheritance.",
+      "codeSnippet": "class Car : ___ Vehicle {};",
+      "options": ["public", "protected", "private", "extends"],
+      "correctAnswer": "public"
     },
     {
       "slideId": "CPP_209_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Dynamic Array Deallocation",
-      "prompt": "Which syntax frees memory allocated via new int[10]?",
-      "options": ["delete[] arr;", "delete arr;", "free(arr);", "delete arr[];"],
-      "correctAnswer": "delete[] arr;"
+      "title": "Protected Access Specifier",
+      "prompt": "What is the visibility of 'protected' members of a base class?",
+      "options": [
+        "Accessible inside the base class and its derived classes only",
+        "Accessible anywhere in the program via object instances",
+        "Accessible only inside the base class itself",
+        "Accessible only inside friend functions of the main file"
+      ],
+      "correctAnswer": "Accessible inside the base class and its derived classes only"
     },
     {
       "slideId": "CPP_209_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Delete Keyword",
-      "prompt": "Fill in keyword to deallocate single dynamic object.",
-      "codeSnippet": "___ ptr;",
-      "options": ["delete", "free", "clear", "remove"],
-      "correctAnswer": "delete"
+      "title": "Private Base Class Access",
+      "prompt": "Can a derived class directly access 'private' members of its base class?",
+      "codeSnippet": "// Direct access to private base members is:\n___",
+      "options": ["Forbidden", "Allowed", "Conditional", "Implicit"],
+      "correctAnswer": "Forbidden"
     },
     {
       "slideId": "CPP_209_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Dangling Pointer Definition",
-      "prompt": "What is a dangling pointer?",
+      "title": "Protected Inheritance Effect",
+      "prompt": "Under 'protected' inheritance, what do public members of the base class become in the derived class?",
       "options": [
-        "Pointer pointing to deallocated memory",
-        "Pointer initialized to nullptr",
-        "Pointer pointing to global variable",
-        "Pointer to pointer"
+        "Protected members",
+        "Public members",
+        "Private members",
+        "Inaccessible members"
       ],
-      "correctAnswer": "Pointer pointing to deallocated memory"
+      "correctAnswer": "Protected members"
     },
     {
       "slideId": "CPP_209_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Nullptr Reset",
-      "prompt": "After deleting a pointer, assign it to ___ for safety.",
-      "codeSnippet": "delete ptr;\nptr = ___;",
-      "options": ["nullptr", "0", "NULL", "void"],
-      "correctAnswer": "nullptr"
+      "title": "Base Constructor Execution",
+      "prompt": "In an inheritance chain, which constructor runs first when creating a derived class object?",
+      "codeSnippet": "// Constructor execution order:\n___ Class First",
+      "options": ["Base", "Derived", "Member", "Virtual"],
+      "correctAnswer": "Base"
     },
     {
       "slideId": "CPP_209_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Memory Leak Consequence",
-      "prompt": "What is the primary danger of failing to delete heap memory?",
+      "title": "Destructor Execution Order",
+      "prompt": "In what order are destructors executed when a derived object goes out of scope?",
       "options": [
-        "Memory leak consuming available system RAM",
-        "Compiler build error",
-        "CPU clock speed drop",
-        "Variables convert to const"
+        "Derived class destructor first, then Base class destructor",
+        "Base class destructor first, then Derived class destructor",
+        "Destructors run in parallel",
+        "Order depends on compiler optimization flags"
       ],
-      "correctAnswer": "Memory leak consuming available system RAM"
+      "correctAnswer": "Derived class destructor first, then Base class destructor"
     },
     {
       "slideId": "CPP_209_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Allocation Failure Exception",
-      "prompt": "When 'new' fails, it throws std::___ exception.",
-      "codeSnippet": "throw std::___();",
-      "options": ["bad_alloc", "bad_cast", "out_of_memory", "null_alloc"],
-      "correctAnswer": "bad_alloc"
+      "title": "Explicit Base Constructor Invocation",
+      "prompt": "Fill in the syntax to invoke a parameterized base class constructor from derived initializer list.",
+      "codeSnippet": "Dog(string name) ___ Animal(name) {}",
+      "options": [":", "->", "::", "="],
+      "correctAnswer": ":"
     },
     {
       "slideId": "CPP_209_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Nothrow New Option",
-      "prompt": "How can you make 'new' return nullptr instead of throwing exception on failure?",
+      "title": "Private Inheritance Relationship",
+      "prompt": "What type of relationship does 'private' inheritance model best in C++?",
       "options": [
-        "new (std::nothrow) int",
-        "new (nullptr) int",
-        "nothrow new int",
-        "new int try"
+        "'Implemented-in-terms-of' (composition-like relationship)",
+        "'IS-A' interface relationship",
+        "'HAS-A' public container relationship",
+        "Polymorphic runtime interface"
       ],
-      "correctAnswer": "new (std::nothrow) int"
+      "correctAnswer": "'Implemented-in-terms-of' (composition-like relationship)"
     },
     {
       "slideId": "CPP_209_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Dynamic Array Allocation Syntax",
-      "prompt": "Fill in brackets for dynamic array allocation.",
-      "codeSnippet": "int* arr = new int___10___;",
-      "options": ["[ ]", "( )", "< >", "{ }"],
-      "correctAnswer": "[ ]"
-    },
-    {
-      "slideId": "CPP_209_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Stack vs Heap Lifetime",
-      "prompt": "How long does heap allocated memory remain active?",
-      "options": [
-        "Until explicitly freed using delete operator or program terminates",
-        "Until variable goes out of current scope",
-        "Fixed 10 seconds timeout",
-        "Until next function call"
-      ],
-      "correctAnswer": "Until explicitly freed using delete operator or program terminates"
+      "title": "Scope Resolution for Hidden Members",
+      "prompt": "Fill in the operator used to access a base class method hidden by a derived class.",
+      "codeSnippet": "Derived d;\nd.Base___display();",
+      "options": ["::", ".", "->", "#"],
+      "correctAnswer": "::"
     }
   ]
 }

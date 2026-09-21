@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_163",
+  "title": "Unique Pointers (std::unique_ptr)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_163_S1",
+      "type": "CONCEPT",
+      "title": "Exclusive Smart Pointer Ownership",
+      "prompt": "std::unique_ptr owns dynamic memory exclusively. Automatically deletes resource when out of scope.",
+      "codeSnippet": "#include <memory>\nauto p = std::make_unique<int>(10);\n// Auto deleted at scope end"
+    },
+    {
+      "slideId": "CPP_163_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "make_unique Factory",
+      "prompt": "Fill in standard library factory function for unique_ptr.",
+      "codeSnippet": "auto ptr = std::___<int>(42);",
+      "options": ["make_unique", "make_shared", "unique_ptr", "new_unique"],
+      "correctAnswer": "make_unique"
+    },
+    {
+      "slideId": "CPP_163_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copying unique_ptr",
+      "prompt": "What happens if you attempt to copy a std::unique_ptr ('auto p2 = p1;')?",
+      "options": [
+        "Compilation error (copy constructor is deleted)",
+        "Moves ownership automatically",
+        "Increases reference counter to 2",
+        "Deep copies the managed resource"
+      ],
+      "correctAnswer": "Compilation error (copy constructor is deleted)"
+    },
+    {
+      "slideId": "CPP_163_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Moving unique_ptr Ownership",
+      "prompt": "Fill in function used to transfer ownership of a unique_ptr.",
+      "codeSnippet": "std::unique_ptr<int> p1 = std::make_unique<int>(10);\nstd::unique_ptr<int> p2 = std::___(p1);",
+      "options": ["move", "copy", "forward", "transfer"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_163_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Releasing Raw Pointer",
+      "prompt": "Which method releases ownership and returns the raw pointer without deleting it?",
+      "options": [
+        "release()",
+        "reset()",
+        "get()",
+        "swap()"
+      ],
+      "correctAnswer": "release()"
+    },
+    {
+      "slideId": "CPP_163_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Accessing Raw Pointer",
+      "prompt": "Fill in method name used to observe raw pointer without transferring ownership.",
+      "codeSnippet": "int* raw = ptr.___();",
+      "options": ["get", "release", "raw", "data"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_163_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "unique_ptr Array Support",
+      "prompt": "How do you declare a std::unique_ptr managing a dynamic array of integers?",
+      "options": [
+        "std::unique_ptr<int[]> ptr = std::make_unique<int[]>(10);",
+        "std::unique_ptr<int*> ptr = std::make_unique<int*>(10);",
+        "std::unique_ptr<int, 10> ptr;",
+        "std::unique_array<int> ptr(10);"
+      ],
+      "correctAnswer": "std::unique_ptr<int[]> ptr = std::make_unique<int[]>(10);"
+    },
+    {
+      "slideId": "CPP_163_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Resetting unique_ptr",
+      "prompt": "Fill in method to destroy existing managed object and take optional new pointer.",
+      "codeSnippet": "ptr.___(); // Destroys object and sets ptr to nullptr",
+      "options": ["reset", "clear", "destroy", "free"],
+      "correctAnswer": "reset"
+    },
+    {
+      "slideId": "CPP_163_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Custom Deleter in unique_ptr",
+      "prompt": "Where is a custom deleter specified in std::unique_ptr syntax?",
+      "options": [
+        "As a second template type parameter: std::unique_ptr<T, DeleterType>",
+        "Passed as second parameter to std::make_unique",
+        "Inside the destructor function body",
+        "Via std::set_deleter() function"
+      ],
+      "correctAnswer": "As a second template type parameter: std::unique_ptr<T, DeleterType>"
+    },
+    {
+      "slideId": "CPP_163_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Arrow Operator Member Access",
+      "prompt": "Fill in operator to access member function of object inside unique_ptr.",
+      "codeSnippet": "auto player = std::make_unique<Player>();\nplayer___play();",
+      "options": ["->", ".", "::", "*."],
+      "correctAnswer": "->"
+    }
+  ]
+}

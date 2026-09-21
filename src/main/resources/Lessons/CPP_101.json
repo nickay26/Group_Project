@@ -60,6 +60,32 @@
       "prompt": "Is C++ a case-sensitive programming language?",
       "options": ["Yes, uppercase and lowercase matter", "No, it ignores case", "Only for variable names", "Only for keywords"],
       "correctAnswer": "Yes, uppercase and lowercase matter"
+    },
+    {
+      "slideId": "CPP_101_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Function Return Type",
+      "prompt": "Fill in the correct return type for the main function.",
+      "codeSnippet": "___ main() {\n    return 0;\n}",
+      "options": ["int", "void", "double", "string"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_101_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compiler Role",
+      "prompt": "What is the purpose of a C++ compiler?",
+      "options": ["Translates C++ code into machine code", "Runs the operating system", "Styles text on screen", "Connects to the database"],
+      "correctAnswer": "Translates C++ code into machine code"
+    },
+    {
+      "slideId": "CPP_101_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Keyword",
+      "prompt": "Fill in the keyword used to avoid typing std:: repeatedly.",
+      "codeSnippet": "using ___ std;",
+      "options": ["namespace", "package", "library", "module"],
+      "correctAnswer": "namespace"
     }
   ]
 }

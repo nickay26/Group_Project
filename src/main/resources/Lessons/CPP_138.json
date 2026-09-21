@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_138",
+  "title": "Infinite Loops & Prevention Strategies",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_138_S1",
+      "type": "CONCEPT",
+      "title": "Infinite Loop Mechanics",
+      "prompt": "An infinite loop occurs when a loop's condition never evaluates to false, causing the program to hang or consume high CPU resources.",
+      "codeSnippet": "// Infinite loop due to missing decrement\nint i = 10;\nwhile (i > 0) {\n    std::cout << i << \" \";\n    // i is never modified!\n}"
+    },
+    {
+      "slideId": "CPP_138_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "For-Loop Infinite Syntax",
+      "prompt": "Fill in the missing parts to make a canonical infinite for loop.",
+      "codeSnippet": "for (___ ; ; ) {\n    // Runs indefinitely\n}",
+      "options": [";", "true", "1", "0"],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_138_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Common Cause of Infinite Loops",
+      "prompt": "Which of the following frequently causes an accidental infinite loop?",
+      "options": ["Forgetting to update the loop control variable", "Using pre-increment instead of post-increment", "Declaring counter variable inside loop header", "Using range-based for loops"],
+      "correctAnswer": "Forgetting to update the loop control variable"
+    },
+    {
+      "slideId": "CPP_138_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Break-Based Termination",
+      "prompt": "Fill in the condition check to break an infinite while loop.",
+      "codeSnippet": "while (true) {\n    if (shouldExit()) ___; \n}",
+      "options": ["break", "continue", "return 0", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_138_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unreachable Code Warning",
+      "prompt": "What happens to statements placed directly after an unconditional infinite loop without a break?",
+      "options": ["They become unreachable code and may trigger compiler warnings", "They execute in parallel", "They cause compile errors", "They run when program terminates"],
+      "correctAnswer": "They become unreachable code and may trigger compiler warnings"
+    },
+    {
+      "slideId": "CPP_138_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Floating Point Loop Hazard",
+      "prompt": "Why can 'for (float f = 0.0f; f != 1.0f; f += 0.1f)' become infinite?",
+      "codeSnippet": "// Floating point imprecision makes f ___ equal 1.0f exactly",
+      "options": ["never", "always", "sometimes", "immediately"],
+      "correctAnswer": "never"
+    },
+    {
+      "slideId": "CPP_138_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Safe Floating Point Loop Condition",
+      "prompt": "How should floating point loop bounds be safely written?",
+      "options": ["Use relational operators (< or <=) instead of exact equality (!=)", "Use double instead of float with !=", "Multiply float by 10", "Cast float to int inside loop"],
+      "correctAnswer": "Use relational operators (< or <=) instead of exact equality (!=)"
+    },
+    {
+      "slideId": "CPP_138_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Overflow Loop Trap",
+      "prompt": "What happens with 'for (unsigned char i = 0; i >= 0; i++)'?",
+      "codeSnippet": "// Unsigned type can never be negative, causing an ___ loop",
+      "options": ["infinite", "empty", "one-time", "error"],
+      "correctAnswer": "infinite"
+    },
+    {
+      "slideId": "CPP_138_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Event Loop Pattern",
+      "prompt": "When is an intentional infinite loop acceptable in software design?",
+      "options": ["In game loops, web servers, and embedded system main polling loops", "In recursive sorting algorithms", "In array index lookups", "In constructor functions"],
+      "correctAnswer": "In game loops, web servers, and embedded system main polling loops"
+    },
+    {
+      "slideId": "CPP_138_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Timeout Guard Pattern",
+      "prompt": "Fill in the maximum iteration variable name in safety-critical loops.",
+      "codeSnippet": "int iterations = 0;\nwhile (condition && iterations < ___) {\n    doWork();\n    iterations++;\n}",
+      "options": ["MAX_LIMIT", "0", "iterations", "condition"],
+      "correctAnswer": "MAX_LIMIT"
+    }
+  ]
+}

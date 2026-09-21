@@ -1,70 +1,91 @@
 {
   "lessonId": "CPP_114",
-  "title": "C++ Arrays",
+  "title": "Characters & ASCII Representation",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_114_S1",
       "type": "CONCEPT",
-      "title": "Array Concept",
-      "prompt": "Arrays store fixed-size sequential collections of elements of the same type.",
-      "codeSnippet": "int numbers[5] = {10, 20, 30, 40, 50};\nstd::cout << numbers[0]; // Outputs 10"
+      "title": "Character Type & ASCII",
+      "prompt": "The 'char' data type stores single characters internally represented as ASCII integer values.",
+      "codeSnippet": "char letter = 'A';\nint asciiValue = letter; // Value is 65"
     },
     {
       "slideId": "CPP_114_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Array Bracket Declaration",
-      "prompt": "Fill in brackets specifying array size 5.",
-      "codeSnippet": "int scores___5___;",
-      "options": ["[ ]", "( )", "{ }", "< >"],
-      "correctAnswer": "[ ]"
+      "title": "Declaring Char",
+      "prompt": "Fill in the data type for storing a single character.",
+      "codeSnippet": "___ initial = 'J';",
+      "options": ["char", "string", "letter", "byte"],
+      "correctAnswer": "char"
     },
     {
       "slideId": "CPP_114_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Out of Bounds Access",
-      "prompt": "What occurs when attempting to read array element index 'arr[10]' on array size 5?",
-      "options": [
-        "Undefined behavior / segmentation fault risk",
-        "Automatic array resizing",
-        "Returns 0 safely",
-        "Throws OutOfBoundsException"
-      ],
-      "correctAnswer": "Undefined behavior / segmentation fault risk"
+      "title": "ASCII Code for 'A'",
+      "prompt": "What is the ASCII integer code for uppercase 'A'?",
+      "options": ["65", "97", "48", "1"],
+      "correctAnswer": "65"
     },
     {
       "slideId": "CPP_114_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Array Initialization List Braces",
-      "prompt": "Fill in braces enclosed list values.",
-      "codeSnippet": "int arr[] = ___1, 2, 3___;",
-      "options": ["{ }", "[ ]", "( )", "< >"],
-      "correctAnswer": "{ }"
+      "title": "Char Delimiter",
+      "prompt": "Fill in the correct character quote delimiter.",
+      "codeSnippet": "char symbol = ___%___;",
+      "options": ["'", "\"", "`", "/"],
+      "correctAnswer": "'"
     },
     {
       "slideId": "CPP_114_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Calculating Element Count",
-      "prompt": "How do you calculate number of elements in standard raw array 'arr'?",
-      "options": ["sizeof(arr) / sizeof(arr[0])", "arr.length()", "arr.size()", "count(arr)"],
-      "correctAnswer": "sizeof(arr) / sizeof(arr[0])"
+      "title": "Char Memory Size",
+      "prompt": "What is the memory size of a standard 'char' in C++?",
+      "options": ["1 byte (8 bits)", "2 bytes", "4 bytes", "Depends on CPU"],
+      "correctAnswer": "1 byte (8 bits)"
     },
     {
       "slideId": "CPP_114_S6",
       "type": "FILL_IN_BLANK",
-      "title": "2D Array Declaration",
-      "prompt": "Fill in second dimension bracket for 2 rows and 3 columns array.",
-      "codeSnippet": "int matrix[2][___] = { {1,2,3}, {4,5,6} };",
-      "options": ["3", "2", "6", "1"],
-      "correctAnswer": "3"
+      "title": "Assigning ASCII Value",
+      "prompt": "Fill in the character resulting from ASCII value 66.",
+      "codeSnippet": "char ch = 66; // Value becomes ___",
+      "options": ["'B'", "'A'", "'C'", "'6'"],
+      "correctAnswer": "'B'"
     },
     {
       "slideId": "CPP_114_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Fixed Size Limit",
-      "prompt": "Can standard static array size in C++ be dynamically changed after declaration?",
-      "options": ["No, static array size is fixed at compile time", "Yes, using resize() method", "Yes, assigning new list", "Only inside loops"],
-      "correctAnswer": "No, static array size is fixed at compile time"
+      "title": "Escape Character Slash",
+      "prompt": "Which character begins escape sequences like '\\n' or '\\t'?",
+      "options": ["Backslash (\\)", "Forward slash (/)", "Tilde (~)", "At sign (@)"],
+      "correctAnswer": "Backslash (\\)"
+    },
+    {
+      "slideId": "CPP_114_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Character Arithmetic",
+      "prompt": "Fill in the resulting character for 'A' + 1.",
+      "codeSnippet": "char next = 'A' + 1; // Evaluates to ___",
+      "options": ["'B'", "'A1'", "66", "'C'"],
+      "correctAnswer": "'B'"
+    },
+    {
+      "slideId": "CPP_114_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Null Character Representation",
+      "prompt": "What is the null character literal used to terminate C-style strings?",
+      "options": ["'\\0'", "'0'", "NULL", "'\\n'"],
+      "correctAnswer": "'\\0'"
+    },
+    {
+      "slideId": "CPP_114_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Wide Character Type",
+      "prompt": "Fill in the type used for wide/Unicode characters.",
+      "codeSnippet": "___ wch = L'A';",
+      "options": ["wchar_t", "char16_t", "char32_t", "wide_char"],
+      "correctAnswer": "wchar_t"
     }
   ]
 }

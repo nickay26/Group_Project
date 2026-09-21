@@ -1,114 +1,111 @@
 {
   "lessonId": "CPP_218",
-  "title": "C++ Concurrency & Multithreading (Premium)",
-  "isPremium": true,
+  "title": "Class Templates & Member Templates",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_218_S1",
       "type": "CONCEPT",
-      "title": "Multithreading with std::thread",
-      "prompt": "std::thread enables concurrent task execution; std::mutex synchronizes access.",
-      "codeSnippet": "#include <thread>\nvoid task() { std::cout << \"Work\"; }\nstd::thread t(task);\nt.join();"
+      "title": "Class Templates Concept",
+      "prompt": "Class templates allow creating generic blueprints for classes (e.g., containers). Methods defined outside the class body require separate template parameter declarations.",
+      "codeSnippet": "template <typename T>\nclass Box {\n    T item;\npublic:\n    Box(T i) : item(i) {}\n    T getItem();\n};\n\ntemplate <typename T>\nT Box<T>::getItem() { return item; }"
     },
     {
       "slideId": "CPP_218_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Thread Join Method",
-      "prompt": "Fill in method pausing main thread until sub-thread completes.",
-      "codeSnippet": "t.___();",
-      "options": ["join", "wait", "detach", "stop"],
-      "correctAnswer": "join"
+      "title": "Class Template Instantiation Syntax",
+      "prompt": "Fill in the type argument specifier required when instantiating a class template prior to C++17.",
+      "codeSnippet": "Box___double> doubleBox(3.14);",
+      "options": ["<", "(", "[", "{"],
+      "correctAnswer": "<"
     },
     {
       "slideId": "CPP_218_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Thread Detach Function",
-      "prompt": "What happens when calling t.detach() on thread object?",
+      "title": "Class Template Method Definition Outside",
+      "prompt": "Which syntax is required when defining a class template member function outside the class body?",
       "options": [
-        "Separates thread execution to run independently in background",
-        "Terminates thread execution immediately",
-        "Pauses execution for 1 second",
-        "Passes thread ownership to CPU core 0"
+        "Prefix definition with 'template <typename T>' and qualify class name as 'ClassName<T>::'",
+        "Qualify function name with inline keyword only",
+        "Use 'typename ClassName::method()' without template prefix",
+        "Class template methods can only be defined inline inside class body"
       ],
-      "correctAnswer": "Separates thread execution to run independently in background"
+      "correctAnswer": "Prefix definition with 'template <typename T>' and qualify class name as 'ClassName<T>::'"
     },
     {
       "slideId": "CPP_218_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Lock Guard RAII Wrapper",
-      "prompt": "Fill in RAII wrapper locking mutex on creation and unlocking on destruction.",
-      "codeSnippet": "std::___<std::mutex> lock(mtx);",
-      "options": ["lock_guard", "unique_lock", "scoped_lock", "auto_lock"],
-      "correctAnswer": "lock_guard"
+      "title": "Member Template Functions",
+      "prompt": "Fill in the template parameter name for an independent template method inside a class template.",
+      "codeSnippet": "template <typename T>\nclass Container {\n    template <typename ___>\n    void assign(U value) {}\n};",
+      "options": ["U", "T", "auto", "class"],
+      "correctAnswer": "U"
     },
     {
       "slideId": "CPP_218_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Data Race Definition",
-      "prompt": "What causes a Data Race condition?",
+      "title": "Class Template Deduction Guides (CTAD)",
+      "prompt": "What feature introduced in C++17 allows writing 'std::pair p(1, 2.5);' without explicit type parameters?",
       "options": [
-        "Two threads access same memory concurrently with at least one write without synchronization",
-        "Threads executing on different CPU cores",
-        "Calling join() on already joined thread",
-        "Using smart pointers across threads"
+        "Class Template Argument Deduction (CTAD)",
+        "Dynamic Type Inference",
+        "Runtime Parameter Resolution",
+        "Implicit Virtual Specialization"
       ],
-      "correctAnswer": "Two threads access same memory concurrently with at least one write without synchronization"
+      "correctAnswer": "Class Template Argument Deduction (CTAD)"
     },
     {
       "slideId": "CPP_218_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Atomic Variable Header",
-      "prompt": "Fill in header for lock-free atomic variables.",
-      "codeSnippet": "#include <___>",
-      "options": ["atomic", "mutex", "thread", "future"],
-      "correctAnswer": "atomic"
+      "title": "Friend Templates Syntax",
+      "prompt": "To grant a template function access to private members, declare it as a ___ template.",
+      "codeSnippet": "template <typename U>\n___ void display(const Box<U>& b);",
+      "options": ["friend", "virtual", "public", "extern"],
+      "correctAnswer": "friend"
     },
     {
       "slideId": "CPP_218_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Async Task Execution Function",
-      "prompt": "Which function runs task asynchronously and returns value via std::future?",
-      "options": ["std::async", "std::thread", "std::launch", "std::promise"],
-      "correctAnswer": "std::async"
+      "title": "Virtual Member Function Templates Restriction",
+      "prompt": "Why can a member function template NOT be declared virtual in C++?",
+      "options": [
+        "VTable size must be fixed at compile-time; unlimited template instantiations would make fixed VTables impossible",
+        "Templates cannot be used inside class definitions",
+        "Virtual functions do not support parameter passing",
+        "Compilers restrict virtual keyword to static methods"
+      ],
+      "correctAnswer": "VTable size must be fixed at compile-time; unlimited template instantiations would make fixed VTables impossible"
     },
     {
       "slideId": "CPP_218_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Condition Variable Wait",
-      "prompt": "Fill in method causing condition variable to sleep until notified.",
-      "codeSnippet": "cv.___ (lock);",
-      "options": ["wait", "sleep", "pause", "block"],
-      "correctAnswer": "wait"
+      "title": "Template Class Inheritance",
+      "prompt": "Fill in the qualification required when inheriting from a class template dependent base class.",
+      "codeSnippet": "template <typename T>\nclass Derived : public Base<T> {\n    void run() { this->___(); }\n};",
+      "options": ["baseMethod", "virtualMethod", "templateMethod", "superMethod"],
+      "correctAnswer": "baseMethod"
     },
     {
       "slideId": "CPP_218_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Joinable Thread Check",
-      "prompt": "Which method checks if std::thread object can still be joined?",
-      "options": ["t.joinable()", "t.is_active()", "t.valid()", "t.running()"],
-      "correctAnswer": "t.joinable()"
+      "title": "Class Template Static Members",
+      "prompt": "How are static member variables shared across instances of a Class Template?",
+      "options": [
+        "Each distinct template instantiation type (e.g., Box<int> vs Box<double>) gets its own separate static variable",
+        "All instantiations share a single global static variable across all types",
+        "Static variables are forbidden inside class templates",
+        "Static members are re-initialized on every object construction"
+      ],
+      "correctAnswer": "Each distinct template instantiation type (e.g., Box<int> vs Box<double>) gets its own separate static variable"
     },
     {
       "slideId": "CPP_218_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Condition Variable Notify One",
-      "prompt": "Fill in method waking up one thread waiting on condition variable.",
-      "codeSnippet": "cv.___();",
-      "options": ["notify_one", "wake_one", "signal", "notify_all"],
-      "correctAnswer": "notify_one"
-    },
-    {
-      "slideId": "CPP_218_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Future Get Method Behavior",
-      "prompt": "What happens when you call fut.get() on std::future object?",
-      "options": [
-        "Blocks current thread until asynchronous result is ready, then returns value",
-        "Returns immediately with default value if task isn't ready",
-        "Cancels asynchronous task execution",
-        "Launches thread on new CPU core"
-      ],
-      "correctAnswer": "Blocks current thread until asynchronous result is ready, then returns value"
+      "title": "Alias Templates with using",
+      "prompt": "Fill in the keyword to create a template type alias in modern C++.",
+      "codeSnippet": "template <typename T>\n___ StringMap = std::unordered_map<std::string, T>;",
+      "options": ["using", "typedef", "auto", "typename"],
+      "correctAnswer": "using"
     }
   ]
 }

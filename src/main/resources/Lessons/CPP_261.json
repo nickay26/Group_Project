@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_261",
+  "title": "Asynchronous Tasks (std::async, std::future, std::promise)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_261_S1",
+      "type": "CONCEPT",
+      "title": "Task-Based Concurrency Overview",
+      "prompt": "Task-based concurrency abstracts thread management. std::async runs a function asynchronously and returns a std::future, which holds the result once computed. std::promise is the provider side that sets the value for a std::future.",
+      "codeSnippet": "#include <future>\n#include <iostream>\n\nint calculateSum(int a, int b) { return a + b; }\n\nint main() {\n    std::future<int> result = std::async(calculateSum, 10, 20);\n    std::cout << \"Sum: \" << result.get() << std::endl; // Blocks until result is ready\n}"
+    },
+    {
+      "slideId": "CPP_261_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Retrieving Future Result",
+      "prompt": "Fill in the method name used on a std::future to retrieve its value (blocking if not yet ready).",
+      "codeSnippet": "std::future<int> fut = std::async([]() { return 42; });\nint val = fut.___(); // Retrieves 42",
+      "options": ["get", "wait", "read", "fetch"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_261_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Calling future::get Multiple Times",
+      "prompt": "What happens if you call .get() a second time on a standard std::future object?",
+      "options": [
+        "Undefined behavior / throws std::future_error because state is invalidated",
+        "Returns the cached result immediately",
+        "Re-evaluates the asynchronous task",
+        "Blocks indefinitely"
+      ],
+      "correctAnswer": "Undefined behavior / throws std::future_error because state is invalidated"
+    },
+    {
+      "slideId": "CPP_261_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Launch Policy Async",
+      "prompt": "Fill in the launch policy flag forcing std::async to execute the task on a new asynchronous thread.",
+      "codeSnippet": "auto f = std::async(std::launch::___, myTask);",
+      "options": ["async", "deferred", "any", "concurrent"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "CPP_261_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deferred Launch Policy Behavior",
+      "prompt": "How does std::launch::deferred behave when passed to std::async?",
+      "options": [
+        "Execution is delayed until .get() or .wait() is explicitly invoked on the returned future in the caller thread",
+        "The task runs in a background thread pool lazily",
+        "The task is cancelled if not retrieved within a timeout",
+        "It spawns an immediate detached worker thread"
+      ],
+      "correctAnswer": "Execution is delayed until .get() or .wait() is explicitly invoked on the returned future in the caller thread"
+    },
+    {
+      "slideId": "CPP_261_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Promise Value",
+      "prompt": "Fill in the method on std::promise used to fulfill the promised result value.",
+      "codeSnippet": "std::promise<std::string> p;\np.___value(\"Result Data\");",
+      "options": ["set_", "put_", "store_", "write_"],
+      "correctAnswer": "set_"
+    },
+    {
+      "slideId": "CPP_261_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Shared Future Advantage",
+      "prompt": "What capability does std::shared_future provide over std::future?",
+      "options": [
+        "It can be copied, allowing multiple threads to wait and call .get() on the same shared result",
+        "It processes values across separate processes",
+        "It provides lock-free exception handling",
+        "It consumes less memory than std::future"
+      ],
+      "correctAnswer": "It can be copied, allowing multiple threads to wait and call .get() on the same shared result"
+    },
+    {
+      "slideId": "CPP_261_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Obtaining Future from Promise",
+      "prompt": "Fill in the method on std::promise used to get its associated std::future.",
+      "codeSnippet": "std::promise<int> p;\nstd::future<int> f = p.get____();",
+      "options": ["future", "result", "handle", "target"],
+      "correctAnswer": "future"
+    },
+    {
+      "slideId": "CPP_261_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::async Destructor Blocking Behavior",
+      "prompt": "What special blocking behavior occurs when a std::future returned by std::async(std::launch::async, ...) is destroyed without calling get() or wait()?",
+      "options": [
+        "The destructor blocks until the asynchronous task completes execution",
+        "The task is forcefully terminated immediately",
+        "The program crashes with std::terminate",
+        "The task continues silently detached in the background"
+      ],
+      "correctAnswer": "The destructor blocks until the asynchronous task completes execution"
+    },
+    {
+      "slideId": "CPP_261_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Future Header File",
+      "prompt": "Fill in the header required for promises, futures, and std::async.",
+      "codeSnippet": "#include <___>\nstd::future<void> f;",
+      "options": ["future", "thread", "mutex", "task"],
+      "correctAnswer": "future"
+    }
+  ]
+}

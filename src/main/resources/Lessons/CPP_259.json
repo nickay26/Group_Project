@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_259",
+  "title": "RAII Lock Wrappers (std::lock_guard, std::unique_lock)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_259_S1",
+      "type": "CONCEPT",
+      "title": "RAII Locking Mechanics",
+      "prompt": "To prevent dangling locks when exceptions occur or code exits early, C++ uses RAII wrappers. std::lock_guard provides lightweight scope-based locking, while std::unique_lock adds flexibility like deferred locking and explicit manual locking/unlocking.",
+      "codeSnippet": "#include <mutex>\n\nstd::mutex mtx;\n\nvoid safeFunction() {\n    std::lock_guard<std::mutex> lock(mtx); // Locks on construction\n    // Mutex automatically unlocks when lock leaves scope\n}"
+    },
+    {
+      "slideId": "CPP_259_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::lock_guard Usage",
+      "prompt": "Fill in the class template used for simple scope-bound lock acquisition.",
+      "codeSnippet": "std::mutex m;\n{\n    std::___<std::mutex> guard(m);\n    // Critical section\n}",
+      "options": ["lock_guard", "unique_lock", "scoped_lock", "shared_lock"],
+      "correctAnswer": "lock_guard"
+    },
+    {
+      "slideId": "CPP_259_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::lock_guard vs std::unique_lock",
+      "prompt": "What is a key capability of std::unique_lock that std::lock_guard lacks?",
+      "options": [
+        "std::unique_lock can be unlocked manually before exiting scope and supports condition variables",
+        "std::unique_lock is lighter and faster than lock_guard",
+        "std::unique_lock supports copy operations across threads",
+        "std::unique_lock does not require a mutex reference"
+      ],
+      "correctAnswer": "std::unique_lock can be unlocked manually before exiting scope and supports condition variables"
+    },
+    {
+      "slideId": "CPP_259_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Deferred Locking Flag",
+      "prompt": "Fill in the lock tag used with std::unique_lock to construct the wrapper without acquiring the lock immediately.",
+      "codeSnippet": "std::mutex m;\nstd::unique_lock<std::mutex> lock(m, std::___);",
+      "options": ["defer_lock", "adopt_lock", "try_to_lock", "no_lock"],
+      "correctAnswer": "defer_lock"
+    },
+    {
+      "slideId": "CPP_259_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Adopt Lock Tag",
+      "prompt": "What does the tag std::adopt_lock indicate when passed to a lock guard or unique_lock constructor?",
+      "options": [
+        "The calling thread already owns the lock on the mutex, so do not lock it again",
+        "Adopt lock ownership from another thread",
+        "Lock the mutex immediately using try_lock",
+        "Create a copy of an existing lock"
+      ],
+      "correctAnswer": "The calling thread already owns the lock on the mutex, so do not lock it again"
+    },
+    {
+      "slideId": "CPP_259_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "C++17 std::scoped_lock",
+      "prompt": "Fill in the C++17 lock wrapper designed to safely lock multiple mutexes simultaneously without deadlocks.",
+      "codeSnippet": "std::mutex m1, m2;\nstd::___ lock(m1, m2); // Locks both m1 and m2 deadlock-free",
+      "options": ["scoped_lock", "lock_guard", "unique_lock", "shared_lock"],
+      "correctAnswer": "scoped_lock"
+    },
+    {
+      "slideId": "CPP_259_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::shared_lock for Readers",
+      "prompt": "Which lock wrapper works with std::shared_mutex to acquire a shared (read-only) lock?",
+      "options": [
+        "std::shared_lock",
+        "std::lock_guard",
+        "std::unique_lock",
+        "std::scoped_lock"
+      ],
+      "correctAnswer": "std::shared_lock"
+    },
+    {
+      "slideId": "CPP_259_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Transferring Lock Ownership",
+      "prompt": "Fill in the standard operation used to transfer ownership of a std::unique_lock to another function.",
+      "codeSnippet": "std::unique_lock<std::mutex> getLock(std::mutex& m) {\n    std::unique_lock<std::mutex> lk(m);\n    return std::___(lk);\n}",
+      "options": ["move", "forward", "copy", "ref"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_259_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copyability of RAII Locks",
+      "prompt": "Are std::lock_guard and std::unique_lock copyable?",
+      "options": [
+        "Neither is copyable; unique_lock is move-only, while lock_guard is neither copyable nor movable",
+        "Both are fully copyable and movable",
+        "lock_guard is copyable, unique_lock is move-only",
+        "Both are movable but not copyable"
+      ],
+      "correctAnswer": "Neither is copyable; unique_lock is move-only, while lock_guard is neither copyable nor movable"
+    },
+    {
+      "slideId": "CPP_259_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Ownership Status",
+      "prompt": "Fill in the member function name of std::unique_lock that returns true if it currently owns the locked mutex.",
+      "codeSnippet": "std::unique_lock<std::mutex> lk(m, std::try_to_lock);\nif (lk.___()) {\n    // Mutex is successfully held\n}",
+      "options": ["owns_lock", "is_locked", "has_mutex", "valid"],
+      "correctAnswer": "owns_lock"
+    }
+  ]
+}

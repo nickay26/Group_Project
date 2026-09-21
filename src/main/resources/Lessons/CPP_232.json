@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_232",
+  "title": "std::array, std::span & Modern Views",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_232_S1",
+      "type": "CONCEPT",
+      "title": "std::array & std::span Concept",
+      "prompt": "std::array is a fixed-size stack-allocated wrapper around C-style arrays. std::span (C++20) provides a lightweight non-owning view over any contiguous sequence.",
+      "codeSnippet": "#include <array>\n#include <span>\nstd::array<int, 3> arr = {1, 2, 3};\nstd::span<int> view(arr);"
+    },
+    {
+      "slideId": "CPP_232_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::array Declaration",
+      "prompt": "Fill in the non-type template parameter defining the size in std::array.",
+      "codeSnippet": "std::array<float, ___> staticArr;",
+      "options": ["5", "float", "auto", "size_t"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "CPP_232_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::array Memory Overhead",
+      "prompt": "What is the memory overhead of std::array<T, N> compared to a raw C array T[N]?",
+      "options": [
+        "Zero overhead; it has the exact same size and stack layout as raw C-array T[N]",
+        "Contains an extra 8-byte pointer for size tracking",
+        "Requires dynamic heap allocation header overhead",
+        "Contains a virtual function table pointer"
+      ],
+      "correctAnswer": "Zero overhead; it has the exact same size and stack layout as raw C-array T[N]"
+    },
+    {
+      "slideId": "CPP_232_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::array Fill Method",
+      "prompt": "Fill in the method used to fill an std::array with a specific value across all elements.",
+      "codeSnippet": "arr.___(0); // Set all elements to 0",
+      "options": ["fill", "assign_all", "reset", "clear"],
+      "correctAnswer": "fill"
+    },
+    {
+      "slideId": "CPP_232_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::span Non-Owning Nature",
+      "prompt": "What happens if the underlying buffer viewed by a std::span is destroyed?",
+      "options": [
+        "std::span becomes a dangling view; accessing it results in Undefined Behavior",
+        "std::span extends the lifetime of the underlying data automatically",
+        "std::span makes a copy of the data before destruction",
+        "A runtime exception is thrown immediately"
+      ],
+      "correctAnswer": "std::span becomes a dangling view; accessing it results in Undefined Behavior"
+    },
+    {
+      "slideId": "CPP_232_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::span Subspan",
+      "prompt": "Fill in the method returning a sub-view of the first N elements of a span.",
+      "codeSnippet": "std::span<int> firstThree = mySpan.___ (3);",
+      "options": ["first", "subspan", "head", "take"],
+      "correctAnswer": "first"
+    },
+    {
+      "slideId": "CPP_232_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Passing Contiguous Buffers to Functions",
+      "prompt": "Why is std::span<T> preferred over const std::vector<T>& in function parameters?",
+      "options": [
+        "std::span can accept C arrays, std::array, std::vector, or any contiguous buffer seamlessly without copies or allocation",
+        "std::span is faster because it uses multi-threading",
+        "std::span allows resizing the caller's container inside the function",
+        "std::vector references are deprecated in C++20"
+      ],
+      "correctAnswer": "std::span can accept C arrays, std::array, std::vector, or any contiguous buffer seamlessly without copies or allocation"
+    },
+    {
+      "slideId": "CPP_232_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::get with std::array",
+      "prompt": "Fill in the compile-time indexing function used to access elements of std::array tuple-style.",
+      "codeSnippet": "int val = std::___<0>(myArray);",
+      "options": ["get", "at", "element", "fetch"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_232_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Extent Span",
+      "prompt": "What is std::dynamic_extent when working with std::span?",
+      "options": [
+        "A default template value indicating the span size is determined at runtime",
+        "A flag that allocates heap memory dynamically",
+        "An error state returned when span is empty",
+        "The maximum size limit of stack memory"
+      ],
+      "correctAnswer": "A default template value indicating the span size is determined at runtime"
+    },
+    {
+      "slideId": "CPP_232_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::span Size Bytes",
+      "prompt": "Fill in the method returning the total byte count of elements stored in a span.",
+      "codeSnippet": "size_t bytes = mySpan.___();",
+      "options": ["size_bytes", "byte_count", "capacity_bytes", "total_bytes"],
+      "correctAnswer": "size_bytes"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_248",
+  "title": "Memory Leaks, Tools & Best Practices",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_248_S1",
+      "type": "CONCEPT",
+      "title": "Memory Management Best Practices",
+      "prompt": "Modern C++ memory management principles mandate avoiding raw new/delete in application code. Leverage smart pointers, RAII containers, sanitizers (ASan), and Valgrind to ensure zero memory leaks.",
+      "codeSnippet": "// Modern C++ Rule: Avoid raw 'new' and 'delete'!\nauto data = std::make_unique<std::vector<int>>(1000);"
+    },
+    {
+      "slideId": "CPP_248_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "AddressSanitizer Compiler Flag",
+      "prompt": "Fill in the GCC/Clang compiler flag used to enable runtime AddressSanitizer memory leak detection.",
+      "codeSnippet": "g++ -fsanitize=___ main.cpp -o main",
+      "options": ["address", "memory", "leak", "asan"],
+      "correctAnswer": "address"
+    },
+    {
+      "slideId": "CPP_248_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rule of Zero",
+      "prompt": "What does the 'Rule of Zero' state in modern C++ guidelines?",
+      "options": [
+        "Classes relying on RAII smart pointers and containers should define ZERO custom destructors or copy/move operations",
+        "Classes must contain zero pointer variables",
+        "All functions should return zero on success",
+        "Memory allocations should be zero-initialized"
+      ],
+      "correctAnswer": "Classes relying on RAII smart pointers and containers should define ZERO custom destructors or copy/move operations"
+    },
+    {
+      "slideId": "CPP_248_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Leak Detection Tool",
+      "prompt": "Fill in the popular Linux profiling framework tool used with Memcheck to detect C++ memory leaks.",
+      "codeSnippet": "// Command line tool:\n___ --tool=memcheck ./my_program",
+      "options": ["valgrind", "gdb", "perf", "asan"],
+      "correctAnswer": "valgrind"
+    },
+    {
+      "slideId": "CPP_248_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Double Free Fault Definition",
+      "prompt": "What error causes a 'double free' runtime fault?",
+      "options": [
+        "Attempting to call delete/free twice on the same heap memory address",
+        "Calling delete on a nullptr",
+        "Allocating memory inside a loop 2 times",
+        "Failing to close a smart pointer"
+      ],
+      "correctAnswer": "Attempting to call delete/free twice on the same heap memory address"
+    },
+    {
+      "slideId": "CPP_248_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Undefined Behavior Prevention",
+      "prompt": "Fill in the smart pointer to select by default when exclusive single ownership is required.",
+      "codeSnippet": "std::___<Data> dataPtr = std::make_unique<Data>();",
+      "options": ["unique_ptr", "shared_ptr", "weak_ptr", "auto_ptr"],
+      "correctAnswer": "unique_ptr"
+    },
+    {
+      "slideId": "CPP_248_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deprecated auto_ptr",
+      "prompt": "Why was std::auto_ptr removed in C++17?",
+      "options": [
+        "Its broken copy-semantics silently transferred ownership, causing subtle bugs and unsafe container usage",
+        "It ran too slowly on multi-core processors",
+        "It did not support template parameters",
+        "It required specialized hardware support"
+      ],
+      "correctAnswer": "Its broken copy-semantics silently transferred ownership, causing subtle bugs and unsafe container usage"
+    },
+    {
+      "slideId": "CPP_248_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "LeakSanitizer Flag",
+      "prompt": "Fill in the standalone sanitizer flag targeted specifically at detecting memory leaks.",
+      "codeSnippet": "g++ -fsanitize=___ main.cpp",
+      "options": ["leak", "address", "undefined", "thread"],
+      "correctAnswer": "leak"
+    },
+    {
+      "slideId": "CPP_248_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Passing Smart Pointers to Functions",
+      "prompt": "What is the recommended best practice for passing an object to a function that only needs to read it without sharing ownership?",
+      "options": [
+        "Pass by const reference (const T&) or raw pointer/reference derived via .get()",
+        "Pass std::shared_ptr<T> by value always",
+        "Pass std::unique_ptr<T> by value",
+        "Convert to std::weak_ptr and pass by value"
+      ],
+      "correctAnswer": "Pass by const reference (const T&) or raw pointer/reference derived via .get()"
+    },
+    {
+      "slideId": "CPP_248_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Rule of Five",
+      "prompt": "Fill in the missing custom operation in the Rule of Five: Destructor, Copy Constructor, Copy Assignment, Move Constructor, and ___ Assignment.",
+      "codeSnippet": "Class& operator=(Class&& other); // ___ Assignment",
+      "options": ["Move", "Copy", "Smart", "Value"],
+      "correctAnswer": "Move"
+    }
+  ]
+}

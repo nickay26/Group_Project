@@ -1,92 +1,91 @@
 {
   "lessonId": "CPP_106",
-  "title": "C++ User Input (cin)",
+  "title": "Input with cin",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_106_S1",
       "type": "CONCEPT",
-      "title": "User Input Overview",
-      "prompt": "std::cin combined with extraction operator (>>) reads data entered by the user.",
-      "codeSnippet": "int num;\nstd::cout << \"Enter number: \";\nstd::cin >> num;"
+      "title": "Standard Input Stream",
+      "prompt": "std::cin is used along with the extraction operator (>>) to receive input from the user keyboard.",
+      "codeSnippet": "int age;\nstd::cout << \"Enter age: \";\nstd::cin >> age;"
     },
     {
       "slideId": "CPP_106_S2",
       "type": "FILL_IN_BLANK",
       "title": "Extraction Operator",
       "prompt": "Fill in the extraction operator used with cin.",
-      "codeSnippet": "std::cin ___ x;",
-      "options": [">>", "<<", "=>", "->"],
+      "codeSnippet": "std::cin ___ userAge;",
+      "options": [">>", "<<", "->", "=>"],
       "correctAnswer": ">>"
     },
     {
       "slideId": "CPP_106_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Whitespace Handling in cin",
-      "prompt": "How does standard std::cin >> stringVar handle spaces in input?",
-      "options": [
-        "It stops reading at the first whitespace space/tab/newline",
-        "It reads the whole line including spaces",
-        "It replaces spaces with underscores",
-        "It throws a runtime error"
-      ],
-      "correctAnswer": "It stops reading at the first whitespace space/tab/newline"
+      "title": "Input Stream Name",
+      "prompt": "Which standard object handles keyboard input in C++?",
+      "options": ["std::cin", "std::cout", "std::input", "std::read"],
+      "correctAnswer": "std::cin"
     },
     {
       "slideId": "CPP_106_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Reading Full Line with Spaces",
-      "prompt": "Fill in function to read an entire line including spaces into string 'name'.",
-      "codeSnippet": "___(std::cin, name);",
-      "options": ["getline", "readline", "cin.get", "scan"],
-      "correctAnswer": "getline"
+      "title": "Multiple Input Chaining",
+      "prompt": "Fill in the missing operator to accept two inputs in sequence.",
+      "codeSnippet": "std::cin >> x ___ y;",
+      "options": [">>", "<<", ",", "+"],
+      "correctAnswer": ">>"
     },
     {
       "slideId": "CPP_106_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Multiple Input Chaining",
-      "prompt": "Which expression reads two values 'x' and 'y' consecutively?",
-      "options": ["std::cin >> x >> y;", "std::cin >> x, y;", "std::cin >> (x && y);", "std::cin(x, y);"],
-      "correctAnswer": "std::cin >> x >> y;"
+      "title": "Whitespace Handling in cin",
+      "prompt": "How does standard 'std::cin >>' treat spaces during string input?",
+      "options": ["Stops reading at whitespace", "Includes spaces in the string", "Replaces spaces with underscores", "Throws a runtime error"],
+      "correctAnswer": "Stops reading at whitespace"
     },
     {
       "slideId": "CPP_106_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Input Object Namespace",
-      "prompt": "Fill in standard namespace for cin.",
-      "codeSnippet": "std___cin >> age;",
-      "options": ["::", ".", "->", ":"],
-      "correctAnswer": "::"
+      "title": "Reading Full Lines",
+      "prompt": "Fill in the function name used to read an entire line including spaces.",
+      "codeSnippet": "___(std::cin, fullName);",
+      "options": ["getline", "readline", "get_string", "cin_line"],
+      "correctAnswer": "getline"
     },
     {
       "slideId": "CPP_106_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Input Stream Error State",
+      "title": "Input Type Mismatch",
       "prompt": "What happens if a user inputs letters when cin expects an integer?",
-      "options": [
-        "cin enters a fail state and stops reading subsequent inputs",
-        "Program instantly auto-corrects to 0",
-        "The string is converted to ASCII automatically",
-        "System reboots"
-      ],
-      "correctAnswer": "cin enters a fail state and stops reading subsequent inputs"
+      "options": ["cin enters a fail state", "Code converts letters to numbers automatically", "Program crashes instantly", "Input is silently skipped"],
+      "correctAnswer": "cin enters a fail state"
     },
     {
       "slideId": "CPP_106_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Clearing Error Flag",
-      "prompt": "Fill in method to reset error flags on input stream.",
-      "codeSnippet": "std::cin.___();",
-      "options": ["clear", "reset", "flush", "clean"],
-      "correctAnswer": "clear"
+      "title": "Prompting User Input",
+      "prompt": "Fill in the correct stream object to print a prompt before cin.",
+      "codeSnippet": "___ << \"Enter number: \";\nstd::cin >> num;",
+      "options": ["std::cout", "std::cin", "std::endl", "std::printf"],
+      "correctAnswer": "std::cout"
     },
     {
       "slideId": "CPP_106_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Ignoring Buffer Characters",
-      "prompt": "Which cin method skips remaining newline characters left in the input buffer?",
-      "options": ["std::cin.ignore()", "std::cin.skip()", "std::cin.pop()", "std::cin.clean()"],
-      "correctAnswer": "std::cin.ignore()"
+      "title": "Direction of Arrows",
+      "prompt": "Which statement is correct regarding stream operator directions?",
+      "options": ["cout uses << (pointing away), cin uses >> (pointing to variable)", "cout uses >>, cin uses <<", "Both use <<", "Both use >>"],
+      "correctAnswer": "cout uses << (pointing away), cin uses >> (pointing to variable)"
+    },
+    {
+      "slideId": "CPP_106_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading Double Inputs",
+      "prompt": "Fill in the variable that stores decimal input from user.",
+      "codeSnippet": "double temperature;\nstd::cin >> ___;",
+      "options": ["temperature", "double", "temp()", "&temperature"],
+      "correctAnswer": "temperature"
     }
   ]
 }

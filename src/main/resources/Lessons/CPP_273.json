@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_273",
+  "title": "SFINAE (Substitution Failure Is Not An Error)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_273_S1",
+      "type": "CONCEPT",
+      "title": "Understanding SFINAE",
+      "prompt": "SFINAE stands for Substitution Failure Is Not An Error. During overload resolution, if substituting a template parameter with a type fails, the compiler simply ignores that overload instead of throwing a compilation error.",
+      "codeSnippet": "#include <iostream>\n#include <type_traits>\n\n// Overload for integral types\ntemplate <typename T>\ntypename std::enable_if<std::is_integral<T>::value, void>::type\nprintValue(T val) {\n    std::cout << \"Integral: \" << val << std::endl;\n}\n\n// Overload for floating-point types\ntemplate <typename T>\ntypename std::enable_if<std::is_floating_point<T>::value, void>::type\nprintValue(T val) {\n    std::cout << \"Float: \" << val << std::endl;\n}"
+    },
+    {
+      "slideId": "CPP_273_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "SFINAE Utility Helper",
+      "prompt": "Fill in the missing standard type trait used to conditionally enable function overloads.",
+      "codeSnippet": "template <typename T>\ntypename std::___<std::is_arithmetic<T>::value, void>::type\nprocess(T val) {\n    // Code here\n}",
+      "options": ["enable_if", "is_same", "conditional", "enable_type"],
+      "correctAnswer": "enable_if"
+    },
+    {
+      "slideId": "CPP_273_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "SFINAE Scope Boundary",
+      "prompt": "Where does SFINAE apply during the template specialization/overload resolution process?",
+      "options": [
+        "Only in the immediate context of the function signature and template parameter list",
+        "Inside the function implementation body",
+        "During runtime dynamic dispatch",
+        "In non-templated member functions of ordinary classes"
+      ],
+      "correctAnswer": "Only in the immediate context of the function signature and template parameter list"
+    },
+    {
+      "slideId": "CPP_273_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "enable_if_t Helper Alias (C++14)",
+      "prompt": "Fill in the C++14 alias template suffix for enable_if.",
+      "codeSnippet": "template <typename T,\n          typename = std::enable_if___<std::is_integral_v<T>>>\nvoid compute(T v) {}",
+      "options": ["_t", "_v", "_type", "_value"],
+      "correctAnswer": "_t"
+    },
+    {
+      "slideId": "CPP_273_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Hard Error vs SFINAE Failure",
+      "prompt": "What happens if a type substitution error occurs within the function body rather than the signature?",
+      "options": [
+        "A hard compile error occurs because SFINAE only applies to the signature context",
+        "The compiler discards the function overload cleanly via SFINAE",
+        "The program throws a runtime exception",
+        "The compiler substitutes the type with std::void_t"
+      ],
+      "correctAnswer": "A hard compile error occurs because SFINAE only applies to the signature context"
+    },
+    {
+      "slideId": "CPP_273_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Template Parameter SFINAE",
+      "prompt": "Fill in the default value type for an unnamed enable_if parameter.",
+      "codeSnippet": "template <typename T,\n          typename std::enable_if<std::is_pointer<T>::value, int>::type = ___>\nvoid reset(T ptr) {}",
+      "options": ["0", "nullptr", "void", "true"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_273_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::void_t Purpose",
+      "prompt": "What is the primary usage of std::void_t in expression validity testing with SFINAE (C++17)?",
+      "options": [
+        "To map any sequence of valid types to type void for detecting valid expressions",
+        "To cast pointers safely across template parameter packs",
+        "To force function templates to return no value",
+        "To allocate untyped memory during template evaluation"
+      ],
+      "correctAnswer": "To map any sequence of valid types to type void for detecting valid expressions"
+    },
+    {
+      "slideId": "CPP_273_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "void_t Detection Pattern Syntax",
+      "prompt": "Fill in the type trait helper for detecting if type T has a nested serialize() method.",
+      "codeSnippet": "template <typename T, typename = std::___<>>\nstruct has_serialize : std::false_type {};\n\ntemplate <typename T>\nstruct has_serialize<T, std::void_t<decltype(std::declval<T>().serialize())>> : std::true_type {};",
+      "options": ["void_t", "enable_if", "is_same", "decay"],
+      "correctAnswer": "void_t"
+    },
+    {
+      "slideId": "CPP_273_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::declval Functionality",
+      "prompt": "Why is std::declval<T>() useful inside decltype expressions when writing SFINAE traits?",
+      "options": [
+        "It allows referencing member functions of T without needing a constructor call",
+        "It instantiates an object of type T on the heap at compile time",
+        "It converts rvalue references to lvalue references",
+        "It generates default value initializations for primitive types"
+      ],
+      "correctAnswer": "It allows referencing member functions of T without needing a constructor call"
+    },
+    {
+      "slideId": "CPP_273_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Modern Alternative to SFINAE",
+      "prompt": "Fill in the C++20 feature keyword that largely replaces complex SFINAE enable_if patterns.",
+      "codeSnippet": "template <typename T>\nrequires std::integral<T>\nvoid process(T val) {}",
+      "options": ["requires", "enable_if", "decltype", "concept"],
+      "correctAnswer": "requires"
+    }
+  ]
+}

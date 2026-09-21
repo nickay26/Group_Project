@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_277",
+  "title": "consteval & constinit (C++20)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_277_S1",
+      "type": "CONCEPT",
+      "title": "Immediate Functions (consteval) & constinit",
+      "prompt": "C++20 introduced consteval for immediate functions (must execute at compile time) and constinit to guarantee compile-time static initialization without forcing variables to be immutable.",
+      "codeSnippet": "#include <iostream>\n\nconsteval int sqr(int n) {\n    return n * n;\n}\n\nconstinit int globalVal = sqr(5); // Guarantees static initialization\n\nint main() {\n    constexpr int a = sqr(4); // OK (16)\n    // int x = 3; int b = sqr(x); // Error! x is runtime variable\n}"
+    },
+    {
+      "slideId": "CPP_277_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Immediate Function Keyword",
+      "prompt": "Fill in the C++20 specifier to force a function to evaluate strictly at compile time.",
+      "codeSnippet": "___ int getCompileTimeID() {\n    return 42;\n}",
+      "options": ["consteval", "constexpr", "constinit", "inline"],
+      "correctAnswer": "consteval"
+    },
+    {
+      "slideId": "CPP_277_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "consteval vs constexpr",
+      "prompt": "What happens if a consteval function cannot be evaluated at compile time?",
+      "options": [
+        "It produces a compile error unconditionally",
+        "It falls back to runtime execution automatically",
+        "It issues a compiler warning and runs at runtime",
+        "It defers evaluation to link time"
+      ],
+      "correctAnswer": "It produces a compile error unconditionally"
+    },
+    {
+      "slideId": "CPP_277_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Initialization Guard Keyword",
+      "prompt": "Fill in the C++20 specifier ensuring static/thread-local variable compile-time initialization.",
+      "codeSnippet": "___ static int count = getCompileTimeID();",
+      "options": ["constinit", "consteval", "constexpr", "static_const"],
+      "correctAnswer": "constinit"
+    },
+    {
+      "slideId": "CPP_277_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "constinit Mutability",
+      "prompt": "Can a constinit variable be modified at runtime after initialization?",
+      "options": [
+        "Yes, constinit controls initialization timing, not immutability",
+        "No, constinit variables are implicitly const",
+        "Only within atomic transactions",
+        "Only if declared volatile"
+      ],
+      "correctAnswer": "Yes, constinit controls initialization timing, not immutability"
+    },
+    {
+      "slideId": "CPP_277_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Initialization Order Fiasco Solution",
+      "prompt": "Fill in the keyword that prevents the Static Initialization Order Fiasco by guaranteeing constant initialization.",
+      "codeSnippet": "// In FileA.cpp\n___ int globalConfig = 100;",
+      "options": ["constinit", "consteval", "extern", "constexpr"],
+      "correctAnswer": "constinit"
+    },
+    {
+      "slideId": "CPP_277_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "constinit Storage Duration Requirement",
+      "prompt": "Where can the constinit specifier be applied?",
+      "options": [
+        "Only to variables with static or thread-local storage duration",
+        "To any local stack variable inside functions",
+        "To function parameter lists",
+        "To non-static class member declarations"
+      ],
+      "correctAnswer": "Only to variables with static or thread-local storage duration"
+    },
+    {
+      "slideId": "CPP_277_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "consteval Constructor Syntax",
+      "prompt": "Fill in the specifier to enforce compile-time object construction.",
+      "codeSnippet": "struct StrictLit {\n    ___ StrictLit(int x) {}\n};",
+      "options": ["consteval", "constinit", "constexpr", "explicit"],
+      "correctAnswer": "consteval"
+    },
+    {
+      "slideId": "CPP_277_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Combining constinit with const",
+      "prompt": "Is the combination constinit const int x = 10; valid in C++20?",
+      "options": [
+        "Yes, x is initialized at compile time and is immutable at runtime",
+        "No, constinit and const are mutually exclusive keywords",
+        "Only inside namespace scope",
+        "Only when x is an array"
+      ],
+      "correctAnswer": "Yes, x is initialized at compile time and is immutable at runtime"
+    },
+    {
+      "slideId": "CPP_277_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Runtime Call Attempt with consteval",
+      "prompt": "Fill in the error term when calling a consteval function with dynamic arguments.",
+      "codeSnippet": "// int x = 5;\n// int y = sqr(x); // Causes a ___ error",
+      "options": ["compile", "runtime", "linker", "out_of_memory"],
+      "correctAnswer": "compile"
+    }
+  ]
+}

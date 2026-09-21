@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_255",
+  "title": "Copy Elision, RVO & NRVO",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_255_S1",
+      "type": "CONCEPT",
+      "title": "Copy Elision and RVO Overview",
+      "prompt": "Copy elision is an optimization technique where the compiler omits copy and move constructors entirely, constructing the object directly in the memory location of the target variable. Since C++17, Return Value Optimization (RVO) is mandatory in guaranteed contexts.",
+      "codeSnippet": "std::string createString() {\n    return std::string(\"Direct Construction\"); // Guaranteed RVO in C++17! Zero copy/move.\n}\nstd::string s = createString();"
+    },
+    {
+      "slideId": "CPP_255_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Value Optimization Abbreviation",
+      "prompt": "Fill in the common acronym for named return value optimization where local named variables are elided during function return.",
+      "codeSnippet": "// Named Return Value Optimization = ___O\nWidget getWidget() {\n    Widget localW;\n    return localW; // May trigger ___O\n}",
+      "options": ["NRV", "RV", "COP", "ELID"],
+      "correctAnswer": "NRV"
+    },
+    {
+      "slideId": "CPP_255_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++17 Guaranteed Copy Elision",
+      "prompt": "What changed regarding copy elision in the C++17 standard for prvalues?",
+      "options": [
+        "Copy elision became mandatory for prvalues; temporaries are not materialized until necessary, eliminating copy/move overhead completely",
+        "Copy elision was deprecated in favor of explicit std::move",
+        "Copy elision only applies when compiling with -O3 optimization flag",
+        "It applies only to primitive scalar types"
+      ],
+      "correctAnswer": "Copy elision became mandatory for prvalues; temporaries are not materialized until necessary, eliminating copy/move overhead completely"
+    },
+    {
+      "slideId": "CPP_255_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Copy Elision with Deleted Move Constructor",
+      "prompt": "Fill in the boolean result in C++17 when returning a non-copyable non-movable prvalue from a function.",
+      "codeSnippet": "struct NonMoveable {\n    NonMoveable() = default;\n    NonMoveable(NonMoveable&&) = delete;\n};\nNonMoveable make() { return NonMoveable(); } // Valid in C++17? (true/false)\n// Output: ___",
+      "options": ["true", "false", "error", "undefined"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "CPP_255_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Preventing NRVO with std::move",
+      "prompt": "Why is 'return std::move(localObj);' considered an anti-pattern when returning a local variable by value?",
+      "options": [
+        "It inhibits NRVO copy elision, forcing a move operation where zero-copy construction would otherwise occur",
+        "It causes compile errors on local objects",
+        "It leaks the local stack memory allocation",
+        "It converts local variables into static global objects"
+      ],
+      "correctAnswer": "It inhibits NRVO copy elision, forcing a move operation where zero-copy construction would otherwise occur"
+    },
+    {
+      "slideId": "CPP_255_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Return Paths Effect on NRVO",
+      "prompt": "Fill in what happens to NRVO when a function returns different local named variables across conditional branches.",
+      "codeSnippet": "Widget get(bool flag) {\n    Widget a, b;\n    if (flag) return a;\n    else return b; // NRVO is usually ___ due to ambiguity\n}",
+      "options": ["disabled", "guaranteed", "enforced", "inlined"],
+      "correctAnswer": "disabled"
+    },
+    {
+      "slideId": "CPP_255_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pass-by-Value and Move Paradigm",
+      "prompt": "In C++11 and later, when should a sink function accept parameters by value (T arg) instead of const T&?",
+      "options": [
+        "When the function needs its own copy anyway, allowing callers to pass rvalues that move seamlessly or lvalues that copy once",
+        "Always for all functions regardless of parameter usage",
+        "Only when managing primitive types like int or float",
+        "Never, pass by value is prohibited in modern C++"
+      ],
+      "correctAnswer": "When the function needs its own copy anyway, allowing callers to pass rvalues that move seamlessly or lvalues that copy once"
+    },
+    {
+      "slideId": "CPP_255_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Compiler Flag Disabling Copy Elision",
+      "prompt": "Fill in the GCC/Clang compiler flag used to explicitly turn off copy elision for educational testing.",
+      "codeSnippet": "g++ -fno-elide-___ main.cpp -o main",
+      "options": ["constructors", "moves", "copies", "rvo"],
+      "correctAnswer": "constructors"
+    },
+    {
+      "slideId": "CPP_255_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implicit Move on Local Return",
+      "prompt": "What occurs if NRVO is not performed when returning a local named variable by value in C++11?",
+      "options": [
+        "The compiler automatically treats the returned local variable as an rvalue, invoking its move constructor if available",
+        "The compiler throws a missing move exception",
+        "It falls back to deep copy without checking move constructors",
+        "The program crashes with stack corruption"
+      ],
+      "correctAnswer": "The compiler automatically treats the returned local variable as an rvalue, invoking its move constructor if available"
+    },
+    {
+      "slideId": "CPP_255_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Materialization of Prvalues",
+      "prompt": "Fill in the standard term for when a prvalue temporary object is forced to turn into an actual temporary memory object in C++17.",
+      "codeSnippet": "Temporary ___ occurs when binding a prvalue to a reference or accessing a member.",
+      "options": ["materialization", "elision", "allocation", "instantiation"],
+      "correctAnswer": "materialization"
+    }
+  ]
+}

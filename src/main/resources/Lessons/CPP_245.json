@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_245",
+  "title": "Custom Deleters & Resource Management",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_245_S1",
+      "type": "CONCEPT",
+      "title": "Custom Deleters with Smart Pointers",
+      "prompt": "Smart pointers can manage non-memory resources (like C file handles, sockets, database connections, or custom C-API pointers) by supplying custom deleter functions or lambdas instead of calling standard delete.",
+      "codeSnippet": "#include <memory>\n#include <cstdio>\nauto fileDeleter = [](FILE* f) { if(f) fclose(f); };\nstd::unique_ptr<FILE, decltype(fileDeleter)> filePtr(fopen(\"test.txt\", \"w\"), fileDeleter);"
+    },
+    {
+      "slideId": "CPP_245_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "decltype for Lambda Deleter",
+      "prompt": "Fill in the specifier used to pass a lambda type as a custom deleter template argument to std::unique_ptr.",
+      "codeSnippet": "auto deleter = [](int* p){ delete p; };\nstd::unique_ptr<int, ___ (deleter)> ptr(new int(5), deleter);",
+      "options": ["decltype", "typeof", "typeid", "auto"],
+      "correctAnswer": "decltype"
+    },
+    {
+      "slideId": "CPP_245_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "shared_ptr vs unique_ptr Deleter Type",
+      "prompt": "How do custom deleters differ between std::unique_ptr and std::shared_ptr in C++?",
+      "options": [
+        "std::unique_ptr includes the deleter type in its template signature; std::shared_ptr erases the deleter type in its control block",
+        "std::shared_ptr requires template parameter for deleter; unique_ptr does not",
+        "std::unique_ptr supports lambdas; shared_ptr supports function pointers only",
+        "There is no difference in type specifications"
+      ],
+      "correctAnswer": "std::unique_ptr includes the deleter type in its template signature; std::shared_ptr erases the deleter type in its control block"
+    },
+    {
+      "slideId": "CPP_245_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "shared_ptr Custom Deleter Syntax",
+      "prompt": "Fill in the simple constructor invocation for passing a custom deleter function freeResource to a shared_ptr.",
+      "codeSnippet": "std::shared_ptr<Resource> sp(new Resource(), ___);",
+      "options": ["freeResource", "decltype(freeResource)", "delete freeResource", "Resource::free"],
+      "correctAnswer": "freeResource"
+    },
+    {
+      "slideId": "CPP_245_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deleter with C-API Memory",
+      "prompt": "Which deleter should be used when managing memory allocated via C malloc() inside std::unique_ptr?",
+      "options": [
+        "free",
+        "delete",
+        "delete[]",
+        "fclose"
+      ],
+      "correctAnswer": "free"
+    },
+    {
+      "slideId": "CPP_245_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Pointer Deleter",
+      "prompt": "Fill in the function pointer type for a custom unique_ptr managing FILE* via fclose.",
+      "codeSnippet": "std::unique_ptr<FILE, int(*)(FILE*)> file(fopen(\"a.txt\", \"r\"), ___);",
+      "options": ["std::fclose", "fclose", "free", "close"],
+      "correctAnswer": "std::fclose"
+    },
+    {
+      "slideId": "CPP_245_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Erasure in std::shared_ptr",
+      "prompt": "What is the benefit of type erasure for deleters in std::shared_ptr?",
+      "options": [
+        "Containers like std::vector<std::shared_ptr<T>> can hold pointers with different custom deleters seamlessly",
+        "Eliminates heap allocation for control blocks",
+        "Allows shared_ptr to be passed without memory overhead",
+        "Speeds up destructor performance by making it non-virtual"
+      ],
+      "correctAnswer": "Containers like std::vector<std::shared_ptr<T>> can hold pointers with different custom deleters seamlessly"
+    },
+    {
+      "slideId": "CPP_245_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Functor Class Deleter",
+      "prompt": "Fill in the operator signature required in a struct to make it a valid functor deleter.",
+      "codeSnippet": "struct TextureDeleter {\n    void operator___(Texture* t) const { destroyTexture(t); }\n};",
+      "options": ["()", "->", "*", "~"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "CPP_245_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "make_shared with Custom Deleter",
+      "prompt": "Can you pass a custom deleter directly as an argument to std::make_shared?",
+      "options": [
+        "No, std::allocate_shared must be used instead when custom memory allocation or deleters are required",
+        "Yes, pass deleter as the first parameter to std::make_shared",
+        "Yes, pass deleter as the last parameter to std::make_shared",
+        "No, custom deleters are never supported with shared_ptr"
+      ],
+      "correctAnswer": "No, std::allocate_shared must be used instead when custom memory allocation or deleters are required"
+    },
+    {
+      "slideId": "CPP_245_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::get_deleter Function",
+      "prompt": "Fill in the function used to retrieve a pointer to the custom deleter inside a shared_ptr.",
+      "codeSnippet": "auto* del = std::___<MyDeleter>(sharedPtr);",
+      "options": ["get_deleter", "find_deleter", "cast_deleter", "deleter_of"],
+      "correctAnswer": "get_deleter"
+    }
+  ]
+}

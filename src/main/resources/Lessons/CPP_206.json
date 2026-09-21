@@ -1,104 +1,111 @@
 {
   "lessonId": "CPP_206",
-  "title": "C++ Operator Overloading",
+  "title": "Explicit Constructors & Conversion Operators",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_206_S1",
       "type": "CONCEPT",
-      "title": "Operator Overloading Basics",
-      "prompt": "Operator overloading allows standard operators (+, -, ==) to work on custom objects.",
-      "codeSnippet": "Complex operator+(const Complex& obj) {\n    Complex res;\n    res.real = real + obj.real;\n    return res;\n}"
+      "title": "Implicit Conversions Prevention",
+      "prompt": "Single-argument constructors create implicit type conversions. Use 'explicit' keyword to prevent unintended type casts.",
+      "codeSnippet": "class String {\npublic:\n    explicit String(int size); // Prevents String s = 10;\n};"
     },
     {
       "slideId": "CPP_206_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Operator Keyword",
-      "prompt": "Fill in keyword used to define custom operator function.",
-      "codeSnippet": "Point ___+(const Point& p);",
-      "options": ["operator", "overload", "op", "func"],
-      "correctAnswer": "operator"
+      "title": "Explicit Keyword Syntax",
+      "prompt": "Fill in keyword to disable implicit conversion on single parameter constructor.",
+      "codeSnippet": "class Account {\npublic:\n    ___ Account(double balance);\n};",
+      "options": ["explicit", "inline", "virtual", "noexcept"],
+      "correctAnswer": "explicit"
     },
     {
       "slideId": "CPP_206_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Non-overloadable Operators",
-      "prompt": "Which operator CANNOT be overloaded in C++?",
-      "options": [":: (Scope Resolution)", "+ (Addition)", "== (Equality)", "[] (Subscript)"],
-      "correctAnswer": ":: (Scope Resolution)"
+      "title": "Implicit Conversion Danger",
+      "prompt": "Given 'void printString(String s)', what happens if String constructor 'String(int size)' is NOT explicit and called via 'printString(5)'?",
+      "options": [
+        "5 implicitly converts to String using String(5) constructor",
+        "Compiler throws type mismatch error",
+        "Program crashes with segmentation fault",
+        "5 is converted to string '5'"
+      ],
+      "correctAnswer": "5 implicitly converts to String using String(5) constructor"
     },
     {
       "slideId": "CPP_206_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Stream Insertion Operator",
-      "prompt": "Fill in operator symbol commonly overloaded for printing objects.",
-      "codeSnippet": "ostream& operator___(ostream& os, const Point& p);",
-      "options": ["<<", ">>", "+=", "<="],
-      "correctAnswer": "<<"
+      "title": "User-Defined Conversion Operator",
+      "prompt": "Fill in syntax to overload implicit/explicit conversion to double.",
+      "codeSnippet": "class Centimeters {\n    double cm;\npublic:\n    operator ___() const { return cm; }\n};",
+      "options": ["double", "float", "int", "auto"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_206_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Assignment Operator Return Type",
-      "prompt": "What should operator= return to support chained assignment (a = b = c)?",
-      "options": ["Reference to self (*this)", "void", "Copy of object", "bool"],
-      "correctAnswer": "Reference to self (*this)"
+      "title": "Explicit Conversion Operators (C++11)",
+      "prompt": "What is required to trigger an 'explicit operator bool() const' cast?",
+      "options": [
+        "Explicit cast like static_cast<bool>(obj) or boolean contextual condition (if/while)",
+        "Cannot be triggered under any circumstance",
+        "Implicit assignment to bool variable 'bool b = obj;'",
+        "Passing object into function taking bool"
+      ],
+      "correctAnswer": "Explicit cast like static_cast<bool>(obj) or boolean contextual condition (if/while)"
     },
     {
       "slideId": "CPP_206_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Post-increment Dummy Parameter",
-      "prompt": "Post-increment operator++ overload takes a dummy ___ parameter.",
-      "codeSnippet": "Number operator++(_________);",
-      "options": ["int", "void", "double", "bool"],
-      "correctAnswer": "int"
+      "title": "Explicit Boolean Operator",
+      "prompt": "Fill in keyword to require explicit casting for conversion operator.",
+      "codeSnippet": "___ operator bool() const { return isValid; }",
+      "options": ["explicit", "const", "bool", "friend"],
+      "correctAnswer": "explicit"
     },
     {
       "slideId": "CPP_206_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Subscript Operator Overload",
-      "prompt": "Which operator MUST be overloaded as a member function?",
-      "options": ["[] (Subscript)", "+ (Addition)", ">> (Stream extraction)", "== (Equality)"],
-      "correctAnswer": "[] (Subscript)"
+      "title": "Best Practice for Single Argument Constructors",
+      "prompt": "What is modern C++ best practice regarding constructors taking single parameters?",
+      "options": [
+        "Mark them explicit by default unless implicit conversion is explicitly desired",
+        "Never mark constructors explicit",
+        "Make constructors private and use friend functions",
+        "Use malloc instead of constructors"
+      ],
+      "correctAnswer": "Mark them explicit by default unless implicit conversion is explicitly desired"
     },
     {
       "slideId": "CPP_206_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Friend Function Overloading",
-      "prompt": "Overloading stream operators for custom classes typically requires a ___ function.",
-      "codeSnippet": "___ ostream& operator<<(ostream& os, const Point& p);",
-      "options": ["friend", "virtual", "explicit", "static"],
-      "correctAnswer": "friend"
+      "title": "Explicit Constructor Invocation",
+      "prompt": "Fill in static_cast requirement for explicit constructor.",
+      "codeSnippet": "Account acc = ___<Account>(100.0);",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
     },
     {
       "slideId": "CPP_206_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Ternary Operator Overloading",
-      "prompt": "Can the ternary conditional operator (?:) be overloaded?",
+      "title": "Direct vs Copy Initialization",
+      "prompt": "Which initialization syntax fails if constructor is marked 'explicit'?",
       "options": [
-        "No, conditional operator cannot be overloaded",
-        "Yes, freely overloaded",
-        "Yes, but only for boolean types",
-        "Only as a friend function"
+        "Widget w = 10; (Copy Initialization)",
+        "Widget w(10); (Direct Initialization)",
+        "Widget w{10}; (Direct List Initialization)",
+        "auto w = std::make_unique<Widget>(10);"
       ],
-      "correctAnswer": "No, conditional operator cannot be overloaded"
+      "correctAnswer": "Widget w = 10; (Copy Initialization)"
     },
     {
       "slideId": "CPP_206_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Stream Extraction Operator Symbol",
-      "prompt": "Fill in stream extraction operator symbol overloaded for input.",
-      "codeSnippet": "istream& operator___(istream& is, Point& p);",
-      "options": [">>", "<<", "->", ">="],
-      "correctAnswer": ">>"
-    },
-    {
-      "slideId": "CPP_206_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Function Call Operator Overloading",
-      "prompt": "An object that overloads operator() is commonly referred to as a what?",
-      "options": ["Functor (Function Object)", "Lambda", "Pointer", "Virtual function"],
-      "correctAnswer": "Functor (Function Object)"
+      "title": "Conversion Operator Return Type Syntax",
+      "prompt": "User-defined conversion operators do ___ specify explicit return type in method header.",
+      "codeSnippet": "// Syntax: operator TargetType()\nNOT",
+      "options": ["NOT", "DO", "ALWAYS", "MUST"],
+      "correctAnswer": "NOT"
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_280",
+  "title": "Template Metaprogramming (TMP) Basics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_280_S1",
+      "type": "CONCEPT",
+      "title": "Introduction to Template Metaprogramming",
+      "prompt": "Template Metaprogramming (TMP) is a technique where the compiler executes code at compile time using template instantiation recursion, computing constants or generating types before runtime execution.",
+      "codeSnippet": "#include <iostream>\n\n// Compile-time Factorial via Class Template Recursion\ntemplate <unsigned N>\nstruct Factorial {\n    static constexpr unsigned value = N * Factorial<N - 1>::value;\n};\n\n// Base case specialization\ntemplate <>\nstruct Factorial<0> {\n    static constexpr unsigned value = 1;\n};\n\nint main() {\n    std::cout << Factorial<5>::value; // Evaluated at compile time (120)\n}"
+    },
+    {
+      "slideId": "CPP_280_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "TMP Value Extraction Member",
+      "prompt": "Fill in the standard static constant variable name conventionally used to export numeric results from TMP struct traits.",
+      "codeSnippet": "template <int N>\nstruct Square {\n    static constexpr int ___ = N * N;\n};",
+      "options": ["value", "result", "data", "eval"],
+      "correctAnswer": "value"
+    },
+    {
+      "slideId": "CPP_280_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Recursion Termination in TMP",
+      "prompt": "How is compile-time loop recursion terminated in traditional TMP struct calculators?",
+      "options": [
+        "Through template specialization serving as the base case",
+        "By using standard break or return statements",
+        "Via static_assert statements",
+        "Through runtime exception catching"
+      ],
+      "correctAnswer": "Through template specialization serving as the base case"
+    },
+    {
+      "slideId": "CPP_280_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Type Extraction Member (type)",
+      "prompt": "Fill in the nested type alias name conventionally used in type-transformation traits.",
+      "codeSnippet": "template <typename T>\nstruct Identity {\n    using ___ = T;\n};",
+      "options": ["type", "value_type", "element", "target"],
+      "correctAnswer": "type"
+    },
+    {
+      "slideId": "CPP_280_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Turing Completeness of C++ Templates",
+      "prompt": "What does it mean that C++ template instantiation is Turing complete?",
+      "options": [
+        "Any computable algorithm can theoretically be calculated at compile time using template metaprogramming",
+        "Templates can run embedded assembly code at runtime",
+        "Template code automatically optimizes runtime CPU threads",
+        "Templates can bypass host operating system security restrictions"
+      ],
+      "correctAnswer": "Any computable algorithm can theoretically be calculated at compile time using template metaprogramming"
+    },
+    {
+      "slideId": "CPP_280_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-Time Fibonacci Base Case",
+      "prompt": "Fill in the base value for Fibonacci<1> specialization.",
+      "codeSnippet": "template <unsigned N>\nstruct Fibonacci {\n    static constexpr unsigned value = Fibonacci<N-1>::value + Fibonacci<N-2>::value;\n};\n\ntemplate <>\nstruct Fibonacci<1> {\n    static constexpr unsigned value = ___\n};",
+      "options": ["1", "0", "2", "Fibonacci"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_280_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Drawback of Excessive TMP Recursion",
+      "prompt": "What risk is associated with deep template recursion in classic TMP?",
+      "options": [
+        "Exceeding compiler template instantiation depth limits and causing long build times",
+        "Stack overflow exceptions during runtime execution",
+        "Dynamic memory leakage on the heap",
+        "Thread deadlocks during linking"
+      ],
+      "correctAnswer": "Exceeding compiler template instantiation depth limits and causing long build times"
+    },
+    {
+      "slideId": "CPP_280_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-time Assertion",
+      "prompt": "Fill in the keyword to verify TMP calculations during compilation.",
+      "codeSnippet": "___(Factorial<4>::value == 24, \"Calculation error\");",
+      "options": ["static_assert", "assert", "constexpr", "concept"],
+      "correctAnswer": "static_assert"
+    },
+    {
+      "slideId": "CPP_280_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TMP vs constexpr Functions",
+      "prompt": "Why are modern C++ standards shifting towards constexpr/consteval functions over classic struct-based TMP?",
+      "options": [
+        "constexpr functions offer cleaner, imperative syntax that is easier to read and debug",
+        "Classic TMP cannot compute mathematical expressions",
+        "constexpr functions run strictly faster at runtime than TMP",
+        "TMP is deprecated in C++20"
+      ],
+      "correctAnswer": "constexpr functions offer cleaner, imperative syntax that is easier to read and debug"
+    },
+    {
+      "slideId": "CPP_280_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Typelist Concept in Metaprogramming",
+      "prompt": "Fill in the template container parameter pack type for a compile-time Typelist.",
+      "codeSnippet": "template <typename... Ts>\nstruct TypeList {};",
+      "options": ["typename...", "class", "auto", "concept"],
+      "correctAnswer": "typename..."
+    }
+  ]
+}

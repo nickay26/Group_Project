@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_136",
+  "title": "Jump Statements (break, continue, goto)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_136_S1",
+      "type": "CONCEPT",
+      "title": "Jump Statements Overview",
+      "prompt": "Jump statements (break, continue, goto, return) alter normal sequential flow by transferring control instantly.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n    if (i == 2) continue; // Skip 2\n    if (i == 4) break;    // Exit loop\n    std::cout << i << \" \";\n}"
+    },
+    {
+      "slideId": "CPP_136_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "break Keyword Function",
+      "prompt": "Fill in the keyword to terminate a loop immediately.",
+      "codeSnippet": "while (true) {\n    if (done) ___; \n}",
+      "options": ["break", "continue", "goto", "pass"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_136_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "continue Statement Function",
+      "prompt": "What does 'continue' do inside a loop?",
+      "options": ["Skips the remainder of the current iteration and jumps to next iteration", "Exits the loop entirely", "Restarts the loop from index 0", "Terminates the program"],
+      "correctAnswer": "Skips the remainder of the current iteration and jumps to next iteration"
+    },
+    {
+      "slideId": "CPP_136_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "continue Keyword Syntax",
+      "prompt": "Fill in keyword to skip processing odd numbers.",
+      "codeSnippet": "if (num % 2 != 0) {\n    ___;\n}",
+      "options": ["continue", "break", "skip", "next"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "CPP_136_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "goto Statement Danger",
+      "prompt": "Why is 'goto' generally discouraged in modern C++ design?",
+      "options": ["It creates unstructured 'spaghetti code' that is hard to follow and debug", "It is deprecated and won't compile", "It runs 10x slower than loops", "It causes instant memory corruption"],
+      "correctAnswer": "It creates unstructured 'spaghetti code' that is hard to follow and debug"
+    },
+    {
+      "slideId": "CPP_136_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "goto Label Definition Syntax",
+      "prompt": "Fill in the symbol used to define a goto target label.",
+      "codeSnippet": "myLabel___ \n    std::cout << \"Jumped!\";\ngoto myLabel;",
+      "options": [":", ";", "->", "::"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_136_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Loop break Behavior",
+      "prompt": "When 'break' is executed inside a nested loop, which loop does it terminate?",
+      "options": ["Only the innermost loop containing the break", "All enclosing loops", "The outermost loop only", "The entire program execution"],
+      "correctAnswer": "Only the innermost loop containing the break"
+    },
+    {
+      "slideId": "CPP_136_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Trace break vs continue",
+      "prompt": "What is printed by: for(int i=0;i<3;i++) { if(i==1) continue; cout<<i; }?",
+      "codeSnippet": "// Output becomes ___",
+      "options": ["02", "012", "0", "12"],
+      "correctAnswer": "02"
+    },
+    {
+      "slideId": "CPP_136_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid Use of goto",
+      "prompt": "What is one rare scenario where 'goto' might still be considered acceptable?",
+      "options": ["Breaking out of deeply nested loops in performance-critical code", "Replacing standard for loops", "Implementing recursion", "Converting switch statements"],
+      "correctAnswer": "Breaking out of deeply nested loops in performance-critical code"
+    },
+    {
+      "slideId": "CPP_136_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "goto Keyword Syntax",
+      "prompt": "Fill in the keyword to jump to a label.",
+      "codeSnippet": "if (error) {\n    ___ cleanup;\n}",
+      "options": ["goto", "jump", "transfer", "raise"],
+      "correctAnswer": "goto"
+    },
+    {
+      "slideId": "CPP_136_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "return Statement Function",
+      "prompt": "How does 'return' differ from 'break' inside a loop function?",
+      "options": ["'return' exits the entire function immediately, while 'break' only exits the current loop", "They behave identically", "'return' only works in main()", "'break' returns a value to caller"],
+      "correctAnswer": "'return' exits the entire function immediately, while 'break' only exits the current loop"
+    }
+  ]
+}

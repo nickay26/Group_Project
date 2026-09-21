@@ -1,84 +1,91 @@
 {
   "lessonId": "CPP_116",
-  "title": "C++ Function Parameters & Overloading",
+  "title": "Type Inference with auto",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_116_S1",
       "type": "CONCEPT",
-      "title": "Pass by Value vs Reference & Overloading",
-      "prompt": "Pass by reference uses & to modify original variable. Overloading allows multiple functions with same name but different parameters.",
-      "codeSnippet": "void swap(int &x, int &y);\nint plusFunc(int x, int y);\ndouble plusFunc(double x, double y);"
+      "title": "The auto Keyword",
+      "prompt": "Introduced in C++11, the 'auto' keyword automatically infers variable data type from its initializer.",
+      "codeSnippet": "auto a = 5;       // Deducted as int\nauto b = 3.14;    // Deducted as double\nauto c = \"Hi\";    // Deducted as const char*"
     },
     {
       "slideId": "CPP_116_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Pass-by-Reference Symbol",
-      "prompt": "Fill in operator symbol for passing parameter by reference.",
-      "codeSnippet": "void updateVal(int ___num) { num = 100; }",
-      "options": ["&", "*", "ref", "->"],
-      "correctAnswer": "&"
+      "title": "Auto Declaration",
+      "prompt": "Fill in the keyword to let the compiler deduce the type.",
+      "codeSnippet": "___ score = 100;",
+      "options": ["auto", "var", "let", "dynamic"],
+      "correctAnswer": "auto"
     },
     {
       "slideId": "CPP_116_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Function Overloading Rule",
-      "prompt": "What MUST differ between overloaded functions sharing the exact same name?",
-      "options": [
-        "Parameter list (number, type, or order of arguments)",
-        "Return type only",
-        "Function body comment descriptions",
-        "Variable name inside body"
-      ],
-      "correctAnswer": "Parameter list (number, type, or order of arguments)"
+      "title": "Auto Requirement",
+      "prompt": "What is mandatory when declaring a variable with 'auto'?",
+      "options": ["It must be initialized immediately at declaration", "It must be declared inside a function", "It must be marked const", "It must be an integer type"],
+      "correctAnswer": "It must be initialized immediately at declaration"
     },
     {
       "slideId": "CPP_116_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Array Parameter Passing",
-      "prompt": "Fill in brackets to pass integer array parameter.",
-      "codeSnippet": "void printArray(int myArr___)",
-      "options": ["[ ]", "( )", "*", "{ }"],
-      "correctAnswer": "[ ]"
+      "title": "Auto with Floating Point",
+      "prompt": "What type is inferred for 'auto x = 4.5f;'?",
+      "codeSnippet": "auto x = 4.5f; // Type is ___",
+      "options": ["float", "double", "int", "auto"],
+      "correctAnswer": "float"
     },
     {
       "slideId": "CPP_116_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Pass-by-Value Effect",
-      "prompt": "If variable is passed by value (int x) to function and modified inside, does main's variable change?",
-      "options": ["No, function operates on a copy", "Yes, original changes", "Causes runtime error", "Converts to reference"],
-      "correctAnswer": "No, function operates on a copy"
+      "title": "Type Safety of auto",
+      "prompt": "Is 'auto' statically typed at compile time or dynamically typed at runtime?",
+      "options": ["Statically typed at compile time (type cannot change later)", "Dynamically typed at runtime", "Weakly typed", "Untyped"],
+      "correctAnswer": "Statically typed at compile time (type cannot change later)"
     },
     {
       "slideId": "CPP_116_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Const Reference Guard",
-      "prompt": "Fill in keyword to pass large object by reference safely without allowing modifications.",
-      "codeSnippet": "void printData(___ std::string &s) {}",
-      "options": ["const", "final", "static", "readonly"],
-      "correctAnswer": "const"
+      "title": "Auto Character Inference",
+      "prompt": "Fill in the inferred type for 'auto ch = 'Z';'.",
+      "codeSnippet": "auto ch = 'Z'; // Type is ___",
+      "options": ["char", "string", "int", "auto"],
+      "correctAnswer": "char"
     },
     {
       "slideId": "CPP_116_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Return Type Overloading",
-      "prompt": "Can two functions be overloaded differing ONLY by their return type (e.g. int fn() vs double fn())?",
-      "options": [
-        "No, compiler error occurs",
-        "Yes, completely allowed",
-        "Only inside template functions",
-        "Yes, if marked inline"
-      ],
-      "correctAnswer": "No, compiler error occurs"
+      "title": "Changing Auto Variable Type",
+      "prompt": "If 'auto val = 10;', can you later do 'val = \"Text\";'?",
+      "options": ["No, type is fixed to int at compile time", "Yes, auto changes type dynamically", "Yes, if casted", "Only inside a loop"],
+      "correctAnswer": "No, type is fixed to int at compile time"
     },
     {
       "slideId": "CPP_116_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Inline Keyword",
-      "prompt": "Fill in keyword suggesting compiler copy function code inline.",
-      "codeSnippet": "___ int add(int a, int b) { return a + b; }",
-      "options": ["inline", "static", "fast", "macro"],
-      "correctAnswer": "inline"
+      "title": "Auto Const Modifier",
+      "prompt": "Fill in the combined modifier for an unchangeable auto variable.",
+      "codeSnippet": "___ auto MAX_SPEED = 200;",
+      "options": ["const", "static", "final", "fixed"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_116_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Benefit of auto",
+      "prompt": "What is a major advantage of using 'auto' in modern C++?",
+      "options": ["Simplifies complex iterator and template type declarations", "Makes code run significantly faster", "Reduces binary executable size", "Eliminates syntax errors"],
+      "correctAnswer": "Simplifies complex iterator and template type declarations"
+    },
+    {
+      "slideId": "CPP_116_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Expression Deduction",
+      "prompt": "What type is inferred for 'auto res = 5 + 2.5;'?",
+      "codeSnippet": "auto res = 5 + 2.5; // Type is ___",
+      "options": ["double", "int", "float", "long"],
+      "correctAnswer": "double"
     }
   ]
 }

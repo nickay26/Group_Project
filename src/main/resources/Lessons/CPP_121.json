@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_121",
+  "title": "Short-Circuit Evaluation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_121_S1",
+      "type": "CONCEPT",
+      "title": "Short-Circuit Logic",
+      "prompt": "In logical operations, evaluation stops as soon as the outcome is guaranteed.",
+      "codeSnippet": "bool a = false && (5 / 0 == 1); // Second part skipped (safe)\nbool b = true || (5 / 0 == 1);  // Second part skipped (safe)"
+    },
+    {
+      "slideId": "CPP_121_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Short-Circuit AND Condition",
+      "prompt": "In (A && B), if A is false, B is ___.",
+      "codeSnippet": "bool res = false && ++x; // ++x is ___",
+      "options": ["skipped", "evaluated", "compiled", "errored"],
+      "correctAnswer": "skipped"
+    },
+    {
+      "slideId": "CPP_121_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Short-Circuit OR Behavior",
+      "prompt": "In 'true || expr', why is 'expr' never executed?",
+      "options": ["Because the result is already guaranteed to be true", "Because compiler skips syntax checks", "Because OR operator has lowest priority", "Because expr is converted to 0"],
+      "correctAnswer": "Because the result is already guaranteed to be true"
+    },
+    {
+      "slideId": "CPP_121_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Null Pointer Safety Check",
+      "prompt": "Short-circuit guards against division by zero. Complete the condition.",
+      "codeSnippet": "if (denom != 0 ___ num / denom > 2)",
+      "options": ["&&", "||", "&", "AND"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_121_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Side Effects in Short-Circuit",
+      "prompt": "If int x = 0; if (false && ++x > 0); what is the final value of x?",
+      "options": ["0 (increment was short-circuited)", "1", "undefined", "-1"],
+      "correctAnswer": "0 (increment was short-circuited)"
+    },
+    {
+      "slideId": "CPP_121_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Safe Execution Sequence",
+      "prompt": "Complete the statement to check object exists before accessing.",
+      "codeSnippet": "if (ptr != nullptr ___ ptr->isValid())",
+      "options": ["&&", "||", "==", "!="],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_121_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OR Short-Circuit Test",
+      "prompt": "If int x = 10; if (true || ++x > 5); what is x after evaluation?",
+      "options": ["10", "11", "0", "5"],
+      "correctAnswer": "10"
+    },
+    {
+      "slideId": "CPP_121_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Guarded Condition",
+      "prompt": "Which logical operator short-circuits on 'true'?",
+      "codeSnippet": "true ___ doSomething(); // doSomething skipped",
+      "options": ["||", "&&", "!", "=="],
+      "correctAnswer": "||"
+    },
+    {
+      "slideId": "CPP_121_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Benefit of Short-Circuit",
+      "prompt": "What primary programming advantage does short-circuiting offer?",
+      "options": ["Allows safe conditional checks without risking crashes or illegal operations", "Reduces binary executable size", "Increases variable scope", "Automatically fixes syntax bugs"],
+      "correctAnswer": "Allows safe conditional checks without risking crashes or illegal operations"
+    },
+    {
+      "slideId": "CPP_121_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Short-circuit AND Guard",
+      "prompt": "Which logical operator short-circuits on 'false'?",
+      "codeSnippet": "false ___ doSomething(); // doSomething skipped",
+      "options": ["&&", "||", "!", "!="],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_121_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise vs Logical Evaluation",
+      "prompt": "Do bitwise operators (& and |) support short-circuit evaluation?",
+      "options": ["No, bitwise operators always evaluate both operands", "Yes, exactly like && and ||", "Only in release builds", "Only for integer types"],
+      "correctAnswer": "No, bitwise operators always evaluate both operands"
+    }
+  ]
+}

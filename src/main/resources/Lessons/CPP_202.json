@@ -1,119 +1,111 @@
 {
   "lessonId": "CPP_202",
-  "title": "C++ Constructors & Destructors",
+  "title": "Constructors, Destructors & Member Initialization",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_202_S1",
       "type": "CONCEPT",
-      "title": "Constructors & Destructors",
-      "prompt": "Constructors initialize objects; destructors clean up resources when objects are destroyed.",
-      "codeSnippet": "class Book {\n  public:\n    Book() { std::cout << \"Created\"; }\n    ~Book() { std::cout << \"Destroyed\"; }\n};"
+      "title": "Member Initializer List",
+      "prompt": "Member Initializer Lists initialize class members directly before constructor body executes, avoiding double initialization.",
+      "codeSnippet": "class Vector {\n    int x, y;\npublic:\n    Vector(int a, int b) : x(a), y(b) {}\n};"
     },
     {
       "slideId": "CPP_202_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Destructor Prefix Symbol",
-      "prompt": "Fill in the character prefix used to declare a destructor.",
-      "codeSnippet": "class Student {\n  public:\n    ___Student() {}\n};",
-      "options": ["~", "!", "#", "*"],
-      "correctAnswer": "~"
+      "title": "Member Initializer Syntax",
+      "prompt": "Fill in symbol used to separate constructor signature from initializer list.",
+      "codeSnippet": "Point(int a, int b) ___ x(a), y(b) {}",
+      "options": [":", ";", "->", "="],
+      "correctAnswer": ":"
     },
     {
       "slideId": "CPP_202_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Constructor Return Type",
-      "prompt": "What is the return type of a C++ constructor?",
+      "title": "Initialization Order",
+      "prompt": "In what order are class member variables initialized in C++?",
       "options": [
-        "Constructors have no return type, not even void",
-        "void",
-        "int",
-        "Pointer to class"
+        "In the order they are declared in the class definition",
+        "In the order they appear in member initializer list",
+        "Alphabetical order of variable names",
+        "Random order decided by compiler"
       ],
-      "correctAnswer": "Constructors have no return type, not even void"
+      "correctAnswer": "In the order they are declared in the class definition"
     },
     {
       "slideId": "CPP_202_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Member Initializer List Syntax",
-      "prompt": "Fill in the character used to start a member initializer list.",
-      "codeSnippet": "Car(string b) ___ brand(b) {}",
-      "options": [":", ";", "=", "->"],
-      "correctAnswer": ":"
+      "title": "Destructor Naming",
+      "prompt": "Fill in symbol used before class name to define a destructor.",
+      "codeSnippet": "class Buffer {\npublic:\n    ___Buffer() { delete[] data; }\n};",
+      "options": ["~", "!", "*", "&"],
+      "correctAnswer": "~"
     },
     {
       "slideId": "CPP_202_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Destructor Parameters",
-      "prompt": "How many arguments can a destructor accept?",
-      "options": ["Zero (destructors cannot accept parameters)", "One", "Unlimited", "Depends on constructor"],
-      "correctAnswer": "Zero (destructors cannot accept parameters)"
+      "title": "Destructor Characteristics",
+      "prompt": "Which statement about C++ destructors is true?",
+      "options": [
+        "They take no parameters and cannot be overloaded",
+        "A class can have multiple overloaded destructors",
+        "They can return integer status codes",
+        "They must be manually called for stack objects"
+      ],
+      "correctAnswer": "They take no parameters and cannot be overloaded"
     },
     {
       "slideId": "CPP_202_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Default Constructor",
-      "prompt": "Fill in the term for a constructor that takes no arguments.",
-      "codeSnippet": "// A constructor with no arguments is a ___ constructor.",
-      "options": ["default", "copy", "explicit", "virtual"],
-      "correctAnswer": "default"
+      "title": "Delegating Constructors",
+      "prompt": "Fill in missing call to target constructor from delegating constructor.",
+      "codeSnippet": "Foo(int x, int y) : x(x), y(y) {}\nFoo(int x) : ___(x, 0) {}",
+      "options": ["Foo", "this", "self", "super"],
+      "correctAnswer": "Foo"
     },
     {
       "slideId": "CPP_202_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Copy Constructor Signature",
-      "prompt": "Which of the following is a valid copy constructor signature for 'Widget'?",
+      "title": "In-Class Member Initializers",
+      "prompt": "When both in-class default initializer and member initializer list are provided, which takes precedence?",
       "options": [
-        "Widget(const Widget &other)",
-        "Widget(Widget other)",
-        "Widget copy(Widget &other)",
-        "void Widget(const Widget *other)"
+        "Member Initializer List",
+        "In-Class Initializer",
+        "Compiler throws error",
+        "Values are added together"
       ],
-      "correctAnswer": "Widget(const Widget &other)"
+      "correctAnswer": "Member Initializer List"
     },
     {
       "slideId": "CPP_202_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Explicit Keyword",
-      "prompt": "Fill in the keyword used to prevent implicit constructor conversions.",
-      "codeSnippet": "___ Device(int id);",
-      "options": ["explicit", "inline", "static", "virtual"],
-      "correctAnswer": "explicit"
+      "title": "Default Constructor Keyword",
+      "prompt": "Fill in keyword to explicitly request compiler default constructor generation.",
+      "codeSnippet": "class Widget {\npublic:\n    Widget() = ___; \n};",
+      "options": ["default", "delete", "auto", "override"],
+      "correctAnswer": "default"
     },
     {
       "slideId": "CPP_202_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Constructor Overloading",
-      "prompt": "Can a class have multiple constructors?",
+      "title": "Deleted Constructors",
+      "prompt": "What does 'Widget() = delete;' achieve?",
       "options": [
-        "Yes, constructors can be overloaded with different parameter lists",
-        "No, a class can have only one constructor",
-        "Yes, but only up to two constructors",
-        "Only if they are virtual"
+        "Prevents creation of objects using the default constructor",
+        "Destroys object immediately upon allocation",
+        "Marks constructor for garbage collection",
+        "Restricts access to private scope"
       ],
-      "correctAnswer": "Yes, constructors can be overloaded with different parameter lists"
+      "correctAnswer": "Prevents creation of objects using the default constructor"
     },
     {
       "slideId": "CPP_202_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Delegating Constructor",
-      "prompt": "Fill in the missing symbol in delegating constructor syntax.",
-      "codeSnippet": "Car() ___ Car(\"Default\") {}",
-      "options": [":", "=", "->", "::"],
-      "correctAnswer": ":"
-    },
-    {
-      "slideId": "CPP_202_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Destructor Execution Order",
-      "prompt": "In what order are destructors called for local objects?",
-      "options": [
-        "In reverse order of their construction (LIFO)",
-        "In exact order of their construction (FIFO)",
-        "In random order at program termination",
-        "Alphabetically by variable name"
-      ],
-      "correctAnswer": "In reverse order of their construction (LIFO)"
+      "title": "Constructor Execution Timing",
+      "prompt": "Constructors are called automatically when object is ___.",
+      "codeSnippet": "// Called when object is:\nCreated",
+      "options": ["Created", "Destroyed", "Copied", "Moved"],
+      "correctAnswer": "Created"
     }
   ]
 }

@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_130",
+  "title": "switch Statements & Jump Tables",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_130_S1",
+      "type": "CONCEPT",
+      "title": "switch Statement Concept",
+      "prompt": "The 'switch' statement selects one of many code blocks to execute based on an integral expression.",
+      "codeSnippet": "int day = 2;\nswitch (day) {\n    case 1: std::cout << \"Mon\"; break;\n    case 2: std::cout << \"Tue\"; break;\n    default: std::cout << \"Other\";\n}"
+    },
+    {
+      "slideId": "CPP_130_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "switch Keyword Syntax",
+      "prompt": "Fill in the keyword to initiate multi-way branching.",
+      "codeSnippet": "___ (code) {\n    case 1: break;\n}",
+      "options": ["switch", "select", "match", "choose"],
+      "correctAnswer": "switch"
+    },
+    {
+      "slideId": "CPP_130_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Allowed switch Expression Types",
+      "prompt": "Which data types are valid as a switch condition in C++?",
+      "options": ["Integral types (int, char, enum)", "std::string and float", "double and float only", "Any object or pointer"],
+      "correctAnswer": "Integral types (int, char, enum)"
+    },
+    {
+      "slideId": "CPP_130_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "case Label Syntax",
+      "prompt": "Fill in the keyword that labels a matching value.",
+      "codeSnippet": "switch (ch) {\n    ___ 'A': std::cout << \"Apple\"; break;\n}",
+      "options": ["case", "value", "option", "label"],
+      "correctAnswer": "case"
+    },
+    {
+      "slideId": "CPP_130_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "default Label Purpose",
+      "prompt": "What is the purpose of the 'default' case in a switch statement?",
+      "options": ["Executes when no other case matches the condition", "Executes always before every case", "Sets default value of switch variable", "Forces compiler optimization"],
+      "correctAnswer": "Executes when no other case matches the condition"
+    },
+    {
+      "slideId": "CPP_130_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "default Keyword Syntax",
+      "prompt": "Fill in the fallback keyword for unmatched switch values.",
+      "codeSnippet": "switch (x) {\n    case 1: break;\n    ___: std::cout << \"Unknown\";\n}",
+      "options": ["default", "else", "other", "otherwise"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_130_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Jump Table Optimization",
+      "prompt": "Why can 'switch' statements be faster than long 'else-if' ladders?",
+      "options": ["Compilers can optimize dense switch cases into a jump table ($O(1)$ lookup)", "Switch statements bypass CPU register checks", "Switch uses multi-threading automatically", "Else-if ladders use heap memory"],
+      "correctAnswer": "Compilers can optimize dense switch cases into a jump table ($O(1)$ lookup)"
+    },
+    {
+      "slideId": "CPP_130_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Case Delimiter Symbol",
+      "prompt": "Which symbol follows a case value label?",
+      "codeSnippet": "case 100___ std::cout << \"Max\"; break;",
+      "options": [":", ";", "->", "=>"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_130_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constant Expression Requirement",
+      "prompt": "Must case labels in a switch statement be compile-time constant expressions?",
+      "options": ["Yes, case labels must be compile-time constants", "No, variables are allowed as case values", "Only in debug builds", "Only for char types"],
+      "correctAnswer": "Yes, case labels must be compile-time constants"
+    },
+    {
+      "slideId": "CPP_130_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Enumeration Switch",
+      "prompt": "Fill in the case label for enum value COLOR_RED.",
+      "codeSnippet": "enum Color { RED, BLUE };\nColor c = RED;\nswitch(c) {\n    case ___: std::cout << \"Red\"; break;\n}",
+      "options": ["RED", "Color::RED", "0", "RED_VAL"],
+      "correctAnswer": "RED"
+    },
+    {
+      "slideId": "CPP_130_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Declaration in Case",
+      "prompt": "How can you declare new variables inside a case label without triggering compile errors?",
+      "options": ["Enclose the case body in curly braces {}", "Mark the variable as static", "Use auto keyword", "Variable declaration inside case is impossible"],
+      "correctAnswer": "Enclose the case body in curly braces {}"
+    }
+  ]
+}

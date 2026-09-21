@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_221",
+  "title": "Variadic Templates & Parameter Packs",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_221_S1",
+      "type": "CONCEPT",
+      "title": "Variadic Templates Overview",
+      "prompt": "Variadic templates accept an arbitrary number of arguments of any type using parameter packs (`typename... Args`). Introduced in C++11.",
+      "codeSnippet": "template <typename... Args>\nvoid logAll(Args... args) {\n    // Parameter pack expanded\n}"
+    },
+    {
+      "slideId": "CPP_221_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Ellipsis Syntax",
+      "prompt": "Fill in the operator symbol used to declare a template parameter pack.",
+      "codeSnippet": "template <typename___ Types>\nvoid print(Types... args);",
+      "options": ["...", "..", "*", "::"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_221_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "sizeof... Operator Purpose",
+      "prompt": "What does the 'sizeof...(args)' operator return?",
+      "options": [
+        "The number of elements/arguments contained inside the parameter pack",
+        "The total memory size in bytes of all pack elements combined",
+        "The byte size of the first argument only",
+        "A boolean indicating if the pack is empty"
+      ],
+      "correctAnswer": "The number of elements/arguments contained inside the parameter pack"
+    },
+    {
+      "slideId": "CPP_221_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pack Expansion Operator Location",
+      "prompt": "To expand a parameter pack inside a function call expression, place the ellipsis ___ the pack name.",
+      "codeSnippet": "process(args___);",
+      "options": ["...", "..", "->", "::"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_221_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Recursive Unpacking Pattern",
+      "prompt": "In pre-C++17 variadic templates, how were parameter packs processed element by element?",
+      "options": [
+        "Using recursive function calls paired with a base-case overload function",
+        "Using standard runtime for-each loops",
+        "Using dynamic array indexing (args[i])",
+        "Using switch statements"
+      ],
+      "correctAnswer": "Using recursive function calls paired with a base-case overload function"
+    },
+    {
+      "slideId": "CPP_221_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Fold Expressions C++17",
+      "prompt": "C++17 introduced fold expressions to reduce parameter packs without recursion. Fill in the binary fold syntax to sum args.",
+      "codeSnippet": "template <typename... Args>\nauto sum(Args... args) {\n    return (... ___ args);\n}",
+      "options": ["+", ",", "*", "&&"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_221_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fold Expression Types",
+      "prompt": "What is the difference between unary left fold '(... + args)' and binary left fold '(init + ... + args)'?",
+      "options": [
+        "Binary left fold provides an explicit initial value when the parameter pack is empty",
+        "Unary left fold works only with integer types",
+        "Binary left fold evaluates arguments right-to-left",
+        "Unary fold generates slower machine code"
+      ],
+      "correctAnswer": "Binary left fold provides an explicit initial value when the parameter pack is empty"
+    },
+    {
+      "slideId": "CPP_221_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Perfect Forwarding Parameter Pack",
+      "prompt": "Fill in the rvalue reference parameter syntax for forwarding parameter packs.",
+      "codeSnippet": "template <typename... Args>\nvoid forwarder(Args___... args) {\n    target(std::forward<Args>(args)...);\n}",
+      "options": ["&&", "&", "*", "const"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_221_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::make_tuple Variadic Mechanism",
+      "prompt": "Which C++ feature powers factory functions like std::make_tuple and std::emplace?",
+      "options": [
+        "Variadic Templates and Parameter Pack Expansion",
+        "Virtual Function Polymorphism",
+        "RTTI and dynamic_cast",
+        "Pre-processor Macro Expansion"
+      ],
+      "correctAnswer": "Variadic Templates and Parameter Pack Expansion"
+    },
+    {
+      "slideId": "CPP_221_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Comma Operator Pack Expansion",
+      "prompt": "Expanding pack side-effects before C++17 was often accomplished using the ___ initializer list trick.",
+      "codeSnippet": "int dummy[] = { 0, (print(args), 0)... };",
+      "options": ["dummy", "args", "print", "list"],
+      "correctAnswer": "dummy"
+    }
+  ]
+}

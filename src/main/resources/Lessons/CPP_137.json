@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_137",
+  "title": "Nested Loops & Multi-Dimensional Iteration",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_137_S1",
+      "type": "CONCEPT",
+      "title": "Nested Loops Concept",
+      "prompt": "A nested loop is a loop inside another loop. The inner loop completes all its iterations for each single iteration of the outer loop.",
+      "codeSnippet": "for (int i = 0; i < 2; i++) {\n    for (int j = 0; j < 3; j++) {\n        std::cout << i << \",\" << j << \" \";\n    }\n}"
+    },
+    {
+      "slideId": "CPP_137_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested Loop Syntax",
+      "prompt": "Fill in the keyword to create an inner loop.",
+      "codeSnippet": "for (int i = 0; i < 3; i++) {\n    ___ (int j = 0; j < 3; j++) {\n        // ...\n    }\n}",
+      "options": ["for", "while", "loop", "repeat"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "CPP_137_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Total Iteration Count",
+      "prompt": "If the outer loop runs 3 times and the inner loop runs 4 times, how many total times does the inner loop body execute?",
+      "options": ["12 times", "7 times", "4 times", "3 times"],
+      "correctAnswer": "12 times"
+    },
+    {
+      "slideId": "CPP_137_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "2D Array Traversal",
+      "prompt": "Fill in the correct variable to access columns in a 2D grid.",
+      "codeSnippet": "for (int r = 0; r < rows; r++) {\n    for (int c = 0; c < cols; c++) {\n        std::cout << grid[r][___];\n    }\n}",
+      "options": ["c", "r", "0", "cols"],
+      "correctAnswer": "c"
+    },
+    {
+      "slideId": "CPP_137_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Time Complexity of Nested Loops",
+      "prompt": "What is the time complexity of two nested loops each iterating N times?",
+      "options": ["O(N^2)", "O(N)", "O(2N)", "O(log N)"],
+      "correctAnswer": "O(N^2)"
+    },
+    {
+      "slideId": "CPP_137_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Outer vs Inner Variable Scope",
+      "prompt": "Can the inner loop use the loop counter variable declared in the outer loop?",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n    for (int j = 0; j < ___; j++) {\n        // ...\n    }\n}",
+      "options": ["i", "j", "5", "0"],
+      "correctAnswer": "i"
+    },
+    {
+      "slideId": "CPP_137_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Shadowing Danger",
+      "prompt": "What happens if you use the same counter variable name (e.g. 'i') for both outer and inner loops?",
+      "options": ["The inner variable shadows the outer one, leading to unexpected infinite or broken loops", "Compiler fixes it automatically", "It is mandatory syntax", "It speeds up loop execution"],
+      "correctAnswer": "The inner variable shadows the outer one, leading to unexpected infinite or broken loops"
+    },
+    {
+      "slideId": "CPP_137_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested Loop Output Trace",
+      "prompt": "What gets printed: for(int i=0;i<2;i++) for(int j=0;j<2;j++) cout << i;",
+      "codeSnippet": "// Output becomes ___",
+      "options": ["0011", "0101", "0123", "0000"],
+      "correctAnswer": "0011"
+    },
+    {
+      "slideId": "CPP_137_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pattern Generation Logic",
+      "prompt": "How do you construct a right-angled triangle pattern of stars using nested loops?",
+      "options": ["Inner loop condition depends on outer counter (j <= i)", "Outer loop runs backwards", "Inner loop runs fixed 10 times", "Use single loop with if-else"],
+      "correctAnswer": "Inner loop condition depends on outer counter (j <= i)"
+    },
+    {
+      "slideId": "CPP_137_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Triangle Pattern Condition",
+      "prompt": "Fill in the inner loop condition for printing a triangle.",
+      "codeSnippet": "for (int i = 1; i <= n; i++) {\n    for (int j = 1; ___ ; j++) {\n        std::cout << \"*\";\n    }\n    std::cout << \"\\n\";\n}",
+      "options": ["j <= i", "j <= n", "j < i", "i <= j"],
+      "correctAnswer": "j <= i"
+    }
+  ]
+}

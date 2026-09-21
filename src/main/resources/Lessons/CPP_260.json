@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_260",
+  "title": "Condition Variables (std::condition_variable)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_260_S1",
+      "type": "CONCEPT",
+      "title": "Condition Variable Mechanics",
+      "prompt": "Condition variables enable threads to wait efficiently for specific conditions to become true without busy-polling. A condition_variable must be used in conjunction with a std::unique_lock<std::mutex>.",
+      "codeSnippet": "#include <condition_variable>\n#include <mutex>\n\nstd::mutex mtx;\nstd::condition_variable cv;\nbool ready = false;\n\nvoid worker() {\n    std::unique_lock<std::mutex> lock(mtx);\n    cv.wait(lock, [] { return ready; }); // Releases lock and waits\n}"
+    },
+    {
+      "slideId": "CPP_260_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Signaling One Waiting Thread",
+      "prompt": "Fill in the method used to wake up one thread currently waiting on a condition variable.",
+      "codeSnippet": "std::condition_variable cv;\n// Ready condition updated\ncv.___(); // Unblocks one thread",
+      "options": ["notify_one", "notify_all", "signal", "wake_one"],
+      "correctAnswer": "notify_one"
+    },
+    {
+      "slideId": "CPP_260_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Signaling All Waiting Threads",
+      "prompt": "Which method unblocks all threads currently waiting on a condition variable?",
+      "options": [
+        "cv.notify_all()",
+        "cv.notify_one()",
+        "cv.broadcast()",
+        "cv.wake_all()"
+      ],
+      "correctAnswer": "cv.notify_all()"
+    },
+    {
+      "slideId": "CPP_260_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Preventing Spurious Wakeups",
+      "prompt": "Fill in the mechanism passed as the second argument to cv.wait() to protect against spurious wakeups.",
+      "codeSnippet": "cv.wait(lock, []() { return dataReady; });\n// The second argument is a callable ___",
+      "options": ["predicate", "functor", "mutex", "handler"],
+      "correctAnswer": "predicate"
+    },
+    {
+      "slideId": "CPP_260_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lock Type Requirement for condition_variable",
+      "prompt": "Why does std::condition_variable::wait requiring std::unique_lock<std::mutex> instead of std::lock_guard<std::mutex>?",
+      "options": [
+        "The wait method must unlock and re-lock the mutex internally while suspending execution",
+        "lock_guard does not support template instantiation with condition variables",
+        "unique_lock is faster than lock_guard",
+        "It is an arbitrary design choice with no functional difference"
+      ],
+      "correctAnswer": "The wait method must unlock and re-lock the mutex internally while suspending execution"
+    },
+    {
+      "slideId": "CPP_260_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Condition Variable Any Type",
+      "prompt": "Fill in the variant class that works with any lock type beyond std::unique_lock<std::mutex>.",
+      "codeSnippet": "std::___ cv_any; // Works with custom lock types",
+      "options": ["condition_variable_any", "condition_variable_custom", "condition_variable_generic", "condition_variable_flex"],
+      "correctAnswer": "condition_variable_any"
+    },
+    {
+      "slideId": "CPP_260_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Spurious Wakeup Definition",
+      "prompt": "What is a spurious wakeup in multithreaded programming?",
+      "options": [
+        "A thread waiting on a condition variable wakes up without any notify call being made",
+        "A thread crashes due to a lost notification signal",
+        "A deadlock caused by out-of-order notification",
+        "A notify_all call that fails to reach suspended threads"
+      ],
+      "correctAnswer": "A thread waiting on a condition variable wakes up without any notify call being made"
+    },
+    {
+      "slideId": "CPP_260_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Timed Waiting on CV",
+      "prompt": "Fill in the method used to wait on a condition variable until a specific time point.",
+      "codeSnippet": "cv.___until(lock, timeout_time, [] { return ready; });",
+      "options": ["wait_", "sleep_", "delay_", "hold_"],
+      "correctAnswer": "wait_"
+    },
+    {
+      "slideId": "CPP_260_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lost Wakeup Hazard",
+      "prompt": "How does using a predicate with cv.wait() prevent lost wakeups?",
+      "options": [
+        "It checks the boolean condition before sleeping, preventing sleep if the signal was sent early",
+        "It queues notifications so no signal is lost",
+        "It locks the condition variable directly",
+        "It forces the notifier to block until the signal is consumed"
+      ],
+      "correctAnswer": "It checks the boolean condition before sleeping, preventing sleep if the signal was sent early"
+    },
+    {
+      "slideId": "CPP_260_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Condition Variable Header",
+      "prompt": "Fill in the header name required to use std::condition_variable.",
+      "codeSnippet": "#include <___>\nstd::condition_variable cv;",
+      "options": ["condition_variable", "mutex", "future", "thread"],
+      "correctAnswer": "condition_variable"
+    }
+  ]
+}

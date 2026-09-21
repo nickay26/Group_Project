@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_241",
+  "title": "RAII & Memory Management Fundamentals",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_241_S1",
+      "type": "CONCEPT",
+      "title": "RAII (Resource Acquisition Is Initialization)",
+      "prompt": "RAII is a core C++ programming idiom where resource life cycle (memory, file handles, sockets) is bound to object lifetime. Resources are acquired in constructors and released automatically in destructors.",
+      "codeSnippet": "class FileHandler {\n    FILE* file;\npublic:\n    FileHandler(const char* path) { file = fopen(path, \"r\"); }\n    ~FileHandler() { if(file) fclose(file); }\n};"
+    },
+    {
+      "slideId": "CPP_241_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Automatic Cleanup with Destructor",
+      "prompt": "Fill in the special member function signature that releases resources when an object goes out of scope.",
+      "codeSnippet": "class Resource {\npublic:\n    ___Resource() { delete[] data; } // Cleans up memory automatically\nprivate:\n    int* data;\n};",
+      "options": ["~", "delete", "void", "clear"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_241_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Advantage of RAII",
+      "prompt": "What is the primary benefit of adhering to the RAII pattern in C++?",
+      "options": [
+        "Guarantees exception-safe resource release and prevents leaks when functions exit early",
+        "Eliminates the need for class constructors entirely",
+        "Accelerates program compilation speed",
+        "Replaces static memory allocation with heap memory"
+      ],
+      "correctAnswer": "Guarantees exception-safe resource release and prevents leaks when functions exit early"
+    },
+    {
+      "slideId": "CPP_241_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Heap Allocation operator",
+      "prompt": "Fill in the operator used to dynamically allocate memory on the heap.",
+      "codeSnippet": "int* ptr = ___ int(10);",
+      "options": ["new", "malloc", "alloc", "create"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "CPP_241_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Raw Pointer Risks",
+      "prompt": "Which issue commonly arises when managing memory manually with raw pointers using new/delete?",
+      "options": [
+        "Memory leaks, double deletion, and dangling pointers",
+        "Stack overflow errors on small objects",
+        "Compilation failures on template types",
+        "Automatic array boundary checking failures"
+      ],
+      "correctAnswer": "Memory leaks, double deletion, and dangling pointers"
+    },
+    {
+      "slideId": "CPP_241_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Heap Deallocation",
+      "prompt": "Fill in the keyword used to free memory previously allocated with new[].",
+      "codeSnippet": "int* arr = new int[50];\n___[] arr; // Deallocates heap array",
+      "options": ["delete", "free", "release", "clear"],
+      "correctAnswer": "delete"
+    },
+    {
+      "slideId": "CPP_241_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack vs Heap Allocation",
+      "prompt": "What happens to variables allocated directly on the stack when their enclosing scope ends?",
+      "options": [
+        "They are popped off the stack and destroyed automatically",
+        "They remain in memory until explicit delete is called",
+        "They are converted into heap allocations",
+        "They cause dangling reference errors automatically"
+      ],
+      "correctAnswer": "They are popped off the stack and destroyed automatically"
+    },
+    {
+      "slideId": "CPP_241_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Dangling Pointer Prevention",
+      "prompt": "Fill in the standard value to assign to a raw pointer after deleting its memory to prevent accidental access.",
+      "codeSnippet": "delete ptr;\nptr = ___;",
+      "options": ["nullptr", "0", "NULL", "void"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_241_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Safety Level",
+      "prompt": "Which exception guarantee ensures that if an exception is thrown, no resources are leaked and objects remain in valid states?",
+      "options": [
+        "Strong Exception Guarantee",
+        "No-throw Guarantee",
+        "Basic Exception Guarantee",
+        "Zero Guarantee"
+      ],
+      "correctAnswer": "Strong Exception Guarantee"
+    },
+    {
+      "slideId": "CPP_241_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Stack Object Scope",
+      "prompt": "Fill in the lock guard class that demonstrates RAII for std::mutex synchronization.",
+      "codeSnippet": "#include <mutex>\nstd::mutex mtx;\nvoid safe_print() {\n    std::___<std::mutex> lock(mtx);\n}",
+      "options": ["lock_guard", "unique_ptr", "scoped_lock", "mutex_holder"],
+      "correctAnswer": "lock_guard"
+    }
+  ]
+}

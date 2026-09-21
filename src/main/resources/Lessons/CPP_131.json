@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_131",
+  "title": "Fallthrough & break in switch",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_131_S1",
+      "type": "CONCEPT",
+      "title": "Fallthrough Mechanics",
+      "prompt": "Without a 'break' statement, execution falls through to subsequent cases automatically.",
+      "codeSnippet": "int val = 1;\nswitch (val) {\n    case 1: std::cout << \"1 \"; // Fallthrough!\n    case 2: std::cout << \"2 \"; break;\n} // Outputs: \"1 2 \""
+    },
+    {
+      "slideId": "CPP_131_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "break Statement Keyword",
+      "prompt": "Fill in the keyword used to exit a switch block.",
+      "codeSnippet": "case 5:\n    process();\n    ___;",
+      "options": ["break", "exit", "stop", "return"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_131_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Consequence of Missing break",
+      "prompt": "What happens if you omit 'break' at the end of a case block?",
+      "options": ["Execution falls through and continues into the next case code", "Compile-time error", "Runtime crash", "Switch automatically restarts"],
+      "correctAnswer": "Execution falls through and continues into the next case code"
+    },
+    {
+      "slideId": "CPP_131_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Grouping Cases Intentional Fallthrough",
+      "prompt": "Fill in the missing case label sharing the same action.",
+      "codeSnippet": "switch (ch) {\n    case 'a':\n    ___ 'A':\n        std::cout << \"Vowel A\"; break;\n}",
+      "options": ["case", "label", "or", "option"],
+      "correctAnswer": "case"
+    },
+    {
+      "slideId": "CPP_131_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++17 fallthrough Attribute",
+      "prompt": "Which attribute explicitly informs the compiler that fallthrough is intentional?",
+      "options": ["[[fallthrough]];", "[[allow_fall]];", "[[continue]];", "[[next]];"],
+      "correctAnswer": "[[fallthrough]];"
+    },
+    {
+      "slideId": "CPP_131_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Fallthrough Trace Output",
+      "prompt": "What is output when num = 1?",
+      "codeSnippet": "switch(num) {\n    case 1: std::cout << \"X\";\n    case 2: std::cout << \"Y\"; break;\n}",
+      "options": ["XY", "X", "Y", "Nothing"],
+      "correctAnswer": "XY"
+    },
+    {
+      "slideId": "CPP_131_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Common Bug Source",
+      "prompt": "Why is accidental fallthrough considered a dangerous C++ bug?",
+      "options": ["Because unintended statements in following cases get executed without warning", "Because it leaks memory", "Because it corrupts local variables", "Because it converts switch to infinite loop"],
+      "correctAnswer": "Because unintended statements in following cases get executed without warning"
+    },
+    {
+      "slideId": "CPP_131_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "C++17 Fallthrough Syntax",
+      "prompt": "Fill in the C++17 attribute keyword.",
+      "codeSnippet": "case 1:\n    doTask1();\n    [[___]];\ncase 2:\n    doTask2();",
+      "options": ["fallthrough", "continue", "ignore", "pass"],
+      "correctAnswer": "fallthrough"
+    },
+    {
+      "slideId": "CPP_131_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Last Case break Requirement",
+      "prompt": "Is a 'break' strictly required after the last case/default block?",
+      "options": ["Not strictly required, but good practice to prevent future errors", "Yes, mandatory or code won't compile", "Only if default case comes first", "Only for character switches"],
+      "correctAnswer": "Not strictly required, but good practice to prevent future errors"
+    },
+    {
+      "slideId": "CPP_131_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Multi-Case Match Logic",
+      "prompt": "What gets printed when val = 2?",
+      "codeSnippet": "switch(val) {\n    case 1:\n    case 2:\n    case 3:\n        std::cout << \"Small\"; break;\n}",
+      "options": ["Small", "2", "Nothing", "SmallSmall"],
+      "correctAnswer": "Small"
+    }
+  ]
+}

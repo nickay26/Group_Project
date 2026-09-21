@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_247",
+  "title": "Placement New & Explicit Destructors",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_247_S1",
+      "type": "CONCEPT",
+      "title": "Placement New Concept",
+      "prompt": "Placement new constructs an object inside a pre-allocated raw memory buffer supplied by the user. Because memory is managed separately, objects constructed with placement new must be destroyed by explicitly calling their destructor.",
+      "codeSnippet": "#include <new>\nchar buffer[sizeof(Widget)];\nWidget* w = new (buffer) Widget(10); // Construct in buffer\nw->~Widget(); // Explicit destructor call!"
+    },
+    {
+      "slideId": "CPP_247_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Placement New Syntax",
+      "prompt": "Fill in the placement new syntax to construct object T inside raw memory address 'buf'.",
+      "codeSnippet": "T* obj = new (___) T(args);",
+      "options": ["buf", "address", "raw", "alloc"],
+      "correctAnswer": "buf"
+    },
+    {
+      "slideId": "CPP_247_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destroying Placement New Objects",
+      "prompt": "Why must you NEVER call 'delete ptr;' on an object constructed via placement new on a custom stack buffer?",
+      "options": [
+        "delete tries to free memory to the heap, causing runtime corruption when address isn't from heap new",
+        "Explicit destructors are called twice automatically",
+        "Placement new objects are immutable",
+        "It causes compile-time syntax failure"
+      ],
+      "correctAnswer": "delete tries to free memory to the heap, causing runtime corruption when address isn't from heap new"
+    },
+    {
+      "slideId": "CPP_247_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Destructor Invocation",
+      "prompt": "Fill in the syntax to explicitly invoke the destructor for pointer variable 'pObj'.",
+      "codeSnippet": "pObj->___T();",
+      "options": ["~", "destroy", "clean", "delete"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_247_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Alignment Requirement",
+      "prompt": "What constraint must be satisfied by raw memory passed to placement new?",
+      "options": [
+        "The memory address must be properly aligned for object type T (e.g. via alignas or std::aligned_storage)",
+        "The buffer size must be exactly 1024 bytes",
+        "The memory address must be allocated using malloc",
+        "The buffer must be initialized to zero bytes"
+      ],
+      "correctAnswer": "The memory address must be properly aligned for object type T (e.g. via alignas or std::aligned_storage)"
+    },
+    {
+      "slideId": "CPP_247_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Alignas Specifier",
+      "prompt": "Fill in the specifier used to ensure a byte array buffer has alignment suitable for type T.",
+      "codeSnippet": "___(alignof(T)) char buffer[sizeof(T)];",
+      "options": ["alignas", "aligned", "align_to", "pack"],
+      "correctAnswer": "alignas"
+    },
+    {
+      "slideId": "CPP_247_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::construct_at (C++20)",
+      "prompt": "What standardized helper function in C++20 replaces manual placement new syntax?",
+      "options": [
+        "std::construct_at(ptr, args...)",
+        "std::make_at(ptr, args...)",
+        "std::placement_new(ptr, args...)",
+        "std::create_at(ptr, args...)"
+      ],
+      "correctAnswer": "std::construct_at(ptr, args...)"
+    },
+    {
+      "slideId": "CPP_247_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::destroy_at (C++17)",
+      "prompt": "Fill in the standard C++17 function that invokes the destructor of an object at a given address.",
+      "codeSnippet": "std::___(pObj); // Calls pObj->~T()",
+      "options": ["destroy_at", "delete_at", "clean_at", "destroy_object"],
+      "correctAnswer": "destroy_at"
+    },
+    {
+      "slideId": "CPP_247_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Header Required for Placement New",
+      "prompt": "Which standard library header must be included to use placement new?",
+      "options": [
+        "<new>",
+        "<memory>",
+        "<utility>",
+        "<cstdlib>"
+      ],
+      "correctAnswer": "<new>"
+    },
+    {
+      "slideId": "CPP_247_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::launder Purpose",
+      "prompt": "Fill in the C++17 function used to obtain a clean pointer when re-constructing objects in existing storage.",
+      "codeSnippet": "Widget* newPtr = std::___(oldPtr);",
+      "options": ["launder", "cast", "refresh", "clean_ptr"],
+      "correctAnswer": "launder"
+    }
+  ]
+}

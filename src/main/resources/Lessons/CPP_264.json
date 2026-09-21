@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_264",
+  "title": "Modern Concurrency Features (C++17/20 Extensions)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_264_S1",
+      "type": "CONCEPT",
+      "title": "Modern Concurrency in C++20",
+      "prompt": "C++20 introduced high-level concurrency constructs: std::jthread (auto-joining thread with stop tokens), semaphores (counting_semaphore), latches (std::latch), and barriers (std::barrier).",
+      "codeSnippet": "#include <thread>\n#include <chrono>\n\nvoid task(std::stop_token stoken) {\n    while (!stoken.stop_requested()) {\n        // Do work...\n    }\n}\n\nint main() {\n    std::jthread jt(task); // Automatically joins and supports cooperative cancellation\n}"
+    },
+    {
+      "slideId": "CPP_264_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto-Joining Thread Class",
+      "prompt": "Fill in the C++20 thread class that automatically joins on destruction.",
+      "codeSnippet": "#include <thread>\nstd::___ t(workerFunction); // Auto-joining thread",
+      "options": ["jthread", "thread", "task_thread", "async_thread"],
+      "correctAnswer": "jthread"
+    },
+    {
+      "slideId": "CPP_264_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::jthread Cooperative Interruption",
+      "prompt": "How does std::jthread signal a running thread to interrupt or stop its execution?",
+      "options": [
+        "By passing a std::stop_token parameter to the thread function and invoking request_stop()",
+        "By forcefully killing the OS thread handle",
+        "By throwing a std::thread_interrupted exception across threads",
+        "By automatically setting the thread pointer to nullptr"
+      ],
+      "correctAnswer": "By passing a std::stop_token parameter to the thread function and invoking request_stop()"
+    },
+    {
+      "slideId": "CPP_264_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 Semaphore Type",
+      "prompt": "Fill in the C++20 synchronization primitive used to manage access to a finite pool of resources.",
+      "codeSnippet": "#include <semaphore>\nstd::counting____<5> sem(5); // Allows up to 5 concurrent accesses",
+      "options": ["semaphore", "barrier", "latch", "mutex"],
+      "correctAnswer": "semaphore"
+    },
+    {
+      "slideId": "CPP_264_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::latch vs std::barrier",
+      "prompt": "What is a major difference between a std::latch and a std::barrier in C++20?",
+      "options": [
+        "A std::latch is a single-use downward counter, whereas a std::barrier is reusable across multiple phases",
+        "std::latch works only across processes, whereas std::barrier works only within threads",
+        "std::latch requires mutexes, whereas std::barrier is lock-free",
+        "std::barrier cannot execute completion steps"
+      ],
+      "correctAnswer": "A std::latch is a single-use downward counter, whereas a std::barrier is reusable across multiple phases"
+    },
+    {
+      "slideId": "CPP_264_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Decrementing Latch Counter",
+      "prompt": "Fill in the method name on std::latch that decrements the counter and blocks until it reaches zero.",
+      "codeSnippet": "std::latch workDone(4);\n// Worker finishes work\nworkDone.___();",
+      "options": ["arrive_and_wait", "count_down", "wait", "signal"],
+      "correctAnswer": "arrive_and_wait"
+    },
+    {
+      "slideId": "CPP_264_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Atomic Wait and Notify in C++20",
+      "prompt": "Which methods were added to std::atomic in C++20 for efficient thread synchronization without condition variables?",
+      "options": [
+        "wait(), notify_one(), and notify_all()",
+        "park(), unpark()",
+        "suspend(), resume()",
+        "block(), unblock()"
+      ],
+      "correctAnswer": "wait(), notify_one(), and notify_all()"
+    },
+    {
+      "slideId": "CPP_264_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Binary Semaphore Type Alias",
+      "prompt": "Fill in the C++20 type alias for a std::counting_semaphore with a least max count of 1.",
+      "codeSnippet": "#include <semaphore>\nstd::____semaphore sem(1);",
+      "options": ["binary", "mutex", "single", "flag"],
+      "correctAnswer": "binary"
+    },
+    {
+      "slideId": "CPP_264_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::call_once Purpose",
+      "prompt": "What does std::call_once guarantee when executed concurrently across multiple threads?",
+      "options": [
+        "The provided callable is executed exactly once, even if called simultaneously from multiple threads",
+        "The callable runs once per CPU core",
+        "The function runs asynchronously in the background",
+        "Execution repeats until it succeeds without throwing an exception"
+      ],
+      "correctAnswer": "The provided callable is executed exactly once, even if called simultaneously from multiple threads"
+    },
+    {
+      "slideId": "CPP_264_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::once_flag Variable",
+      "prompt": "Fill in the flag object type passed to std::call_once.",
+      "codeSnippet": "#include <mutex>\nstd::___ flag;\nstd::call_once(flag, []() { std::cout << \"Initialized once\\n\"; });",
+      "options": ["once_flag", "atomic_flag", "call_flag", "init_flag"],
+      "correctAnswer": "once_flag"
+    }
+  ]
+}

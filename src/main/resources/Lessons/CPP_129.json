@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_129",
+  "title": "Nested Conditionals",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_129_S1",
+      "type": "CONCEPT",
+      "title": "Nested Conditionals Overview",
+      "prompt": "An 'if' statement placed inside another 'if' or 'else' block forms a nested conditional structure.",
+      "codeSnippet": "if (hasAccount) {\n    if (isPasswordCorrect) {\n        std::cout << \"Access Granted\";\n    }\n}"
+    },
+    {
+      "slideId": "CPP_129_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested if Placement",
+      "prompt": "Fill in the inner if block condition.",
+      "codeSnippet": "if (age >= 18) {\n    ___ (hasID) {\n        std::cout << \"Allowed\";\n    }\n}",
+      "options": ["if", "else", "and", "check"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "CPP_129_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested vs Compound Logic",
+      "prompt": "Which expression is logically equivalent to nested 'if (A) { if (B) { ... } }'?",
+      "options": ["if (A && B) { ... }", "if (A || B) { ... }", "if (A != B) { ... }", "if (A ! B) { ... }"],
+      "correctAnswer": "if (A && B) { ... }"
+    },
+    {
+      "slideId": "CPP_129_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested else Identification",
+      "prompt": "What executes when isMember is true and hasCoupon is false?",
+      "codeSnippet": "if (isMember) {\n    if (hasCoupon) std::cout << \"20%\";\n    else std::cout << \"10%\";\n}",
+      "options": ["10%", "20%", "0%", "Nothing"],
+      "correctAnswer": "10%"
+    },
+    {
+      "slideId": "CPP_129_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Readability Danger",
+      "prompt": "What problem arises when nesting conditionals too deeply (e.g., 4+ levels)?",
+      "options": ["Code becomes extremely difficult to read and maintain (Arrow Anti-pattern)", "Execution time increases exponentially", "Compiler runs out of memory", "Variables automatically lose scope"],
+      "correctAnswer": "Code becomes extremely difficult to read and maintain (Arrow Anti-pattern)"
+    },
+    {
+      "slideId": "CPP_129_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Refactoring Nested code",
+      "prompt": "Replace nested checks with logical operator to flatten code.",
+      "codeSnippet": "if (x > 0 ___ y > 0) {\n    std::cout << \"Quadrant 1\";\n}",
+      "options": ["&&", "||", "==", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_129_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Guard Clauses Pattern",
+      "prompt": "How do 'Guard Clauses' help reduce deeply nested conditionals?",
+      "options": ["By checking failure conditions early and returning/exiting early", "By converting all 'if' statements to 'switch'", "By wrapping code in loops", "By eliminating all boolean flags"],
+      "correctAnswer": "By checking failure conditions early and returning/exiting early"
+    },
+    {
+      "slideId": "CPP_129_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Outer vs Inner Scope",
+      "prompt": "When does the inner conditional run?",
+      "codeSnippet": "if (outer) {\n    // Inner runs ONLY if 'outer' is ___\n    if (inner) {}\n}",
+      "options": ["true", "false", "0", "null"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "CPP_129_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Scope Variable Access",
+      "prompt": "Can an inner 'if' block access variables declared in the outer 'if' block?",
+      "options": ["Yes, inner scope can access outer scope variables", "No, inner scope has no access to outer variables", "Only if variables are declared const", "Only if passed by reference"],
+      "correctAnswer": "Yes, inner scope can access outer scope variables"
+    },
+    {
+      "slideId": "CPP_129_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested Branch Output",
+      "prompt": "What is output if x = 5 and y = -2?",
+      "codeSnippet": "if (x > 0) {\n    if (y > 0) std::cout << \"A\";\n    else std::cout << \"B\";\n}",
+      "options": ["B", "A", "AB", "Nothing"],
+      "correctAnswer": "B"
+    }
+  ]
+}

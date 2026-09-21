@@ -1,109 +1,111 @@
 {
   "lessonId": "CPP_212",
-  "title": "C++ STL Maps & Sets (std::map & std::set)",
+  "title": "Pure Virtual Functions & Abstract Classes",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_212_S1",
       "type": "CONCEPT",
-      "title": "Associative Containers",
-      "prompt": "std::set stores unique sorted values; std::map stores sorted key-value pairs.",
-      "codeSnippet": "#include <map>\nstd::map<string, int> ages;\nages[\"Alice\"] = 25;"
+      "title": "Interfaces and Pure Virtual Methods",
+      "prompt": "A pure virtual function (`virtual void fn() = 0;`) has no implementation in base class. A class with at least one pure virtual function is Abstract.",
+      "codeSnippet": "class AbstractInterface {\npublic:\n    virtual void execute() = 0; // Pure virtual\n};"
     },
     {
       "slideId": "CPP_212_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Set Uniqueness Property",
-      "prompt": "std::set rejects duplicate entries and keeps items in ___ order.",
-      "codeSnippet": "std::set<int> s; // items are unique & ___",
-      "options": ["sorted", "random", "unordered", "reverse"],
-      "correctAnswer": "sorted"
+      "title": "Pure Virtual Function Syntax",
+      "prompt": "Fill in the syntax initializer to declare a pure virtual function.",
+      "codeSnippet": "virtual void render() = ___;",
+      "options": ["0", "nullptr", "default", "delete"],
+      "correctAnswer": "0"
     },
     {
       "slideId": "CPP_212_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Map Key-Value Access Syntax",
-      "prompt": "How do you access value associated with key 'Apple' in map 'm'?",
-      "options": ["m[\"Apple\"]", "m.get(\"Apple\")", "m.value(\"Apple\")", "m->\"Apple\""],
-      "correctAnswer": "m[\"Apple\"]"
+      "title": "Abstract Class Instantiation",
+      "prompt": "What happens if you attempt to instantiate an abstract class directly ('AbstractInterface obj;')?",
+      "options": [
+        "Compile-time error",
+        "Runtime segmentation fault",
+        "Creates an object with default dummy methods",
+        "Instantiates object as a void pointer"
+      ],
+      "correctAnswer": "Compile-time error"
     },
     {
       "slideId": "CPP_212_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Set Insert Method",
-      "prompt": "Fill in method to insert element into set.",
-      "codeSnippet": "mySet.___ (42);",
-      "options": ["insert", "push", "add", "append"],
-      "correctAnswer": "insert"
+      "title": "Concrete Class Requirement",
+      "prompt": "To instantiate a derived class, it must ___ all inherited pure virtual functions.",
+      "codeSnippet": "// Derived class must:\nImplement",
+      "options": ["Implement", "Delete", "Hide", "Rename"],
+      "correctAnswer": "Implement"
     },
     {
       "slideId": "CPP_212_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Unordered Map Structure",
-      "prompt": "What data structure powers std::unordered_map for O(1) average lookup?",
-      "options": ["Hash Table", "Red-Black Tree", "Doubly Linked List", "Binary Heap"],
-      "correctAnswer": "Hash Table"
+      "title": "Pure Virtual Function with Body",
+      "prompt": "Is it legal in C++ to provide a function body for a pure virtual function?",
+      "options": [
+        "Yes, but it must be defined outside the class body",
+        "No, pure virtual functions can never have bodies",
+        "Yes, but only if inline inside the class definition",
+        "Only if marked constexpr"
+      ],
+      "correctAnswer": "Yes, but it must be defined outside the class body"
     },
     {
       "slideId": "CPP_212_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Map Find Return",
-      "prompt": "If key is not found, find() returns iterator to ___.",
-      "codeSnippet": "if (m.find(k) == m.___())",
-      "options": ["end", "null", "last", "finish"],
-      "correctAnswer": "end"
+      "title": "Interface Idiom in C++",
+      "prompt": "A C++ class with ONLY pure virtual functions and a virtual destructor is called an ___.",
+      "codeSnippet": "// Class acting purely as contract:\nInterface",
+      "options": ["Interface", "Struct", "Template", "Singleton"],
+      "correctAnswer": "Interface"
     },
     {
       "slideId": "CPP_212_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Standard Map Time Complexity",
-      "prompt": "What is search time complexity for std::map (Red-Black tree)?",
-      "options": ["O(log N)", "O(1)", "O(N)", "O(N log N)"],
-      "correctAnswer": "O(log N)"
+      "title": "Pointers to Abstract Classes",
+      "prompt": "Can you declare pointers or references of an Abstract Class type?",
+      "options": [
+        "Yes, they are commonly used to point to concrete derived objects",
+        "No, abstract class pointers cause compilation errors",
+        "Only when using std::shared_ptr",
+        "Only if the abstract class has no variables"
+      ],
+      "correctAnswer": "Yes, they are commonly used to point to concrete derived objects"
     },
     {
       "slideId": "CPP_212_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Map Erase Method",
-      "prompt": "Fill in method used to remove a key-value pair by key.",
-      "codeSnippet": "m.___(\"Alice\");",
-      "options": ["erase", "remove", "pop", "delete"],
-      "correctAnswer": "erase"
+      "title": "Pure Virtual Destructor Requirement",
+      "prompt": "If a class declares a pure virtual destructor, it ___ still provide a destructor definition body.",
+      "codeSnippet": "// Pure virtual destructor definition body is:\nMust",
+      "options": ["Must", "Optional", "Forbidden", "Generated"],
+      "correctAnswer": "Must"
     },
     {
       "slideId": "CPP_212_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Multimap Duplicate Keys",
-      "prompt": "Can std::multimap store multiple values for the exact same key?",
+      "title": "Abstract Base Class Pointer Array",
+      "prompt": "Why are arrays of base abstract class pointers useful in C++?",
       "options": [
-        "Yes, std::multimap allows duplicate keys",
-        "No, duplicate keys are auto-overwritten",
-        "Only for string keys",
-        "Throws compile error"
+        "Allows storing heterogeneous concrete derived objects in a unified collection",
+        "Reduces total memory used by vector containers",
+        "Disables requirement for virtual destructors",
+        "Speeds up array indexing speed"
       ],
-      "correctAnswer": "Yes, std::multimap allows duplicate keys"
+      "correctAnswer": "Allows storing heterogeneous concrete derived objects in a unified collection"
     },
     {
       "slideId": "CPP_212_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Map Count Method",
-      "prompt": "Fill in method checking if key exists in std::map (returns 1 or 0).",
-      "codeSnippet": "if (m.___(key) > 0)",
-      "options": ["count", "exists", "contains", "has"],
-      "correctAnswer": "count"
-    },
-    {
-      "slideId": "CPP_212_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Set Element Mutability",
-      "prompt": "Can you directly modify an element stored inside std::set using iterator?",
-      "options": [
-        "No, set elements are immutable (const) because modification breaks sorting",
-        "Yes, freely modified",
-        "Only using set.update() method",
-        "Only if element is integer"
-      ],
-      "correctAnswer": "No, set elements are immutable (const) because modification breaks sorting"
+      "title": "Interface Pure Virtual Assignment",
+      "prompt": "Fill in the syntax to declare pure virtual getter.",
+      "codeSnippet": "virtual int getId() const = ___;",
+      "options": ["0", "nullptr", "false", "void"],
+      "correctAnswer": "0"
     }
   ]
 }

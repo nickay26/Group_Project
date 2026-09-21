@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_162",
+  "title": "Memory Leaks & Dangling Pointers",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_162_S1",
+      "type": "CONCEPT",
+      "title": "Pitfalls in Dynamic Memory",
+      "prompt": "Memory Leaks occur when allocated dynamic memory loses all pointer references without being deleted. Dangling pointers point to deallocated memory.",
+      "codeSnippet": "int* ptr = new int(10);\ndelete ptr;\n// ptr is dangling now!\nptr = nullptr; // Prevents dangling access"
+    },
+    {
+      "slideId": "CPP_162_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Safe Pointer Reset",
+      "prompt": "Fill in keyword to safely reset pointer after deallocation.",
+      "codeSnippet": "delete ptr;\nptr = ___;",
+      "options": ["nullptr", "NULL", "0", "void"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_162_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Double Free Bug",
+      "prompt": "What occurs when executing 'delete p;' twice on the same non-null raw pointer?",
+      "options": [
+        "Undefined behavior or program crash",
+        "The second call is safely ignored automatically",
+        "Allocates new memory instead",
+        "Compiler throws an error during compilation"
+      ],
+      "correctAnswer": "Undefined behavior or program crash"
+    },
+    {
+      "slideId": "CPP_162_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Leak Cause",
+      "prompt": "Fill in line causing memory leak by overwriting pointer.",
+      "codeSnippet": "int* p = new int(10);\np = ___ int(20); // Lost reference to first allocation",
+      "options": ["new", "delete", "malloc", "alloc"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "CPP_162_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dangling Pointer Fix",
+      "prompt": "What is the best immediate practice after executing 'delete ptr;' on a raw pointer?",
+      "options": [
+        "Set ptr = nullptr",
+        "Set *ptr = 0",
+        "Re-allocate ptr immediately",
+        "Call delete ptr again"
+      ],
+      "correctAnswer": "Set ptr = nullptr"
+    },
+    {
+      "slideId": "CPP_162_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Out-of-Scope Memory Leak",
+      "prompt": "Fill in function return type to fix local pointer heap leak.",
+      "codeSnippet": "___ createData() {\n    return new int(100); // Pass ownership caller\n}",
+      "options": ["int*", "int", "void", "auto&"],
+      "correctAnswer": "int*"
+    },
+    {
+      "slideId": "CPP_162_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valgrind Tool Purpose",
+      "prompt": "What is the primary function of memory analysis tools like Valgrind or AddressSanitizer (ASan)?",
+      "options": [
+        "Detecting memory leaks, buffer overflows, and dangling pointer accesses",
+        "Compiling C++ code faster",
+        "Optimizing loop performance automatically",
+        "Formatting C++ source code"
+      ],
+      "correctAnswer": "Detecting memory leaks, buffer overflows, and dangling pointer accesses"
+    },
+    {
+      "slideId": "CPP_162_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Safe Delete of Nullptr",
+      "prompt": "In C++, executing delete on nullptr is ___. Fill in validity.",
+      "codeSnippet": "int* p = nullptr;\ndelete p; // Perfectly ___ and safe",
+      "options": ["valid", "invalid", "dangerous", "illegal"],
+      "correctAnswer": "valid"
+    },
+    {
+      "slideId": "CPP_162_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Returning Stack Reference/Pointer Pitfall",
+      "prompt": "What bug occurs when a function returns a pointer to its local stack variable?",
+      "options": [
+        "Dangling pointer bug (local variable destroyed when function exits)",
+        "Memory leak on heap",
+        "Double free error",
+        "Compilation syntax error"
+      ],
+      "correctAnswer": "Dangling pointer bug (local variable destroyed when function exits)"
+    },
+    {
+      "slideId": "CPP_162_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Cleanup Paradigm",
+      "prompt": "Fill in keyword for pattern that binds resource lifecycle to object scope.",
+      "codeSnippet": "// Standard idiom: RAII\n// Resource Acquisition Is ___",
+      "options": ["Initialization", "Allocation", "Implementation", "Instantiation"],
+      "correctAnswer": "Initialization"
+    }
+  ]
+}

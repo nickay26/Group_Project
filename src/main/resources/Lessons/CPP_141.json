@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_141",
+  "title": "Algorithm-Driven Alternatives to Loops",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_141_S1",
+      "type": "CONCEPT",
+      "title": "No Raw Loops Idiom",
+      "prompt": "Modern C++ emphasizes using STL algorithms (<algorithm>) instead of explicit 'raw' loops to improve expressiveness and correctness.",
+      "codeSnippet": "// Instead of raw loop for sum:\nint sum = std::accumulate(vec.begin(), vec.end(), 0);"
+    },
+    {
+      "slideId": "CPP_141_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::find Function",
+      "prompt": "Fill in algorithm name to locate a specific value in a range.",
+      "codeSnippet": "auto it = std::___(vec.begin(), vec.end(), target);",
+      "options": ["find", "search", "locate", "match"],
+      "correctAnswer": "find"
+    },
+    {
+      "slideId": "CPP_141_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::count_if Purpose",
+      "prompt": "What does 'std::count_if' do?",
+      "options": ["Counts elements in a range that satisfy a given predicate condition", "Counts all elements in vector", "Modifies elements matching condition", "Removes matching elements"],
+      "correctAnswer": "Counts elements in a range that satisfy a given predicate condition"
+    },
+    {
+      "slideId": "CPP_141_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::transform Function",
+      "prompt": "Fill in algorithm used to apply a transformation to every element.",
+      "codeSnippet": "std::___(src.begin(), src.end(), dest.begin(), [](int n){ return n*2; });",
+      "options": ["transform", "map", "apply", "convert"],
+      "correctAnswer": "transform"
+    },
+    {
+      "slideId": "CPP_141_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Erase-Remove Idiom",
+      "prompt": "How do you remove elements matching a predicate from a std::vector in C++11..C++17?",
+      "options": ["vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());", "std::delete_if(vec, pred);", "vec.remove(pred);", "for(auto x: vec) vec.erase(x);"],
+      "correctAnswer": "vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());"
+    },
+    {
+      "slideId": "CPP_141_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::any_of Algorithm",
+      "prompt": "Fill in algorithm checking if AT LEAST ONE element meets a condition.",
+      "codeSnippet": "bool hasNeg = std::___(v.begin(), v.end(), [](int x){ return x < 0; });",
+      "options": ["any_of", "all_of", "none_of", "some_of"],
+      "correctAnswer": "any_of"
+    },
+    {
+      "slideId": "CPP_141_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::all_of Behavior",
+      "prompt": "When does std::all_of return true?",
+      "options": ["When EVERY element in the range satisfies the predicate", "When at least one element satisfies predicate", "When range is empty", "When no elements satisfy predicate"],
+      "correctAnswer": "When EVERY element in the range satisfies the predicate"
+    },
+    {
+      "slideId": "CPP_141_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::accumulate Header",
+      "prompt": "Which header defines std::accumulate?",
+      "codeSnippet": "#include <___>",
+      "options": ["numeric", "algorithm", "utility", "cmath"],
+      "correctAnswer": "numeric"
+    },
+    {
+      "slideId": "CPP_141_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 std::erase_if Convenience",
+      "prompt": "What C++20 non-member function replaces the cumbersome Erase-Remove idiom for std::vector?",
+      "options": ["std::erase_if(vec, pred);", "vec.erase_where(pred);", "std::remove_vector(vec, pred);", "vec.clean(pred);"],
+      "correctAnswer": "std::erase_if(vec, pred);"
+    },
+    {
+      "slideId": "CPP_141_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::fill Array Initialization",
+      "prompt": "Fill in algorithm to set all elements in a range to value 0.",
+      "codeSnippet": "std::___(arr.begin(), arr.end(), 0);",
+      "options": ["fill", "set", "zero", "assign"],
+      "correctAnswer": "fill"
+    }
+  ]
+}

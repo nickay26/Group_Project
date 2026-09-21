@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_230",
+  "title": "Unordered Containers & Hash Tables",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_230_S1",
+      "type": "CONCEPT",
+      "title": "Unordered Containers Concept",
+      "prompt": "Unordered containers (std::unordered_map, std::unordered_set) implement hash tables. They provide average O(1) constant-time search, insertion, and deletion.",
+      "codeSnippet": "#include <unordered_map>\nstd::unordered_map<std::string, int> hashMap;\nhashMap[\"key\"] = 100;"
+    },
+    {
+      "slideId": "CPP_230_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Header for Unordered Map",
+      "prompt": "Fill in the header file required for std::unordered_map.",
+      "codeSnippet": "#include <___>",
+      "options": ["unordered_map", "hash_map", "map", "unordered_set"],
+      "correctAnswer": "unordered_map"
+    },
+    {
+      "slideId": "CPP_230_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Average vs Worst Complexity",
+      "prompt": "What are the average and worst-case search time complexities for std::unordered_map?",
+      "options": [
+        "Average: O(1), Worst-Case: O(N) when hash collisions occur frequently",
+        "Average: O(log N), Worst-Case: O(N)",
+        "Average: O(1), Worst-Case: O(log N)",
+        "Average: O(N), Worst-Case: O(N^2)"
+      ],
+      "correctAnswer": "Average: O(1), Worst-Case: O(N) when hash collisions occur frequently"
+    },
+    {
+      "slideId": "CPP_230_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Bucket Count Check",
+      "prompt": "Fill in the method returning the current number of hash table buckets.",
+      "codeSnippet": "size_t n = hashMap.___();",
+      "options": ["bucket_count", "buckets", "hash_size", "capacity"],
+      "correctAnswer": "bucket_count"
+    },
+    {
+      "slideId": "CPP_230_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requirements for Custom Key Types",
+      "prompt": "What two items must be supplied to use a custom class as a key in std::unordered_map?",
+      "options": [
+        "A hash function (std::hash specialization or custom functor) AND an equality comparison operator (operator==)",
+        "A less-than operator (operator<) AND an assignment operator",
+        "A default constructor AND a destructor only",
+        "A virtual function table AND serializing functions"
+      ],
+      "correctAnswer": "A hash function (std::hash specialization or custom functor) AND an equality comparison operator (operator==)"
+    },
+    {
+      "slideId": "CPP_230_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Load Factor Method",
+      "prompt": "Fill in the method returning the average number of elements per bucket.",
+      "codeSnippet": "float lf = hashMap.___();",
+      "options": ["load_factor", "bucket_density", "hash_ratio", "fullness"],
+      "correctAnswer": "load_factor"
+    },
+    {
+      "slideId": "CPP_230_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rehash Trigger Condition",
+      "prompt": "When does an unordered container trigger a automatic rehash operation?",
+      "options": [
+        "When load_factor() exceeds max_load_factor()",
+        "Whenever a duplicate key is searched",
+        "When capacity reaches power of 2",
+        "On every 100th element insertion"
+      ],
+      "correctAnswer": "When load_factor() exceeds max_load_factor()"
+    },
+    {
+      "slideId": "CPP_230_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Manual Rehash",
+      "prompt": "Fill in the method used to manually set the minimum bucket count and rehash the table.",
+      "codeSnippet": "hashMap.___(256);",
+      "options": ["rehash", "reserve_buckets", "resize_hash", "clear_rehash"],
+      "correctAnswer": "rehash"
+    },
+    {
+      "slideId": "CPP_230_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ordered vs Unordered Map Iteration",
+      "prompt": "Which statement correctly describes iteration order in std::unordered_map?",
+      "options": [
+        "Elements are traversed in an arbitrary order dictated by hash values and bucket allocation",
+        "Elements are guaranteed to be sorted by key ascending",
+        "Elements are iterated in the exact order they were inserted",
+        "Elements are sorted by value descending"
+      ],
+      "correctAnswer": "Elements are traversed in an arbitrary order dictated by hash values and bucket allocation"
+    },
+    {
+      "slideId": "CPP_230_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Bucket of Key",
+      "prompt": "Fill in the method returning the bucket index assigned to a specific key.",
+      "codeSnippet": "size_t index = hashMap.___(\"myKey\");",
+      "options": ["bucket", "get_bucket", "hash_index", "find_bucket"],
+      "correctAnswer": "bucket"
+    }
+  ]
+}

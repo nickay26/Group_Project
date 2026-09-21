@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_226",
+  "title": "std::deque & Double-Ended Queues",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_226_S1",
+      "type": "CONCEPT",
+      "title": "std::deque Concept",
+      "prompt": "std::deque (double-ended queue) allows fast insertions and deletions at both its beginning and end. Unlike std::vector, its memory is allocated in non-contiguous chunks indexed by a central map.",
+      "codeSnippet": "#include <deque>\nstd::deque<int> dq;\ndq.push_front(10);\ndq.push_back(20);"
+    },
+    {
+      "slideId": "CPP_226_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Push Front Syntax",
+      "prompt": "Fill in the function name to insert an element at the beginning of a deque.",
+      "codeSnippet": "std::deque<int> d;\nd.___ (5);",
+      "options": ["push_front", "push_first", "prepend", "add_front"],
+      "correctAnswer": "push_front"
+    },
+    {
+      "slideId": "CPP_226_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deque Memory Layout",
+      "prompt": "How is memory internally stored in std::deque compared to std::vector?",
+      "options": [
+        "A series of fixed-size contiguous memory chunks managed by an array of pointers",
+        "A single continuous block of heap memory",
+        "A doubly linked list of individual nodes",
+        "A binary search tree structure"
+      ],
+      "correctAnswer": "A series of fixed-size contiguous memory chunks managed by an array of pointers"
+    },
+    {
+      "slideId": "CPP_226_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pop Operations",
+      "prompt": "Fill in the function to remove the first element from a deque.",
+      "codeSnippet": "dq.pop_front___();",
+      "options": ["()", "->", "::", ";"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "CPP_226_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Random Access Support",
+      "prompt": "Does std::deque support random access indexing using operator[]?",
+      "options": [
+        "Yes, with O(1) constant time complexity (though slightly slower than std::vector due to pointer indirection)",
+        "No, random access is not supported",
+        "Yes, but access takes O(N) linear time",
+        "Only when using reverse iterators"
+      ],
+      "correctAnswer": "Yes, with O(1) constant time complexity (though slightly slower than std::vector due to pointer indirection)"
+    },
+    {
+      "slideId": "CPP_226_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Emplace Front",
+      "prompt": "Fill in the method used to construct an element directly at the front of a deque.",
+      "codeSnippet": "dq.___ (100);",
+      "options": ["emplace_front", "construct_front", "insert_front", "emplace_head"],
+      "correctAnswer": "emplace_front"
+    },
+    {
+      "slideId": "CPP_226_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Insertion Complexity at Ends",
+      "prompt": "What is the time complexity of push_front() and push_back() on std::deque?",
+      "options": [
+        "O(1) - Constant Time",
+        "O(N) - Linear Time",
+        "O(log N) - Logarithmic Time",
+        "O(N log N)"
+      ],
+      "correctAnswer": "O(1) - Constant Time"
+    },
+    {
+      "slideId": "CPP_226_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Front Element Reference",
+      "prompt": "Fill in the method name that returns a reference to the first element.",
+      "codeSnippet": "int& head = dq.___();",
+      "options": ["front", "begin", "first", "head"],
+      "correctAnswer": "front"
+    },
+    {
+      "slideId": "CPP_226_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Contiguous Memory Comparison",
+      "prompt": "Why can't std::deque elements be passed directly to C-style APIs requiring raw array pointers?",
+      "options": [
+        "Deque elements are not guaranteed to be stored in a contiguous array in memory",
+        "Deque elements are immutable",
+        "Deque contains pointer references rather than actual objects",
+        "C APIs do not accept STL types under any conditions"
+      ],
+      "correctAnswer": "Deque elements are not guaranteed to be stored in a contiguous array in memory"
+    },
+    {
+      "slideId": "CPP_226_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Back Element Reference",
+      "prompt": "Fill in the method name that returns a reference to the last element in a deque.",
+      "codeSnippet": "int& tail = dq.___();",
+      "options": ["back", "end", "last", "tail"],
+      "correctAnswer": "back"
+    }
+  ]
+}

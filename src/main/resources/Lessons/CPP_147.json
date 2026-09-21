@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_147",
+  "title": "std::string Container Deep Dive",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_147_S1",
+      "type": "CONCEPT",
+      "title": "std::string Overview",
+      "prompt": "The C++ standard class 'std::string' (<string>) manages dynamic memory automatically and offers safe string manipulation.",
+      "codeSnippet": "#include <string>\nstd::string s1 = \"Hello\";\ns1 += \" World\"; // Easy concatenation\nstd::cout << s1.length();"
+    },
+    {
+      "slideId": "CPP_147_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Header Include for std::string",
+      "prompt": "Fill in correct C++ standard header.",
+      "codeSnippet": "#include <___>",
+      "options": ["string", "cstring", "string.h", "str"],
+      "correctAnswer": "string"
+    },
+    {
+      "slideId": "CPP_147_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Length Methods Equivalency",
+      "prompt": "Is there any functional difference between s.length() and s.size() for std::string?",
+      "options": ["No, they are completely identical methods returning the number of characters", "length() counts bytes; size() counts words", "size() includes null terminator", "length() works only on ASCII"],
+      "correctAnswer": "No, they are completely identical methods returning the number of characters"
+    },
+    {
+      "slideId": "CPP_147_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Safe Index Access Method",
+      "prompt": "Fill in method performing bounds checking with exception throwing.",
+      "codeSnippet": "char c = str.___ (5);",
+      "options": ["at", "get", "fetch", "check"],
+      "correctAnswer": "at"
+    },
+    {
+      "slideId": "CPP_147_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Small String Optimization (SSO)",
+      "prompt": "What is Small String Optimization (SSO) in modern C++ std::string implementations?",
+      "options": ["Storing short strings inside the string object buffer directly to avoid dynamic heap allocation", "Compressing strings using ZIP algorithm", "Limiting strings to 16 characters", "Converting uppercase to lowercase"],
+      "correctAnswer": "Storing short strings inside the string object buffer directly to avoid dynamic heap allocation"
+    },
+    {
+      "slideId": "CPP_147_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "c_str() Interoperability",
+      "prompt": "Fill in method converting std::string to const char* for legacy C APIs.",
+      "codeSnippet": "const char* cstr = str.___();",
+      "options": ["c_str", "data", "to_char", "cstring"],
+      "correctAnswer": "c_str"
+    },
+    {
+      "slideId": "CPP_147_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reading Full Line with Spaces",
+      "prompt": "Which function correctly reads a full line containing spaces into std::string line?",
+      "options": ["std::getline(std::cin, line);", "std::cin >> line;", "line.readline();", "std::cin.read(line);"],
+      "correctAnswer": "std::getline(std::cin, line);"
+    },
+    {
+      "slideId": "CPP_147_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "String Concatenation Operator",
+      "prompt": "Fill in operator for appending text.",
+      "codeSnippet": "std::string msg = \"Hi \";\nmsg ___ \"there\";",
+      "options": ["+=", "+", "append", "<<"],
+      "correctAnswer": "+="
+    },
+    {
+      "slideId": "CPP_147_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Comparison Operator",
+      "prompt": "Can std::string objects be compared directly using == and < operators?",
+      "options": ["Yes, operators are overloaded for lexicographical comparison", "No, must use strcmp", "Only == is supported", "Only in C++20"],
+      "correctAnswer": "Yes, operators are overloaded for lexicographical comparison"
+    },
+    {
+      "slideId": "CPP_147_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Substring Extraction",
+      "prompt": "Fill in method name extracting substring starting at pos for len characters.",
+      "codeSnippet": "std::string sub = str.___(pos, len);",
+      "options": ["substr", "substring", "slice", "extract"],
+      "correctAnswer": "substr"
+    }
+  ]
+}

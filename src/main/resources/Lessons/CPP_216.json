@@ -1,136 +1,111 @@
 {
   "lessonId": "CPP_216",
-  "title": "C++ Namespaces & Type Aliasing",
+  "title": "Static vs Dynamic Polymorphism & Design Patterns",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_216_S1",
       "type": "CONCEPT",
-      "title": "Namespaces & Aliases",
-      "prompt": "Namespaces prevent naming collisions. Type aliases (using/typedef) simplify long types.",
-      "codeSnippet": "namespace Custom {\n    int val = 10;\n}\nusing StringList = std::vector<std::string>;"
+      "title": "Dynamic vs Static Polymorphism",
+      "prompt": "Dynamic polymorphism uses Virtual Tables at runtime. Static polymorphism uses Templates (CRTP) at compile-time with zero runtime overhead.",
+      "codeSnippet": "// CRTP Static Polymorphism:\ntemplate <typename Derived>\nclass Base {\npublic:\n    void interface() { static_cast<Derived*>(this)->implementation(); }\n};"
     },
     {
       "slideId": "CPP_216_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Namespace Keyword",
-      "prompt": "Fill in keyword used to group identifiers into scope boundaries.",
-      "codeSnippet": "___ MyLib {\n    void init();\n}",
-      "options": [
-        "namespace",
-        "package",
-        "module",
-        "scope"
-      ],
-      "correctAnswer": "namespace"
+      "title": "CRTP Acronym",
+      "prompt": "CRTP stands for Curiously ___ Template Pattern.",
+      "codeSnippet": "// CRTP name:\nCuriously ___ Template Pattern",
+      "options": ["Recurring", "Redundant", "Relative", "Recursive"],
+      "correctAnswer": "Recurring"
     },
     {
       "slideId": "CPP_216_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Scope Resolution Operator",
-      "prompt": "Which operator accesses members inside a namespace?",
+      "title": "Static Polymorphism Advantage",
+      "prompt": "What is the key performance benefit of CRTP / Static Polymorphism over Virtual Functions?",
       "options": [
-        "::",
-        ".",
-        "->",
-        ":"
+        "Zero runtime VTable lookup overhead and enables full compiler inlining",
+        "Reduces template code bloat in compiled binary",
+        "Allows heterogeneous collections in std::vector",
+        "Eliminates need for C++ constructors"
       ],
-      "correctAnswer": "::"
+      "correctAnswer": "Zero runtime VTable lookup overhead and enables full compiler inlining"
     },
     {
       "slideId": "CPP_216_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Using Alias Keyword",
-      "prompt": "Fill in modern C++ keyword creating type alias 'IntVec'.",
-      "codeSnippet": "___ IntVec = std::vector<int>;",
-      "options": [
-        "using",
-        "typedef",
-        "alias",
-        "type"
-      ],
-      "correctAnswer": "using"
+      "title": "Static Cast in CRTP",
+      "prompt": "Fill in the cast operator used inside CRTP Base to access Derived implementation.",
+      "codeSnippet": "___<Derived*>(this)->impl();",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
     },
     {
       "slideId": "CPP_216_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Anonymous Namespace Scope",
-      "prompt": "What is the primary effect of an anonymous namespace (namespace {})?",
+      "title": "Dynamic Polymorphism Unique Capability",
+      "prompt": "Which capability is exclusive to Dynamic Polymorphism that Static Polymorphism cannot do directly?",
       "options": [
-        "Restricts member linkage to current translation unit (file-local scope)",
-        "Accelerates compilation speed",
-        "Makes variables static const automatically",
-        "Allows public external access"
+        "Storing different derived types dynamically in a single container at runtime",
+        "Executing function calls inside loops",
+        "Overloading binary operators",
+        "Passing objects by const reference"
       ],
-      "correctAnswer": "Restricts member linkage to current translation unit (file-local scope)"
+      "correctAnswer": "Storing different derived types dynamically in a single container at runtime"
     },
     {
       "slideId": "CPP_216_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Typedef Keyword",
-      "prompt": "Fill in traditional C-style type definition keyword.",
-      "codeSnippet": "___ unsigned long ulong;",
-      "options": [
-        "typedef",
-        "using",
-        "alias",
-        "type"
-      ],
-      "correctAnswer": "typedef"
+      "title": "Non-Virtual Interface (NVI) Idiom",
+      "prompt": "NVI Idiom calls private virtual methods inside a ___ public base method.",
+      "codeSnippet": "// Public NVI wrapper method is:\nNonVirtual",
+      "options": ["NonVirtual", "PureVirtual", "Static", "Friend"],
+      "correctAnswer": "NonVirtual"
     },
     {
       "slideId": "CPP_216_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Inline Namespace Behavior",
-      "prompt": "What happens when a nested namespace is declared 'inline namespace'?",
+      "title": "NVI Idiom Advantage",
+      "prompt": "Why use the Non-Virtual Interface (NVI) pattern in class design?",
       "options": [
-        "Its members are automatically exposed to enclosing outer parent scope",
-        "Functions execute at compile time",
-        "Cannot contain template classes",
-        "Code generated without function calls"
+        "Allows Base class to control pre-conditions and post-conditions before calling virtual implementation",
+        "Eliminates the requirement for virtual destructors",
+        "Speeds up dynamic_cast evaluation time",
+        "Converts dynamic polymorphism into static polymorphism"
       ],
-      "correctAnswer": "Its members are automatically exposed to enclosing outer parent scope"
+      "correctAnswer": "Allows Base class to control pre-conditions and post-conditions before calling virtual implementation"
     },
     {
       "slideId": "CPP_216_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Using Directive Keyword",
-      "prompt": "Fill in directive keyword importing namespace identifiers.",
-      "codeSnippet": "___ namespace std;",
-      "options": [
-        "using",
-        "import",
-        "include",
-        "use"
-      ],
-      "correctAnswer": "using"
+      "title": "CRTP Base Class Definition",
+      "prompt": "Fill in class template syntax for CRTP derived definition.",
+      "codeSnippet": "class Derived : public Base<___> {};",
+      "options": ["Derived", "Base", "auto", "void"],
+      "correctAnswer": "Derived"
     },
     {
       "slideId": "CPP_216_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Global Scope Resolution Operator",
-      "prompt": "How do you access a global variable 'x' when shadowed by local variable 'x'?",
+      "title": "Strategy Pattern Variant",
+      "prompt": "How can Strategy Pattern be implemented without VTable runtime overhead in Modern C++?",
       "options": [
-        "::x",
-        "global.x",
-        "this->x",
-        "super.x"
+        "Using template policy parameters or std::variant with std::visit",
+        "Using multiple inheritance of concrete classes",
+        "Using raw void pointers and function pointer offsets",
+        "Using macro definitions exclusively"
       ],
-      "correctAnswer": "::x"
+      "correctAnswer": "Using template policy parameters or std::variant with std::visit"
     },
     {
       "slideId": "CPP_216_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Namespace Alias Definition",
-      "prompt": "Fill in equals sign operator for namespace aliasing.",
-      "codeSnippet": "namespace ShortName ___ VeryLongModuleName;",
-      "options": [
-        "=",
-        ":",
-        "::",
-        "->"
-      ],
-      "correctAnswer": "="
+      "title": "Policy-Based Design Keyword",
+      "prompt": "Policy-based design relies heavily on C++ ___ templates.",
+      "codeSnippet": "// Policy design uses:\nClass Templates",
+      "options": ["Class Templates", "Macros", "Virtual Methods", "RTTI"],
+      "correctAnswer": "Class Templates"
     }
   ]
 }

@@ -1,79 +1,99 @@
 {
   "lessonId": "CPP_111",
-  "title": "C++ Switch Statement",
+  "title": "Integers & Memory Sizes",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_111_S1",
       "type": "CONCEPT",
-      "title": "Switch Statement Overview",
-      "prompt": "Switch selects one of many code blocks to execute based on a single discrete expression.",
-      "codeSnippet": "switch(day) {\n  case 1: std::cout << \"Mon\"; break;\n  default: std::cout << \"Other\";\n}"
+      "title": "Integer Types Overview",
+      "prompt": "C++ offers different integer types based on memory size: short, int, long, and long long.",
+      "codeSnippet": "short s = 32767;\nint i = 2147483647;\nlong long ll = 9223372036854775807LL;"
     },
     {
       "slideId": "CPP_111_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Switch Keyword",
-      "prompt": "Fill in keyword to evaluate expression.",
-      "codeSnippet": "___ (grade) { case 'A': break; }",
-      "options": ["switch", "match", "select", "check"],
-      "correctAnswer": "switch"
+      "title": "Basic Integer Declaration",
+      "prompt": "Fill in the keyword to declare a standard integer variable.",
+      "codeSnippet": "___ count = 50;",
+      "options": ["int", "short", "long", "num"],
+      "correctAnswer": "int"
     },
     {
       "slideId": "CPP_111_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Break Statement Purpose",
-      "prompt": "What happens if a 'break' statement is omitted from a matching case block?",
-      "options": [
-        "Execution falls through to subsequent case blocks automatically",
-        "Program halts immediately with error",
-        "Switch restarts from beginning",
-        "Default block is executed"
-      ],
-      "correctAnswer": "Execution falls through to subsequent case blocks automatically"
+      "title": "Largest Integer Type",
+      "prompt": "Which integer type provides the largest memory capacity (at least 64 bits)?",
+      "options": ["long long", "int", "short", "long"],
+      "correctAnswer": "long long"
     },
     {
       "slideId": "CPP_111_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Default Case Keyword",
-      "prompt": "Fill in keyword for default fallback block.",
-      "codeSnippet": "___: std::cout << \"Invalid input\";",
-      "options": ["default", "else", "otherwise", "catch"],
-      "correctAnswer": "default"
+      "title": "Short Integer",
+      "prompt": "Fill in the integer type used for smaller numbers to save memory.",
+      "codeSnippet": "___ smallNumber = 100;",
+      "options": ["short", "int", "long", "byte"],
+      "correctAnswer": "short"
     },
     {
       "slideId": "CPP_111_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Valid Switch Expression Types",
-      "prompt": "Which type CANNOT be evaluated directly inside standard C++ switch() expression?",
-      "options": ["std::string", "int", "char", "enum"],
-      "correctAnswer": "std::string"
+      "title": "Size of Standard int",
+      "prompt": "What is the typical memory size of a standard 'int' on most modern systems?",
+      "options": ["4 bytes (32 bits)", "1 byte (8 bits)", "2 bytes (16 bits)", "8 bytes (64 bits)"],
+      "correctAnswer": "4 bytes (32 bits)"
     },
     {
       "slideId": "CPP_111_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Case Keyword Syntax",
-      "prompt": "Fill in label keyword for value match.",
-      "codeSnippet": "___ 10: std::cout << \"Ten\"; break;",
-      "options": ["case", "when", "val", "match"],
-      "correctAnswer": "case"
+      "title": "Checking Size",
+      "prompt": "Fill in the operator used to check the memory size of an integer type.",
+      "codeSnippet": "std::cout << ___(int);",
+      "options": ["sizeof", "length", "bitness", "memory"],
+      "correctAnswer": "sizeof"
     },
     {
       "slideId": "CPP_111_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Case Delimiter Character",
-      "prompt": "Which character follows every case value expression label in a switch block?",
-      "options": [": (Colon)", "; (Semicolon)", "-> (Arrow)", "=> (Fat Arrow)"],
-      "correctAnswer": ": (Colon)"
+      "title": "Integer Overflow",
+      "prompt": "What occurs when an integer exceeds its maximum storeable value?",
+      "options": ["Integer overflow (wraps around or causes undefined behavior)", "Automatic conversion to double", "Compiler crashes immediately", "Value resets to zero safely"],
+      "correctAnswer": "Integer overflow (wraps around or causes undefined behavior)"
     },
     {
       "slideId": "CPP_111_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Breaking Case Loop",
-      "prompt": "Fill in statement to exit switch.",
-      "codeSnippet": "case 5: print(); ___;",
-      "options": ["break", "stop", "exit", "return"],
-      "correctAnswer": "break"
+      "title": "Long Long Suffix",
+      "prompt": "Fill in the suffix added to long long literals.",
+      "codeSnippet": "long long distance = 9000000000___;",
+      "options": ["LL", "F", "D", "U"],
+      "correctAnswer": "LL"
+    },
+    {
+      "slideId": "CPP_111_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Minimum Size of short",
+      "prompt": "What is the minimum guaranteed size of 'short' in C++?",
+      "options": ["16 bits (2 bytes)", "8 bits (1 byte)", "32 bits (4 bytes)", "64 bits (8 bytes)"],
+      "correctAnswer": "16 bits (2 bytes)"
+    },
+    {
+      "slideId": "CPP_111_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Long Type Declaration",
+      "prompt": "Fill in the data type for a long integer.",
+      "codeSnippet": "___ population = 7800000000L;",
+      "options": ["long", "int", "short", "bigint"],
+      "correctAnswer": "long"
+    },
+    {
+      "slideId": "CPP_111_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Integer Type",
+      "prompt": "Which integer type is used by default when you write a whole number literal like 42?",
+      "options": ["int", "short", "long", "long long"],
+      "correctAnswer": "int"
     }
   ]
 }

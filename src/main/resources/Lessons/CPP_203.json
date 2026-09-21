@@ -1,136 +1,111 @@
 {
   "lessonId": "CPP_203",
-  "title": "C++ Access Specifiers & Encapsulation",
+  "title": "Copy Constructors & Copy Assignment",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_203_S1",
       "type": "CONCEPT",
-      "title": "Encapsulation Basics",
-      "prompt": "Encapsulation hides internal data using private members and public getters/setters.",
-      "codeSnippet": "class BankAccount {\n  private:\n    double balance;\n  public:\n    void setBalance(double b) { balance = b; }\n    double getBalance() { return balance; }\n};"
+      "title": "Shallow vs Deep Copying",
+      "prompt": "Default copy constructor performs Shallow Copy (copying pointers directly). Classes managing raw heap memory must implement Deep Copy.",
+      "codeSnippet": "class Array {\n    int* data;\npublic:\n    Array(const Array& other) { // Deep Copy\n        data = new int(*other.data);\n    }\n};"
     },
     {
       "slideId": "CPP_203_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Private Keyword",
-      "prompt": "Fill in the access specifier that restricts direct external access.",
-      "codeSnippet": "class User {\n  ___:\n    string password;\n};",
-      "options": [
-        "private",
-        "protected",
-        "public",
-        "hidden"
-      ],
-      "correctAnswer": "private"
+      "title": "Copy Constructor Signature",
+      "prompt": "Fill in missing parameter qualifier for standard Copy Constructor.",
+      "codeSnippet": "MyClass(___ MyClass& other);",
+      "options": ["const", "volatile", "static", "explicit"],
+      "correctAnswer": "const"
     },
     {
       "slideId": "CPP_203_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Protected Access Scope",
-      "prompt": "Where can protected members be accessed?",
+      "title": "Shallow Copy Danger",
+      "prompt": "What primary runtime crash error is caused by default shallow copying of raw pointer members?",
       "options": [
-        "Inside the class and derived (child) classes",
-        "Anywhere in the entire program",
-        "Only strictly inside the class itself",
-        "Only in external main function"
+        "Double Free / Dangling Pointer crash on destruction",
+        "Stack Overflow exception",
+        "Infinite loop during assignment",
+        "Const correctness error"
       ],
-      "correctAnswer": "Inside the class and derived (child) classes"
+      "correctAnswer": "Double Free / Dangling Pointer crash on destruction"
     },
     {
       "slideId": "CPP_203_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Getter Function Prefix",
-      "prompt": "Fill in the standard prefix convention for reading a variable.",
-      "codeSnippet": "int ___Age() { return age; }",
-      "options": [
-        "get",
-        "set",
-        "read",
-        "fetch"
-      ],
-      "correctAnswer": "get"
+      "title": "Copy Assignment Operator",
+      "prompt": "Fill in correct return type for Copy Assignment Operator 'operator='.",
+      "codeSnippet": "MyClass___ operator=(const MyClass& rhs);",
+      "options": ["&", "*", "void", "const"],
+      "correctAnswer": "&"
     },
     {
       "slideId": "CPP_203_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Encapsulation Benefit",
-      "prompt": "What is the primary benefit of encapsulation?",
+      "title": "Self-Assignment Guard",
+      "prompt": "Why is 'if (this == &rhs) return *this;' necessary in copy assignment operators?",
       "options": [
-        "Protects internal state integrity and controls data modifications",
-        "Increases program execution speed drastically",
-        "Eliminates the use of pointers",
-        "Replaces compilers with interpreters"
+        "Prevents deleting self resources before copying them",
+        "Improves template instantiations",
+        "Enables copy elision optimization",
+        "Required by C++ syntax standards"
       ],
-      "correctAnswer": "Protects internal state integrity and controls data modifications"
+      "correctAnswer": "Prevents deleting self resources before copying them"
     },
     {
       "slideId": "CPP_203_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Setter Function Prefix",
-      "prompt": "Fill in standard prefix convention for modifying a variable.",
-      "codeSnippet": "void ___Age(int a) { age = a; }",
-      "options": [
-        "set",
-        "get",
-        "write",
-        "change"
-      ],
-      "correctAnswer": "set"
+      "title": "Returning Current Instance Reference",
+      "prompt": "Fill in expression returned at end of assignment operator implementation.",
+      "codeSnippet": "return ___;",
+      "options": ["*this", "this", "&this", "self"],
+      "correctAnswer": "*this"
     },
     {
       "slideId": "CPP_203_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Friend Function Access",
-      "prompt": "What access rights does a friend function have?",
+      "title": "Copy Elision / RVO",
+      "prompt": "What does Return Value Optimization (RVO) do when returning temporary objects from functions?",
       "options": [
-        "Can access private and protected members of the class",
-        "Can only access public members",
-        "Can only modify static variables",
-        "No special access rights"
+        "Omits copy/move constructor calls by constructing object directly in target location",
+        "Converts heap allocations into stack allocations",
+        "Automatically converts pass-by-value into pass-by-reference",
+        "Forces function to execute inline"
       ],
-      "correctAnswer": "Can access private and protected members of the class"
+      "correctAnswer": "Omits copy/move constructor calls by constructing object directly in target location"
     },
     {
       "slideId": "CPP_203_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Friend Keyword",
-      "prompt": "Fill in keyword to grant an external function access to private members.",
-      "codeSnippet": "class Box {\n  ___ void printWidth(Box b);\n};",
-      "options": [
-        "friend",
-        "public",
-        "extern",
-        "virtual"
-      ],
-      "correctAnswer": "friend"
+      "title": "Disabling Object Copying",
+      "prompt": "Fill in specifier to disable copy construction for a non-copyable class.",
+      "codeSnippet": "NonCopyable(const NonCopyable&) = ___;",
+      "options": ["delete", "default", "private", "disable"],
+      "correctAnswer": "delete"
     },
     {
       "slideId": "CPP_203_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Struct vs Class Access Specifier",
-      "prompt": "What is the default access specifier for members in a struct?",
+      "title": "Rule of Three",
+      "prompt": "According to C++ Rule of Three, if a class defines a destructor, it should also explicitly define:",
       "options": [
-        "public",
-        "private",
-        "protected",
-        "internal"
+        "Copy Constructor and Copy Assignment Operator",
+        "Move Constructor and Move Assignment Operator",
+        "Default Constructor and Virtual Destructor",
+        "Friend Functions and Stream Operators"
       ],
-      "correctAnswer": "public"
+      "correctAnswer": "Copy Constructor and Copy Assignment Operator"
     },
     {
       "slideId": "CPP_203_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Friend Class Declaration",
-      "prompt": "Fill in keyword declaring another class as a friend.",
-      "codeSnippet": "class A {\n  ___ class B;\n};",
-      "options": [
-        "friend",
-        "public",
-        "using",
-        "export"
-      ],
-      "correctAnswer": "friend"
+      "title": "Copy Initialization Trigger",
+      "prompt": "Fill in operator invoking Copy Constructor during variable declaration.",
+      "codeSnippet": "MyClass obj2 ___ obj1;",
+      "options": ["=", "==", "->", "::"],
+      "correctAnswer": "="
     }
   ]
 }

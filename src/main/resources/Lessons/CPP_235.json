@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_235",
+  "title": "Modifying Sequence Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_235_S1",
+      "type": "CONCEPT",
+      "title": "Modifying Sequence Algorithms",
+      "prompt": "Modifying algorithms alter container contents or create transformed copies. Standard operations include copying, transforming, filling, replacing, and removing elements.",
+      "codeSnippet": "#include <algorithm>\n#include <vector>\nstd::vector<int> src = {1, 2, 3};\nstd::vector<int> dst(3);\nstd::copy(src.begin(), src.end(), dst.begin());"
+    },
+    {
+      "slideId": "CPP_235_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Transforming Elements",
+      "prompt": "Fill in the function used to apply an operation to a range and store the results in a destination.",
+      "codeSnippet": "std::___(src.begin(), src.end(), dst.begin(), [](int x){ return x * 2; });",
+      "options": ["transform", "map", "apply", "convert"],
+      "correctAnswer": "transform"
+    },
+    {
+      "slideId": "CPP_235_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::remove Behavior",
+      "prompt": "What does std::remove(v.begin(), v.end(), val) actually do to a vector?",
+      "options": [
+        "It shifts non-matching elements to the front and returns a new logical end iterator without shrinking vector capacity",
+        "It immediately erases matching elements and reduces the vector's size()",
+        "It sets removed elements to 0",
+        "It deallocates the vector memory for matching elements"
+      ],
+      "correctAnswer": "It shifts non-matching elements to the front and returns a new logical end iterator without shrinking vector capacity"
+    },
+    {
+      "slideId": "CPP_235_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Erase-Remove Idiom",
+      "prompt": "Fill in the vector member function used together with std::remove to physically delete elements.",
+      "codeSnippet": "v.___(std::remove(v.begin(), v.end(), 5), v.end());",
+      "options": ["erase", "delete", "pop_back", "clear"],
+      "correctAnswer": "erase"
+    },
+    {
+      "slideId": "CPP_235_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::replace_if Functionality",
+      "prompt": "How does std::replace_if operate on a range?",
+      "options": [
+        "Replaces all elements satisfying a predicate with a specified new value",
+        "Replaces elements only if they are equal to zero",
+        "Swaps matching elements with another container",
+        "Deletes elements matching the predicate"
+      ],
+      "correctAnswer": "Replaces all elements satisfying a predicate with a specified new value"
+    },
+    {
+      "slideId": "CPP_235_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Filling Range Values",
+      "prompt": "Fill in the algorithm function that assigns a given value to every element in a specified range.",
+      "codeSnippet": "std::___(v.begin(), v.end(), 0);",
+      "options": ["fill", "assign", "set", "reset"],
+      "correctAnswer": "fill"
+    },
+    {
+      "slideId": "CPP_235_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::generate vs std::fill",
+      "prompt": "What is the key difference between std::fill and std::generate?",
+      "options": [
+        "std::fill assigns a constant value; std::generate assigns values returned by calling a generator function/lambda",
+        "std::generate works only on dynamic arrays",
+        "std::fill runs in parallel automatically",
+        "There is no difference"
+      ],
+      "correctAnswer": "std::fill assigns a constant value; std::generate assigns values returned by calling a generator function/lambda"
+    },
+    {
+      "slideId": "CPP_235_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Generating Sequence Values",
+      "prompt": "Fill in the algorithm that invokes a generator function for each element in a range.",
+      "codeSnippet": "int n = 0;\nstd::___(v.begin(), v.end(), [&n](){ return ++n; });",
+      "options": ["generate", "fill", "create", "populate"],
+      "correctAnswer": "generate"
+    },
+    {
+      "slideId": "CPP_235_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::copy_n Usage",
+      "prompt": "What parameters does std::copy_n require?",
+      "options": [
+        "An input starting iterator, element count N, and destination output iterator",
+        "Begin iterator, end iterator, predicate function",
+        "Source container and target container references",
+        "Output iterator and array size only"
+      ],
+      "correctAnswer": "An input starting iterator, element count N, and destination output iterator"
+    },
+    {
+      "slideId": "CPP_235_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Unique Algorithm",
+      "prompt": "Fill in the algorithm function that removes consecutive duplicate elements from a range.",
+      "codeSnippet": "auto newEnd = std::___(v.begin(), v.end());",
+      "options": ["unique", "distinct", "dedupe", "compact"],
+      "correctAnswer": "unique"
+    }
+  ]
+}

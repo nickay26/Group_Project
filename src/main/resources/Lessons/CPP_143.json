@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_143",
+  "title": "Loop Best Practices & Code Review",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_143_S1",
+      "type": "CONCEPT",
+      "title": "Selecting the Right Loop Construct",
+      "prompt": "Choose range-based loops for container traversal, traditional for-loops for indexed access, while for unknown iterations, and algorithms for functional logic.",
+      "codeSnippet": "// Range-based for clarity\nfor (const auto& item : container) {\n    process(item);\n}"
+    },
+    {
+      "slideId": "CPP_143_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Scope Minimization for Loop Counter",
+      "prompt": "Where should a loop counter variable be declared to limit scope leakage?",
+      "codeSnippet": "for (___ i = 0; i < N; i++) {\n    // i scope ends at loop brace\n}",
+      "options": ["int", "static int", "global int", "extern int"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_143_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Prefer Range-based over Indexed Loops",
+      "prompt": "Why are range-based loops preferred over manual index access when index is not needed?",
+      "options": ["Eliminates out-of-bounds indexing bugs and off-by-one errors completely", "Runs 100x faster", "Consumes half the RAM", "Allows modifying const vectors"],
+      "correctAnswer": "Eliminates out-of-bounds indexing bugs and off-by-one errors completely"
+    },
+    {
+      "slideId": "CPP_143_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Avoiding Container Modification inside Range Loop",
+      "prompt": "Adding or removing elements directly inside a range-based loop causes ___ behavior.",
+      "codeSnippet": "// Modifying vector structure during range loop = ___ behavior",
+      "options": ["undefined", "defined", "safe", "optimal"],
+      "correctAnswer": "undefined"
+    },
+    {
+      "slideId": "CPP_143_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Loop Condition Side Effects Bad Practice",
+      "prompt": "Why is writing 'while (x++ < y--)' discouraged in production code?",
+      "options": ["Side effects inside conditions reduce readability and make debugging/reviewing hard", "It fails to compile", "It triggers memory leaks", "It is illegal in C++20"],
+      "correctAnswer": "Side effects inside conditions reduce readability and make debugging/reviewing hard"
+    },
+    {
+      "slideId": "CPP_134_S6_REV",
+      "type": "FILL_IN_BLANK",
+      "title": "Descriptive Loop Counters",
+      "prompt": "Instead of nested i, j, k, use descriptive names like row and ___.",
+      "codeSnippet": "for (int row = 0; row < R; row++) {\n    for (int ___ = 0; col < C; col++) {}\n}",
+      "options": ["col", "column", "c", "j"],
+      "correctAnswer": "col"
+    },
+    {
+      "slideId": "CPP_143_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Early Return vs Deep Nesting",
+      "prompt": "How can you simplify a loop containing multiple nested 'if' checks inside?",
+      "options": ["Use 'continue' early guards to skip invalid iterations and flatten code", "Wrap loop inside switch", "Convert to do-while loop", "Use goto labels"],
+      "correctAnswer": "Use 'continue' early guards to skip invalid iterations and flatten code"
+    },
+    {
+      "slideId": "CPP_143_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Signed vs Unsigned Indexing Safety",
+      "prompt": "C++20 introduced std::ssize() to return ___ integers for safe loop comparison.",
+      "codeSnippet": "for (int i = 0; i < std::___(vec); i++) {}",
+      "options": ["ssize", "size", "isize", "length"],
+      "correctAnswer": "ssize"
+    },
+    {
+      "slideId": "CPP_143_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Off-by-one Prevention",
+      "prompt": "How do you avoid off-by-one errors when processing 0-indexed containers?",
+      "options": ["Use half-open intervals [0, size) with condition 'i < size'", "Use 'i <= size'", "Start indexing from 1", "Subtract 1 from array pointer"],
+      "correctAnswer": "Use half-open intervals [0, size) with condition 'i < size'"
+    },
+    {
+      "slideId": "CPP_143_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Infinite Loop Safeguard",
+      "prompt": "Always ensure every loop has a guaranteed ___ condition under all inputs.",
+      "codeSnippet": "// Ensure loop guaranteed ___ condition",
+      "options": ["exit", "start", "print", "throw"],
+      "correctAnswer": "exit"
+    }
+  ]
+}

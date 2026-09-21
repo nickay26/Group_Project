@@ -1,104 +1,111 @@
 {
   "lessonId": "CPP_215",
-  "title": "C++ File Handling (fstream)",
+  "title": "RTTI (Run-Time Type Information) & dynamic_cast",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_215_S1",
       "type": "CONCEPT",
-      "title": "File I/O with fstream",
-      "prompt": "fstream header provides ifstream (reading), ofstream (writing), and fstream (both).",
-      "codeSnippet": "#include <fstream>\nstd::ofstream outFile(\"data.txt\");\noutFile << \"Hello File!\";\noutFile.close();"
+      "title": "Runtime Type Inspection",
+      "prompt": "RTTI provides runtime type checking via `dynamic_cast` and `typeid`. Requires at least one virtual function in the class hierarchy.",
+      "codeSnippet": "Base* ptr = new Derived();\nif (Derived* d = dynamic_cast<Derived*>(ptr)) {\n    // Safe downcast succeeded\n}"
     },
     {
       "slideId": "CPP_215_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Output File Stream Class",
-      "prompt": "Fill in stream class used for writing data to files.",
-      "codeSnippet": "std::___ writer(\"log.txt\");",
-      "options": ["ofstream", "ifstream", "fstream", "file"],
-      "correctAnswer": "ofstream"
+      "title": "Dynamic Cast Operator",
+      "prompt": "Fill in the cast operator used for safe polymorphic downcasting.",
+      "codeSnippet": "Derived* d = ___<Derived*>(basePtr);",
+      "options": ["dynamic_cast", "static_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "dynamic_cast"
     },
     {
       "slideId": "CPP_215_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Input File Stream Class",
-      "prompt": "Which class is specifically designed for reading files?",
-      "options": ["std::ifstream", "std::ofstream", "std::iostream", "std::filein"],
-      "correctAnswer": "std::ifstream"
+      "title": "Failed Pointer dynamic_cast",
+      "prompt": "What does 'dynamic_cast<Derived*>(ptr)' return if the cast fails for pointers?",
+      "options": [
+        "nullptr",
+        "Throws std::bad_cast exception",
+        "Undefined pointer memory address",
+        "Compilation error"
+      ],
+      "correctAnswer": "nullptr"
     },
     {
       "slideId": "CPP_215_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Close File Method",
-      "prompt": "Fill in method closing an open file stream.",
-      "codeSnippet": "file.___();",
-      "options": ["close", "flush", "end", "finish"],
-      "correctAnswer": "close"
+      "title": "Failed Reference dynamic_cast",
+      "prompt": "When 'dynamic_cast<Derived&>(ref)' fails for references, it throws std::___.",
+      "codeSnippet": "// Reference cast failure throws:\nbad_cast",
+      "options": ["bad_cast", "bad_alloc", "out_of_range", "runtime_error"],
+      "correctAnswer": "bad_cast"
     },
     {
       "slideId": "CPP_215_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Append Mode Flag",
-      "prompt": "Which open mode flag appends new content without truncating existing data?",
-      "options": ["std::ios::app", "std::ios::ate", "std::ios::in", "std::ios::trunc"],
-      "correctAnswer": "std::ios::app"
+      "title": "RTTI Prerequisite Requirement",
+      "prompt": "What is required in the base class for dynamic_cast and RTTI to function?",
+      "options": [
+        "Base class must have at least one virtual function (polymorphic class)",
+        "Base class must inherit from std::exception",
+        "Base class must be template-based",
+        "Class must be marked with #pragma rtti"
+      ],
+      "correctAnswer": "Base class must have at least one virtual function (polymorphic class)"
     },
     {
       "slideId": "CPP_215_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Is Open Check Method",
-      "prompt": "Fill in method verifying file stream opened successfully.",
-      "codeSnippet": "if (file.___()) { /* work */ }",
-      "options": ["is_open", "isOpen", "valid", "ready"],
-      "correctAnswer": "is_open"
+      "title": "Typeid Operator Usage",
+      "prompt": "Fill in the operator used to query the std::type_info of an expression.",
+      "codeSnippet": "const std::type_info& info = ___(obj);",
+      "options": ["typeid", "typeof", "decltype", "sizeof"],
+      "correctAnswer": "typeid"
     },
     {
       "slideId": "CPP_215_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Reading Line by Line Function",
-      "prompt": "Which function reads an entire text line including spaces into std::string?",
-      "options": ["std::getline(file, line)", "file >> line", "file.read(line)", "file.getline_str(line)"],
-      "correctAnswer": "std::getline(file, line)"
+      "title": "typeid Name Method",
+      "prompt": "What does 'typeid(obj).name()' return?",
+      "options": [
+        "Implementation-defined C-style string representing type name",
+        "Guaranteed cross-platform standardized class string",
+        "Unique integer type identifier",
+        "Pointer to class VTable"
+      ],
+      "correctAnswer": "Implementation-defined C-style string representing type name"
     },
     {
       "slideId": "CPP_215_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Binary Mode Flag",
-      "prompt": "Fill in mode flag opening file in binary mode.",
-      "codeSnippet": "std::fstream f(\"data.bin\", std::ios::___);",
-      "options": ["binary", "raw", "bin", "data"],
-      "correctAnswer": "binary"
+      "title": "Header for type_info",
+      "prompt": "Fill in standard header required to use std::type_info object methods.",
+      "codeSnippet": "#include <___>",
+      "options": ["typeinfo", "type_traits", "utility", "typeindex"],
+      "correctAnswer": "typeinfo"
     },
     {
       "slideId": "CPP_215_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "File Pointer Seek Method",
-      "prompt": "Which method moves the read position pointer in an input file stream?",
-      "options": ["seekg()", "seekp()", "tellg()", "tellp()"],
-      "correctAnswer": "seekg()"
+      "title": "Overuse of RTTI",
+      "prompt": "Why is heavy reliance on RTTI and dynamic_cast often considered a code smell?",
+      "options": [
+        "Indicates poor object-oriented design (violates Open/Closed Principle)",
+        "Causes memory leaks on dynamic heap",
+        "Disables C++ template metaprogramming",
+        "Forces single thread execution"
+      ],
+      "correctAnswer": "Indicates poor object-oriented design (violates Open/Closed Principle)"
     },
     {
       "slideId": "CPP_215_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Tell Write Position Method",
-      "prompt": "Fill in method returning current write position in output stream.",
-      "codeSnippet": "std::streampos pos = outFile.___();",
-      "options": ["tellp", "tellg", "getp", "pos"],
-      "correctAnswer": "tellp"
-    },
-    {
-      "slideId": "CPP_215_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "File Flush Operation",
-      "prompt": "What does calling file.flush() do?",
-      "options": [
-        "Forces unwritten buffer data to write directly to physical disk immediately",
-        "Clears file contents to zero bytes",
-        "Closes file stream permanently",
-        "Deletes target file from disk"
-      ],
-      "correctAnswer": "Forces unwritten buffer data to write directly to physical disk immediately"
+      "title": "Disabling RTTI Compiler Flag",
+      "prompt": "Compilers allow disabling RTTI (e.g., -fno-rtti) to save memory size and speed up ___.",
+      "codeSnippet": "// Disabling RTTI saves performance in:\nEmbedded",
+      "options": ["Embedded", "Web", "Cloud", "Scripting"],
+      "correctAnswer": "Embedded"
     }
   ]
 }

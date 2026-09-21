@@ -1,70 +1,136 @@
 {
   "lessonId": "CPP_112",
-  "title": "C++ While & Do-While Loops",
+  "title": "Signed vs Unsigned Modifiers",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_112_S1",
       "type": "CONCEPT",
-      "title": "While vs Do-While",
-      "prompt": "while tests condition before executing loop body; do-while executes loop body AT LEAST ONCE before condition test.",
-      "codeSnippet": "int i = 0;\nwhile(i < 5) { i++; }\n\ndo { i++; } while(i < 10);"
+      "title": "Signed and Unsigned Concept",
+      "prompt": "Unsigned modifiers remove negative numbers, doubling the positive capacity of the variable.",
+      "codeSnippet": "unsigned int positiveOnly = 4000000000U;\nsigned int standardInt = -100;"
     },
     {
       "slideId": "CPP_112_S2",
       "type": "FILL_IN_BLANK",
-      "title": "While Loop Syntax",
-      "prompt": "Fill in loop keyword.",
-      "codeSnippet": "___ (i < 10) { i++; }",
-      "options": ["while", "loop", "repeat", "until"],
-      "correctAnswer": "while"
+      "title": "Unsigned Keyword",
+      "prompt": "Fill in the modifier for non-negative integers.",
+      "codeSnippet": "___ int speed = 120;",
+      "options": [
+        "unsigned",
+        "signed",
+        "positive",
+        "nonneg"
+      ],
+      "correctAnswer": "unsigned"
     },
     {
       "slideId": "CPP_112_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Do-While Minimum Executions",
-      "prompt": "How many times is a do-while loop body guaranteed to execute even if condition is false?",
-      "options": ["At least 1 time", "0 times", "Infinite times", "2 times"],
-      "correctAnswer": "At least 1 time"
+      "title": "Unsigned Minimum Value",
+      "prompt": "What is the minimum value an unsigned integer can hold?",
+      "options": [
+        "0",
+        "-32768",
+        "-2147483648",
+        "-1"
+      ],
+      "correctAnswer": "0"
     },
     {
       "slideId": "CPP_112_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Do Keyword",
-      "prompt": "Fill in starting keyword for post-tested condition loop.",
-      "codeSnippet": "___ { i++; } while(i < 5);",
-      "options": ["do", "repeat", "start", "run"],
-      "correctAnswer": "do"
+      "title": "Signed Keyword",
+      "prompt": "Fill in the explicit modifier that allows both positive and negative values.",
+      "codeSnippet": "___ int temperature = -5;",
+      "options": [
+        "signed",
+        "unsigned",
+        "negative",
+        "both"
+      ],
+      "correctAnswer": "signed"
     },
     {
       "slideId": "CPP_112_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Infinite Loop Cause",
-      "prompt": "What causes an infinite loop in a while(x < 10) construct?",
+      "title": "Default Sign Status",
+      "prompt": "By default, is 'int' signed or unsigned in C++?",
       "options": [
-        "Forgetting to increment x inside loop body",
-        "Declaring x as integer",
-        "Placing braces around body",
-        "Using cout inside body"
+        "Signed by default",
+        "Unsigned by default",
+        "Depends on variable name",
+        "Neither"
       ],
-      "correctAnswer": "Forgetting to increment x inside loop body"
+      "correctAnswer": "Signed by default"
     },
     {
       "slideId": "CPP_112_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Do-While Semicolon Rule",
-      "prompt": "Fill in required symbol at end of do-while line.",
-      "codeSnippet": "do { i++; } while(i < 5)___",
-      "options": [";", ":", "}", "nothing"],
-      "correctAnswer": ";"
+      "title": "Unsigned Literal Suffix",
+      "prompt": "Fill in the literal suffix for unsigned numbers.",
+      "codeSnippet": "unsigned int score = 500___;",
+      "options": [
+        "U",
+        "L",
+        "F",
+        "S"
+      ],
+      "correctAnswer": "U"
     },
     {
       "slideId": "CPP_112_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Condition Evaluation Moment",
-      "prompt": "When is condition checked in standard while loop?",
-      "options": ["Before running loop body", "After running loop body", "During output flush", "At compilation"],
-      "correctAnswer": "Before running loop body"
+      "title": "Assigning Negative to Unsigned",
+      "prompt": "What happens if you assign -1 to an 'unsigned int'?",
+      "options": [
+        "It wraps around to the maximum unsigned value",
+        "It becomes 0",
+        "Compile error",
+        "Program terminates"
+      ],
+      "correctAnswer": "It wraps around to the maximum unsigned value"
+    },
+    {
+      "slideId": "CPP_112_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Unsigned Short",
+      "prompt": "Fill in the data type for an unsigned short integer.",
+      "codeSnippet": "unsigned ___ smallPositive = 65000;",
+      "options": [
+        "short",
+        "int",
+        "char",
+        "long"
+      ],
+      "correctAnswer": "short"
+    },
+    {
+      "slideId": "CPP_112_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Use Case for Unsigned",
+      "prompt": "When is using an 'unsigned int' recommended?",
+      "options": [
+        "For quantities that can never be negative, like array sizes or counts",
+        "For bank balances with debt",
+        "For coordinates that move in all directions",
+        "For degree temperatures"
+      ],
+      "correctAnswer": "For quantities that can never be negative, like array sizes or counts"
+    },
+    {
+      "slideId": "CPP_112_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Shortened Unsigned Syntax",
+      "prompt": "Writing 'unsigned' alone is shorthand for which type?",
+      "codeSnippet": "unsigned age = 20; // Shorthand for unsigned ___",
+      "options": [
+        "int",
+        "short",
+        "char",
+        "long"
+      ],
+      "correctAnswer": "int"
     }
   ]
 }

@@ -1,133 +1,111 @@
 {
   "lessonId": "CPP_205",
-  "title": "C++ Polymorphism & Virtual Functions",
+  "title": "Operator Overloading Basics",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_205_S1",
       "type": "CONCEPT",
-      "title": "Polymorphism Overview",
-      "prompt": "Polymorphism allows derived classes to override methods defined in base classes using virtual functions.",
-      "codeSnippet": "class Animal {\n  public:\n    virtual void sound() { std::cout << \"Animal sound\"; }\n};\nclass Cat : public Animal {\n  public:\n    void sound() override { std::cout << \"Meow\"; }\n};"
+      "title": "Custom Operator Mechanics",
+      "prompt": "Operator overloading lets custom types use built-in C++ operators (`+`, `-`, `==`). Implemented as member or non-member functions.",
+      "codeSnippet": "class Complex {\n    double r, i;\npublic:\n    Complex operator+(const Complex& rhs) const {\n        return Complex(r + rhs.r, i + rhs.i);\n    }\n};"
     },
     {
       "slideId": "CPP_205_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Virtual Keyword",
-      "prompt": "Fill in keyword enabling dynamic dispatch for a base class method.",
-      "codeSnippet": "class Shape {\n  ___ void draw();\n};",
-      "options": ["virtual", "override", "abstract", "dynamic"],
-      "correctAnswer": "virtual"
+      "title": "Operator Keyword",
+      "prompt": "Fill in C++ keyword used to overload built-in operators.",
+      "codeSnippet": "Complex ___+(const Complex& rhs);",
+      "options": ["operator", "overload", "function", "custom"],
+      "correctAnswer": "operator"
     },
     {
       "slideId": "CPP_205_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Override Keyword Specifier",
-      "prompt": "What is the purpose of the 'override' specifier in derived methods?",
+      "title": "Unoverloadable Operators",
+      "prompt": "Which set of operators CANNOT be overloaded in C++?",
       "options": [
-        "Ensures the method overrides a matching virtual function in base class",
-        "Makes function execution twice as fast",
-        "Prevents child classes from redefining it",
-        "Allocates dynamic heap memory"
+        ":: , . , .* , ?",
+        "+ , - , * , /",
+        "== , != , < , >",
+        "[ ] , ( ) , -> , ="
       ],
-      "correctAnswer": "Ensures the method overrides a matching virtual function in base class"
+      "correctAnswer": ":: , . , .* , ?"
     },
     {
       "slideId": "CPP_205_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Pure Virtual Function Syntax",
-      "prompt": "Fill in value assigned to make a virtual function pure virtual.",
-      "codeSnippet": "virtual void calculate() = ___;",
-      "options": ["0", "null", "nullptr", "default"],
-      "correctAnswer": "0"
+      "title": "Equality Comparison Overload",
+      "prompt": "Fill in operator name to compare equality of two custom objects.",
+      "codeSnippet": "bool operator___(const Point& rhs) const;",
+      "options": ["==", "=", "equals", "eq"],
+      "correctAnswer": "=="
     },
     {
       "slideId": "CPP_205_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Abstract Class Definition",
-      "prompt": "What makes a class an Abstract Class in C++?",
+      "title": "Member vs Non-Member Overloading",
+      "prompt": "Why overload binary operator '+' as non-member function when left operand is primitive type (e.g., 'int + Vector')?",
       "options": [
-        "Having at least one pure virtual function (= 0)",
-        "Having all members declared private",
-        "Having no constructor definitions",
-        "Using the abstract keyword"
+        "Member operator requires left operand to be instance of overloaded class",
+        "Non-member operators execute faster",
+        "Primitive types cannot be passed by const reference",
+        "Member operators cannot return objects by value"
       ],
-      "correctAnswer": "Having at least one pure virtual function (= 0)"
+      "correctAnswer": "Member operator requires left operand to be instance of overloaded class"
     },
     {
       "slideId": "CPP_205_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Virtual Destructor Symbol",
-      "prompt": "Base classes with virtual functions should have a virtual ___.",
-      "codeSnippet": "virtual ___Shape() {}",
-      "options": ["~", "!", "*", "&"],
-      "correctAnswer": "~"
+      "title": "Prefix vs Postfix Increment",
+      "prompt": "Fill in dummy parameter type used to distinguish Postfix increment from Prefix.",
+      "codeSnippet": "Number operator++();    // Prefix\nNumber operator++(___); // Postfix",
+      "options": ["int", "void", "double", "bool"],
+      "correctAnswer": "int"
     },
     {
       "slideId": "CPP_205_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "VTable Mechanism",
-      "prompt": "What underlying mechanism implements dynamic dispatch in C++?",
+      "title": "Operator Precedence Rules",
+      "prompt": "What happens to operator precedence and associativity when overloaded?",
       "options": [
-        "Virtual Table (VTable) and vptr",
-        "Compile-time hash maps",
-        "Garbage collector",
-        "Global string comparison"
+        "They remain identical to built-in operator rules and cannot be changed",
+        "Developer can re-define operator precedence levels",
+        "All overloaded operators convert to right-to-left associativity",
+        "Precedence decreases to lowest priority level"
       ],
-      "correctAnswer": "Virtual Table (VTable) and vptr"
+      "correctAnswer": "They remain identical to built-in operator rules and cannot be changed"
     },
     {
       "slideId": "CPP_205_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Final Method Specifier",
-      "prompt": "Fill in specifier that stops further virtual function overriding.",
-      "codeSnippet": "void speak() override ___ ;",
-      "options": ["final", "stop", "sealed", "static"],
-      "correctAnswer": "final"
+      "title": "Subscript Operator Overload",
+      "prompt": "Fill in operator for array-like indexing overload.",
+      "codeSnippet": "int& operator___(size_t index);",
+      "options": ["[]", "()", "->", "{}"] ,
+      "correctAnswer": "[]"
     },
     {
       "slideId": "CPP_205_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Compile-time Polymorphism Example",
-      "prompt": "Which of the following is an example of compile-time polymorphism?",
+      "title": "Function Call Operator ()",
+      "prompt": "What is an object called when it overloads operator()?",
       "options": [
-        "Function Overloading",
-        "Virtual Function Overriding",
-        "Abstract Class Interface",
-        "Dynamic Casting"
+        "Functor (Function Object)",
+        "Lambda Expression",
+        "Function Pointer",
+        "Virtual Dispatcher"
       ],
-      "correctAnswer": "Function Overloading"
+      "correctAnswer": "Functor (Function Object)"
     },
     {
       "slideId": "CPP_205_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Virtual Function Default Argument",
-      "prompt": "Default argument values for virtual functions are bound at ___ time.",
-      "codeSnippet": "// Default arguments are bound at ___ time",
-      "options": ["compile", "run", "link", "load"],
-      "correctAnswer": "compile"
-    },
-    {
-      "slideId": "CPP_205_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Abstract Class Instantiation",
-      "prompt": "Can you directly instantiate an object of an abstract class?",
-      "options": [
-        "No, abstract classes cannot be instantiated",
-        "Yes, freely like normal classes",
-        "Yes, but only using pointers",
-        "Only inside main()"
-      ],
-      "correctAnswer": "No, abstract classes cannot be instantiated"
-    },
-    {
-      "slideId": "CPP_205_S12",
-      "type": "FILL_IN_BLANK",
-      "title": "Pure Virtual Function Implementation",
-      "prompt": "A pure virtual function ___ be provided a default implementation body in base class.",
-      "codeSnippet": "// Pure virtual function ___ have a body in C++",
-      "options": ["can", "cannot", "must", "always"],
-      "correctAnswer": "can"
+      "title": "Const Subscript Read-Only Overload",
+      "prompt": "Fill in return type modifier for const indexing operator.",
+      "codeSnippet": "___ int& operator[](size_t i) const;",
+      "options": ["const", "static", "volatile", "inline"],
+      "correctAnswer": "const"
     }
   ]
 }

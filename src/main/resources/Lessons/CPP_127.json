@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_127",
+  "title": "if & if-else Statements",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_127_S1",
+      "type": "CONCEPT",
+      "title": "if Statement Overview",
+      "prompt": "The 'if' statement executes a block of code only when a condition evaluates to true.",
+      "codeSnippet": "int score = 85;\nif (score >= 50) {\n    std::cout << \"Passed!\";\n}"
+    },
+    {
+      "slideId": "CPP_127_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic if Syntax",
+      "prompt": "Fill in the keyword used for conditional execution.",
+      "codeSnippet": "___ (age >= 18) {\n    canVote = true;\n}",
+      "options": ["if", "when", "check", "case"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "CPP_127_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "else Branch Behavior",
+      "prompt": "When is the code inside an 'else' block executed?",
+      "options": ["When the associated 'if' condition is false", "When the 'if' condition is true", "Always executed regardless of condition", "Only if an error occurs"],
+      "correctAnswer": "When the associated 'if' condition is false"
+    },
+    {
+      "slideId": "CPP_127_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "if-else Structure",
+      "prompt": "Fill in the keyword for alternative execution.",
+      "codeSnippet": "if (score >= 50) {\n    std::cout << \"Pass\";\n} ___ {\n    std::cout << \"Fail\";\n}",
+      "options": ["else", "then", "otherwise", "ifnot"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "CPP_127_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Condition Parentheses Rule",
+      "prompt": "Are parentheses required around the condition in a C++ if-statement?",
+      "options": ["Yes, always required", "No, optional", "Only for complex conditions", "Only when using else"],
+      "correctAnswer": "Yes, always required"
+    },
+    {
+      "slideId": "CPP_127_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Single Statement if",
+      "prompt": "Fill in the missing symbol to enclose the condition.",
+      "codeSnippet": "if ___val > 0) {\n    pos = true;\n}",
+      "options": ["(", "{", "[", "<"],
+      "correctAnswer": "("
+    },
+    {
+      "slideId": "CPP_127_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Block Braces Importance",
+      "prompt": "What happens if curly braces {} are omitted in an 'if' block with multiple statements?",
+      "options": ["Only the first statement is tied to the 'if' condition", "All statements are included in the 'if' block", "Compile error occurs immediately", "Execution speed improves"],
+      "correctAnswer": "Only the first statement is tied to the 'if' condition"
+    },
+    {
+      "slideId": "CPP_127_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "if-else Output Logic",
+      "prompt": "What gets printed when x = 3?",
+      "codeSnippet": "if (x > 5) std::cout << \"A\";\nelse std::cout << \"B\";",
+      "options": ["B", "A", "AB", "Nothing"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "CPP_127_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dangling else Problem",
+      "prompt": "To which 'if' does an 'else' attach by default in nested statements?",
+      "options": ["The nearest preceding 'if' without an 'else'", "The very first 'if'", "The outer 'if'", "It causes a compile error"],
+      "correctAnswer": "The nearest preceding 'if' without an 'else'"
+    },
+    {
+      "slideId": "CPP_127_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Condition directly",
+      "prompt": "Complete the statement to check boolean variable 'isReady'.",
+      "codeSnippet": "if (___) {\n    startProcess();\n}",
+      "options": ["isReady", "isReady == true", "isReady()", "bool(isReady)"],
+      "correctAnswer": "isReady"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_140",
+  "title": "Iterators & STL Loop Integration",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_140_S1",
+      "type": "CONCEPT",
+      "title": "STL Iterators Concept",
+      "prompt": "An iterator is an object that points to elements inside an STL container, acting as a generalized pointer for iteration.",
+      "codeSnippet": "std::vector<int> vec = {10, 20, 30};\nfor (auto it = vec.begin(); it != vec.end(); ++it) {\n    std::cout << *it << \" \";\n}"
+    },
+    {
+      "slideId": "CPP_140_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "begin() Method Syntax",
+      "prompt": "Fill in the method obtaining the iterator to the first element.",
+      "codeSnippet": "auto it = container.___();",
+      "options": ["begin", "front", "first", "start"],
+      "correctAnswer": "begin"
+    },
+    {
+      "slideId": "CPP_140_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "end() Iterator Meaning",
+      "prompt": "What does container.end() point to?",
+      "options": ["One position PAST the last element (past-the-end element)", "The actual last element", "The first element", "A null pointer"],
+      "correctAnswer": "One position PAST the last element (past-the-end element)"
+    },
+    {
+      "slideId": "CPP_140_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Dereferencing Iterator",
+      "prompt": "Fill in the operator to access the value pointed to by an iterator.",
+      "codeSnippet": "std::cout << ___it;",
+      "options": ["*", "&", "->", "."],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_140_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Iterator Usage",
+      "prompt": "When should you use cbegin() and cend()?",
+      "options": ["When you want read-only access to container elements via iterators", "When iterating backwards", "When container is empty", "When using raw pointers"],
+      "correctAnswer": "When you want read-only access to container elements via iterators"
+    },
+    {
+      "slideId": "CPP_140_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Reverse Iteration Method",
+      "prompt": "Fill in the method to obtain a reverse starting iterator.",
+      "codeSnippet": "for (auto it = vec.___(); it != vec.rend(); ++it) {}",
+      "options": ["rbegin", "begin", "rend", "last"],
+      "correctAnswer": "rbegin"
+    },
+    {
+      "slideId": "CPP_140_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Invalidation Danger",
+      "prompt": "What happens if you push_back() into a std::vector while iterating over it?",
+      "options": ["Vector reallocation may invalidate existing iterators, causing undefined behavior", "Iterators automatically adjust", "Compile error", "Loop instantly breaks safely"],
+      "correctAnswer": "Vector reallocation may invalidate existing iterators, causing undefined behavior"
+    },
+    {
+      "slideId": "CPP_140_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "erase() Return Value Pattern",
+      "prompt": "Fill in method that returns a valid iterator after deleting an element during iteration.",
+      "codeSnippet": "if (*it == target) {\n    it = vec.___(it);\n} else {\n    ++it;\n}",
+      "options": ["erase", "remove", "pop", "delete"],
+      "correctAnswer": "erase"
+    },
+    {
+      "slideId": "CPP_140_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::for_each Algorithm",
+      "prompt": "Which header contains 'std::for_each' for applying a function to a range?",
+      "options": ["<algorithm>", "<numeric>", "<iterator>", "<utility>"],
+      "correctAnswer": "<algorithm>"
+    },
+    {
+      "slideId": "CPP_140_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::for_each Lambda Syntax",
+      "prompt": "Complete the std::for_each call with a lambda.",
+      "codeSnippet": "std::for_each(vec.begin(), vec.end(), [](int x) {\n    std::cout << x;\n}___;",
+      "options": [")", "]", "}", ";"],
+      "correctAnswer": ")"
+    }
+  ]
+}

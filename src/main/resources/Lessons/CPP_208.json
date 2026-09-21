@@ -1,114 +1,111 @@
 {
   "lessonId": "CPP_208",
-  "title": "C++ Exception Handling (try...catch)",
+  "title": "Nested Classes & Pimpl Idiom",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_208_S1",
       "type": "CONCEPT",
-      "title": "Exception Handling Overview",
-      "prompt": "Exceptions handle runtime errors gracefully using try, throw, and catch blocks.",
-      "codeSnippet": "try {\n    if (denom == 0) throw std::runtime_error(\"Div zero\");\n} catch (const std::exception& e) {\n    std::cout << e.what();\n}"
+      "title": "Pimpl Idiom (Pointer to Implementation)",
+      "prompt": "Pimpl hides private implementation members behind a forward-declared pointer, reducing compilation dependencies and build times.",
+      "codeSnippet": "// Widget.h\nclass Widget {\n    class Impl; // Forward declaration\n    std::unique_ptr<Impl> pImpl;\n};"
     },
     {
       "slideId": "CPP_208_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Try Block Keyword",
-      "prompt": "Fill in keyword opening code block monitored for exceptions.",
-      "codeSnippet": "___ { doTask(); } catch(...) {}",
-      "options": ["try", "check", "test", "attempt"],
-      "correctAnswer": "try"
+      "title": "Forward Declaration Syntax",
+      "prompt": "Fill in keyword to forward declare implementation class in header.",
+      "codeSnippet": "class Window {\n    ___ Impl;\n    Impl* pImpl;\n};",
+      "options": ["class", "struct", "typename", "using"],
+      "correctAnswer": "class"
     },
     {
       "slideId": "CPP_208_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Throw Execution Action",
-      "prompt": "What happens when a throw statement executes?",
+      "title": "Primary Pimpl Idiom Benefit",
+      "prompt": "What is the key advantage of using the Pimpl idiom in commercial C++ libraries?",
       "options": [
-        "Execution jumps to nearest matching catch handler",
-        "Program terminates with return code 0",
-        "Prints warning to console and continues next line",
-        "Resets variables to zero"
+        "ABI stability and faster compile times (changes to Impl don't recompile client code)",
+        "Faster runtime speed due to extra pointer indirection",
+        "Automatic thread synchronization",
+        "Elimination of dynamic heap memory allocation"
       ],
-      "correctAnswer": "Execution jumps to nearest matching catch handler"
+      "correctAnswer": "ABI stability and faster compile times (changes to Impl don't recompile client code)"
     },
     {
       "slideId": "CPP_208_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Catch All Handler Syntax",
-      "prompt": "Fill in ellipsis operator catching all exception types.",
-      "codeSnippet": "catch (___) { std::cout << \"Error\"; }",
-      "options": ["...", "etc", "auto", "all"],
-      "correctAnswer": "..."
+      "title": "Smart Pointer for Pimpl",
+      "prompt": "Fill in recommended modern smart pointer managing pImpl lifetime.",
+      "codeSnippet": "std::___<Impl> pImpl;",
+      "options": ["unique_ptr", "shared_ptr", "weak_ptr", "auto_ptr"],
+      "correctAnswer": "unique_ptr"
     },
     {
       "slideId": "CPP_208_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Standard Exception Base Class",
-      "prompt": "What is the base class for standard C++ library exceptions?",
-      "options": ["std::exception", "std::error", "std::fault", "std::runtime_issue"],
-      "correctAnswer": "std::exception"
+      "title": "Pimpl Destructor Requirement",
+      "prompt": "Why must the destructor of a Pimpl class be defined in the .cpp implementation file rather than header?",
+      "options": [
+        "To ensure Impl type is complete when std::unique_ptr destructor is instantiated",
+        "Required by C++ virtual table layout rules",
+        "Header destructors automatically inline and fail",
+        "To prevent duplicate symbol linker errors"
+      ],
+      "correctAnswer": "To ensure Impl type is complete when std::unique_ptr destructor is instantiated"
     },
     {
       "slideId": "CPP_208_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Exception message Method",
-      "prompt": "Fill in method returning exception error string.",
-      "codeSnippet": "std::cout << e.___();",
-      "options": ["what", "getMessage", "str", "print"],
-      "correctAnswer": "what"
+      "title": "Nested Class Scope Resolution",
+      "prompt": "Fill in operator to access public nested class outside enclosing class scope.",
+      "codeSnippet": "Outer___Inner obj;",
+      "options": ["::", ".", "->", "#"],
+      "correctAnswer": "::"
     },
     {
       "slideId": "CPP_208_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Uncaught Exception Result",
-      "prompt": "What happens if an exception is thrown but no catch handler matches?",
+      "title": "Nested Class Outer Scope Access",
+      "prompt": "Can a nested class access private members of its enclosing (outer) class in modern C++?",
       "options": [
-        "std::terminate() is invoked, aborting execution",
-        "Program ignores error and continues",
-        "Memory is cleared automatically",
-        "Code restarts main()"
+        "Yes, nested class has full access rights to enclosing class members",
+        "No, nested classes have zero access to outer class members",
+        "Only if nested class inherits from outer class",
+        "Only if outer class members are static"
       ],
-      "correctAnswer": "std::terminate() is invoked, aborting execution"
+      "correctAnswer": "Yes, nested class has full access rights to enclosing class members"
     },
     {
       "slideId": "CPP_208_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Noexcept Specifier",
-      "prompt": "Fill in specifier guaranteeing a function will not throw exceptions.",
-      "codeSnippet": "void safeFunc() ___;",
-      "options": ["noexcept", "nothrow", "final", "const"],
-      "correctAnswer": "noexcept"
+      "title": "Incomplete Type Allocation",
+      "prompt": "Forward declared Impl class is an ___ type inside header file.",
+      "codeSnippet": "// Forward declared Impl is:\nIncomplete",
+      "options": ["Incomplete", "Complete", "Abstract", "Virtual"],
+      "correctAnswer": "Incomplete"
     },
     {
       "slideId": "CPP_208_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Rethrowing Exception Syntax",
-      "prompt": "How do you rethrow an exception inside a catch block?",
-      "options": ["throw;", "throw e;", "rethrow;", "catch.throw()"],
-      "correctAnswer": "throw;"
+      "title": "Pimpl Runtime Overhead",
+      "prompt": "What is the main performance trade-off associated with Pimpl Idiom?",
+      "options": [
+        "Dynamic memory allocation cost and pointer indirection overhead",
+        "Double code compilation time",
+        "Increased stack frame size",
+        "Cache line eviction during vector sorting"
+      ],
+      "correctAnswer": "Dynamic memory allocation cost and pointer indirection overhead"
     },
     {
       "slideId": "CPP_208_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Standard Exception Header",
-      "prompt": "Fill in header file for std::runtime_error.",
-      "codeSnippet": "#include <___>",
-      "options": ["stdexcept", "exception", "cerror", "stdlib.h"],
-      "correctAnswer": "stdexcept"
-    },
-    {
-      "slideId": "CPP_208_S11",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Multiple Catch Blocks Evaluation",
-      "prompt": "How are multiple catch blocks evaluated when an exception is thrown?",
-      "options": [
-        "In order from top to bottom; first matching block executes",
-        "In random order",
-        "All matching catch blocks run sequentially",
-        "In reverse order from bottom to top"
-      ],
-      "correctAnswer": "In order from top to bottom; first matching block executes"
+      "title": "Impl Instantiation in Constructor",
+      "prompt": "Fill in function allocating Impl object inside .cpp file constructor.",
+      "codeSnippet": "Widget::Widget() : pImpl(std::___<Impl>()) {}",
+      "options": ["make_unique", "make_shared", "unique_ptr", "alloc"],
+      "correctAnswer": "make_unique"
     }
   ]
 }

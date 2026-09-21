@@ -1,136 +1,111 @@
 {
   "lessonId": "CPP_213",
-  "title": "C++ STL Iterators & Algorithms",
+  "title": "Virtual Destructors & Polymorphic Memory Cleanup",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_213_S1",
       "type": "CONCEPT",
-      "title": "Iterators & <algorithm>",
-      "prompt": "Iterators act as generalized pointers to elements. <algorithm> offers sort, find, count, and transform.",
-      "codeSnippet": "#include <algorithm>\nstd::vector<int> v = {4, 1, 3};\nstd::sort(v.begin(), v.end());"
+      "title": "Virtual Destructor Rule",
+      "prompt": "Always declare a virtual destructor in a base class intended for polymorphic deletion to prevent undefined behavior and memory leaks.",
+      "codeSnippet": "class Base {\npublic:\n    virtual ~Base() = default; // Essential!\n};\nBase* ptr = new Derived();\ndelete ptr; // Safely calls ~Derived() then ~Base()"
     },
     {
       "slideId": "CPP_213_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Begin Function",
-      "prompt": "Fill in function returning iterator to container start.",
-      "codeSnippet": "auto it = v.___();",
-      "options": [
-        "begin",
-        "start",
-        "front",
-        "first"
-      ],
-      "correctAnswer": "begin"
+      "title": "Virtual Destructor Declaration",
+      "prompt": "Fill in the keyword to declare a safe polymorphic base destructor.",
+      "codeSnippet": "class Base {\npublic:\n    ___ ~Base() = default;\n};",
+      "options": ["virtual", "override", "explicit", "static"],
+      "correctAnswer": "virtual"
     },
     {
       "slideId": "CPP_213_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Sort Algorithm Syntax",
-      "prompt": "Which code snippet sorts vector 'v' in ascending order?",
+      "title": "Non-Virtual Destructor Bug",
+      "prompt": "What happens if you execute 'delete basePtr' where basePtr points to a Derived object, but Base destructor is NOT virtual?",
       "options": [
-        "std::sort(v.begin(), v.end());",
-        "v.sort();",
-        "std::sort(v);",
-        "sort(v.first, v.last);"
+        "Undefined behavior (only Base destructor runs, causing memory leak of Derived resources)",
+        "Both Base and Derived destructors run safely",
+        "Compiler prevents program compilation",
+        "Derived destructor runs, but Base destructor is skipped"
       ],
-      "correctAnswer": "std::sort(v.begin(), v.end());"
+      "correctAnswer": "Undefined behavior (only Base destructor runs, causing memory leak of Derived resources)"
     },
     {
       "slideId": "CPP_213_S4",
       "type": "FILL_IN_BLANK",
-      "title": "End Iterator Position",
-      "prompt": "v.end() points to position immediately ___ last element.",
-      "codeSnippet": "// v.end() points ___ last element",
-      "options": [
-        "after",
-        "at",
-        "before",
-        "inside"
-      ],
-      "correctAnswer": "after"
+      "title": "Default Destructor Generation",
+      "prompt": "Fill in the keyword to generate default virtual destructor implementation.",
+      "codeSnippet": "virtual ~Base() = ___;",
+      "options": ["default", "delete", "0", "inline"],
+      "correctAnswer": "default"
     },
     {
       "slideId": "CPP_213_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Find Algorithm Return",
-      "prompt": "What does std::find(v.begin(), v.end(), val) return if val exists?",
+      "title": "When to Omit Virtual Destructor",
+      "prompt": "When is it safe to omit a virtual destructor in a class?",
       "options": [
-        "Iterator pointing to matching element",
-        "Boolean true",
-        "Integer index",
-        "Pointer to copy"
+        "When the class is not intended to be used as a polymorphic base class",
+        "When the class contains private member variables",
+        "When using smart pointers exclusively",
+        "When the class inherits from std::string"
       ],
-      "correctAnswer": "Iterator pointing to matching element"
+      "correctAnswer": "When the class is not intended to be used as a polymorphic base class"
     },
     {
       "slideId": "CPP_213_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Dereferencing Iterator",
-      "prompt": "Fill in operator to access value pointed by iterator.",
-      "codeSnippet": "int val = ___it;",
-      "options": [
-        "*",
-        "&",
-        "->",
-        "val"
-      ],
-      "correctAnswer": "*"
+      "title": "Protected Non-Virtual Destructor Pattern",
+      "prompt": "To prevent deletion via base pointer without adding vtable overhead, make destructor ___.",
+      "codeSnippet": "class Base {\n___:\n    ~Base() = default;\n};",
+      "options": ["protected", "private", "public", "friend"],
+      "correctAnswer": "protected"
     },
     {
       "slideId": "CPP_213_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Reverse Iterators",
-      "prompt": "Which methods return iterators for iterating backward?",
+      "title": "Smart Pointer Polymorphic Deletion",
+      "prompt": "How does 'std::shared_ptr<Base> sp = std::make_shared<Derived>();' handle deletion if ~Base() is non-virtual?",
       "options": [
-        "rbegin() and rend()",
-        "back() and front()",
-        "reverse_begin() and reverse_end()",
-        "end() and begin()"
+        "shared_ptr captures the correct Derived deleter at construction, avoiding memory leak",
+        "Triggers runtime double free error",
+        "Throws std::bad_cast exception",
+        "Leaks the Derived class portion completely"
       ],
-      "correctAnswer": "rbegin() and rend()"
+      "correctAnswer": "shared_ptr captures the correct Derived deleter at construction, avoiding memory leak"
     },
     {
       "slideId": "CPP_213_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Header for Algorithms",
-      "prompt": "Fill in header for std::sort and std::find.",
-      "codeSnippet": "#include <___>",
-      "options": [
-        "algorithm",
-        "numeric",
-        "iterator",
-        "utility"
-      ],
-      "correctAnswer": "algorithm"
+      "title": "Unique Pointer Polymorphic Deletion Constraint",
+      "prompt": "Unlike shared_ptr, std::unique_ptr<Base> managed objects ___ require virtual base destructors.",
+      "codeSnippet": "// unique_ptr polymorphic deletion without virtual destructor is:\nUnsafe",
+      "options": ["Unsafe", "Safe", "Guaranteed", "Automatic"],
+      "correctAnswer": "Unsafe"
     },
     {
       "slideId": "CPP_213_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Binary Search Pre-condition",
-      "prompt": "What pre-condition MUST be met before calling std::binary_search?",
+      "title": "Virtual Constructing Idiom",
+      "prompt": "Since constructors cannot be virtual in C++, how is 'virtual object cloning' implemented?",
       "options": [
-        "Elements in range must be sorted",
-        "Range size must be even",
-        "Container must be vector",
-        "Elements must be positive"
+        "By defining a custom virtual clone() method returning a copy of derived object",
+        "By calling new operator inside destructor",
+        "By type casting vtable pointer manually",
+        "By making constructor protected"
       ],
-      "correctAnswer": "Elements in range must be sorted"
+      "correctAnswer": "By defining a custom virtual clone() method returning a copy of derived object"
     },
     {
       "slideId": "CPP_213_S10",
       "type": "FILL_IN_BLANK",
-      "title": "Const Iterator Keyword",
-      "prompt": "Fill in method returning const iterator to start of container.",
-      "codeSnippet": "auto it = v.___();",
-      "options": [
-        "cbegin",
-        "const_begin",
-        "begin_const",
-        "cstart"
-      ],
-      "correctAnswer": "cbegin"
+      "title": "Virtual Constructor Possibility",
+      "prompt": "Can a constructor be declared 'virtual' in C++?",
+      "codeSnippet": "// Virtual constructor declaration is:\nIllegal",
+      "options": ["Illegal", "Valid", "Recommended", "Optional"],
+      "correctAnswer": "Illegal"
     }
   ]
 }

@@ -1,87 +1,99 @@
 {
   "lessonId": "CPP_117",
-  "title": "C++ Pointers (Premium)",
-  "isPremium": true,
+  "title": "Implicit & Explicit Type Casting",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_117_S1",
       "type": "CONCEPT",
-      "title": "What is a Pointer?",
-      "prompt": "A pointer is a variable that stores the memory address of another variable as its value.",
-      "codeSnippet": "string food = \"Pizza\";\nstring* ptr = &food;\nstd::cout << ptr; // Outputs memory address"
+      "title": "Type Casting Overview",
+      "prompt": "Converting a value from one data type to another can happen implicitly (automatically) or explicitly (manually).",
+      "codeSnippet": "double d = 9.8;\nint i = d; // Implicit casting (truncates to 9)\nint staticCast = static_cast<int>(d); // Explicit casting"
     },
     {
       "slideId": "CPP_117_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Address-of Operator",
-      "prompt": "Fill in the operator used to get the memory address of a variable.",
-      "codeSnippet": "string food = \"Pizza\";\nstd::cout << ___food;",
-      "options": ["&", "*", "->", "ptr"],
-      "correctAnswer": "&"
+      "title": "C-Style Explicit Cast",
+      "prompt": "Fill in the target type in parentheses for C-style cast.",
+      "codeSnippet": "double pi = 3.14;\nint integerPi = (___)pi;",
+      "options": ["int", "double", "float", "char"],
+      "correctAnswer": "int"
     },
     {
       "slideId": "CPP_117_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Pointer Declaration Syntax",
-      "prompt": "Which symbol is used to declare a pointer variable in C++?",
-      "options": ["*", "&", "#", "->"],
-      "correctAnswer": "*"
+      "title": "Recommended Modern C++ Cast",
+      "prompt": "Which cast operator is safest and recommended in modern C++ for standard conversions?",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
     },
     {
       "slideId": "CPP_117_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Dereferencing Pointer",
-      "prompt": "Fill in the symbol to dereference a pointer and get the value stored at the memory address.",
-      "codeSnippet": "std::cout << ___ptr; // Outputs 'Pizza'",
-      "options": ["*", "&", "val", "->"],
-      "correctAnswer": "*"
+      "title": "static_cast Syntax",
+      "prompt": "Fill in the template keyword for C++ explicit type casting.",
+      "codeSnippet": "int val = ___<int>(5.7);",
+      "options": ["static_cast", "type_cast", "convert_cast", "explicit_cast"],
+      "correctAnswer": "static_cast"
     },
     {
       "slideId": "CPP_117_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Null Pointer Concept",
-      "prompt": "What is a pointer that does not point to any memory location called?",
-      "options": ["Null pointer (nullptr)", "Void pointer", "Dangling pointer", "Wild pointer"],
-      "correctAnswer": "Null pointer (nullptr)"
+      "title": "Narrowing Conversion Data Loss",
+      "prompt": "What happens to the decimal part during 'int x = 7.9;'?",
+      "options": ["Truncated (dropped, x becomes 7)", "Rounded to nearest integer (8)", "Raises compile error", "Replaced with zero"],
+      "correctAnswer": "Truncated (dropped, x becomes 7)"
     },
     {
       "slideId": "CPP_117_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Modifying Value via Pointer",
-      "prompt": "Complete the code to change the value of 'food' to 'Burger' using its pointer.",
-      "codeSnippet": "___ptr = \"Burger\";",
-      "options": ["*", "&", "ptr", "->"],
-      "correctAnswer": "*"
+      "title": "Char to Int Implicit Cast",
+      "prompt": "Assigning 'A' to int results in its ASCII code. Complete the code.",
+      "codeSnippet": "int code = 'A'; // code becomes ___",
+      "options": ["65", "'A'", "1", "97"],
+      "correctAnswer": "65"
     },
     {
       "slideId": "CPP_117_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Pointer Arithmetic Increment",
-      "prompt": "If int pointer 'p' points to address 0x1000, what address does 'p + 1' point to on 32-bit int (4 bytes)?",
-      "options": ["0x1004", "0x1001", "0x1002", "0x1008"],
-      "correctAnswer": "0x1004"
+      "title": "Promotion in Arithmetic Expressions",
+      "prompt": "In expression '5 + 2.0', what type is '5' implicitly converted to before addition?",
+      "options": ["double", "int", "float", "long"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_117_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Void Pointer Type",
-      "prompt": "Fill in generic pointer keyword that points to data of any type.",
-      "codeSnippet": "___* genericPtr = &data;",
-      "options": ["void", "auto", "generic", "any"],
-      "correctAnswer": "void"
+      "title": "Explicit Division Casting",
+      "prompt": "Fill in the cast to avoid integer division truncation of 5 / 2.",
+      "codeSnippet": "double res = static_cast<___>(5) / 2;",
+      "options": ["double", "int", "short", "char"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_117_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Pointer and Array Relationship",
-      "prompt": "In C++, what does the name of an array act as when evaluated as a value?",
-      "options": [
-        "A pointer to its first element",
-        "A constant string value",
-        "A reference to the entire array size",
-        "An integer count of elements"
-      ],
-      "correctAnswer": "A pointer to its first element"
+      "title": "C-style vs static_cast",
+      "prompt": "Why is static_cast preferred over traditional C-style casting (type)val?",
+      "options": ["Checked at compile-time and more visible in source code", "Faster at runtime", "Generates smaller machine code", "Saves memory"],
+      "correctAnswer": "Checked at compile-time and more visible in source code"
+    },
+    {
+      "slideId": "CPP_117_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Double to Float Casting",
+      "prompt": "Fill in the closing bracket for static_cast syntax.",
+      "codeSnippet": "float f = static_cast<float___(3.14159);",
+      "options": [">", ")", "]", "}"],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_117_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implicit Conversion Direction",
+      "prompt": "Implicit type conversion generally promotes variables from:",
+      "options": ["Smaller memory types to larger memory types (widening)", "Larger types to smaller types", "Floating types to integer types only", "String types to number types"],
+      "correctAnswer": "Smaller memory types to larger memory types (widening)"
     }
   ]
 }

@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_148",
+  "title": "std::array Containers (C++11)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_148_S1",
+      "type": "CONCEPT",
+      "title": "std::array Overview",
+      "prompt": "Introduced in C++11, std::array combines the zero-overhead performance of fixed-size raw arrays with STL container safety and features.",
+      "codeSnippet": "#include <array>\nstd::array<int, 5> arr = {1, 2, 3, 4, 5};\nstd::cout << arr.size();"
+    },
+    {
+      "slideId": "CPP_148_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::array Template Parameters",
+      "prompt": "Fill in data type and fixed size template arguments.",
+      "codeSnippet": "std::array<___, 10> numbers;",
+      "options": ["int", "10", "auto", "size_t"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_148_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Allocation Location",
+      "prompt": "Where is the underlying data stored for a local 'std::array<int, 100>' variable?",
+      "options": ["On the stack (same as raw array)", "On the heap", "In global static memory", "In CPU registers"],
+      "correctAnswer": "On the stack (same as raw array)"
+    },
+    {
+      "slideId": "CPP_148_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Fill Method",
+      "prompt": "Fill in method name that sets all elements to a value.",
+      "codeSnippet": "std::array<int, 5> arr;\narr.___(0);",
+      "options": ["fill", "reset", "clear", "assign"],
+      "correctAnswer": "fill"
+    },
+    {
+      "slideId": "CPP_148_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Raw Array Conversion Overhead",
+      "prompt": "Is there any memory or runtime overhead when using std::array compared to raw C arrays?",
+      "options": ["Zero overhead; it wraps a raw array with zero performance cost", "10% memory overhead", "Calls malloc dynamically", "Slower indexing by 2x"],
+      "correctAnswer": "Zero overhead; it wraps a raw array with zero performance cost"
+    },
+    {
+      "slideId": "CPP_148_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Raw Pointer Access Method",
+      "prompt": "Fill in method returning direct raw pointer to internal array buffer.",
+      "codeSnippet": "int* ptr = arr.___();",
+      "options": ["data", "raw", "get", "pointer"],
+      "correctAnswer": "data"
+    },
+    {
+      "slideId": "CPP_148_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copy Assignment Feature",
+      "prompt": "Does std::array support direct copy assignment (arr1 = arr2)?",
+      "options": ["Yes, value copy assignment is fully supported", "No, fails compile", "Only using std::copy", "Only if size is 0"],
+      "correctAnswer": "Yes, value copy assignment is fully supported"
+    },
+    {
+      "slideId": "CPP_148_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "C++17 std::to_array Deduction",
+      "prompt": "Fill in helper function creating std::array from raw initializer.",
+      "codeSnippet": "auto arr = std::___({1, 2, 3});",
+      "options": ["to_array", "make_array", "create_array", "as_array"],
+      "correctAnswer": "to_array"
+    },
+    {
+      "slideId": "CPP_148_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "STL Algorithm Integration",
+      "prompt": "Can std::array be used directly with standard algorithms like std::sort?",
+      "options": ["Yes, using arr.begin() and arr.end()", "No, algorithms require std::vector", "Only in debug mode", "Only with C++20 ranges"],
+      "correctAnswer": "Yes, using arr.begin() and arr.end()"
+    },
+    {
+      "slideId": "CPP_148_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Element Access by Bounds-Checked at",
+      "prompt": "Fill in method throwing std::out_of_range exception on invalid index.",
+      "codeSnippet": "arr.___(10) = 50;",
+      "options": ["at", "get", "check", "bound"],
+      "correctAnswer": "at"
+    }
+  ]
+}

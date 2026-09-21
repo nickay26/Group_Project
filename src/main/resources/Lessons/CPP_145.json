@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_145",
+  "title": "Multi-Dimensional Arrays & Matrices",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_145_S1",
+      "type": "CONCEPT",
+      "title": "2D Array Concept",
+      "prompt": "A 2D array is an array of arrays organized into rows and columns, stored in row-major order in memory.",
+      "codeSnippet": "int matrix[2][3] = {\n    {1, 2, 3},\n    {4, 5, 6}\n};\nstd::cout << matrix[1][0]; // Prints 4 (Row 1, Col 0)"
+    },
+    {
+      "slideId": "CPP_145_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "2D Array Declaration",
+      "prompt": "Fill in row and column dimension bounds for 3x3 matrix.",
+      "codeSnippet": "int grid[3][___];",
+      "options": ["3", "2", "9", "0"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_145_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Row-Major Memory Order",
+      "prompt": "How are 2D arrays stored sequentially in physical RAM in C++?",
+      "options": ["Row by row (Row-major order)", "Column by column (Column-major order)", "Diagonal order", "Interleaved blocks"],
+      "correctAnswer": "Row by row (Row-major order)"
+    },
+    {
+      "slideId": "CPP_145_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "2D Array Element Access",
+      "prompt": "Fill in the correct brackets to access row 0, column 2.",
+      "codeSnippet": "int val = matrix[0][___];",
+      "options": ["2", "0", "1", "3"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "CPP_145_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Parameter Array Bounds",
+      "prompt": "When passing a 2D array to a function, which dimension size MUST be explicitly specified?",
+      "options": ["The column dimension (and all higher dimensions)", "The row dimension only", "None of the dimensions", "Both dimensions can be left blank"],
+      "correctAnswer": "The column dimension (and all higher dimensions)"
+    },
+    {
+      "slideId": "CPP_145_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Passing 2D Array to Function",
+      "prompt": "Fill in column bound in parameter list.",
+      "codeSnippet": "void printGrid(int grid[][4], int rows) {\n    // ...\n}",
+      "options": ["4", "", "rows", "int"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "CPP_145_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "3D Array Dimension Count",
+      "prompt": "How many total elements are in an array declared as 'int cube[2][3][4]'?",
+      "options": ["24", "9", "12", "48"],
+      "correctAnswer": "24"
+    },
+    {
+      "slideId": "CPP_145_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested Traversal Loops",
+      "prompt": "Fill in inner loop limit for columns.",
+      "codeSnippet": "for (int r = 0; r < R; r++) {\n    for (int c = 0; c < ___; c++) {\n        process(m[r][c]);\n    }\n}",
+      "options": ["C", "R", "r", "0"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "CPP_145_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Partial Matrix Initialization",
+      "prompt": "What happens to unspecified elements in 'int m[2][2] = {{1}};'?",
+      "options": ["They are automatically initialized to 0", "They hold garbage values", "Compile error", "They equal 1"],
+      "correctAnswer": "They are automatically initialized to 0"
+    },
+    {
+      "slideId": "CPP_145_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Matrix Flattening Formula",
+      "prompt": "To convert 2D index (r, c) into 1D array index with C columns, calculate: r * ___ + c.",
+      "codeSnippet": "int index1D = r * ___ + c;",
+      "options": ["C", "R", "r", "1"],
+      "correctAnswer": "C"
+    }
+  ]
+}
