@@ -27,36 +27,43 @@ public class DatabaseManager {
     // 1. USER AUTHENTICATION & SYNC
     // ==========================================
 
+    // Replace findOrCreateGoogleUser in DatabaseManager.java
     public static User findOrCreateGoogleUser(String email, String name, String profilePicUrl) {
         String selectSql = "SELECT * FROM User_table WHERE Email = ?";
-        String insertSql = "INSERT INTO User_table (Name, Email, Password, Profile, last_login_date) VALUES (?, ?, 'GOOGLE_AUTH', ?, CURRENT_DATE())";
         String updateSql = "UPDATE User_table SET last_login_date = CURRENT_DATE() WHERE User_ID = ?";
+        String insertSql = "INSERT INTO User_table (Name, Email, Password, Profile, last_login_date, XP, Streak, coin, brain_count) " +
+                "VALUES (?, ?, 'GOOGLE_AUTH', ?, CURRENT_DATE(), 0, 0, 0, 5)";
 
         try (Connection conn = getConnection()) {
+            // 1. Search for existing Google user in local MySQL database
             try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
                 stmt.setString(1, email);
-                ResultSet rs = stmt.executeQuery();
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        User user = mapResultSetToUser(rs); // Map user record FIRST
 
-                if (rs.next()) {
-                    int userId = rs.getInt("User_ID");
-                    try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
-                        updateStmt.setInt(1, userId);
-                        updateStmt.executeUpdate();
+                        // Update last_login_date using mapped User_ID
+                        try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                            updateStmt.setInt(1, user.getUserId());
+                            updateStmt.executeUpdate();
+                        }
+                        return user;
                     }
-                    return mapResultSetToUser(rs);
                 }
             }
 
+            // 2. Insert new user if email does not exist yet
             try (PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
                 insertStmt.setString(1, name != null ? name : "Google User");
                 insertStmt.setString(2, email);
                 insertStmt.setString(3, profilePicUrl);
                 insertStmt.executeUpdate();
 
-                ResultSet keys = insertStmt.getGeneratedKeys();
-                if (keys.next()) {
-                    int newUserId = keys.getInt(1);
-                    return new User(newUserId, name, email, profilePicUrl, 0, 0, 0, 5);
+                try (ResultSet keys = insertStmt.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        int newUserId = keys.getInt(1);
+                        return new User(newUserId, name, email, profilePicUrl, 0, 0, 0, 5);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -110,16 +117,16 @@ public class DatabaseManager {
     public static List<Course> getCoursesForUser(int userId) {
         List<Course> courses = new ArrayList<>();
         String sql = """
-            SELECT 
-                c.Course_ID, 
-                c.Course_Name, 
-                COUNT(DISTINCT l.Lesson_ID) AS total_lessons,
-                COALESCE(up.completed_lesson, 0) AS completed_lessons
-            FROM Course_table c
-            LEFT JOIN Lesson_table l ON c.Course_ID = l.Course_ID
-            LEFT JOIN user_progress up ON c.Course_ID = up.Course_id AND up.User_id = ?
-            GROUP BY c.Course_ID, c.Course_Name, up.completed_lesson
-        """;
+        SELECT 
+            c.Course_ID, 
+            c.Course_Name, 
+            COUNT(DISTINCT l.Lesson_ID) AS total_lessons,
+            COALESCE(MAX(up.completed_lesson), 0) AS completed_lessons
+        FROM Course_table c
+        LEFT JOIN Lesson_table l ON c.Course_ID = l.Course_ID
+        LEFT JOIN user_progress up ON c.Course_ID = up.Course_id AND up.User_id = ?
+        GROUP BY c.Course_ID, c.Course_Name
+    """;
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -212,11 +219,10 @@ public class DatabaseManager {
 
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
-        String query = "SELECT Lesson_ID, Course_ID, Lesson_order, Title, XP, content, lesson_type " +
-                "FROM lesson_table WHERE Course_ID = ? ORDER BY Lesson_order ASC";
+        String sql = "SELECT * FROM lesson_table WHERE Course_ID = ? ORDER BY Module_Order ASC, Lesson_order ASC";
 
         try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, courseId);
             ResultSet rs = stmt.executeQuery();
@@ -228,13 +234,198 @@ public class DatabaseManager {
                         rs.getInt("Lesson_order"),
                         rs.getString("Title"),
                         rs.getInt("XP"),
-                        rs.getString("content"),
-                        rs.getString("lesson_type")
+                        rs.getString("lesson_type"),
+                        rs.getString("Module_Name")
                 ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return lessons;
+    }
+
+    public static Course getCourseById(String courseId) {
+        String query = "SELECT Course_ID, Course_Name, description, language FROM course_table WHERE Course_ID = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, courseId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Course(
+                        rs.getString("Course_ID"),
+                        rs.getString("Course_Name"),
+                        rs.getString("description"),
+                        rs.getString("language")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Fetch how many lessons the user has completed for a course
+    public static int getCompletedLessonCount(int userId, String courseId) {
+        String sql = "SELECT COALESCE(completed_lesson, 0) FROM user_progress WHERE User_id = ? AND Course_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setString(2, courseId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    // Save progress and award XP atomically when finishing a lesson
+    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount) {
+        if (userId <= 0) {
+            System.err.println("Progress Save Skipped: Invalid User ID (" + userId + ")");
+            return;
+        }
+
+        String checkUserSql = "SELECT COUNT(*) FROM user_table WHERE User_ID = ?";
+
+        String progressSql = """
+        INSERT INTO user_progress (User_id, Course_id, completed_lesson, status, completed_time)
+        VALUES (?, ?, ?, 'IN_PROGRESS', CURRENT_TIMESTAMP)
+        ON DUPLICATE KEY UPDATE 
+            completed_lesson = GREATEST(completed_lesson, ?),
+            completed_time = CURRENT_TIMESTAMP,
+            status = IF(GREATEST(completed_lesson, ?) >= (SELECT COUNT(*) FROM lesson_table WHERE Course_ID = ?), 'COMPLETED', 'IN_PROGRESS')
+    """;
+
+        String xpSql = "UPDATE user_table SET XP = XP + ? WHERE User_ID = ?";
+
+        try (Connection conn = getConnection()) {
+            // Verify user exists in user_table
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkUserSql)) {
+                checkStmt.setInt(1, userId);
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    System.err.println("Progress Save Skipped: User_ID " + userId + " does not exist in user_table.");
+                    return;
+                }
+            }
+
+            conn.setAutoCommit(false);
+
+            // 1. Save progress
+            try (PreparedStatement stmt = conn.prepareStatement(progressSql)) {
+                stmt.setInt(1, userId);
+                stmt.setString(2, courseId);
+                stmt.setInt(3, lessonOrder);
+                stmt.setInt(4, lessonOrder);
+                stmt.setInt(5, lessonOrder);
+                stmt.setString(6, courseId);
+                stmt.executeUpdate();
+            }
+
+            // 2. Award XP
+            try (PreparedStatement stmt = conn.prepareStatement(xpSql)) {
+                stmt.setInt(1, xpAmount);
+                stmt.setInt(2, userId);
+                stmt.executeUpdate();
+            }
+
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getLastActiveCourseId(int userId) {
+        String sql = "SELECT Course_id FROM user_progress WHERE User_id = ? ORDER BY completed_time DESC LIMIT 1";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("Course_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Default fallback if the user has no recorded progress yet
+        return "CPP_BASIC";
+    }
+
+    // User ၏ Projects များအားလုံးကို Database မှ ဆွဲယူခြင်း
+    public static List<Project> getUserProjects(int userId) {
+        List<Project> projects = new ArrayList<>();
+        String sql = "SELECT * FROM user_projects WHERE User_id = ? ORDER BY project_id DESC";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                projects.add(new Project(
+                        rs.getInt("project_id"),
+                        rs.getInt("User_id"),
+                        rs.getString("title"),
+                        rs.getString("Language"),
+                        rs.getString("Code_Content")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return projects;
+    }
+
+    // Project အသစ်ဖန်တီးပြီး Database ထဲ သိမ်းဆည်းခြင်း
+    public static Project createProject(int userId, String title, String language, String codeContent) {
+        String sql = "INSERT INTO user_projects (User_id, title, Language, Code_Content) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, userId);
+            stmt.setString(2, title);
+            stmt.setString(3, language);
+            stmt.setString(4, codeContent);
+            stmt.executeUpdate();
+
+            ResultSet keys = stmt.getGeneratedKeys();
+            if (keys.next()) {
+                int newId = keys.getInt(1);
+                return new Project(newId, userId, title, language, codeContent);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean updateProjectCode(int projectId, String codeContent) {
+        String sql = "UPDATE user_projects SET Code_Content = ? WHERE project_id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codeContent);
+            stmt.setInt(2, projectId);
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
