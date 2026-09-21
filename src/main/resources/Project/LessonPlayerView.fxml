@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="650.0" prefWidth="850.0" stylesheets="@../Css/lesson_player.css" styleClass="root-container" style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LessonPlayerController">
+
+    <!-- Header with Close Button and Progress Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <padding>
+                <Insets bottom="10.0" left="30.0" right="30.0" top="25.0" />
+            </padding>
+            <children>
+                <Button fx:id="closeBtn" onAction="#handleClose" style="-fx-background-color: transparent; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #94A3B8; -fx-cursor: hand;" text="✕" />
+                <ProgressBar fx:id="progressBar" maxWidth="1.0E30" prefHeight="10.0" progress="0.1" style="-fx-accent: #3B82F6; -fx-control-inner-background: #1E293B;" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Center Section for Dynamic Lesson Content Cards -->
+    <center>
+        <StackPane fx:id="cardContainer" alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="30.0" right="30.0" top="10.0" />
+            </padding>
+        </StackPane>
+    </center>
+
+    <!-- Bottom Navigation Bar -->
+    <bottom>
+        <VBox alignment="CENTER" prefHeight="90.0" style="-fx-border-color: #1E293B; -fx-border-width: 1px 0 0 0;">
+            <children>
+                <Button fx:id="continueBtn" onAction="#handleContinue" prefHeight="48.0" prefWidth="240.0" style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-background-color: #2563EB; -fx-text-fill: white; -fx-background-radius: 12px; -fx-cursor: hand;" text="CONTINUE" />
+            </children>
+        </VBox>
+    </bottom>
+</BorderPane>

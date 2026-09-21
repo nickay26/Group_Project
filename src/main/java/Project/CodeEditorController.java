@@ -114,7 +114,7 @@ public class CodeEditorController {
     }
 
     /**
-     * Saves code updates back to the SQLite database on PythonAnywhere.
+     * Saves code updates back to the MySQL database.
      */
     @FXML
     public void handleSaveCode() {
@@ -123,12 +123,18 @@ public class CodeEditorController {
         String updatedCode = codeEditor.getText();
         currentProject.setCodeContent(updatedCode);
 
-        ApiClient.saveProjectCodeAsync(currentProject.getProjectId(), updatedCode)
-                .thenAccept(res -> Platform.runLater(() -> {
-                    if (outputConsole != null && !outputConsole.getText().startsWith("Running")) {
-                        outputConsole.setText("Project saved to PythonAnywhere SQLite!");
-                    }
-                }));
+        // MySQL database ထဲသို့ code တိုက်ရိုက် update လုပ်ခြင်း
+        boolean success = DatabaseManager.updateProjectCode(currentProject.getProjectId(), updatedCode);
+
+        if (success) {
+            if (outputConsole != null && !outputConsole.getText().startsWith("Running")) {
+                outputConsole.setText("Project saved successfully!");
+            }
+        } else {
+            if (outputConsole != null && !outputConsole.getText().startsWith("Running")) {
+                outputConsole.setText("Failed to save project to database.");
+            }
+        }
     }
 
     /**
@@ -165,5 +171,12 @@ public class CodeEditorController {
                     .replace("\\\\", "\\");
         }
         return json;
+    }
+
+    private Lesson currentLesson;
+
+    public void initLesson(Lesson lesson) {
+        this.currentLesson = lesson;
+        System.out.println("Loaded Lesson ID: " + lesson.getLessonId());
     }
 }

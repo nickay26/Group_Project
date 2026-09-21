@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CodeEditorController">
+<AnchorPane styleClass="editor-root" stylesheets="@../Css/code_editor.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CodeEditorController">
     <children>
         <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
@@ -21,37 +21,50 @@
                 <!-- TOP TOOLBAR -->
                 <HBox alignment="CENTER_LEFT" spacing="12.0">
                     <children>
-                        <Button onAction="#handleBackToDashboard" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-cursor: hand;" text="← Back" />
-                        <Label fx:id="projectTitleLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="Project Title" />
-                        <Label fx:id="languageBadge" style="-fx-background-color: #2FBDAE; -fx-background-radius: 12px; -fx-padding: 3 10; -fx-font-size: 11px; -fx-font-weight: bold;" text="C++" />
+                        <Button onAction="#handleBackToDashboard" styleClass="btn-secondary" text="← Back" />
+                        <Label fx:id="projectTitleLabel" styleClass="title-text" text="Project Title" />
+                        <Label fx:id="languageBadge" styleClass="lang-pill" text="C++" />
 
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <Button onAction="#handleSaveCode" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-cursor: hand;" text="💾 Save" />
-                        <Button onAction="#handleRunCode" style="-fx-background-color: #000000; -fx-text-fill: #FFFFFF; -fx-background-radius: 6px; -fx-cursor: hand;" text="▶ Run Code" />
+                        <!-- Save, AI Review, and Run Buttons -->
+                        <Button onAction="#handleSaveCode" styleClass="btn-secondary" text="💾 Save" />
+                        <Button fx:id="reviewBtn" onAction="#handleReviewCode" styleClass="btn-ai" text="✨ Review with AI" />
+                        <Button fx:id="runBtn" onAction="#handleRunCode" styleClass="btn-run" text="▶ Run Code" />
                     </children>
                 </HBox>
 
-                <!-- SPLIT EDITOR & OUTPUT -->
-                <SplitPane dividerPositions="0.6" style="-fx-background-color: #FFFFFF; -fx-box-border: transparent;" VBox.vgrow="ALWAYS">
+                <!-- SPLIT EDITOR & OUTPUT PANELS -->
+                <SplitPane dividerPositions="0.55" styleClass="split-pane" VBox.vgrow="ALWAYS">
                     <items>
-                        <VBox spacing="5.0">
+                        <!-- LEFT PANEL: CODE EDITOR -->
+                        <VBox spacing="6.0">
                             <children>
-                                <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #666666;" text="CODE EDITOR" />
-                                <TextArea fx:id="codeEditor" style="-fx-font-family: 'Consolas', monospace; -fx-font-size: 13px; -fx-border-color: #000000; -fx-border-radius: 6px;" VBox.vgrow="ALWAYS" />
+                                <Label styleClass="section-header" text="CODE EDITOR" />
+                                <TextArea fx:id="codeEditor" styleClass="dark-editor" VBox.vgrow="ALWAYS" />
                             </children>
                         </VBox>
 
-                        <VBox spacing="10.0">
-                            <children>
-                                <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+                        <!-- RIGHT PANEL: TERMINAL OUTPUT & AI REVIEW -->
+                        <SplitPane dividerPositions="0.45" orientation="VERTICAL" styleClass="split-pane">
+                            <items>
+                                <!-- TERMINAL OUTPUT -->
+                                <VBox spacing="6.0">
                                     <children>
-                                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #666666;" text="TERMINAL OUTPUT" />
-                                        <TextArea fx:id="outputConsole" editable="false" style="-fx-font-family: 'Consolas', monospace; -fx-font-size: 12px; -fx-border-color: #000000; -fx-border-radius: 6px;" VBox.vgrow="ALWAYS" />
+                                        <Label styleClass="section-header" text="TERMINAL OUTPUT" />
+                                        <TextArea fx:id="outputConsole" editable="false" styleClass="dark-editor" VBox.vgrow="ALWAYS" />
                                     </children>
                                 </VBox>
-                            </children>
-                        </VBox>
+
+                                <!-- AI CODE REVIEW -->
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label styleClass="section-header" text="✨ AI CODE REVIEW" />
+                                        <TextArea fx:id="aiReviewArea" editable="false" promptText="Click 'Review with AI' to analyze code quality and optimizations..." styleClass="dark-editor" VBox.vgrow="ALWAYS" />
+                                    </children>
+                                </VBox>
+                            </items>
+                        </SplitPane>
                     </items>
                 </SplitPane>
 
