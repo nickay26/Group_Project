@@ -234,8 +234,10 @@ public class DatabaseManager {
                         rs.getInt("Lesson_order"),
                         rs.getString("Title"),
                         rs.getInt("XP"),
-                        rs.getString("lesson_type"),
-                        rs.getString("Module_Name")
+                        rs.getString("Lesson_type"),
+                        rs.getString("Module_Name"),
+                        false,            // isPremium အတွက် Default Value (Database ထဲမပါသေးပါက)
+                        new ArrayList<>() // slides အတွက် Empty List
                 ));
             }
         } catch (SQLException e) {
