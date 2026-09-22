@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_205",
+  "title": "Operator Overloading Basics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_205_S1",
+      "type": "CONCEPT",
+      "title": "Custom Operator Mechanics",
+      "prompt": "Operator overloading lets custom types use built-in C++ operators (`+`, `-`, `==`). Implemented as member or non-member functions.",
+      "codeSnippet": "class Complex {\n    double r, i;\npublic:\n    Complex operator+(const Complex& rhs) const {\n        return Complex(r + rhs.r, i + rhs.i);\n    }\n};"
+    },
+    {
+      "slideId": "CPP_205_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Operator Keyword",
+      "prompt": "Fill in C++ keyword used to overload built-in operators.",
+      "codeSnippet": "Complex ___+(const Complex& rhs);",
+      "options": ["operator", "overload", "function", "custom"],
+      "correctAnswer": "operator"
+    },
+    {
+      "slideId": "CPP_205_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unoverloadable Operators",
+      "prompt": "Which set of operators CANNOT be overloaded in C++?",
+      "options": [
+        ":: , . , .* , ?",
+        "+ , - , * , /",
+        "== , != , < , >",
+        "[ ] , ( ) , -> , ="
+      ],
+      "correctAnswer": ":: , . , .* , ?"
+    },
+    {
+      "slideId": "CPP_205_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Equality Comparison Overload",
+      "prompt": "Fill in operator name to compare equality of two custom objects.",
+      "codeSnippet": "bool operator___(const Point& rhs) const;",
+      "options": ["==", "=", "equals", "eq"],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "CPP_205_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Member vs Non-Member Overloading",
+      "prompt": "Why overload binary operator '+' as non-member function when left operand is primitive type (e.g., 'int + Vector')?",
+      "options": [
+        "Member operator requires left operand to be instance of overloaded class",
+        "Non-member operators execute faster",
+        "Primitive types cannot be passed by const reference",
+        "Member operators cannot return objects by value"
+      ],
+      "correctAnswer": "Member operator requires left operand to be instance of overloaded class"
+    },
+    {
+      "slideId": "CPP_205_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Prefix vs Postfix Increment",
+      "prompt": "Fill in dummy parameter type used to distinguish Postfix increment from Prefix.",
+      "codeSnippet": "Number operator++();    // Prefix\nNumber operator++(___); // Postfix",
+      "options": ["int", "void", "double", "bool"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_205_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Precedence Rules",
+      "prompt": "What happens to operator precedence and associativity when overloaded?",
+      "options": [
+        "They remain identical to built-in operator rules and cannot be changed",
+        "Developer can re-define operator precedence levels",
+        "All overloaded operators convert to right-to-left associativity",
+        "Precedence decreases to lowest priority level"
+      ],
+      "correctAnswer": "They remain identical to built-in operator rules and cannot be changed"
+    },
+    {
+      "slideId": "CPP_205_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Subscript Operator Overload",
+      "prompt": "Fill in operator for array-like indexing overload.",
+      "codeSnippet": "int& operator___(size_t index);",
+      "options": ["[]", "()", "->", "{}"] ,
+      "correctAnswer": "[]"
+    },
+    {
+      "slideId": "CPP_205_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Call Operator ()",
+      "prompt": "What is an object called when it overloads operator()?",
+      "options": [
+        "Functor (Function Object)",
+        "Lambda Expression",
+        "Function Pointer",
+        "Virtual Dispatcher"
+      ],
+      "correctAnswer": "Functor (Function Object)"
+    },
+    {
+      "slideId": "CPP_205_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Subscript Read-Only Overload",
+      "prompt": "Fill in return type modifier for const indexing operator.",
+      "codeSnippet": "___ int& operator[](size_t i) const;",
+      "options": ["const", "static", "volatile", "inline"],
+      "correctAnswer": "const"
+    }
+  ]
+}

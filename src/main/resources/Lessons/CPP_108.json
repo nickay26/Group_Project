@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_108",
+  "title": "Increment & Decrement Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_108_S1",
+      "type": "CONCEPT",
+      "title": "Increment and Decrement Overview",
+      "prompt": "The increment operator (++) increases a value by 1, while decrement (--) decreases it by 1.",
+      "codeSnippet": "int x = 5;\nx++; // x becomes 6\nx--; // x becomes 5 again"
+    },
+    {
+      "slideId": "CPP_108_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Increment Operator Syntax",
+      "prompt": "Fill in the operator to increase 'counter' by 1.",
+      "codeSnippet": "counter___;",
+      "options": ["++", "+=", "+1", "~~"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_108_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Postfix vs Prefix Concept",
+      "prompt": "What is the key difference between ++x (prefix) and x++ (postfix)?",
+      "options": ["Prefix increments before returning value, Postfix increments after", "Postfix increments by 2", "Prefix works only on constants", "There is no functional difference"],
+      "correctAnswer": "Prefix increments before returning value, Postfix increments after"
+    },
+    {
+      "slideId": "CPP_108_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Decrement Operator Syntax",
+      "prompt": "Fill in the operator to decrease 'lives' by 1.",
+      "codeSnippet": "lives___;",
+      "options": ["--", "-=", "-1", "!!"],
+      "correctAnswer": "--"
+    },
+    {
+      "slideId": "CPP_108_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Postfix Evaluation",
+      "prompt": "If int x = 5; int y = x++; what is the value of y?",
+      "options": ["5", "6", "0", "4"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "CPP_108_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Prefix Decrement",
+      "prompt": "Fill in the prefix decrement operator.",
+      "codeSnippet": "___count;",
+      "options": ["--", "++", "-=", "-1"],
+      "correctAnswer": "--"
+    },
+    {
+      "slideId": "CPP_108_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Prefix Evaluation",
+      "prompt": "If int x = 5; int y = ++x; what is the value of y?",
+      "options": ["6", "5", "7", "4"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "CPP_108_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Standalone Increment",
+      "prompt": "Complete the standalone prefix increment statement.",
+      "codeSnippet": "___a;",
+      "options": ["++", "--", "+=", "=="],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_108_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Applying Increment to Literals",
+      "prompt": "Is the statement '5++' valid in C++?",
+      "options": ["No, increment requires an lvalue (variable)", "Yes, it evaluates to 6", "Yes, but gives a warning", "Only inside a loop"],
+      "correctAnswer": "No, increment requires an lvalue (variable)"
+    },
+    {
+      "slideId": "CPP_108_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Counter Step",
+      "prompt": "Fill in the operator commonly used to step loop counters.",
+      "codeSnippet": "i___;",
+      "options": ["++", "**", "//", "&&"],
+      "correctAnswer": "++"
+    }
+  ]
+}

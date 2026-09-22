@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_214",
+  "title": "Multiple Inheritance & The Diamond Problem",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_214_S1",
+      "type": "CONCEPT",
+      "title": "Multiple Inheritance Structure",
+      "prompt": "Multiple Inheritance allows a derived class to inherit from more than one base class. The Diamond Problem occurs when two base classes share a common parent.",
+      "codeSnippet": "class A { public: int x; };\nclass B : public A {};\nclass C : public A {};\nclass D : public B, public C {}; // Diamond ambiguity!"
+    },
+    {
+      "slideId": "CPP_214_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Inheritance Syntax",
+      "prompt": "Fill in the separator symbol for inheriting multiple base classes.",
+      "codeSnippet": "class Robot : public Device___ public AI {};",
+      "options": [",", ";", "&", "+"],
+      "correctAnswer": ","
+    },
+    {
+      "slideId": "CPP_214_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Diamond Ambiguity Cause",
+      "prompt": "What causes ambiguity when accessing member 'x' in class D in a Diamond structure (D -> B, C -> A)?",
+      "options": [
+        "Object D contains two copies of Base A (one via B, one via C)",
+        "Compiler deletes member 'x' during linkage",
+        "Class A constructor runs after Class D destructor",
+        "VTable cannot store multiple base classes"
+      ],
+      "correctAnswer": "Object D contains two copies of Base A (one via B, one via C)"
+    },
+    {
+      "slideId": "CPP_214_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Base Class Keyword",
+      "prompt": "Fill in the keyword used to solve the Diamond Problem by sharing a single base instance.",
+      "codeSnippet": "class B : ___ public A {};\nclass C : ___ public A {};",
+      "options": ["virtual", "override", "shared", "explicit"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_214_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Base Constructor Responsibility",
+      "prompt": "In virtual inheritance, which class is responsible for initializing the shared virtual base class?",
+      "options": [
+        "The most derived class (Class D directly)",
+        "The first intermediate class (Class B)",
+        "The last intermediate class (Class C)",
+        "The compiler auto-generates default constructor"
+      ],
+      "correctAnswer": "The most derived class (Class D directly)"
+    },
+    {
+      "slideId": "CPP_214_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Ambiguity Resolution Scope Operator",
+      "prompt": "Without virtual inheritance, resolve ambiguity manually using scope operator: d.___::x;",
+      "codeSnippet": "D d;\nint val = d.___::x;",
+      "options": ["B", "A", "D", "this"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "CPP_214_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Base Pointer Overhead",
+      "prompt": "How does virtual inheritance affect internal object memory layout?",
+      "options": [
+        "Adds virtual base pointers (vbptr) to track shared base offset",
+        "Allocates shared base class on Heap dynamically",
+        "Combines all member variables into static storage",
+        "Zero layout impact"
+      ],
+      "correctAnswer": "Adds virtual base pointers (vbptr) to track shared base offset"
+    },
+    {
+      "slideId": "CPP_214_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Inheritance Base Order",
+      "prompt": "Base constructors execute in the order they appear in class ___.",
+      "codeSnippet": "// Base execution order follows:\nDeclaration",
+      "options": ["Declaration", "InitializerList", "Destruction", "Alphabetical"],
+      "correctAnswer": "Declaration"
+    },
+    {
+      "slideId": "CPP_214_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Interface-Only Multiple Inheritance",
+      "prompt": "Why is multiple inheritance of pure abstract interface classes considered safe?",
+      "options": [
+        "Interface classes contain no member variables, avoiding diamond state ambiguity",
+        "Interface classes disable VTables completely",
+        "Compiler converts interface inheritance to single inheritance",
+        "Interfaces are allocated in global data segment"
+      ],
+      "correctAnswer": "Interface classes contain no member variables, avoiding diamond state ambiguity"
+    },
+    {
+      "slideId": "CPP_214_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Inheritance Keyword Position",
+      "prompt": "Fill in missing keyword: class Derived : public ___ Base {};",
+      "codeSnippet": "class B : public ___ A {};",
+      "options": ["virtual", "override", "explicit", "friend"],
+      "correctAnswer": "virtual"
+    }
+  ]
+}

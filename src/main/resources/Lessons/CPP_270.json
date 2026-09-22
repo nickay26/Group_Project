@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_270",
+  "title": "Fold Expressions (C++17)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_270_S1",
+      "type": "CONCEPT",
+      "title": "Fold Expressions Overview",
+      "prompt": "C++17 Fold Expressions provide concise syntax to apply binary operators across parameter packs without writing recursive template boilerplate.",
+      "codeSnippet": "#include <iostream>\n\ntemplate <typename... Args>\nauto sum(Args... args) {\n    return (... + args); // Unary left fold\n}\n\nint main() {\n    std::cout << sum(1, 2, 3, 4, 5); // Output: 15\n}"
+    },
+    {
+      "slideId": "CPP_270_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Unary Right Fold Syntax",
+      "prompt": "Fill in the operator structure for a unary right fold (args op ...).",
+      "codeSnippet": "template <typename... Args>\nauto addRight(Args... args) {\n    return (args + ___);\n}",
+      "options": ["...", "..", "args", "0"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_270_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Types of Fold Expressions",
+      "prompt": "How many forms of fold expressions exist in C++17?",
+      "options": [
+        "4 forms (Unary Left, Unary Right, Binary Left, Binary Right)",
+        "2 forms (Left fold and Right fold only)",
+        "1 form (Unary fold)",
+        "8 forms depending on operator priority"
+      ],
+      "correctAnswer": "4 forms (Unary Left, Unary Right, Binary Left, Binary Right)"
+    },
+    {
+      "slideId": "CPP_270_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Binary Left Fold with Initial Value",
+      "prompt": "Fill in the initial value part of a binary left fold (init + ... + args).",
+      "codeSnippet": "template <typename... Args>\nauto sumWithBase(Args... args) {\n    return (100 + ___ + args);\n}",
+      "options": ["...", "..", "args", "0"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_270_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unary Fold on Empty Packs",
+      "prompt": "Which binary operators are allowed in a unary fold over an empty parameter pack?",
+      "options": [
+        "Only && (returns true), || (returns false), and , (returns void())",
+        "All binary arithmetic operators (+, -, *, /)",
+        "No operators are allowed; empty packs always cause compile errors in unary folds",
+        "Only bitwise operators (&, |, ^)"
+      ],
+      "correctAnswer": "Only && (returns true), || (returns false), and , (returns void())"
+    },
+    {
+      "slideId": "CPP_270_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Fold Expression with Comma Operator",
+      "prompt": "Fill in the fold operator used to execute a function call on every argument in a pack.",
+      "codeSnippet": "template <typename... Args>\nvoid printAllArgs(Args... args) {\n    ((std::cout << args << \" \"), ___);\n}",
+      "options": ["...", "..", "args", ";"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_270_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unary Left vs Unary Right Evaluation Order",
+      "prompt": "For inputs (1, 2, 3), how does unary left fold (... + args) expand compared to unary right fold (args + ...)?",
+      "options": [
+        "Unary Left: ((1 + 2) + 3); Unary Right: (1 + (2 + 3))",
+        "Unary Left: (1 + (2 + 3)); Unary Right: ((1 + 2) + 3)",
+        "Both expand identically as (1 + 2 + 3) without parenthesis evaluation differences",
+        "Unary Left evaluates right to left"
+      ],
+      "correctAnswer": "Unary Left: ((1 + 2) + 3); Unary Right: (1 + (2 + 3))"
+    },
+    {
+      "slideId": "CPP_270_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical AND Fold Expression",
+      "prompt": "Fill in the logical operator used to verify all boolean conditions in a parameter pack are true.",
+      "codeSnippet": "template <typename... Args>\nbool allTrue(Args... args) {\n    return (... ___ args);\n}",
+      "options": ["&&", "||", "==", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_270_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parentheses Requirement in Fold Expressions",
+      "prompt": "Are surrounding parentheses mandatory when writing C++17 fold expressions?",
+      "options": [
+        "Yes, fold expressions must always be enclosed in parentheses e.g. (... + args)",
+        "No, parentheses are optional unless disambiguating precedence",
+        "Only when using binary left folds",
+        "Only when using arithmetic operators"
+      ],
+      "correctAnswer": "Yes, fold expressions must always be enclosed in parentheses e.g. (... + args)"
+    },
+    {
+      "slideId": "CPP_270_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Push Back Fold Example",
+      "prompt": "Fill in the method name in a comma fold to append all arguments into a std::vector.",
+      "codeSnippet": "template <typename T, typename... Args>\nvoid pushMultiple(std::vector<T>& v, Args... args) {\n    (v.____(args), ...);\n}",
+      "options": ["push_back", "emplace", "append", "insert"],
+      "correctAnswer": "push_back"
+    }
+  ]
+}

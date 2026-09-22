@@ -6,17 +6,17 @@ public class Lesson {
     private int lessonOrder;
     private String title;
     private int xp;
-    private String content;   // JSON stored as String
-    private String lessonType; // ENUM value ('LESSON', 'EXAM', etc.)
+    private String lessonType;
+    private String moduleName;
 
-    public Lesson(String lessonId, String courseId, int lessonOrder, String title, int xp, String content, String lessonType) {
+    public Lesson(String lessonId, String courseId, int lessonOrder, String title, int xp, String lessonType, String moduleName) {
         this.lessonId = lessonId;
         this.courseId = courseId;
         this.lessonOrder = lessonOrder;
         this.title = title;
         this.xp = xp;
-        this.content = content;
         this.lessonType = lessonType;
+        this.moduleName = moduleName;
     }
 
     public String getLessonId() { return lessonId; }
@@ -24,6 +24,6 @@ public class Lesson {
     public int getLessonOrder() { return lessonOrder; }
     public String getTitle() { return title; }
     public int getXp() { return xp; }
-    public String getContent() { return content; }
     public String getLessonType() { return lessonType; }
+    public String getModuleName() { return moduleName != null ? moduleName : "Section 1: Basics"; }
 }

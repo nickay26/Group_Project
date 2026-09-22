@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_240",
+  "title": "Custom Iterators & Custom Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_240_S1",
+      "type": "CONCEPT",
+      "title": "Custom Iterators Overview",
+      "prompt": "Creating custom iterators allows user-defined containers to interface seamlessly with C++ STL algorithms. Custom iterators must define iterator category traits and operator overloads (*, ++, ==, !=).",
+      "codeSnippet": "struct SimpleIterator {\n    int* ptr;\n    int& operator*() { return *ptr; }\n    SimpleIterator& operator++() { ++ptr; return *this; }\n    bool operator!=(const SimpleIterator& other) { return ptr != other.ptr; }\n};"
+    },
+    {
+      "slideId": "CPP_240_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Dereference Operator",
+      "prompt": "Fill in the operator overloaded to return a reference to the value pointed to by an iterator.",
+      "codeSnippet": "T& operator___() { return *ptr; }",
+      "options": ["*", "->", "&", "()"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_240_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Prefix vs Postfix Increment",
+      "prompt": "How is the postfix increment operator syntax differentiated from prefix increment in custom iterator classes?",
+      "options": [
+        "Postfix increment accepts a dummy int parameter: operator++(int)",
+        "Postfix increment uses keyword 'post'",
+        "Postfix increment returns a reference type T&",
+        "Postfix increment is defined using operator+"
+      ],
+      "correctAnswer": "Postfix increment accepts a dummy int parameter: operator++(int)"
+    },
+    {
+      "slideId": "CPP_240_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 std::iterator_interface / Concept",
+      "prompt": "Fill in the C++20 concept used to verify that a type models a forward iterator.",
+      "codeSnippet": "template <std::forward____ Iter>\nvoid process(Iter begin, Iter end);",
+      "options": ["iterator", "concept", "traits", "type"],
+      "correctAnswer": "iterator"
+    },
+    {
+      "slideId": "CPP_240_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Required Member Typedefs Pre-C++20",
+      "prompt": "Before C++20 concepts, what typedefs were typically required in custom iterators for STL algorithm compatibility?",
+      "options": [
+        "iterator_category, value_type, difference_type, pointer, reference",
+        "element_type, size_type, index_type",
+        "container_type, allocator_type",
+        "begin_type, end_type, step_type"
+      ],
+      "correctAnswer": "iterator_category, value_type, difference_type, pointer, reference"
+    },
+    {
+      "slideId": "CPP_240_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Arrow Operator Overload",
+      "prompt": "Fill in the operator overload used to access member fields of an object through an iterator.",
+      "codeSnippet": "T* operator___() { return ptr; }",
+      "options": ["->", "*", ".", "::"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_240_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Writing Custom Generic Algorithms",
+      "prompt": "What template parameter design best practice ensures custom algorithms work across different STL containers?",
+      "options": [
+        "Accept generic template iterator parameters (InputIt, ForwardIt) rather than specific container types",
+        "Accept std::vector<T>& parameter directly",
+        "Pass raw pointers int* explicitly",
+        "Use void* raw pointers for efficiency"
+      ],
+      "correctAnswer": "Accept generic template iterator parameters (InputIt, ForwardIt) rather than specific container types"
+    },
+    {
+      "slideId": "CPP_240_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Iterator Category Tag",
+      "prompt": "Fill in the standard tag struct representing random access iterator capability.",
+      "codeSnippet": "using iterator_category = std::____iterator_tag;",
+      "options": ["random_access", "forward", "bidirectional", "input"],
+      "correctAnswer": "random_access"
+    },
+    {
+      "slideId": "CPP_240_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::iterator Deprecation",
+      "prompt": "Why was base class std::iterator deprecated in C++17?",
+      "options": [
+        "It added unnecessary boilerplate and inheritance complexity; defining nested types or using C++20 concepts is cleaner",
+        "It caused memory leaks in virtual destructors",
+        "It was incompatible with template compilation",
+        "Iterators are no longer supported in C++"
+      ],
+      "correctAnswer": "It added unnecessary boilerplate and inheritance complexity; defining nested types or using C++20 concepts is cleaner"
+    },
+    {
+      "slideId": "CPP_240_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Equality Comparison",
+      "prompt": "Fill in the operator required to check if two iterators point to the same position.",
+      "codeSnippet": "bool operator___(const SimpleIterator& other) const { return ptr == other.ptr; }",
+      "options": ["==", "!=", "=", "<"],
+      "correctAnswer": "=="
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_116",
+  "title": "Type Inference with auto",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_116_S1",
+      "type": "CONCEPT",
+      "title": "The auto Keyword",
+      "prompt": "Introduced in C++11, the 'auto' keyword automatically infers variable data type from its initializer.",
+      "codeSnippet": "auto a = 5;       // Deducted as int\nauto b = 3.14;    // Deducted as double\nauto c = \"Hi\";    // Deducted as const char*"
+    },
+    {
+      "slideId": "CPP_116_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Declaration",
+      "prompt": "Fill in the keyword to let the compiler deduce the type.",
+      "codeSnippet": "___ score = 100;",
+      "options": ["auto", "var", "let", "dynamic"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_116_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Auto Requirement",
+      "prompt": "What is mandatory when declaring a variable with 'auto'?",
+      "options": ["It must be initialized immediately at declaration", "It must be declared inside a function", "It must be marked const", "It must be an integer type"],
+      "correctAnswer": "It must be initialized immediately at declaration"
+    },
+    {
+      "slideId": "CPP_116_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto with Floating Point",
+      "prompt": "What type is inferred for 'auto x = 4.5f;'?",
+      "codeSnippet": "auto x = 4.5f; // Type is ___",
+      "options": ["float", "double", "int", "auto"],
+      "correctAnswer": "float"
+    },
+    {
+      "slideId": "CPP_116_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Safety of auto",
+      "prompt": "Is 'auto' statically typed at compile time or dynamically typed at runtime?",
+      "options": ["Statically typed at compile time (type cannot change later)", "Dynamically typed at runtime", "Weakly typed", "Untyped"],
+      "correctAnswer": "Statically typed at compile time (type cannot change later)"
+    },
+    {
+      "slideId": "CPP_116_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Character Inference",
+      "prompt": "Fill in the inferred type for 'auto ch = 'Z';'.",
+      "codeSnippet": "auto ch = 'Z'; // Type is ___",
+      "options": ["char", "string", "int", "auto"],
+      "correctAnswer": "char"
+    },
+    {
+      "slideId": "CPP_116_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Changing Auto Variable Type",
+      "prompt": "If 'auto val = 10;', can you later do 'val = \"Text\";'?",
+      "options": ["No, type is fixed to int at compile time", "Yes, auto changes type dynamically", "Yes, if casted", "Only inside a loop"],
+      "correctAnswer": "No, type is fixed to int at compile time"
+    },
+    {
+      "slideId": "CPP_116_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Const Modifier",
+      "prompt": "Fill in the combined modifier for an unchangeable auto variable.",
+      "codeSnippet": "___ auto MAX_SPEED = 200;",
+      "options": ["const", "static", "final", "fixed"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_116_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Benefit of auto",
+      "prompt": "What is a major advantage of using 'auto' in modern C++?",
+      "options": ["Simplifies complex iterator and template type declarations", "Makes code run significantly faster", "Reduces binary executable size", "Eliminates syntax errors"],
+      "correctAnswer": "Simplifies complex iterator and template type declarations"
+    },
+    {
+      "slideId": "CPP_116_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Expression Deduction",
+      "prompt": "What type is inferred for 'auto res = 5 + 2.5;'?",
+      "codeSnippet": "auto res = 5 + 2.5; // Type is ___",
+      "options": ["double", "int", "float", "long"],
+      "correctAnswer": "double"
+    }
+  ]
+}

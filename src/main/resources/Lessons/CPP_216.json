@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_216",
+  "title": "Static vs Dynamic Polymorphism & Design Patterns",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_216_S1",
+      "type": "CONCEPT",
+      "title": "Dynamic vs Static Polymorphism",
+      "prompt": "Dynamic polymorphism uses Virtual Tables at runtime. Static polymorphism uses Templates (CRTP) at compile-time with zero runtime overhead.",
+      "codeSnippet": "// CRTP Static Polymorphism:\ntemplate <typename Derived>\nclass Base {\npublic:\n    void interface() { static_cast<Derived*>(this)->implementation(); }\n};"
+    },
+    {
+      "slideId": "CPP_216_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "CRTP Acronym",
+      "prompt": "CRTP stands for Curiously ___ Template Pattern.",
+      "codeSnippet": "// CRTP name:\nCuriously ___ Template Pattern",
+      "options": ["Recurring", "Redundant", "Relative", "Recursive"],
+      "correctAnswer": "Recurring"
+    },
+    {
+      "slideId": "CPP_216_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static Polymorphism Advantage",
+      "prompt": "What is the key performance benefit of CRTP / Static Polymorphism over Virtual Functions?",
+      "options": [
+        "Zero runtime VTable lookup overhead and enables full compiler inlining",
+        "Reduces template code bloat in compiled binary",
+        "Allows heterogeneous collections in std::vector",
+        "Eliminates need for C++ constructors"
+      ],
+      "correctAnswer": "Zero runtime VTable lookup overhead and enables full compiler inlining"
+    },
+    {
+      "slideId": "CPP_216_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Cast in CRTP",
+      "prompt": "Fill in the cast operator used inside CRTP Base to access Derived implementation.",
+      "codeSnippet": "___<Derived*>(this)->impl();",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
+    },
+    {
+      "slideId": "CPP_216_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Polymorphism Unique Capability",
+      "prompt": "Which capability is exclusive to Dynamic Polymorphism that Static Polymorphism cannot do directly?",
+      "options": [
+        "Storing different derived types dynamically in a single container at runtime",
+        "Executing function calls inside loops",
+        "Overloading binary operators",
+        "Passing objects by const reference"
+      ],
+      "correctAnswer": "Storing different derived types dynamically in a single container at runtime"
+    },
+    {
+      "slideId": "CPP_216_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Non-Virtual Interface (NVI) Idiom",
+      "prompt": "NVI Idiom calls private virtual methods inside a ___ public base method.",
+      "codeSnippet": "// Public NVI wrapper method is:\nNonVirtual",
+      "options": ["NonVirtual", "PureVirtual", "Static", "Friend"],
+      "correctAnswer": "NonVirtual"
+    },
+    {
+      "slideId": "CPP_216_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NVI Idiom Advantage",
+      "prompt": "Why use the Non-Virtual Interface (NVI) pattern in class design?",
+      "options": [
+        "Allows Base class to control pre-conditions and post-conditions before calling virtual implementation",
+        "Eliminates the requirement for virtual destructors",
+        "Speeds up dynamic_cast evaluation time",
+        "Converts dynamic polymorphism into static polymorphism"
+      ],
+      "correctAnswer": "Allows Base class to control pre-conditions and post-conditions before calling virtual implementation"
+    },
+    {
+      "slideId": "CPP_216_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "CRTP Base Class Definition",
+      "prompt": "Fill in class template syntax for CRTP derived definition.",
+      "codeSnippet": "class Derived : public Base<___> {};",
+      "options": ["Derived", "Base", "auto", "void"],
+      "correctAnswer": "Derived"
+    },
+    {
+      "slideId": "CPP_216_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Strategy Pattern Variant",
+      "prompt": "How can Strategy Pattern be implemented without VTable runtime overhead in Modern C++?",
+      "options": [
+        "Using template policy parameters or std::variant with std::visit",
+        "Using multiple inheritance of concrete classes",
+        "Using raw void pointers and function pointer offsets",
+        "Using macro definitions exclusively"
+      ],
+      "correctAnswer": "Using template policy parameters or std::variant with std::visit"
+    },
+    {
+      "slideId": "CPP_216_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Policy-Based Design Keyword",
+      "prompt": "Policy-based design relies heavily on C++ ___ templates.",
+      "codeSnippet": "// Policy design uses:\nClass Templates",
+      "options": ["Class Templates", "Macros", "Virtual Methods", "RTTI"],
+      "correctAnswer": "Class Templates"
+    }
+  ]
+}

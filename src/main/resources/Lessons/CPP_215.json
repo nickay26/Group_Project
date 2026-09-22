@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_215",
+  "title": "RTTI (Run-Time Type Information) & dynamic_cast",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_215_S1",
+      "type": "CONCEPT",
+      "title": "Runtime Type Inspection",
+      "prompt": "RTTI provides runtime type checking via `dynamic_cast` and `typeid`. Requires at least one virtual function in the class hierarchy.",
+      "codeSnippet": "Base* ptr = new Derived();\nif (Derived* d = dynamic_cast<Derived*>(ptr)) {\n    // Safe downcast succeeded\n}"
+    },
+    {
+      "slideId": "CPP_215_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Dynamic Cast Operator",
+      "prompt": "Fill in the cast operator used for safe polymorphic downcasting.",
+      "codeSnippet": "Derived* d = ___<Derived*>(basePtr);",
+      "options": ["dynamic_cast", "static_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "dynamic_cast"
+    },
+    {
+      "slideId": "CPP_215_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Failed Pointer dynamic_cast",
+      "prompt": "What does 'dynamic_cast<Derived*>(ptr)' return if the cast fails for pointers?",
+      "options": [
+        "nullptr",
+        "Throws std::bad_cast exception",
+        "Undefined pointer memory address",
+        "Compilation error"
+      ],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_215_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Failed Reference dynamic_cast",
+      "prompt": "When 'dynamic_cast<Derived&>(ref)' fails for references, it throws std::___.",
+      "codeSnippet": "// Reference cast failure throws:\nbad_cast",
+      "options": ["bad_cast", "bad_alloc", "out_of_range", "runtime_error"],
+      "correctAnswer": "bad_cast"
+    },
+    {
+      "slideId": "CPP_215_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "RTTI Prerequisite Requirement",
+      "prompt": "What is required in the base class for dynamic_cast and RTTI to function?",
+      "options": [
+        "Base class must have at least one virtual function (polymorphic class)",
+        "Base class must inherit from std::exception",
+        "Base class must be template-based",
+        "Class must be marked with #pragma rtti"
+      ],
+      "correctAnswer": "Base class must have at least one virtual function (polymorphic class)"
+    },
+    {
+      "slideId": "CPP_215_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Typeid Operator Usage",
+      "prompt": "Fill in the operator used to query the std::type_info of an expression.",
+      "codeSnippet": "const std::type_info& info = ___(obj);",
+      "options": ["typeid", "typeof", "decltype", "sizeof"],
+      "correctAnswer": "typeid"
+    },
+    {
+      "slideId": "CPP_215_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "typeid Name Method",
+      "prompt": "What does 'typeid(obj).name()' return?",
+      "options": [
+        "Implementation-defined C-style string representing type name",
+        "Guaranteed cross-platform standardized class string",
+        "Unique integer type identifier",
+        "Pointer to class VTable"
+      ],
+      "correctAnswer": "Implementation-defined C-style string representing type name"
+    },
+    {
+      "slideId": "CPP_215_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Header for type_info",
+      "prompt": "Fill in standard header required to use std::type_info object methods.",
+      "codeSnippet": "#include <___>",
+      "options": ["typeinfo", "type_traits", "utility", "typeindex"],
+      "correctAnswer": "typeinfo"
+    },
+    {
+      "slideId": "CPP_215_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Overuse of RTTI",
+      "prompt": "Why is heavy reliance on RTTI and dynamic_cast often considered a code smell?",
+      "options": [
+        "Indicates poor object-oriented design (violates Open/Closed Principle)",
+        "Causes memory leaks on dynamic heap",
+        "Disables C++ template metaprogramming",
+        "Forces single thread execution"
+      ],
+      "correctAnswer": "Indicates poor object-oriented design (violates Open/Closed Principle)"
+    },
+    {
+      "slideId": "CPP_215_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Disabling RTTI Compiler Flag",
+      "prompt": "Compilers allow disabling RTTI (e.g., -fno-rtti) to save memory size and speed up ___.",
+      "codeSnippet": "// Disabling RTTI saves performance in:\nEmbedded",
+      "options": ["Embedded", "Web", "Cloud", "Scripting"],
+      "correctAnswer": "Embedded"
+    }
+  ]
+}

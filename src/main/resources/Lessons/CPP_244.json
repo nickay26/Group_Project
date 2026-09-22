@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_244",
+  "title": "std::weak_ptr & Cyclic Reference Resolution",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_244_S1",
+      "type": "CONCEPT",
+      "title": "Weak References & Cycle Breaking",
+      "prompt": "std::weak_ptr holds a non-owning ('weak') reference to an object managed by std::shared_ptr. It is used to break cyclic reference memory leaks and inspect object availability without incrementing use count.",
+      "codeSnippet": "#include <memory>\nstd::shared_ptr<Node> a = std::make_shared<Node>();\nstd::weak_ptr<Node> w = a; // Reference count remains 1!"
+    },
+    {
+      "slideId": "CPP_244_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Locking weak_ptr",
+      "prompt": "Fill in the member function that converts a std::weak_ptr into a std::shared_ptr to access the object safely.",
+      "codeSnippet": "if (auto shared = weakPtr.___()) {\n    // Use shared pointer safely\n}",
+      "options": ["lock", "upgrade", "to_shared", "get"],
+      "correctAnswer": "lock"
+    },
+    {
+      "slideId": "CPP_244_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cyclic Reference Problem",
+      "prompt": "What memory defect occurs when two std::shared_ptr instances store shared_ptr references pointing directly to each other?",
+      "options": [
+        "Memory leak: Reference counts never drop to zero, so neither object is destroyed",
+        "Immediate stack overflow crash",
+        "Double deletion runtime fault",
+        "Segmentation fault on program startup"
+      ],
+      "correctAnswer": "Memory leak: Reference counts never drop to zero, so neither object is destroyed"
+    },
+    {
+      "slideId": "CPP_244_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Expiration",
+      "prompt": "Fill in the member function that returns true if the referenced object has already been destroyed.",
+      "codeSnippet": "if (weakPtr.___()) {\n    // Object no longer exists!\n}",
+      "options": ["expired", "is_null", "deleted", "dead"],
+      "correctAnswer": "expired"
+    },
+    {
+      "slideId": "CPP_244_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "weak_ptr Dereferencing",
+      "prompt": "Why can you not dereference a std::weak_ptr directly using operator* or operator->?",
+      "options": [
+        "Because the underlying object might have been deleted asynchronously; it must be converted to shared_ptr first via lock()",
+        "Because std::weak_ptr does not store memory address location",
+        "Because weak_ptr is designed for integer values only",
+        "To enforce private encapsulation rules"
+      ],
+      "correctAnswer": "Because the underlying object might have been deleted asynchronously; it must be converted to shared_ptr first via lock()"
+    },
+    {
+      "slideId": "CPP_244_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Weak Reference Counter",
+      "prompt": "Fill in the pointer type used in class structures for parent pointers to prevent cycles with children.",
+      "codeSnippet": "struct Node {\n    std::vector<std::shared_ptr<Node>> children;\n    std::___<Node> parent; // Prevents cycle!\n};",
+      "options": ["weak_ptr", "unique_ptr", "shared_ptr", "raw_ptr"],
+      "correctAnswer": "weak_ptr"
+    },
+    {
+      "slideId": "CPP_244_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Control Block Lifetime with weak_ptr",
+      "prompt": "When is the Control Block freed if all std::shared_ptrs are destroyed, but std::weak_ptrs still exist?",
+      "options": [
+        "The managed object is destroyed immediately, but the Control Block remains until all weak_ptrs are destroyed",
+        "Both object and control block are destroyed immediately",
+        "The managed object remains alive until weak_ptrs are cleared",
+        "The control block leaks permanently"
+      ],
+      "correctAnswer": "The managed object is destroyed immediately, but the Control Block remains until all weak_ptrs are destroyed"
+    },
+    {
+      "slideId": "CPP_244_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Constructing weak_ptr from shared_ptr",
+      "prompt": "Fill in the type used to initialize a weak pointer from a shared pointer variable 'sp'.",
+      "codeSnippet": "std::shared_ptr<Item> sp = std::make_shared<Item>();\nstd::___<Item> wp(sp);",
+      "options": ["weak_ptr", "shared_ptr", "unique_ptr", "auto_ptr"],
+      "correctAnswer": "weak_ptr"
+    },
+    {
+      "slideId": "CPP_244_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::enable_shared_from_this Purpose",
+      "prompt": "What problem does std::enable_shared_from_this solve?",
+      "options": [
+        "Allows a class member method to safely create a valid std::shared_ptr to 'this' without creating duplicate control blocks",
+        "Enables automatic conversion from raw pointers to weak pointers",
+        "Accelerates make_shared performance by 50%",
+        "Protects class member variables with internal mutex locks"
+      ],
+      "correctAnswer": "Allows a class member method to safely create a valid std::shared_ptr to 'this' without creating duplicate control blocks"
+    },
+    {
+      "slideId": "CPP_244_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "shared_from_this Method Call",
+      "prompt": "Fill in the method name inherited from std::enable_shared_from_this to get a shared_ptr instance inside class scope.",
+      "codeSnippet": "class Worker : public std::enable_shared_from_this<Worker> {\npublic:\n    std::shared_ptr<Worker> getSelf() {\n        return ___();\n    }\n};",
+      "options": ["shared_from_this", "get_shared", "make_shared_this", "self"],
+      "correctAnswer": "shared_from_this"
+    }
+  ]
+}

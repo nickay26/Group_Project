@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_161",
+  "title": "Dynamic Memory Allocation with new/delete",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_161_S1",
+      "type": "CONCEPT",
+      "title": "Heap Allocation Mechanics",
+      "prompt": "'new' allocates memory on the Heap. 'delete' deallocates single items, and 'delete[]' deallocates dynamic arrays to prevent memory leaks.",
+      "codeSnippet": "int* p = new int(42);\nstd::cout << *p;\ndelete p;\np = nullptr;"
+    },
+    {
+      "slideId": "CPP_161_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Dynamic Allocation Operator",
+      "prompt": "Fill in the keyword to dynamically allocate a single integer on heap.",
+      "codeSnippet": "int* ptr = ___ int(50);",
+      "options": ["new", "malloc", "alloc", "create"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "CPP_161_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deallocating Dynamic Memory",
+      "prompt": "What is the proper way to free memory allocated with 'new int[100]'?",
+      "options": [
+        "delete[] ptr;",
+        "delete ptr;",
+        "free(ptr);",
+        "remove(ptr);"
+      ],
+      "correctAnswer": "delete[] ptr;"
+    },
+    {
+      "slideId": "CPP_161_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Dynamic Allocation",
+      "prompt": "Fill in the operator to allocate dynamic array of 5 elements.",
+      "codeSnippet": "double* arr = new double___;",
+      "options": ["[5]", "(5)", "{5}", "<5>"],
+      "correctAnswer": "[5]"
+    },
+    {
+      "slideId": "CPP_161_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Allocation Failure",
+      "prompt": "What exception is thrown when 'new' fails to allocate requested memory?",
+      "options": [
+        "std::bad_alloc",
+        "std::out_of_range",
+        "std::bad_cast",
+        "std::runtime_error"
+      ],
+      "correctAnswer": "std::bad_alloc"
+    },
+    {
+      "slideId": "CPP_161_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Nothrow Variant for new",
+      "prompt": "Fill in constant argument used to return nullptr instead of throwing on allocation failure.",
+      "codeSnippet": "int* ptr = new (std::___) int[1000];",
+      "options": ["nothrow", "noexcept", "quiet", "safe"],
+      "correctAnswer": "nothrow"
+    },
+    {
+      "slideId": "CPP_161_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack vs Heap Lifetime",
+      "prompt": "How long does dynamic memory allocated with 'new' persist in memory?",
+      "options": [
+        "Until explicitly freed with delete/delete[] or the program terminates",
+        "Until the enclosing function scope finishes execution",
+        "Until the stack frame unwinds",
+        "For a fixed duration of 10 seconds"
+      ],
+      "correctAnswer": "Until explicitly freed with delete/delete[] or the program terminates"
+    },
+    {
+      "slideId": "CPP_161_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Dynamic Initialization Syntax",
+      "prompt": "Fill in syntax to allocate and initialize dynamic double value to 3.14.",
+      "codeSnippet": "double* d = new double___;",
+      "options": ["(3.14)", "[3.14]", "<3.14>", "=3.14"],
+      "correctAnswer": "(3.14)"
+    },
+    {
+      "slideId": "CPP_161_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mismatching delete and new[]",
+      "prompt": "What happens if you use 'delete ptr' instead of 'delete[] ptr' for an array allocated with 'new T[N]'?",
+      "options": [
+        "Undefined behavior (destructors for remaining elements are not called)",
+        "The compiler automatically corrects it to delete[]",
+        "Only the last element is deleted",
+        "Returns false at runtime"
+      ],
+      "correctAnswer": "Undefined behavior (destructors for remaining elements are not called)"
+    },
+    {
+      "slideId": "CPP_161_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Single Deallocation Keyword",
+      "prompt": "Fill in deallocation keyword for single dynamically allocated object.",
+      "codeSnippet": "___ ptr;",
+      "options": ["delete", "delete[]", "free", "release"],
+      "correctAnswer": "delete"
+    }
+  ]
+}

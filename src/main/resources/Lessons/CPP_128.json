@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_128",
+  "title": "else-if Ladders & Logical Branching",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_128_S1",
+      "type": "CONCEPT",
+      "title": "else-if Ladder Concept",
+      "prompt": "Use else-if ladders to test multiple mutually exclusive conditions sequentially.",
+      "codeSnippet": "if (marks >= 90) std::cout << \"A\";\nelse if (marks >= 75) std::cout << \"B\";\nelse std::cout << \"C\";"
+    },
+    {
+      "slideId": "CPP_128_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "else-if Keyword Syntax",
+      "prompt": "Fill in the missing keywords for testing a second condition.",
+      "codeSnippet": "if (x > 10) {\n    // ...\n} ___ (x > 5) {\n    // ...\n}",
+      "options": ["else if", "elseif", "else", "if else"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "CPP_128_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ladder Evaluation Order",
+      "prompt": "How does C++ evaluate an else-if ladder?",
+      "options": ["Top to bottom, stopping at the first true condition", "Evaluates all conditions regardless of truth", "Bottom to top", "In random order"],
+      "correctAnswer": "Top to bottom, stopping at the first true condition"
+    },
+    {
+      "slideId": "CPP_128_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Fallback Branch",
+      "prompt": "Fill in the final fallback keyword executed if all preceding conditions fail.",
+      "codeSnippet": "if (x == 1) {}\nelse if (x == 2) {}\n___ {}",
+      "options": ["else", "default", "final", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "CPP_128_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mutual Exclusivity in Ladders",
+      "prompt": "If both 1st and 2nd conditions in an else-if ladder are true, which block executes?",
+      "options": ["Only the 1st block", "Only the 2nd block", "Both blocks", "Neither block"],
+      "correctAnswer": "Only the 1st block"
+    },
+    {
+      "slideId": "CPP_128_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Grade Classification Logic",
+      "prompt": "Fill in the condition check for marks >= 50.",
+      "codeSnippet": "if (marks >= 80) {}\nelse if (___) { std::cout << \"Pass\"; }",
+      "options": ["marks >= 50", "marks < 50", "marks == 50", "50"],
+      "correctAnswer": "marks >= 50"
+    },
+    {
+      "slideId": "CPP_128_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Independent if vs else-if",
+      "prompt": "What is the key difference between multiple 'if' statements and an 'else-if' ladder?",
+      "options": ["Multiple 'if' statements evaluate every condition; 'else-if' skips remaining tests once a match is found", "They behave identically", "'else-if' runs faster in all scenarios", "Multiple 'if' statements require an 'else' at the end"],
+      "correctAnswer": "Multiple 'if' statements evaluate every condition; 'else-if' skips remaining tests once a match is found"
+    },
+    {
+      "slideId": "CPP_128_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Chained Logic Evaluation",
+      "prompt": "What is output if x = 15?",
+      "codeSnippet": "if (x > 20) std::cout << \"High\";\nelse if (x > 10) std::cout << \"Mid\";\nelse std::cout << \"Low\";",
+      "options": ["Mid", "High", "Low", "HighMid"],
+      "correctAnswer": "Mid"
+    },
+    {
+      "slideId": "CPP_128_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++17 if with Initialization",
+      "prompt": "What is valid syntax introduced in C++17 for if statements?",
+      "options": ["if (init; condition)", "if (condition; init)", "if init then condition", "if (condition : init)"],
+      "correctAnswer": "if (init; condition)"
+    },
+    {
+      "slideId": "CPP_128_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "C++17 if Init Syntax",
+      "prompt": "Fill in the separator for C++17 if with initializer.",
+      "codeSnippet": "if (int val = getValue() ___ val > 0) {\n    use(val);\n}",
+      "options": [";", ",", ":", "&&"],
+      "correctAnswer": ";"
+    }
+  ]
+}

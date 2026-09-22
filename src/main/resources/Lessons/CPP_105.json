@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_105",
+  "title": "Output with cout",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_105_S1",
+      "type": "CONCEPT",
+      "title": "Standard Output Stream",
+      "prompt": "std::cout is used alongside insertion operator (<<) to print output to the console.",
+      "codeSnippet": "#include <iostream>\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_105_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Insertion Operator",
+      "prompt": "Fill in the insertion operator symbol used with cout.",
+      "codeSnippet": "std::cout ___ \"Score: \";",
+      "options": ["<<", ">>", "<=", "=>"],
+      "correctAnswer": "<<"
+    },
+    {
+      "slideId": "CPP_105_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "New Line Creation",
+      "prompt": "Which of the following creates a new line in console output?",
+      "options": ["std::endl", "std::line", "std::next", "std::break"],
+      "correctAnswer": "std::endl"
+    },
+    {
+      "slideId": "CPP_105_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Escape Sequence Newline",
+      "prompt": "Fill in the escape sequence used inside strings for newlines.",
+      "codeSnippet": "std::cout << \"Line 1___Line 2\";",
+      "options": ["\\n", "/n", "\\t", "/t"],
+      "correctAnswer": "\\n"
+    },
+    {
+      "slideId": "CPP_105_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Printing Variables",
+      "prompt": "How do you print a variable's value using cout?",
+      "options": ["std::cout << myVar;", "std::cout << \"myVar\";", "std::cout(myVar);", "std::cout >> myVar;"],
+      "correctAnswer": "std::cout << myVar;"
+    },
+    {
+      "slideId": "CPP_105_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Chaining Outputs",
+      "prompt": "Fill in the missing operator to chain text and variable.",
+      "codeSnippet": "std::cout << \"Age: \" ___ age;",
+      "options": ["<<", ">>", "+", ","],
+      "correctAnswer": "<<"
+    },
+    {
+      "slideId": "CPP_105_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Escape Character for Tab",
+      "prompt": "Which escape sequence inserts a horizontal tab space?",
+      "options": ["\\t", "\\b", "\\a", "\\r"],
+      "correctAnswer": "\\t"
+    },
+    {
+      "slideId": "CPP_105_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Printing Double Quotes",
+      "prompt": "Fill in the escaped character needed to display double quotes.",
+      "codeSnippet": "std::cout << \"He said ___Hi!___\";",
+      "options": ["\\\"", "//\"", "\"\"", "/\""],
+      "correctAnswer": "\\\""
+    },
+    {
+      "slideId": "CPP_105_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "endl vs \\n",
+      "prompt": "What extra step does 'std::endl' perform compared to '\\n'?",
+      "options": ["Flushes the output buffer", "Clears the screen", "Stops the program", "Resets variable values"],
+      "correctAnswer": "Flushes the output buffer"
+    },
+    {
+      "slideId": "CPP_105_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Using Directive Output",
+      "prompt": "If 'using namespace std;' is present, how can cout be written?",
+      "codeSnippet": "___ << \"Success!\";",
+      "options": ["cout", "std::cout", "cin", "print"],
+      "correctAnswer": "cout"
+    }
+  ]
+}

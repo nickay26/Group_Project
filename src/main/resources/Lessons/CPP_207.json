@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_207",
+  "title": "Friend Functions & Friend Classes",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_207_S1",
+      "type": "CONCEPT",
+      "title": "Bypassing Private Encapsulation",
+      "prompt": "'friend' specifier grants external functions or classes complete access to private and protected members.",
+      "codeSnippet": "class Node {\n    int data;\n    friend class LinkedList; // Granted full access\n};"
+    },
+    {
+      "slideId": "CPP_207_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Function Keyword",
+      "prompt": "Fill in keyword inside class definition granting access to external function.",
+      "codeSnippet": "class Box {\n    double width;\n    ___ void printWidth(Box b);\n};",
+      "options": ["friend", "public", "extern", "export"],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_207_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Friendship Directionality",
+      "prompt": "If Class A declares Class B as a friend ('friend class B;'), can Class A access Class B private members?",
+      "options": [
+        "No, friendship is non-symmetric (one-way)",
+        "Yes, friendship is automatically mutual",
+        "Yes, if Class B inherits Class A",
+        "Only if Class B is marked public"
+      ],
+      "correctAnswer": "No, friendship is non-symmetric (one-way)"
+    },
+    {
+      "slideId": "CPP_207_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Insertion Operator Friend Overload",
+      "prompt": "Fill in friend keyword for overloading stream insertion operator <<.",
+      "codeSnippet": "___ std::ostream& operator<<(std::ostream& os, const Point& p);",
+      "options": ["friend", "virtual", "inline", "static"],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_207_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Friendship Transitivity",
+      "prompt": "If Class A is friend of B, and B is friend of C, is A automatically friend of C?",
+      "options": [
+        "No, friendship is not transitive",
+        "Yes, friendship propagates transitively",
+        "Only if virtual inheritance is used",
+        "Yes, if declared in same namespace"
+      ],
+      "correctAnswer": "No, friendship is not transitive"
+    },
+    {
+      "slideId": "CPP_207_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Class Syntax",
+      "prompt": "Fill in declaration granting entire class access.",
+      "codeSnippet": "class Matrix {\n    friend ___ Vector;\n};",
+      "options": ["class", "struct", "typename", "void"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "CPP_207_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Friend Function Scope",
+      "prompt": "Where is a friend function defined outside class body located in terms of scope?",
+      "options": [
+        "In the enclosing namespace scope, NOT class scope",
+        "Inside class private scope",
+        "Inside global vtable",
+        "In thread local storage"
+      ],
+      "correctAnswer": "In the enclosing namespace scope, NOT class scope"
+    },
+    {
+      "slideId": "CPP_207_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Member Function Syntax",
+      "prompt": "Fill in scope operator to grant friend access to specific method of another class.",
+      "codeSnippet": "friend void Logger___logMessage(const Engine& e);",
+      "options": ["::", ".", "->", "~"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_207_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Trade-off",
+      "prompt": "Why should 'friend' declarations be used sparingly in software design?",
+      "options": [
+        "Tightly couples classes and breaks encapsulation guarantees",
+        "Slower runtime execution speed",
+        "Increases compiled binary executable size",
+        "Prevents inheritance from derived classes"
+      ],
+      "correctAnswer": "Tightly couples classes and breaks encapsulation guarantees"
+    },
+    {
+      "slideId": "CPP_207_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Extraction Friend Overload",
+      "prompt": "Fill in stream type for operator>> input overload.",
+      "codeSnippet": "friend std::___& operator>>(std::istream& is, Point& p);",
+      "options": ["istream", "ostream", "ofstream", "stringstream"],
+      "correctAnswer": "istream"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_134",
+  "title": "for Loops & Iteration Syntax",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_134_S1",
+      "type": "CONCEPT",
+      "title": "for Loop Anatomy",
+      "prompt": "A 'for' loop bundles initialization, condition, and update step into a concise header.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n    std::cout << i << \" \";\n} // Outputs: 0 1 2 3 4"
+    },
+    {
+      "slideId": "CPP_134_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "for Loop Keyword",
+      "prompt": "Fill in the loop keyword.",
+      "codeSnippet": "___ (int i = 0; i < 10; i++) {\n    // ...\n}",
+      "options": ["for", "loop", "repeat", "foreach"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "CPP_134_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Header Separator Symbol",
+      "prompt": "Which symbol separates the three parts in a for-loop header?",
+      "options": ["; (semicolon)", ", (comma)", ": (colon)", ". (dot)"],
+      "correctAnswer": "; (semicolon)"
+    },
+    {
+      "slideId": "CPP_134_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Increment Step",
+      "prompt": "Fill in the update clause to step by 2.",
+      "codeSnippet": "for (int i = 0; i < 10; ___ ) {\n    // ...\n}",
+      "options": ["i += 2", "i + 2", "i = 2", "i++2"],
+      "correctAnswer": "i += 2"
+    },
+    {
+      "slideId": "CPP_134_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Order of Execution in for Loop",
+      "prompt": "In what order does a standard for-loop execute?",
+      "options": ["Init -> Condition -> Body -> Update -> Condition...", "Init -> Update -> Body -> Condition", "Condition -> Init -> Body -> Update", "Body -> Init -> Update -> Condition"],
+      "correctAnswer": "Init -> Condition -> Body -> Update -> Condition..."
+    },
+    {
+      "slideId": "CPP_134_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Omitted Expressions for Loop",
+      "prompt": "Complete the infinite loop created with empty for clauses.",
+      "codeSnippet": "for (___ ; ; ) {\n    // infinite loop\n}",
+      "options": [";", "true", "0", "1"],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_134_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Counter Variable Scope",
+      "prompt": "What is the scope of variable 'i' declared inside 'for (int i = 0; i < 5; i++)'?",
+      "options": ["Limited strictly to the for-loop body and header", "Extends to the end of the surrounding function", "Global scope", "Available only in subsequent loops"],
+      "correctAnswer": "Limited strictly to the for-loop body and header"
+    },
+    {
+      "slideId": "CPP_134_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Counting Down Loop",
+      "prompt": "Fill in the condition clause for counting down from 10 to 1 inclusive.",
+      "codeSnippet": "for (int i = 10; ___; i--) {\n    std::cout << i;\n}",
+      "options": ["i >= 1", "i > 1", "i == 1", "i <= 10"],
+      "correctAnswer": "i >= 1"
+    },
+    {
+      "slideId": "CPP_134_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Variables in Init Clause",
+      "prompt": "Can you initialize multiple variables of the same type in a for-loop init statement?",
+      "options": ["Yes, using commas: for (int i = 0, j = 10; ...)", "No, only one variable is allowed", "Only in C++20", "Yes, using semicolons"],
+      "correctAnswer": "Yes, using commas: for (int i = 0, j = 10; ...)"
+    },
+    {
+      "slideId": "CPP_134_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Iteration Count Calculation",
+      "prompt": "How many times does 'for (int i = 0; i <= 5; i++)' run?",
+      "codeSnippet": "// Loop runs ___ times",
+      "options": ["6", "5", "4", "0"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "CPP_134_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Off-By-One Error",
+      "prompt": "What is an 'Off-by-One' error in loop iteration?",
+      "options": ["Executing a loop one time too many or one time too few due to incorrect condition bounds (< vs <=)", "Incrementing counter by 2 instead of 1", "Using 1-based indexing in C++ arrays", "Declaring variable with initial value 1"],
+      "correctAnswer": "Executing a loop one time too many or one time too few due to incorrect condition bounds (< vs <=)"
+    }
+  ]
+}

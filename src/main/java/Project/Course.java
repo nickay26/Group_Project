@@ -8,6 +8,10 @@ public class Course {
     private int totalLessons;
     private int completedLessons;
 
+    public Course(String courseId, String title, String description, String language) {
+        this(courseId, title, description, language, 0, 0);
+    }
+
     public Course(String courseId, String title, String description, String language, int totalLessons, int completedLessons) {
         this.courseId = courseId;
         this.title = title;

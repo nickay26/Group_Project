@@ -145,8 +145,22 @@ public class LoginController {
         System.out.println("Opening browser for Google Authentication...");
 
         GoogleAuthService.startGoogleLogin(authCode -> {
-            System.out.println("Received Google Code: " + authCode);
-            sendAuthCodeToFlask(authCode);
+            GoogleAuthService.fetchUserProfile(authCode, (userIdFromAuth, email, name) -> {
+
+                // 1. Fetch or create local MySQL record to obtain correct User_ID (3)
+                User dbUser = DatabaseManager.findOrCreateGoogleUser(email, name, null);
+
+                if (dbUser != null) {
+                    // 2. Initialize UserSession with the local database User
+                    UserSession.initSession(dbUser);
+                    System.out.println("Session started for Google User ID: " + dbUser.getUserId());
+
+                    // 3. Navigate to main UI page
+                    sendAuthCodeToFlask(authCode);
+                } else {
+                    System.err.println("Failed to sync Google user with local database.");
+                }
+            });
         });
     }
 
@@ -154,7 +168,7 @@ public class LoginController {
     private void sendAuthCodeToFlask(String code) {
         // TODO: HTTP POST request to your backend: /api/auth/google
         // Verified ဖြစ်ရင် Dashboard ကို သွား
-        SceneManager.switchScene("LearnPage.fxml", "Mimo Platform - Dashboard");
+        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
     }
 
     // ============================================

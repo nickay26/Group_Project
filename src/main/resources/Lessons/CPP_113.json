@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_113",
+  "title": "Floating-Point Types & Precision",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_113_S1",
+      "type": "CONCEPT",
+      "title": "Floating Point Types",
+      "prompt": "Floating point types represent real numbers: float (single precision), double (double precision), and long double.",
+      "codeSnippet": "float f = 3.14f;\ndouble d = 3.1415926535;\nlong double ld = 3.141592653589793238L;"
+    },
+    {
+      "slideId": "CPP_113_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Float Literal Suffix",
+      "prompt": "Fill in the suffix required for a float literal.",
+      "codeSnippet": "float price = 12.99___;",
+      "options": ["f", "d", "l", "m"],
+      "correctAnswer": "f"
+    },
+    {
+      "slideId": "CPP_113_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Decimal Type",
+      "prompt": "What is the default type of a literal decimal number like 5.5 in C++?",
+      "options": ["double", "float", "long double", "decimal"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_113_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Double Precision",
+      "prompt": "Fill in the keyword for standard double precision numbers.",
+      "codeSnippet": "___ gpa = 3.85;",
+      "options": ["double", "float", "real", "decimal"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_113_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Float Precision Digits",
+      "prompt": "Roughly how many decimal digits of precision does 'float' offer?",
+      "options": ["6-7 digits", "15-17 digits", "3-4 digits", "30 digits"],
+      "correctAnswer": "6-7 digits"
+    },
+    {
+      "slideId": "CPP_113_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Long Double Keyword",
+      "prompt": "Fill in the data type for maximum floating point precision.",
+      "codeSnippet": "long ___ exactVal = 1.23456789012345L;",
+      "options": ["double", "float", "int", "real"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_113_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Double Precision Digits",
+      "prompt": "Roughly how many decimal digits of precision does 'double' offer?",
+      "options": ["15-17 digits", "6-7 digits", "8-10 digits", "25 digits"],
+      "correctAnswer": "15-17 digits"
+    },
+    {
+      "slideId": "CPP_113_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Scientific Notation",
+      "prompt": "Fill in the exponent letter for scientific notation.",
+      "codeSnippet": "double force = 1.2___3; // 1.2 x 10^3",
+      "options": ["e", "x", "^", "p"],
+      "correctAnswer": "e"
+    },
+    {
+      "slideId": "CPP_113_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floating Point Comparison Issue",
+      "prompt": "Why should you avoid using '==' to compare floating point numbers directly?",
+      "options": ["Due to potential precision and rounding inaccuracies", "It causes a compile error", "They can only be compared with strings", "It always evaluates to true"],
+      "correctAnswer": "Due to potential precision and rounding inaccuracies"
+    },
+    {
+      "slideId": "CPP_113_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Stream Precision",
+      "prompt": "Fill in the manipulator to format output floating digits.",
+      "codeSnippet": "std::cout << std::___(2) << 3.14159;",
+      "options": ["setprecision", "precision", "fixed", "format"],
+      "correctAnswer": "setprecision"
+    },
+    {
+      "slideId": "CPP_113_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fixed Point Notation",
+      "prompt": "Which stream manipulator forces decimal notation instead of scientific notation?",
+      "options": ["std::fixed", "std::scientific", "std::hex", "std::showpoint"],
+      "correctAnswer": "std::fixed"
+    }
+  ]
+}

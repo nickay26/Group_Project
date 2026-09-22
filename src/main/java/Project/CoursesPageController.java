@@ -29,7 +29,6 @@ public class CoursesPageController {
     @FXML
     private FlowPane coursesContainer;
 
-    // Cache loaded images to prevent re-reading files on re-navigation
     private static final Map<String, Image> LOGO_CACHE = new HashMap<>();
 
     @FXML
@@ -56,7 +55,7 @@ public class CoursesPageController {
 
         if (courses.isEmpty()) {
             Label emptyLabel = new Label("No courses available at the moment.");
-            emptyLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #888888;");
+            emptyLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #94A3B8;");
             coursesContainer.getChildren().add(emptyLabel);
             return;
         }
@@ -70,14 +69,22 @@ public class CoursesPageController {
     private Node createCourseCard(Course course) {
         AnchorPane card = new AnchorPane();
         card.setPrefSize(360, 240);
-        card.setStyle("-fx-background-color: #DCDCDC; -fx-background-radius: 24px;");
+
+        // Dark blue card container styling with slate borders
+        String defaultStyle = "-fx-background-color: #1E293B; -fx-background-radius: 24px; -fx-border-color: #334155; -fx-border-radius: 24px; -fx-border-width: 1.5px;";
+        String hoverStyle = "-fx-background-color: #1E293B; -fx-background-radius: 24px; -fx-border-color: #3B82F6; -fx-border-radius: 24px; -fx-border-width: 1.5px;";
+
+        card.setStyle(defaultStyle);
+
+        // Hover effect on card border
+        card.setOnMouseEntered(e -> card.setStyle(hoverStyle));
+        card.setOnMouseExited(e -> card.setStyle(defaultStyle));
 
         Rectangle clip = new Rectangle(360, 240);
         clip.setArcWidth(48);
         clip.setArcHeight(48);
         card.setClip(clip);
 
-        // 1. Header with Offline-Safe Badge
         HBox header = new HBox(12);
         header.setAlignment(Pos.CENTER_LEFT);
         AnchorPane.setTopAnchor(header, 20.0);
@@ -86,12 +93,11 @@ public class CoursesPageController {
         Node logoNode = getLanguageLogoNode(course.getLanguage());
 
         Label titleLabel = new Label(course.getTitle());
-        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
         header.getChildren().addAll(logoNode, titleLabel);
 
-        // 2. Center Description
         Label descLabel = new Label(course.getDescription());
-        descLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #222222; -fx-alignment: center;");
+        descLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #94A3B8; -fx-alignment: center;");
         descLabel.setWrapText(true);
         descLabel.setMaxWidth(280);
         descLabel.setAlignment(Pos.CENTER);
@@ -99,17 +105,16 @@ public class CoursesPageController {
         AnchorPane.setLeftAnchor(descLabel, 40.0);
         AnchorPane.setRightAnchor(descLabel, 40.0);
 
-        // 3. Bottom-Left Ribbon
         Polygon ribbon = new Polygon();
         ribbon.getPoints().addAll(new Double[]{
                 0.0, 240.0,
                 130.0, 240.0,
                 0.0, 110.0
         });
-        ribbon.setStyle("-fx-fill: #1E1B68;");
+        ribbon.setStyle("-fx-fill: #2563EB;"); // Electric Blue accent
 
         Label ribbonText = new Label("Start Learning");
-        ribbonText.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;");
+        ribbonText.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-size: 13px;");
         ribbonText.setRotate(45.0);
         ribbonText.setLayoutX(10);
         ribbonText.setLayoutY(188);
@@ -118,7 +123,6 @@ public class CoursesPageController {
         cornerButton.setCursor(Cursor.HAND);
         cornerButton.setOnMouseClicked(e -> launchLessonView(course));
 
-        // 4. Bottom-Right Progress Ring
         StackPane progressRing = createProgressRing(course.getCompletedLessons(), course.getTotalLessons());
         AnchorPane.setBottomAnchor(progressRing, 20.0);
         AnchorPane.setRightAnchor(progressRing, 25.0);
@@ -130,7 +134,6 @@ public class CoursesPageController {
     private Node getLanguageLogoNode(String language) {
         String langKey = language.toLowerCase();
 
-        // Return cached Image view if available
         if (LOGO_CACHE.containsKey(langKey)) {
             ImageView cachedView = new ImageView(LOGO_CACHE.get(langKey));
             cachedView.setFitWidth(100);
@@ -140,9 +143,9 @@ public class CoursesPageController {
         }
 
         String fileName = switch (langKey) {
-            case "java" -> "Java-Logo-removebg-preview.png";
-            case "cpp" -> "CPP_logo.png";
-            case "python" -> "Python-Logo-removebg-preview.png";
+            case "java" -> "java.png";
+            case "cpp" -> "c++.png";
+            case "python" -> "python.png";
             default -> "code-logo.png";
         };
 
@@ -157,7 +160,6 @@ public class CoursesPageController {
             return logoView;
         }
 
-        // OFFLINE FALLBACK: Programmatically drawn hexagon badge (Zero Network/UI Blocking)
         return createVectorBadge(language);
     }
 
@@ -174,11 +176,11 @@ public class CoursesPageController {
                 0.0, 40.0,
                 0.0, 15.0
         });
-        hex.setStyle("-fx-fill: #1E1B68; -fx-stroke: #FFA500; -fx-stroke-width: 2;");
+        hex.setStyle("-fx-fill: #2563EB; -fx-stroke: #3B82F6; -fx-stroke-width: 2;");
 
         String labelText = language.length() > 3 ? language.substring(0, 3).toUpperCase() : language.toUpperCase();
         Label langText = new Label(labelText);
-        langText.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px;");
+        langText.setStyle("-fx-text-fill: #F8FAFC; -fx-font-weight: bold; -fx-font-size: 11px;");
 
         badge.getChildren().addAll(hex, langText);
         return badge;
@@ -188,19 +190,20 @@ public class CoursesPageController {
         StackPane container = new StackPane();
 
         Circle ring = new Circle(30);
-        ring.setFill(Color.WHITE);
-        ring.setStroke(Color.BLACK);
-        ring.setStrokeWidth(6);
+        ring.setFill(Color.web("#0F172A"));
+        ring.setStroke(Color.web("#3B82F6"));
+        ring.setStrokeWidth(5);
 
         int percentage = total > 0 ? (int) (((double) completed / total) * 100) : 0;
         Label text = new Label(completed > 0 ? percentage + "%" : "Progress");
-        text.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+        text.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;");
 
         container.getChildren().addAll(ring, text);
         return container;
     }
 
     private void launchLessonView(Course course) {
-        System.out.println("Navigating to course: " + course.getCourseId());
+        UserSession.setActiveCourseId(course.getCourseId());
+        MainLayoutController.getInstance().loadPage("LearnPage.fxml");
     }
 }

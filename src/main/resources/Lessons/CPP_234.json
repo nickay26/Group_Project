@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_234",
+  "title": "Non-Modifying Sequence Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_234_S1",
+      "type": "CONCEPT",
+      "title": "Non-Modifying Algorithms",
+      "prompt": "Non-modifying algorithms inspect sequence elements without modifying them. Common examples include std::find, std::count, std::for_each, and logical predicate checks like std::all_of.",
+      "codeSnippet": "#include <algorithm>\n#include <vector>\nstd::vector<int> v = {1, 2, 3, 4, 5};\nauto it = std::find(v.begin(), v.end(), 3);"
+    },
+    {
+      "slideId": "CPP_234_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Counting Elements",
+      "prompt": "Fill in the algorithm function used to count occurrences of a value in a sequence.",
+      "codeSnippet": "int c = std::___(v.begin(), v.end(), 2);",
+      "options": ["count", "count_if", "find", "search"],
+      "correctAnswer": "count"
+    },
+    {
+      "slideId": "CPP_234_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::find_if Behavior",
+      "prompt": "What does std::find_if return when a matching element is found?",
+      "options": [
+        "An iterator pointing to the first element satisfying the predicate",
+        "A boolean true value",
+        "The index integer of the matching element",
+        "A copy of the matched object"
+      ],
+      "correctAnswer": "An iterator pointing to the first element satisfying the predicate"
+    },
+    {
+      "slideId": "CPP_234_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking All Conditions",
+      "prompt": "Fill in the algorithm function returning true if a predicate evaluates to true for all elements in a range.",
+      "codeSnippet": "bool allEven = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",
+      "options": ["all_of", "any_of", "none_of", "every_of"],
+      "correctAnswer": "all_of"
+    },
+    {
+      "slideId": "CPP_234_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::none_of Logic",
+      "prompt": "When does std::none_of return true?",
+      "options": [
+        "When NO elements in the range satisfy the specified predicate condition",
+        "When the container is completely empty",
+        "When at least one element fails the predicate condition",
+        "When all elements satisfy the predicate condition"
+      ],
+      "correctAnswer": "When NO elements in the range satisfy the specified predicate condition"
+    },
+    {
+      "slideId": "CPP_234_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Counting with Predicate",
+      "prompt": "Fill in the function used to count elements that meet a condition.",
+      "codeSnippet": "int evens = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",
+      "options": ["count_if", "count", "find_if", "sum_if"],
+      "correctAnswer": "count_if"
+    },
+    {
+      "slideId": "CPP_234_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::for_each Return Value",
+      "prompt": "What does the std::for_each algorithm return upon completion?",
+      "options": [
+        "The unary function/lambda object passed into it",
+        "An iterator pointing to end()",
+        "The total count of iterated elements",
+        "void"
+      ],
+      "correctAnswer": "The unary function/lambda object passed into it"
+    },
+    {
+      "slideId": "CPP_234_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Mismatch Search",
+      "prompt": "Fill in the algorithm that compares two ranges and returns a pair of iterators to the first differing elements.",
+      "codeSnippet": "auto [it1, it2] = std::___(v1.begin(), v1.end(), v2.begin());",
+      "options": ["mismatch", "compare", "diff", "equal"],
+      "correctAnswer": "mismatch"
+    },
+    {
+      "slideId": "CPP_234_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::search vs std::find",
+      "prompt": "How does std::search differ from std::find?",
+      "options": [
+        "std::search looks for a sub-sequence pattern inside a range; std::find searches for a single value",
+        "std::search works only on binary trees",
+        "std::find works only on sorted ranges",
+        "std::search is faster because it performs binary search"
+      ],
+      "correctAnswer": "std::search looks for a sub-sequence pattern inside a range; std::find searches for a single value"
+    },
+    {
+      "slideId": "CPP_234_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Any Condition",
+      "prompt": "Fill in the algorithm returning true if at least one element satisfies a predicate.",
+      "codeSnippet": "bool hasOdd = std::___(v.begin(), v.end(), [](int x){ return x % 2 != 0; });",
+      "options": ["any_of", "some_of", "all_of", "one_of"],
+      "correctAnswer": "any_of"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_222",
+  "title": "SFINAE (Substitution Failure Is Not An Error) & std::enable_if",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_222_S1",
+      "type": "CONCEPT",
+      "title": "SFINAE Principle",
+      "prompt": "SFINAE dictates that if an invalid type/expression is created during template argument substitution, the compiler discards that overload instead of raising a compile error.",
+      "codeSnippet": "template <typename T>\ntypename T::value_type check(const T& t);\n// Discarded gracefully if T has no inner ::value_type"
+    },
+    {
+      "slideId": "CPP_222_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "SFINAE Acronym",
+      "prompt": "SFINAE stands for Substitution Failure Is Not An ___.",
+      "codeSnippet": "// SFINAE definition:\nSubstitution Failure Is Not An ___",
+      "options": ["Error", "Exception", "Event", "Empty"],
+      "correctAnswer": "Error"
+    },
+    {
+      "slideId": "CPP_222_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::enable_if Purpose",
+      "prompt": "What is the primary usage of 'std::enable_if' in template metaprogramming?",
+      "options": [
+        "Conditionally enable/disable template overloads based on compile-time boolean traits",
+        "Enable runtime exception handling for templates",
+        "Force template instantiation on the heap",
+        "Convert runtime errors into warnings"
+      ],
+      "correctAnswer": "Conditionally enable/disable template overloads based on compile-time boolean traits"
+    },
+    {
+      "slideId": "CPP_222_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::enable_if_t Alias C++14",
+      "prompt": "Fill in the modern helper alias for 'typename std::enable_if<B, T>::type'.",
+      "codeSnippet": "template <typename T>\nstd::enable_if___<std::is_integral<T>::value, void> func(T val) {}",
+      "options": ["_t", "_v", "_type", "_val"],
+      "correctAnswer": "_t"
+    },
+    {
+      "slideId": "CPP_222_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Traits Header",
+      "prompt": "Which C++ standard library header contains boolean type inspection utilities like std::is_integral or std::is_floating_point?",
+      "options": [
+        "<type_traits>",
+        "<utility>",
+        "<typeinfo>",
+        "<concepts>"
+      ],
+      "correctAnswer": "<type_traits>"
+    },
+    {
+      "slideId": "CPP_222_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::is_same_v Helper C++17",
+      "prompt": "Fill in the C++17 variable template helper suffix for 'std::is_same<T, U>::value'.",
+      "codeSnippet": "if constexpr (std::is_same___<T, int>) {}",
+      "options": ["_v", "_t", "_b", "_bool"],
+      "correctAnswer": "_v"
+    },
+    {
+      "slideId": "CPP_222_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "SFINAE Scope Limit",
+      "prompt": "Where must substitution errors occur for SFINAE to discard an overload gracefully?",
+      "options": [
+        "In the immediate context of the function template signature (declaration/parameters/return type)",
+        "Inside the nested body of the function implementation",
+        "In any called sub-function anywhere in the program",
+        "Inside constructor initializer lists only"
+      ],
+      "correctAnswer": "In the immediate context of the function template signature (declaration/parameters/return type)"
+    },
+    {
+      "slideId": "CPP_222_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "void_t Detector Pattern C++17",
+      "prompt": "Fill in the C++17 utility used to detect valid expression idioms via SFINAE.",
+      "codeSnippet": "template <typename, typename = std::___<>>\nstruct has_serialize : std::false_type {};",
+      "options": ["void_t", "enable_if_t", "conditional_t", "decltype"],
+      "correctAnswer": "void_t"
+    },
+    {
+      "slideId": "CPP_222_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "SFINAE vs C++20 Concepts",
+      "prompt": "Why are C++20 Concepts preferred over pre-C++20 SFINAE enable_if techniques?",
+      "options": [
+        "Concepts produce dramatically clearer compiler error messages and faster compile times",
+        "Concepts work at runtime while SFINAE works at compile time",
+        "Concepts completely eliminate the need for templates",
+        "SFINAE is deprecated and removed in C++20"
+      ],
+      "correctAnswer": "Concepts produce dramatically clearer compiler error messages and faster compile times"
+    },
+    {
+      "slideId": "CPP_222_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "decltype and std::declval idiom",
+      "prompt": "Fill in the utility used inside decltype to test expressions on types without public constructors.",
+      "codeSnippet": "decltype(std::___<T>().serialize())",
+      "options": ["declval", "make_shared", "move", "forward"],
+      "correctAnswer": "declval"
+    }
+  ]
+}

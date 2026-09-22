@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_239",
+  "title": "C++20 Ranges & Constrained Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_239_S1",
+      "type": "CONCEPT",
+      "title": "C++20 Ranges Overview",
+      "prompt": "C++20 Ranges (<ranges>) modernize STL algorithms by allowing direct container passing instead of explicit iterator pairs (v.begin(), v.end()) and enabling composable view pipelines with pipe operators (|).",
+      "codeSnippet": "#include <ranges>\n#include <algorithm>\n#include <vector>\nstd::vector<int> v = {4, 2, 1, 3};\nstd::ranges::sort(v); // Direct container passing!"
+    },
+    {
+      "slideId": "CPP_239_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Constrained Algorithm Syntax",
+      "prompt": "Fill in the namespace required for C++20 constrained range algorithms.",
+      "codeSnippet": "std::___::sort(container);",
+      "options": ["ranges", "views", "algo", "v2"],
+      "correctAnswer": "ranges"
+    },
+    {
+      "slideId": "CPP_239_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Projections in Ranges",
+      "prompt": "What is a projection in C++20 std::ranges algorithms?",
+      "options": [
+        "A callable function that transforms elements before applying the primary algorithm/predicate",
+        "A view that filters out null pointers",
+        "A method to print range content to screen",
+        "A thread execution model for ranges"
+      ],
+      "correctAnswer": "A callable function that transforms elements before applying the primary algorithm/predicate"
+    },
+    {
+      "slideId": "CPP_239_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Filtering View Pipe",
+      "prompt": "Fill in the range view adapter used to filter elements based on a predicate condition.",
+      "codeSnippet": "auto evens = v | std::views::___([](int x){ return x % 2 == 0; });",
+      "options": ["filter", "transform", "take", "drop"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "CPP_239_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Range Views Evaluation",
+      "prompt": "How are range views evaluated in C++20 range pipelines?",
+      "options": [
+        "Lazily evaluated on-demand as elements are iterated over",
+        "Eagerly computed immediately creating temporary container copies",
+        "Evaluated in parallel across multiple worker threads",
+        "Compiled directly into static array constants"
+      ],
+      "correctAnswer": "Lazily evaluated on-demand as elements are iterated over"
+    },
+    {
+      "slideId": "CPP_239_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Transform View Pipe",
+      "prompt": "Fill in the range view adapter used to map elements to new values.",
+      "codeSnippet": "auto sq = v | std::views::___([](int x){ return x * x; });",
+      "options": ["transform", "filter", "map", "apply"],
+      "correctAnswer": "transform"
+    },
+    {
+      "slideId": "CPP_239_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::views::take Functionality",
+      "prompt": "What does `v | std::views::take(N)` do?",
+      "options": [
+        "Creates a view containing at most the first N elements of range v",
+        "Removes the first N elements from container v",
+        "Splits container v into chunks of size N",
+        "Skips N elements and returns the remainder"
+      ],
+      "correctAnswer": "Creates a view containing at most the first N elements of range v"
+    },
+    {
+      "slideId": "CPP_239_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Drop View Pipe",
+      "prompt": "Fill in the range view used to skip the first N elements of a range.",
+      "codeSnippet": "auto rest = v | std::views::___(3);",
+      "options": ["drop", "skip", "take", "first"],
+      "correctAnswer": "drop"
+    },
+    {
+      "slideId": "CPP_239_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Projection Sorting Example",
+      "prompt": "How can you sort a vector of Struct Person by age using C++20 range projections?",
+      "options": [
+        "std::ranges::sort(people, {}, &Person::age);",
+        "std::ranges::sort(people.age);",
+        "std::sort(people.begin(), people.end(), &Person::age);",
+        "std::views::sort(people, &Person::age);"
+      ],
+      "correctAnswer": "std::ranges::sort(people, {}, &Person::age);"
+    },
+    {
+      "slideId": "CPP_239_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Keys View Adapter",
+      "prompt": "Fill in the view adapter used to extract the first element (keys) from a range of pairs/tuples.",
+      "codeSnippet": "auto keys = myMap | std::views::___;",
+      "options": ["keys", "first", "values", "elements"],
+      "correctAnswer": "keys"
+    }
+  ]
+}

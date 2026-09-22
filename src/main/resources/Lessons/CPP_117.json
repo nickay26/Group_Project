@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_117",
+  "title": "Implicit & Explicit Type Casting",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_117_S1",
+      "type": "CONCEPT",
+      "title": "Type Casting Overview",
+      "prompt": "Converting a value from one data type to another can happen implicitly (automatically) or explicitly (manually).",
+      "codeSnippet": "double d = 9.8;\nint i = d; // Implicit casting (truncates to 9)\nint staticCast = static_cast<int>(d); // Explicit casting"
+    },
+    {
+      "slideId": "CPP_117_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "C-Style Explicit Cast",
+      "prompt": "Fill in the target type in parentheses for C-style cast.",
+      "codeSnippet": "double pi = 3.14;\nint integerPi = (___)pi;",
+      "options": ["int", "double", "float", "char"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_117_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Recommended Modern C++ Cast",
+      "prompt": "Which cast operator is safest and recommended in modern C++ for standard conversions?",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
+    },
+    {
+      "slideId": "CPP_117_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "static_cast Syntax",
+      "prompt": "Fill in the template keyword for C++ explicit type casting.",
+      "codeSnippet": "int val = ___<int>(5.7);",
+      "options": ["static_cast", "type_cast", "convert_cast", "explicit_cast"],
+      "correctAnswer": "static_cast"
+    },
+    {
+      "slideId": "CPP_117_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Narrowing Conversion Data Loss",
+      "prompt": "What happens to the decimal part during 'int x = 7.9;'?",
+      "options": ["Truncated (dropped, x becomes 7)", "Rounded to nearest integer (8)", "Raises compile error", "Replaced with zero"],
+      "correctAnswer": "Truncated (dropped, x becomes 7)"
+    },
+    {
+      "slideId": "CPP_117_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Char to Int Implicit Cast",
+      "prompt": "Assigning 'A' to int results in its ASCII code. Complete the code.",
+      "codeSnippet": "int code = 'A'; // code becomes ___",
+      "options": ["65", "'A'", "1", "97"],
+      "correctAnswer": "65"
+    },
+    {
+      "slideId": "CPP_117_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Promotion in Arithmetic Expressions",
+      "prompt": "In expression '5 + 2.0', what type is '5' implicitly converted to before addition?",
+      "options": ["double", "int", "float", "long"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_117_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Division Casting",
+      "prompt": "Fill in the cast to avoid integer division truncation of 5 / 2.",
+      "codeSnippet": "double res = static_cast<___>(5) / 2;",
+      "options": ["double", "int", "short", "char"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_117_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C-style vs static_cast",
+      "prompt": "Why is static_cast preferred over traditional C-style casting (type)val?",
+      "options": ["Checked at compile-time and more visible in source code", "Faster at runtime", "Generates smaller machine code", "Saves memory"],
+      "correctAnswer": "Checked at compile-time and more visible in source code"
+    },
+    {
+      "slideId": "CPP_117_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Double to Float Casting",
+      "prompt": "Fill in the closing bracket for static_cast syntax.",
+      "codeSnippet": "float f = static_cast<float___(3.14159);",
+      "options": [">", ")", "]", "}"],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_117_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implicit Conversion Direction",
+      "prompt": "Implicit type conversion generally promotes variables from:",
+      "options": ["Smaller memory types to larger memory types (widening)", "Larger types to smaller types", "Floating types to integer types only", "String types to number types"],
+      "correctAnswer": "Smaller memory types to larger memory types (widening)"
+    }
+  ]
+}

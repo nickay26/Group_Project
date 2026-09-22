@@ -10,6 +10,7 @@ public class App extends Application {
         SceneManager.setPrimaryStage(stage);
 
         // Launch initial welcome screen
+        stage.setMaximized(true);
         SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
     }
 

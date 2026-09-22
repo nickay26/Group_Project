@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_263",
+  "title": "Deadlocks & Synchronisation Pitfalls",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_263_S1",
+      "type": "CONCEPT",
+      "title": "Deadlock Fundamentals & Prevention",
+      "prompt": "A deadlock occurs when two or more threads are blocked forever, each waiting for a resource held by another. Standard deadlock conditions include Mutual Exclusion, Hold & Wait, No Preemption, and Circular Wait.",
+      "codeSnippet": "// Deadlock Scenario:\n// Thread 1: Locks A, waits for B\n// Thread 2: Locks B, waits for A\n\n// Solution in C++11: std::lock(mtx1, mtx2)\n// Solution in C++17: std::scoped_lock lock(mtx1, mtx2);"
+    },
+    {
+      "slideId": "CPP_263_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::lock Function",
+      "prompt": "Fill in the algorithm function used to lock multiple mutexes without risking deadlock.",
+      "codeSnippet": "std::mutex m1, m2;\nstd::___(m1, m2); // Deadlock-free locking algorithm",
+      "options": ["lock", "scoped_lock", "unique_lock", "try_lock"],
+      "correctAnswer": "lock"
+    },
+    {
+      "slideId": "CPP_263_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circular Wait Condition",
+      "prompt": "Which deadlock prevention strategy breaks the 'Circular Wait' condition?",
+      "options": [
+        "Enforcing a global lock acquisition hierarchy order for all mutexes",
+        "Using recursive mutexes exclusively",
+        "Disabling exception handling in critical sections",
+        "Increasing the number of worker threads"
+      ],
+      "correctAnswer": "Enforcing a global lock acquisition hierarchy order for all mutexes"
+    },
+    {
+      "slideId": "CPP_263_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Livelock Description",
+      "prompt": "Fill in the term for a situation where threads continuously change state in response to each other without making progress.",
+      "codeSnippet": "// Threads are actively running but unable to progress = ___lock",
+      "options": ["live", "dead", "spin", "starve"],
+      "correctAnswer": "live"
+    },
+    {
+      "slideId": "CPP_263_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Starvation Cause",
+      "prompt": "What causes thread starvation in concurrent systems?",
+      "options": [
+        "A thread is perpetually denied necessary CPU or lock resources due to unfair scheduling or greedy priorities",
+        "A thread accesses invalid unmapped memory addresses",
+        "A mutex is unlocked out of order",
+        "Atomic operations consume all CPU cache bandwidth"
+      ],
+      "correctAnswer": "A thread is perpetually denied necessary CPU or lock resources due to unfair scheduling or greedy priorities"
+    },
+    {
+      "slideId": "CPP_263_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Spinlock Mechanism",
+      "prompt": "Fill in the term for a lock mechanism where a thread repeatedly polls in a busy loop until the lock becomes available.",
+      "codeSnippet": "// Busy-waiting lock mechanism = ___lock",
+      "options": ["spin", "dead", "live", "read"],
+      "correctAnswer": "spin"
+    },
+    {
+      "slideId": "CPP_263_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "False Sharing Explanation",
+      "prompt": "What is false sharing in high-performance multithreaded applications?",
+      "options": [
+        "Two threads on different CPU cores modify independent variables located on the exact same CPU cache line, causing cache invalidation traffic",
+        "Two threads read from separate dynamic libraries",
+        "Multiple processes map to identical virtual addresses",
+        "A lock guard incorrectly references a local mutex variable"
+      ],
+      "correctAnswer": "Two threads on different CPU cores modify independent variables located on the exact same CPU cache line, causing cache invalidation traffic"
+    },
+    {
+      "slideId": "CPP_263_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Destructive Interference Size",
+      "prompt": "Fill in the C++17 constant used with alignas to prevent false sharing.",
+      "codeSnippet": "#include <new>\nstruct alignas(std::hardware_____interference_size) ThreadData {\n    int counter;\n};",
+      "options": ["destructive", "constructive", "cache", "line"],
+      "correctAnswer": "destructive"
+    },
+    {
+      "slideId": "CPP_263_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Priority Inversion Fix",
+      "prompt": "Which technique mitigates Priority Inversion, where a high-priority thread waits on a resource held by a low-priority thread?",
+      "options": [
+        "Priority Inheritance Protocol",
+        "Lock-free atomic counters",
+        "Thread detaching",
+        "Condition variable broadcasting"
+      ],
+      "correctAnswer": "Priority Inheritance Protocol"
+    },
+    {
+      "slideId": "CPP_263_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "RAII Adopt Lock Pattern",
+      "prompt": "Fill in the tag used with std::lock_guard after calling std::lock(m1, m2) to take ownership without relocking.",
+      "codeSnippet": "std::lock(m1, m2);\nstd::lock_guard<std::mutex> g1(m1, std::___);\nstd::lock_guard<std::mutex> g2(m2, std::___);",
+      "options": ["adopt_lock", "defer_lock", "try_to_lock", "no_lock"],
+      "correctAnswer": "adopt_lock"
+    }
+  ]
+}

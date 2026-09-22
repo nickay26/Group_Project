@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_202",
+  "title": "Constructors, Destructors & Member Initialization",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_202_S1",
+      "type": "CONCEPT",
+      "title": "Member Initializer List",
+      "prompt": "Member Initializer Lists initialize class members directly before constructor body executes, avoiding double initialization.",
+      "codeSnippet": "class Vector {\n    int x, y;\npublic:\n    Vector(int a, int b) : x(a), y(b) {}\n};"
+    },
+    {
+      "slideId": "CPP_202_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Initializer Syntax",
+      "prompt": "Fill in symbol used to separate constructor signature from initializer list.",
+      "codeSnippet": "Point(int a, int b) ___ x(a), y(b) {}",
+      "options": [":", ";", "->", "="],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_202_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Initialization Order",
+      "prompt": "In what order are class member variables initialized in C++?",
+      "options": [
+        "In the order they are declared in the class definition",
+        "In the order they appear in member initializer list",
+        "Alphabetical order of variable names",
+        "Random order decided by compiler"
+      ],
+      "correctAnswer": "In the order they are declared in the class definition"
+    },
+    {
+      "slideId": "CPP_202_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Destructor Naming",
+      "prompt": "Fill in symbol used before class name to define a destructor.",
+      "codeSnippet": "class Buffer {\npublic:\n    ___Buffer() { delete[] data; }\n};",
+      "options": ["~", "!", "*", "&"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_202_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destructor Characteristics",
+      "prompt": "Which statement about C++ destructors is true?",
+      "options": [
+        "They take no parameters and cannot be overloaded",
+        "A class can have multiple overloaded destructors",
+        "They can return integer status codes",
+        "They must be manually called for stack objects"
+      ],
+      "correctAnswer": "They take no parameters and cannot be overloaded"
+    },
+    {
+      "slideId": "CPP_202_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Delegating Constructors",
+      "prompt": "Fill in missing call to target constructor from delegating constructor.",
+      "codeSnippet": "Foo(int x, int y) : x(x), y(y) {}\nFoo(int x) : ___(x, 0) {}",
+      "options": ["Foo", "this", "self", "super"],
+      "correctAnswer": "Foo"
+    },
+    {
+      "slideId": "CPP_202_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "In-Class Member Initializers",
+      "prompt": "When both in-class default initializer and member initializer list are provided, which takes precedence?",
+      "options": [
+        "Member Initializer List",
+        "In-Class Initializer",
+        "Compiler throws error",
+        "Values are added together"
+      ],
+      "correctAnswer": "Member Initializer List"
+    },
+    {
+      "slideId": "CPP_202_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Constructor Keyword",
+      "prompt": "Fill in keyword to explicitly request compiler default constructor generation.",
+      "codeSnippet": "class Widget {\npublic:\n    Widget() = ___; \n};",
+      "options": ["default", "delete", "auto", "override"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_202_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Deleted Constructors",
+      "prompt": "What does 'Widget() = delete;' achieve?",
+      "options": [
+        "Prevents creation of objects using the default constructor",
+        "Destroys object immediately upon allocation",
+        "Marks constructor for garbage collection",
+        "Restricts access to private scope"
+      ],
+      "correctAnswer": "Prevents creation of objects using the default constructor"
+    },
+    {
+      "slideId": "CPP_202_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Constructor Execution Timing",
+      "prompt": "Constructors are called automatically when object is ___.",
+      "codeSnippet": "// Called when object is:\nCreated",
+      "options": ["Created", "Destroyed", "Copied", "Moved"],
+      "correctAnswer": "Created"
+    }
+  ]
+}

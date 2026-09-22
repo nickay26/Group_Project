@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_237",
+  "title": "Binary Search & Sorted Range Operations",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_237_S1",
+      "type": "CONCEPT",
+      "title": "Binary Search Operations",
+      "prompt": "C++ provides efficient binary search algorithms for sorted ranges: std::binary_search, std::lower_bound, std::upper_bound, and std::equal_range, operating in O(log N) time.",
+      "codeSnippet": "#include <algorithm>\n#include <vector>\nstd::vector<int> sorted = {10, 20, 30, 30, 40};\nbool found = std::binary_search(sorted.begin(), sorted.end(), 20);"
+    },
+    {
+      "slideId": "CPP_237_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Binary Search",
+      "prompt": "Fill in the function returning true if a target value exists in a sorted range.",
+      "codeSnippet": "bool exists = std::___(sorted.begin(), sorted.end(), 30);",
+      "options": ["binary_search", "lower_bound", "find_sorted", "search_binary"],
+      "correctAnswer": "binary_search"
+    },
+    {
+      "slideId": "CPP_237_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "lower_bound Definition",
+      "prompt": "What does std::lower_bound(begin, end, val) return?",
+      "options": [
+        "Iterator to the first element that is NOT less than val (>= val)",
+        "Iterator to the first element strictly less than val",
+        "Iterator to the last element equal to val",
+        "The index integer of val"
+      ],
+      "correctAnswer": "Iterator to the first element that is NOT less than val (>= val)"
+    },
+    {
+      "slideId": "CPP_237_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Upper Bound Search",
+      "prompt": "Fill in the algorithm returning an iterator to the first element strictly greater than val.",
+      "codeSnippet": "auto it = std::___(sorted.begin(), sorted.end(), 30);",
+      "options": ["upper_bound", "lower_bound", "equal_range", "next_bound"],
+      "correctAnswer": "upper_bound"
+    },
+    {
+      "slideId": "CPP_237_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::equal_range Return Type",
+      "prompt": "What type of result does std::equal_range return?",
+      "options": [
+        "A pair of iterators representing [lower_bound, upper_bound)",
+        "A vector containing all matching elements",
+        "The total count integer of matching values",
+        "A boolean true/false pair"
+      ],
+      "correctAnswer": "A pair of iterators representing [lower_bound, upper_bound)"
+    },
+    {
+      "slideId": "CPP_237_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Equal Range Function",
+      "prompt": "Fill in the algorithm function used to find lower and upper bounds simultaneously.",
+      "codeSnippet": "auto [first, last] = std::___(sorted.begin(), sorted.end(), 30);",
+      "options": ["equal_range", "search_range", "bounds", "find_range"],
+      "correctAnswer": "equal_range"
+    },
+    {
+      "slideId": "CPP_237_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Binary Search Requirement",
+      "prompt": "What is the critical prerequisite for calling std::binary_search or std::lower_bound?",
+      "options": [
+        "The input range must be sorted according to the ordering criterion",
+        "The container must be a std::vector",
+        "The container size must be a power of 2",
+        "Elements must be unique with no duplicates"
+      ],
+      "correctAnswer": "The input range must be sorted according to the ordering criterion"
+    },
+    {
+      "slideId": "CPP_237_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Merging Sorted Ranges",
+      "prompt": "Fill in the algorithm function that merges two sorted ranges into a single sorted range.",
+      "codeSnippet": "std::___(v1.begin(), v1.end(), v2.begin(), v2.end(), res.begin());",
+      "options": ["merge", "combine", "union", "join"],
+      "correctAnswer": "merge"
+    },
+    {
+      "slideId": "CPP_237_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::includes Purpose",
+      "prompt": "What does std::includes(beg1, end1, beg2, end2) evaluate?",
+      "options": [
+        "Returns true if every element in the second sorted range is present in the first sorted range",
+        "Returns true if two ranges share at least one common value",
+        "Returns true if the ranges are identical in length and content",
+        "Merges two ranges if they overlap"
+      ],
+      "correctAnswer": "Returns true if every element in the second sorted range is present in the first sorted range"
+    },
+    {
+      "slideId": "CPP_237_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Set Difference Operation",
+      "prompt": "Fill in the algorithm function that computes the set difference of two sorted ranges.",
+      "codeSnippet": "std::___(a.begin(), a.end(), b.begin(), b.end(), out.begin());",
+      "options": ["set_difference", "set_union", "set_intersection", "difference"],
+      "correctAnswer": "set_difference"
+    }
+  ]
+}

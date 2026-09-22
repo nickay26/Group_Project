@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_209",
+  "title": "Inheritance Basics & Access Specifiers",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_209_S1",
+      "type": "CONCEPT",
+      "title": "Inheritance Mechanics",
+      "prompt": "Inheritance allows a derived class to inherit members from a base class. Public inheritance represents an 'IS-A' relationship.",
+      "codeSnippet": "class Animal {\npublic:\n    void eat() {}\n};\nclass Dog : public Animal {}; // Dog IS-A Animal"
+    },
+    {
+      "slideId": "CPP_209_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Public Inheritance Syntax",
+      "prompt": "Fill in the access specifier used for standard public inheritance.",
+      "codeSnippet": "class Car : ___ Vehicle {};",
+      "options": ["public", "protected", "private", "extends"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_209_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protected Access Specifier",
+      "prompt": "What is the visibility of 'protected' members of a base class?",
+      "options": [
+        "Accessible inside the base class and its derived classes only",
+        "Accessible anywhere in the program via object instances",
+        "Accessible only inside the base class itself",
+        "Accessible only inside friend functions of the main file"
+      ],
+      "correctAnswer": "Accessible inside the base class and its derived classes only"
+    },
+    {
+      "slideId": "CPP_209_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Private Base Class Access",
+      "prompt": "Can a derived class directly access 'private' members of its base class?",
+      "codeSnippet": "// Direct access to private base members is:\n___",
+      "options": ["Forbidden", "Allowed", "Conditional", "Implicit"],
+      "correctAnswer": "Forbidden"
+    },
+    {
+      "slideId": "CPP_209_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protected Inheritance Effect",
+      "prompt": "Under 'protected' inheritance, what do public members of the base class become in the derived class?",
+      "options": [
+        "Protected members",
+        "Public members",
+        "Private members",
+        "Inaccessible members"
+      ],
+      "correctAnswer": "Protected members"
+    },
+    {
+      "slideId": "CPP_209_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Constructor Execution",
+      "prompt": "In an inheritance chain, which constructor runs first when creating a derived class object?",
+      "codeSnippet": "// Constructor execution order:\n___ Class First",
+      "options": ["Base", "Derived", "Member", "Virtual"],
+      "correctAnswer": "Base"
+    },
+    {
+      "slideId": "CPP_209_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Destructor Execution Order",
+      "prompt": "In what order are destructors executed when a derived object goes out of scope?",
+      "options": [
+        "Derived class destructor first, then Base class destructor",
+        "Base class destructor first, then Derived class destructor",
+        "Destructors run in parallel",
+        "Order depends on compiler optimization flags"
+      ],
+      "correctAnswer": "Derived class destructor first, then Base class destructor"
+    },
+    {
+      "slideId": "CPP_209_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Base Constructor Invocation",
+      "prompt": "Fill in the syntax to invoke a parameterized base class constructor from derived initializer list.",
+      "codeSnippet": "Dog(string name) ___ Animal(name) {}",
+      "options": [":", "->", "::", "="],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_209_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Private Inheritance Relationship",
+      "prompt": "What type of relationship does 'private' inheritance model best in C++?",
+      "options": [
+        "'Implemented-in-terms-of' (composition-like relationship)",
+        "'IS-A' interface relationship",
+        "'HAS-A' public container relationship",
+        "Polymorphic runtime interface"
+      ],
+      "correctAnswer": "'Implemented-in-terms-of' (composition-like relationship)"
+    },
+    {
+      "slideId": "CPP_209_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Scope Resolution for Hidden Members",
+      "prompt": "Fill in the operator used to access a base class method hidden by a derived class.",
+      "codeSnippet": "Derived d;\nd.Base___display();",
+      "options": ["::", ".", "->", "#"],
+      "correctAnswer": "::"
+    }
+  ]
+}

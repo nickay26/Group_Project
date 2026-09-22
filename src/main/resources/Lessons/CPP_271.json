@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_271",
+  "title": "Type Aliases & Alias Templates (using vs typedef)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_271_S1",
+      "type": "CONCEPT",
+      "title": "Modern Type Aliases (using)",
+      "prompt": "C++11 introduced the using keyword for type aliases. Type aliases offer cleaner syntax than legacy typedef and critically support alias templates.",
+      "codeSnippet": "#include <vector>\n#include <map>\n#include <string>\n\n// Legacy typedef\ntypedef std::map<std::string, int> StringMap;\n\n// Modern type alias\nusing StringMap2 = std::map<std::string, int>;\n\n// Alias Template (Not possible directly with typedef)\ntemplate <typename T>\nusing Vec = std::vector<T>;"
+    },
+    {
+      "slideId": "CPP_271_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Type Alias Keyword",
+      "prompt": "Fill in the C++11 keyword used to create a modern type alias.",
+      "codeSnippet": "___ IntList = std::vector<int>;",
+      "options": ["using", "typedef", "typename", "auto"],
+      "correctAnswer": "using"
+    },
+    {
+      "slideId": "CPP_271_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Advantage of using over typedef",
+      "prompt": "What is the primary technical capability of using aliases that legacy typedef lacks?",
+      "options": [
+        "using statements can be templated (Alias Templates)",
+        "using aliases are faster at runtime",
+        "using supports dynamic runtime type redefinition",
+        "using can alias variable names directly"
+      ],
+      "correctAnswer": "using statements can be templated (Alias Templates)"
+    },
+    {
+      "slideId": "CPP_271_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Alias Template Syntax",
+      "prompt": "Fill in the template header for an alias template wrapping a std::pair.",
+      "codeSnippet": "template <typename T>\n___ StringPair = std::pair<std::string, T>;",
+      "options": ["using", "typedef", "struct", "class"],
+      "correctAnswer": "using"
+    },
+    {
+      "slideId": "CPP_271_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Standard Library _t Suffix Traits",
+      "prompt": "In <type_traits>, what do aliases ending with _t (e.g. std::decay_t<T>) represent since C++14?",
+      "options": [
+        "Alias templates that simplify typename std::trait_name<T>::type syntax",
+        "Thread-local typedef variables",
+        "Tuple trait wrappers",
+        "Type trait checks returning boolean values"
+      ],
+      "correctAnswer": "Alias templates that simplify typename std::trait_name<T>::type syntax"
+    },
+    {
+      "slideId": "CPP_271_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Pointer Alias",
+      "prompt": "Fill in the type alias for a function pointer taking int and returning void.",
+      "codeSnippet": "using FuncPtr = void(*)(___);",
+      "options": ["int", "void", "auto", "typename"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_271_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Typedef Equivalent for Function Pointers",
+      "prompt": "How does using Func = void(*)(double); compare to typedef void(*Func)(double); readability?",
+      "options": [
+        "using keeps the alias name clearly on the left of = separate from complex syntax",
+        "typedef is easier because the name is embedded inside the function pointer syntax",
+        "They have identical syntax with no equal sign",
+        "using cannot alias function pointer types"
+      ],
+      "correctAnswer": "using keeps the alias name clearly on the left of = separate from complex syntax"
+    },
+    {
+      "slideId": "CPP_271_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Parameterized Map Alias",
+      "prompt": "Fill in the alias body to create a map with std::string keys and generic values V.",
+      "codeSnippet": "template <typename V>\nusing StringMap = std::map<std::string, ___>;",
+      "options": ["V", "typename", "auto", "T"],
+      "correctAnswer": "V"
+    },
+    {
+      "slideId": "CPP_271_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Typedef inside Class Templates",
+      "prompt": "When creating nested type aliases inside a class template prior to C++11, how was a template typedef simulated?",
+      "options": [
+        "By defining a nested struct containing a typedef inside a wrapper template class",
+        "By using preprocessor #define macros",
+        "By using dynamic void pointers",
+        "It was impossible under any pattern"
+      ],
+      "correctAnswer": "By defining a nested struct containing a typedef inside a wrapper template class"
+    },
+    {
+      "slideId": "CPP_271_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Level Type Alias Scope",
+      "prompt": "Fill in the keyword to export a local alias throughout a namespace.",
+      "codeSnippet": "namespace MyLib {\n    ___ ID = std::uint64_t;\n}",
+      "options": ["using", "typedef", "export", "auto"],
+      "correctAnswer": "using"
+    }
+  ]
+}

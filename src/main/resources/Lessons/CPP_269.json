@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_269",
+  "title": "Variadic Templates & Parameter Packs",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_269_S1",
+      "type": "CONCEPT",
+      "title": "Variadic Templates Concept",
+      "prompt": "Variadic templates (introduced in C++11) allow functions and classes to accept an arbitrary number of template arguments using parameter packs (represented by the ellipsis ... token).",
+      "codeSnippet": "#include <iostream>\n\n// Base case for recursion\nvoid printAll() {}\n\n// Variadic template function\ntemplate <typename T, typename... Args>\nvoid printAll(T first, Args... args) {\n    std::cout << first << \" \";\n    printAll(args...); // Unpack parameter pack\n}"
+    },
+    {
+      "slideId": "CPP_269_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Parameter Pack Token",
+      "prompt": "Fill in the three-dot token used to define a template parameter pack.",
+      "codeSnippet": "template <typename___ Types>\nvoid process(Types... args);",
+      "options": ["...", "..", "*", "&&"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_269_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "sizeof... Operator",
+      "prompt": "What is the purpose of the sizeof... operator in C++ variadic templates?",
+      "options": [
+        "It returns the number of elements/arguments contained in a parameter pack at compile time",
+        "It calculates the total memory size in bytes of all pack elements combined",
+        "It expands the pack into a comma-separated tuple",
+        "It checks whether a parameter pack is empty"
+      ],
+      "correctAnswer": "It returns the number of elements/arguments contained in a parameter pack at compile time"
+    },
+    {
+      "slideId": "CPP_269_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "sizeof... Operator Usage",
+      "prompt": "Fill in the operator name to count arguments in a template parameter pack.",
+      "codeSnippet": "template <typename... Args>\nconstexpr std::size_t countArgs(Args... args) {\n    return ____...(args);\n}",
+      "options": ["sizeof", "countof", "lengthof", "pack_size"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_269_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parameter Pack Expansion Placement",
+      "prompt": "In the call function(args...); where args is a function parameter pack, what does args... do?",
+      "options": [
+        "It expands the pack into a comma-separated sequence of individual arguments",
+        "It creates an std::initializer_list containing all elements",
+        "It converts the arguments into a std::tuple",
+        "It passes arguments as a linked list"
+      ],
+      "correctAnswer": "It expands the pack into a comma-separated sequence of individual arguments"
+    },
+    {
+      "slideId": "CPP_269_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Forwarding Variadic Arguments",
+      "prompt": "Fill in the forward call used to perfectly forward parameter packs.",
+      "codeSnippet": "template <typename... Args>\nvoid factory(Args&&... args) {\n    targetFunction(std::___<Args>(args)...);\n}",
+      "options": ["forward", "move", "pass", "cast"],
+      "correctAnswer": "forward"
+    },
+    {
+      "slideId": "CPP_269_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variadic Class Templates",
+      "prompt": "Which STL utility class is a primary example of a variadic class template?",
+      "options": [
+        "std::tuple",
+        "std::vector",
+        "std::pair",
+        "std::map"
+      ],
+      "correctAnswer": "std::tuple"
+    },
+    {
+      "slideId": "CPP_269_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Pack Expansion Pattern Expression",
+      "prompt": "Fill in the expansion token to double each argument passed to a function.",
+      "codeSnippet": "template <typename... Args>\nvoid printDoubled(Args... args) {\n    printAll((args * 2)___);\n}",
+      "options": ["...", "..", "->", "[]"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_269_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fold Expressions Introduction",
+      "prompt": "In which C++ standard were Fold Expressions introduced to simplify unpacking parameter packs without recursion?",
+      "options": [
+        "C++17",
+        "C++11",
+        "C++14",
+        "C++20"
+      ],
+      "correctAnswer": "C++17"
+    },
+    {
+      "slideId": "CPP_269_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Case Termination Requirement",
+      "prompt": "When using recursive variadic template functions prior to C++17, what must be provided to avoid infinite compile-time recursion?",
+      "codeSnippet": "// A non-variadic or zero-argument overload acting as a ___ case\nvoid process() {}",
+      "options": ["base", "final", "exit", "null"],
+      "correctAnswer": "base"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_249",
+  "title": "Lvalues, Rvalues & Value Categories",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_249_S1",
+      "type": "CONCEPT",
+      "title": "Lvalues and Rvalues Fundamentals",
+      "prompt": "Every expression in C++ has a type and a value category. An lvalue refers to a memory location with a persistent identity (has a name and addressable memory). An rvalue represents temporary data with no persistent identity.",
+      "codeSnippet": "int x = 10; // 'x' is an lvalue, '10' is an rvalue\nint y = x + 5; // 'x + 5' produces a temporary rvalue"
+    },
+    {
+      "slideId": "CPP_249_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Addressable Memory Identifiers",
+      "prompt": "Fill in the operator that can be applied to lvalues to retrieve their memory address, but fails on rvalues.",
+      "codeSnippet": "int a = 42;\nint* ptr = ___a; // Valid because 'a' is an lvalue",
+      "options": ["&", "*", "&&", "->"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_249_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Value Category of String Literals",
+      "prompt": "What value category does a string literal like \"Hello, World!\" belong to in C++?",
+      "options": [
+        "Lvalue expression (it resides in static memory and has an addressable location)",
+        "Prvalue expression (it is purely temporary without memory)",
+        "Xvalue expression (an expiring value ready for move)",
+        "Rvalue expression (cannot take its address)"
+      ],
+      "correctAnswer": "Lvalue expression (it resides in static memory and has an addressable location)"
+    },
+    {
+      "slideId": "CPP_249_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Prvalues and Temporary Objects",
+      "prompt": "Fill in the standard term for a pure rvalue that initializes an object or computes a value.",
+      "codeSnippet": "// '5 + 3' is a pure rvalue, also known as a ___value\nint val = 5 + 3;",
+      "options": ["pr", "x", "l", "gl"],
+      "correctAnswer": "pr"
+    },
+    {
+      "slideId": "CPP_249_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Taxonomies of C++11 Value Categories",
+      "prompt": "Which expression category encompasses both prvalues (pure rvalues) and xvalues (eXpiring values)?",
+      "options": [
+        "Rvalue",
+        "Lvalue",
+        "Glvalue",
+        "Static value"
+      ],
+      "correctAnswer": "Rvalue"
+    },
+    {
+      "slideId": "CPP_249_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Xvalue (eXpiring Value)",
+      "prompt": "Fill in the cast operator that turns an lvalue into an expiring value (xvalue).",
+      "codeSnippet": "std::string name = \"C++\";\nstd::string target = std::___(name); // 'name' becomes an xvalue",
+      "options": ["move", "forward", "static_cast", "rvalue_cast"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_249_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modifying Rvalues",
+      "prompt": "Which statement regarding class-type rvalues is correct?",
+      "options": [
+        "Member functions can be invoked on class-type rvalues, and they can be modified unless marked with lvalue ref-qualifiers",
+        "Rvalues can never have member methods called on them",
+        "Rvalues automatically convert to non-const lvalue references",
+        "Built-in primitive rvalues (like int) allow direct assignment"
+      ],
+      "correctAnswer": "Member functions can be invoked on class-type rvalues, and they can be modified unless marked with lvalue ref-qualifiers"
+    },
+    {
+      "slideId": "CPP_249_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Lvalue References",
+      "prompt": "Fill in the reference type that can bind to temporary rvalues without allowing modifications.",
+      "codeSnippet": "___ std::string& ref = std::string(\"Temp\"); // Extends temporary lifetime",
+      "options": ["const", "constexpr", "static", "volatile"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_249_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lifetime Extension of Temporaries",
+      "prompt": "What happens when a temporary object is bound to a const lvalue reference?",
+      "options": [
+        "The lifetime of the temporary object is extended to match the scope of the reference",
+        "A deep copy is created immediately on the stack",
+        "The temporary is destroyed at the end of the full expression statement",
+        "A compilation error occurs unless std::move is used"
+      ],
+      "correctAnswer": "The lifetime of the temporary object is extended to match the scope of the reference"
+    },
+    {
+      "slideId": "CPP_249_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Glvalue Definition",
+      "prompt": "Fill in the term used to describe any expression that has memory identity (includes lvalues and xvalues).",
+      "codeSnippet": "// Generalized lvalue = ___value\n// Comprises lvalue and xvalue categories.",
+      "options": ["gl", "pr", "r", "ex"],
+      "correctAnswer": "gl"
+    }
+  ]
+}

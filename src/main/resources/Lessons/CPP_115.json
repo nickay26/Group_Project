@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_115",
+  "title": "Booleans & Truth Values",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_115_S1",
+      "type": "CONCEPT",
+      "title": "Boolean Type Fundamentals",
+      "prompt": "The 'bool' data type stores logic values: true (1) or false (0).",
+      "codeSnippet": "bool isLoggedIn = true;\nbool hasError = false;"
+    },
+    {
+      "slideId": "CPP_115_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Bool Declaration",
+      "prompt": "Fill in the data type keyword for boolean variables.",
+      "codeSnippet": "___ isPassed = true;",
+      "options": ["bool", "boolean", "flag", "bit"],
+      "correctAnswer": "bool"
+    },
+    {
+      "slideId": "CPP_115_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Numeric Value of true",
+      "prompt": "What numeric integer value corresponds to 'true' in C++?",
+      "options": ["1", "0", "-1", "Any negative number"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_115_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Numeric Value of false",
+      "prompt": "Fill in the integer equivalent of 'false'.",
+      "codeSnippet": "bool status = 0; // Equivalent to ___",
+      "options": ["false", "true", "null", "undefined"],
+      "correctAnswer": "false"
+    },
+    {
+      "slideId": "CPP_115_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Output Format",
+      "prompt": "How does 'std::cout << true;' display by default without manipulators?",
+      "options": ["1", "true", "TRUE", "Yes"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_115_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolalpha Manipulator",
+      "prompt": "Fill in the manipulator to print booleans as 'true' or 'false' words.",
+      "codeSnippet": "std::cout << std::___ << true;",
+      "options": ["boolalpha", "noboolalpha", "showbool", "textbool"],
+      "correctAnswer": "boolalpha"
+    },
+    {
+      "slideId": "CPP_115_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implicit Conversion to Bool",
+      "prompt": "Which non-zero integer converts to true when cast to bool?",
+      "options": ["Any non-zero integer (e.g. 5 or -1)", "Only 1", "Only positive numbers", "None"],
+      "correctAnswer": "Any non-zero integer (e.g. 5 or -1)"
+    },
+    {
+      "slideId": "CPP_115_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical Inversion",
+      "prompt": "Fill in the operator to negate a boolean variable.",
+      "codeSnippet": "bool result = ___isReady;",
+      "options": ["!", "~", "not", "-"],
+      "correctAnswer": "!"
+    },
+    {
+      "slideId": "CPP_115_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Size of bool",
+      "prompt": "What is the typical memory size reserved for a bool variable in C++?",
+      "options": ["1 byte", "1 bit", "4 bytes", "2 bytes"],
+      "correctAnswer": "1 byte"
+    },
+    {
+      "slideId": "CPP_115_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Comparison Result Type",
+      "prompt": "Fill in the type returned by expression (10 > 5).",
+      "codeSnippet": "___ condition = (10 > 5);",
+      "options": ["bool", "int", "char", "double"],
+      "correctAnswer": "bool"
+    },
+    {
+      "slideId": "CPP_115_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Resetting Boolalpha",
+      "prompt": "Which manipulator restores numeric 1/0 output for booleans after boolalpha?",
+      "options": ["std::noboolalpha", "std::resetbool", "std::numalpha", "std::offbool"],
+      "correctAnswer": "std::noboolalpha"
+    }
+  ]
+}

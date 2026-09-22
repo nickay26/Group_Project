@@ -1,0 +1,106 @@
+{
+  "lessonId": "CPP_156",
+  "title": "Recursion Mechanics & Stack Safety",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_156_S1",
+      "type": "CONCEPT",
+      "title": "Recursion & Call Stack Structure",
+      "prompt": "Recursion occurs when a function calls itself. Every call pushes a new stack frame (containing parameters and local variables) onto the execution stack until a base case stops recursion.",
+      "codeSnippet": "int factorial(int n) {\n    if (n <= 1) return 1; // Base case\n    return n * factorial(n - 1); // Recursive step\n}"
+    },
+    {
+      "slideId": "CPP_156_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Case Identification",
+      "prompt": "Fill in the missing check condition that halts recursion.",
+      "codeSnippet": "int countdown(int n) {\n    if (n ___ 0) return 0; // Base Case\n    return countdown(n - 1);\n}",
+      "options": ["<=", "==", ">=", ">"],
+      "correctAnswer": "<="
+    },
+    {
+      "slideId": "CPP_156_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Overflow Root Cause",
+      "prompt": "What causes a Stack Overflow error during recursive function execution?",
+      "options": [
+        "Exceeding allocated call stack memory due to missing or unreachable base cases",
+        "Dereferencing a nullptr inside the loop",
+        "Allocating too much memory on the dynamic heap",
+        "Buffer overflow in C-style string buffers"
+      ],
+      "correctAnswer": "Exceeding allocated call stack memory due to missing or unreachable base cases"
+    },
+    {
+      "slideId": "CPP_156_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Tail Recursion Concept",
+      "prompt": "In tail recursion, the recursive call is the ___ statement executed in the function.",
+      "codeSnippet": "int tailFact(int n, int acc = 1) {\n    if (n <= 1) return acc;\n    return tailFact(n - 1, n * acc); // ___ call\n}",
+      "options": ["last", "first", "middle", "optional"],
+      "correctAnswer": "last"
+    },
+    {
+      "slideId": "CPP_156_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Tail Call Optimization (TCO)",
+      "prompt": "What does Tail Call Optimization (TCO) perform under compiler optimization?",
+      "options": [
+        "Replaces the recursive call stack frame reuse like an iterative loop to save stack space",
+        "Converts recursive calls to multi-threaded tasks",
+        "Moves recursive variables to dynamic heap memory",
+        "Inlines all recursive branches completely"
+      ],
+      "correctAnswer": "Replaces the recursive call stack frame reuse like an iterative loop to save stack space"
+    },
+    {
+      "slideId": "CPP_156_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Accumulator Parameter in Tail Call",
+      "prompt": "Fill in the default value for the accumulator in tail recursive multiplication.",
+      "codeSnippet": "int product(int n, int acc = ___) {\n    if (n == 1) return acc;\n    return product(n - 1, acc * n);\n}",
+      "options": ["1", "0", "-1", "n"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_156_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Space Complexity of Standard Recursion",
+      "prompt": "What is the memory space complexity of a non-optimized recursive function with call depth N?",
+      "options": ["O(N) stack space", "O(1) constant space", "O(N^2) space", "O(log N) space"],
+      "correctAnswer": "O(N) stack space"
+    },
+    {
+      "slideId": "CPP_156_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Fibonacci Recursive Base Case",
+      "prompt": "Fill in the condition for early return in Fibonacci recursion.",
+      "codeSnippet": "int fib(int n) {\n    if (n ___ 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}",
+      "options": ["<=", "==", ">=", "!="],
+      "correctAnswer": "<="
+    },
+    {
+      "slideId": "CPP_156_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Direct vs Indirect Recursion",
+      "prompt": "What defines indirect recursion?",
+      "options": [
+        "Function A calls Function B, which in turn calls Function A",
+        "A function calling itself directly in a loop",
+        "A function calling a lambda function",
+        "A function returning a function pointer to itself"
+      ],
+      "correctAnswer": "Function A calls Function B, which in turn calls Function A"
+    },
+    {
+      "slideId": "CPP_156_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Recursion Depth Guarding",
+      "prompt": "Fill in variable type for depth tracking parameter.",
+      "codeSnippet": "void traverse(Node* node, ___ depth) {\n    if (!node || depth > 1000) return;\n    traverse(node->next, depth + 1);\n}",
+      "options": ["int", "void", "bool", "auto"],
+      "correctAnswer": "int"
+    }
+  ]
+}

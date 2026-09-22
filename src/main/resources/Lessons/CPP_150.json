@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_150",
+  "title": "std::string_view Non-Owning Views (C++17)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_150_S1",
+      "type": "CONCEPT",
+      "title": "std::string_view Overview",
+      "prompt": "Introduced in C++17, std::string_view provides a lightweight, non-owning reference to a sequence of characters without performing memory allocations.",
+      "codeSnippet": "#include <string_view>\nvoid printSV(std::string_view sv) {\n    std::cout << sv;\n}"
+    },
+    {
+      "slideId": "CPP_150_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "string_view Header",
+      "prompt": "Fill in standard header for string_view.",
+      "codeSnippet": "#include <___>",
+      "options": ["string_view", "string", "cstring", "view"],
+      "correctAnswer": "string_view"
+    },
+    {
+      "slideId": "CPP_150_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Zero Allocation Benefit",
+      "prompt": "Why pass string parameters as std::string_view instead of 'const std::string&'?",
+      "options": ["Avoids unnecessary temporary string allocations when passing C-string literals or substrings", "Runs on GPU", "Modifies original string", "Guarantees null termination"],
+      "correctAnswer": "Avoids unnecessary temporary string allocations when passing C-string literals or substrings"
+    },
+    {
+      "slideId": "CPP_150_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Remove Prefix View Adjustment",
+      "prompt": "Fill in method trimming N characters from start of view in O(1) time.",
+      "codeSnippet": "sv.___(2); // Drops first 2 characters",
+      "options": ["remove_prefix", "drop_front", "pop_front", "trim_left"],
+      "correctAnswer": "remove_prefix"
+    },
+    {
+      "slideId": "CPP_150_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dangling Pointer Risk",
+      "prompt": "What critical bug occurs if std::string_view outlives the underlying string data?",
+      "options": ["Dangling reference leading to undefined behavior on access", "Compile error", "Memory leak", "Automatic data copy"],
+      "correctAnswer": "Dangling reference leading to undefined behavior on access"
+    },
+    {
+      "slideId": "CPP_150_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Remove Suffix View Adjustment",
+      "prompt": "Fill in method dropping N characters from back of view.",
+      "codeSnippet": "sv.___(1); // Drops last character",
+      "options": ["remove_suffix", "drop_back", "pop_back", "trim_right"],
+      "correctAnswer": "remove_suffix"
+    },
+    {
+      "slideId": "CPP_150_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Null Termination Guarantee",
+      "prompt": "Is data referenced by std::string_view guaranteed to be null-terminated?",
+      "options": ["No! string_view may point to a slice without null terminator", "Yes, always null-terminated", "Only if created from std::string", "Only in release builds"],
+      "correctAnswer": "No! string_view may point to a slice without null terminator"
+    },
+    {
+      "slideId": "CPP_150_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "string_view Literal Suffix",
+      "prompt": "Fill in namespace literal suffix for string_view (e.g. \"text\"sv).",
+      "codeSnippet": "using namespace std::string_view_literals;\nauto sv = \"hello\"___;",
+      "options": ["sv", "s", "v", "view"],
+      "correctAnswer": "sv"
+    },
+    {
+      "slideId": "CPP_150_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copy Complexity of string_view",
+      "prompt": "What is the time complexity to copy a std::string_view object?",
+      "options": ["O(1) constant time (copies pointer + length size_t)", "O(N) linear time", "O(log N)", "Dependent on string length"],
+      "correctAnswer": "O(1) constant time (copies pointer + length size_t)"
+    },
+    {
+      "slideId": "CPP_150_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating std::string from view",
+      "prompt": "Convert string_view to owning string explicitly using std::string constructor.",
+      "codeSnippet": "std::string owningString{___};",
+      "options": ["sv", "sv.data()", "sv.c_str()", "sv.to_string()"],
+      "correctAnswer": "sv"
+    }
+  ]
+}

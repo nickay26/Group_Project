@@ -12,28 +12,28 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="playgroundRoot" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PlaygroundDashboardController">
+<StackPane fx:id="playgroundRoot" styleClass="playground-root" stylesheets="@../Css/playground_dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PlaygroundDashboardController">
     <children>
 
         <!-- MAIN DASHBOARD CONTENT -->
-        <AnchorPane style="-fx-background-color: #FFFFFF;">
+        <AnchorPane styleClass="playground-root">
             <children>
                 <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                     </padding>
                     <children>
                         <!-- HEADER BAR -->
                         <HBox alignment="CENTER_RIGHT">
                             <children>
-                                <Button onAction="#openCreateModal" style="-fx-background-color: #2FBDAE; -fx-background-radius: 8px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-cursor: hand; -fx-padding: 8 16;" text="➕ Create New Project" />
+                                <Button onAction="#openCreateModal" styleClass="btn-primary" text="➕ Create New Project" />
                             </children>
                         </HBox>
 
                         <!-- SAVED PROJECTS GRID / LIST -->
-                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                        <ScrollPane fitToWidth="true" styleClass="transparent-scroll-pane" VBox.vgrow="ALWAYS">
                             <content>
-                                <FlowPane fx:id="projectsGrid" hgap="15.0" vgap="15.0" style="-fx-background-color: transparent;" />
+                                <FlowPane fx:id="projectsGrid" hgap="16.0" vgap="16.0" style="-fx-background-color: transparent;" />
                             </content>
                         </ScrollPane>
                     </children>
@@ -42,36 +42,36 @@
         </AnchorPane>
 
         <!-- CREATE NEW PROJECT OVERLAY MODAL -->
-        <VBox fx:id="createModal" alignment="CENTER" visible="false" style="-fx-background-color: rgba(0, 0, 0, 0.45);">
+        <VBox fx:id="createModal" alignment="CENTER" visible="false" styleClass="modal-overlay">
             <children>
-                <VBox maxWidth="380.0" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-border-color: #000000; -fx-border-radius: 12px;">
+                <VBox maxWidth="400.0" spacing="16.0" styleClass="modal-card">
                     <padding>
-                        <Insets bottom="25.0" left="25.0" right="25.0" top="20.0" />
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                     </padding>
                     <children>
-                        <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="Create New Project" />
+                        <Label styleClass="modal-title" text="Create New Project" />
 
-                        <VBox spacing="5.0">
+                        <VBox spacing="6.0">
                             <children>
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #555555;" text="Project Title" />
-                                <TextField fx:id="titleInput" promptText="e.g. Binary Tree Implementation" style="-fx-border-color: #000000; -fx-border-radius: 5px;" />
+                                <Label styleClass="form-label" text="Project Title" />
+                                <TextField fx:id="titleInput" promptText="e.g. Binary Tree Implementation" styleClass="dark-text-field" />
                             </children>
                         </VBox>
 
-                        <VBox spacing="5.0">
+                        <VBox spacing="6.0">
                             <children>
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #555555;" text="Language" />
-                                <ComboBox fx:id="languageSelect" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-radius: 5px;" />
+                                <Label styleClass="form-label" text="Language" />
+                                <ComboBox fx:id="languageSelect" maxWidth="1.7976931348623157E308" styleClass="dark-combo-box" />
                             </children>
                         </VBox>
 
-                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                        <HBox alignment="CENTER_RIGHT" spacing="12.0">
                             <padding>
-                                <Insets top="10.0" />
+                                <Insets top="12.0" />
                             </padding>
                             <children>
-                                <Button onAction="#closeCreateModal" style="-fx-background-color: transparent; -fx-text-fill: #000000; -fx-cursor: hand;" text="Cancel" />
-                                <Button onAction="#handleCreateProject" style="-fx-background-color: #000000; -fx-text-fill: #FFFFFF; -fx-background-radius: 6px; -fx-cursor: hand;" text="Create &amp; Code" />
+                                <Button onAction="#closeCreateModal" styleClass="btn-cancel" text="Cancel" />
+                                <Button onAction="#handleCreateProject" styleClass="btn-submit" text="Create &amp; Code" />
                             </children>
                         </HBox>
                     </children>

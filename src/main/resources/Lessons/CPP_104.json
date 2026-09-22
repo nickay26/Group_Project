@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_104",
+  "title": "Primitive Data Types",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_104_S1",
+      "type": "CONCEPT",
+      "title": "Core Data Types",
+      "prompt": "C++ offers built-in data types: int for integers, double/float for decimals, char for characters, and bool for booleans.",
+      "codeSnippet": "int count = 10;\ndouble price = 19.99;\nchar grade = 'A';\nbool isReady = true;"
+    },
+    {
+      "slideId": "CPP_104_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Character Literal",
+      "prompt": "Fill in the missing data type for single characters.",
+      "codeSnippet": "___ symbol = '$';",
+      "options": ["char", "string", "text", "letter"],
+      "correctAnswer": "char"
+    },
+    {
+      "slideId": "CPP_104_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Boolean Values",
+      "prompt": "What are the two possible values for a 'bool' variable?",
+      "options": ["true or false", "1 or -1", "yes or no", "on or off"],
+      "correctAnswer": "true or false"
+    },
+    {
+      "slideId": "CPP_104_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Floating Point Type",
+      "prompt": "Fill in the data type for high-precision decimal numbers.",
+      "codeSnippet": "___ pi = 3.14159;",
+      "options": ["double", "int", "bool", "char"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_104_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Quotes for Characters",
+      "prompt": "Which quotes must be used to enclose a single 'char' literal?",
+      "options": ["Single quotes (' ')", "Double quotes (\" \")", "Backticks (` `)", "No quotes required"],
+      "correctAnswer": "Single quotes (' ')"
+    },
+    {
+      "slideId": "CPP_104_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Initialization",
+      "prompt": "Complete the boolean initialization for a false condition.",
+      "codeSnippet": "bool isOver = ___;",
+      "options": ["false", "0", "null", "False"],
+      "correctAnswer": "false"
+    },
+    {
+      "slideId": "CPP_104_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Data Type Size Check",
+      "prompt": "Which keyword returns the memory size (in bytes) of a data type?",
+      "options": ["sizeof", "length", "size", "bytesof"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_104_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "String Included Header",
+      "prompt": "Fill in the header file needed to use std::string.",
+      "codeSnippet": "#include <___>",
+      "options": ["string", "cstring", "text", "iostream"],
+      "correctAnswer": "string"
+    },
+    {
+      "slideId": "CPP_104_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Float vs Double",
+      "prompt": "What is the primary difference between float and double?",
+      "options": ["double provides higher precision and double the size of float", "float handles text, double handles numbers", "float is unsigned, double is signed", "There is no difference"],
+      "correctAnswer": "double provides higher precision and double the size of float"
+    },
+    {
+      "slideId": "CPP_104_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "String Literal Quotes",
+      "prompt": "Fill in the correct delimiter for string literals.",
+      "codeSnippet": "std::string name = ___Hello___;",
+      "options": ["\"", "'", "`", "/"],
+      "correctAnswer": "\""
+    }
+  ]
+}

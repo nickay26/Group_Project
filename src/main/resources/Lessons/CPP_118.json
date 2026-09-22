@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_118",
+  "title": "Scope & Variable Lifetime",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_118_S1",
+      "type": "CONCEPT",
+      "title": "Variable Scope Rules",
+      "prompt": "A variable's scope determines where it can be accessed. Local variables exist only within their enclosing block {}.",
+      "codeSnippet": "int globalVar = 100; // Global scope\nvoid func() {\n    int localVar = 10; // Local scope\n}"
+    },
+    {
+      "slideId": "CPP_118_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Local Scope Braces",
+      "prompt": "Fill in the block delimiter enclosing local variables.",
+      "codeSnippet": "if (true) ___ int x = 5; ___",
+      "options": ["{ , }", "( , )", "[ , ]", "< , >"],
+      "correctAnswer": "{ , }"
+    },
+    {
+      "slideId": "CPP_118_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Global Scope Access",
+      "prompt": "Where can a global variable declared outside all functions be accessed?",
+      "options": ["Anywhere in the file after its declaration", "Only inside main()", "Only inside user-defined functions", "Inside loops only"],
+      "correctAnswer": "Anywhere in the file after its declaration"
+    },
+    {
+      "slideId": "CPP_118_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Scope Resolution Operator",
+      "prompt": "Fill in the operator used to explicitly access a global variable shadowed by a local one.",
+      "codeSnippet": "std::cout << ___globalCounter;",
+      "options": ["::", "->", ".", ":::"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_118_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Local Lifetime Expiry",
+      "prompt": "When is memory for a local variable destroyed?",
+      "options": ["When execution exits the enclosing block {}", "When the program shuts down", "When clear() is called", "When reassigned to zero"],
+      "correctAnswer": "When execution exits the enclosing block {}"
+    },
+    {
+      "slideId": "CPP_118_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Local Variable",
+      "prompt": "Fill in the keyword to preserve a local variable's value between function calls.",
+      "codeSnippet": "___ int callCount = 0;",
+      "options": ["static", "const", "persistent", "global"],
+      "correctAnswer": "static"
+    },
+    {
+      "slideId": "CPP_118_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Shadowing",
+      "prompt": "What happens if a local variable has the exact same name as a global variable?",
+      "options": ["Local variable hides (shadows) the global variable in that block", "Compile error due to duplicate name", "Global variable value is overwritten", "Both variables merge"],
+      "correctAnswer": "Local variable hides (shadows) the global variable in that block"
+    },
+    {
+      "slideId": "CPP_118_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Block Scope in Loops",
+      "prompt": "Variables declared in a loop header exist for how long?",
+      "codeSnippet": "for (int i = 0; i < 5; i++) { }\n// i is ___ here",
+      "options": ["out of scope", "valid", "global", "static"],
+      "correctAnswer": "out of scope"
+    },
+    {
+      "slideId": "CPP_118_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Global Variable Disadvantage",
+      "prompt": "Why is overuse of global variables generally discouraged?",
+      "options": ["Makes code harder to debug and maintain due to unintended side effects", "Consumes CPU cycles endlessly", "Causes memory leaks", "Cannot be initialized"],
+      "correctAnswer": "Makes code harder to debug and maintain due to unintended side effects"
+    },
+    {
+      "slideId": "CPP_118_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Lifetime",
+      "prompt": "A static local variable is initialized ___ time(s).",
+      "codeSnippet": "static int count = 0;",
+      "options": ["1", "every function call", "0", "infinite"],
+      "correctAnswer": "1"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_152",
+  "title": "Function Declarations, Definitions, and Headers",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_152_S1",
+      "type": "CONCEPT",
+      "title": "Function Declaration vs Definition",
+      "prompt": "A declaration (prototype) informs the compiler about the function name, return type, and parameters before use, whereas the definition provides the actual implementation body.",
+      "codeSnippet": "// Declaration (Prototype)\nint add(int a, int b);\n\nint main() {\n    return add(5, 3);\n}\n\n// Definition\nint add(int a, int b) {\n    return a + b;\n}"
+    },
+    {
+      "slideId": "CPP_152_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Prototype Syntax",
+      "prompt": "Fill in the correct return type keyword for a function that returns no value.",
+      "codeSnippet": "___ logMessage(const std::string& msg);",
+      "options": ["void", "null", "empty", "auto"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "CPP_152_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Header File Guards Purpose",
+      "prompt": "Why do C++ header files use '#pragma once' or inclusion guards (#ifndef / #define)?",
+      "options": [
+        "To prevent duplicate symbol definition errors during compilation",
+        "To speed up execution runtime performance",
+        "To enable multithreading support automatically",
+        "To automatically inline functions"
+      ],
+      "correctAnswer": "To prevent duplicate symbol definition errors during compilation"
+    },
+    {
+      "slideId": "CPP_152_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Header Guard Preprocessor Directives",
+      "prompt": "Fill in the missing preprocessor directive used to check if a macro is not yet defined.",
+      "codeSnippet": "#___ MATH_UTILS_H\n#define MATH_UTILS_H\n\nint multiply(int a, int b);\n\n#endif",
+      "options": ["ifndef", "ifdef", "if", "define"],
+      "correctAnswer": "ifndef"
+    },
+    {
+      "slideId": "CPP_152_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "One Definition Rule (ODR)",
+      "prompt": "According to the One Definition Rule (ODR), how many definitions can a non-inline function have across the entire program?",
+      "options": [
+        "Exactly one definition across all translation units",
+        "One definition per header file included",
+        "Unlimited definitions as long as parameter names differ",
+        "One definition per class instance"
+      ],
+      "correctAnswer": "Exactly one definition across all translation units"
+    },
+    {
+      "slideId": "CPP_152_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Modern Pragmatic Header Guard",
+      "prompt": "Fill in the non-standard but widely supported modern single-line header guard directive.",
+      "codeSnippet": "#___ once",
+      "options": ["pragma", "include", "define", "guard"],
+      "correctAnswer": "pragma"
+    },
+    {
+      "slideId": "CPP_152_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parameter Names in Prototypes",
+      "prompt": "Are parameter names strictly required in function forward declarations/prototypes?",
+      "options": [
+        "No, parameter types are mandatory, but names are optional",
+        "Yes, parameter names must match the definition exactly",
+        "Yes, parameter names are required by the C++ standard",
+        "No, neither types nor names are required"
+      ],
+      "correctAnswer": "No, parameter types are mandatory, but names are optional"
+    },
+    {
+      "slideId": "CPP_152_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Forward Declaration Syntax",
+      "prompt": "Fill in missing parameter types for a declaration expecting double inputs.",
+      "codeSnippet": "double calculateInterest(double, ___);",
+      "options": ["double", "val", "amount", "var"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_152_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Translation Units and Functions",
+      "prompt": "What happens when a declared function is called in main() but lacks any definition during compilation?",
+      "options": [
+        "A Linker Error (e.g., unresolved external symbol)",
+        "A Compiler Syntax Error",
+        "Runtime crash on program start",
+        "Function implicitly returns 0"
+      ],
+      "correctAnswer": "A Linker Error (e.g., unresolved external symbol)"
+    },
+    {
+      "slideId": "CPP_152_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Source File Inclusion",
+      "prompt": "Fill in the include quotes used for user-defined local header files.",
+      "codeSnippet": "#include ___my_header.h___",
+      "options": ["\" \"", "< >", "[ ]", "{ }"],
+      "correctAnswer": "\" \""
+    }
+  ]
+}

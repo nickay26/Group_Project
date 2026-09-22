@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Code Editor Theme (Dark Slate)
+   ========================================================================== */
+
+/* Main Container */
+.editor-root {
+    -fx-background-color: #0F172A;
+}
+
+/* Header & Typography */
+.title-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F8FAFC;
+}
+
+.section-header {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #94A3B8;
+}
+
+.lang-pill {
+    -fx-background-color: rgba(37, 99, 235, 0.2);
+    -fx-text-fill: #60A5FA;
+    -fx-background-radius: 12px;
+    -fx-padding: 3 10;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* Toolbar Buttons */
+.btn-secondary {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #F8FAFC;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8 14;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #334155;
+}
+
+.btn-ai {
+    -fx-background-color: #7C3AED;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+.btn-ai:hover {
+    -fx-background-color: #6D28D9;
+}
+
+.btn-run {
+    -fx-background-color: #2563EB;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+.btn-run:hover {
+    -fx-background-color: #1D4ED8;
+}
+
+/* Split Pane Dividers */
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: #334155;
+    -fx-padding: 0 2px;
+}
+
+/* Text Editors & Output Consoles */
+.dark-editor {
+    -fx-control-inner-background: #0F172A;
+    -fx-background-color: #0F172A;
+    -fx-text-fill: #F8FAFC;
+    -fx-font-family: 'Consolas', 'Courier New', monospace;
+    -fx-font-size: 13px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.dark-editor .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.dark-editor .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.dark-editor .scroll-pane .content {
+    -fx-background-color: transparent;
+}

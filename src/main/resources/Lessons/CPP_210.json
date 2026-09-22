@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_210",
+  "title": "Virtual Functions & Dynamic Polymorphism",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_210_S1",
+      "type": "CONCEPT",
+      "title": "Dynamic Binding Mechanics",
+      "prompt": "Virtual functions enable runtime dynamic polymorphism. Calling a virtual method via base pointer executes the derived class override.",
+      "codeSnippet": "class Shape {\npublic:\n    virtual void draw() { std::cout << \"Shape\"; }\n};\nclass Circle : public Shape {\npublic:\n    void draw() override { std::cout << \"Circle\"; }\n};"
+    },
+    {
+      "slideId": "CPP_210_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Keyword",
+      "prompt": "Fill in the keyword to enable dynamic dispatch on a base class function.",
+      "codeSnippet": "class Base {\npublic:\n    ___ void show();\n};",
+      "options": ["virtual", "override", "dynamic", "inline"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_210_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Override Keyword Purpose",
+      "prompt": "What is the primary benefit of using the 'override' specifier on derived class methods?",
+      "options": [
+        "Ensures at compile-time that the method correctly overrides a base virtual function",
+        "Speeds up function execution at runtime",
+        "Automatically allocates method memory on Heap",
+        "Prevents derived classes from overriding it further"
+      ],
+      "correctAnswer": "Ensures at compile-time that the method correctly overrides a base virtual function"
+    },
+    {
+      "slideId": "CPP_210_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Override Specifier Syntax",
+      "prompt": "Fill in the specifier at the end of the overridden function signature.",
+      "codeSnippet": "void draw() ___ {\n    // Derived implementation\n}",
+      "options": ["override", "virtual", "final", "explicit"],
+      "correctAnswer": "override"
+    },
+    {
+      "slideId": "CPP_210_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static vs Dynamic Binding",
+      "prompt": "When does C++ resolve function calls for non-virtual methods?",
+      "options": [
+        "Compile time (Static Binding)",
+        "Runtime (Dynamic Binding)",
+        "Link time via VTable lookup",
+        "Program exit time"
+      ],
+      "correctAnswer": "Compile time (Static Binding)"
+    },
+    {
+      "slideId": "CPP_210_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Final Specifier on Methods",
+      "prompt": "Fill in the specifier used to prevent derived classes from overriding a virtual method.",
+      "codeSnippet": "void compute() ___ ;",
+      "options": ["final", "override", "static", "const"],
+      "correctAnswer": "final"
+    },
+    {
+      "slideId": "CPP_210_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Final Specifier on Classes",
+      "prompt": "What happens when a class is declared as 'class Base final {...}'?",
+      "options": [
+        "No other class can inherit from Base",
+        "All members of Base become immutable const variables",
+        "Base can only be instantiated once (Singleton)",
+        "Virtual functions are disabled inside Base"
+      ],
+      "correctAnswer": "No other class can inherit from Base"
+    },
+    {
+      "slideId": "CPP_210_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Polymorphic Call via Pointer",
+      "prompt": "Fill in the operator used to invoke a virtual function using a base class pointer.",
+      "codeSnippet": "Shape* s = new Circle();\ns___draw();",
+      "options": ["->", ".", "::", "*"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_210_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Covariant Return Types",
+      "prompt": "What are covariant return types in C++ virtual function overriding?",
+      "options": [
+        "An override can return a pointer/reference to a class derived from the base method's return type",
+        "An override must return void regardless of base function return type",
+        "An override can return any primitive scalar data type",
+        "An override can change the function return type to templates"
+      ],
+      "correctAnswer": "An override can return a pointer/reference to a class derived from the base method's return type"
+    },
+    {
+      "slideId": "CPP_210_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Arguments with Virtual Functions",
+      "prompt": "Default parameter values for virtual functions are bound at ___ time.",
+      "codeSnippet": "// Default arguments are bound at:\nCompile",
+      "options": ["Compile", "Run", "Link", "Load"],
+      "correctAnswer": "Compile"
+    }
+  ]
+}

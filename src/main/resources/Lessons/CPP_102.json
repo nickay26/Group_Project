@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_102",
+  "title": "Comments & Code Formatting",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_102_S1",
+      "type": "CONCEPT",
+      "title": "Single-line vs Multi-line Comments",
+      "prompt": "Comments are ignored by the compiler and are used to explain code.",
+      "codeSnippet": "// Single-line comment\n/* Multi-line\n   comment */"
+    },
+    {
+      "slideId": "CPP_102_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Single-Line Comment",
+      "prompt": "Fill in the syntax for a single-line comment.",
+      "codeSnippet": "___ This is a comment",
+      "options": ["//", "/*", "#", "<!--"],
+      "correctAnswer": "//"
+    },
+    {
+      "slideId": "CPP_102_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multi-Line Comment Closing",
+      "prompt": "How do you close a multi-line comment in C++?",
+      "options": ["*/", "//", "-->", "*/"],
+      "correctAnswer": "*/"
+    },
+    {
+      "slideId": "CPP_102_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multi-Line Comment Start",
+      "prompt": "Fill in the opening symbol for a multi-line comment.",
+      "codeSnippet": "___ Multi line comment here */",
+      "options": ["/*", "//", "<!--", "~~"],
+      "correctAnswer": "/*"
+    },
+    {
+      "slideId": "CPP_102_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Comment Execution",
+      "prompt": "Does the C++ compiler execute comment lines?",
+      "options": ["No, they are completely ignored", "Yes, as slow code", "Only multi-line comments", "Only if in main()"],
+      "correctAnswer": "No, they are completely ignored"
+    },
+    {
+      "slideId": "CPP_102_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Code Indentation",
+      "prompt": "Code blocks inside functions are enclosed within ___ braces.",
+      "codeSnippet": "int main() ___\n    return 0;\n}",
+      "options": ["{", "(", "[", "<"],
+      "correctAnswer": "{"
+    },
+    {
+      "slideId": "CPP_102_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Whitespace Handling",
+      "prompt": "How does C++ handle extra whitespace and newlines?",
+      "options": ["Ignores most extra whitespace", "Causes compile error", "Replaces with spaces", "Treats as variables"],
+      "correctAnswer": "Ignores most extra whitespace"
+    },
+    {
+      "slideId": "CPP_102_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Commenting",
+      "prompt": "Fill in the missing comment symbol next to statement.",
+      "codeSnippet": "int age = 20; ___ Set user age",
+      "options": ["//", "#", "--", "%"],
+      "correctAnswer": "//"
+    },
+    {
+      "slideId": "CPP_102_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Good Comment Practice",
+      "prompt": "Why are comments important in programming?",
+      "options": ["Improves code readability and maintainability", "Makes code run faster", "Reduces file size", "Required for memory allocation"],
+      "correctAnswer": "Improves code readability and maintainability"
+    },
+    {
+      "slideId": "CPP_102_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Closing Brace",
+      "prompt": "Fill in the matching closing symbol for function body.",
+      "codeSnippet": "int main() {\n    return 0;\n___",
+      "options": ["}", ")", "]", ">"],
+      "correctAnswer": "}"
+    }
+  ]
+}

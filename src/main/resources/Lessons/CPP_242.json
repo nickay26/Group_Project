@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_242",
+  "title": "std::unique_ptr & Exclusive Ownership",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_242_S1",
+      "type": "CONCEPT",
+      "title": "Exclusive Ownership with std::unique_ptr",
+      "prompt": "std::unique_ptr manages heap objects with exclusive ownership semantics. It cannot be copied, only moved, guaranteeing zero-overhead destruction when the owner scope terminates.",
+      "codeSnippet": "#include <memory>\nstd::unique_ptr<int> p1 = std::make_unique<int>(42);\n// std::unique_ptr<int> p2 = p1; // ERROR: Cannot copy!\nstd::unique_ptr<int> p2 = std::move(p1); // OK: Ownership transferred"
+    },
+    {
+      "slideId": "CPP_242_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating unique_ptr",
+      "prompt": "Fill in the recommended C++14 helper function to create a std::unique_ptr safely.",
+      "codeSnippet": "auto ptr = std::___<Widget>(arg1, arg2);",
+      "options": ["make_unique", "make_shared", "create_unique", "alloc_unique"],
+      "correctAnswer": "make_unique"
+    },
+    {
+      "slideId": "CPP_242_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copying std::unique_ptr",
+      "prompt": "What happens when you attempt to copy pass a std::unique_ptr by value?",
+      "options": [
+        "Compile-time error because copy constructor/assignment are deleted",
+        "Runtime crash due to double deletion",
+        "Automatic conversion to std::shared_ptr",
+        "Deep copy of the underlying managed object"
+      ],
+      "correctAnswer": "Compile-time error because copy constructor/assignment are deleted"
+    },
+    {
+      "slideId": "CPP_242_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Transferring Ownership",
+      "prompt": "Fill in the function used to move ownership from one std::unique_ptr to another.",
+      "codeSnippet": "std::unique_ptr<int> u2 = std::___(u1);",
+      "options": ["move", "transfer", "forward", "pass"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_242_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::unique_ptr Overhead",
+      "prompt": "What is the memory footprint and runtime cost of a standard std::unique_ptr compared to a raw pointer?",
+      "options": [
+        "Zero overhead: same size as a raw pointer with inline dereferencing",
+        "Double size due to internal reference counters",
+        "Requires atomic lock operations on access",
+        "Allocates hidden tracking headers on the heap"
+      ],
+      "correctAnswer": "Zero overhead: same size as a raw pointer with inline dereferencing"
+    },
+    {
+      "slideId": "CPP_242_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Releasing Ownership",
+      "prompt": "Fill in the member function that releases raw ownership without deleting the underlying object.",
+      "codeSnippet": "int* raw = ptr.___(); // ptr becomes null, returns raw pointer",
+      "options": ["release", "reset", "get", "detach"],
+      "correctAnswer": "release"
+    },
+    {
+      "slideId": "CPP_242_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::unique_ptr with Arrays",
+      "prompt": "How should std::unique_ptr be templated to manage dynamic arrays safely?",
+      "options": [
+        "std::unique_ptr<int[]>",
+        "std::unique_ptr<std::vector<int>>",
+        "std::unique_ptr<int*>",
+        "std::unique_ptr<array<int>>"
+      ],
+      "correctAnswer": "std::unique_ptr<int[]>"
+    },
+    {
+      "slideId": "CPP_242_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Resetting Managed Object",
+      "prompt": "Fill in the member function used to replace or delete the currently managed object.",
+      "codeSnippet": "ptr.___(new Widget()); // Deletes old object and manages new one",
+      "options": ["reset", "release", "replace", "assign"],
+      "correctAnswer": "reset"
+    },
+    {
+      "slideId": "CPP_242_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Accessing Raw Pointer",
+      "prompt": "Which member function returns the underlying raw pointer without transferring ownership?",
+      "options": [
+        "ptr.get()",
+        "ptr.release()",
+        "ptr.raw()",
+        "ptr.pointer()"
+      ],
+      "correctAnswer": "ptr.get()"
+    },
+    {
+      "slideId": "CPP_242_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Deleter Syntax",
+      "prompt": "Fill in the template argument placement for a custom deleter in std::unique_ptr.",
+      "codeSnippet": "std::unique_ptr<File, ___> filePtr(fopen(\"data.txt\", \"r\"), FileDeleter());",
+      "options": ["FileDeleter", "decltype(FileDeleter)", "custom_delete", "deleter_t"],
+      "correctAnswer": "FileDeleter"
+    }
+  ]
+}

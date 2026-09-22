@@ -1,0 +1,63 @@
+/* Course Page Main Root */
+.course-root {
+    -fx-background-color: #0F172A;
+}
+
+/* Header Labels */
+.course-page-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F8FAFC;
+}
+
+.course-page-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #94A3B8;
+}
+
+.empty-course-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #94A3B8;
+}
+
+/* Scroll Pane & Containers */
+.course-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-viewport-background-color: transparent;
+}
+
+/* Course Card Item */
+.course-card {
+    -fx-background-color: #1E293B;
+    -fx-background-radius: 24px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 24px;
+    -fx-border-width: 1.5px;
+}
+
+.course-card:hover {
+    -fx-border-color: #3B82F6;
+    -fx-cursor: hand;
+}
+
+.course-card-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F8FAFC;
+}
+
+.course-card-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #94A3B8;
+}
+
+/* Dynamic Ribbon & Progress Badge */
+.course-ribbon {
+    -fx-fill: #2563EB;
+}
+
+.course-ribbon-text {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}

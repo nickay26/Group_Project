@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_251",
+  "title": "Move Constructors & Move Assignment Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_251_S1",
+      "type": "CONCEPT",
+      "title": "Move Operations Concept",
+      "prompt": "Move constructors and move assignment operators transfer ownership of heap memory or resources from a source temporary object into a target object, leaving the source in a valid but unspecified state without copying.",
+      "codeSnippet": "class Buffer {\n    int* data;\npublic:\n    // Move constructor\n    Buffer(Buffer&& other) noexcept : data(other.data) {\n        other.data = nullptr; // Steal resource and neutralize source\n    }\n};"
+    },
+    {
+      "slideId": "CPP_251_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Constructor Signature",
+      "prompt": "Fill in the parameter signature for the move constructor of class Vector.",
+      "codeSnippet": "class Vector {\npublic:\n    Vector(Vector___ other) noexcept;\n};",
+      "options": ["&&", "&", "const &", "*"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_251_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "noexcept Specifier Importance",
+      "prompt": "Why is it critical to mark move constructors and move assignment operators as 'noexcept'?",
+      "options": [
+        "STL containers like std::vector require noexcept move operations to provide strong exception guarantees during resizing",
+        "The compiler refuses to compile move constructors without noexcept",
+        "It automatically frees pointers assigned to nullptr",
+        "It forces the compiler to inline the move method execution"
+      ],
+      "correctAnswer": "STL containers like std::vector require noexcept move operations to provide strong exception guarantees during resizing"
+    },
+    {
+      "slideId": "CPP_251_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Neutralizing Source State",
+      "prompt": "Fill in the standard value assigned to raw pointers in moved-from objects to prevent double-free errors upon destruction.",
+      "codeSnippet": "Buffer::Buffer(Buffer&& other) noexcept : ptr(other.ptr) {\n    other.ptr = ___; // Prevent destructor from deleting memory\n}",
+      "options": ["nullptr", "0", "NULL", "void"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_251_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Move Assignment Self-Assignment Check",
+      "prompt": "What check must be performed at the start of a move assignment operator (operator=(T&&))?",
+      "options": [
+        "Check for self-assignment (this != &other) to prevent releasing own resources prematurely",
+        "Check if the source parameter pointer is non-const",
+        "Check if memory is allocated on the stack",
+        "Check if reference count equals one"
+      ],
+      "correctAnswer": "Check for self-assignment (this != &other) to prevent releasing own resources prematurely"
+    },
+    {
+      "slideId": "CPP_251_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Assignment Operator Signature",
+      "prompt": "Fill in the operator signature for class MyArray move assignment.",
+      "codeSnippet": "MyArray& operator=(MyArray___ other) noexcept {\n    if (this != &other) { /* move logic */ }\n    return *this;\n}",
+      "options": ["&&", "&", "const &", "*"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_251_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "State of Moved-From Object",
+      "prompt": "According to the C++ Standard Library rules, what condition must a moved-from object satisfy?",
+      "options": [
+        "Valid but unspecified state (can be safely destroyed or re-assigned)",
+        "Must be automatically deleted from memory immediately",
+        "Must retain its original initial values intact",
+        "All pointers must throw exceptions if accessed"
+      ],
+      "correctAnswer": "Valid but unspecified state (can be safely destroyed or re-assigned)"
+    },
+    {
+      "slideId": "CPP_251_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Move Generation",
+      "prompt": "Fill in the keyword to request compiler-generated default move constructor.",
+      "codeSnippet": "class Widget {\npublic:\n    Widget(Widget&&) = ___;\n};",
+      "options": ["default", "delete", "auto", "noexcept"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_251_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implicit Generation Suppression",
+      "prompt": "Declaring a custom destructor in a class suppresses the implicit generation of which special member functions?",
+      "options": [
+        "Implicit move constructor and implicit move assignment operator",
+        "Implicit copy constructor and default constructor",
+        "Virtual function table overrides",
+        "Static member initialization procedures"
+      ],
+      "correctAnswer": "Implicit move constructor and implicit move assignment operator"
+    },
+    {
+      "slideId": "CPP_251_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::exchange in Move Constructor",
+      "prompt": "Fill in the utility function that replaces a pointer value while returning its old value in one atomic step.",
+      "codeSnippet": "Buffer::Buffer(Buffer&& other) noexcept \n    : ptr(std::___(other.ptr, nullptr)) {} // Clears other.ptr while returning old ptr",
+      "options": ["exchange", "swap", "move", "forward"],
+      "correctAnswer": "exchange"
+    }
+  ]
+}

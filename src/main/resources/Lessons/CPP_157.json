@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_157",
+  "title": "Function Pointers, std::function, and Callables",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_157_S1",
+      "type": "CONCEPT",
+      "title": "Callable Types in C++",
+      "prompt": "C++ supports raw function pointers, function objects (functors), and std::function wrappers to store, pass, and execute callable entities dynamically.",
+      "codeSnippet": "// Raw Function Pointer\nint (*funcPtr)(int, int) = &add;\n\n// std::function Wrapper\n#include <functional>\nstd::function<int(int, int)> op = add;"
+    },
+    {
+      "slideId": "CPP_157_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Pointer Declaration Syntax",
+      "prompt": "Fill in missing parenthesis symbol to declare a pointer to a function returning void.",
+      "codeSnippet": "void ___*fptr)(int);",
+      "options": ["(", "*", "&", "void"],
+      "correctAnswer": "("
+    },
+    {
+      "slideId": "CPP_157_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functor Definition",
+      "prompt": "What is a Functor in C++?",
+      "options": [
+        "A class or struct that overloads the call operator 'operator()'",
+        "A function that takes another function as a parameter",
+        "A pointer to a member function",
+        "A lambda expression without captures"
+      ],
+      "correctAnswer": "A class or struct that overloads the call operator 'operator()'"
+    },
+    {
+      "slideId": "CPP_157_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Operator Overloading for Functors",
+      "prompt": "Fill in the operator signature for a functor call operator.",
+      "codeSnippet": "struct Multiplier {\n    int factor;\n    int operator___(int x) const {\n        return x * factor;\n    }\n};",
+      "options": ["()", "[]", "->", "*"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "CPP_157_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::function Overhead",
+      "prompt": "What tradeoff comes with using std::function compared to raw function pointers or template parameters?",
+      "options": [
+        "Potential overhead due to type erasure and dynamic allocation for large callables",
+        "std::function cannot store lambda functions",
+        "std::function can only call static global functions",
+        "std::function reduces compile times but slows disk IO"
+      ],
+      "correctAnswer": "Potential overhead due to type erasure and dynamic allocation for large callables"
+    },
+    {
+      "slideId": "CPP_157_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Functional Header Include",
+      "prompt": "Fill in the standard header required for std::function.",
+      "codeSnippet": "#include <___>",
+      "options": ["functional", "function", "algorithm", "utility"],
+      "correctAnswer": "functional"
+    },
+    {
+      "slideId": "CPP_157_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Callback Functions",
+      "prompt": "How are function pointers or std::function commonly applied in software design?",
+      "options": [
+        "As callback parameters passed to algorithms or event notification systems",
+        "To override standard math operations",
+        "To manage memory destruction automatically",
+        "To bypass const-correctness checks"
+      ],
+      "correctAnswer": "As callback parameters passed to algorithms or event notification systems"
+    },
+    {
+      "slideId": "CPP_157_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::invoke Utility (C++17)",
+      "prompt": "Fill in standard C++17 utility function that invokes any callable uniformally.",
+      "codeSnippet": "std::___(funcPtr, arg1, arg2);",
+      "options": ["invoke", "call", "run", "execute"],
+      "correctAnswer": "invoke"
+    },
+    {
+      "slideId": "CPP_157_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Empty std::function Invocation",
+      "prompt": "What happens if you invoke an uninitialized/empty std::function object?",
+      "options": [
+        "Throws std::bad_function_call exception",
+        "Returns 0 default value",
+        "Segmentation fault immediately without exception",
+        "Compile-time error"
+      ],
+      "correctAnswer": "Throws std::bad_function_call exception"
+    },
+    {
+      "slideId": "CPP_157_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Typedef / Using Alias for Function Pointer",
+      "prompt": "Fill in alias keyword for clean function pointer type definitions.",
+      "codeSnippet": "___ Action = void(*)(int, double);",
+      "options": ["using", "typedef", "auto", "typename"],
+      "correctAnswer": "using"
+    }
+  ]
+}

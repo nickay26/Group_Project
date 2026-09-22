@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_106",
+  "title": "Input with cin",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_106_S1",
+      "type": "CONCEPT",
+      "title": "Standard Input Stream",
+      "prompt": "std::cin is used along with the extraction operator (>>) to receive input from the user keyboard.",
+      "codeSnippet": "int age;\nstd::cout << \"Enter age: \";\nstd::cin >> age;"
+    },
+    {
+      "slideId": "CPP_106_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Extraction Operator",
+      "prompt": "Fill in the extraction operator used with cin.",
+      "codeSnippet": "std::cin ___ userAge;",
+      "options": [">>", "<<", "->", "=>"],
+      "correctAnswer": ">>"
+    },
+    {
+      "slideId": "CPP_106_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Input Stream Name",
+      "prompt": "Which standard object handles keyboard input in C++?",
+      "options": ["std::cin", "std::cout", "std::input", "std::read"],
+      "correctAnswer": "std::cin"
+    },
+    {
+      "slideId": "CPP_106_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Input Chaining",
+      "prompt": "Fill in the missing operator to accept two inputs in sequence.",
+      "codeSnippet": "std::cin >> x ___ y;",
+      "options": [">>", "<<", ",", "+"],
+      "correctAnswer": ">>"
+    },
+    {
+      "slideId": "CPP_106_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Whitespace Handling in cin",
+      "prompt": "How does standard 'std::cin >>' treat spaces during string input?",
+      "options": ["Stops reading at whitespace", "Includes spaces in the string", "Replaces spaces with underscores", "Throws a runtime error"],
+      "correctAnswer": "Stops reading at whitespace"
+    },
+    {
+      "slideId": "CPP_106_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading Full Lines",
+      "prompt": "Fill in the function name used to read an entire line including spaces.",
+      "codeSnippet": "___(std::cin, fullName);",
+      "options": ["getline", "readline", "get_string", "cin_line"],
+      "correctAnswer": "getline"
+    },
+    {
+      "slideId": "CPP_106_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Input Type Mismatch",
+      "prompt": "What happens if a user inputs letters when cin expects an integer?",
+      "options": ["cin enters a fail state", "Code converts letters to numbers automatically", "Program crashes instantly", "Input is silently skipped"],
+      "correctAnswer": "cin enters a fail state"
+    },
+    {
+      "slideId": "CPP_106_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Prompting User Input",
+      "prompt": "Fill in the correct stream object to print a prompt before cin.",
+      "codeSnippet": "___ << \"Enter number: \";\nstd::cin >> num;",
+      "options": ["std::cout", "std::cin", "std::endl", "std::printf"],
+      "correctAnswer": "std::cout"
+    },
+    {
+      "slideId": "CPP_106_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Direction of Arrows",
+      "prompt": "Which statement is correct regarding stream operator directions?",
+      "options": ["cout uses << (pointing away), cin uses >> (pointing to variable)", "cout uses >>, cin uses <<", "Both use <<", "Both use >>"],
+      "correctAnswer": "cout uses << (pointing away), cin uses >> (pointing to variable)"
+    },
+    {
+      "slideId": "CPP_106_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading Double Inputs",
+      "prompt": "Fill in the variable that stores decimal input from user.",
+      "codeSnippet": "double temperature;\nstd::cin >> ___;",
+      "options": ["temperature", "double", "temp()", "&temperature"],
+      "correctAnswer": "temperature"
+    }
+  ]
+}

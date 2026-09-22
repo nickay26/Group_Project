@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_225",
+  "title": "std::vector & Dynamic Array Internals",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_225_S1",
+      "type": "CONCEPT",
+      "title": "std::vector Overview",
+      "prompt": "std::vector is a sequence container representing a dynamic contiguous array. It manages memory automatically, expanding capacity when the array size exceeds current allocation.",
+      "codeSnippet": "#include <vector>\nstd::vector<int> numbers = {1, 2, 3};\nnumbers.push_back(4);"
+    },
+    {
+      "slideId": "CPP_225_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding Elements",
+      "prompt": "Fill in the function used to append an element to the end of a vector.",
+      "codeSnippet": "std::vector<int> vec;\nvec.___ (10);",
+      "options": ["push_back", "append", "insert_end", "add"],
+      "correctAnswer": "push_back"
+    },
+    {
+      "slideId": "CPP_225_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Size vs Capacity",
+      "prompt": "What is the difference between vector size() and capacity()?",
+      "options": [
+        "size() is the number of elements held; capacity() is the total memory allocated before requiring reallocation",
+        "capacity() is the number of elements held; size() is the maximum limit",
+        "There is no difference; both return the same value always",
+        "size() measures bytes; capacity() measures element count"
+      ],
+      "correctAnswer": "size() is the number of elements held; capacity() is the total memory allocated before requiring reallocation"
+    },
+    {
+      "slideId": "CPP_225_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Reserving Capacity",
+      "prompt": "Fill in the method used to pre-allocate memory for a vector to avoid frequent reallocations.",
+      "codeSnippet": "std::vector<int> v;\nv.___(1000); // Pre-allocate space for 1000 elements",
+      "options": ["reserve", "resize", "allocate", "capacity"],
+      "correctAnswer": "reserve"
+    },
+    {
+      "slideId": "CPP_225_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "In-Place Construction",
+      "prompt": "Why is emplace_back() often preferred over push_back() for complex objects?",
+      "options": [
+        "emplace_back constructs the object directly in vector memory, avoiding unnecessary copy/move operations",
+        "emplace_back guarantees O(1) performance while push_back is O(N)",
+        "emplace_back allows adding multiple elements at once",
+        "push_back works only for primitive data types"
+      ],
+      "correctAnswer": "emplace_back constructs the object directly in vector memory, avoiding unnecessary copy/move operations"
+    },
+    {
+      "slideId": "CPP_225_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Safe Element Access",
+      "prompt": "Fill in the method that performs bounds checking when accessing a vector element.",
+      "codeSnippet": "int val = vec.___(2); // Throws std::out_of_range if index is invalid",
+      "options": ["at", "get", "access", "value_at"],
+      "correctAnswer": "at"
+    },
+    {
+      "slideId": "CPP_225_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Invalidation",
+      "prompt": "When are iterators to a vector invalidated during an insertion?",
+      "options": [
+        "When size reaches capacity and reallocation to a new memory block occurs",
+        "On every call to push_back() regardless of capacity",
+        "Never; vector iterators remain valid indefinitely",
+        "Only when elements are erased from the vector"
+      ],
+      "correctAnswer": "When size reaches capacity and reallocation to a new memory block occurs"
+    },
+    {
+      "slideId": "CPP_225_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Shrinking Memory",
+      "prompt": "Fill in the C++11 method used to reduce vector capacity to fit its current size.",
+      "codeSnippet": "vec.shrink_to_fit___();",
+      "options": ["()", "==", "->", "::"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "CPP_225_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Random Access Complexity",
+      "prompt": "What is the time complexity of accessing an element in std::vector using operator[]?",
+      "options": [
+        "O(1) - Constant Time",
+        "O(N) - Linear Time",
+        "O(log N) - Logarithmic Time",
+        "O(N^2) - Quadratic Time"
+      ],
+      "correctAnswer": "O(1) - Constant Time"
+    },
+    {
+      "slideId": "CPP_225_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Direct Data Access",
+      "prompt": "Fill in the member function returning a direct pointer to the underlying array memory block.",
+      "codeSnippet": "int* rawPtr = vec.___();",
+      "options": ["data", "pointer", "raw", "buffer"],
+      "correctAnswer": "data"
+    }
+  ]
+}

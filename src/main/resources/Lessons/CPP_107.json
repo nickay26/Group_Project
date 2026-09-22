@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_107",
+  "title": "Arithmetic Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_107_S1",
+      "type": "CONCEPT",
+      "title": "Basic Arithmetic Operators",
+      "prompt": "C++ supports standard mathematical operators: + (addition), - (subtraction), * (multiplication), / (division), and % (modulus).",
+      "codeSnippet": "int sum = 10 + 5;\nint diff = 10 - 5;\nint prod = 10 * 5;\nint quot = 10 / 5;\nint rem = 10 % 3;"
+    },
+    {
+      "slideId": "CPP_107_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Addition Operator",
+      "prompt": "Fill in the correct operator to add two numbers.",
+      "codeSnippet": "int total = 15 ___ 25;",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_107_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modulus Operator Role",
+      "prompt": "What does the modulus operator (%) return?",
+      "options": ["The remainder of integer division", "The quotient of division", "The percentage of a number", "The power of a number"],
+      "correctAnswer": "The remainder of integer division"
+    },
+    {
+      "slideId": "CPP_107_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Modulus Calculation",
+      "prompt": "Fill in the operator that computes remainder of division.",
+      "codeSnippet": "int remainder = 7 ___ 2;",
+      "options": ["%", "/", "*", "#"],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "CPP_107_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Integer Division Behavior",
+      "prompt": "What is the result of '7 / 2' in integer division?",
+      "options": ["3", "3.5", "4", "3.0"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_107_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Floating Division",
+      "prompt": "Complete the statement to get a precise decimal result.",
+      "codeSnippet": "double result = 7.0 ___ 2.0;",
+      "options": ["/", "%", "\\", "div"],
+      "correctAnswer": "/"
+    },
+    {
+      "slideId": "CPP_107_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Precedence",
+      "prompt": "Which operation is performed first in '5 + 3 * 2'?",
+      "options": ["Multiplication (3 * 2)", "Addition (5 + 3)", "Left-to-right (5 + 3)", "Depends on compiler"],
+      "correctAnswer": "Multiplication (3 * 2)"
+    },
+    {
+      "slideId": "CPP_107_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Overriding Precedence",
+      "prompt": "Fill in the grouping symbols to force addition before multiplication.",
+      "codeSnippet": "int ans = ___5 + 3___ * 2;",
+      "options": ["( , )", "[ , ]", "{ , }", "< , >"],
+      "correctAnswer": "( , )"
+    },
+    {
+      "slideId": "CPP_107_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Division by Zero",
+      "prompt": "What happens when you divide an integer by zero in C++?",
+      "options": ["Causes undefined behavior / runtime error", "Returns zero", "Returns infinity", "Evaluates to false"],
+      "correctAnswer": "Causes undefined behavior / runtime error"
+    },
+    {
+      "slideId": "CPP_107_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiplication Operator",
+      "prompt": "Fill in the correct operator for multiplication.",
+      "codeSnippet": "int area = length ___ width;",
+      "options": ["*", "x", "X", "&"],
+      "correctAnswer": "*"
+    }
+  ]
+}

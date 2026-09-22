@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_266",
+  "title": "Class Templates & Template Instantiation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_266_S1",
+      "type": "CONCEPT",
+      "title": "Class Templates Overview",
+      "prompt": "Class templates allow defining container or utility classes that operate on generic data types. Unlike function templates prior to C++17, class template instantiations historically required explicit type arguments.",
+      "codeSnippet": "template <typename T>\nclass Box {\nprivate:\n    T value;\npublic:\n    Box(T v) : value(v) {}\n    T getValue() const { return value; }\n};\n\nBox<int> intBox(123);\nBox<std::string> strBox(\"Hello\");"
+    },
+    {
+      "slideId": "CPP_266_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Template Syntax",
+      "prompt": "Fill in the syntax to instantiate a Class Template for holding double values.",
+      "codeSnippet": "template <typename T>\nclass Container { T item; };\n\nContainer<___> c;",
+      "options": ["double", "T", "auto", "typename"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_266_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Out-of-Class Member Function Definition",
+      "prompt": "How must a member function of a class template be defined outside the class body?",
+      "options": [
+        "It must be prefixed with the template header template <typename T> and qualified with ClassName<T>::",
+        "It is defined just like a normal non-template class member function",
+        "It must use the static keyword prefix",
+        "It can only be defined inside header files using inline without template headers"
+      ],
+      "correctAnswer": "It must be prefixed with the template header template <typename T> and qualified with ClassName<T>::"
+    },
+    {
+      "slideId": "CPP_266_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "OutOfClass Definition Qualification",
+      "prompt": "Fill in the qualification for defining getValue() outside Box<T> class template.",
+      "codeSnippet": "template <typename T>\nclass Box { T value; T getValue(); };\n\ntemplate <typename T>\nT Box<___>::getValue() {\n    return value;\n}",
+      "options": ["T", "auto", "typename", "class"],
+      "correctAnswer": "T"
+    },
+    {
+      "slideId": "CPP_266_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Method Instantiation",
+      "prompt": "When are member functions of a class template instantiated by the compiler?",
+      "options": [
+        "Only when that specific member function is actually called/used in the code",
+        "All member functions are instantiated immediately when the class object is instantiated",
+        "At the moment the class template definition is parsed",
+        "During link-time optimization exclusively"
+      ],
+      "correctAnswer": "Only when that specific member function is actually called/used in the code"
+    },
+    {
+      "slideId": "CPP_266_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Template Arguments",
+      "prompt": "Fill in the syntax to specify double as the default type parameter for a class template.",
+      "codeSnippet": "template <typename T = ___>\nclass Calculator {\n    T result;\n};\n\nCalculator<> calc; // Uses default type",
+      "options": ["double", "typename", "auto", "void"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_266_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Separation of Header and Implementation",
+      "prompt": "Why are class template definitions usually placed entirely inside header files (.h / .hpp)?",
+      "options": [
+        "The compiler needs access to the full source implementation to generate code whenever the template is instantiated in different translation units",
+        "C++ prevents .cpp files from importing template keywords",
+        "Including template definitions in .cpp files causes duplicate symbol errors at link time",
+        "Template functions are automatically converted to inline macros by the preprocessor"
+      ],
+      "correctAnswer": "The compiler needs access to the full source implementation to generate code whenever the template is instantiated in different translation units"
+    },
+    {
+      "slideId": "CPP_266_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Instantiation Declaration",
+      "prompt": "Fill in the keyword used to perform explicit template instantiation to avoid code bloat across translation units.",
+      "codeSnippet": "// Explicit instantiation definition in .cpp file:\n___ template class Box<int>;",
+      "options": ["template", "extern", "export", "using"],
+      "correctAnswer": "template"
+    },
+    {
+      "slideId": "CPP_266_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Argument Deduction (CTAD)",
+      "prompt": "Starting in C++17, what feature allows writing std::pair p(1, \"text\") without explicit <int, const char*> parameters?",
+      "options": [
+        "Class Template Argument Deduction (CTAD)",
+        "Auto Template Instantiation (ATI)",
+        "Concept Type Deduction",
+        "Dynamic Type Inference"
+      ],
+      "correctAnswer": "Class Template Argument Deduction (CTAD)"
+    },
+    {
+      "slideId": "CPP_266_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Deduction Guide Syntax",
+      "prompt": "Fill in the arrow token used in user-defined CTAD deduction guides.",
+      "codeSnippet": "// Custom Deduction Guide\ntemplate <typename T>\nMyWrapper(T) ___ MyWrapper<T>;",
+      "options": ["->", "=>", ":", "::"],
+      "correctAnswer": "->"
+    }
+  ]
+},

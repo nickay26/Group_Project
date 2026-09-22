@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_274",
+  "title": "Type Traits & <type_traits> Library",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_274_S1",
+      "type": "CONCEPT",
+      "title": "Overview of Type Traits",
+      "prompt": "The <type_traits> header provides compile-time tools to inspect, query, and modify type properties. They enable type introspection and meta-programming choices at compile time.",
+      "codeSnippet": "#include <iostream>\n#include <type_traits>\n\ntemplate <typename T>\nvoid checkType() {\n    if constexpr (std::is_integral_v<T>) {\n        std::cout << \"Integral type\\n\";\n    } else {\n        std::cout << \"Non-integral type\\n\";\n    }\n}"
+    },
+    {
+      "slideId": "CPP_274_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Type Equality",
+      "prompt": "Fill in the type trait used to check if two types are identical.",
+      "codeSnippet": "static_assert(std::___<int, int>::value, \"Types must match\");",
+      "options": ["is_same", "is_equivalent", "is_equal", "same_type"],
+      "correctAnswer": "is_same"
+    },
+    {
+      "slideId": "CPP_274_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Value Suffix (_v) vs Type Traits",
+      "prompt": "In C++17, what is std::is_floating_point_v<T>?",
+      "options": [
+        "A variable template shortcut for std::is_floating_point<T>::value",
+        "A function pointer returning a boolean value",
+        "An inline function evaluating type at runtime",
+        "A dynamic type cast operator"
+      ],
+      "correctAnswer": "A variable template shortcut for std::is_floating_point<T>::value"
+    },
+    {
+      "slideId": "CPP_274_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Removing Reference Trait",
+      "prompt": "Fill in the trait modifier used to strip reference qualifiers from type T.",
+      "codeSnippet": "using CleanType = typename std::___<int&>::type; // CleanType is int",
+      "options": ["remove_reference", "strip_ref", "decay", "remove_pointer"],
+      "correctAnswer": "remove_reference"
+    },
+    {
+      "slideId": "CPP_274_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::decay Purpose",
+      "prompt": "What modifications does std::decay apply to a type T?",
+      "options": [
+        "Removes const/volatile/reference qualifiers and converts array/function types to pointers",
+        "Converts pointers into reference types",
+        "Casts primitive types to void*",
+        "Strips class member visibility modifiers"
+      ],
+      "correctAnswer": "Removes const/volatile/reference qualifiers and converts array/function types to pointers"
+    },
+    {
+      "slideId": "CPP_274_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Conditional Type Selection",
+      "prompt": "Fill in the type trait that selects between TypeA and TypeB based on a boolean condition.",
+      "codeSnippet": "using SelectedType = std::___<true, int, double>::type; // int",
+      "options": ["conditional", "enable_if", "select_type", "switch_type"],
+      "correctAnswer": "conditional"
+    },
+    {
+      "slideId": "CPP_274_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Type Categories",
+      "prompt": "Which trait tests if a type is a non-union class or struct type?",
+      "options": [
+        "std::is_class",
+        "std::is_object",
+        "std::is_compound",
+        "std::is_polymorphic"
+      ],
+      "correctAnswer": "std::is_class"
+    },
+    {
+      "slideId": "CPP_274_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Base Class Relationship",
+      "prompt": "Fill in the type trait checking if Base is a base class of Derived.",
+      "codeSnippet": "static_assert(std::___<Base, Derived>::value, \"Must inherit\");",
+      "options": ["is_base_of", "is_parent_of", "is_subclass", "is_derived"],
+      "correctAnswer": "is_base_of"
+    },
+    {
+      "slideId": "CPP_274_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::integral_constant Inheritance",
+      "prompt": "What base classes do std::true_type and std::false_type derive from?",
+      "options": [
+        "std::integral_constant<bool, true> and std::integral_constant<bool, false>",
+        "std::bool_constant and std::type_identity",
+        "std::enable_if and std::conditional",
+        "They are basic primitive typedefs without inheritance"
+      ],
+      "correctAnswer": "std::integral_constant<bool, true> and std::integral_constant<bool, false>"
+    },
+    {
+      "slideId": "CPP_274_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking No-throw Construction",
+      "prompt": "Fill in the trait verifying if type T has a non-throwing default constructor.",
+      "codeSnippet": "bool safe = std::___<T>::value;",
+      "options": ["is_nothrow_default_constructible", "is_safe_constructible", "is_noexcept_constructible", "is_nothrow"],
+      "correctAnswer": "is_nothrow_default_constructible"
+    }
+  ]
+}

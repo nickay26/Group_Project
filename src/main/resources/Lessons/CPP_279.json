@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_279",
+  "title": "Requires Clauses & Expression Requirements (C++20)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_279_S1",
+      "type": "CONCEPT",
+      "title": "Deep Dive into Requires Expressions",
+      "prompt": "Requires expressions evaluate syntactic requirements at compile time. They can contain simple requirements, type requirements, compound requirements, and nested requirements.",
+      "codeSnippet": "#include <concepts>\n#include <iostream>\n\ntemplate <typename T>\nconcept Container = requires(T c) {\n    typename T::value_type; // Type requirement\n    { c.size() } -> std::same_as<std::size_t>; // Compound requirement\n    requires sizeof(T) >= 8; // Nested requirement\n};"
+    },
+    {
+      "slideId": "CPP_279_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Simple Requirement Syntax",
+      "prompt": "Fill in the expression checking for the presence of a clear() method on object x.",
+      "codeSnippet": "template <typename T>\nconcept Clearable = requires(T x) {\n    x.___(); // Simple requirement\n};",
+      "options": ["clear", "reset", "erase", "clean"],
+      "correctAnswer": "clear"
+    },
+    {
+      "slideId": "CPP_279_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Requirement Syntax",
+      "prompt": "How do you check that a type T contains a nested typedef or type alias named iterator inside a requires block?",
+      "options": [
+        "typename T::iterator;",
+        "T::iterator;",
+        "requires T::iterator;",
+        "concept T::iterator;"
+      ],
+      "correctAnswer": "typename T::iterator;"
+    },
+    {
+      "slideId": "CPP_279_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Nested Requirement Keyword",
+      "prompt": "Fill in the keyword required to enforce boolean expression checks inside a requires block.",
+      "codeSnippet": "template <typename T>\nconcept LargeType = requires {\n    ___ sizeof(T) > 16; // Nested requirement\n};",
+      "options": ["requires", "constexpr", "static_assert", "concept"],
+      "correctAnswer": "requires"
+    },
+    {
+      "slideId": "CPP_279_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compound Requirement noexcept Check",
+      "prompt": "Which syntax specifies that an expression must not throw exceptions?",
+      "options": [
+        "{ expr } noexcept;",
+        "{ expr } throw(false);",
+        "noexcept { expr };",
+        "requires noexcept(expr);"
+      ],
+      "correctAnswer": "{ expr } noexcept;"
+    },
+    {
+      "slideId": "CPP_279_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Ad-hoc Requires Clause",
+      "prompt": "Fill in the double requires syntax used for ad-hoc inline constraints on function templates.",
+      "codeSnippet": "template <typename T>\nvoid process(T v) ___ requires (sizeof(T) == 4) {}",
+      "options": ["requires", "if", "concept", "where"],
+      "correctAnswer": "requires"
+    },
+    {
+      "slideId": "CPP_279_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Subsumption & Concept Ordering",
+      "prompt": "How does the compiler resolve overloads when multiple constrained templates match a function call?",
+      "options": [
+        "The template with the more specific (subsuming) concept/constraint is preferred",
+        "It raises an ambiguous call compilation error regardless of constraints",
+        "The first template defined in the header file is chosen",
+        "The less constrained template is preferred"
+      ],
+      "correctAnswer": "The template with the more specific (subsuming) concept/constraint is preferred"
+    },
+    {
+      "slideId": "CPP_279_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Combining Requirements with Conjunction",
+      "prompt": "Fill in the boolean operator to combine two concepts in a single requires clause.",
+      "codeSnippet": "template <typename T>\nrequires std::integral<T> ___ std::signed_integral<T>\nvoid handleSigned(T val) {}",
+      "options": ["&&", "and_then", "||", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_279_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requires Expression Evaluation Result",
+      "prompt": "What does a requires expression yield at compile time?",
+      "options": [
+        "A boolean constant value (true if valid syntax, false otherwise)",
+        "A deduced data type",
+        "An instantiated class template",
+        "A std::type_info object"
+      ],
+      "correctAnswer": "A boolean constant value (true if valid syntax, false otherwise)"
+    },
+    {
+      "slideId": "CPP_279_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Disjunction in Constraints",
+      "prompt": "Fill in the boolean disjunction operator for requirements.",
+      "codeSnippet": "template <typename T>\nrequires std::integral<T> ___ std::floating_point<T>\nvoid processNumber(T n) {}",
+      "options": ["||", "or_else", "&&", "|"],
+      "correctAnswer": "||"
+    }
+  ]
+}

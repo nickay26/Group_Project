@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_275",
+  "title": "constexpr & Compile-Time Evaluation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_275_S1",
+      "type": "CONCEPT",
+      "title": "constexpr Functions & Variables",
+      "prompt": "The constexpr specifier declares that the value of a variable or the return value of a function can be evaluated at compile time when constant parameters are supplied.",
+      "codeSnippet": "#include <iostream>\n\nconstexpr int factorial(int n) {\n    return (n <= 1) ? 1 : n * factorial(n - 1);\n}\n\nint main() {\n    constexpr int val = factorial(5); // Computed at compile time (120)\n    std::cout << val;\n}"
+    },
+    {
+      "slideId": "CPP_275_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "constexpr Variable Declaration",
+      "prompt": "Fill in the keyword to mandate compile-time calculation of array size.",
+      "codeSnippet": "___ int size = 10 + 20;\nint arr[size];",
+      "options": ["constexpr", "const", "static", "inline"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_275_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "constexpr vs const",
+      "prompt": "What is the key difference between const and constexpr variables?",
+      "options": [
+        "constexpr requires initialization with a compile-time constant; const can be initialized with runtime values",
+        "const variables are evaluated at compile time; constexpr at runtime",
+        "constexpr variables cannot be primitive data types",
+        "const applies only to functions, while constexpr applies to variables"
+      ],
+      "correctAnswer": "constexpr requires initialization with a compile-time constant; const can be initialized with runtime values"
+    },
+    {
+      "slideId": "CPP_275_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "constexpr Function Rule",
+      "prompt": "Fill in the required specifier to make a member function executable in constant expressions.",
+      "codeSnippet": "struct Point {\n    int x, y;\n    ___ int getX() const { return x; }\n};",
+      "options": ["constexpr", "consteval", "constinit", "inline"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_275_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runtime Execution of constexpr Functions",
+      "prompt": "Can a constexpr function be invoked with non-constexpr runtime arguments?",
+      "options": [
+        "Yes, and in that case it executes at runtime like a normal function",
+        "No, calling it with non-const arguments causes a compile error",
+        "Yes, but it converts runtime values to static constants",
+        "No, constexpr functions are deleted from runtime binaries"
+      ],
+      "correctAnswer": "Yes, and in that case it executes at runtime like a normal function"
+    },
+    {
+      "slideId": "CPP_275_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Testing Compile-Time Execution Context",
+      "prompt": "Fill in the standard C++20 function used to detect if execution is currently happening in a constant evaluation context.",
+      "codeSnippet": "if (std::___()) {\n    // Compile-time path\n} else {\n    // Runtime path\n}",
+      "options": ["is_constant_evaluated", "is_compile_time", "is_constexpr", "in_constexpr"],
+      "correctAnswer": "is_constant_evaluated"
+    },
+    {
+      "slideId": "CPP_275_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++14 Relaxation of constexpr Functions",
+      "prompt": "Which feature was added to constexpr functions in C++14?",
+      "options": [
+        "Support for local variable declarations, loops, and multiple return statements",
+        "Support for dynamic stack allocation using new",
+        "Permission to throw unhandled runtime exceptions",
+        "Support for inline assembly instructions"
+      ],
+      "correctAnswer": "Support for local variable declarations, loops, and multiple return statements"
+    },
+    {
+      "slideId": "CPP_275_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "constexpr Constructors",
+      "prompt": "Fill in the specifier allowing literal class instantiation at compile time.",
+      "codeSnippet": "class Complex {\n    double r, i;\npublic:\n    ___ Complex(double r, double i) : r(r), i(i) {}\n};",
+      "options": ["constexpr", "const", "explicit", "inline"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_275_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Literal Types Requirement",
+      "prompt": "What is a requirement for a custom class to be used as a constexpr variable type?",
+      "options": [
+        "It must have a constexpr constructor and literal type data members",
+        "It must inherit from std::integral_constant",
+        "It must not contain any member functions",
+        "It must be declared inside an anonymous namespace"
+      ],
+      "correctAnswer": "It must have a constexpr constructor and literal type data members"
+    },
+    {
+      "slideId": "CPP_275_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "constexpr Allocation (C++20)",
+      "prompt": "Fill in the header file enabling std::vector usage inside constexpr contexts in C++20.",
+      "codeSnippet": "#include <___>\nconstexpr int getSum() {\n    std::vector<int> v = {1, 2, 3};\n    return v[0] + v[1] + v[2];\n}",
+      "options": ["vector", "memory", "numeric", "utility"],
+      "correctAnswer": "vector"
+    }
+  ]
+}

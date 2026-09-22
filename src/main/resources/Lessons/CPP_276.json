@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_276",
+  "title": "if constexpr (C++17)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_276_S1",
+      "type": "CONCEPT",
+      "title": "Compile-Time Selection with if constexpr",
+      "prompt": "Introduced in C++17, if constexpr allows conditional compilation where discarded branches are completely ignored and not compiled for incompatible types.",
+      "codeSnippet": "#include <iostream>\n#include <type_traits>\n\ntemplate <typename T>\nauto getValue(T t) {\n    if constexpr (std::is_pointer_v<T>) {\n        return *t; // Dereferenced if T is a pointer\n    } else {\n        return t;  // Returned directly otherwise\n    }\n}"
+    },
+    {
+      "slideId": "CPP_276_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "if constexpr Syntax",
+      "prompt": "Fill in the keyword combination for compile-time branch selection.",
+      "codeSnippet": "template <typename T>\nvoid process(T val) {\n    ___ ___ (std::is_integral_v<T>) {\n        // Integral processing\n    }\n}",
+      "options": ["if constexpr", "constexpr if", "static if", "if compile"],
+      "correctAnswer": "if constexpr"
+    },
+    {
+      "slideId": "CPP_276_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Discarded Branch Behavior",
+      "prompt": "What happens to the discarded branch of an if constexpr statement during compilation?",
+      "options": [
+        "It is completely excluded from instantiation for that particular type",
+        "It is compiled normally but skipped at runtime",
+        "It causes compile errors if it contains invalid syntax",
+        "It is moved to a separate dynamic translation unit"
+      ],
+      "correctAnswer": "It is completely excluded from instantiation for that particular type"
+    },
+    {
+      "slideId": "CPP_276_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Simplifying Recursion with if constexpr",
+      "prompt": "Fill in the condition to break variadic parameter pack recursion using if constexpr.",
+      "codeSnippet": "template <typename T, typename... Args>\nvoid printAll(T first, Args... args) {\n    std::cout << first << \" \";\n    if constexpr (sizeof...(args) ___ 0) {\n        printAll(args...);\n    }\n}",
+      "options": [">", "==", "<", "!="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_276_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "if constexpr vs Regular if",
+      "prompt": "Why would *t fail in a regular if (std::is_pointer_v<T>) statement when T is int?",
+      "options": [
+        "Both branches are compiled, so *t causes a compile error because int cannot be dereferenced",
+        "Regular if cannot evaluate type traits",
+        "The condition evaluates at runtime instead of compile time",
+        "Non-pointer types cause stack overflow in standard if blocks"
+      ],
+      "correctAnswer": "Both branches are compiled, so *t causes a compile error because int cannot be dereferenced"
+    },
+    {
+      "slideId": "CPP_276_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Type Deduction across Branches",
+      "prompt": "Fill in the modifier required to allow different return types in if constexpr branches.",
+      "codeSnippet": "template <typename T>\n___ getItem(T container) {\n    if constexpr (std::is_array_v<T>) return container[0];\n    else return container;\n}",
+      "options": ["auto", "decltype", "void", "constexpr"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_276_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Syntax Checking in Discarded Branches",
+      "prompt": "Are non-dependent syntax errors checked inside discarded if constexpr branches?",
+      "options": [
+        "Yes, non-dependent syntax errors are checked even in discarded branches",
+        "No, discarded branches are completely skipped by the lexer",
+        "Only if debug flags are set in the compiler",
+        "Syntax is checked during linking phase"
+      ],
+      "correctAnswer": "Yes, non-dependent syntax errors are checked even in discarded branches"
+    },
+    {
+      "slideId": "CPP_276_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Combining with Concepts (C++20)",
+      "prompt": "Fill in the concept used inside if constexpr to check integral constraint.",
+      "codeSnippet": "template <typename T>\nvoid adjust(T& val) {\n    if constexpr (std::___<T>) {\n        val++;\n    }\n}",
+      "options": ["integral", "is_integral", "is_integer", "numeric"],
+      "correctAnswer": "integral"
+    },
+    {
+      "slideId": "CPP_276_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Replacing SFINAE with if constexpr",
+      "prompt": "How does if constexpr improve over SFINAE for handling type-specific behavior?",
+      "options": [
+        "It places conditional logic inside a single function instead of requiring multiple overloads",
+        "It speeds up execution time by running in multithreaded mode",
+        "It eliminates the need for template headers",
+        "It bypasses compile-time type safety checks"
+      ],
+      "correctAnswer": "It places conditional logic inside a single function instead of requiring multiple overloads"
+    },
+    {
+      "slideId": "CPP_276_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "if constexpr with Variable Initialization (C++17)",
+      "prompt": "Fill in the statement syntax combining init-statement with if constexpr.",
+      "codeSnippet": "if constexpr (___ val = T::size; val > 0) {\n    // Use val\n}",
+      "options": ["auto", "constexpr", "int", "decltype"],
+      "correctAnswer": "auto"
+    }
+  ]
+}

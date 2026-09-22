@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_139",
+  "title": "Loop Performance & Optimization",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_139_S1",
+      "type": "CONCEPT",
+      "title": "Loop Invariant Code Motion",
+      "prompt": "Loop optimization involves moving calculations that do not change inside the loop outside of it (Loop Invariant Code Motion).",
+      "codeSnippet": "// Bad: size() called every iteration\nfor (int i = 0; i < vec.size(); i++) {}\n\n// Good: size cached once\nfor (size_t i = 0, len = vec.size(); i < len; i++) {}"
+    },
+    {
+      "slideId": "CPP_139_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Caching Container Size",
+      "prompt": "Fill in the variable to store vector size outside the comparison.",
+      "codeSnippet": "const size_t len = vec.size();\nfor (size_t i = 0; i < ___; i++) {\n    // ...\n}",
+      "options": ["len", "vec.size()", "i", "0"],
+      "correctAnswer": "len"
+    },
+    {
+      "slideId": "CPP_139_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Loop Unrolling Concept",
+      "prompt": "What is 'Loop Unrolling'?",
+      "options": ["Replicating loop body statements to reduce loop control overhead", "Converting a loop into a recursive function", "Removing the break keyword", "Converting for loop to do-while loop"],
+      "correctAnswer": "Replicating loop body statements to reduce loop control overhead"
+    },
+    {
+      "slideId": "CPP_139_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pre vs Post Increment Performance",
+      "prompt": "Which increment is preferred for non-primitive iterators to avoid temp copies?",
+      "codeSnippet": "for (auto it = vec.begin(); it != vec.end(); ___it) {\n    // ...\n}",
+      "options": ["++", "it++", "+= 1", "+ 1"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_139_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cache Locality in 2D Iteration",
+      "prompt": "Why is row-major iteration (outer row, inner column) faster for 2D arrays in C++?",
+      "options": ["C++ stores arrays in row-major order; consecutive memory accesses maximize CPU cache hits", "Column-major uses more heap space", "Row-major bypasses CPU registers", "Compiler rejects column-major code"],
+      "correctAnswer": "C++ stores arrays in row-major order; consecutive memory accesses maximize CPU cache hits"
+    },
+    {
+      "slideId": "CPP_139_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Reference Range Loop Performance",
+      "prompt": "Fill in keywords to avoid copying large objects in range loops.",
+      "codeSnippet": "for (___ std::string& s : stringVec) {\n    use(s);\n}",
+      "options": ["const", "static", "volatile", "register"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_139_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Branch Misprediction inside Loops",
+      "prompt": "How can frequent 'if' conditions inside tight loops degrade performance?",
+      "options": ["They cause CPU branch mispredictions, stalling the execution pipeline", "They consume extra stack memory", "They disable compiler optimization levels", "They force heap allocation"],
+      "correctAnswer": "They cause CPU branch mispredictions, stalling the execution pipeline"
+    },
+    {
+      "slideId": "CPP_139_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "SIMD Vectorization Friendly Loops",
+      "prompt": "Loops without data dependencies across iterations enable CPU ___ (vectorization).",
+      "codeSnippet": "// Enabling Auto-___",
+      "options": ["SIMD", "RAM", "FIFO", "RAII"],
+      "correctAnswer": "SIMD"
+    },
+    {
+      "slideId": "CPP_139_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compiler Optimization Flags",
+      "prompt": "Which GCC/Clang flag enables aggressive loop optimizations (like auto-vectorization)?",
+      "options": ["-O3", "-O0", "-g", "-Wall"],
+      "correctAnswer": "-O3"
+    },
+    {
+      "slideId": "CPP_139_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Reserve Capacity Before Loop",
+      "prompt": "Fill in the vector method to prevent repeated reallocation inside a loop.",
+      "codeSnippet": "std::vector<int> v;\nv.___ (1000);\nfor(int i=0; i<1000; i++) v.push_back(i);",
+      "options": ["reserve", "resize", "clear", "capacity"],
+      "correctAnswer": "reserve"
+    }
+  ]
+}

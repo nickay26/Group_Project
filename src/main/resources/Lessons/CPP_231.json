@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_231",
+  "title": "Container Adapters (stack, queue, priority_queue)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_231_S1",
+      "type": "CONCEPT",
+      "title": "Container Adapters Concept",
+      "prompt": "Container Adapters (stack, queue, priority_queue) provide restricted interfaces over underlying sequential containers. They do not support iterators directly.",
+      "codeSnippet": "#include <stack>\nstd::stack<int> s;\ns.push(10);\ns.push(20);\ns.pop(); // Removes 20 (LIFO)"
+    },
+    {
+      "slideId": "CPP_231_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Stack LIFO Operation",
+      "prompt": "Fill in the function returning a reference to the top element of a stack.",
+      "codeSnippet": "std::stack<int> st;\nint val = st.___();",
+      "options": ["top", "peek", "front", "back"],
+      "correctAnswer": "top"
+    },
+    {
+      "slideId": "CPP_231_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Underlying Container Defaults",
+      "prompt": "What are the default underlying sequence containers for std::stack and std::queue?",
+      "options": [
+        "std::deque for both std::stack and std::queue",
+        "std::vector for std::stack, std::list for std::queue",
+        "std::vector for both",
+        "std::list for both"
+      ],
+      "correctAnswer": "std::deque for both std::stack and std::queue"
+    },
+    {
+      "slideId": "CPP_231_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Queue FIFO Front Access",
+      "prompt": "Fill in the function returning the oldest element in a std::queue.",
+      "codeSnippet": "std::queue<int> q;\nint oldest = q.___();",
+      "options": ["front", "top", "peek", "head"],
+      "correctAnswer": "front"
+    },
+    {
+      "slideId": "CPP_231_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Priority Queue Default Ordering",
+      "prompt": "By default, what type of heap does std::priority_queue represent?",
+      "options": [
+        "Max-Heap (largest element is always at the top using std::less)",
+        "Min-Heap (smallest element is always at the top using std::greater)",
+        "FIFO Queue",
+        "Unsorted sequence"
+      ],
+      "correctAnswer": "Max-Heap (largest element is always at the top using std::less)"
+    },
+    {
+      "slideId": "CPP_231_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Min-Heap Priority Queue Syntax",
+      "prompt": "Fill in the comparator parameter to transform std::priority_queue into a Min-Heap.",
+      "codeSnippet": "std::priority_queue<int, std::vector<int>, std::___<int>> minHeap;",
+      "options": ["greater", "less", "min", "compare"],
+      "correctAnswer": "greater"
+    },
+    {
+      "slideId": "CPP_231_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "pop() Return Type",
+      "prompt": "What is the return type of pop() on STL container adapters like std::stack or std::queue?",
+      "options": [
+        "void (It removes the element but does NOT return its value)",
+        "The element value by reference",
+        "A boolean indicating success",
+        "An iterator pointing to the next item"
+      ],
+      "correctAnswer": "void (It removes the element but does NOT return its value)"
+    },
+    {
+      "slideId": "CPP_231_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Underlying Container Stack",
+      "prompt": "Fill in the template argument specifying std::vector as the underlying container for a stack.",
+      "codeSnippet": "std::stack<int, std::___<int>> customStack;",
+      "options": ["vector", "deque", "list", "array"],
+      "correctAnswer": "vector"
+    },
+    {
+      "slideId": "CPP_231_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Priority Queue Complexity",
+      "prompt": "What are the time complexities for push() and pop() operations on std::priority_queue?",
+      "options": [
+        "O(log N) for both push() and pop()",
+        "O(1) for push(), O(N) for pop()",
+        "O(1) for both",
+        "O(N) for both"
+      ],
+      "correctAnswer": "O(log N) for both push() and pop()"
+    },
+    {
+      "slideId": "CPP_231_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Emplace in Priority Queue",
+      "prompt": "Fill in the method to construct an element directly inside a priority_queue.",
+      "codeSnippet": "pq.___ (42);",
+      "options": ["emplace", "push_emplace", "insert", "construct"],
+      "correctAnswer": "emplace"
+    }
+  ]
+}

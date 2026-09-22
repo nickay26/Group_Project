@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_153",
+  "title": "Pass-by-Value vs Pass-by-Reference vs Pass-by-Pointer",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_153_S1",
+      "type": "CONCEPT",
+      "title": "Argument Passing Semantics",
+      "prompt": "C++ supports Pass-by-Value (makes a copy), Pass-by-Reference (creates an alias to the original variable), and Pass-by-Pointer (passes memory address explicitly).",
+      "codeSnippet": "void byVal(int x) { x = 10; }       // No change to original\nvoid byRef(int& x) { x = 10; }      // Modifies original\nvoid byPtr(int* x) { if(x) *x=10; } // Modifies original via pointer"
+    },
+    {
+      "slideId": "CPP_153_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass-by-Reference Syntax",
+      "prompt": "Fill in the reference operator to enable modifying the original argument.",
+      "codeSnippet": "void increment(int___ num) {\n    num++;\n}",
+      "options": ["&", "*", "ref", "%"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_153_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Performance Benefit of Const References",
+      "prompt": "Why use 'const std::string&' as a function parameter instead of 'std::string'?",
+      "options": [
+        "To prevent expensive deep copies while ensuring the caller data remains unmodified",
+        "To enable move semantics automatically",
+        "To force the function to return a value faster",
+        "To allocate the parameter on the heap"
+      ],
+      "correctAnswer": "To prevent expensive deep copies while ensuring the caller data remains unmodified"
+    },
+    {
+      "slideId": "CPP_153_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass-by-Pointer Dereferencing",
+      "prompt": "Fill in the dereference operator to update the value at the passed address.",
+      "codeSnippet": "void reset(int* ptr) {\n    ___ptr = 0;\n}",
+      "options": ["*", "&", "->", "val"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_153_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nullability Difference",
+      "prompt": "What is a primary advantage of Pass-by-Pointer over Pass-by-Reference?",
+      "options": [
+        "Pointers can be nullptr, allowing optional argument passing",
+        "Pointers are faster to access than references",
+        "Pointers automatically prevent memory leaks",
+        "References cannot be used with custom classes"
+      ],
+      "correctAnswer": "Pointers can be nullptr, allowing optional argument passing"
+    },
+    {
+      "slideId": "CPP_153_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Reference Parameter",
+      "prompt": "Fill in the const keyword to make a read-only reference parameter.",
+      "codeSnippet": "void display(___ std::string& text) {\n    std::cout << text;\n}",
+      "options": ["const", "constexpr", "static", "final"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_153_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pass-by-Value Copy Effect",
+      "prompt": "What happens when a large object like std::vector<int> with 1 million items is passed by value?",
+      "options": [
+        "All 1 million elements are copied to a new memory block, causing heavy overhead",
+        "Only the vector header is copied; elements remain shared",
+        "The compiler automatically converts it to a pointer",
+        "It results in a compile-time error"
+      ],
+      "correctAnswer": "All 1 million elements are copied to a new memory block, causing heavy overhead"
+    },
+    {
+      "slideId": "CPP_153_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Calling Pass-by-Pointer Function",
+      "prompt": "Fill in the address-of operator to pass a local variable to a pointer parameter.",
+      "codeSnippet": "int val = 42;\nreset(___val);",
+      "options": ["&", "*", "ptr", "ref"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_153_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modifying Pointer Arguments",
+      "prompt": "How do you allow a function to modify a pointer address itself (e.g., reallocate memory)?",
+      "options": [
+        "Pass a pointer reference (T*&) or double pointer (T**)",
+        "Pass by constant reference (const T&)",
+        "Pass by value (T*)",
+        "Declare the pointer as static"
+      ],
+      "correctAnswer": "Pass a pointer reference (T*&) or double pointer (T**)"
+    },
+    {
+      "slideId": "CPP_153_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Pointer Reference Syntax",
+      "prompt": "Fill in the combined operators for a reference to a pointer parameter.",
+      "codeSnippet": "void reallocate(int___ ptr) {\n    ptr = new int[50];\n}",
+      "options": ["*&", "&*", "**", "&&"],
+      "correctAnswer": "*&"
+    }
+  ]
+}

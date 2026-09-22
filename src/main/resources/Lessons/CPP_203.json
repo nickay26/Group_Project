@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_203",
+  "title": "Copy Constructors & Copy Assignment",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_203_S1",
+      "type": "CONCEPT",
+      "title": "Shallow vs Deep Copying",
+      "prompt": "Default copy constructor performs Shallow Copy (copying pointers directly). Classes managing raw heap memory must implement Deep Copy.",
+      "codeSnippet": "class Array {\n    int* data;\npublic:\n    Array(const Array& other) { // Deep Copy\n        data = new int(*other.data);\n    }\n};"
+    },
+    {
+      "slideId": "CPP_203_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Copy Constructor Signature",
+      "prompt": "Fill in missing parameter qualifier for standard Copy Constructor.",
+      "codeSnippet": "MyClass(___ MyClass& other);",
+      "options": ["const", "volatile", "static", "explicit"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_203_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Shallow Copy Danger",
+      "prompt": "What primary runtime crash error is caused by default shallow copying of raw pointer members?",
+      "options": [
+        "Double Free / Dangling Pointer crash on destruction",
+        "Stack Overflow exception",
+        "Infinite loop during assignment",
+        "Const correctness error"
+      ],
+      "correctAnswer": "Double Free / Dangling Pointer crash on destruction"
+    },
+    {
+      "slideId": "CPP_203_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Copy Assignment Operator",
+      "prompt": "Fill in correct return type for Copy Assignment Operator 'operator='.",
+      "codeSnippet": "MyClass___ operator=(const MyClass& rhs);",
+      "options": ["&", "*", "void", "const"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_203_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Self-Assignment Guard",
+      "prompt": "Why is 'if (this == &rhs) return *this;' necessary in copy assignment operators?",
+      "options": [
+        "Prevents deleting self resources before copying them",
+        "Improves template instantiations",
+        "Enables copy elision optimization",
+        "Required by C++ syntax standards"
+      ],
+      "correctAnswer": "Prevents deleting self resources before copying them"
+    },
+    {
+      "slideId": "CPP_203_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Returning Current Instance Reference",
+      "prompt": "Fill in expression returned at end of assignment operator implementation.",
+      "codeSnippet": "return ___;",
+      "options": ["*this", "this", "&this", "self"],
+      "correctAnswer": "*this"
+    },
+    {
+      "slideId": "CPP_203_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copy Elision / RVO",
+      "prompt": "What does Return Value Optimization (RVO) do when returning temporary objects from functions?",
+      "options": [
+        "Omits copy/move constructor calls by constructing object directly in target location",
+        "Converts heap allocations into stack allocations",
+        "Automatically converts pass-by-value into pass-by-reference",
+        "Forces function to execute inline"
+      ],
+      "correctAnswer": "Omits copy/move constructor calls by constructing object directly in target location"
+    },
+    {
+      "slideId": "CPP_203_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Disabling Object Copying",
+      "prompt": "Fill in specifier to disable copy construction for a non-copyable class.",
+      "codeSnippet": "NonCopyable(const NonCopyable&) = ___;",
+      "options": ["delete", "default", "private", "disable"],
+      "correctAnswer": "delete"
+    },
+    {
+      "slideId": "CPP_203_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rule of Three",
+      "prompt": "According to C++ Rule of Three, if a class defines a destructor, it should also explicitly define:",
+      "options": [
+        "Copy Constructor and Copy Assignment Operator",
+        "Move Constructor and Move Assignment Operator",
+        "Default Constructor and Virtual Destructor",
+        "Friend Functions and Stream Operators"
+      ],
+      "correctAnswer": "Copy Constructor and Copy Assignment Operator"
+    },
+    {
+      "slideId": "CPP_203_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Copy Initialization Trigger",
+      "prompt": "Fill in operator invoking Copy Constructor during variable declaration.",
+      "codeSnippet": "MyClass obj2 ___ obj1;",
+      "options": ["=", "==", "->", "::"],
+      "correctAnswer": "="
+    }
+  ]
+}

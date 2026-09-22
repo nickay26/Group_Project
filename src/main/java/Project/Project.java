@@ -11,6 +11,7 @@ public class Project {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    // 1. Parameter ၇ ခုပါသည့် မူလ Constructor
     public Project(int projectId, int userId, String title, String language, String codeContent, Timestamp createdAt, Timestamp updatedAt) {
         this.projectId = projectId;
         this.userId = userId;
@@ -19,6 +20,11 @@ public class Project {
         this.codeContent = codeContent;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    // 2. Parameter ၅ ခုပါသည့် Constructor (DatabaseManager မှ လွယ်ကူစွာ သုံးနိုင်ရန် ထပ်ဖြည့်ထားခြင်း)
+    public Project(int projectId, int userId, String title, String language, String codeContent) {
+        this(projectId, userId, title, language, codeContent, null, null);
     }
 
     // Getters and Setters

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_256",
+  "title": "Ref-Qualifiers & Move-Aware API Design",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_256_S1",
+      "type": "CONCEPT",
+      "title": "Member Function Ref-Qualifiers (& and &&)",
+      "prompt": "Ref-qualifiers allow member functions to be overloaded based on whether the object (*this) is an lvalue or an rvalue. This enables move-aware API design where temporaries can return internal data via move instead of copy.",
+      "codeSnippet": "class DataHolder {\n    std::string data;\npublic:\n    // Called on lvalue objects (*this is lvalue)\n    std::string getData() const & { return data; } // Returns copy\n    // Called on temporary rvalue objects (*this is rvalue)\n    std::string getData() && { return std::move(data); } // Steals internal data!\n};"
+    },
+    {
+      "slideId": "CPP_256_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Lvalue Ref-Qualifier Syntax",
+      "prompt": "Fill in the qualifier token applied after member method parameter list to restrict execution to lvalue objects.",
+      "codeSnippet": "class Builder {\npublic:\n    void build() ___ { // Executes only on lvalue instances\n    }\n};",
+      "options": ["&", "&&", "const", "ref"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_256_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rvalue Ref-Qualified Method Invocation",
+      "prompt": "When is a member method qualified with '&&' invoked?",
+      "options": [
+        "When the method is called on temporary rvalue instances or objects cast via std::move(*this)",
+        "When the function receives rvalue parameters",
+        "Only when static memory allocation is used",
+        "When called concurrently from multiple threads"
+      ],
+      "correctAnswer": "When the method is called on temporary rvalue instances or objects cast via std::move(*this)"
+    },
+    {
+      "slideId": "CPP_256_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Ref-Qualifier Overloading Syntax",
+      "prompt": "Fill in the qualifier for stealing internal state when chaining methods on temporary rvalues.",
+      "codeSnippet": "class Query {\n    std::string sql;\npublic:\n    std::string str() ___ { return std::move(sql); }\n};",
+      "options": ["&&", "&", "const &", "move"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_256_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Preventing Assignment to Temporaries",
+      "prompt": "How can ref-qualifiers prevent accidental code like 'Foo() = bar();' where an assignment is attempted on a temporary instance?",
+      "options": [
+        "Qualify operator= with lvalue ref-qualifier '&' so assignment is permitted only on lvalue objects",
+        "Mark operator= as deleted",
+        "Mark operator= with const qualifier",
+        "Make constructor explicit"
+      ],
+      "correctAnswer": "Qualify operator= with lvalue ref-qualifier '&' so assignment is permitted only on lvalue objects"
+    },
+    {
+      "slideId": "CPP_256_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Lvalue Ref-Qualified Assignment Operator",
+      "prompt": "Fill in the ref-qualifier to restrict copy assignment to lvalues.",
+      "codeSnippet": "class Widget {\npublic:\n    Widget& operator=(const Widget& other) ___ { // Only lvalue targets allowed\n        return *this;\n    }\n};",
+      "options": ["&", "&&", "const", "noexcept"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_256_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mixing Qualified and Unqualified Overloads",
+      "prompt": "Can you declare both a ref-qualified overload (e.g. void f() &;) and an unqualified overload (void f();) inside the same class?",
+      "options": [
+        "No, if any overload of a member function has a ref-qualifier, all overloads of that function must have ref-qualifiers",
+        "Yes, they coexist without restrictions",
+        "Only if one of them is marked const",
+        "Only inside template classes"
+      ],
+      "correctAnswer": "No, if any overload of a member function has a ref-qualifier, all overloads of that function must have ref-qualifiers"
+    },
+    {
+      "slideId": "CPP_256_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Rvalue Ref-Qualifier Syntax",
+      "prompt": "Fill in the combined qualifier specifiers for const rvalue object instances.",
+      "codeSnippet": "void inspect() ___ {\n    // Called on const temporary rvalues\n}",
+      "options": ["const &&", "const &", "&& const", "volatile &&"],
+      "correctAnswer": "const &&"
+    },
+    {
+      "slideId": "CPP_256_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Move-Aware Method Chaining (Fluent Interfaces)",
+      "prompt": "Why are ref-qualifiers useful in Builder or Fluent API patterns?",
+      "options": [
+        "They allow move operations on temporary builder chains without copying intermediate configurations",
+        "They replace the need for virtual destructors",
+        "They force synchronous execution on GPU buffers",
+        "They automatically lock thread mutexes during builder steps"
+      ],
+      "correctAnswer": "They allow move operations on temporary builder chains without copying intermediate configurations"
+    },
+    {
+      "slideId": "CPP_256_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Stealing Member with std::move(*this)",
+      "prompt": "Fill in the standard cast call inside an rvalue ref-qualified method to convert member variables into move candidates.",
+      "codeSnippet": "struct Heavy {\n    std::vector<int> vec;\n    std::vector<int> get() && {\n        return std::___(vec); // Move out vector from temporary *this\n    }\n};",
+      "options": ["move", "forward", "swap", "release"],
+      "correctAnswer": "move"
+    }
+  ]
+}

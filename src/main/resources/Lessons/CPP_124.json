@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_124",
+  "title": "Ternary (Conditional) Operator",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_124_S1",
+      "type": "CONCEPT",
+      "title": "Ternary Operator Structure",
+      "prompt": "The ternary operator (condition ? expr1 : expr2) provides a inline shorthand for if-else expressions.",
+      "codeSnippet": "int age = 20;\nstd::string status = (age >= 18) ? \"Adult\" : \"Minor\";"
+    },
+    {
+      "slideId": "CPP_124_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary Condition Separator",
+      "prompt": "Fill in the symbol following the condition in a ternary operator.",
+      "codeSnippet": "int max = (a > b) ___ a : b;",
+      "options": ["?", ":", "->", "if"],
+      "correctAnswer": "?"
+    },
+    {
+      "slideId": "CPP_124_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Branch Delimiter",
+      "prompt": "Which symbol separates true-expression and false-expression in a ternary operator?",
+      "options": [": (colon)", "? (question mark)", "; (semicolon)", ", (comma)"],
+      "correctAnswer": ": (colon)"
+    },
+    {
+      "slideId": "CPP_124_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary False Branch",
+      "prompt": "Fill in the missing symbol in the ternary operator.",
+      "codeSnippet": "int min = (a < b) ? a ___ b;",
+      "options": [":", "?", ";", "|"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_124_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Operands Count",
+      "prompt": "How many operands does the ternary operator take?",
+      "options": ["3 operands", "2 operands", "1 operand", "4 operands"],
+      "correctAnswer": "3 operands"
+    },
+    {
+      "slideId": "CPP_124_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary Value Return",
+      "prompt": "What is assigned to 'ans' when condition (10 < 5) is evaluated?",
+      "codeSnippet": "int ans = (10 < 5) ? 100 : 200; // ans becomes ___",
+      "options": ["200", "100", "true", "false"],
+      "correctAnswer": "200"
+    },
+    {
+      "slideId": "CPP_124_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Type Matching",
+      "prompt": "Must both result expressions (expr1 and expr2) in a ternary operator have compatible types?",
+      "options": ["Yes, both branches must evaluate to compatible types", "No, one can be string and the other int freely", "Only in release builds", "Types don't matter in C++"],
+      "correctAnswer": "Yes, both branches must evaluate to compatible types"
+    },
+    {
+      "slideId": "CPP_124_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Printing Ternary",
+      "prompt": "Fill in the question mark for inline output ternary.",
+      "codeSnippet": "std::cout << (score >= 50 ___ \"Pass\" : \"Fail\");",
+      "options": ["?", ":", "==", "&&"],
+      "correctAnswer": "?"
+    },
+    {
+      "slideId": "CPP_124_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Ternary Readability",
+      "prompt": "Why is deep nesting of ternary operators (a ? b : c ? d : e) generally discouraged?",
+      "options": ["Significantly degrades code readability and maintainability", "Causes compile errors", "Executes 2x slower", "Uses extra memory"],
+      "correctAnswer": "Significantly degrades code readability and maintainability"
+    },
+    {
+      "slideId": "CPP_124_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary Absolute Value",
+      "prompt": "Fill in the true branch expression to return absolute value of x.",
+      "codeSnippet": "int absVal = (x < 0) ? ___ : x;",
+      "options": ["-x", "x", "0", "abs(x)"],
+      "correctAnswer": "-x"
+    },
+    {
+      "slideId": "CPP_124_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Lvalue Result",
+      "prompt": "In C++, can a ternary operator return an lvalue (referencable variable) if both expressions are lvalues?",
+      "options": ["Yes, e.g. ((a > b) ? a : b) = 0; is valid in C++", "No, ternary always returns rvalue", "Only if marked const", "Only for floating point types"],
+      "correctAnswer": "Yes, e.g. ((a > b) ? a : b) = 0; is valid in C++"
+    }
+  ]
+}
