@@ -26,6 +26,7 @@ public class WelcomeController implements Initializable {
     @FXML private Button helpBtn;
     @FXML private Button loginBtn;
     @FXML private Button signUpButton;
+    @FXML private Button adminBtn;
 
     @FXML private TextField usernameField;
     @FXML private TextField emailField;
@@ -75,6 +76,11 @@ public class WelcomeController implements Initializable {
     @FXML
     private void handleLogin() {
         SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+    }
+
+    @FXML
+    private void handleAdmin() {
+        SceneManager.switchScene("AdminView.fxml", "Mimo Platform - Admin Login");
     }
 
     @FXML
@@ -146,14 +152,43 @@ public class WelcomeController implements Initializable {
         GoogleAuthService.startGoogleLogin(authCode -> {
             System.out.println("Received Google Code: " + authCode);
 
-            GoogleAuthService.fetchUserProfile(authCode, (userId, name, email) -> {
+            GoogleAuthService.fetchUserProfile(authCode, (googleId, name, email) -> {
                 System.out.println("Authenticated Real User: " + email + " (" + name + ")");
 
-                User user = new User(userId, email, name, "", 0, 0, 0, 0);
-
                 Platform.runLater(() -> {
-                    UserSession.initSession(user);
-                    SceneManager.switchScene("MainLayoutView.fxml");
+                    try (Connection conn = DatabaseManager.getConnection()) {
+                        String selectSql = "SELECT * FROM User_table WHERE Email = ?";
+                        PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+                        selectStmt.setString(1, email);
+                        ResultSet rs = selectStmt.executeQuery();
+
+                        User loggedInUser;
+                        if (rs.next()) {
+                            int existingId = rs.getInt("User_ID");
+                            loggedInUser = new User(existingId, name, email, null, 0, 0, 0, 5);
+                        } else {
+                            String insertSql = "INSERT INTO User_table (Name, Email, Password, last_login_date) VALUES (?, ?, ?, CURRENT_DATE())";
+                            PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+                            insertStmt.setString(1, name);
+                            insertStmt.setString(2, email);
+                            insertStmt.setString(3, "GOOGLE_AUTH_USER");
+                            insertStmt.executeUpdate();
+
+                            ResultSet keys = insertStmt.getGeneratedKeys();
+                            int newUserId = 0;
+                            if (keys.next()) {
+                                newUserId = keys.getInt(1);
+                            }
+                            loggedInUser = new User(newUserId, name, email, null, 0, 0, 0, 5);
+                        }
+
+                        UserSession.initSession(loggedInUser);
+                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showAlert(Alert.AlertType.ERROR, "Login Error", "Failed to process Google Authentication.");
+                    }
                 });
             });
         });
@@ -170,62 +205,17 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleJavaCard() {
-        String title = "Java";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "Java is a high-level, object-oriented programming language designed to build robust, secure, and scalable applications with minimal implementation dependencies.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Enterprise Software & Backend Systems\n" +
-                "• Android Mobile Application Development\n" +
-                "• High-Scale Web Services & Cloud Architecture";
-
-        String[] titles = {"Java Basic", "Java Intermediate"};
-        String[] descriptions = {
-                "Learn basic syntax, variables, primitive types, and control flow.",
-                "Master Object-Oriented Programming (OOP), Classes, Inheritance, and Exceptions."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("JavaOverviewView.fxml", "Mimo Platform - Java Overview");
     }
 
     @FXML
     private void handleCppCard() {
-        String title = "C++";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "C++ is a high-performance general-purpose programming language that provides low-level memory control, extreme speed, and direct hardware access.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Game Engines & 3D Real-time Graphics\n" +
-                "• Operating Systems & Low-level System Drivers\n" +
-                "• High-Frequency Financial Trading & Embedded Systems";
-
-        String[] titles = {"C++ Basic", "C++ Intermediate"};
-        String[] descriptions = {
-                "Understand C++ syntax, basic data types, condition statements, and loops.",
-                "Master Pointers, Memory Management (Stack/Heap), References, and OOP concepts."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("CppOverviewView.fxml", "Mimo Platform - C++ Overview");
     }
 
     @FXML
     private void handlePythonCard() {
-        String title = "Python";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "Python is a beginner-friendly, interpreted programming language known for its clean syntax, rapid development capabilities, and powerful libraries.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Artificial Intelligence & Machine Learning\n" +
-                "• Data Science, Analytics & Visualization\n" +
-                "• Web Backend Services & Automation Scripts";
-
-        String[] titles = {"Python Basic", "Python Intermediate"};
-        String[] descriptions = {
-                "Learn Python basics, variables, user input, and string formatting.",
-                "Work with Data Structures (Lists, Dicts, Sets), Control Flow, and Functions."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("PythonOverviewView.fxml", "Mimo Platform - Python Overview");
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
