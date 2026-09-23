@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_272",
+  "title": "Template Model & Compilation Overhead",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_272_S1",
+      "type": "CONCEPT",
+      "title": "Template Compilation Mechanics & Overhead",
+      "prompt": "Templates use a two-phase lookup model. Because code is generated per unique type combination, templates can cause compile-time slowdowns and binary size expansion (code bloat) if managed improperly.",
+      "codeSnippet": "// Two-Phase Lookup Example\ntemplate <typename T>\nvoid process(T x) {\n    // Phase 1: Non-dependent syntax checking\n    int a = 10; \n    \n    // Phase 2: Dependent lookup executed upon instantiation\n    x.customMethod(); \n}"
+    },
+    {
+      "slideId": "CPP_272_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Two-Phase Lookup Phase 1",
+      "prompt": "Fill in the phase term where non-dependent names and syntax are verified when the template is first parsed.",
+      "codeSnippet": "// Phase ___ lookup verifies template syntax independently of concrete type arguments.",
+      "options": ["1", "2", "instantiation", "link"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_272_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dependent Name Definition",
+      "prompt": "What is a dependent name in a C++ template?",
+      "options": [
+        "A name that depends directly or indirectly on a template parameter type",
+        "A global variable declared outside template scopes",
+        "A header file inclusion guard",
+        "A library function loaded dynamically at runtime"
+      ],
+      "correctAnswer": "A name that depends directly or indirectly on a template parameter type"
+    },
+    {
+      "slideId": "CPP_272_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "typename Keyword for Dependent Nested Types",
+      "prompt": "Fill in the required keyword preceding a dependent nested type inside a template.",
+      "codeSnippet": "template <typename T>\nvoid printContainer(const T& container) {\n    ___ T::const_iterator it = container.begin();\n}",
+      "options": ["typename", "template", "auto", "decltype"],
+      "correctAnswer": "typename"
+    },
+    {
+      "slideId": "CPP_272_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Template Code Bloat Cause",
+      "prompt": "What causes the phenomenon known as 'Code Bloat' in template-heavy C++ applications?",
+      "options": [
+        "The compiler generates entirely duplicate machine code implementations for every unique combination of template arguments used",
+        "Templates force the compiler to include debug symbols in release builds",
+        "Template instantiations prevent link-time dead code elimination",
+        "Template definitions dynamically allocate executable heap memory"
+      ],
+      "correctAnswer": "The compiler generates entirely duplicate machine code implementations for every unique combination of template arguments used"
+    },
+    {
+      "slideId": "CPP_272_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Extern Template Declaration (C++11)",
+      "prompt": "Fill in the keyword used in C++11 to suppress template instantiation in the current translation unit.",
+      "codeSnippet": "// Prevents automatic instantiation in this file:\n___ template class std::vector<MyClass>;",
+      "options": ["extern", "static", "inline", "explicit"],
+      "correctAnswer": "extern"
+    },
+    {
+      "slideId": "CPP_272_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mitigating Template Code Bloat",
+      "prompt": "Which technique helps mitigate template code bloat when creating container class templates?",
+      "options": [
+        "Factoring out type-independent code into non-template base classes or void* internal helpers",
+        "Making all template member functions virtual",
+        "Splitting templates into multiple .cpp files without headers",
+        "Using constexpr for all template local variables"
+      ],
+      "correctAnswer": "Factoring out type-independent code into non-template base classes or void* internal helpers"
+    },
+    {
+      "slideId": "CPP_272_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Disambiguator Keyword",
+      "prompt": "Fill in the disambiguator keyword required when calling a dependent template member function e.g. obj.template func<T>().",
+      "codeSnippet": "template <typename T, typename U>\nvoid callMethod(T obj) {\n    obj.____ getVal<U>();\n}",
+      "options": ["template", "typename", "concept", "decltype"],
+      "correctAnswer": "template"
+    },
+    {
+      "slideId": "CPP_272_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Impact of Precompiled Headers on Templates",
+      "prompt": "Why do precompiled headers (PCH) significantly benefit template-heavy C++ codebases?",
+      "options": [
+        "They cache parsed standard library template headers, reducing redundant parsing time across translation units",
+        "They eliminate binary executable size bloat entirely",
+        "They convert template definitions directly into dynamic libraries",
+        "They defer template type deduction until runtime"
+      ],
+      "correctAnswer": "They cache parsed standard library template headers, reducing redundant parsing time across translation units"
+    },
+    {
+      "slideId": "CPP_272_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Two-Phase Lookup Phase 2",
+      "prompt": "Fill in the phase name when dependent names are resolved after concrete types are known.",
+      "codeSnippet": "// Phase 2 occurs during template ___ when concrete types are provided.",
+      "options": ["instantiation", "declaration", "linking", "preprocessing"],
+      "correctAnswer": "instantiation"
+    }
+  ]
+}

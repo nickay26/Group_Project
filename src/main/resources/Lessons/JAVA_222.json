@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_222",
+  "title": "Generic Class",
+  "slides": [
+    {
+      "slideId": "JAVA_222_S1",
+      "type": "CONCEPT",
+      "title": "Generic Class",
+      "prompt": "A generic class allows you to define a class with a type parameter. This allows the class to work with different data types while providing type safety.",
+      "codeSnippet": "class Box<T> {\n    private T value;\n    \n    public void set(T value) {\n        this.value = value;\n    }\n    \n    public T get() {\n        return value;\n    }\n}\n\nBox<String> box = new Box<>();\nbox.set(\"Hello\");\nSystem.out.println(box.get());",
+      "output": "Hello"
+    },
+    {
+      "slideId": "JAVA_222_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Class Definition",
+      "prompt": "What is a generic class?",
+      "options": ["A class with a type parameter", "A class with no type", "A class with static fields", "A class with abstract methods"],
+      "correctAnswer": "A class with a type parameter"
+    },
+    {
+      "slideId": "JAVA_222_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Parameter",
+      "prompt": "What is the common letter for a type parameter?",
+      "options": ["T", "X", "V", "A"],
+      "correctAnswer": "T"
+    },
+    {
+      "slideId": "JAVA_222_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Benefit",
+      "prompt": "What is the main benefit of generics?",
+      "options": ["Type safety", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Type safety"
+    },
+    {
+      "slideId": "JAVA_222_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Syntax",
+      "prompt": "How do you declare a generic class?",
+      "options": ["class Box<T>", "class Box(T)", "class Box[T]", "class Box{T}"],
+      "correctAnswer": "class Box<T>"
+    },
+    {
+      "slideId": "JAVA_222_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Class",
+      "prompt": "Complete the generic class declaration.",
+      "codeSnippet": "class Box____ {\n  private T value;\n}",
+      "options": ["<T>", "(T)", "[T]", "{T}"],
+      "correctAnswer": "<T>"
+    },
+    {
+      "slideId": "JAVA_222_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Object",
+      "prompt": "Complete the generic object declaration.",
+      "codeSnippet": "Box____ box = new Box<>();",
+      "options": ["<String>", "(String)", "[String]", "{String}"],
+      "correctAnswer": "<String>"
+    },
+    {
+      "slideId": "JAVA_222_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Box<T> {\n  private T value;\n  public void set(T v) { value = v; }\n  public T get() { return value; }\n}\nBox<String> box = new Box<>();\nbox.set(\"Hello\");\nSystem.out.println(box.get());",
+      "options": ["Hello", "value", "Box", "Error"],
+      "correctAnswer": "Hello"
+    },
+    {
+      "slideId": "JAVA_222_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Integer",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Box<T> {\n  private T value;\n  public void set(T v) { value = v; }\n  public T get() { return value; }\n}\nBox<Integer> box = new Box<>();\nbox.set(100);\nSystem.out.println(box.get());",
+      "options": ["100", "value", "Box", "Error"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "JAVA_222_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Type",
+      "prompt": "Can a generic class work with different data types?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_222_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Type Safety",
+      "prompt": "What does type safety mean?",
+      "options": ["Errors are caught at compile time", "Errors are caught at runtime", "No errors", "Many errors"],
+      "correctAnswer": "Errors are caught at compile time"
+    }
+  ]
+}

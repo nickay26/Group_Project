@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_262",
+  "title": "Atomic Operations & Memory Model (std::atomic)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_262_S1",
+      "type": "CONCEPT",
+      "title": "Atomic Types and Lock-Free Operations",
+      "prompt": "std::atomic<T> provides thread-safe operations on variables without using mutex locks. Atomic operations are indivisible—no other thread can observe a half-completed state.",
+      "codeSnippet": "#include <atomic>\n\nstd::atomic<int> counter(0);\n\nvoid increment() {\n    counter++; // Atomic increment, free from data races\n}"
+    },
+    {
+      "slideId": "CPP_262_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Atomic Header",
+      "prompt": "Fill in the header file required for atomic operations and types.",
+      "codeSnippet": "#include <___>\nstd::atomic<bool> flag(false);",
+      "options": ["atomic", "mutex", "thread", "utility"],
+      "correctAnswer": "atomic"
+    },
+    {
+      "slideId": "CPP_262_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Atomic Lock-Free Check",
+      "prompt": "Which member function checks if operations on a std::atomic instance are lock-free on the target hardware?",
+      "options": [
+        "a.is_lock_free()",
+        "a.is_atomic()",
+        "a.hardware_supported()",
+        "a.is_fast()"
+      ],
+      "correctAnswer": "a.is_lock_free()"
+    },
+    {
+      "slideId": "CPP_262_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Compare-and-Exchange Operation",
+      "prompt": "Fill in the standard atomic compare-and-swap method name.",
+      "codeSnippet": "std::atomic<int> val(10);\nint expected = 10;\nval.compare_exchange____(expected, 20);",
+      "options": ["strong", "direct", "atomic", "value"],
+      "correctAnswer": "strong"
+    },
+    {
+      "slideId": "CPP_262_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Memory Order",
+      "prompt": "What is the default memory order applied to atomic operations if unspecified?",
+      "options": [
+        "std::memory_order_seq_cst (Sequential Consistency)",
+        "std::memory_order_relaxed",
+        "std::memory_order_acquire",
+        "std::memory_order_release"
+      ],
+      "correctAnswer": "std::memory_order_seq_cst (Sequential Consistency)"
+    },
+    {
+      "slideId": "CPP_262_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Atomic Store Operation",
+      "prompt": "Fill in the explicit method used to store a value into an atomic variable.",
+      "codeSnippet": "std::atomic<int> a;\na.___ (100, std::memory_order_relaxed);",
+      "options": ["store", "set", "write", "put"],
+      "correctAnswer": "store"
+    },
+    {
+      "slideId": "CPP_262_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Acquire-Release Semantics",
+      "prompt": "How do acquire-release memory orders coordinate between threads?",
+      "options": [
+        "A release store in thread A synchronizes with an acquire load in thread B, establishing a happens-before relationship for preceding memory writes",
+        "They prevent all hardware instruction reordering completely across all CPU cores",
+        "They lock the bus during execution",
+        "They force cache flushes to main RAM on every single instruction"
+      ],
+      "correctAnswer": "A release store in thread A synchronizes with an acquire load in thread B, establishing a happens-before relationship for preceding memory writes"
+    },
+    {
+      "slideId": "CPP_262_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Atomic Flag Type",
+      "prompt": "Fill in the basic lock-free boolean atomic type guaranteed to be lock-free across all platform implementations.",
+      "codeSnippet": "std::___ flag = ATOMIC_FLAG_INIT;",
+      "options": ["atomic_flag", "atomic_bool", "atomic_byte", "atomic_bit"],
+      "correctAnswer": "atomic_flag"
+    },
+    {
+      "slideId": "CPP_262_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fetch and Add Operation",
+      "prompt": "What value is returned by the atomic operation counter.fetch_add(5)?",
+      "options": [
+        "The original value of counter before addition",
+        "The new value after adding 5",
+        "A boolean status indicating success",
+        "A reference to counter"
+      ],
+      "correctAnswer": "The original value of counter before addition"
+    },
+    {
+      "slideId": "CPP_262_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Relaxed Memory Ordering",
+      "prompt": "Fill in the memory order enum value that guarantees atomicity but imposes no order constraints on surrounding memory accesses.",
+      "codeSnippet": "count.fetch_add(1, std::memory_order____);",
+      "options": ["relaxed", "seq_cst", "acquire", "consume"],
+      "correctAnswer": "relaxed"
+    }
+  ]
+}

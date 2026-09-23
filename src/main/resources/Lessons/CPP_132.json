@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_132",
+  "title": "while Loops & Entry Conditions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_132_S1",
+      "type": "CONCEPT",
+      "title": "while Loop Mechanics",
+      "prompt": "The 'while' loop repeats a block of code as long as its condition remains true. It is an entry-controlled loop.",
+      "codeSnippet": "int count = 0;\nwhile (count < 3) {\n    std::cout << count << \" \";\n    count++;\n} // Outputs: 0 1 2"
+    },
+    {
+      "slideId": "CPP_132_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "while Keyword Syntax",
+      "prompt": "Fill in the loop keyword.",
+      "codeSnippet": "___ (x > 0) {\n    x--;\n}",
+      "options": ["while", "until", "for", "loop"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "CPP_132_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Entry-Controlled Loop Characteristic",
+      "prompt": "If a while loop's condition is false initially, how many times does the body execute?",
+      "options": ["0 times", "1 time", "Undefined number of times", "Until break is called"],
+      "correctAnswer": "0 times"
+    },
+    {
+      "slideId": "CPP_132_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Counter Decrement",
+      "prompt": "Fill in the decrement statement to avoid an infinite loop.",
+      "codeSnippet": "int i = 5;\nwhile (i > 0) {\n    // ...\n    ___;\n}",
+      "options": ["i--", "i++", "i == 0", "break"],
+      "correctAnswer": "i--"
+    },
+    {
+      "slideId": "CPP_132_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Infinite Loop Prevention",
+      "prompt": "What causes an infinite while loop?",
+      "options": ["The condition never evaluates to false", "Using int instead of float for counter", "Omitting curly braces", "Calling cout inside loop"],
+      "correctAnswer": "The condition never evaluates to false"
+    },
+    {
+      "slideId": "CPP_132_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Intentional Infinite Loop",
+      "prompt": "Fill in the boolean literal for an intentional infinite while loop.",
+      "codeSnippet": "while (___) {\n    // Server event loop\n}",
+      "options": ["true", "1 == 1", "0", "false"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "CPP_132_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "while vs for Usage",
+      "prompt": "When is a 'while' loop preferred over a 'for' loop?",
+      "options": ["When the number of iterations is not known in advance", "When iterating over a fixed array size", "When counting from 1 to 10", "When performance is critical"],
+      "correctAnswer": "When the number of iterations is not known in advance"
+    },
+    {
+      "slideId": "CPP_132_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Iteration Output Trace",
+      "prompt": "How many times does this loop execute?",
+      "codeSnippet": "int n = 3;\nwhile (n > 0) {\n    n--;\n}",
+      "options": ["3", "4", "2", "0"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_132_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Semicolon Bug after while",
+      "prompt": "What happens in code 'while (x < 10); { x++; }'?",
+      "options": ["The empty statement ';' loops infinitely if x < 10", "Code compiles and runs normally", "Compile-time error", "Loop is skipped entirely"],
+      "correctAnswer": "The empty statement ';' loops infinitely if x < 10"
+    },
+    {
+      "slideId": "CPP_132_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Sentinel Value Condition",
+      "prompt": "Fill in the condition to stop loop when user inputs -1.",
+      "codeSnippet": "int input = 0;\nwhile (input ___ -1) {\n    std::cin >> input;\n}",
+      "options": ["!=", "==", ">=", "<="],
+      "correctAnswer": "!="
+    }
+  ]
+}

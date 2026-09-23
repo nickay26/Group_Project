@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_233",
+  "title": "Iterator Categories & Operations",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_233_S1",
+      "type": "CONCEPT",
+      "title": "Iterator Categories Overview",
+      "prompt": "Iterators act as a bridge between STL algorithms and containers. C++ defines five main iterator categories: Input, Output, Forward, Bidirectional, and Random Access, each providing specific capabilities.",
+      "codeSnippet": "#include <vector>\n#include <iterator>\nstd::vector<int> vec = {10, 20, 30};\nauto it = vec.begin(); // Random Access Iterator"
+    },
+    {
+      "slideId": "CPP_233_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Advancing Iterators",
+      "prompt": "Fill in the function used to safely advance an iterator by n positions.",
+      "codeSnippet": "auto it = vec.begin();\nstd::___(it, 3); // Moves iterator forward by 3 steps",
+      "options": ["advance", "next", "move", "forward"],
+      "correctAnswer": "advance"
+    },
+    {
+      "slideId": "CPP_233_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Category Capabilities",
+      "prompt": "Which container provides Random Access Iterators that support arithmetic operations like (it + 5)?",
+      "options": [
+        "std::vector and std::deque",
+        "std::list and std::forward_list",
+        "std::set and std::map",
+        "std::stack and std::queue"
+      ],
+      "correctAnswer": "std::vector and std::deque"
+    },
+    {
+      "slideId": "CPP_233_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Calculating Distance",
+      "prompt": "Fill in the function that calculates the number of elements between two iterators.",
+      "codeSnippet": "auto count = std::___(vec.begin(), vec.end());",
+      "options": ["distance", "count", "length", "difference"],
+      "correctAnswer": "distance"
+    },
+    {
+      "slideId": "CPP_233_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::next vs std::advance",
+      "prompt": "What is the key functional difference between std::next and std::advance?",
+      "options": [
+        "std::next returns a new iterator without modifying the original; std::advance modifies the iterator in-place",
+        "std::advance works only on forward lists; std::next works on vectors",
+        "std::next advances in linear time; std::advance is always constant time",
+        "There is no difference; they are aliases for each other"
+      ],
+      "correctAnswer": "std::next returns a new iterator without modifying the original; std::advance modifies the iterator in-place"
+    },
+    {
+      "slideId": "CPP_233_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Getting the Next Iterator",
+      "prompt": "Fill in the function that returns an iterator advanced by n positions without modifying the passed iterator.",
+      "codeSnippet": "auto nextIt = std::___(it, 2);",
+      "options": ["next", "advance", "prev", "increment"],
+      "correctAnswer": "next"
+    },
+    {
+      "slideId": "CPP_233_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Forward List Iterator Category",
+      "prompt": "What minimum iterator category is provided by std::forward_list?",
+      "options": [
+        "Forward Iterator",
+        "Bidirectional Iterator",
+        "Random Access Iterator",
+        "Input Iterator"
+      ],
+      "correctAnswer": "Forward Iterator"
+    },
+    {
+      "slideId": "CPP_233_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Getting Previous Iterator",
+      "prompt": "Fill in the function that returns an iterator decremented by n positions.",
+      "codeSnippet": "auto prevIt = std::___(vec.end(), 1);",
+      "options": ["prev", "back", "decrement", "previous"],
+      "correctAnswer": "prev"
+    },
+    {
+      "slideId": "CPP_233_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output Iterators Requirement",
+      "prompt": "Which of the following describes the primary behavior of an Output Iterator?",
+      "options": [
+        "Allows single-pass writing to elements (e.g., std::back_inserter or std::ostream_iterator)",
+        "Allows multi-pass reading and writing in both directions",
+        "Supports random access via bracket operator []",
+        "Can read the same value multiple times without advancing"
+      ],
+      "correctAnswer": "Allows single-pass writing to elements (e.g., std::back_inserter or std::ostream_iterator)"
+    },
+    {
+      "slideId": "CPP_233_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Iterator Traits",
+      "prompt": "Fill in the template struct used to retrieve properties (such as value_type or iterator_category) from an iterator type.",
+      "codeSnippet": "using ValueType = std::___<It>::value_type;",
+      "options": ["iterator_traits", "iterator_info", "traits", "container_traits"],
+      "correctAnswer": "iterator_traits"
+    }
+  ]
+}

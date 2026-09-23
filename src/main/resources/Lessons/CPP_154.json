@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_154",
+  "title": "Default Arguments & Function Overloading",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_154_S1",
+      "type": "CONCEPT",
+      "title": "Default Arguments and Overloading Rules",
+      "prompt": "Default parameters specify fallback values if arguments are omitted. Function overloading allows multiple functions with the same name but distinct parameter signatures.",
+      "codeSnippet": "// Default Parameter\nvoid log(std::string msg, int level = 1);\n\n// Function Overloading\nint add(int a, int b);\ndouble add(double a, double b);"
+    },
+    {
+      "slideId": "CPP_154_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Parameter Assignment",
+      "prompt": "Fill in the default value syntax in parameter declaration.",
+      "codeSnippet": "void setSpeed(int speed ___ 60);",
+      "options": ["=", "==", ":", "default"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_154_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Arguments Trailing Rule",
+      "prompt": "Where must default arguments be placed in a function parameter list?",
+      "options": [
+        "At the end of the parameter list (trailing parameters)",
+        "At the beginning of the parameter list",
+        "Anywhere in any order",
+        "In the middle between required parameters"
+      ],
+      "correctAnswer": "At the end of the parameter list (trailing parameters)"
+    },
+    {
+      "slideId": "CPP_154_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Declaration Placement for Defaults",
+      "prompt": "Default values should be declared in prototype headers, NOT repeated in definitions. Fill in parameter name.",
+      "codeSnippet": "// In header file:\nvoid printBox(int width, int height = 10);\n\n// In cpp definition:\nvoid printBox(int width, int ___ ) {\n    // code\n}",
+      "options": ["height", "height = 10", "10", "default"],
+      "correctAnswer": "height"
+    },
+    {
+      "slideId": "CPP_154_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Overload Resolution Criteria",
+      "prompt": "Which criteria determine a valid function overload signature in C++?",
+      "options": [
+        "Number, types, and sequence of parameters (Return type alone is NOT sufficient)",
+        "Return type alone",
+        "Parameter variable names",
+        "The virtual modifier"
+      ],
+      "correctAnswer": "Number, types, and sequence of parameters (Return type alone is NOT sufficient)"
+    },
+    {
+      "slideId": "CPP_154_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Ambiguous Call Hazard",
+      "prompt": "Combining default parameters with overloading can cause ambiguous calls. Identify parameter count for error.",
+      "codeSnippet": "void show(int a, int b = 0);\nvoid show(int a);\n\nshow(5); // Error: ___ call",
+      "options": ["Ambiguous", "Undefined", "Invalid", "Static"],
+      "correctAnswer": "Ambiguous"
+    },
+    {
+      "slideId": "CPP_154_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Name Mangling Mechanism",
+      "prompt": "How does the C++ compiler support function overloading under the hood?",
+      "options": [
+        "Name Mangling (decorating symbol names with parameter type information)",
+        "Dynamic polymorphism at runtime",
+        "Macro expansion",
+        "Function pointer tables"
+      ],
+      "correctAnswer": "Name Mangling (decorating symbol names with parameter type information)"
+    },
+    {
+      "slideId": "CPP_154_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Disabling Name Mangling",
+      "prompt": "Fill in linkage specification to export function with standard C linkage.",
+      "codeSnippet": "extern ___ \"C\" {\n    void c_function(int x);\n}",
+      "options": ["\"C\"", "C", "c", "extern"],
+      "correctAnswer": "\"C\""
+    },
+    {
+      "slideId": "CPP_154_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Overloading on Reference Types",
+      "prompt": "Can functions be overloaded based on 'const T&' versus 'T&' parameter qualification?",
+      "options": [
+        "Yes, the compiler resolves rvalues/const lvalues to const T& and mutable lvalues to T&",
+        "No, const qualifications are ignored during overload resolution",
+        "Only if return types differ as well",
+        "Only inside class definitions"
+      ],
+      "correctAnswer": "Yes, the compiler resolves rvalues/const lvalues to const T& and mutable lvalues to T&"
+    },
+    {
+      "slideId": "CPP_154_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Overloading Parameter Count",
+      "prompt": "Fill in missing overload parameter to handle 3 integers.",
+      "codeSnippet": "int sum(int a, int b);\nint sum(int a, int b, ___ c);",
+      "options": ["int", "double", "auto", "default"],
+      "correctAnswer": "int"
+    }
+  ]
+}

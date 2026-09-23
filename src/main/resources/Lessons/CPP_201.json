@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_201",
+  "title": "Classes, Objects & Encapsulation Mechanics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_201_S1",
+      "type": "CONCEPT",
+      "title": "Classes & Access Specifiers",
+      "prompt": "Encapsulation hides internal implementation details. Class members are 'private' by default, whereas struct members are 'public' by default.",
+      "codeSnippet": "class BankAccount {\nprivate:\n    double balance;\npublic:\n    void deposit(double amount) { balance += amount; }\n};"
+    },
+    {
+      "slideId": "CPP_201_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Class Access Specifier",
+      "prompt": "Fill in the access specifier that restricts member access to inside the class only.",
+      "codeSnippet": "class Player {\n___:\n    int health;\n};",
+      "options": ["private", "public", "protected", "internal"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "CPP_201_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class vs Struct Difference",
+      "prompt": "What is the primary technical difference between a 'class' and a 'struct' in C++?",
+      "options": [
+        "Default member access is private in class, public in struct",
+        "Structs cannot have member functions",
+        "Classes are allocated on Heap, structs on Stack",
+        "Structs do not support inheritance"
+      ],
+      "correctAnswer": "Default member access is private in class, public in struct"
+    },
+    {
+      "slideId": "CPP_201_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Public Getter Method",
+      "prompt": "Fill in the keyword to return member variable without permitting modification.",
+      "codeSnippet": "class Car {\nprivate:\n    int speed;\npublic:\n    int getSpeed() ___ { return speed; }\n};",
+      "options": ["const", "static", "inline", "explicit"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_201_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Advantage",
+      "prompt": "Why is data encapsulation recommended in Object-Oriented Design?",
+      "options": [
+        "Protects internal state from unauthorized external modification",
+        "Increases code compilation speed",
+        "Reduces memory consumption of objects",
+        "Eliminates the need for constructors"
+      ],
+      "correctAnswer": "Protects internal state from unauthorized external modification"
+    },
+    {
+      "slideId": "CPP_201_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Object Instantiation",
+      "prompt": "Fill in variable type to instantiate object on stack.",
+      "codeSnippet": "___ acc;\nacc.deposit(100.0);",
+      "options": ["BankAccount", "class", "auto*", "void"],
+      "correctAnswer": "BankAccount"
+    },
+    {
+      "slideId": "CPP_201_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Member Functions",
+      "prompt": "What happens if a 'const' member function attempts to modify a class member variable?",
+      "options": [
+        "Compilation Error",
+        "Runtime Warning",
+        "Modifies variable temporarily",
+        "Undefined Behavior"
+      ],
+      "correctAnswer": "Compilation Error"
+    },
+    {
+      "slideId": "CPP_201_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Protected Access Specifier",
+      "prompt": "Fill in access specifier accessible by class and derived classes only.",
+      "codeSnippet": "class Shape {\n___:\n    int width;\n};",
+      "options": ["protected", "private", "public", "friend"],
+      "correctAnswer": "protected"
+    },
+    {
+      "slideId": "CPP_201_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mutable Keyword",
+      "prompt": "Which keyword allows a member variable to be modified inside a 'const' member function?",
+      "options": [
+        "mutable",
+        "volatile",
+        "extern",
+        "register"
+      ],
+      "correctAnswer": "mutable"
+    },
+    {
+      "slideId": "CPP_201_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Access Operator",
+      "prompt": "Fill in operator used to access public methods of object instance.",
+      "codeSnippet": "Player p1;\np1___setHealth(100);",
+      "options": [".", "->", "::", "*"],
+      "correctAnswer": "."
+    }
+  ]
+}

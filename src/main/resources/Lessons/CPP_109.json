@@ -1,65 +1,91 @@
 {
   "lessonId": "CPP_109",
-  "title": "C++ If...Else Logic",
-  "isPremium": true,
+  "title": "Assignment Operators",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_109_S1",
       "type": "CONCEPT",
-      "title": "Conditional Execution",
-      "prompt": "Use the if statement to specify a block of C++ code to be executed if a condition is true.",
-      "codeSnippet": "if (20 > 18) {\n    std::cout << \"20 is greater than 18\";\n}"
+      "title": "Compound Assignment",
+      "prompt": "Compound assignment operators combine arithmetic with assignment to shorthand expressions.",
+      "codeSnippet": "int x = 10;\nx += 5; // Equivalent to x = x + 5;\nx *= 2; // Equivalent to x = x * 2;"
     },
     {
       "slideId": "CPP_109_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Else Statement",
-      "prompt": "Complete the code to execute a fallback block when condition is false.",
-      "codeSnippet": "if (x > y) {\n    std::cout << \"X\";\n} ___ {\n    std::cout << \"Y\";\n}",
-      "options": ["else", "then", "otherwise", "elif"],
-      "correctAnswer": "else"
+      "title": "Add and Assign",
+      "prompt": "Fill in the compound operator to add 10 to total.",
+      "codeSnippet": "total ___ 10;",
+      "options": ["+=", "=+ ", "++=", "=="],
+      "correctAnswer": "+="
     },
     {
       "slideId": "CPP_109_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Equality Comparison Operator",
-      "prompt": "Which operator compares if two values are equal in an if statement?",
-      "options": ["==", "=", "equals", "==="],
-      "correctAnswer": "=="
+      "title": "Shorthand Equivalence",
+      "prompt": "What is 'x -= 3;' equivalent to?",
+      "options": ["x = x - 3;", "x = 3 - x;", "x - 3 = x;", "x == 3;"],
+      "correctAnswer": "x = x - 3;"
     },
     {
       "slideId": "CPP_109_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Ternary Operator",
-      "prompt": "Fill in the symbol for short-hand if...else (ternary operator).",
-      "codeSnippet": "string result = (time < 18) ___ \"Good day.\" : \"Good evening.\";",
-      "options": ["?", ":", "if", "then"],
-      "correctAnswer": "?"
+      "title": "Multiply and Assign",
+      "prompt": "Fill in the compound operator to double the value of 'score'.",
+      "codeSnippet": "score ___ 2;",
+      "options": ["*=", "=* ", "**=", "*+"],
+      "correctAnswer": "*="
     },
     {
       "slideId": "CPP_109_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Logical NOT Operator",
-      "prompt": "Which symbol reverses the boolean state of a condition?",
-      "options": ["!", "~", "NOT", "^"],
-      "correctAnswer": "!"
+      "title": "Divide and Assign Result",
+      "prompt": "If int x = 20; x /= 4; what is the new value of x?",
+      "options": ["5", "80", "16", "4"],
+      "correctAnswer": "5"
     },
     {
       "slideId": "CPP_109_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Else If Condition",
-      "prompt": "Fill in the keywords to test a new condition if the first condition is false.",
-      "codeSnippet": "if (x == 1) {}\n___ (x == 2) {}",
-      "options": ["else if", "elif", "or if", "case"],
-      "correctAnswer": "else if"
+      "title": "Modulus and Assign",
+      "prompt": "Fill in the compound operator to keep remainder after division by 3.",
+      "codeSnippet": "num ___ 3;",
+      "options": ["%=", "=%", "%%=", "%/"],
+      "correctAnswer": "%="
     },
     {
       "slideId": "CPP_109_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Nested Conditionals",
-      "prompt": "What is an 'if' statement placed inside another 'if' statement called?",
-      "options": ["Nested if", "Inner if", "Double if", "Chained if"],
-      "correctAnswer": "Nested if"
+      "title": "Chained Assignment",
+      "prompt": "In 'a = b = c = 5;', what value is assigned to 'a'?",
+      "options": ["5", "0", "Undefined", "Syntax error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "CPP_109_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Subtract and Assign",
+      "prompt": "Fill in the compound operator to subtract 5 from health.",
+      "codeSnippet": "health ___ 5;",
+      "options": ["-=", "=-", "--=", "->"],
+      "correctAnswer": "-="
+    },
+    {
+      "slideId": "CPP_109_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Assignment Direction",
+      "prompt": "Which side of the '=' operator evaluates first during assignment?",
+      "options": ["Right-hand side", "Left-hand side", "Both simultaneously", "Depends on variable type"],
+      "correctAnswer": "Right-hand side"
+    },
+    {
+      "slideId": "CPP_109_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic Assignment Operator",
+      "prompt": "Fill in the primary assignment operator.",
+      "codeSnippet": "int val ___ 42;",
+      "options": ["=", "==", "::", "<-"],
+      "correctAnswer": "="
     }
   ]
 }

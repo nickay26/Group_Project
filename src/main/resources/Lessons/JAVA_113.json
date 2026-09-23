@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_113",
+  "title": "Switch Statement",
+  "slides": [
+    {
+      "slideId": "JAVA_113_S1",
+      "type": "CONCEPT",
+      "title": "Switch Statement",
+      "prompt": "The switch statement is used when you have many choices. It compares a value against multiple case labels. Use break to exit the switch.",
+      "codeSnippet": "int day = 3;\nswitch (day) {\n    case 1:\n        System.out.println(\"Monday\");\n        break;\n    case 2:\n        System.out.println(\"Tuesday\");\n        break;\n    case 3:\n        System.out.println(\"Wednesday\");\n        break;\n    default:\n        System.out.println(\"Other day\");\n}",
+      "output": "Wednesday"
+    },
+    {
+      "slideId": "JAVA_113_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Switch Keyword",
+      "prompt": "Which statement is used for multiple choices?",
+      "options": ["switch", "if", "for", "while"],
+      "correctAnswer": "switch"
+    },
+    {
+      "slideId": "JAVA_113_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Break Keyword",
+      "prompt": "Which keyword is used to exit a switch statement?",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_113_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Keyword",
+      "prompt": "Which keyword is used when no case matches?",
+      "options": ["default", "else", "otherwise", "final"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "JAVA_113_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Switch",
+      "prompt": "Complete the code to break out of the switch.",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_113_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Default",
+      "prompt": "Complete the code to handle no matching case.",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); break;\n  ____: System.out.println(\"Other\");\n}",
+      "options": ["default", "else", "otherwise", "final"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "JAVA_113_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Switch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 2;\nswitch (x) {\n  case 1: System.out.println(\"One\"); break;\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
+      "options": ["One", "Two", "Other", "Error"],
+      "correctAnswer": "Two"
+    },
+    {
+      "slideId": "JAVA_113_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Switch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 5;\nswitch (x) {\n  case 1: System.out.println(\"One\"); break;\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
+      "options": ["One", "Two", "Other", "Error"],
+      "correctAnswer": "Other"
+    },
+    {
+      "slideId": "JAVA_113_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Switch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int day = 3;\nswitch (day) {\n  case 1: System.out.println(\"Monday\"); break;\n  case 2: System.out.println(\"Tuesday\"); break;\n  case 3: System.out.println(\"Wednesday\"); break;\n  default: System.out.println(\"Other\");\n}",
+      "options": ["Monday", "Tuesday", "Wednesday", "Other"],
+      "correctAnswer": "Wednesday"
+    },
+    {
+      "slideId": "JAVA_113_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Switch Fall-Through",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 1;\nswitch (x) {\n  case 1: System.out.println(\"One\");\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
+      "options": ["One", "One Two", "Two", "Other"],
+      "correctAnswer": "One Two"
+    },
+    {
+      "slideId": "JAVA_113_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Case",
+      "prompt": "Complete the code to print \"One\" when x is 1.",
+      "codeSnippet": "switch (x) {\n  ____ 1: System.out.println(\"One\"); break;\n}",
+      "options": ["case", "default", "switch", "if"],
+      "correctAnswer": "case"
+    }
+  ]
+}

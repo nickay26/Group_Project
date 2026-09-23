@@ -1,0 +1,105 @@
+{
+  "lessonId": "JAVA_115",
+  "title": "Practice: Complete the If",
+  "slides": [
+    {
+      "slideId": "JAVA_115_S1",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is greater than 5.",
+      "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
+      "options": [">", "<", "==", "!="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "JAVA_115_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is less than 5.",
+      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Small\");\n}",
+      "options": ["<", ">", "==", "!="],
+      "correctAnswer": "<"
+    },
+    {
+      "slideId": "JAVA_115_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is equal to 5.",
+      "codeSnippet": "int x = 5;\nif (x __ 5) {\n  System.out.println(\"Equal\");\n}",
+      "options": ["==", "=", "!=", ">"],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "JAVA_115_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is not equal to 5.",
+      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Not Equal\");\n}",
+      "options": ["!=", "==", ">", "<"],
+      "correctAnswer": "!="
+    },
+    {
+      "slideId": "JAVA_115_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is greater than or equal to 5.",
+      "codeSnippet": "int x = 5;\nif (x __ 5) {\n  System.out.println(\"Big or Equal\");\n}",
+      "options": [">=", ">", "<=", "<"],
+      "correctAnswer": ">="
+    },
+    {
+      "slideId": "JAVA_115_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If-Else",
+      "prompt": "Complete the code to output 'B'.",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_115_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else If",
+      "prompt": "Complete the code to check if x is greater than 3.",
+      "codeSnippet": "int x = 5;\nif (x > 10) {\n  System.out.println(\"A\");\n} ____ (x > 3) {\n  System.out.println(\"B\");\n}",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_115_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Switch",
+      "prompt": "Complete the code to break out of the switch.",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_115_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Ternary",
+      "prompt": "Complete the code to output 'Big'.",
+      "codeSnippet": "int x = 10;\nString r = (x > 5) __ \"Big\" : \"Small\";",
+      "options": ["?", ":", "=", "=="],
+      "correctAnswer": "?"
+    },
+    {
+      "slideId": "JAVA_115_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nif (x > 5) {\n  System.out.println(\"Big\");\n}",
+      "options": ["Big", "Small", "10", "5"],
+      "correctAnswer": "Big"
+    },
+    {
+      "slideId": "JAVA_115_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "3", "5"],
+      "correctAnswer": "B"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_245",
+  "title": "BufferedWriter",
+  "slides": [
+    {
+      "slideId": "JAVA_245_S1",
+      "type": "CONCEPT",
+      "title": "BufferedWriter",
+      "prompt": "BufferedWriter writes text to a character-output stream, buffering characters for efficient writing. Use write() and newLine() methods.",
+      "codeSnippet": "import java.io.BufferedWriter;\nimport java.io.FileWriter;\n\npublic class Program {\n    public static void main(String[] args) {\n        try {\n            BufferedWriter bw = new BufferedWriter(new FileWriter(\"test.txt\"));\n            bw.write(\"Hello\");\n            bw.newLine();\n            bw.write(\"World\");\n            bw.close();\n            System.out.println(\"File written\");\n        } catch (Exception e) {\n            System.out.println(\"Error\");\n        }\n    }\n}",
+      "output": "File written"
+    },
+    {
+      "slideId": "JAVA_245_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedWriter Class",
+      "prompt": "Which class writes text efficiently?",
+      "options": ["BufferedWriter", "FileWriter", "File", "Writer"],
+      "correctAnswer": "BufferedWriter"
+    },
+    {
+      "slideId": "JAVA_245_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Write Method",
+      "prompt": "Which method writes text to a BufferedWriter?",
+      "options": ["write()", "print()", "output()", "save()"],
+      "correctAnswer": "write()"
+    },
+    {
+      "slideId": "JAVA_245_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NewLine Method",
+      "prompt": "Which method writes a new line?",
+      "options": ["newLine()", "nextLine()", "println()", "line()"],
+      "correctAnswer": "newLine()"
+    },
+    {
+      "slideId": "JAVA_245_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedWriter Package",
+      "prompt": "Which package contains BufferedWriter?",
+      "options": ["java.io", "java.util", "java.lang", "java.buffer"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_245_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import BufferedWriter",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io._____________;",
+      "options": ["BufferedWriter", "FileWriter", "File", "Writer"],
+      "correctAnswer": "BufferedWriter"
+    },
+    {
+      "slideId": "JAVA_245_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Write Text",
+      "prompt": "Complete the code to write text.",
+      "codeSnippet": "bw.______(\"Hello\");",
+      "options": ["write", "print", "output", "save"],
+      "correctAnswer": "write"
+    },
+    {
+      "slideId": "JAVA_245_S8",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedWriter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedWriter bw = new BufferedWriter(new FileWriter(\"test.txt\"));\n  bw.write(\"Hello\");\n  bw.close();\n  System.out.println(\"File written\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["File written", "Hello", "Error", "No Error"],
+      "correctAnswer": "File written"
+    },
+    {
+      "slideId": "JAVA_245_S9",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedWriter NewLine",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedWriter bw = new BufferedWriter(new FileWriter(\"test.txt\"));\n  bw.write(\"Line 1\");\n  bw.newLine();\n  bw.write(\"Line 2\");\n  bw.close();\n  System.out.println(\"Done\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Done or Error", "Done", "Error", "Line 1"],
+      "correctAnswer": "Done or Error"
+    },
+    {
+      "slideId": "JAVA_245_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedWriter Close",
+      "prompt": "Which method closes a BufferedWriter?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_245_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedWriter Benefit",
+      "prompt": "Why use BufferedWriter?",
+      "options": ["Efficient writing", "Efficient reading", "Less memory", "More errors"],
+      "correctAnswer": "Efficient writing"
+    }
+  ]
+}

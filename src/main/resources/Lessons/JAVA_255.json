@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_255",
+  "title": "Practice: URL and HTTP",
+  "slides": [
+    {
+      "slideId": "JAVA_255_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "URL Definition",
+      "prompt": "What is a URL?",
+      "options": ["Uniform Resource Locator", "Universal Resource Link", "Unified Resource Locator", "Unique Resource Link"],
+      "correctAnswer": "Uniform Resource Locator"
+    },
+    {
+      "slideId": "JAVA_255_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "URL Class",
+      "prompt": "Which class represents a URL?",
+      "options": ["URL", "URI", "Link", "Web"],
+      "correctAnswer": "URL"
+    },
+    {
+      "slideId": "JAVA_255_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OpenStream Method",
+      "prompt": "Which method opens a stream from a URL?",
+      "options": ["openStream()", "open()", "connect()", "read()"],
+      "correctAnswer": "openStream()"
+    },
+    {
+      "slideId": "JAVA_255_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import URL",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.net.______;",
+      "options": ["URL", "URI", "Link", "Web"],
+      "correctAnswer": "URL"
+    },
+    {
+      "slideId": "JAVA_255_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Open URL Stream",
+      "prompt": "Complete the code to open a URL stream.",
+      "codeSnippet": "Scanner sc = new Scanner(url.__________());",
+      "options": ["openStream", "open", "connect", "read"],
+      "correctAnswer": "openStream"
+    },
+    {
+      "slideId": "JAVA_255_S6",
+      "type": "CODE_OUTPUT",
+      "title": "URL Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  URL url = new URL(\"https://example.com\");\n  System.out.println(\"URL opened\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["URL opened or Error", "URL opened", "Error", "No Error"],
+      "correctAnswer": "URL opened or Error"
+    },
+    {
+      "slideId": "JAVA_255_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HTTP Protocol",
+      "prompt": "What does HTTP stand for?",
+      "options": ["HyperText Transfer Protocol", "High Transfer Text Protocol", "HyperText Transport Process", "High Text Transfer Process"],
+      "correctAnswer": "HyperText Transfer Protocol"
+    },
+    {
+      "slideId": "JAVA_255_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HTTPS Protocol",
+      "prompt": "What does HTTPS stand for?",
+      "options": ["HTTP Secure", "HTTP Server", "HTTP Standard", "HTTP Simple"],
+      "correctAnswer": "HTTP Secure"
+    },
+    {
+      "slideId": "JAVA_255_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "URL Package",
+      "prompt": "Which package contains URL?",
+      "options": ["java.net", "java.io", "java.util", "java.url"],
+      "correctAnswer": "java.net"
+    },
+    {
+      "slideId": "JAVA_255_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "URL Purpose",
+      "prompt": "Why do we use URL?",
+      "options": ["To access web resources", "To read files", "To write files", "To connect to database"],
+      "correctAnswer": "To access web resources"
+    },
+    {
+      "slideId": "JAVA_255_S11",
+      "type": "CODE_OUTPUT",
+      "title": "URL HTTPS Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  URL url = new URL(\"https://google.com\");\n  System.out.println(\"URL created\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["URL created or Error", "URL created", "Error", "No Error"],
+      "correctAnswer": "URL created or Error"
+    }
+  ]
+}

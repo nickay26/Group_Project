@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_159",
+  "title": "Pointers Mechanics & Address Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_159_S1",
+      "type": "CONCEPT",
+      "title": "Pointer Fundamentals",
+      "prompt": "A pointer stores the memory address of another variable. '&' gets the address, and '*' dereferences the pointer.",
+      "codeSnippet": "int x = 42;\nint* ptr = &x;\nstd::cout << *ptr; // Prints 42"
+    },
+    {
+      "slideId": "CPP_159_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Address-Of Operator",
+      "prompt": "Fill in the operator used to get the memory address of a variable.",
+      "codeSnippet": "int num = 100;\nint* ptr = ___num;",
+      "options": ["&", "*", "->", "ref"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_159_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dereferencing Behavior",
+      "prompt": "What happens when you execute '*ptr = 20;' assuming 'ptr' points to variable 'a'?",
+      "options": [
+        "Modifies the value stored in variable 'a' to 20",
+        "Changes 'ptr' to point to memory address 20",
+        "Creates a new variable with value 20",
+        "Causes a compilation error"
+      ],
+      "correctAnswer": "Modifies the value stored in variable 'a' to 20"
+    },
+    {
+      "slideId": "CPP_159_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Null Pointer Constant",
+      "prompt": "Fill in the C++11 keyword used to represent a null pointer safely.",
+      "codeSnippet": "int* ptr = ___;",
+      "options": ["nullptr", "NULL", "0", "void"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_159_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uninitialized Pointers",
+      "prompt": "What happens if you dereference an uninitialized raw pointer ('int* p;')?",
+      "options": [
+        "Undefined behavior or potential Segmentation Fault",
+        "Automatically returns 0",
+        "Allocates dynamic memory automatically",
+        "Generates a compile-time error"
+      ],
+      "correctAnswer": "Undefined behavior or potential Segmentation Fault"
+    },
+    {
+      "slideId": "CPP_159_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pointer Type Declaration",
+      "prompt": "Fill in the correct data type declaration for a pointer pointing to a double.",
+      "codeSnippet": "___* valPtr = nullptr;",
+      "options": ["double", "float", "int", "auto"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_159_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Memory Size",
+      "prompt": "What determines the size in bytes of a pointer variable in C++?",
+      "options": [
+        "The system architecture (e.g., 8 bytes on 64-bit systems)",
+        "The size of the data type it points to",
+        "The value stored inside the variable",
+        "It is always fixed at 4 bytes on all devices"
+      ],
+      "correctAnswer": "The system architecture (e.g., 8 bytes on 64-bit systems)"
+    },
+    {
+      "slideId": "CPP_159_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Changing Pointer Value",
+      "prompt": "Fill in the operator to update the value of the target variable directly.",
+      "codeSnippet": "int val = 10;\nint* p = &val;\n___p = 50;",
+      "options": ["*", "&", "->", "val"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_159_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Checking Nullptr Before Access",
+      "prompt": "Why is it important to check if a pointer is 'nullptr' before dereferencing it?",
+      "options": [
+        "To prevent application crashes and segmentation fault exceptions",
+        "To speed up program execution time",
+        "To automatically free memory when zero",
+        "To enable implicit conversion to boolean"
+      ],
+      "correctAnswer": "To prevent application crashes and segmentation fault exceptions"
+    },
+    {
+      "slideId": "CPP_159_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Evaluation of Pointer",
+      "prompt": "Fill in missing check condition for valid pointer.",
+      "codeSnippet": "if (ptr ___ nullptr) {\n    std::cout << *ptr;\n}",
+      "options": ["!=", "==", "=", "is"],
+      "correctAnswer": "!="
+    }
+  ]
+}

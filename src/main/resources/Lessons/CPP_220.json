@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_220",
+  "title": "Non-Type Template Parameters (NTTP)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_220_S1",
+      "type": "CONCEPT",
+      "title": "Non-Type Parameters Basics",
+      "prompt": "Templates can accept structural values (integers, pointers, enums, auto) instead of types. Value parameters must be compile-time constants.",
+      "codeSnippet": "template <typename T, std::size_t N>\nclass FixedArray {\n    T data[N];\n};\nFixedArray<int, 10> arr; // N is a compile-time constant"
+    },
+    {
+      "slideId": "CPP_220_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "NTTP Declaration Syntax",
+      "prompt": "Fill in the parameter type for fixed integer size NTTP.",
+      "codeSnippet": "template <typename T, ___ Size>\nclass Buffer {};",
+      "options": ["int", "typename", "class", "auto*"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_220_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid NTTP Types in Pre-C++20",
+      "prompt": "Which type was NOT allowed as a Non-Type Template Parameter prior to C++20?",
+      "options": [
+        "Floating-point numbers (float, double)",
+        "Integral types (int, char, size_t)",
+        "Enumeration types (enum)",
+        "Pointer / Reference to objects with external linkage"
+      ],
+      "correctAnswer": "Floating-point numbers (float, double)"
+    },
+    {
+      "slideId": "CPP_220_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "NTTP Auto Keyword C++17",
+      "prompt": "Since C++17, fill in the keyword to deduce the type of a non-type parameter automatically.",
+      "codeSnippet": "template <___ Val>\nvoid printValue() {}",
+      "options": ["auto", "typename", "decltype", "var"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_220_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NTTP Compile-Time Requirement",
+      "prompt": "What happens if you pass a runtime variable (e.g., user input) to an NTTP like 'FixedArray<int, n>'?",
+      "options": [
+        "Compile-time error because NTTP requires expression evaluated at compile time",
+        "Dynamic memory allocation occurs automatically",
+        "Runtime exception is thrown",
+        "Variable is converted into global pointer"
+      ],
+      "correctAnswer": "Compile-time error because NTTP requires expression evaluated at compile time"
+    },
+    {
+      "slideId": "CPP_220_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::array NTTP Usage",
+      "prompt": "In 'std::array<int, 5>', 5 is passed as a ___ template parameter.",
+      "codeSnippet": "// Parameter '5' in std::array is an:\nNTTP",
+      "options": ["NTTP", "RTTI", "CRTP", "SFINAE"],
+      "correctAnswer": "NTTP"
+    },
+    {
+      "slideId": "CPP_220_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 Structural Class Types as NTTP",
+      "prompt": "What C++20 enhancement expanded Non-Type Template Parameter capabilities?",
+      "options": [
+        "Allowed literal/structural class types and floating-point values as NTTPs",
+        "Allowed passing std::string runtime objects directly",
+        "Allowed passing dynamic std::vector instances as NTTPs",
+        "Removed compile-time evaluation requirements for NTTPs"
+      ],
+      "correctAnswer": "Allowed literal/structural class types and floating-point values as NTTPs"
+    },
+    {
+      "slideId": "CPP_220_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "NTTP Default Argument",
+      "prompt": "Fill in the syntax to assign a default integer value to an NTTP.",
+      "codeSnippet": "template <typename T, int Size ___ 100>\nclass Queue {};",
+      "options": ["=", ":", "==", "->"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_220_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Impact of Different NTTP Values on Types",
+      "prompt": "What is the relationship between 'FixedArray<int, 5>' and 'FixedArray<int, 10>'?",
+      "options": [
+        "They are two completely distinct, incompatible types generated at compile time",
+        "They share the same underlying type with dynamic length variable",
+        "They are implicitly convertible via base pointer",
+        "They trigger a duplicate class compilation error"
+      ],
+      "correctAnswer": "They are two completely distinct, incompatible types generated at compile time"
+    },
+    {
+      "slideId": "CPP_220_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "String Literals as NTTP C++20",
+      "prompt": "Passing compile-time string literal NTTP in C++20 requires wrapped structural ___ wrapper.",
+      "codeSnippet": "// C++20 string NTTP relies on structural:\nClass",
+      "options": ["Class", "Pointer", "Macro", "Union"],
+      "correctAnswer": "Class"
+    }
+  ]
+}

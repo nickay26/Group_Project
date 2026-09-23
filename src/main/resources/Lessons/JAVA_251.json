@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_251",
+  "title": "Practice: Socket Basics",
+  "slides": [
+    {
+      "slideId": "JAVA_251_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Socket Definition",
+      "prompt": "What is a socket?",
+      "options": ["An endpoint for communication", "A class", "A method", "A variable"],
+      "correctAnswer": "An endpoint for communication"
+    },
+    {
+      "slideId": "JAVA_251_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Socket Class",
+      "prompt": "Which class represents a client socket?",
+      "options": ["Socket", "ServerSocket", "Client", "Connection"],
+      "correctAnswer": "Socket"
+    },
+    {
+      "slideId": "JAVA_251_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ServerSocket Class",
+      "prompt": "Which class represents a server socket?",
+      "options": ["ServerSocket", "Socket", "Server", "Connection"],
+      "correctAnswer": "ServerSocket"
+    },
+    {
+      "slideId": "JAVA_251_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Socket",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.net.______;",
+      "options": ["Socket", "ServerSocket", "Connection", "Network"],
+      "correctAnswer": "Socket"
+    },
+    {
+      "slideId": "JAVA_251_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Socket",
+      "prompt": "Complete the code to create a client socket.",
+      "codeSnippet": "Socket socket = new ______(\"localhost\", 8080);",
+      "options": ["Socket", "ServerSocket", "Connection", "Client"],
+      "correctAnswer": "Socket"
+    },
+    {
+      "slideId": "JAVA_251_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Socket Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  Socket socket = new Socket(\"localhost\", 8080);\n  System.out.println(\"Connected\");\n  socket.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Connected or Error", "Connected", "Error", "No Error"],
+      "correctAnswer": "Connected or Error"
+    },
+    {
+      "slideId": "JAVA_251_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Socket Close",
+      "prompt": "Which method closes a socket?",
+      "options": ["close()", "end()", "stop()", "disconnect()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_251_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Socket Port",
+      "prompt": "What is a port?",
+      "options": ["A number for network communication", "A class", "A method", "A variable"],
+      "correctAnswer": "A number for network communication"
+    },
+    {
+      "slideId": "JAVA_251_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Networking Package",
+      "prompt": "Which package contains Socket?",
+      "options": ["java.net", "java.io", "java.util", "java.socket"],
+      "correctAnswer": "java.net"
+    },
+    {
+      "slideId": "JAVA_251_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Socket Purpose",
+      "prompt": "Why do we use sockets?",
+      "options": ["For network communication", "For file reading", "For database", "For UI"],
+      "correctAnswer": "For network communication"
+    },
+    {
+      "slideId": "JAVA_251_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Socket Port Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  Socket socket = new Socket(\"localhost\", 9090);\n  System.out.println(\"Port 9090\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Port 9090 or Error", "Port 9090", "Error", "No Error"],
+      "correctAnswer": "Port 9090 or Error"
+    }
+  ]
+}

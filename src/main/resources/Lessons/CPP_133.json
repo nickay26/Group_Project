@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_133",
+  "title": "do-while Loops & Exit Conditions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_133_S1",
+      "type": "CONCEPT",
+      "title": "do-while Mechanics",
+      "prompt": "The 'do-while' loop is exit-controlled; its body always executes at least once before testing the condition.",
+      "codeSnippet": "int val = 10;\ndo {\n    std::cout << val;\n} while (val < 5); // Executes once, outputs 10"
+    },
+    {
+      "slideId": "CPP_133_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "do-while Opening Keyword",
+      "prompt": "Fill in the starting keyword for an exit-controlled loop.",
+      "codeSnippet": "___ {\n    process();\n} while (keepRunning);",
+      "options": ["do", "repeat", "loop", "while"],
+      "correctAnswer": "do"
+    },
+    {
+      "slideId": "CPP_133_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Guaranteed Execution Count",
+      "prompt": "How many times is a do-while body guaranteed to run regardless of condition?",
+      "options": ["At least 1 time", "0 times", "At least 2 times", "Depends on compiler"],
+      "correctAnswer": "At least 1 time"
+    },
+    {
+      "slideId": "CPP_133_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Closing Semicolon Rule",
+      "prompt": "Fill in the required character ending a do-while loop statement.",
+      "codeSnippet": "do {\n    // ...\n} while (x > 0)___",
+      "options": [";", "}", ":", "no character"],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_133_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Use Case for do-while",
+      "prompt": "What is a typical use case for a do-while loop?",
+      "options": ["Menu-driven programs where options must be displayed at least once", "Iterating through fixed arrays", "Compiling templates", "Bitwise masking"],
+      "correctAnswer": "Menu-driven programs where options must be displayed at least once"
+    },
+    {
+      "slideId": "CPP_133_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Condition Keyword Position",
+      "prompt": "Fill in the condition keyword placed after the do block.",
+      "codeSnippet": "do {\n    std::cout << \"Menu\";\n} ___ (choice != 0);",
+      "options": ["while", "until", "for", "if"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "CPP_133_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "while vs do-while Primary Difference",
+      "prompt": "What distinguishes while from do-while?",
+      "options": ["'while' tests condition before body; 'do-while' tests condition after body", "'do-while' uses more memory", "'while' cannot use break statements", "'do-while' only works with integers"],
+      "correctAnswer": "'while' tests condition before body; 'do-while' tests condition after body"
+    },
+    {
+      "slideId": "CPP_133_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Trace Output count",
+      "prompt": "What is the final value of x after this loop?",
+      "codeSnippet": "int x = 5;\ndo {\n    x++;\n} while (x < 3);",
+      "options": ["6", "5", "3", "4"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "CPP_133_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Scope in do-while Condition",
+      "prompt": "Where must variables used in the do-while condition be declared?",
+      "options": ["Outside the do-block scope", "Inside the do-block scope", "Inside the while condition parentheses", "Globally only"],
+      "correctAnswer": "Outside the do-block scope"
+    },
+    {
+      "slideId": "CPP_133_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Input Validation Loop",
+      "prompt": "Fill in operator to continue prompting while input is out of range (1..10).",
+      "codeSnippet": "do {\n    std::cin >> num;\n} while (num < 1 ___ num > 10);",
+      "options": ["||", "&&", "==", "!="],
+      "correctAnswer": "||"
+    }
+  ]
+}

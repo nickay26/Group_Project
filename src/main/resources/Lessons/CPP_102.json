@@ -1,65 +1,91 @@
 {
   "lessonId": "CPP_102",
-  "title": "C++ Output (std::cout)",
+  "title": "Comments & Code Formatting",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_102_S1",
       "type": "CONCEPT",
-      "title": "Printing Multiple Lines",
-      "prompt": "In C++, std::endl or '\\n' is used to create a new line in the output.",
-      "codeSnippet": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello World!\" << std::endl;\n    std::cout << \"Welcome to C++\\n\";\n    return 0;\n}"
+      "title": "Single-line vs Multi-line Comments",
+      "prompt": "Comments are ignored by the compiler and are used to explain code.",
+      "codeSnippet": "// Single-line comment\n/* Multi-line\n   comment */"
     },
     {
       "slideId": "CPP_102_S2",
       "type": "FILL_IN_BLANK",
-      "title": "New Line Character",
-      "prompt": "Complete the code to insert a newline using the special character escape sequence.",
-      "codeSnippet": "std::cout << \"Line 1___Line 2\";",
-      "options": ["\\n", "\\t", "\\r", "\\\\"],
-      "correctAnswer": "\\n"
+      "title": "Single-Line Comment",
+      "prompt": "Fill in the syntax for a single-line comment.",
+      "codeSnippet": "___ This is a comment",
+      "options": ["//", "/*", "#", "<!--"],
+      "correctAnswer": "//"
     },
     {
       "slideId": "CPP_102_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Output Statement End",
-      "prompt": "What symbol must be used at the end of every C++ output statement?",
-      "options": ["; (Semicolon)", ": (Colon)", ". (Period)", ", (Comma)"],
-      "correctAnswer": "; (Semicolon)"
+      "title": "Multi-Line Comment Closing",
+      "prompt": "How do you close a multi-line comment in C++?",
+      "options": ["*/", "//", "-->", "*/"],
+      "correctAnswer": "*/"
     },
     {
       "slideId": "CPP_102_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Using std::endl",
-      "prompt": "Fill in the blank to print a new line using std stream manipulator.",
-      "codeSnippet": "std::cout << \"Hello\" << std::___;",
-      "options": ["endl", "newline", "break", "flush"],
-      "correctAnswer": "endl"
+      "title": "Multi-Line Comment Start",
+      "prompt": "Fill in the opening symbol for a multi-line comment.",
+      "codeSnippet": "___ Multi line comment here */",
+      "options": ["/*", "//", "<!--", "~~"],
+      "correctAnswer": "/*"
     },
     {
       "slideId": "CPP_102_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Tab Space Escape Character",
-      "prompt": "Which escape sequence inserts a horizontal tab space in the printed output?",
-      "options": ["\\t", "\\n", "\\a", "\\v"],
-      "correctAnswer": "\\t"
+      "title": "Comment Execution",
+      "prompt": "Does the C++ compiler execute comment lines?",
+      "options": ["No, they are completely ignored", "Yes, as slow code", "Only multi-line comments", "Only if in main()"],
+      "correctAnswer": "No, they are completely ignored"
     },
     {
       "slideId": "CPP_102_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Chaining Outputs",
-      "prompt": "Fill in the operator to chain multiple items in one std::cout statement.",
-      "codeSnippet": "std::cout << \"Age: \" ___ 20;",
-      "options": ["<<", ">>", "+", ","],
-      "correctAnswer": "<<"
+      "title": "Code Indentation",
+      "prompt": "Code blocks inside functions are enclosed within ___ braces.",
+      "codeSnippet": "int main() ___\n    return 0;\n}",
+      "options": ["{", "(", "[", "<"],
+      "correctAnswer": "{"
     },
     {
       "slideId": "CPP_102_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Escaping Double Quotes",
-      "prompt": "How do you display literal double quotes inside a string literal?",
-      "options": ["\\\"text\\\"", "\"\"text\"\"", "'text'", "/\"text/\""],
-      "correctAnswer": "\\\"text\\\""
+      "title": "Whitespace Handling",
+      "prompt": "How does C++ handle extra whitespace and newlines?",
+      "options": ["Ignores most extra whitespace", "Causes compile error", "Replaces with spaces", "Treats as variables"],
+      "correctAnswer": "Ignores most extra whitespace"
+    },
+    {
+      "slideId": "CPP_102_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Commenting",
+      "prompt": "Fill in the missing comment symbol next to statement.",
+      "codeSnippet": "int age = 20; ___ Set user age",
+      "options": ["//", "#", "--", "%"],
+      "correctAnswer": "//"
+    },
+    {
+      "slideId": "CPP_102_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Good Comment Practice",
+      "prompt": "Why are comments important in programming?",
+      "options": ["Improves code readability and maintainability", "Makes code run faster", "Reduces file size", "Required for memory allocation"],
+      "correctAnswer": "Improves code readability and maintainability"
+    },
+    {
+      "slideId": "CPP_102_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Closing Brace",
+      "prompt": "Fill in the matching closing symbol for function body.",
+      "codeSnippet": "int main() {\n    return 0;\n___",
+      "options": ["}", ")", "]", ">"],
+      "correctAnswer": "}"
     }
   ]
 }

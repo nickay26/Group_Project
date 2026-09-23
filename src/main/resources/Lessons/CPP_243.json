@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_243",
+  "title": "std::shared_ptr & Shared Ownership",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_243_S1",
+      "type": "CONCEPT",
+      "title": "Shared Ownership with std::shared_ptr",
+      "prompt": "std::shared_ptr enables shared ownership across multiple smart pointers using reference counting. The resource is destroyed when the final std::shared_ptr referencing it goes out of scope.",
+      "codeSnippet": "#include <memory>\nstd::shared_ptr<int> s1 = std::make_shared<int>(100);\nstd::shared_ptr<int> s2 = s1; // Copy allowed! Ref count = 2"
+    },
+    {
+      "slideId": "CPP_243_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating shared_ptr",
+      "prompt": "Fill in the preferred function used to construct a std::shared_ptr efficiently.",
+      "codeSnippet": "auto s = std::___<int>(42);",
+      "options": ["make_shared", "make_unique", "create_shared", "alloc_shared"],
+      "correctAnswer": "make_shared"
+    },
+    {
+      "slideId": "CPP_243_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reference Counting Control Block",
+      "prompt": "What extra structure does std::shared_ptr maintain alongside the managed object?",
+      "options": [
+        "A dynamic Control Block containing shared reference count, weak reference count, and deleter",
+        "A static global hash table of alive pointers",
+        "A thread mutex table for every variable access",
+        "A binary search tree tracking scopes"
+      ],
+      "correctAnswer": "A dynamic Control Block containing shared reference count, shared reference count, weak reference count, and deleter"
+    },
+    {
+      "slideId": "CPP_243_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Use Count",
+      "prompt": "Fill in the member function that returns the current number of shared_ptr instances managing the resource.",
+      "codeSnippet": "long count = ptr.___();",
+      "options": ["use_count", "ref_count", "count", "shared_count"],
+      "correctAnswer": "use_count"
+    },
+    {
+      "slideId": "CPP_243_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::make_shared Efficiency",
+      "prompt": "Why is std::make_shared preferred over using std::shared_ptr(new T())?",
+      "options": [
+        "Combines object allocation and control block allocation into a single memory block",
+        "Disables reference counting overhead completely",
+        "Prevents standard copy construction",
+        "Supports thread safety without mutexes"
+      ],
+      "correctAnswer": "Combines object allocation and control block allocation into a single memory block"
+    },
+    {
+      "slideId": "CPP_243_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Pointer Validity",
+      "prompt": "Fill in the boolean check idiom to determine if a shared_ptr holds a valid object.",
+      "codeSnippet": "if (___ptr) { /* Object exists and pointer is not null */ }",
+      "options": ["static_cast<bool>(", "isValid(", "exists(", "has_value("],
+      "correctAnswer": "static_cast<bool>("
+    },
+    {
+      "slideId": "CPP_243_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Safety of std::shared_ptr",
+      "prompt": "Which part of std::shared_ptr is guaranteed to be thread-safe automatically?",
+      "options": [
+        "Atomic updates to the reference count in the control block",
+        "Concurrent writes to the underlying managed object value",
+        "Re-assigning the same shared_ptr variable from multiple threads simultaneously without locks",
+        "Custom deleters execution synchronization"
+      ],
+      "correctAnswer": "Atomic updates to the reference count in the control block"
+    },
+    {
+      "slideId": "CPP_243_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Shared Pointer Aliasing Constructor",
+      "prompt": "Fill in the constructor mode that allows a shared_ptr to share ownership of one object while pointing to a member inside it.",
+      "codeSnippet": "std::shared_ptr<int> memberPtr(ownerSharedPtr, &ownerSharedPtr->___);",
+      "options": ["memberVal", "get()", "release()", "data"],
+      "correctAnswer": "memberVal"
+    },
+    {
+      "slideId": "CPP_243_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Performance Overhead of shared_ptr",
+      "prompt": "Compared to std::unique_ptr, what additional runtime costs does std::shared_ptr incur?",
+      "options": [
+        "Atomic increment/decrement operations on reference count and indirect heap control block storage",
+        "Memory re-allocation on every pointer dereference",
+        "Stack frame overhead on every function call",
+        "Compulsory Garbage Collection pauses"
+      ],
+      "correctAnswer": "Atomic increment/decrement operations on reference count and indirect heap control block storage"
+    },
+    {
+      "slideId": "CPP_243_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Unique Check Method",
+      "prompt": "Fill in the function check to verify if a shared_ptr is the sole owner (deprecated in C++20, but conceptually checked via use_count()==1).",
+      "codeSnippet": "bool isOnlyOwner = (sPtr.___() == 1);",
+      "options": ["use_count", "unique", "single", "owners"],
+      "correctAnswer": "use_count"
+    }
+  ]
+}

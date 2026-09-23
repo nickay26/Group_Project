@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_223",
+  "title": "C++20 Concepts & Constraints",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_223_S1",
+      "type": "CONCEPT",
+      "title": "Concepts Overview",
+      "prompt": "C++20 Concepts specify compile-time constraints on template arguments, replacing complex SFINAE. Declared using `concept` and evaluated with `requires` clauses.",
+      "codeSnippet": "template <typename T>\nconcept Numeric = std::is_arithmetic_v<T>;\n\ntemplate <Numeric T>\nT add(T a, T b) { return a + b; }"
+    },
+    {
+      "slideId": "CPP_223_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Concept Declaration Keyword",
+      "prompt": "Fill in the keyword used to define a concept in C++20.",
+      "codeSnippet": "template <typename T>\n___ SignedNumber = std::is_signed_v<T>;",
+      "options": ["concept", "requires", "typename", "constrained"],
+      "correctAnswer": "concept"
+    },
+    {
+      "slideId": "CPP_223_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requires Clause Placement",
+      "prompt": "Which of the following syntaxes uses a valid C++20 'requires' clause?",
+      "options": [
+        "template <typename T> requires std::integral<T> void print(T val);",
+        "template <typename T constraint std::integral> void print(T val);",
+        "template <typename T> where std::integral<T> void print(T val);",
+        "template <typename T if std::integral<T>> void print(T val);"
+      ],
+      "correctAnswer": "template <typename T> requires std::integral<T> void print(T val);"
+    },
+    {
+      "slideId": "CPP_223_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Abbreviated Function Template Syntax",
+      "prompt": "C++20 allows constrained auto function parameters. Fill in the constrained auto syntax.",
+      "codeSnippet": "void printValue(std::___ auto val) {}",
+      "options": ["integral", "typename", "template", "class"],
+      "correctAnswer": "integral"
+    },
+    {
+      "slideId": "CPP_223_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requires Expression compound constraint",
+      "prompt": "What does '{ expr } -> std::same_as<int>;' enforce inside a C++20 requires expression?",
+      "options": [
+        "The expression 'expr' must be valid AND its return type must satisfy std::same_as<int>",
+        "It casts the result of 'expr' to int automatically",
+        "It executes 'expr' at runtime and checks return equality",
+        "It declares a lambda function returning int"
+      ],
+      "correctAnswer": "The expression 'expr' must be valid AND its return type must satisfy std::same_as<int>"
+    },
+    {
+      "slideId": "CPP_223_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Concepts Header",
+      "prompt": "Fill in the standard C++20 header file required for standard library concepts like std::integral.",
+      "codeSnippet": "#include <___>",
+      "options": ["concepts", "type_traits", "utility", "algorithm"],
+      "correctAnswer": "concepts"
+    },
+    {
+      "slideId": "CPP_223_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Concept Overload Subsumption",
+      "prompt": "How does C++20 handle template overloads when multiple concepts match the provided argument?",
+      "options": [
+        "Selects the function constrained by the MORE SPECIFIC concept (subsumption rule)",
+        "Throws a compile-time ambiguity error in all cases",
+        "Selects the first declared overload in source code order",
+        "Falls back to non-constrained generic template"
+      ],
+      "correctAnswer": "Selects the function constrained by the MORE SPECIFIC concept (subsumption rule)"
+    },
+    {
+      "slideId": "CPP_223_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Combining Constraints Operator",
+      "prompt": "Fill in the logical operator used to combine concepts in a requires clause.",
+      "codeSnippet": "template <typename T>\nrequires std::integral<T> ___ std::signed_integral<T>\nvoid compute(T val) {}",
+      "options": ["&&", "&", "and_then", "comp"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_223_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Concept Evaluation Context",
+      "prompt": "When are C++20 Concepts evaluated by the compiler?",
+      "options": [
+        "At compile time during template specialization/instantiation candidate filtering",
+        "At application startup prior to main()",
+        "At runtime when entering the function body",
+        "During linker symbol resolution"
+      ],
+      "correctAnswer": "At compile time during template specialization/instantiation candidate filtering"
+    },
+    {
+      "slideId": "CPP_223_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Requires Clause Keyword",
+      "prompt": "Fill in the keyword used both to start constraint clauses and open nested constraint blocks.",
+      "codeSnippet": "template <typename T>\nconcept Movable = ___ (T a) {\n    { std::move(a) };\n};",
+      "options": ["requires", "concept", "typename", "decltype"],
+      "correctAnswer": "requires"
+    }
+  ]
+}

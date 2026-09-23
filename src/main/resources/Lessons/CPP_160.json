@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_160",
+  "title": "Pointer Arithmetic & Array Decay",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_160_S1",
+      "type": "CONCEPT",
+      "title": "Pointer Arithmetic Mechanics",
+      "prompt": "Adding N to a pointer advances its address by N * sizeof(Type) bytes. Arrays decay into pointers to their first element.",
+      "codeSnippet": "int arr[] = {10, 20, 30};\nint* p = arr; // Decay to &arr[0]\nstd::cout << *(p + 1); // Prints 20"
+    },
+    {
+      "slideId": "CPP_160_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Pointer Access",
+      "prompt": "Fill in pointer dereference expression equivalent to arr[2].",
+      "codeSnippet": "int arr[] = {5, 10, 15};\nint val = *(___ + 2);",
+      "options": ["arr", "&arr", "*arr", "arr[]"],
+      "correctAnswer": "arr"
+    },
+    {
+      "slideId": "CPP_160_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Distance",
+      "prompt": "If 'ptr2' points to arr[4] and 'ptr1' points to arr[1], what is the result of 'ptr2 - ptr1'?",
+      "options": [
+        "3 (number of elements between them)",
+        "12 (if sizeof(int) is 4 bytes)",
+        "The memory address difference in hexadecimal",
+        "Invalid pointer operation"
+      ],
+      "correctAnswer": "3 (number of elements between them)"
+    },
+    {
+      "slideId": "CPP_160_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Pointers vs Pointer to Const",
+      "prompt": "Fill in the qualifier to make the pointer itself immutable (cannot point elsewhere).",
+      "codeSnippet": "int x = 10;\nint* ___ ptr = &x;",
+      "options": ["const", "static", "constexpr", "inline"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_160_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Void Pointers",
+      "prompt": "Which of the following operations is forbidden directly on a 'void*' pointer?",
+      "options": [
+        "Dereferencing without type casting",
+        "Storing any object memory address",
+        "Assigning nullptr to it",
+        "Passing it as a function parameter"
+      ],
+      "correctAnswer": "Dereferencing without type casting"
+    },
+    {
+      "slideId": "CPP_160_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Incrementing Pointer",
+      "prompt": "Fill in the operator to advance a pointer to the next array element.",
+      "codeSnippet": "int* p = arr;\np___; // Moves to arr[1]",
+      "options": ["++", "+=sizeof", "+1bytes", "**"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_160_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer to Constant Data",
+      "prompt": "What does 'const int* ptr' mean?",
+      "options": [
+        "The integer value pointed to cannot be modified through 'ptr'",
+        "The pointer itself cannot point to a different address",
+        "Both the pointer address and integer value are constant",
+        "The memory is allocated on constant read-only RAM"
+      ],
+      "correctAnswer": "The integer value pointed to cannot be modified through 'ptr'"
+    },
+    {
+      "slideId": "CPP_160_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Cast for Void Pointer",
+      "prompt": "Fill in the type cast operator used to safely cast a void pointer back to int pointer.",
+      "codeSnippet": "void* vptr = &x;\nint* iptr = ___<int*>(vptr);",
+      "options": ["static_cast", "dynamic_cast", "reinterpret_cast", "const_cast"],
+      "correctAnswer": "static_cast"
+    },
+    {
+      "slideId": "CPP_160_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Parameter Decay in Functions",
+      "prompt": "When passing an array 'int arr[10]' to a function 'void fn(int arr[])', what does 'arr' decay into?",
+      "options": [
+        "A raw pointer 'int*'",
+        "A full copy of the array",
+        "A std::vector<int> reference",
+        "A fixed array reference"
+      ],
+      "correctAnswer": "A raw pointer 'int*'"
+    },
+    {
+      "slideId": "CPP_160_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Constant Pointer to Constant Data",
+      "prompt": "Fill in missing const keyword where neither address nor data can change.",
+      "codeSnippet": "___ int* const ptr = &val;",
+      "options": ["const", "static", "constexpr", "inline"],
+      "correctAnswer": "const"
+    }
+  ]
+}

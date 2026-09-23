@@ -4,12 +4,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,105 +16,212 @@ public class CodeEditorController {
 
     @FXML private Label projectTitleLabel;
     @FXML private Label languageBadge;
+    @FXML private Label instructionsLabel;
+    @FXML private Label taskLabel;
+    @FXML private Label expectedOutputLabel;
     @FXML private TextArea codeEditor;
     @FXML private TextArea outputConsole;
     @FXML private TextArea aiReviewArea;
     @FXML private Button runBtn;
     @FXML private Button reviewBtn;
+    @FXML private Button checkBtn;
 
     private Project currentProject;
+    private QuestionData currentQuestion;
 
-    /**
-     * Initializes the controller with data from the selected project.
-     */
+    // ============================================
+    // INIT — Question (Mimo Style)
+    // ============================================
+    public void initQuestion(QuestionData question) {
+        this.currentQuestion = question;
+        this.currentProject = null;
+
+        if (projectTitleLabel != null) projectTitleLabel.setText(question.getTitle());
+        if (languageBadge != null) languageBadge.setText(question.getLanguage());
+        if (instructionsLabel != null) instructionsLabel.setText(question.getInstructions());
+        if (taskLabel != null) taskLabel.setText(question.getTask());
+        if (expectedOutputLabel != null) expectedOutputLabel.setText(question.getExpectedOutput());
+        if (codeEditor != null) codeEditor.setText(question.getStarterCode());
+        if (outputConsole != null) outputConsole.clear();
+        if (aiReviewArea != null) aiReviewArea.clear();
+    }
+
+    // ============================================
+    // INIT — Project (Playground)
+    // ============================================
     public void initData(Project project) {
         this.currentProject = project;
+        this.currentQuestion = null;
 
         if (projectTitleLabel != null) projectTitleLabel.setText(project.getTitle());
         if (languageBadge != null) languageBadge.setText(project.getLanguage());
-        if (codeEditor != null) {
-            codeEditor.setText(project.getCodeContent() != null ? project.getCodeContent() : "");
-        }
+        if (instructionsLabel != null) instructionsLabel.setText("Free coding playground. Write any code.");
+        if (taskLabel != null) taskLabel.setText("No task — just code freely.");
+        if (codeEditor != null) codeEditor.setText(
+                project.getCodeContent() != null ? project.getCodeContent() : "");
     }
 
-    /**
-     * Runs the code remotely on the PythonAnywhere sandbox.
-     */
+    // ============================================
+    // RUN CODE
+    // ============================================
     @FXML
     public void handleRunCode() {
-        if (currentProject == null) return;
-
-        String lang = currentProject.getLanguage().toLowerCase();
+        String lang = getLanguage();
         String code = codeEditor.getText();
 
-        if (code.trim().isEmpty()) {
-            if (outputConsole != null) outputConsole.setText("Error: Editor is empty.");
+        if (lang == null || code.trim().isEmpty()) {
+            outputConsole.setText("Error: Editor is empty.");
             return;
         }
 
-        if (outputConsole != null) outputConsole.setText("Running code on PythonAnywhere sandbox...");
-        if (runBtn != null) runBtn.setDisable(true);
+        outputConsole.setText("▶ Running...\n");
+        runBtn.setDisable(true);
 
-        // Auto-save code before execution
-        handleSaveCode();
+        if (currentProject != null) handleSaveCode();
 
         ApiClient.executeCodeAsync(lang, code)
                 .thenAccept(responseJson -> Platform.runLater(() -> {
-                    if (outputConsole != null) {
-                        outputConsole.setText(extractJsonField(responseJson, "output"));
-                    }
-                    if (runBtn != null) runBtn.setDisable(false);
+                    outputConsole.setText(extractJsonField(responseJson, "output"));
+                    runBtn.setDisable(false);
                 }))
                 .exceptionally(ex -> {
                     Platform.runLater(() -> {
-                        if (outputConsole != null) {
-                            outputConsole.setText("Execution Error: " + ex.getMessage());
-                        }
-                        if (runBtn != null) runBtn.setDisable(false);
+                        outputConsole.setText("Error: " + ex.getMessage());
+                        runBtn.setDisable(false);
                     });
                     return null;
                 });
     }
 
-    /**
-     * Sends the code to Gemini AI for analysis and optimization feedback.
-     */
+    // ============================================
+    // CHECK — Mimo Style (Expected Output နဲ့ ယှဉ်)
+    // ============================================
     @FXML
-    public void handleReviewCode() {
-        if (currentProject == null) return;
-
-        String lang = currentProject.getLanguage().toLowerCase();
-        String code = codeEditor.getText();
-
-        if (code.trim().isEmpty()) {
-            if (aiReviewArea != null) aiReviewArea.setText("Error: Editor is empty.");
+    public void handleCheckCode() {
+        if (currentQuestion == null) {
+            outputConsole.setText("Check is only available in Practice mode.");
             return;
         }
 
-        if (aiReviewArea != null) aiReviewArea.setText("Analyzing code with Gemini AI...");
-        if (reviewBtn != null) reviewBtn.setDisable(true);
+        String lang = getLanguage();
+        String code = codeEditor.getText();
 
-        ApiClient.reviewCodeAsync(lang, code)
+        if (code.trim().isEmpty()) {
+            outputConsole.setText("Error: Editor is empty.");
+            return;
+        }
+
+        outputConsole.setText("▶ Running and checking...\n");
+        checkBtn.setDisable(true);
+
+        ApiClient.executeCodeAsync(lang, code)
                 .thenAccept(responseJson -> Platform.runLater(() -> {
-                    if (aiReviewArea != null) {
-                        aiReviewArea.setText(extractJsonField(responseJson, "review"));
+                    String actualOutput = extractJsonField(responseJson, "output").trim();
+                    String expected = currentQuestion.getExpectedOutput().trim();
+
+                    outputConsole.appendText(actualOutput + "\n");
+                    outputConsole.appendText("─────────────────\n");
+
+                    if (actualOutput.equals(expected)) {
+                        outputConsole.appendText("✅ Correct! Well done.\n");
+                    } else {
+                        outputConsole.appendText("❌ Not quite.\n");
+                        outputConsole.appendText("Expected: " + expected + "\n");
+                        outputConsole.appendText("Your output: " + actualOutput + "\n");
                     }
-                    if (reviewBtn != null) reviewBtn.setDisable(false);
+                    checkBtn.setDisable(false);
                 }))
                 .exceptionally(ex -> {
                     Platform.runLater(() -> {
-                        if (aiReviewArea != null) {
-                            aiReviewArea.setText("AI Review Error: " + ex.getMessage());
-                        }
-                        if (reviewBtn != null) reviewBtn.setDisable(false);
+                        outputConsole.setText("Error: " + ex.getMessage());
+                        checkBtn.setDisable(false);
                     });
                     return null;
                 });
     }
 
-    /**
-     * Saves code updates back to the SQLite database on PythonAnywhere.
-     */
+    // ============================================
+    // AI REVIEW
+    // ============================================
+    @FXML
+    public void handleReviewCode() {
+        String lang = getLanguage();
+        String code = codeEditor.getText();
+        String task = currentQuestion != null ? currentQuestion.getTask() : "Free coding";
+
+        if (lang == null || code.trim().isEmpty()) {
+            aiReviewArea.setText("Error: Editor is empty.");
+            return;
+        }
+
+        aiReviewArea.setText("🤖 Analyzing with Gemini AI...");
+        reviewBtn.setDisable(true);
+
+        CompletableFuture<String> future;
+        if (currentQuestion != null) {
+            future = ApiClient.reviewPracticeCodeAsync(lang, code, task);
+        } else {
+            future = ApiClient.reviewCodeAsync(lang, code);
+        }
+
+        future.thenAccept(responseJson -> Platform.runLater(() -> {
+                    aiReviewArea.setText(extractJsonField(responseJson, "review"));
+                    reviewBtn.setDisable(false);
+                }))
+                .exceptionally(ex -> {
+                    Platform.runLater(() -> {
+                        aiReviewArea.setText("Error: " + ex.getMessage());
+                        reviewBtn.setDisable(false);
+                    });
+                    return null;
+                });
+    }
+
+    // ============================================
+    // HINT
+    // ============================================
+    @FXML
+    public void handleHint() {
+        if (currentQuestion == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Hint");
+            alert.setHeaderText("💡 Playground Mode");
+            alert.setContentText("Write any code you like. Click Run to execute.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Hint");
+        alert.setHeaderText("💡 Need help?");
+        alert.setContentText(currentQuestion.getHint());
+        alert.showAndWait();
+    }
+
+    // ============================================
+    // SHOW SOLUTION
+    // ============================================
+    @FXML
+    public void handleShowSolution() {
+        if (currentQuestion == null || currentQuestion.getSolutionCode() == null) {
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Show Solution");
+        alert.setHeaderText("👁 Solution");
+        alert.setContentText("Are you sure? Try solving it first!\n\nSolution:\n"
+                + currentQuestion.getSolutionCode());
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                codeEditor.setText(currentQuestion.getSolutionCode());
+            }
+        });
+    }
+
+    // ============================================
+    // SAVE
+    // ============================================
     @FXML
     public void handleSaveCode() {
         if (currentProject == null || codeEditor == null) return;
@@ -125,37 +231,43 @@ public class CodeEditorController {
 
         ApiClient.saveProjectCodeAsync(currentProject.getProjectId(), updatedCode)
                 .thenAccept(res -> Platform.runLater(() -> {
-                    if (outputConsole != null && !outputConsole.getText().startsWith("Running")) {
-                        outputConsole.setText("Project saved to PythonAnywhere SQLite!");
+                    if (outputConsole != null && outputConsole.getText().isEmpty()) {
+                        outputConsole.setText("💾 Project saved!");
                     }
                 }));
     }
 
-    /**
-     * Auto-saves the current file and navigates back to the Dashboard page.
-     */
+    // ============================================
+    // BACK
+    // ============================================
     @FXML
     public void handleBackToDashboard() {
-        handleSaveCode();
-
+        if (currentProject != null) handleSaveCode();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PlaygroundDashboardView.fxml"));
-            Parent dashboardView = loader.load();
-
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("PracticeView.fxml"));
+            Parent view = loader.load();
             StackPane contentArea = (StackPane) codeEditor.getScene().lookup("#contentArea");
             if (contentArea != null) {
-                contentArea.getChildren().setAll(dashboardView);
+                contentArea.getChildren().setAll(view);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Helper method to unescape and extract values from JSON API responses.
-     */
+    // ============================================
+    // HELPERS
+    // ============================================
+    private String getLanguage() {
+        if (currentQuestion != null) return currentQuestion.getLanguage().toLowerCase();
+        if (currentProject != null) return currentProject.getLanguage().toLowerCase();
+        return null;
+    }
+
     private String extractJsonField(String json, String fieldName) {
-        Pattern pattern = Pattern.compile("\"" + fieldName + "\":\\s*\"(.*?)\"\\s*\\}", Pattern.DOTALL);
+        Pattern pattern = Pattern.compile(
+                "\"" + fieldName + "\":\\s*\"(.*?)\"\\s*\\}", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(json);
         if (matcher.find()) {
             return matcher.group(1)

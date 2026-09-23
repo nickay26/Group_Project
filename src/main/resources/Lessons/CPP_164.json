@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_164",
+  "title": "Shared Pointers (std::shared_ptr)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_164_S1",
+      "type": "CONCEPT",
+      "title": "Reference Counted Ownership",
+      "prompt": "std::shared_ptr allows multiple pointers to share ownership. Resource freed when count drops to 0.",
+      "codeSnippet": "#include <memory>\nauto p1 = std::make_shared<int>(20);\nauto p2 = p1; // Ref count = 2\nstd::cout << p1.use_count();"
+    },
+    {
+      "slideId": "CPP_164_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "make_shared Factory",
+      "prompt": "Fill in standard function used to allocate std::shared_ptr efficient control block.",
+      "codeSnippet": "auto sptr = std::___<std::string>(\"Hello\");",
+      "options": ["make_shared", "make_unique", "shared_ptr", "alloc_shared"],
+      "correctAnswer": "make_shared"
+    },
+    {
+      "slideId": "CPP_164_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Shared Pointer Copying",
+      "prompt": "What occurs to the internal reference count when copying a std::shared_ptr?",
+      "options": [
+        "Reference count increments by 1",
+        "Reference count remains unchanged",
+        "A deep copy of object is performed",
+        "Ownership is moved from source to target"
+      ],
+      "correctAnswer": "Reference count increments by 1"
+    },
+    {
+      "slideId": "CPP_164_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Reference Count Method",
+      "prompt": "Fill in method name used to query current shared ownership count.",
+      "codeSnippet": "long count = ptr.___();",
+      "options": ["use_count", "count", "ref_count", "shared_count"],
+      "correctAnswer": "use_count"
+    },
+    {
+      "slideId": "CPP_164_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circular Dependency Leak",
+      "prompt": "What structural problem occurs when two objects hold std::shared_ptr to each other?",
+      "options": [
+        "Circular reference preventing reference count from reaching zero (Memory Leak)",
+        "Automatic crash due to double delete",
+        "Dangling pointer exception",
+        "Stack overflow error"
+      ],
+      "correctAnswer": "Circular reference preventing reference count from reaching zero (Memory Leak)"
+    },
+    {
+      "slideId": "CPP_164_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Unique Check Method",
+      "prompt": "Fill in method checking if reference count is exactly 1 (deprecated in C++20, check use_count() == 1).",
+      "codeSnippet": "bool isOnlyOwner = (ptr.___() == 1);",
+      "options": ["use_count", "unique", "single", "is_sole"],
+      "correctAnswer": "use_count"
+    },
+    {
+      "slideId": "CPP_164_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "make_shared Efficiency Advantage",
+      "prompt": "Why is std::make_shared preferred over std::shared_ptr<T>(new T())?",
+      "options": [
+        "Performs single memory allocation for both control block and object",
+        "Disables reference counting overhead completely",
+        "Allows raw pointers to be cast implicitly",
+        "Prevents copy construction completely"
+      ],
+      "correctAnswer": "Performs single memory allocation for both control block and object"
+    },
+    {
+      "slideId": "CPP_164_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Aliasing Constructor Concept",
+      "prompt": "shared_ptr can store stored pointer and owned pointer separately. Fill in type parameter.",
+      "codeSnippet": "std::shared_ptr<___> sp;",
+      "options": ["int", "auto", "void", "any"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_164_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Safety of Reference Count",
+      "prompt": "Are reference count increments/decrements in std::shared_ptr thread-safe?",
+      "options": [
+        "Yes, reference count updates are atomic",
+        "No, external mutex locks are always required",
+        "Only when compiled with multithread flag",
+        "Only in C++20"
+      ],
+      "correctAnswer": "Yes, reference count updates are atomic"
+    },
+    {
+      "slideId": "CPP_164_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Reset Shared Pointer",
+      "prompt": "Fill in method to decrement reference count and detach pointer.",
+      "codeSnippet": "p1.___();",
+      "options": ["reset", "detach", "release", "clear"],
+      "correctAnswer": "reset"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_132",
+  "title": "Practice: Creating Objects",
+  "slides": [
+    {
+      "slideId": "JAVA_132_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Creation",
+      "prompt": "How do you create an object?",
+      "options": ["ClassName obj = new ClassName();", "ClassName obj = ClassName();", "new ClassName obj;", "obj = ClassName();"],
+      "correctAnswer": "ClassName obj = new ClassName();"
+    },
+    {
+      "slideId": "JAVA_132_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "New Keyword",
+      "prompt": "Which keyword is used to create an object?",
+      "options": ["new", "create", "make", "object"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "JAVA_132_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Dog {\n  String name = \"Buddy\";\n}\nDog d = new Dog();\nSystem.out.println(d.name);",
+      "options": ["Buddy", "Dog", "name", "Error"],
+      "correctAnswer": "Buddy"
+    },
+    {
+      "slideId": "JAVA_132_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Object",
+      "prompt": "Complete the code to create an object of class Dog.",
+      "codeSnippet": "Dog d = _____ Dog();",
+      "options": ["new", "create", "make", "object"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "JAVA_132_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Object with Constructor",
+      "prompt": "Complete the code to create an object with a constructor.",
+      "codeSnippet": "Car c = new Car(____);",
+      "options": ["\"Toyota\"", "Toyota", "new", "Car"],
+      "correctAnswer": "\"Toyota\""
+    },
+    {
+      "slideId": "JAVA_132_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  String model = \"Toyota\";\n}\nCar c = new Car();\nSystem.out.println(c.model);",
+      "options": ["Toyota", "Car", "model", "Error"],
+      "correctAnswer": "Toyota"
+    },
+    {
+      "slideId": "JAVA_132_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name = \"John\";\n}\nPerson p = new Person();\nSystem.out.println(p.name);",
+      "options": ["John", "Person", "name", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_132_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Multiple Objects",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  String model;\n  Car(String m) { model = m; }\n}\nCar c1 = new Car(\"Toyota\");\nCar c2 = new Car(\"Honda\");\nSystem.out.println(c1.model + \" \" + c2.model);",
+      "options": ["Toyota Honda", "ToyotaHonda", "Car Car", "Error"],
+      "correctAnswer": "Toyota Honda"
+    },
+    {
+      "slideId": "JAVA_132_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Creation",
+      "prompt": "Which of the following creates an object of class Person?",
+      "options": ["Person p = new Person();", "Person p = Person();", "new Person p;", "p = Person();"],
+      "correctAnswer": "Person p = new Person();"
+    },
+    {
+      "slideId": "JAVA_132_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Student {\n  int id = 101;\n}\nStudent s = new Student();\nSystem.out.println(s.id);",
+      "options": ["101", "Student", "id", "Error"],
+      "correctAnswer": "101"
+    },
+    {
+      "slideId": "JAVA_132_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Instance",
+      "prompt": "What is an object also called?",
+      "options": ["Instance", "Method", "Variable", "Package"],
+      "correctAnswer": "Instance"
+    }
+  ]
+}

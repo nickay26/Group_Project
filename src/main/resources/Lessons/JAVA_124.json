@@ -1,0 +1,102 @@
+{
+  "lessonId": "JAVA_124",
+  "title": "Method Parameters",
+  "slides": [
+    {
+      "slideId": "JAVA_124_S1",
+      "type": "CONCEPT",
+      "title": "Method Parameters",
+      "prompt": "You can pass values to methods using parameters. The method can use these values to perform calculations.",
+      "codeSnippet": "public class Program {\n    static int add(int a, int b) {\n        return a + b;\n    }\n    \n    public static void main(String[] args) {\n        int result = add(5, 3);\n        System.out.println(result);\n    }\n}",
+      "output": "8"
+    },
+    {
+      "slideId": "JAVA_124_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parameter Definition",
+      "prompt": "What is a parameter?",
+      "options": ["A value passed to a method", "A return value", "A variable", "A class"],
+      "correctAnswer": "A value passed to a method"
+    },
+    {
+      "slideId": "JAVA_124_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Parameters",
+      "prompt": "Can a method have multiple parameters?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_124_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method with two parameters.",
+      "codeSnippet": "static int add(int a, ____ b) {\n  return a + b;\n}",
+      "options": ["int", "String", "void", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_124_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Call",
+      "prompt": "Complete the method call.",
+      "codeSnippet": "int result = add(5, __);",
+      "options": ["3", "5", "10", "15"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_124_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) {\n  return a + b;\n}\nSystem.out.println(add(2, 3));",
+      "options": ["5", "23", "2 + 3", "Error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_124_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) {\n  return a + b;\n}\nSystem.out.println(add(10, 20));",
+      "options": ["30", "1020", "10 + 20", "Error"],
+      "correctAnswer": "30"
+    },
+    {
+      "slideId": "JAVA_124_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int multiply(int a, int b) {\n  return a * b;\n}\nSystem.out.println(multiply(3, 4));",
+      "options": ["12", "7", "34", "Error"],
+      "correctAnswer": "12"
+    },
+    {
+      "slideId": "JAVA_124_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static void greet(String name) {\n  System.out.println(\"Hello, \" + name);\n}\ngreet(\"John\");",
+      "options": ["Hello, John", "Hello, name", "John", "Error"],
+      "correctAnswer": "Hello, John"
+    },
+    {
+      "slideId": "JAVA_124_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(5));",
+      "options": ["25", "10", "5", "Error"],
+      "correctAnswer": "25"
+    },
+    {
+      "slideId": "JAVA_124_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parameter Type",
+      "prompt": "What is the parameter type in this method?",
+      "codeSnippet": "static void greet(String name) { }",
+      "options": ["String", "int", "void", "boolean"],
+      "correctAnswer": "String"
+    }
+  ]
+}

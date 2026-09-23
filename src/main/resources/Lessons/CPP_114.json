@@ -1,75 +1,91 @@
 {
   "lessonId": "CPP_114",
-  "title": "C++ Arrays (Premium)",
-  "isPremium": true,
+  "title": "Characters & ASCII Representation",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_114_S1",
       "type": "CONCEPT",
-      "title": "Declaring and Accessing Arrays",
-      "prompt": "Arrays are used to store multiple values of the same type in a single variable.",
-      "codeSnippet": "std::string cars[4] = {\"Volvo\", \"BMW\", \"Ford\", \"Mazda\"};\nstd::cout << cars[0]; // Outputs Volvo"
+      "title": "Character Type & ASCII",
+      "prompt": "The 'char' data type stores single characters internally represented as ASCII integer values.",
+      "codeSnippet": "char letter = 'A';\nint asciiValue = letter; // Value is 65"
     },
     {
       "slideId": "CPP_114_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Array Indexing",
-      "prompt": "Fill in the index to access the third element in array 'nums'.",
-      "codeSnippet": "int myNum = nums[___];",
-      "options": ["2", "3", "1", "0"],
-      "correctAnswer": "2"
+      "title": "Declaring Char",
+      "prompt": "Fill in the data type for storing a single character.",
+      "codeSnippet": "___ initial = 'J';",
+      "options": ["char", "string", "letter", "byte"],
+      "correctAnswer": "char"
     },
     {
       "slideId": "CPP_114_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Array Index Start",
-      "prompt": "What is the index of the first element in a C++ array?",
-      "options": ["0", "1", "-1", "Depends on size"],
-      "correctAnswer": "0"
+      "title": "ASCII Code for 'A'",
+      "prompt": "What is the ASCII integer code for uppercase 'A'?",
+      "options": ["65", "97", "48", "1"],
+      "correctAnswer": "65"
     },
     {
       "slideId": "CPP_114_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Foreach Loop over Array",
-      "prompt": "Fill in the keyword to iterate easily through array elements in C++11.",
-      "codeSnippet": "for (int i ___ myNumbers) {\n    std::cout << i;\n}",
-      "options": [":", "in", "of", "->"],
-      "correctAnswer": ":"
+      "title": "Char Delimiter",
+      "prompt": "Fill in the correct character quote delimiter.",
+      "codeSnippet": "char symbol = ___%___;",
+      "options": ["'", "\"", "`", "/"],
+      "correctAnswer": "'"
     },
     {
       "slideId": "CPP_114_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Array Size Calculation",
-      "prompt": "How do you calculate the number of elements in an array 'arr'?",
-      "options": [
-        "sizeof(arr) / sizeof(arr[0])",
-        "arr.length()",
-        "arr.size()",
-        "sizeof(arr)"
-      ],
-      "correctAnswer": "sizeof(arr) / sizeof(arr[0])"
+      "title": "Char Memory Size",
+      "prompt": "What is the memory size of a standard 'char' in C++?",
+      "options": ["1 byte (8 bits)", "2 bytes", "4 bytes", "Depends on CPU"],
+      "correctAnswer": "1 byte (8 bits)"
     },
     {
       "slideId": "CPP_114_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Changing Array Element",
-      "prompt": "Complete the code to set the first element of 'cars' to 'Tesla'.",
-      "codeSnippet": "cars[___] = \"Tesla\";",
-      "options": ["0", "1", "first", "start"],
-      "correctAnswer": "0"
+      "title": "Assigning ASCII Value",
+      "prompt": "Fill in the character resulting from ASCII value 66.",
+      "codeSnippet": "char ch = 66; // Value becomes ___",
+      "options": ["'B'", "'A'", "'C'", "'6'"],
+      "correctAnswer": "'B'"
     },
     {
       "slideId": "CPP_114_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Multidimensional Array Declaration",
-      "prompt": "Which syntax correctly declares a 2D integer array with 2 rows and 3 columns?",
-      "options": [
-        "int matrix[2][3];",
-        "int matrix[2, 3];",
-        "int matrix(2)(3);",
-        "array<int, 2, 3> matrix;"
-      ],
-      "correctAnswer": "int matrix[2][3];"
+      "title": "Escape Character Slash",
+      "prompt": "Which character begins escape sequences like '\\n' or '\\t'?",
+      "options": ["Backslash (\\)", "Forward slash (/)", "Tilde (~)", "At sign (@)"],
+      "correctAnswer": "Backslash (\\)"
+    },
+    {
+      "slideId": "CPP_114_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Character Arithmetic",
+      "prompt": "Fill in the resulting character for 'A' + 1.",
+      "codeSnippet": "char next = 'A' + 1; // Evaluates to ___",
+      "options": ["'B'", "'A1'", "66", "'C'"],
+      "correctAnswer": "'B'"
+    },
+    {
+      "slideId": "CPP_114_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Null Character Representation",
+      "prompt": "What is the null character literal used to terminate C-style strings?",
+      "options": ["'\\0'", "'0'", "NULL", "'\\n'"],
+      "correctAnswer": "'\\0'"
+    },
+    {
+      "slideId": "CPP_114_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Wide Character Type",
+      "prompt": "Fill in the type used for wide/Unicode characters.",
+      "codeSnippet": "___ wch = L'A';",
+      "options": ["wchar_t", "char16_t", "char32_t", "wide_char"],
+      "correctAnswer": "wchar_t"
     }
   ]
 }

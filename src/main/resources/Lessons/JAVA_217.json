@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_217",
+  "title": "HashSet",
+  "slides": [
+    {
+      "slideId": "JAVA_217_S1",
+      "type": "CONCEPT",
+      "title": "HashSet",
+      "prompt": "A HashSet stores unique elements. It does not allow duplicates and does not maintain order.",
+      "codeSnippet": "import java.util.HashSet;\n\npublic class Program {\n    public static void main(String[] args) {\n        HashSet<String> set = new HashSet<>();\n        set.add(\"Java\");\n        set.add(\"Python\");\n        set.add(\"Java\");\n        System.out.println(set);\n    }\n}",
+      "output": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_217_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashSet Definition",
+      "prompt": "What is a HashSet?",
+      "options": ["A collection of unique elements", "A key-value pair", "A single array", "A method"],
+      "correctAnswer": "A collection of unique elements"
+    },
+    {
+      "slideId": "JAVA_217_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Duplicate Elements",
+      "prompt": "Can a HashSet have duplicate elements?",
+      "options": ["No", "Yes", "Only with add", "Only with put"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_217_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashSet Order",
+      "prompt": "Does a HashSet maintain insertion order?",
+      "options": ["No", "Yes", "Only with add", "Only with put"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_217_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Add Method",
+      "prompt": "Which method adds an element to a HashSet?",
+      "options": ["add()", "put()", "insert()", "set()"],
+      "correctAnswer": "add()"
+    },
+    {
+      "slideId": "JAVA_217_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import HashSet",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["HashSet", "Set", "Hash", "List"],
+      "correctAnswer": "HashSet"
+    },
+    {
+      "slideId": "JAVA_217_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Add Element",
+      "prompt": "Complete the code to add an element.",
+      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.____(\"Java\");",
+      "options": ["add", "put", "insert", "set"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "JAVA_217_S8",
+      "type": "CODE_OUTPUT",
+      "title": "HashSet Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.add(\"Java\");\nset.add(\"Python\");\nset.add(\"Java\");\nSystem.out.println(set);",
+      "options": ["[Java, Python]", "[Java, Java, Python]", "JavaPython", "Error"],
+      "correctAnswer": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_217_S9",
+      "type": "CODE_OUTPUT",
+      "title": "HashSet Size",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.add(\"A\");\nset.add(\"B\");\nset.add(\"A\");\nSystem.out.println(set.size());",
+      "options": ["2", "3", "1", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_217_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Contains Element",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.add(\"Java\");\nSystem.out.println(set.contains(\"Java\"));",
+      "options": ["true", "false", "Java", "Error"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "JAVA_217_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashSet Package",
+      "prompt": "Which package contains HashSet?",
+      "options": ["java.util", "java.io", "java.lang", "java.set"],
+      "correctAnswer": "java.util"
+    }
+  ]
+}

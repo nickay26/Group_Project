@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_228",
+  "title": "Practice: Generics",
+  "slides": [
+    {
+      "slideId": "JAVA_228_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Definition",
+      "prompt": "What is a generic?",
+      "options": ["A class or method with a type parameter", "A class with no type", "A method with static fields", "A method with abstract methods"],
+      "correctAnswer": "A class or method with a type parameter"
+    },
+    {
+      "slideId": "JAVA_228_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Benefit",
+      "prompt": "What is the main benefit of generics?",
+      "options": ["Type safety", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Type safety"
+    },
+    {
+      "slideId": "JAVA_228_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Class",
+      "prompt": "How do you declare a generic class?",
+      "options": ["class Box<T>", "class Box(T)", "class Box[T]", "class Box{T}"],
+      "correctAnswer": "class Box<T>"
+    },
+    {
+      "slideId": "JAVA_228_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method",
+      "prompt": "Where is the type parameter declared in a generic method?",
+      "options": ["Before the return type", "After the return type", "Inside the method body", "After the method name"],
+      "correctAnswer": "Before the return type"
+    },
+    {
+      "slideId": "JAVA_228_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type",
+      "prompt": "Which keyword is used to set an upper bound?",
+      "options": ["extends", "implements", "super", "this"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_228_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Class",
+      "prompt": "Complete the generic class declaration.",
+      "codeSnippet": "class Box____ {\n  private T value;\n}",
+      "options": ["<T>", "(T)", "[T]", "{T}"],
+      "correctAnswer": "<T>"
+    },
+    {
+      "slideId": "JAVA_228_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Method",
+      "prompt": "Complete the generic method declaration.",
+      "codeSnippet": "public static ____ void print(T value) {\n}",
+      "options": ["<T>", "(T)", "[T]", "{T}"],
+      "correctAnswer": "<T>"
+    },
+    {
+      "slideId": "JAVA_228_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Bounded Type",
+      "prompt": "Complete the bounded type parameter.",
+      "codeSnippet": "public static <T ______ Number> void print(T value) {\n}",
+      "options": ["extends", "implements", "super", "this"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_228_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Box<T> {\n  private T value;\n  public void set(T v) { value = v; }\n  public T get() { return value; }\n}\nBox<String> box = new Box<>();\nbox.set(\"Hello\");\nSystem.out.println(box.get());",
+      "options": ["Hello", "value", "Box", "Error"],
+      "correctAnswer": "Hello"
+    },
+    {
+      "slideId": "JAVA_228_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T> void print(T value) {\n  System.out.println(value);\n}\nprint(100);",
+      "options": ["100", "value", "T", "Error"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "JAVA_228_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Bounded Type Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T extends Number> double doubleValue(T value) {\n  return value.doubleValue();\n}\nSystem.out.println(doubleValue(100));",
+      "options": ["100.0", "100", "value", "Error"],
+      "correctAnswer": "100.0"
+    }
+  ]
+}

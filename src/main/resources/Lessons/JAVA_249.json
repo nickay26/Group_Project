@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_249",
+  "title": "Practice: Scanner for Input",
+  "slides": [
+    {
+      "slideId": "JAVA_249_S1",
+      "type": "CONCEPT",
+      "title": "Scanner for Input",
+      "prompt": "The Scanner class is used to read input from the user or a file. Use nextInt(), nextLine(), nextDouble() methods.",
+      "codeSnippet": "import java.util.Scanner;\n\npublic class Program {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"Enter name: \");\n        String name = sc.nextLine();\n        System.out.println(\"Hello, \" + name);\n    }\n}",
+      "output": "Enter name: John\nHello, John"
+    },
+    {
+      "slideId": "JAVA_249_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Scanner Class",
+      "prompt": "Which class is used to read input?",
+      "options": ["Scanner", "Reader", "Input", "Buffer"],
+      "correctAnswer": "Scanner"
+    },
+    {
+      "slideId": "JAVA_249_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NextLine Method",
+      "prompt": "Which method reads a String line?",
+      "options": ["nextLine()", "nextString()", "readLine()", "getLine()"],
+      "correctAnswer": "nextLine()"
+    },
+    {
+      "slideId": "JAVA_249_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NextInt Method",
+      "prompt": "Which method reads an integer?",
+      "options": ["nextInt()", "nextInteger()", "readInt()", "getInt()"],
+      "correctAnswer": "nextInt()"
+    },
+    {
+      "slideId": "JAVA_249_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NextDouble Method",
+      "prompt": "Which method reads a double?",
+      "options": ["nextDouble()", "nextFloat()", "readDouble()", "getDouble()"],
+      "correctAnswer": "nextDouble()"
+    },
+    {
+      "slideId": "JAVA_249_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Scanner",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["Scanner", "Reader", "Input", "Buffer"],
+      "correctAnswer": "Scanner"
+    },
+    {
+      "slideId": "JAVA_249_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Read Line",
+      "prompt": "Complete the code to read a line.",
+      "codeSnippet": "String name = sc.________();",
+      "options": ["nextLine", "nextString", "readLine", "getLine"],
+      "correctAnswer": "nextLine"
+    },
+    {
+      "slideId": "JAVA_249_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Scanner Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Scanner sc = new Scanner(System.in);\nString name = sc.nextLine();\nSystem.out.println(\"Hello, \" + name);",
+      "options": ["Hello, [input]", "Hello, name", "[input]", "Error"],
+      "correctAnswer": "Hello, [input]"
+    },
+    {
+      "slideId": "JAVA_249_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Scanner Package",
+      "prompt": "Which package contains Scanner?",
+      "options": ["java.util", "java.io", "java.lang", "java.scanner"],
+      "correctAnswer": "java.util"
+    },
+    {
+      "slideId": "JAVA_249_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Close Scanner",
+      "prompt": "Which method closes a Scanner?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_249_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Scanner Integer Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Scanner sc = new Scanner(System.in);\nint num = sc.nextInt();\nSystem.out.println(num * 2);",
+      "options": ["[input] * 2", "[input]", "0", "Error"],
+      "correctAnswer": "[input] * 2"
+    }
+  ]
+}

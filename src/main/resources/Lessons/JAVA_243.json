@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_243",
+  "title": "BufferedReader",
+  "slides": [
+    {
+      "slideId": "JAVA_243_S1",
+      "type": "CONCEPT",
+      "title": "BufferedReader",
+      "prompt": "BufferedReader reads text from a character-input stream, buffering characters for efficient reading. Use readLine() to read a line.",
+      "codeSnippet": "import java.io.BufferedReader;\nimport java.io.FileReader;\n\npublic class Program {\n    public static void main(String[] args) {\n        try {\n            BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n            String line = br.readLine();\n            System.out.println(line);\n            br.close();\n        } catch (Exception e) {\n            System.out.println(\"Error\");\n        }\n    }\n}",
+      "output": "File content"
+    },
+    {
+      "slideId": "JAVA_243_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Class",
+      "prompt": "Which class reads text efficiently?",
+      "options": ["BufferedReader", "FileReader", "File", "Reader"],
+      "correctAnswer": "BufferedReader"
+    },
+    {
+      "slideId": "JAVA_243_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ReadLine Method",
+      "prompt": "Which method reads a line of text?",
+      "options": ["readLine()", "read()", "nextLine()", "getLine()"],
+      "correctAnswer": "readLine()"
+    },
+    {
+      "slideId": "JAVA_243_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Package",
+      "prompt": "Which package contains BufferedReader?",
+      "options": ["java.io", "java.util", "java.lang", "java.buffer"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_243_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Benefit",
+      "prompt": "Why use BufferedReader?",
+      "options": ["Efficient reading", "Faster writing", "Less memory", "More errors"],
+      "correctAnswer": "Efficient reading"
+    },
+    {
+      "slideId": "JAVA_243_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import BufferedReader",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io._____________;",
+      "options": ["BufferedReader", "FileReader", "File", "Reader"],
+      "correctAnswer": "BufferedReader"
+    },
+    {
+      "slideId": "JAVA_243_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Read Line",
+      "prompt": "Complete the code to read a line.",
+      "codeSnippet": "String line = br.________();",
+      "options": ["readLine", "read", "nextLine", "getLine"],
+      "correctAnswer": "readLine"
+    },
+    {
+      "slideId": "JAVA_243_S8",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedReader Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n  String line = br.readLine();\n  System.out.println(line);\n  br.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["File content or Error", "File content", "Error", "No Error"],
+      "correctAnswer": "File content or Error"
+    },
+    {
+      "slideId": "JAVA_243_S9",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedReader Loop",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n  String line;\n  while ((line = br.readLine()) != null) {\n    System.out.println(line);\n  }\n  br.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["All lines in file", "First line", "Error", "No Error"],
+      "correctAnswer": "All lines in file"
+    },
+    {
+      "slideId": "JAVA_243_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Close",
+      "prompt": "Which method closes a BufferedReader?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_243_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Constructor",
+      "prompt": "What does BufferedReader take as parameter?",
+      "options": ["Reader", "File", "String", "Writer"],
+      "correctAnswer": "Reader"
+    }
+  ]
+}

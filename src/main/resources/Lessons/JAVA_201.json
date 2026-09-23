@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_201",
+  "title": "Encapsulation",
+  "slides": [
+    {
+      "slideId": "JAVA_201_S1",
+      "type": "CONCEPT",
+      "title": "Encapsulation",
+      "prompt": "Encapsulation is the practice of hiding data using private fields and providing public methods to access them. It protects data from unauthorized access.",
+      "codeSnippet": "public class Person {\n    private String name;\n    \n    public String getName() {\n        return name;\n    }\n    \n    public void setName(String n) {\n        name = n;\n    }\n}",
+      "output": "Data is encapsulated"
+    },
+    {
+      "slideId": "JAVA_201_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Definition",
+      "prompt": "What is encapsulation?",
+      "options": ["Hiding data with private fields", "Creating objects", "Inheriting classes", "Overloading methods"],
+      "correctAnswer": "Hiding data with private fields"
+    },
+    {
+      "slideId": "JAVA_201_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Private Keyword",
+      "prompt": "Which keyword makes a field private?",
+      "options": ["private", "public", "protected", "static"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "JAVA_201_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Getter Method",
+      "prompt": "What is a getter method?",
+      "options": ["A method that returns a field value", "A method that sets a field value", "A method that deletes a field", "A method that creates a field"],
+      "correctAnswer": "A method that returns a field value"
+    },
+    {
+      "slideId": "JAVA_201_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Setter Method",
+      "prompt": "What is a setter method?",
+      "options": ["A method that sets a field value", "A method that returns a field value", "A method that deletes a field", "A method that creates a field"],
+      "correctAnswer": "A method that sets a field value"
+    },
+    {
+      "slideId": "JAVA_201_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Field",
+      "prompt": "Complete the code to make the field private.",
+      "codeSnippet": "class Person {\n  ______ String name;\n}",
+      "options": ["private", "public", "protected", "static"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "JAVA_201_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Getter",
+      "prompt": "Complete the getter method.",
+      "codeSnippet": "public String ________() {\n  return name;\n}",
+      "options": ["getName", "setName", "name", "get"],
+      "correctAnswer": "getName"
+    },
+    {
+      "slideId": "JAVA_201_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Encapsulation Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  private String name = \"John\";\n  public String getName() { return name; }\n}\nPerson p = new Person();\nSystem.out.println(p.getName());",
+      "options": ["John", "name", "Person", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_201_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Setter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  private String name;\n  public void setName(String n) { name = n; }\n  public String getName() { return name; }\n}\nPerson p = new Person();\np.setName(\"Alice\");\nSystem.out.println(p.getName());",
+      "options": ["Alice", "name", "Person", "Error"],
+      "correctAnswer": "Alice"
+    },
+    {
+      "slideId": "JAVA_201_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Benefit",
+      "prompt": "What is the main benefit of encapsulation?",
+      "options": ["Data protection", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Data protection"
+    },
+    {
+      "slideId": "JAVA_201_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Practice",
+      "prompt": "Which is an example of encapsulation?",
+      "options": ["private field + public getter/setter", "public field", "static field", "final field"],
+      "correctAnswer": "private field + public getter/setter"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_205",
+  "title": "Abstraction",
+  "slides": [
+    {
+      "slideId": "JAVA_205_S1",
+      "type": "CONCEPT",
+      "title": "Abstraction",
+      "prompt": "Abstraction hides implementation details and shows only functionality. Use abstract classes and interfaces.",
+      "codeSnippet": "abstract class Animal {\n    abstract void sound();\n}\nclass Dog extends Animal {\n    void sound() {\n        System.out.println(\"Bark\");\n    }\n}\nAnimal a = new Dog();\na.sound();",
+      "output": "Bark"
+    },
+    {
+      "slideId": "JAVA_205_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstraction Definition",
+      "prompt": "What is abstraction?",
+      "options": ["Hiding implementation details", "Creating objects", "Hiding data", "Deleting data"],
+      "correctAnswer": "Hiding implementation details"
+    },
+    {
+      "slideId": "JAVA_205_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Keyword",
+      "prompt": "Which keyword declares an abstract class?",
+      "options": ["abstract", "interface", "extends", "implements"],
+      "correctAnswer": "abstract"
+    },
+    {
+      "slideId": "JAVA_205_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Method",
+      "prompt": "Can you create an object of an abstract class?",
+      "options": ["No", "Yes", "Only with new", "Only with extends"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_205_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Abstract",
+      "prompt": "Complete the abstract class.",
+      "codeSnippet": "______ class Animal {\n  abstract void sound();\n}",
+      "options": ["abstract", "interface", "extends", "implements"],
+      "correctAnswer": "abstract"
+    },
+    {
+      "slideId": "JAVA_205_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Abstract Method",
+      "prompt": "Complete the abstract method.",
+      "codeSnippet": "abstract void ______();",
+      "options": ["sound", "voice", "noise", "call"],
+      "correctAnswer": "sound"
+    },
+    {
+      "slideId": "JAVA_205_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Abstraction Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "abstract class Animal { abstract void sound(); }\nclass Dog extends Animal { void sound() { System.out.println(\"Bark\"); } }\nAnimal a = new Dog();\na.sound();",
+      "options": ["Bark", "Animal", "Dog", "Error"],
+      "correctAnswer": "Bark"
+    },
+    {
+      "slideId": "JAVA_205_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Interface Keyword",
+      "prompt": "Which keyword declares an interface?",
+      "options": ["interface", "abstract", "extends", "implements"],
+      "correctAnswer": "interface"
+    },
+    {
+      "slideId": "JAVA_205_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Implements Keyword",
+      "prompt": "Which keyword is used to implement an interface?",
+      "options": ["implements", "extends", "abstract", "interface"],
+      "correctAnswer": "implements"
+    },
+    {
+      "slideId": "JAVA_205_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Interface Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface Animal { void sound(); }\nclass Dog implements Animal { public void sound() { System.out.println(\"Bark\"); } }\nAnimal a = new Dog();\na.sound();",
+      "options": ["Bark", "Animal", "Dog", "Error"],
+      "correctAnswer": "Bark"
+    },
+    {
+      "slideId": "JAVA_205_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract vs Interface",
+      "prompt": "Which can have abstract methods?",
+      "options": ["Both abstract classes and interfaces", "Only abstract classes", "Only interfaces", "Neither"],
+      "correctAnswer": "Both abstract classes and interfaces"
+    }
+  ]
+}

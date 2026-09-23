@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_141",
+  "title": "Practice: Substring",
+  "slides": [
+    {
+      "slideId": "JAVA_141_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Substring Method",
+      "prompt": "Which method returns a part of a String?",
+      "options": ["substring()", "subString()", "part()", "slice()"],
+      "correctAnswer": "substring()"
+    },
+    {
+      "slideId": "JAVA_141_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(1, 3));",
+      "options": ["av", "ava", "Ja", "va"],
+      "correctAnswer": "av"
+    },
+    {
+      "slideId": "JAVA_141_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hello\";\nSystem.out.println(s.substring(1, 4));",
+      "options": ["ell", "ello", "He", "llo"],
+      "correctAnswer": "ell"
+    },
+    {
+      "slideId": "JAVA_141_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Substring",
+      "prompt": "Complete the code to output \"av\".",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(__, 3));",
+      "options": ["1", "0", "2", "3"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_141_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Substring",
+      "prompt": "Complete the code to output \"Ja\".",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(0, __));",
+      "options": ["2", "1", "3", "4"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_141_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(2));",
+      "options": ["va", "av", "Ja", "va"],
+      "correctAnswer": "va"
+    },
+    {
+      "slideId": "JAVA_141_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Programming\";\nSystem.out.println(s.substring(0, 4));",
+      "options": ["Prog", "gram", "Pro", "ming"],
+      "correctAnswer": "Prog"
+    },
+    {
+      "slideId": "JAVA_141_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(0, 2));",
+      "options": ["Ja", "va", "Java", "av"],
+      "correctAnswer": "Ja"
+    },
+    {
+      "slideId": "JAVA_141_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hello\";\nSystem.out.println(s.substring(2));",
+      "options": ["llo", "ell", "He", "lo"],
+      "correctAnswer": "llo"
+    },
+    {
+      "slideId": "JAVA_141_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Substring Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(1));",
+      "options": ["ava", "Jav", "va", "av"],
+      "correctAnswer": "ava"
+    },
+    {
+      "slideId": "JAVA_141_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Substring Return",
+      "prompt": "What does substring() return?",
+      "options": ["A new String", "The same String", "A number", "A boolean"],
+      "correctAnswer": "A new String"
+    }
+  ]
+}

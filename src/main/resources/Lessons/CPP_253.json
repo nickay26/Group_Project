@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_253",
+  "title": "Universal References & Reference Collapsing",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_253_S1",
+      "type": "CONCEPT",
+      "title": "Universal (Forwarding) References",
+      "prompt": "A template parameter declared as T&& in a type-deduction context is a universal (forwarding) reference. Depending on whether an lvalue or rvalue is passed, it can collapse to either an lvalue reference or an rvalue reference.",
+      "codeSnippet": "template <typename T>\nvoid process(T&& arg) { // 'arg' is a forwarding reference!\n    // If lvalue passed -> T is LvalueRef -> arg is T&\n    // If rvalue passed -> T is non-ref -> arg is T&&\n}"
+    },
+    {
+      "slideId": "CPP_253_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Forwarding Reference Syntax Context",
+      "prompt": "Fill in the auto keyword modifier that creates a universal reference in generic lambda bindings.",
+      "codeSnippet": "auto lambda = [](auto___ param) {\n    // Universal reference in generic lambda\n};",
+      "options": ["&&", "&", "const &", "*"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_253_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reference Collapsing Rules",
+      "prompt": "According to C++ reference collapsing rules, what does 'T& &&' collapse into?",
+      "options": [
+        "T& (lvalue reference always wins over rvalue reference)",
+        "T&& (rvalue reference wins)",
+        "Compilation error",
+        "T (value type)"
+      ],
+      "correctAnswer": "T& (lvalue reference always wins over rvalue reference)"
+    },
+    {
+      "slideId": "CPP_253_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Reference Collapsing Combinations",
+      "prompt": "Fill in the resulting reference type when collapsing 'T&& &&'.",
+      "codeSnippet": "// Reference Collapsing:\n// T& &   -> T&\n// T& &&  -> T&\n// T&& &  -> T&\n// T&& && -> T___",
+      "options": ["&&", "&", "*", "type"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_253_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Distinguishing Forwarding Ref from Rvalue Ref",
+      "prompt": "Why is 'std::vector<T>::push_back(T&&)' NOT a universal (forwarding) reference?",
+      "options": [
+        "Type deduction does not happen for push_back when the class template T is already instantiated",
+        "push_back parameters are always const",
+        "vector elements are stored on heap memory",
+        "It uses type erasure internally"
+      ],
+      "correctAnswer": "Type deduction does not happen for push_back when the class template T is already instantiated"
+    },
+    {
+      "slideId": "CPP_253_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Qualifying Universal References",
+      "prompt": "Fill in what happens if you qualify 'const T&& arg' in a template function parameter.",
+      "codeSnippet": "template <typename T>\nvoid test(const T&& arg); // Is NO LONGER a forwarding reference!\n// It binds strictly to const ___values.",
+      "options": ["r", "l", "gl", "static"],
+      "correctAnswer": "r"
+    },
+    {
+      "slideId": "CPP_253_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Auto&& Universal Reference Binding",
+      "prompt": "What reference type is deduced for variable x in 'auto&& x = lvalueVariable;'?",
+      "options": [
+        "Lvalue reference (auto&& collapses to LvalueType&)",
+        "Rvalue reference (auto&& stays RvalueType&&)",
+        "Const lvalue reference",
+        "Value copy"
+      ],
+      "correctAnswer": "Lvalue reference (auto&& collapses to LvalueType&)"
+    },
+    {
+      "slideId": "CPP_253_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Universal Reference Terminology",
+      "prompt": "Fill in the official ISO C++ Standard term for Scott Meyers' coined phrase 'Universal Reference'.",
+      "codeSnippet": "A reference that can collapse to lvalue or rvalue ref is officially called a ___ reference.",
+      "options": ["forwarding", "universal", "perfect", "dynamic"],
+      "correctAnswer": "forwarding"
+    },
+    {
+      "slideId": "CPP_253_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Deduction with Lvalue Arguments",
+      "prompt": "When passing an lvalue of type 'Widget' to 'template<typename T> void f(T&& param);', what is deduced for template parameter T?",
+      "options": [
+        "Widget&",
+        "Widget",
+        "Widget&&",
+        "const Widget"
+      ],
+      "correctAnswer": "Widget&"
+    },
+    {
+      "slideId": "CPP_253_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Decltype(auto) with Universal Reference",
+      "prompt": "Fill in the deduction mode that preserves exact reference category of an expression.",
+      "codeSnippet": "template <typename Container, typename Index>\n___ getElement(Container&& c, Index i) {\n    return c[i]; // Preserves lvalue or rvalue ref exact type\n}",
+      "options": ["decltype(auto)", "auto", "auto&&", "decltype"],
+      "correctAnswer": "decltype(auto)"
+    }
+  ]
+}

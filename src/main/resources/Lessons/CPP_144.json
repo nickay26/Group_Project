@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_144",
+  "title": "1D Fixed-Size Arrays Mechanics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_144_S1",
+      "type": "CONCEPT",
+      "title": "Fixed-Size Array Concept",
+      "prompt": "An array stores multiple elements of the same data type in contiguous memory locations with a fixed size determined at compile time.",
+      "codeSnippet": "int scores[5] = {90, 85, 78, 92, 88};\nstd::cout << scores[0]; // Accesses first element"
+    },
+    {
+      "slideId": "CPP_144_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Declaration Syntax",
+      "prompt": "Fill in the brackets symbol used to declare array size.",
+      "codeSnippet": "int numbers___10___;",
+      "options": ["[ ]", "{ }", "( )", "< >"],
+      "correctAnswer": "[ ]"
+    },
+    {
+      "slideId": "CPP_144_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Indexing Base",
+      "prompt": "What is the index of the first element in a C++ array?",
+      "options": ["0", "1", "-1", "Depends on array size"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_144_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Zero Initialization",
+      "prompt": "Fill in empty braces to zero-initialize all elements in an array.",
+      "codeSnippet": "int arr[100] = ___;",
+      "options": ["{}", "{0}", "null", "0"],
+      "correctAnswer": "{}"
+    },
+    {
+      "slideId": "CPP_144_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Out-of-Bounds Access Hazard",
+      "prompt": "What happens when you access an element outside array bounds (e.g., arr[10] for array of size 10)?",
+      "options": ["Undefined behavior (may corrupt memory or crash)", "Compiler error automatically", "Array resizes automatically", "Returns 0 default value"],
+      "correctAnswer": "Undefined behavior (may corrupt memory or crash)"
+    },
+    {
+      "slideId": "CPP_144_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Size Calculation via sizeof",
+      "prompt": "Fill in missing division to calculate array length.",
+      "codeSnippet": "int arr[] = {10, 20, 30, 40};\nint len = sizeof(arr) / sizeof(___);",
+      "options": ["arr[0]", "int", "arr", "4"],
+      "correctAnswer": "arr[0]"
+    },
+    {
+      "slideId": "CPP_144_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Contiguous Memory Property",
+      "prompt": "If array element arr[0] is at memory address 0x1000 and elements are 4-byte integers, where is arr[1]?",
+      "options": ["0x1004", "0x1001", "0x1008", "Random address"],
+      "correctAnswer": "0x1004"
+    },
+    {
+      "slideId": "CPP_144_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Automatic Size Deduction",
+      "prompt": "Leave brackets empty to let compiler deduce size from initializer list.",
+      "codeSnippet": "double prices[___] = {1.99, 2.99, 3.99};",
+      "options": ["", "3", "auto", "0"],
+      "correctAnswer": ""
+    },
+    {
+      "slideId": "CPP_144_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Assignment Restriction",
+      "prompt": "Can you directly assign one C++ raw array to another (e.g., arr1 = arr2)?",
+      "options": ["No, raw arrays cannot be directly assigned or copied using = operator", "Yes, always allowed", "Only if sizes are identical", "Only for float arrays"],
+      "correctAnswer": "No, raw arrays cannot be directly assigned or copied using = operator"
+    },
+    {
+      "slideId": "CPP_144_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Iterating Array via Index Loop",
+      "prompt": "Fill in condition bound to iterate over array of size N.",
+      "codeSnippet": "for (int i = 0; i ___ N; i++) {\n    use(arr[i]);\n}",
+      "options": ["<", "<=", "==", ">"],
+      "correctAnswer": "<"
+    }
+  ]
+}

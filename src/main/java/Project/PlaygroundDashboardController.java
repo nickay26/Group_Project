@@ -1,17 +1,18 @@
 package Project;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
 
 public class PlaygroundDashboardController {
@@ -22,8 +23,6 @@ public class PlaygroundDashboardController {
     @FXML private TextField titleInput;
     @FXML private ComboBox<String> languageSelect;
 
-    private final int currentUserId = 1; // Replace with logged-in User_id context
-
     @FXML
     public void initialize() {
         languageSelect.setItems(FXCollections.observableArrayList("C++", "Python", "Java"));
@@ -32,29 +31,60 @@ public class PlaygroundDashboardController {
     }
 
     public void loadUserProjects() {
-        ApiClient.fetchUserProjectsAsync(currentUserId)
-                .thenAccept(jsonResponse -> Platform.runLater(() -> {
-                    List<Project> projects = JsonUtils.parseProjectsJson(jsonResponse);
-                    projectsGrid.getChildren().clear();
-                    for (Project p : projects) {
-                        projectsGrid.getChildren().add(createProjectCard(p));
-                    }
-                }));
+        int currentUserId = UserSession.getUserId();
+        if (currentUserId <= 0) return;
+
+        List<Project> projects = DatabaseManager.getUserProjects(currentUserId);
+        projectsGrid.getChildren().clear();
+        for (Project p : projects) {
+            projectsGrid.getChildren().add(createProjectCard(p));
+        }
     }
 
     private HBox createProjectCard(Project project) {
         HBox card = new HBox();
-        card.setPrefWidth(320.0);
-        card.setPrefHeight(60.0);
-        card.setAlignment(Pos.CENTER);
-        card.setStyle("-fx-background-color: #2FBDAE; -fx-background-radius: 10px; -fx-cursor: hand;");
+        card.setPrefWidth(300.0);
+        card.setPrefHeight(64.0);
+        card.setAlignment(Pos.CENTER_LEFT);
+        card.setPadding(new Insets(12, 16, 12, 16));
+        card.setSpacing(12);
 
-        Label label = new Label("[" + project.getLanguage() + "] " + project.getTitle());
-        label.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #000000;");
+        // Apply base CSS card class
+        card.getStyleClass().add("project-card");
 
-        card.getChildren().add(label);
+        // Language Icon ImageView
+        ImageView iconView = new ImageView();
+        iconView.setFitWidth(50);
+        iconView.setFitHeight(50);
+        iconView.setPreserveRatio(true);
+
+        String iconPath = getLanguageIconPath(project.getLanguage());
+        try {
+            InputStream is = getClass().getResourceAsStream(iconPath);
+            if (is != null) {
+                iconView.setImage(new Image(is));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Title Label
+        Label titleLabel = new Label(project.getTitle());
+        titleLabel.getStyleClass().add("card-title");
+
+        card.getChildren().addAll(iconView, titleLabel);
         card.setOnMouseClicked(e -> openWorkspace(project));
         return card;
+    }
+
+    private String getLanguageIconPath(String lang) {
+        if (lang == null) return "/c++.png";
+        return switch (lang.trim()) {
+            case "Python" -> "/Images/python.png";
+            case "Java" -> "/Images/java.png";
+            case "C++" -> "/Images/c++.png";
+            default -> "/c++.png";
+        };
     }
 
     @FXML
@@ -74,14 +104,14 @@ public class PlaygroundDashboardController {
         String lang = languageSelect.getValue();
         if (title.isEmpty()) return;
 
-        ApiClient.createProjectAsync(currentUserId, title, lang)
-                .thenAccept(jsonResponse -> Platform.runLater(() -> {
-                    closeCreateModal();
-                    Project newProject = JsonUtils.parseSingleProjectJson(jsonResponse);
-                    if (newProject != null) {
-                        openWorkspace(newProject);
-                    }
-                }));
+        int currentUserId = UserSession.getUserId();
+        String defaultCode = getBoilerplate(lang);
+
+        Project newProject = DatabaseManager.createProject(currentUserId, title, lang, defaultCode);
+        if (newProject != null) {
+            closeCreateModal();
+            openWorkspace(newProject);
+        }
     }
 
     private void openWorkspace(Project project) {
@@ -92,7 +122,6 @@ public class PlaygroundDashboardController {
             CodeEditorController controller = loader.getController();
             controller.initData(project);
 
-            // Swap view inside the main contentArea container
             StackPane contentArea = (StackPane) playgroundRoot.getParent();
             if (contentArea != null) {
                 contentArea.getChildren().setAll(workspaceView);

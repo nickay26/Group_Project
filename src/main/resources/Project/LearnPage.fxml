@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
+<AnchorPane style="-fx-background-color: #0F172A;" stylesheets="@../Css/learn_page.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
     <children>
-        <!-- SCROLLABLE ROADMAP CONTENT (Anchored to stretch full size) -->
-        <ScrollPane fitToWidth="true" style="-fx-background-color: #FFFFFF; -fx-viewport-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!-- SCROLLABLE ROADMAP CONTENT -->
+        <ScrollPane fx:id="roadmapScrollPane" fitToWidth="true" styleClass="learn-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox alignment="TOP_CENTER" spacing="15.0" style="-fx-background-color: #FFFFFF;">
+                <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #0F172A;" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets bottom="40.0" top="10.0" />
+                        <Insets bottom="40.0" top="20.0" />
                     </padding>
                     <children>
-                        <!-- COURSE TITLE HEADER BANNER -->
-                        <VBox alignment="CENTER" maxWidth="240.0" prefHeight="45.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-width: 1px; -fx-border-radius: 8px;">
-                            <children>
-                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #000000;" text="Intermediate C++" />
-                            </children>
-                        </VBox>
-
                         <!-- DYNAMIC DRAWING CANVAS PANE -->
-                        <Pane fx:id="roadmapPane" maxWidth="400.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;" />
+                        <Pane fx:id="roadmapPane" maxWidth="600.0" prefWidth="600.0" style="-fx-background-color: #0F172A;" />
                     </children>
                 </VBox>
             </content>

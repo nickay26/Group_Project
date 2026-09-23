@@ -1,240 +1,311 @@
 package Project;
 
-import java.sql.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DatabaseManager {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/group_project?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    private static final String USER = "root"; // Update with your MySQL Workbench username
-    private static final String PASSWORD = "root"; // Update with your MySQL Workbench password
-
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found. Ensure mysql-connector-j is in build path.");
-            e.printStackTrace();
-        }
-    }
-
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
+    private static final String BASE_URL = "https://NickayJohn26.pythonanywhere.com";
+    private static final HttpClient client = HttpClient.newHttpClient();
 
     // ==========================================
     // 1. USER AUTHENTICATION & SYNC
     // ==========================================
 
     public static User findOrCreateGoogleUser(String email, String name, String profilePicUrl) {
-        String selectSql = "SELECT * FROM User_table WHERE Email = ?";
-        String insertSql = "INSERT INTO User_table (Name, Email, Password, Profile, last_login_date) VALUES (?, ?, 'GOOGLE_AUTH', ?, CURRENT_DATE())";
-        String updateSql = "UPDATE User_table SET last_login_date = CURRENT_DATE() WHERE User_ID = ?";
+        try {
+            JSONObject body = new JSONObject();
+            body.put("email", email);
+            body.put("name", name != null ? name : "Google User");
+            body.put("profile_pic", profilePicUrl);
 
-        try (Connection conn = getConnection()) {
-            try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
-                stmt.setString(1, email);
-                ResultSet rs = stmt.executeQuery();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/auth/google"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
 
-                if (rs.next()) {
-                    int userId = rs.getInt("User_ID");
-                    try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
-                        updateStmt.setInt(1, userId);
-                        updateStmt.executeUpdate();
-                    }
-                    return mapResultSetToUser(rs);
-                }
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200 || response.statusCode() == 201) {
+                JSONObject res = new JSONObject(response.body());
+                return mapJsonToUser(res.getJSONObject("user"));
             }
-
-            try (PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
-                insertStmt.setString(1, name != null ? name : "Google User");
-                insertStmt.setString(2, email);
-                insertStmt.setString(3, profilePicUrl);
-                insertStmt.executeUpdate();
-
-                ResultSet keys = insertStmt.getGeneratedKeys();
-                if (keys.next()) {
-                    int newUserId = keys.getInt(1);
-                    return new User(newUserId, name, email, profilePicUrl, 0, 0, 0, 5);
-                }
-            }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
     public static User authenticateUser(String email, String password) {
-        String sql = "SELECT * FROM User_table WHERE Email = ? AND Password = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("email", email);
+            body.put("password", password);
 
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
 
-            if (rs.next()) {
-                return mapResultSetToUser(rs);
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject res = new JSONObject(response.body());
+                return mapJsonToUser(res.getJSONObject("user"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
     public static User registerUser(String name, String email, String password) {
-        String sql = "INSERT INTO User_table (Name, Email, Password, last_login_date) VALUES (?, ?, ?, CURRENT_DATE())";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("name", name);
+            body.put("email", email);
+            body.put("password", password);
 
-            stmt.setString(1, name);
-            stmt.setString(2, email);
-            stmt.setString(3, password);
-            stmt.executeUpdate();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/auth/register"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
 
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) {
-                return new User(keys.getInt(1), name, email, null, 0, 0, 0, 5);
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 201) {
+                JSONObject res = new JSONObject(response.body());
+                return mapJsonToUser(res.getJSONObject("user"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    // User ၏ နောက်ဆုံး Active ဖြစ်ခဲ့သော Course ID ကို API မှတစ်ဆင့် ရယူခြင်း
+    public static String getLastActiveCourseId(int userId) {
+        if (userId <= 0) return "CPP_BASIC";
+
+        try {
+            List<Course> courses = getCoursesForUser(userId);
+            if (courses != null && !courses.isEmpty()) {
+                return courses.get(0).getCourseId(); // ပထမဆုံး Course ကို Default ယူခြင်း
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "CPP_BASIC"; // Connection မရပါက သို့မဟုတ် Dataset မရှိပါက Default ပေးမည့် Course ID
+    }
+
     // ==========================================
-    // 2. COURSES & PROGRESS
+    // 2. COURSES & LESSONS
     // ==========================================
 
     public static List<Course> getCoursesForUser(int userId) {
         List<Course> courses = new ArrayList<>();
-        String sql = """
-            SELECT 
-                c.Course_ID, 
-                c.Course_Name, 
-                COUNT(DISTINCT l.Lesson_ID) AS total_lessons,
-                COALESCE(up.completed_lesson, 0) AS completed_lessons
-            FROM Course_table c
-            LEFT JOIN Lesson_table l ON c.Course_ID = l.Course_ID
-            LEFT JOIN user_progress up ON c.Course_ID = up.Course_id AND up.User_id = ?
-            GROUP BY c.Course_ID, c.Course_Name, up.completed_lesson
-        """;
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/courses"))
+                    .GET()
+                    .build();
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
+            if (response.statusCode() == 200) {
+                JSONArray arr = new JSONArray(response.body());
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    String courseId = obj.getString("Course_ID");
+                    String title = obj.getString("Course_Name");
+                    int total = obj.optInt("total_lessons", 0);
+                    int completed = obj.optInt("completed_lessons", 0);
 
-            while (rs.next()) {
-                String courseId = rs.getString("Course_ID");
-                String title = rs.getString("Course_Name");
-                int total = rs.getInt("total_lessons");
-                int completed = rs.getInt("completed_lessons");
-
-                courses.add(new Course(
-                        courseId,
-                        title,
-                        "Master " + title + " with interactive lessons.",
-                        courseId.split("_")[0],
-                        total,
-                        completed
-                ));
+                    courses.add(new Course(
+                            courseId,
+                            title,
+                            "Master " + title + " with interactive lessons.",
+                            courseId.split("_")[0],
+                            total,
+                            completed
+                    ));
+                }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return courses;
     }
 
-    public static boolean updateUserProgress(int userId, String courseId, int completedLessons) {
-        String sql = """
-            INSERT INTO user_progress (User_id, Course_id, completed_lesson, status)
-            VALUES (?, ?, ?, 'IN_PROGRESS')
-            ON DUPLICATE KEY UPDATE completed_lesson = ?, status = IF(? >= (SELECT COUNT(*) FROM Lesson_table WHERE Course_ID = ?), 'COMPLETED', 'IN_PROGRESS')
-        """;
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, userId);
-            stmt.setString(2, courseId);
-            stmt.setInt(3, completedLessons);
-            stmt.setInt(4, completedLessons);
-            stmt.setInt(5, completedLessons);
-            stmt.setString(6, courseId);
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // ==========================================
-    // 3. USER PROJECTS (PLAYGROUND)
-    // ==========================================
-
-    public static boolean saveUserProject(int userId, String title, String language, String codeContent) {
-        String sql = "INSERT INTO user_projects (User_id, title, Language, Code_Content) VALUES (?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, userId);
-            stmt.setString(2, title);
-            stmt.setString(3, language);
-            stmt.setString(4, codeContent);
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // ==========================================
-    // HELPER METHODS
-    // ==========================================
-
-    private static User mapResultSetToUser(ResultSet rs) throws SQLException {
-        return new User(
-                rs.getInt("User_ID"),
-                rs.getString("Name"),
-                rs.getString("Email"),
-                rs.getString("Profile"),
-                rs.getInt("XP"),
-                rs.getInt("Streak"),
-                rs.getInt("coin"),
-                rs.getInt("brain_count")
-        );
-    }
-
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
-        String query = "SELECT Lesson_ID, Course_ID, Lesson_order, Title, XP, content, lesson_type " +
-                "FROM lesson_table WHERE Course_ID = ? ORDER BY Lesson_order ASC";
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/courses/" + courseId + "/lessons"))
+                    .GET()
+                    .build();
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            stmt.setString(1, courseId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                lessons.add(new Lesson(
-                        rs.getString("Lesson_ID"),
-                        rs.getString("Course_ID"),
-                        rs.getInt("Lesson_order"),
-                        rs.getString("Title"),
-                        rs.getInt("XP"),
-                        rs.getString("content"),
-                        rs.getString("lesson_type")
-                ));
+            if (response.statusCode() == 200) {
+                JSONArray arr = new JSONArray(response.body());
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    lessons.add(new Lesson(
+                            obj.getString("Lesson_ID"),
+                            obj.getString("Course_ID"),
+                            obj.getInt("Lesson_order"),
+                            obj.getString("Title"),
+                            obj.getInt("XP"),
+                            obj.optString("lesson_type", "LESSON"),
+                            obj.optString("Module_Name", "General"),
+                            false,
+                            new ArrayList<>()
+                    ));
+                }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return lessons;
+    }
+
+    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("course_id", courseId);
+            body.put("lesson_order", lessonOrder);
+            body.put("xp", xpAmount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/lessons/complete"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // User ၏ Course တစ်ခုအတွက် ပြီးစီးပြီးသော Lesson အရေအတွက်ကို API မှတစ်ဆင့် ယူခြင်း
+    public static int getCompletedLessonCount(int userId, String courseId) {
+        List<Course> courses = getCoursesForUser(userId);
+        for (Course c : courses) {
+            if (c.getCourseId().equalsIgnoreCase(courseId)) {
+                return c.getCompletedLessons();
+            }
+        }
+        return 0;
+    }
+
+    // ==========================================
+    // 3. PLAYGROUND PROJECTS
+    // ==========================================
+
+    public static List<Project> getUserProjects(int userId) {
+        List<Project> projects = new ArrayList<>();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/projects"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONArray arr = new JSONArray(response.body());
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    projects.add(new Project(
+                            obj.getInt("project_id"),
+                            obj.getInt("User_id"),
+                            obj.getString("title"),
+                            obj.getString("Language"),
+                            obj.getString("Code_Content")
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return projects;
+    }
+
+    public static Project createProject(int userId, String title, String language, String codeContent) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("title", title);
+            body.put("language", language);
+            body.put("code_content", codeContent);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/create"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 201) {
+                JSONObject res = new JSONObject(response.body());
+                return new Project(
+                        res.getInt("project_id"),
+                        userId,
+                        title,
+                        language,
+                        codeContent
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean updateProjectCode(int projectId, String codeContent) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("project_id", projectId);
+            body.put("code_content", codeContent);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Helper Mapping Method
+    private static User mapJsonToUser(JSONObject obj) {
+        return new User(
+                obj.getInt("User_ID"),
+                obj.getString("Name"),
+                obj.getString("Email"),
+                obj.optString("Profile", null),
+                obj.optInt("XP", 0),
+                obj.optInt("Streak", 0),
+                obj.optInt("coin", 0),
+                obj.optInt("brain_count", 5)
+        );
     }
 }

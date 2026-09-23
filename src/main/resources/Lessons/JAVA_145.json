@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_145",
+  "title": "Finally Block",
+  "slides": [
+    {
+      "slideId": "JAVA_145_S1",
+      "type": "CONCEPT",
+      "title": "Finally Block",
+      "prompt": "The finally block always executes, whether an exception occurs or not. It is used to close resources like files.",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        try {\n            int x = 10 / 2;\n            System.out.println(x);\n        } catch (ArithmeticException e) {\n            System.out.println(\"Error\");\n        } finally {\n            System.out.println(\"Done\");\n        }\n    }\n}",
+      "output": "5\nDone"
+    },
+    {
+      "slideId": "JAVA_145_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Keyword",
+      "prompt": "Which block always executes?",
+      "options": ["finally", "try", "catch", "throw"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_145_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Purpose",
+      "prompt": "Why do we use finally?",
+      "options": ["To close resources", "To make code slower", "To delete code", "To confuse developers"],
+      "correctAnswer": "To close resources"
+    },
+    {
+      "slideId": "JAVA_145_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Execution",
+      "prompt": "Does finally execute if an exception occurs?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_145_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Finally",
+      "prompt": "Complete the finally block.",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "options": ["finally", "catch", "throw", "throws"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_145_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Finally",
+      "prompt": "Complete the finally block.",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "options": ["finally", "catch", "throw", "throws"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_145_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n  System.out.println(x);\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["5 Done", "5", "Done", "Error"],
+      "correctAnswer": "5 Done"
+    },
+    {
+      "slideId": "JAVA_145_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["Error Done", "Error", "Done", "No Error"],
+      "correctAnswer": "Error Done"
+    },
+    {
+      "slideId": "JAVA_145_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  System.out.println(\"Try\");\n} finally {\n  System.out.println(\"Finally\");\n}",
+      "options": ["Try Finally", "Try", "Finally", "Error"],
+      "correctAnswer": "Try Finally"
+    },
+    {
+      "slideId": "JAVA_145_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally and Catch",
+      "prompt": "Can finally be used without catch?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_145_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Execution",
+      "prompt": "Does finally execute even if try returns?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    }
+  ]
+}

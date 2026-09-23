@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Lesson Player Layout & Background
+   ========================================================================== */
+.root-container {
+    -fx-background-color: #0F172A;
+}
+
+.main-card {
+    -fx-background-color: #1E293B;
+    -fx-background-radius: 20px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+}
+
+.card-scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* ==========================================================================
+   Typography & Badges
+   ========================================================================== */
+.badge-question {
+    -fx-background-color: rgba(124, 58, 237, 0.13);
+    -fx-text-fill: #C084FC;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 8px;
+}
+
+.badge-concept {
+    -fx-background-color: rgba(37, 99, 235, 0.13);
+    -fx-text-fill: #60A5FA;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 8px;
+}
+
+.slide-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F8FAFC;
+}
+
+.slide-prompt {
+    -fx-font-size: 15px;
+    -fx-text-fill: #94A3B8;
+    -fx-line-spacing: 3px;
+}
+
+/* ==========================================================================
+   Code Snippet Box (Styled like an IDE code block)
+   ========================================================================== */
+.code-snippet-box {
+    -fx-background-color: #0B1120;
+    -fx-text-fill: #38BDF8;
+    -fx-font-family: 'Consolas', 'Courier New', monospace;
+    -fx-font-size: 14px;
+    -fx-padding: 14px 16px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #38BDF8;
+    -fx-border-width: 0 0 0 4px; /* Distinct cyan left border */
+}
+
+/* ==========================================================================
+   Multiple Choice Option Buttons
+   ========================================================================== */
+.option-button {
+    -fx-background-color: #0F172A;
+    -fx-text-fill: #E2E8F0;
+    -fx-border-color: #334155;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 10 16 10 16;
+}
+
+.option-button:hover {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #475569;
+}
+
+.option-button-selected {
+    -fx-background-color: #1E3A8A;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #3B82F6;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 10 16 10 16;
+}
+
+/* ==========================================================================
+   Footer & Navigation Buttons
+   ========================================================================== */
+.continue-button {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+}
+
+.continue-button:hover {
+    -fx-background-color: #1D4ED8;
+}
+
+.close-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #94A3B8;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-text-fill: #FFFFFF;
+}

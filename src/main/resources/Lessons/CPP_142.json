@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_142",
+  "title": "C++20 Ranges & Views for Functional Loops",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_142_S1",
+      "type": "CONCEPT",
+      "title": "C++20 Ranges Overview",
+      "prompt": "C++20 Ranges allow composable, lazy evaluation pipelines over data containers without creating intermediate copies.",
+      "codeSnippet": "namespace views = std::views;\nauto evens = vec | views::filter([](int n){ return n % 2 == 0; });\nfor (int n : evens) { std::cout << n << \" \"; }"
+    },
+    {
+      "slideId": "CPP_142_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Pipe Operator Composition",
+      "prompt": "Fill in the operator used to chain views in C++20 Ranges.",
+      "codeSnippet": "auto result = data ___ std::views::filter(isEven) ___ std::views::transform(square);",
+      "options": ["|", ">>", "->", "."],
+      "correctAnswer": "|"
+    },
+    {
+      "slideId": "CPP_142_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lazy Evaluation in Views",
+      "prompt": "What does 'lazy evaluation' mean in C++20 range views?",
+      "options": ["Elements are calculated on-demand as they are iterated over, rather than precomputed", "Execution is delayed until program shutdown", "Views run on background threads", "Views allocate extra dynamic heap memory"],
+      "correctAnswer": "Elements are calculated on-demand as they are iterated over, rather than precomputed"
+    },
+    {
+      "slideId": "CPP_142_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::views::filter Syntax",
+      "prompt": "Fill in view name used to keep only matching elements.",
+      "codeSnippet": "auto pos = numbers | std::views::___([](int x){ return x > 0; });",
+      "options": ["filter", "where", "select", "take_if"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "CPP_142_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::views::transform Function",
+      "prompt": "What does std::views::transform do?",
+      "options": ["Applies a transformation function to each element in range lazily", "Filters out elements", "Sorts range in-place", "Reverses container order"],
+      "correctAnswer": "Applies a transformation function to each element in range lazily"
+    },
+    {
+      "slideId": "CPP_142_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::views::take Adapter",
+      "prompt": "Fill in view adapter to limit iteration to first N elements.",
+      "codeSnippet": "auto firstThree = vec | std::views::___(3);",
+      "options": ["take", "limit", "first", "head"],
+      "correctAnswer": "take"
+    },
+    {
+      "slideId": "CPP_142_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Range Header Requirement",
+      "prompt": "Which standard header must be included to use C++20 ranges and views?",
+      "options": ["<ranges>", "<algorithm>", "<iterator>", "<numeric>"],
+      "correctAnswer": "<ranges>"
+    },
+    {
+      "slideId": "CPP_142_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::views::reverse Syntax",
+      "prompt": "Fill in view adapter to iterate in reverse direction.",
+      "codeSnippet": "for (int x : vec | std::views::___) {\n    std::cout << x;\n}",
+      "options": ["reverse", "backward", "flip", "invert"],
+      "correctAnswer": "reverse"
+    },
+    {
+      "slideId": "CPP_142_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Range Projection Feature",
+      "prompt": "What is a 'projection' in C++20 constrained algorithms (e.g. std::ranges::sort)?",
+      "options": ["A function that extracts or transforms member fields prior to comparison/processing", "A 3D rendering feature", "A type casting operator", "A thread synchronization barrier"],
+      "correctAnswer": "A function that extracts or transforms member fields prior to comparison/processing"
+    },
+    {
+      "slideId": "CPP_142_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::ranges::sort Direct Container",
+      "prompt": "Fill in C++20 constrained algorithm call passing container directly without iterators.",
+      "codeSnippet": "std::ranges::___(vec);",
+      "options": ["sort", "order", "arrange", "align"],
+      "correctAnswer": "sort"
+    }
+  ]
+}

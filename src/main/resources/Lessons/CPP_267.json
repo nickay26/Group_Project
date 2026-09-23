@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_267",
+  "title": "Non-Type Template Parameters",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_267_S1",
+      "type": "CONCEPT",
+      "title": "Non-Type Template Parameters Concept",
+      "prompt": "Besides data types, templates can accept non-type parameters such as compile-time integer constants, pointers, references, and (since C++20) literal floating-point/class values.",
+      "codeSnippet": "#include <iostream>\n#include <array>\n\ntemplate <typename T, std::size_t N>\nclass StaticArray {\n    T data[N];\npublic:\n    std::size_t getSize() const { return N; }\n};\n\nint main() {\n    StaticArray<int, 10> arr;\n    std::cout << arr.getSize(); // Prints 10\n}"
+    },
+    {
+      "slideId": "CPP_267_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Non-Type Parameter Declaration",
+      "prompt": "Fill in the integer parameter type in the template parameter list.",
+      "codeSnippet": "template <typename T, ___ Size>\nclass FixedBuffer {\n    T buffer[Size];\n};",
+      "options": ["int", "typename", "class", "auto_type"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_267_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requirement for Non-Type Parameters",
+      "prompt": "What restriction applies to non-type template arguments passed during instantiation?",
+      "options": [
+        "They must be constant expressions known at compile time",
+        "They can be dynamic variables evaluated at runtime",
+        "They must always be unsigned integer types",
+        "They can only be passed by reference"
+      ],
+      "correctAnswer": "They must be constant expressions known at compile time"
+    },
+    {
+      "slideId": "CPP_267_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Non-Type Template Parameter",
+      "prompt": "Fill in the default value assignment for the non-type template argument.",
+      "codeSnippet": "template <typename T, std::size_t N = ___>\nclass Matrix {\n    T grid[N][N];\n};",
+      "options": ["3", "int", "typename", "auto"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_267_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Distinctness with Non-Type Parameters",
+      "prompt": "Are StaticArray<int, 5> and StaticArray<int, 10> considered the same type by the compiler?",
+      "options": [
+        "No, they are entirely distinct classes, and objects cannot be assigned to each other",
+        "Yes, because their element type T (int) is identical",
+        "Yes, size parameters are stripped after template compilation",
+        "Only if an implicit conversion operator is defined"
+      ],
+      "correctAnswer": "No, they are entirely distinct classes, and objects cannot be assigned to each other"
+    },
+    {
+      "slideId": "CPP_267_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Non-Type Parameters (C++17)",
+      "prompt": "Fill in the placeholder keyword used in C++17 to let the compiler deduce the type of a non-type template parameter.",
+      "codeSnippet": "template <___ Value>\nvoid printConstant() {\n    std::cout << Value << std::endl;\n}\n\nprintConstant<100>(); // Value is deduced as int",
+      "options": ["auto", "typename", "decltype", "concept"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_267_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Allowed Non-Type Parameters in C++11",
+      "prompt": "Which of the following was NOT a valid non-type template parameter type prior to C++20?",
+      "options": [
+        "Floating-point types (e.g. double, float)",
+        "Integral / enumeration types",
+        "Pointers to functions or objects with external linkage",
+        "std::nullptr_t"
+      ],
+      "correctAnswer": "Floating-point types (e.g. double, float)"
+    },
+    {
+      "slideId": "CPP_267_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-Time String Parameter (C++20)",
+      "prompt": "Fill in the compile-time specifier required for structural class types used as non-type template parameters in C++20.",
+      "codeSnippet": "struct FixedString {\n    ___ FixedString(const char* str) { /* ... */ }\n};",
+      "options": ["constexpr", "inline", "static", "explicit"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_267_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::array Non-Type Parameter Usage",
+      "prompt": "How does C++ standard library std::array<T, N> utilize non-type template parameters?",
+      "options": [
+        "N specifies the fixed stack-allocated size of the array at compile time",
+        "N determines the dynamic initial capacity reserved on the heap",
+        "N controls the alignment offset in memory",
+        "N defines the thread-safety lock granularity"
+      ],
+      "correctAnswer": "N specifies the fixed stack-allocated size of the array at compile time"
+    },
+    {
+      "slideId": "CPP_267_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Parameter Comparison",
+      "prompt": "Fill in the boolean return expression verifying array capacity.",
+      "codeSnippet": "template <int N>\nconstexpr bool isLarge() {\n    return N ___ 1000;\n}",
+      "options": [">", "=>", "equals", "typeid"],
+      "correctAnswer": ">"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_227",
+  "title": "std::list & std::forward_list Linked Lists",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_227_S1",
+      "type": "CONCEPT",
+      "title": "Linked List Containers",
+      "prompt": "std::list is a doubly linked list while std::forward_list is a singly linked list. Both offer O(1) constant time insertion and deletion anywhere once an iterator is obtained.",
+      "codeSnippet": "#include <list>\n#include <forward_list>\nstd::list<int> l = {1, 2, 3};\nstd::forward_list<int> fl = {4, 5, 6};"
+    },
+    {
+      "slideId": "CPP_227_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::list Header",
+      "prompt": "Fill in the header file required to use std::list.",
+      "codeSnippet": "#include <___>",
+      "options": ["list", "forward_list", "linked_list", "containers"],
+      "correctAnswer": "list"
+    },
+    {
+      "slideId": "CPP_227_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Random Access in std::list",
+      "prompt": "Can you access elements in std::list using operator[] or indexing?",
+      "options": [
+        "No, std::list supports only bidirectional step-by-step traversal via iterators",
+        "Yes, operator[] is available with O(1) complexity",
+        "Yes, operator[] is available with O(log N) complexity",
+        "Only if the list is sorted"
+      ],
+      "correctAnswer": "No, std::list supports only bidirectional step-by-step traversal via iterators"
+    },
+    {
+      "slideId": "CPP_227_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Singly Linked List Header",
+      "prompt": "Fill in the header file required for singly linked lists.",
+      "codeSnippet": "#include <___>",
+      "options": ["forward_list", "slist", "single_list", "list"],
+      "correctAnswer": "forward_list"
+    },
+    {
+      "slideId": "CPP_227_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::forward_list Efficiency",
+      "prompt": "What advantage does std::forward_list have over std::list?",
+      "options": [
+        "Lower memory overhead per element since each node stores only a single next pointer",
+        "Faster random access search speeds",
+        "Supports reverse iteration using rbegin()",
+        "Automatically maintains sorted order"
+      ],
+      "correctAnswer": "Lower memory overhead per element since each node stores only a single next pointer"
+    },
+    {
+      "slideId": "CPP_227_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Splice Operations",
+      "prompt": "Fill in the member function used to transfer elements between std::list containers without copying.",
+      "codeSnippet": "list1.___(list1.begin(), list2);",
+      "options": ["splice", "transfer", "merge", "move"],
+      "correctAnswer": "splice"
+    },
+    {
+      "slideId": "CPP_227_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Invalidation on Insertion",
+      "prompt": "What happens to existing iterators in std::list when a new element is inserted?",
+      "options": [
+        "Iterators remain valid because memory nodes are heap-allocated independently",
+        "All iterators are invalidated",
+        "Only end() iterator is invalidated",
+        "Iterators after the insertion point are invalidated"
+      ],
+      "correctAnswer": "Iterators remain valid because memory nodes are heap-allocated independently"
+    },
+    {
+      "slideId": "CPP_227_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inserting in forward_list",
+      "prompt": "Fill in the insertion method used for forward_list that inserts after a specified iterator position.",
+      "codeSnippet": "fl.___ (fl.begin(), 42);",
+      "options": ["insert_after", "insert", "push_front", "emplace_after"],
+      "correctAnswer": "insert_after"
+    },
+    {
+      "slideId": "CPP_227_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::list::sort Method",
+      "prompt": "Why should you use member function 'lst.sort()' instead of 'std::sort(lst.begin(), lst.end())'?",
+      "options": [
+        "std::sort requires random access iterators which std::list does not provide",
+        "lst.sort() runs in O(1) time",
+        "std::sort converts list to vector internally causing extra memory usage",
+        "std::list cannot be sorted under any circumstances"
+      ],
+      "correctAnswer": "std::sort requires random access iterators which std::list does not provide"
+    },
+    {
+      "slideId": "CPP_227_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Removing Consecutive Duplicates",
+      "prompt": "Fill in the method used to remove consecutive duplicate elements from a list.",
+      "codeSnippet": "myList.___();",
+      "options": ["unique", "dedupe", "remove_duplicates", "compact"],
+      "correctAnswer": "unique"
+    }
+  ]
+}

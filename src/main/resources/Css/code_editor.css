@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Code Editor Theme (VS Code Style Dark Theme)
+   ========================================================================== */
+
+/* Main Container Background (VS Code Default) */
+.editor-root {
+    -fx-background-color: #181818;
+}
+
+/* Header & Typography */
+.title-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #CCCCCC;
+}
+
+.section-header {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #569CD6; /* VS Code Keyword Blue */
+}
+
+.lang-pill {
+    -fx-background-color: #264F78;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-padding: 3 10;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* Toolbar Buttons */
+.btn-secondary {
+    -fx-background-color: #2D2D2D;
+    -fx-border-color: #454545;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #CCCCCC;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 14;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #3C3C3C;
+}
+
+.btn-ai {
+    -fx-background-color: #6B21A8;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 16;
+}
+
+.btn-ai:hover {
+    -fx-background-color: #581C87;
+}
+
+.btn-run {
+    -fx-background-color: #0E639C; /* VS Code Primary Blue Button */
+    -fx-background-radius: 6px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 16;
+}
+
+.btn-run:hover {
+    -fx-background-color: #1177BB;
+}
+
+/* Split Pane Dividers */
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: #2B2B2B;
+    -fx-padding: 0 2px;
+}
+
+/* Main Code Editor Style */
+.dark-editor {
+    -fx-control-inner-background: #1E1E1E; /* VS Code Main Editor Color */
+    -fx-background-color: #1E1E1E;
+    -fx-text-fill: #D4D4D4; /* VS Code Bright Plain Text */
+    -fx-prompt-text-fill: #6A9955; /* Green color for placeholders */
+    -fx-font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+    -fx-font-size: 15px; /* Bigger font for clarity */
+    -fx-border-color: #333333;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+/* Custom Text Colors for Output & AI Area */
+#outputConsole {
+    -fx-text-fill: #4EC9B0; /* Bright Cyan for Terminal Output */
+    -fx-font-size: 14px;
+}
+
+#aiReviewArea {
+    -fx-text-fill: #CE9178; /* Soft Peach for AI Response Text */
+    -fx-font-size: 14px;
+}

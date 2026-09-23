@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_253",
+  "title": "Practice: ServerSocket",
+  "slides": [
+    {
+      "slideId": "JAVA_253_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ServerSocket Definition",
+      "prompt": "What is a ServerSocket?",
+      "options": ["A socket that waits for clients", "A socket for clients", "A file", "A method"],
+      "correctAnswer": "A socket that waits for clients"
+    },
+    {
+      "slideId": "JAVA_253_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Accept Method",
+      "prompt": "Which method accepts a client connection?",
+      "options": ["accept()", "connect()", "receive()", "listen()"],
+      "correctAnswer": "accept()"
+    },
+    {
+      "slideId": "JAVA_253_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ServerSocket Constructor",
+      "prompt": "What does ServerSocket take as parameter?",
+      "options": ["Port number", "IP address", "Hostname", "File path"],
+      "correctAnswer": "Port number"
+    },
+    {
+      "slideId": "JAVA_253_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import ServerSocket",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.net.__________;",
+      "options": ["ServerSocket", "Socket", "Connection", "Network"],
+      "correctAnswer": "ServerSocket"
+    },
+    {
+      "slideId": "JAVA_253_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Accept Connection",
+      "prompt": "Complete the code to accept a connection.",
+      "codeSnippet": "Socket client = serverSocket.______();",
+      "options": ["accept", "connect", "receive", "listen"],
+      "correctAnswer": "accept"
+    },
+    {
+      "slideId": "JAVA_253_S6",
+      "type": "CODE_OUTPUT",
+      "title": "ServerSocket Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  ServerSocket serverSocket = new ServerSocket(8080);\n  System.out.println(\"Server started\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Server started or Error", "Server started", "Error", "No Error"],
+      "correctAnswer": "Server started or Error"
+    },
+    {
+      "slideId": "JAVA_253_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ServerSocket Close",
+      "prompt": "Which method closes a ServerSocket?",
+      "options": ["close()", "end()", "stop()", "disconnect()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_253_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Server Port",
+      "prompt": "Which port is commonly used for HTTP?",
+      "options": ["80", "8080", "443", "21"],
+      "correctAnswer": "80"
+    },
+    {
+      "slideId": "JAVA_253_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Server vs Client",
+      "prompt": "Which socket waits for connections?",
+      "options": ["ServerSocket", "Socket", "Both", "Neither"],
+      "correctAnswer": "ServerSocket"
+    },
+    {
+      "slideId": "JAVA_253_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ServerSocket Purpose",
+      "prompt": "Why do we use ServerSocket?",
+      "options": ["To accept client connections", "To connect to server", "To read files", "To write files"],
+      "correctAnswer": "To accept client connections"
+    },
+    {
+      "slideId": "JAVA_253_S11",
+      "type": "CODE_OUTPUT",
+      "title": "ServerSocket Port Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  ServerSocket serverSocket = new ServerSocket(9090);\n  System.out.println(\"Port 9090\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Port 9090 or Error", "Port 9090", "Error", "No Error"],
+      "correctAnswer": "Port 9090 or Error"
+    }
+  ]
+}

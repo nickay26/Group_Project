@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_111",
+  "title": "Else If Statement",
+  "slides": [
+    {
+      "slideId": "JAVA_111_S1",
+      "type": "CONCEPT",
+      "title": "Else If Statement",
+      "prompt": "Use else if to check multiple conditions. The program checks each condition in order. If one is true, it runs that block and skips the rest.",
+      "codeSnippet": "int score = 75;\nif (score >= 90) {\n    System.out.println(\"Grade A\");\n} else if (score >= 80) {\n    System.out.println(\"Grade B\");\n} else if (score >= 70) {\n    System.out.println(\"Grade C\");\n} else {\n    System.out.println(\"Grade F\");\n}",
+      "output": "Grade C"
+    },
+    {
+      "slideId": "JAVA_111_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else If Keyword",
+      "prompt": "Which keyword is used for an alternative condition?",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_111_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Order of Conditions",
+      "prompt": "In what order does Java check conditions in an if-else if chain?",
+      "options": ["From top to bottom", "From bottom to top", "Randomly", "Alphabetically"],
+      "correctAnswer": "From top to bottom"
+    },
+    {
+      "slideId": "JAVA_111_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else If",
+      "prompt": "Complete the code to check if score is 80 or higher.",
+      "codeSnippet": "int score = 85;\nif (score >= 90) {\n  System.out.println(\"A\");\n} ____ (score >= 80) {\n  System.out.println(\"B\");\n}",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_111_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else",
+      "prompt": "Complete the code to output 'F' when no conditions match.",
+      "codeSnippet": "int score = 50;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} ____ {\n  System.out.println(\"F\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_111_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Grade Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 75;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "B", "C", "F"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "JAVA_111_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Grade Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 95;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "B", "C", "F"],
+      "correctAnswer": "A"
+    },
+    {
+      "slideId": "JAVA_111_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Grade Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 65;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "B", "C", "F"],
+      "correctAnswer": "F"
+    },
+    {
+      "slideId": "JAVA_111_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Condition",
+      "prompt": "Complete the code to check if score is 90 or higher.",
+      "codeSnippet": "int score = 95;\nif (score __ 90) {\n  System.out.println(\"A\");\n}",
+      "options": [">=", ">", "<=", "<"],
+      "correctAnswer": ">="
+    },
+    {
+      "slideId": "JAVA_111_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of If-Else",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else if (x > 1) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "3"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_111_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Number of Conditions",
+      "prompt": "Can you have multiple else if statements?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    }
+  ]
+}

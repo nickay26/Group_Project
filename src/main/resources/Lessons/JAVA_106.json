@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_106",
+  "title": "Variables",
+  "slides": [
+    {
+      "slideId": "JAVA_106_S1",
+      "type": "CONCEPT",
+      "title": "Variables",
+      "prompt": "A variable is a container for storing data. In Java, you must declare a variable before using it. Common data types are int (whole numbers), double (decimal numbers), and String (text).",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        int age = 25;\n        double price = 19.99;\n        String name = \"John\";\n        \n        System.out.println(age);\n        System.out.println(price);\n        System.out.println(name);\n    }\n}",
+      "output": "25\n19.99\nJohn"
+    },
+    {
+      "slideId": "JAVA_106_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Definition",
+      "prompt": "What is a variable?",
+      "options": ["A container for storing data", "A method", "A class", "A loop"],
+      "correctAnswer": "A container for storing data"
+    },
+    {
+      "slideId": "JAVA_106_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Integer Declaration",
+      "prompt": "How do you declare an integer variable?",
+      "options": ["int x = 5;", "integer x = 5;", "Int x = 5;", "x = 5;"],
+      "correctAnswer": "int x = 5;"
+    },
+    {
+      "slideId": "JAVA_106_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Declaration",
+      "prompt": "A String variable is declared with ___________.",
+      "options": ["String", "string", "Str", "Text"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_106_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decimal Data Type",
+      "prompt": "Which data type stores decimal numbers?",
+      "options": ["double", "int", "String", "boolean"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "JAVA_106_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Integer",
+      "prompt": "Complete the code to declare an integer variable 'age' with value 25.",
+      "codeSnippet": "____ age = 25;",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_106_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare String",
+      "prompt": "Complete the code to declare a String variable 'name' with value \"John\".",
+      "codeSnippet": "____ name = \"John\";",
+      "options": ["String", "string", "Str", "Text"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_106_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Integer Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int age = 25;\nSystem.out.println(age);",
+      "options": ["25", "age", "0", "Error"],
+      "correctAnswer": "25"
+    },
+    {
+      "slideId": "JAVA_106_S9",
+      "type": "CODE_OUTPUT",
+      "title": "String Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name);",
+      "options": ["John", "name", "null", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_106_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Addition Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int a = 5;\nint b = 3;\nSystem.out.println(a + b);",
+      "options": ["8", "53", "5 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_106_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Double",
+      "prompt": "Complete the code to declare a double variable 'price' with value 19.99.",
+      "codeSnippet": "____ price = 19.99;",
+      "options": ["double", "int", "float", "decimal"],
+      "correctAnswer": "double"
+    }
+  ]
+}

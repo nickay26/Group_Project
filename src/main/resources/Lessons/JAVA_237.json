@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_237",
+  "title": "Practice: Thread Basics",
+  "slides": [
+    {
+      "slideId": "JAVA_237_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Definition",
+      "prompt": "What is a thread?",
+      "options": ["A lightweight sub-process", "A class", "A method", "A variable"],
+      "correctAnswer": "A lightweight sub-process"
+    },
+    {
+      "slideId": "JAVA_237_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Class",
+      "prompt": "Which class can be extended to create a thread?",
+      "options": ["Thread", "Runnable", "Process", "Task"],
+      "correctAnswer": "Thread"
+    },
+    {
+      "slideId": "JAVA_237_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Start Method",
+      "prompt": "Which method starts a thread?",
+      "options": ["start()", "run()", "begin()", "execute()"],
+      "correctAnswer": "start()"
+    },
+    {
+      "slideId": "JAVA_237_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Extend Thread",
+      "prompt": "Complete the thread class.",
+      "codeSnippet": "class MyThread ______ Thread {\n  public void run() {\n    System.out.println(\"Running\");\n  }\n}",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_237_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Start Thread",
+      "prompt": "Complete the code to start a thread.",
+      "codeSnippet": "MyThread t = new MyThread();\nt._____();",
+      "options": ["start", "run", "begin", "execute"],
+      "correctAnswer": "start"
+    },
+    {
+      "slideId": "JAVA_237_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Thread Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class MyThread extends Thread {\n  public void run() { System.out.println(\"Thread running\"); }\n}\nMyThread t = new MyThread();\nt.start();",
+      "options": ["Thread running", "MyThread", "t", "Error"],
+      "correctAnswer": "Thread running"
+    },
+    {
+      "slideId": "JAVA_237_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Runnable Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class MyRunnable implements Runnable {\n  public void run() { System.out.println(\"Runnable running\"); }\n}\nThread t = new Thread(new MyRunnable());\nt.start();",
+      "options": ["Runnable running", "MyRunnable", "t", "Error"],
+      "correctAnswer": "Runnable running"
+    },
+    {
+      "slideId": "JAVA_237_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Interface",
+      "prompt": "Which interface can be implemented to create a thread?",
+      "options": ["Runnable", "Thread", "Process", "Task"],
+      "correctAnswer": "Runnable"
+    },
+    {
+      "slideId": "JAVA_237_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Package",
+      "prompt": "Which package contains Thread?",
+      "options": ["java.lang", "java.util", "java.io", "java.thread"],
+      "correctAnswer": "java.lang"
+    },
+    {
+      "slideId": "JAVA_237_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multithreading Benefit",
+      "prompt": "What is the benefit of multithreading?",
+      "options": ["Multiple tasks run simultaneously", "Slower code", "More memory", "Less CPU usage"],
+      "correctAnswer": "Multiple tasks run simultaneously"
+    },
+    {
+      "slideId": "JAVA_237_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Thread Two Tasks",
+      "prompt": "What is the output?",
+      "codeSnippet": "Thread t1 = new Thread(() -> System.out.println(\"Task 1\"));\nThread t2 = new Thread(() -> System.out.println(\"Task 2\"));\nt1.start();\nt2.start();",
+      "options": ["Task 1 and Task 2 (any order)", "Task 1 Task 2", "Task 2 Task 1", "Error"],
+      "correctAnswer": "Task 1 and Task 2 (any order)"
+    }
+  ]
+}

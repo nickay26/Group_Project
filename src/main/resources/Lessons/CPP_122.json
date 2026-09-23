@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_122",
+  "title": "Bitwise Operators Basics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_122_S1",
+      "type": "CONCEPT",
+      "title": "Bitwise Operators Concept",
+      "prompt": "Bitwise operators perform operations directly on binary bits of integer types.",
+      "codeSnippet": "int a = 5;  // 0101 in binary\nint b = 3;  // 0011 in binary\nint AND = a & b; // 0001 (1)\nint OR  = a | b; // 0111 (7)\nint XOR = a ^ b; // 0110 (6)"
+    },
+    {
+      "slideId": "CPP_122_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise AND Operator",
+      "prompt": "Fill in the symbol for bitwise AND.",
+      "codeSnippet": "int result = 5 ___ 3;",
+      "options": ["&", "&&", "AND", "%"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_122_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise OR Function",
+      "prompt": "What does bitwise OR (|) return for each bit position?",
+      "options": ["1 if at least one corresponding bit is 1", "1 only if both corresponding bits are 1", "1 if bits are different", "0 always"],
+      "correctAnswer": "1 if at least one corresponding bit is 1"
+    },
+    {
+      "slideId": "CPP_122_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise OR Operator",
+      "prompt": "Fill in the symbol for bitwise OR.",
+      "codeSnippet": "int flags = 4 ___ 2;",
+      "options": ["|", "||", "OR", "+"],
+      "correctAnswer": "|"
+    },
+    {
+      "slideId": "CPP_122_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise XOR Truth Rule",
+      "prompt": "When does bitwise XOR (^) return 1 for a bit position?",
+      "options": ["When the bits are different (one is 1, the other is 0)", "When both bits are 1", "When both bits are 0", "When at least one bit is 0"],
+      "correctAnswer": "When the bits are different (one is 1, the other is 0)"
+    },
+    {
+      "slideId": "CPP_122_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise XOR Symbol",
+      "prompt": "Fill in the symbol for bitwise XOR.",
+      "codeSnippet": "int toggled = mask ___ value;",
+      "options": ["^", "~", "#", "**"],
+      "correctAnswer": "^"
+    },
+    {
+      "slideId": "CPP_122_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise NOT Function",
+      "prompt": "What does the unary bitwise NOT (~) operator do?",
+      "options": ["Inverts all binary bits (1 to 0, 0 to 1)", "Clears the lowest bit", "Reverses array order", "Converts to negative float"],
+      "correctAnswer": "Inverts all binary bits (1 to 0, 0 to 1)"
+    },
+    {
+      "slideId": "CPP_122_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise NOT Symbol",
+      "prompt": "Fill in the unary bitwise complement operator.",
+      "codeSnippet": "int inverted = ___mask;",
+      "options": ["~", "!", "-", "^"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_122_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise AND Application",
+      "prompt": "Which bitwise operation is used to check if a specific bit flag is set?",
+      "options": ["Bitwise AND (&)", "Bitwise OR (|)", "Bitwise NOT (~)", "Bitwise Addition (+)"],
+      "correctAnswer": "Bitwise AND (&)"
+    },
+    {
+      "slideId": "CPP_122_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise XOR Self Evaluation",
+      "prompt": "What is the result of (x ^ x) for any integer x?",
+      "codeSnippet": "int res = 5 ^ 5; // Result is ___",
+      "options": ["0", "5", "10", "1"],
+      "correctAnswer": "0"
+    }
+  ]
+}

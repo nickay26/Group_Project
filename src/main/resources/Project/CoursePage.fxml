@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CoursesPageController">
+<AnchorPane style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CoursesPageController">
     <children>
         <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
@@ -16,8 +16,8 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="Available Courses" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #666666;" text="Select a language track to continue learning and building projects." />
+                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Available Courses" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Select a language track to continue learning and building projects." />
                     </children>
                 </VBox>
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="manageQuestionsView" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.ManageQuestionsController">
+    <children>
+        <!-- ADD / EDIT SLIDE FORM (LEFT PANEL) -->
+        <VBox prefWidth="420.0" spacing="10.0" styleClass="glass-panel">
+            <children>
+                <Label styleClass="section-title" text="Add / Edit Slide" />
+
+                <HBox spacing="10.0">
+                    <children>
+                        <ComboBox fx:id="categoryCombo" maxWidth="1.7976931348623157E308" promptText="Category" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="lessonCombo" maxWidth="1.7976931348623157E308" promptText="Lesson" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <ComboBox fx:id="typeCombo" maxWidth="1.7976931348623157E308" promptText="Select Slide Type" styleClass="input-field" />
+
+                <TextField fx:id="slideTitleInput" promptText="Slide Title (e.g., Basic Syntax)" styleClass="input-field" />
+                <TextArea fx:id="promptArea" prefHeight="65.0" promptText="Enter Prompt / Question Text" styleClass="input-field" wrapText="true" />
+                <TextArea fx:id="codeSnippetArea" prefHeight="65.0" promptText="Code Snippet (Optional)" styleClass="input-field" wrapText="true" />
+
+                <HBox spacing="10.0">
+                    <children>
+                        <TextField fx:id="optA" promptText="Option A" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="optB" promptText="Option B" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <HBox spacing="10.0">
+                    <children>
+                        <TextField fx:id="optC" promptText="Option C" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="optD" promptText="Option D" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <TextField fx:id="correctAnswerInput" promptText="Correct Answer Text" styleClass="input-field" />
+
+                <HBox spacing="10.0">
+                    <children>
+                        <Button maxWidth="1.7976931348623157E308" onAction="#handleSaveQuestion" styleClass="primary-btn" text="Save Slide" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" onAction="#handleDeleteQuestion" style="-fx-background-color: #dc2626;" styleClass="primary-btn" text="Delete Selected" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- SLIDES LIST TABLE (RIGHT PANEL) -->
+        <VBox spacing="10.0" styleClass="glass-panel" HBox.hgrow="ALWAYS">
+            <children>
+                <Label styleClass="section-title" text="Existing Slides List" />
+                <TableView fx:id="slideTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" prefWidth="100.0" text="Slide ID" />
+                        <TableColumn fx:id="colType" prefWidth="110.0" text="Type" />
+                        <TableColumn fx:id="colTitle" prefWidth="130.0" text="Title" />
+                        <TableColumn fx:id="colPrompt" prefWidth="200.0" text="Prompt" />
+                        <TableColumn fx:id="colAnswer" prefWidth="100.0" text="Answer" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
+</HBox>

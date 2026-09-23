@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_219",
+  "title": "Template Specialization & Partial Specialization",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_219_S1",
+      "type": "CONCEPT",
+      "title": "Full vs Partial Specialization",
+      "prompt": "Template Specialization allows providing custom implementations for specific data types. Full specialization works for functions and classes; Partial specialization is only for class templates.",
+      "codeSnippet": "// Explicit (Full) Specialization:\ntemplate <>\nclass Printer<char> {\npublic:\n    void print() { std::cout << \"Char specialization\"; }\n};"
+    },
+    {
+      "slideId": "CPP_219_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Full Specialization Syntax",
+      "prompt": "Fill in the template header required for full template specialization.",
+      "codeSnippet": "template <___>\nclass Storage<bool> {};",
+      "options": [">", "void", "typename T", "auto"],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_219_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Partial Specialization Support",
+      "prompt": "Which language construct supports Partial Specialization in C++?",
+      "options": [
+        "Class Templates only",
+        "Function Templates only",
+        "Both Class Templates and Function Templates",
+        "Lambda Expressions only"
+      ],
+      "correctAnswer": "Class Templates only"
+    },
+    {
+      "slideId": "CPP_219_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Partial Pointer Specialization",
+      "prompt": "Fill in the partial specialization template header to match any pointer type T*.",
+      "codeSnippet": "template <typename T>\nclass Wrapper<___*> {};",
+      "options": ["T", "auto", "void", "class"],
+      "correctAnswer": "T"
+    },
+    {
+      "slideId": "CPP_219_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Template Customization Alternative",
+      "prompt": "Because function templates do not support partial specialization, what is the idiomatic alternative?",
+      "options": [
+        "Use standard Function Overloading",
+        "Use dynamic_cast inside function body",
+        "Use macros (#define)",
+        "Convert function to virtual member function"
+      ],
+      "correctAnswer": "Use standard Function Overloading"
+    },
+    {
+      "slideId": "CPP_219_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Specialized Method Header",
+      "prompt": "Full specialization of a single member function uses template <___> prefix.",
+      "codeSnippet": "template <___>\nvoid Box<int>::show() {}",
+      "options": [">", "typename T", "int", "auto"],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_219_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::vector<bool> Specialization",
+      "prompt": "What is unique about the standard library specialization std::vector<bool>?",
+      "options": [
+        "It is space-optimized to store booleans as individual bits rather than full bytes",
+        "It uses heap allocation for every element",
+        "It is completely immutable (read-only)",
+        "It disables random access operator[]"
+      ],
+      "correctAnswer": "It is space-optimized to store booleans as individual bits rather than full bytes"
+    },
+    {
+      "slideId": "CPP_219_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Primary Template Requirement",
+      "prompt": "Before defining a specialization, the ___ template declaration must be visible to the compiler.",
+      "codeSnippet": "// Specialization requires preceding:\nPrimary",
+      "options": ["Primary", "Derived", "Virtual", "Abstract"],
+      "correctAnswer": "Primary"
+    },
+    {
+      "slideId": "CPP_219_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Partial Specialization for Two Parameters",
+      "prompt": "Given 'template<typename T, typename U> class Pair;', which choice is a partial specialization where both types are identical?",
+      "options": [
+        "template<typename T> class Pair<T, T> {};",
+        "template<> class Pair<int, int> {};",
+        "template<typename T, typename U> class Pair {};",
+        "template<typename T> class Pair<T, void> {};"
+      ],
+      "correctAnswer": "template<typename T> class Pair<T, T> {};"
+    },
+    {
+      "slideId": "CPP_219_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Specialization Code Linkage",
+      "prompt": "Fully specialized function templates should be declared ___ or defined in source files to avoid multiple symbol definition errors.",
+      "codeSnippet": "template <>\n___ void print<int>(int val) {}",
+      "options": ["inline", "virtual", "static_cast", "extern"],
+      "correctAnswer": "inline"
+    }
+  ]
+}

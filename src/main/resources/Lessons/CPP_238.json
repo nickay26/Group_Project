@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_238",
+  "title": "Numeric Algorithms & Ranges Header",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_238_S1",
+      "type": "CONCEPT",
+      "title": "Numeric & Header Overview",
+      "prompt": "The <numeric> header provides algorithms like std::accumulate, std::iota, and std::inner_product. C++20 introduced the <numeric> and <ranges> updates to streamline algorithm pipelines.",
+      "codeSnippet": "#include <numeric>\n#include <vector>\nstd::vector<int> v = {1, 2, 3, 4};\nint sum = std::accumulate(v.begin(), v.end(), 0);"
+    },
+    {
+      "slideId": "CPP_238_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Summing Elements",
+      "prompt": "Fill in the function used to accumulate values over a range starting with an initial sum.",
+      "codeSnippet": "int total = std::___(v.begin(), v.end(), 0);",
+      "options": ["accumulate", "reduce", "sum", "add_all"],
+      "correctAnswer": "accumulate"
+    },
+    {
+      "slideId": "CPP_238_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::iota Functionality",
+      "prompt": "What does std::iota(begin, end, val) do?",
+      "options": [
+        "Fills a range with sequentially increasing values starting from val (val, val+1, val+2...)",
+        "Calculates the factorial sum of range elements",
+        "Initializes all range values to zero",
+        "Randomizes elements in a range"
+      ],
+      "correctAnswer": "Fills a range with sequentially increasing values starting from val (val, val+1, val+2...)"
+    },
+    {
+      "slideId": "CPP_238_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Iota Generation",
+      "prompt": "Fill in the numeric algorithm that populates a vector with values 1, 2, 3...",
+      "codeSnippet": "std::vector<int> nums(5);\nstd::___(nums.begin(), nums.end(), 1);",
+      "options": ["iota", "fill_seq", "sequence", "generate_n"],
+      "correctAnswer": "iota"
+    },
+    {
+      "slideId": "CPP_238_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::reduce vs std::accumulate",
+      "prompt": "What advantage does std::reduce (C++17) have over std::accumulate?",
+      "options": [
+        "std::reduce supports out-of-order parallel execution because it does not require strict sequential order",
+        "std::reduce works on non-numeric types only",
+        "std::reduce guarantees left-to-right strict order of operations",
+        "std::reduce has lower memory usage"
+      ],
+      "correctAnswer": "std::reduce supports out-of-order parallel execution because it does not require strict sequential order"
+    },
+    {
+      "slideId": "CPP_238_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Adjacent Difference",
+      "prompt": "Fill in the algorithm that calculates differences between adjacent elements in a range.",
+      "codeSnippet": "std::___(v.begin(), v.end(), res.begin());",
+      "options": ["adjacent_difference", "difference", "adjacent_sub", "delta"],
+      "correctAnswer": "adjacent_difference"
+    },
+    {
+      "slideId": "CPP_238_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::inner_product Calculation",
+      "prompt": "What does std::inner_product compute for two ranges A and B?",
+      "options": [
+        "The sum of element-wise products: (A[0]*B[0] + A[1]*B[1] + ...)",
+        "The cross product vector of A and B",
+        "The matrix multiplication result of A and B",
+        "The element-wise division vector"
+      ],
+      "correctAnswer": "The sum of element-wise products: (A[0]*B[0] + A[1]*B[1] + ...)"
+    },
+    {
+      "slideId": "CPP_238_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Partial Sum",
+      "prompt": "Fill in the algorithm function that computes running cumulative sums of a sequence.",
+      "codeSnippet": "std::___(v.begin(), v.end(), res.begin());",
+      "options": ["partial_sum", "running_sum", "accumulate_step", "cumulative_sum"],
+      "correctAnswer": "partial_sum"
+    },
+    {
+      "slideId": "CPP_238_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::midpoint (C++20)",
+      "prompt": "Why is std::midpoint(a, b) preferred over (a + b) / 2?",
+      "options": [
+        "Prevents integer overflow during addition when computing averages",
+        "Runs faster on GPU processors",
+        "Works exclusively with floating point types",
+        "Compiles only if a and b are constants"
+      ],
+      "correctAnswer": "Prevents integer overflow during addition when computing averages"
+    },
+    {
+      "slideId": "CPP_238_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "GCD Numeric Function",
+      "prompt": "Fill in the C++17 numeric function that computes the greatest common divisor of two integers.",
+      "codeSnippet": "int g = std::___(24, 36);",
+      "options": ["gcd", "lcm", "greatest_divisor", "common_factor"],
+      "correctAnswer": "gcd"
+    }
+  ]
+}

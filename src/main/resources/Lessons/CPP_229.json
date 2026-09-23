@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_229",
+  "title": "std::set & std::multiset",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_229_S1",
+      "type": "CONCEPT",
+      "title": "std::set Fundamentals",
+      "prompt": "std::set stores unique keys in sorted order. Elements in a set cannot be modified directly once inserted; to change a value, it must be removed and re-inserted.",
+      "codeSnippet": "#include <set>\nstd::set<int> numbers = {3, 1, 4, 1, 5};\n// Contains unique sorted values: {1, 3, 4, 5}"
+    },
+    {
+      "slideId": "CPP_229_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Insertion Result",
+      "prompt": "The insert method on std::set returns a std::pair<iterator, ___>.",
+      "codeSnippet": "auto [it, success] = mySet.insert(42);",
+      "options": ["bool", "int", "status", "void"],
+      "correctAnswer": "bool"
+    },
+    {
+      "slideId": "CPP_229_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::multiset Behavior",
+      "prompt": "How does std::multiset differ from std::set?",
+      "options": [
+        "std::multiset allows duplicate keys, while std::set enforces strict key uniqueness",
+        "std::multiset elements are unsorted",
+        "std::multiset uses dynamic arrays internally",
+        "std::multiset supports modification of keys in-place"
+      ],
+      "correctAnswer": "std::multiset allows duplicate keys, while std::set enforces strict key uniqueness"
+    },
+    {
+      "slideId": "CPP_229_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Element Existence C++20",
+      "prompt": "Fill in the C++20 method to check if an element exists in a set.",
+      "codeSnippet": "if (mySet.___(10)) {\n    // Element exists\n}",
+      "options": ["contains", "exists", "has_key", "find_bool"],
+      "correctAnswer": "contains"
+    },
+    {
+      "slideId": "CPP_229_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Immutability of Set Elements",
+      "prompt": "Why are set element iterators treated as const_iterator references?",
+      "options": [
+        "Modifying an element in-place could corrupt the underlying tree sorting structure",
+        "Sets are stored in read-only memory",
+        "Sets do not allocate heap memory",
+        "To allow faster thread safety"
+      ],
+      "correctAnswer": "Modifying an element in-place could corrupt the underlying tree sorting structure"
+    },
+    {
+      "slideId": "CPP_229_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Lower Bound Lookup",
+      "prompt": "Fill in the method returning an iterator to the first element that is NOT less than a given key.",
+      "codeSnippet": "auto it = mySet.___ (15);",
+      "options": ["lower_bound", "upper_bound", "find_first", "first_greater"],
+      "correctAnswer": "lower_bound"
+    },
+    {
+      "slideId": "CPP_229_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Upper Bound Behavior",
+      "prompt": "What does upper_bound(val) return when called on std::set?",
+      "options": [
+        "Iterator to the first element strictly greater than val",
+        "Iterator to the element equal to val",
+        "Iterator to the last element in the set",
+        "Iterator to the smallest element"
+      ],
+      "correctAnswer": "Iterator to the first element strictly greater than val"
+    },
+    {
+      "slideId": "CPP_229_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Comparator Set",
+      "prompt": "Fill in the comparator specifier to declare a set sorted in descending order.",
+      "codeSnippet": "std::set<int, std::___<int>> descendingSet;",
+      "options": ["greater", "less", "descending", "reverse"],
+      "correctAnswer": "greater"
+    },
+    {
+      "slideId": "CPP_229_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Set Counting Function",
+      "prompt": "What value will set.count(key) return for std::set when key is present?",
+      "options": [
+        "1 (since keys are guaranteed unique)",
+        "Total number of elements in the set",
+        "0",
+        "Index position of the key"
+      ],
+      "correctAnswer": "1 (since keys are guaranteed unique)"
+    },
+    {
+      "slideId": "CPP_229_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Extracting Nodes C++17",
+      "prompt": "Fill in the C++17 method used to extract a node handle from a set without copying or reallocating memory.",
+      "codeSnippet": "auto node = mySet.___(iterator);",
+      "options": ["extract", "detach", "node_take", "pop"],
+      "correctAnswer": "extract"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_149",
+  "title": "std::vector Dynamic Sequences",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_149_S1",
+      "type": "CONCEPT",
+      "title": "std::vector Overview",
+      "prompt": "std::vector is a dynamic array that grows or shrinks automatically in contiguous heap memory as elements are added or removed.",
+      "codeSnippet": "#include <vector>\nstd::vector<int> vec;\nvec.push_back(10);\nvec.push_back(20);\nstd::cout << vec.size();"
+    },
+    {
+      "slideId": "CPP_149_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding Element to Back",
+      "prompt": "Fill in method to append value to the end of a vector.",
+      "codeSnippet": "vec.___(42);",
+      "options": ["push_back", "append", "add", "insert"],
+      "correctAnswer": "push_back"
+    },
+    {
+      "slideId": "CPP_149_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Size vs Capacity Distinction",
+      "prompt": "What is the difference between vector size() and capacity()?",
+      "options": ["size() is number of current elements; capacity() is total allocated memory slots before reallocating", "They mean the exact same thing", "capacity() is byte size; size() is element count", "size() is max allowed size"],
+      "correctAnswer": "size() is number of current elements; capacity() is total allocated memory slots before reallocating"
+    },
+    {
+      "slideId": "CPP_149_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "In-Place Construction",
+      "prompt": "Fill in method constructing object directly inside vector memory.",
+      "codeSnippet": "vec.___(arg1, arg2);",
+      "options": ["emplace_back", "push_back", "construct", "insert"],
+      "correctAnswer": "emplace_back"
+    },
+    {
+      "slideId": "CPP_149_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Amortized Push Back Complexity",
+      "prompt": "What is the amortized time complexity of push_back() on a std::vector?",
+      "options": ["O(1) amortized constant time", "O(N) linear time always", "O(log N)", "O(N^2)"],
+      "correctAnswer": "O(1) amortized constant time"
+    },
+    {
+      "slideId": "CPP_149_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Removing Last Element",
+      "prompt": "Fill in method removing last item without returning it.",
+      "codeSnippet": "vec.___();",
+      "options": ["pop_back", "remove_last", "erase", "delete"],
+      "correctAnswer": "pop_back"
+    },
+    {
+      "slideId": "CPP_149_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Growth Factor Strategy",
+      "prompt": "How do standard library vectors typical expand capacity when full?",
+      "options": ["By multiplying capacity by a factor (usually 1.5x or 2x)", "Adding 1 slot at a time", "Doubling size every iteration", "Allocating fixed 100 slots"],
+      "correctAnswer": "By multiplying capacity by a factor (usually 1.5x or 2x)"
+    },
+    {
+      "slideId": "CPP_149_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Shrinking Memory Capacity",
+      "prompt": "Fill in method requesting vector to drop unused capacity.",
+      "codeSnippet": "vec.___();",
+      "options": ["shrink_to_fit", "compact", "free_unused", "trim"],
+      "correctAnswer": "shrink_to_fit"
+    },
+    {
+      "slideId": "CPP_149_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Specialization for bool",
+      "prompt": "Why is std::vector<bool> uniquely controversial in C++?",
+      "options": ["It is space-optimized bitfield specialization that does not store true C++ bool references", "It is twice as slow", "It uses heap on every element", "It cannot be sorted"],
+      "correctAnswer": "It is space-optimized bitfield specialization that does not store true C++ bool references"
+    },
+    {
+      "slideId": "CPP_149_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Clearing Vector Elements",
+      "prompt": "Fill in method clearing all elements (resets size to 0).",
+      "codeSnippet": "vec.___();",
+      "options": ["clear", "reset", "erase", "empty"],
+      "correctAnswer": "clear"
+    }
+  ]
+}

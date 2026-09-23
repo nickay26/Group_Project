@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_165",
+  "title": "Weak Pointers (std::weak_ptr) & RAII",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_165_S1",
+      "type": "CONCEPT",
+      "title": "Non-Owning Smart Pointer Observer",
+      "prompt": "std::weak_ptr observes shared_ptr without increasing reference count, breaking cyclic dependencies.",
+      "codeSnippet": "std::shared_ptr<int> s = std::make_shared<int>(50);\nstd::weak_ptr<int> w = s;\nif (auto locked = w.lock()) {\n    std::cout << *locked;\n}"
+    },
+    {
+      "slideId": "CPP_165_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Locking Weak Pointer",
+      "prompt": "Fill in method to safely convert weak_ptr to shared_ptr for access.",
+      "codeSnippet": "if (auto shared = weakPtr.___()) {\n    // Safe usage\n}",
+      "options": ["lock", "get", "upgrade", "to_shared"],
+      "correctAnswer": "lock"
+    },
+    {
+      "slideId": "CPP_165_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Expired Check",
+      "prompt": "Which method checks if the resource observed by std::weak_ptr was already deleted?",
+      "options": [
+        "expired()",
+        "is_null()",
+        "deleted()",
+        "valid()"
+      ],
+      "correctAnswer": "expired()"
+    },
+    {
+      "slideId": "CPP_165_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "RAII Paradigm Acronym",
+      "prompt": "Fill in acronym keyword concept: Resource Acquisition Is ___.",
+      "codeSnippet": "// RAII concept name\n// Resource Acquisition Is ___",
+      "options": ["Initialization", "Instantiation", "Implementation", "Integration"],
+      "correctAnswer": "Initialization"
+    },
+    {
+      "slideId": "CPP_165_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Raw Pointers Modern Usage",
+      "prompt": "In Modern C++ guidelines, when should raw pointers primarily be used?",
+      "options": [
+        "As non-owning observers/parameters where lifetime management is handled elsewhere",
+        "To perform explicit heap allocations using 'new'",
+        "To replace std::shared_ptr in multithreaded code",
+        "They should be completely banned and never used"
+      ],
+      "correctAnswer": "As non-owning observers/parameters where lifetime management is handled elsewhere"
+    },
+    {
+      "slideId": "CPP_165_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "enable_shared_from_this Helper",
+      "prompt": "Fill in class helper allowing object to safely generate shared_ptr to itself.",
+      "codeSnippet": "class Node : public std::___<Node> {};",
+      "options": ["enable_shared_from_this", "shared_object", "make_shared_this", "self_shared"],
+      "correctAnswer": "enable_shared_from_this"
+    },
+    {
+      "slideId": "CPP_165_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Calling shared_from_this() Constraint",
+      "prompt": "When is it safe to call 'shared_from_this()' inside a class method?",
+      "options": [
+        "Only after the object is already managed by at least one std::shared_ptr",
+        "Inside the class constructor",
+        "Inside the class destructor",
+        "Anytime, even on stack-allocated instances"
+      ],
+      "correctAnswer": "Only after the object is already managed by at least one std::shared_ptr"
+    },
+    {
+      "slideId": "CPP_165_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Weak Pointer Assignment",
+      "prompt": "Fill in weak_ptr declaration initialized from shared_ptr.",
+      "codeSnippet": "std::shared_ptr<int> sp = std::make_shared<int>(10);\nstd::___<int> wp = sp;",
+      "options": ["weak_ptr", "shared_ptr", "unique_ptr", "observer_ptr"],
+      "correctAnswer": "weak_ptr"
+    },
+    {
+      "slideId": "CPP_165_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Benefit of RAII Paradigm",
+      "prompt": "What is the primary architectural guarantee provided by RAII in C++?",
+      "options": [
+        "Guaranteed resource release (memory, file handles, locks) when object leaves scope",
+        "Elimination of virtual table runtime overhead",
+        "Automatic parallel execution of functions",
+        "Compression of binary executable size"
+      ],
+      "correctAnswer": "Guaranteed resource release (memory, file handles, locks) when object leaves scope"
+    },
+    {
+      "slideId": "CPP_165_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Destructor Automatic Cleanup",
+      "prompt": "RAII relies on class ___ to free resources automatically.",
+      "codeSnippet": "// Resource freed inside:\n~MyClass() { /* cleanup */ }",
+      "options": ["destructors", "constructors", "methods", "operators"],
+      "correctAnswer": "destructors"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_252",
+  "title": "std::move & Explicit Resource Transfer",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_252_S1",
+      "type": "CONCEPT",
+      "title": "std::move Mechanics",
+      "prompt": "std::move does not actually move any memory at runtime! It is merely an unconditional static cast that converts an lvalue expression into an rvalue reference (xvalue), enabling move overload selection.",
+      "codeSnippet": "#include <utility>\nstd::string s1 = \"Large String Data...\";\nstd::string s2 = std::move(s1); // Casts s1 to rvalue; calls string(string&&)"
+    },
+    {
+      "slideId": "CPP_252_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Header for std::move",
+      "prompt": "Fill in the standard header required to use std::move.",
+      "codeSnippet": "#include <___>\nstd::string b = std::move(a);",
+      "options": ["utility", "algorithm", "memory", "iostream"],
+      "correctAnswer": "utility"
+    },
+    {
+      "slideId": "CPP_252_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::move Runtime Overhead",
+      "prompt": "What is the runtime instruction cost of calling std::move on an object?",
+      "options": [
+        "Zero overhead (it is purely a compile-time type cast)",
+        "Allocates dynamic control headers on heap",
+        "Performs bitwise block memory copies",
+        "Executes atomic synchronization locks"
+      ],
+      "correctAnswer": "Zero overhead (it is purely a compile-time type cast)"
+    },
+    {
+      "slideId": "CPP_252_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::move on Const Objects",
+      "prompt": "Fill in the resulting operation when calling std::move on a const lvalue object.",
+      "codeSnippet": "const std::string text = \"Frozen\";\nstd::string target = std::move(text); // Triggers ___ constructor instead of move!",
+      "options": ["copy", "move", "default", "deleter"],
+      "correctAnswer": "copy"
+    },
+    {
+      "slideId": "CPP_252_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Why std::move on Const Fails to Move",
+      "prompt": "Why does std::move(const_object) result in a copy operation rather than a move?",
+      "options": [
+        "Move constructors require non-const T&& parameters to mutate and reset the source object",
+        "Const objects cannot be referenced with double ampersands (&&)",
+        "The compiler throws a syntax error when std::move receives const types",
+        "Const memory is stored on read-only hardware sectors"
+      ],
+      "correctAnswer": "Move constructors require non-const T&& parameters to mutate and reset the source object"
+    },
+    {
+      "slideId": "CPP_252_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Moving Primitives",
+      "prompt": "Fill in what happens when applying std::move to built-in primitive types like int or double.",
+      "codeSnippet": "int x = 10;\nint y = std::move(x); // Simply ___ the value (no memory steal benefit)",
+      "options": ["copies", "clears", "deletes", "nullifies"],
+      "correctAnswer": "copies"
+    },
+    {
+      "slideId": "CPP_252_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Re-using Moved-From Variables",
+      "prompt": "Is it safe to reuse a moved-from variable in C++?",
+      "options": [
+        "Yes, provided you assign a brand new valid state value to it before reading from it",
+        "No, reading or writing to a moved-from variable causes immediate segmentation fault",
+        "Yes, it automatically retains its original value",
+        "No, compiler blocks any further access to that variable name"
+      ],
+      "correctAnswer": "Yes, provided you assign a brand new valid state value to it before reading from it"
+    },
+    {
+      "slideId": "CPP_252_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Moving Local Return Values (Pessimization Warning)",
+      "prompt": "Fill in the bad practice term when writing 'return std::move(localObj);' which prevents Named Return Value Optimization (NRVO).",
+      "codeSnippet": "// Writing 'return std::move(localObj);' causes move ___\n// It prevents NRVO copy elision!",
+      "options": ["pessimization", "optimization", "recursion", "inlining"],
+      "correctAnswer": "pessimization"
+    },
+    {
+      "slideId": "CPP_252_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::swap Implementation with std::move",
+      "prompt": "How does std::swap work efficiently for C++11 types?",
+      "options": [
+        "Uses std::move to perform 3 move operations without allocating heap memory or copying data",
+        "Allocates a temporary heap buffer to store object state",
+        "Swaps hardware registers using inline assembly",
+        "Executes memcpy on object raw byte buffers"
+      ],
+      "correctAnswer": "Uses std::move to perform 3 move operations without allocating heap memory or copying data"
+    },
+    {
+      "slideId": "CPP_252_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Move in Setter Functions",
+      "prompt": "Fill in the std function call to sink parameter value into class member.",
+      "codeSnippet": "class Person {\n    std::string name;\npublic:\n    void setName(std::string newName) {\n        name = std::___(newName);\n    }\n};",
+      "options": ["move", "forward", "swap", "copy"],
+      "correctAnswer": "move"
+    }
+  ]
+},

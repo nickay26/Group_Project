@@ -1,70 +1,91 @@
 {
   "lessonId": "CPP_104",
-  "title": "C++ User Input (std::cin)",
+  "title": "Primitive Data Types",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_104_S1",
       "type": "CONCEPT",
-      "title": "Reading Input",
-      "prompt": "std::cin is used together with the extraction operator (>>) to get user input.",
-      "codeSnippet": "int x;\nstd::cout << \"Type a number: \";\nstd::cin >> x;"
+      "title": "Core Data Types",
+      "prompt": "C++ offers built-in data types: int for integers, double/float for decimals, char for characters, and bool for booleans.",
+      "codeSnippet": "int count = 10;\ndouble price = 19.99;\nchar grade = 'A';\nbool isReady = true;"
     },
     {
       "slideId": "CPP_104_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Taking Input",
-      "prompt": "Fill in the blank to read user input into variable 'age'.",
-      "codeSnippet": "std::___ >> age;",
-      "options": ["cin", "cout", "input", "read"],
-      "correctAnswer": "cin"
+      "title": "Character Literal",
+      "prompt": "Fill in the missing data type for single characters.",
+      "codeSnippet": "___ symbol = '$';",
+      "options": ["char", "string", "text", "letter"],
+      "correctAnswer": "char"
     },
     {
       "slideId": "CPP_104_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Extraction Operator",
-      "prompt": "Which operator is used with std::cin to read input?",
-      "options": [">>", "<<", "->", "::"],
-      "correctAnswer": ">>"
+      "title": "Boolean Values",
+      "prompt": "What are the two possible values for a 'bool' variable?",
+      "options": ["true or false", "1 or -1", "yes or no", "on or off"],
+      "correctAnswer": "true or false"
     },
     {
       "slideId": "CPP_104_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Multiple Inputs",
-      "prompt": "Complete the code to take input for two variables x and y sequentially.",
-      "codeSnippet": "std::cin >> x ___ y;",
-      "options": [">>", "<<", ",", "+"],
-      "correctAnswer": ">>"
+      "title": "Floating Point Type",
+      "prompt": "Fill in the data type for high-precision decimal numbers.",
+      "codeSnippet": "___ pi = 3.14159;",
+      "options": ["double", "int", "bool", "char"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_104_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "cin Stream Type",
-      "prompt": "std::cin is an instance of which C++ stream class?",
-      "options": ["istream", "ostream", "fstream", "stringstream"],
-      "correctAnswer": "istream"
+      "title": "Quotes for Characters",
+      "prompt": "Which quotes must be used to enclose a single 'char' literal?",
+      "options": ["Single quotes (' ')", "Double quotes (\" \")", "Backticks (` `)", "No quotes required"],
+      "correctAnswer": "Single quotes (' ')"
     },
     {
       "slideId": "CPP_104_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Prompting User",
-      "prompt": "Complete the code to output a prompt before receiving input.",
-      "codeSnippet": "std::___ << \"Enter name: \";\nstd::cin >> name;",
-      "options": ["cout", "cin", "print", "write"],
-      "correctAnswer": "cout"
+      "title": "Boolean Initialization",
+      "prompt": "Complete the boolean initialization for a false condition.",
+      "codeSnippet": "bool isOver = ___;",
+      "options": ["false", "0", "null", "False"],
+      "correctAnswer": "false"
     },
     {
       "slideId": "CPP_104_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Whitespace Handling",
-      "prompt": "How does std::cin >> stringVar handle whitespace (spaces, tabs, newlines)?",
-      "options": [
-        "It stops reading at the first whitespace",
-        "It reads the entire line including spaces",
-        "It throws an execution error",
-        "It automatically converts spaces to underscores"
-      ],
-      "correctAnswer": "It stops reading at the first whitespace"
+      "title": "Data Type Size Check",
+      "prompt": "Which keyword returns the memory size (in bytes) of a data type?",
+      "options": ["sizeof", "length", "size", "bytesof"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_104_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "String Included Header",
+      "prompt": "Fill in the header file needed to use std::string.",
+      "codeSnippet": "#include <___>",
+      "options": ["string", "cstring", "text", "iostream"],
+      "correctAnswer": "string"
+    },
+    {
+      "slideId": "CPP_104_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Float vs Double",
+      "prompt": "What is the primary difference between float and double?",
+      "options": ["double provides higher precision and double the size of float", "float handles text, double handles numbers", "float is unsigned, double is signed", "There is no difference"],
+      "correctAnswer": "double provides higher precision and double the size of float"
+    },
+    {
+      "slideId": "CPP_104_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "String Literal Quotes",
+      "prompt": "Fill in the correct delimiter for string literals.",
+      "codeSnippet": "std::string name = ___Hello___;",
+      "options": ["\"", "'", "`", "/"],
+      "correctAnswer": "\""
     }
   ]
 }

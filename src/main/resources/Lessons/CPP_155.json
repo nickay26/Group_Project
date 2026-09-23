@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_155",
+  "title": "Inline Functions & Compiler Inlining Mechanics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_155_S1",
+      "type": "CONCEPT",
+      "title": "Inline Functions Overview",
+      "prompt": "The 'inline' keyword hints to the compiler to substitute function calls directly with the function's machine code, eliminating call overhead at the expense of binary size.",
+      "codeSnippet": "inline int square(int x) {\n    return x * x;\n}"
+    },
+    {
+      "slideId": "CPP_155_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Keyword Placement",
+      "prompt": "Fill in the keyword to request function code substitution.",
+      "codeSnippet": "___ double cube(double x) {\n    return x * x * x;\n}",
+      "options": ["inline", "constexpr", "static", "fast"],
+      "correctAnswer": "inline"
+    },
+    {
+      "slideId": "CPP_155_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compiler Inlining Authority",
+      "prompt": "Is the 'inline' keyword a strict mandatory command to the C++ compiler?",
+      "options": [
+        "No, it is merely a recommendation; the compiler decides whether to inline based on optimization settings",
+        "Yes, the compiler must inline every function marked inline",
+        "Yes, but only in debug build modes",
+        "No, inline is deprecated in C++20"
+      ],
+      "correctAnswer": "No, it is merely a recommendation; the compiler decides whether to inline based on optimization settings"
+    },
+    {
+      "slideId": "CPP_155_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Implicit Inlining in Classes",
+      "prompt": "Functions defined inside class declarations are implicitly marked ___. Fill in keyword.",
+      "codeSnippet": "class Calculator {\npublic:\n    int getValue() { return val; } // Implicitly ___\n};",
+      "options": ["inline", "static", "constexpr", "virtual"],
+      "correctAnswer": "inline"
+    },
+    {
+      "slideId": "CPP_155_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inline Linkage Exception",
+      "prompt": "What key linkage permission does the 'inline' keyword grant regarding multiple definitions?",
+      "options": [
+        "Allows identical function definitions in multiple header-included translation units without linker errors",
+        "Restricts function access strictly to the local source file",
+        "Makes the function globally accessible to C programs",
+        "Forces function symbols to be dynamically exported"
+      ],
+      "correctAnswer": "Allows identical function definitions in multiple header-included translation units without linker errors"
+    },
+    {
+      "slideId": "CPP_155_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Variables in C++17",
+      "prompt": "Fill in the C++17 keyword that permits global constants in headers without violating ODR.",
+      "codeSnippet": "___ constexpr int MAX_BUFFER = 1024;",
+      "options": ["inline", "static", "extern", "global"],
+      "correctAnswer": "inline"
+    },
+    {
+      "slideId": "CPP_155_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Drawbacks of Over-Inlining",
+      "prompt": "What is the primary risk of forcing inlining on large complex functions?",
+      "options": [
+        "Code bloat causing instruction cache misses and performance loss",
+        "Memory leak on the call stack",
+        "Stack overflow runtime exceptions",
+        "Race conditions in multi-threaded code"
+      ],
+      "correctAnswer": "Code bloat causing instruction cache misses and performance loss"
+    },
+    {
+      "slideId": "CPP_155_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Always Inline Compiler Extensions",
+      "prompt": "Fill in MSVC attribute keyword for forcing inline substitution.",
+      "codeSnippet": "__forceinline void criticalCode();",
+      "options": ["__forceinline", "inline_always", "always_inline", "inline_force"],
+      "correctAnswer": "__forceinline"
+    },
+    {
+      "slideId": "CPP_155_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inlining and Recursion",
+      "prompt": "Can recursive functions be completely inlined at compile time?",
+      "options": [
+        "Generally no, because call depth is dynamic (unless unrolled for fixed depth compile-time limits)",
+        "Yes, recursive functions are always inlined",
+        "Only if marked with constexpr",
+        "Only when optimized with O3"
+      ],
+      "correctAnswer": "Generally no, because call depth is dynamic (unless unrolled for fixed depth compile-time limits)"
+    },
+    {
+      "slideId": "CPP_155_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Header Placement for Inline Functions",
+      "prompt": "Inline function definitions must be placed in ___ files so compilers see the body in every translation unit.",
+      "codeSnippet": "// Place inline functions in .h / .hpp files",
+      "options": ["header", "source", "binary", "object"],
+      "correctAnswer": "header"
+    }
+  ]
+}

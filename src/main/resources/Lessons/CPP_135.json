@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_135",
+  "title": "Range-Based for Loops (C++11)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_135_S1",
+      "type": "CONCEPT",
+      "title": "Range-Based for Loop Overview",
+      "prompt": "Introduced in C++11, range-based for loops iterate effortlessly over all elements in containers or arrays.",
+      "codeSnippet": "int nums[] = {10, 20, 30};\nfor (int x : nums) {\n    std::cout << x << \" \";\n}"
+    },
+    {
+      "slideId": "CPP_135_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Range-Based Separator Symbol",
+      "prompt": "Fill in the colon separator used in range-based for syntax.",
+      "codeSnippet": "for (int item ___ collection) {\n    use(item);\n}",
+      "options": [":", "in", "->", "::"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_135_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reference Iteration Purpose",
+      "prompt": "Why use 'for (auto& x : container)' instead of 'for (auto x : container)'?",
+      "options": ["To modify elements directly and avoid copying overhead", "To make elements read-only", "To iterate backwards", "To access element indices"],
+      "correctAnswer": "To modify elements directly and avoid copying overhead"
+    },
+    {
+      "slideId": "CPP_135_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Reference Range Loop",
+      "prompt": "Fill in keywords for read-only element access without copying.",
+      "codeSnippet": "for (___ auto& val : vec) {\n    std::cout << val;\n}",
+      "options": ["const", "static", "readonly", "constexpr"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_135_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Index Access in Range-Based Loop",
+      "prompt": "Does a standard C++11 range-based for loop directly provide the current loop index?",
+      "options": ["No, it yields elements directly; index tracking requires separate variable or C++20 init", "Yes, via index keyword", "Yes, using std::index()", "Only when iterating arrays"],
+      "correctAnswer": "No, it yields elements directly; index tracking requires separate variable or C++20 init"
+    },
+    {
+      "slideId": "CPP_135_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Type Deduction Range",
+      "prompt": "Fill in keyword for automatic type deduction.",
+      "codeSnippet": "for (___ x : numbers) {\n    sum += x;\n}",
+      "options": ["auto", "var", "type", "let"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_135_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compatible Types for Range Loop",
+      "prompt": "What types can be iterated using a range-based for loop?",
+      "options": ["Raw arrays and standard library containers (std::vector, std::string, etc.)", "Any primitive int or double variable", "Only pointer types", "Functions and lambdas"],
+      "correctAnswer": "Raw arrays and standard library containers (std::vector, std::string, etc.)"
+    },
+    {
+      "slideId": "CPP_135_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Modifying Element Value",
+      "prompt": "Fill in the symbol enabling modification of array elements.",
+      "codeSnippet": "for (auto___ elem : arr) {\n    elem *= 2; // Doubles array values\n}",
+      "options": ["&", "*", "%", "&&"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_135_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 Init Statement in Range Loop",
+      "prompt": "What C++20 enhancement was added to range-based for loops?",
+      "options": ["Initializer statements: for (init; decl : expr)", "Reverse iteration operator", "Parallel execution keyword", "Automatic index variable"],
+      "correctAnswer": "Initializer statements: for (init; decl : expr)"
+    },
+    {
+      "slideId": "CPP_135_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "String Character Iteration",
+      "prompt": "Fill in the loop variable type to iterate characters of std::string.",
+      "codeSnippet": "std::string str = \"Hello\";\nfor (___ c : str) {\n    std::cout << c;\n}",
+      "options": ["char", "int", "string", "float"],
+      "correctAnswer": "char"
+    }
+  ]
+}

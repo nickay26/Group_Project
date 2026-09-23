@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_133",
+  "title": "Inheritance",
+  "slides": [
+    {
+      "slideId": "JAVA_133_S1",
+      "type": "CONCEPT",
+      "title": "Inheritance",
+      "prompt": "Inheritance allows a class to inherit fields and methods from another class. Use the extends keyword.",
+      "codeSnippet": "public class Program {\n    static class Animal {\n        void sound() {\n            System.out.println(\"Animal sound\");\n        }\n    }\n    \n    static class Dog extends Animal {\n        void sound() {\n            System.out.println(\"Bark\");\n        }\n    }\n    \n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.sound();\n    }\n}",
+      "output": "Bark"
+    },
+    {
+      "slideId": "JAVA_133_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Definition",
+      "prompt": "What is inheritance?",
+      "options": ["A class inheriting from another class", "A method", "A variable", "An object"],
+      "correctAnswer": "A class inheriting from another class"
+    },
+    {
+      "slideId": "JAVA_133_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Keyword",
+      "prompt": "Which keyword is used for inheritance?",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_133_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parent Class",
+      "prompt": "What is the parent class called?",
+      "options": ["Superclass", "Subclass", "Child class", "Derived class"],
+      "correctAnswer": "Superclass"
+    },
+    {
+      "slideId": "JAVA_133_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Child Class",
+      "prompt": "What is the child class called?",
+      "options": ["Subclass", "Superclass", "Parent class", "Base class"],
+      "correctAnswer": "Subclass"
+    },
+    {
+      "slideId": "JAVA_133_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Keyword",
+      "prompt": "Complete the class declaration with inheritance.",
+      "codeSnippet": "class Dog _____ Animal {\n}",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_133_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal {\n  void sound() {\n    System.out.println(\"Animal sound\");\n  }\n}\nclass Dog extends Animal {\n  void sound() {\n    System.out.println(\"Bark\");\n  }\n}\nAnimal a = new Dog();\na.sound();",
+      "options": ["Bark", "Animal sound", "Dog", "Error"],
+      "correctAnswer": "Bark"
+    },
+    {
+      "slideId": "JAVA_133_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal {\n  void sound() {\n    System.out.println(\"Animal sound\");\n  }\n}\nclass Cat extends Animal { }\nCat c = new Cat();\nc.sound();",
+      "options": ["Animal sound", "Bark", "Cat", "Error"],
+      "correctAnswer": "Animal sound"
+    },
+    {
+      "slideId": "JAVA_133_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Type",
+      "prompt": "How many classes can a class extend?",
+      "options": ["One", "Two", "Three", "Unlimited"],
+      "correctAnswer": "One"
+    },
+    {
+      "slideId": "JAVA_133_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Purpose",
+      "prompt": "Why do we use inheritance?",
+      "options": ["To reuse code", "To make code slower", "To delete code", "To confuse developers"],
+      "correctAnswer": "To reuse code"
+    },
+    {
+      "slideId": "JAVA_133_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Vehicle {\n  void start() {\n    System.out.println(\"Vehicle starts\");\n  }\n}\nclass Car extends Vehicle { }\nCar c = new Car();\nc.start();",
+      "options": ["Vehicle starts", "Car starts", "Car", "Error"],
+      "correctAnswer": "Vehicle starts"
+    }
+  ]
+}

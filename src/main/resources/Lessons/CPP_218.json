@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_218",
+  "title": "Class Templates & Member Templates",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_218_S1",
+      "type": "CONCEPT",
+      "title": "Class Templates Concept",
+      "prompt": "Class templates allow creating generic blueprints for classes (e.g., containers). Methods defined outside the class body require separate template parameter declarations.",
+      "codeSnippet": "template <typename T>\nclass Box {\n    T item;\npublic:\n    Box(T i) : item(i) {}\n    T getItem();\n};\n\ntemplate <typename T>\nT Box<T>::getItem() { return item; }"
+    },
+    {
+      "slideId": "CPP_218_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Template Instantiation Syntax",
+      "prompt": "Fill in the type argument specifier required when instantiating a class template prior to C++17.",
+      "codeSnippet": "Box___double> doubleBox(3.14);",
+      "options": ["<", "(", "[", "{"],
+      "correctAnswer": "<"
+    },
+    {
+      "slideId": "CPP_218_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Method Definition Outside",
+      "prompt": "Which syntax is required when defining a class template member function outside the class body?",
+      "options": [
+        "Prefix definition with 'template <typename T>' and qualify class name as 'ClassName<T>::'",
+        "Qualify function name with inline keyword only",
+        "Use 'typename ClassName::method()' without template prefix",
+        "Class template methods can only be defined inline inside class body"
+      ],
+      "correctAnswer": "Prefix definition with 'template <typename T>' and qualify class name as 'ClassName<T>::'"
+    },
+    {
+      "slideId": "CPP_218_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Template Functions",
+      "prompt": "Fill in the template parameter name for an independent template method inside a class template.",
+      "codeSnippet": "template <typename T>\nclass Container {\n    template <typename ___>\n    void assign(U value) {}\n};",
+      "options": ["U", "T", "auto", "class"],
+      "correctAnswer": "U"
+    },
+    {
+      "slideId": "CPP_218_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Deduction Guides (CTAD)",
+      "prompt": "What feature introduced in C++17 allows writing 'std::pair p(1, 2.5);' without explicit type parameters?",
+      "options": [
+        "Class Template Argument Deduction (CTAD)",
+        "Dynamic Type Inference",
+        "Runtime Parameter Resolution",
+        "Implicit Virtual Specialization"
+      ],
+      "correctAnswer": "Class Template Argument Deduction (CTAD)"
+    },
+    {
+      "slideId": "CPP_218_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Templates Syntax",
+      "prompt": "To grant a template function access to private members, declare it as a ___ template.",
+      "codeSnippet": "template <typename U>\n___ void display(const Box<U>& b);",
+      "options": ["friend", "virtual", "public", "extern"],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_218_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Member Function Templates Restriction",
+      "prompt": "Why can a member function template NOT be declared virtual in C++?",
+      "options": [
+        "VTable size must be fixed at compile-time; unlimited template instantiations would make fixed VTables impossible",
+        "Templates cannot be used inside class definitions",
+        "Virtual functions do not support parameter passing",
+        "Compilers restrict virtual keyword to static methods"
+      ],
+      "correctAnswer": "VTable size must be fixed at compile-time; unlimited template instantiations would make fixed VTables impossible"
+    },
+    {
+      "slideId": "CPP_218_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Class Inheritance",
+      "prompt": "Fill in the qualification required when inheriting from a class template dependent base class.",
+      "codeSnippet": "template <typename T>\nclass Derived : public Base<T> {\n    void run() { this->___(); }\n};",
+      "options": ["baseMethod", "virtualMethod", "templateMethod", "superMethod"],
+      "correctAnswer": "baseMethod"
+    },
+    {
+      "slideId": "CPP_218_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Static Members",
+      "prompt": "How are static member variables shared across instances of a Class Template?",
+      "options": [
+        "Each distinct template instantiation type (e.g., Box<int> vs Box<double>) gets its own separate static variable",
+        "All instantiations share a single global static variable across all types",
+        "Static variables are forbidden inside class templates",
+        "Static members are re-initialized on every object construction"
+      ],
+      "correctAnswer": "Each distinct template instantiation type (e.g., Box<int> vs Box<double>) gets its own separate static variable"
+    },
+    {
+      "slideId": "CPP_218_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Alias Templates with using",
+      "prompt": "Fill in the keyword to create a template type alias in modern C++.",
+      "codeSnippet": "template <typename T>\n___ StringMap = std::unordered_map<std::string, T>;",
+      "options": ["using", "typedef", "auto", "typename"],
+      "correctAnswer": "using"
+    }
+  ]
+}

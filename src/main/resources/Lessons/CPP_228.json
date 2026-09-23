@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_228",
+  "title": "std::map & std::multimap Associative Containers",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_228_S1",
+      "type": "CONCEPT",
+      "title": "std::map Overview",
+      "prompt": "std::map stores key-value pairs sorted automatically by key using self-balancing binary search trees (Red-Black Trees). Search, insert, and delete take O(log N) logarithmic time.",
+      "codeSnippet": "#include <map>\nstd::map<std::string, int> ages;\nages[\"Alice\"] = 25;\nages[\"Bob\"] = 30;"
+    },
+    {
+      "slideId": "CPP_228_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Subscript Operator Behavior",
+      "prompt": "Fill in the key parameter to access or insert an element using operator[].",
+      "codeSnippet": "std::map<int, std::string> m;\nm[___] = \"Value\";",
+      "options": ["1", "int", "key", "first"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_228_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "operator[] vs at()",
+      "prompt": "What happens when accessing a non-existent key using map[key] vs map.at(key)?",
+      "options": [
+        "operator[] inserts a default-constructed value; at() throws std::out_of_range",
+        "operator[] throws exception; at() inserts default value",
+        "Both throw runtime exceptions",
+        "Both insert a default value"
+      ],
+      "correctAnswer": "operator[] inserts a default-constructed value; at() throws std::out_of_range"
+    },
+    {
+      "slideId": "CPP_228_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Value Type in Map Iteration",
+      "prompt": "When iterating over std::map, elements are represented as std::pair<const Key, ___>.",
+      "codeSnippet": "// Element type during iteration:\nstd::pair<const Key, Value>",
+      "options": ["Value", "Key", "auto", "void"],
+      "correctAnswer": "Value"
+    },
+    {
+      "slideId": "CPP_228_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::multimap Key Duplication",
+      "prompt": "How does std::multimap differ from std::map?",
+      "options": [
+        "std::multimap allows multiple elements to share the exact same key",
+        "std::multimap uses hash tables instead of trees",
+        "std::multimap does not keep keys in sorted order",
+        "std::multimap supports operator[] with multiple indexes"
+      ],
+      "correctAnswer": "std::multimap allows multiple elements to share the exact same key"
+    },
+    {
+      "slideId": "CPP_228_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Finding Keys in Map",
+      "prompt": "Fill in the function returning an iterator to a key, or end() if not found.",
+      "codeSnippet": "auto it = myMap.___(\"Alice\");",
+      "options": ["find", "search", "get", "lookup"],
+      "correctAnswer": "find"
+    },
+    {
+      "slideId": "CPP_228_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Key Ordering Requirement",
+      "prompt": "What operator must a custom key class overload to be usable in std::map by default?",
+      "options": [
+        "operator< (Less-than operator for strict weak ordering)",
+        "operator== (Equality operator)",
+        "operator> (Greater-than operator)",
+        "operator!="
+      ],
+      "correctAnswer": "operator< (Less-than operator for strict weak ordering)"
+    },
+    {
+      "slideId": "CPP_228_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "C++17 map try_emplace",
+      "prompt": "Fill in the C++17 method that prevents creating temporary objects if a key already exists.",
+      "codeSnippet": "myMap.___(\"Key\", 100);",
+      "options": ["try_emplace", "emplace", "insert_or_assign", "insert_unique"],
+      "correctAnswer": "try_emplace"
+    },
+    {
+      "slideId": "CPP_228_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Search Time Complexity",
+      "prompt": "What is the worst-case lookup time complexity for std::map containing N elements?",
+      "options": [
+        "O(log N)",
+        "O(1)",
+        "O(N)",
+        "O(N log N)"
+      ],
+      "correctAnswer": "O(log N)"
+    },
+    {
+      "slideId": "CPP_228_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Range Lookup in Multimap",
+      "prompt": "Fill in the method returning a pair of iterators representing the range of matching duplicate keys in a multimap.",
+      "codeSnippet": "auto range = multiMap.___(\"Key\");",
+      "options": ["equal_range", "find_range", "key_range", "bounds"],
+      "correctAnswer": "equal_range"
+    }
+  ]
+}

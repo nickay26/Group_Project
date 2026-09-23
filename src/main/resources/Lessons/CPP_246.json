@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_246",
+  "title": "Custom Allocators & Memory Pools",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_246_S1",
+      "type": "CONCEPT",
+      "title": "Custom Allocators Overview",
+      "prompt": "Custom allocators handle memory allocation and deallocation strategies for STL containers. They allow developers to build specialized memory pools, arena allocators, or embedded system memory managers.",
+      "codeSnippet": "template <typename T>\nstruct SimpleAllocator {\n    using value_type = T;\n    T* allocate(std::size_t n) { return static_cast<T*>(::operator new(n * sizeof(T))); }\n    void deallocate(T* p, std::size_t n) { ::operator delete(p); }\n};"
+    },
+    {
+      "slideId": "CPP_246_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Allocator allocate Method",
+      "prompt": "Fill in the required allocator method name that reserves uninitialized memory for n items.",
+      "codeSnippet": "T* ptr = alloc.___ (n);",
+      "options": ["allocate", "malloc", "construct", "get_mem"],
+      "correctAnswer": "allocate"
+    },
+    {
+      "slideId": "CPP_246_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::allocator_traits Purpose",
+      "prompt": "Why should container implementations use std::allocator_traits<Alloc> rather than calling allocator methods directly?",
+      "options": [
+        "Provides backward compatibility and default implementations for optional allocator requirements",
+        "Enforces multithread locks around memory allocation calls",
+        "Automatically converts raw pointers to smart pointers",
+        "Optimizes runtime execution using SIMD instructions"
+      ],
+      "correctAnswer": "Provides backward compatibility and default implementations for optional allocator requirements"
+    },
+    {
+      "slideId": "CPP_246_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Deallocate Method",
+      "prompt": "Fill in the allocator method responsible for releasing memory block ptr.",
+      "codeSnippet": "alloc.___(ptr, n);",
+      "options": ["deallocate", "free", "destroy", "release"],
+      "correctAnswer": "deallocate"
+    },
+    {
+      "slideId": "CPP_246_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Pool Benefit",
+      "prompt": "What primary performance bottleneck do memory pools address compared to global heap (new/malloc)?",
+      "options": [
+        "Eliminates heap fragmentation and provides fast O(1) allocation time by pre-allocating contiguous chunks",
+        "Bypasses cache synchronization completely",
+        "Reduces binary executable file size",
+        "Provides automatic thread-safe garbage collection"
+      ],
+      "correctAnswer": "Eliminates heap fragmentation and provides fast O(1) allocation time by pre-allocating contiguous chunks"
+    },
+    {
+      "slideId": "CPP_246_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Constructing Object via Traits",
+      "prompt": "Fill in the traits function used to construct an object in pre-allocated memory.",
+      "codeSnippet": "std::allocator_traits<Alloc>::___(alloc, ptr, arg1);",
+      "options": ["construct", "allocate", "new_object", "create"],
+      "correctAnswer": "construct"
+    },
+    {
+      "slideId": "CPP_246_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stateful vs Stateless Allocator",
+      "prompt": "What defines a stateless allocator in C++?",
+      "options": [
+        "All instances of the allocator type are equivalent and interchangeable (operator== always returns true)",
+        "It cannot allocate memory for classes with state member variables",
+        "It stores raw pointer references to a global arena pool",
+        "It works only with stack memory"
+      ],
+      "correctAnswer": "All instances of the allocator type are equivalent and interchangeable (operator== always returns true)"
+    },
+    {
+      "slideId": "CPP_246_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Standard Container Allocator Parameter",
+      "prompt": "Fill in the second template type parameter slot of std::vector used to pass custom allocators.",
+      "codeSnippet": "std::vector<int, ___<int>> customVec;",
+      "options": ["MyAllocator", "allocator", "std::allocator", "CustomMem"],
+      "correctAnswer": "MyAllocator"
+    },
+    {
+      "slideId": "CPP_246_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::pmr (Polymorphic Memory Resource)",
+      "prompt": "What major feature did C++17 introduce in <memory_resource> via std::pmr?",
+      "options": [
+        "Polymorphic allocators where container types don't change even when using different runtime memory resources",
+        "Automatic GPU memory allocation for vectors",
+        "Compile-time static vector sizing",
+        "Thread-local garbage collection mechanisms"
+      ],
+      "correctAnswer": "Polymorphic allocators where container types don't change even when using different runtime memory resources"
+    },
+    {
+      "slideId": "CPP_246_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "pmr Vector Alias",
+      "prompt": "Fill in the C++17 pmr namespace alias for vector using polymorphic allocators.",
+      "codeSnippet": "std::pmr::___<int> vec(&monotonic_buffer);",
+      "options": ["vector", "pmr_vector", "alloc_vector", "poly_vector"],
+      "correctAnswer": "vector"
+    }
+  ]
+}

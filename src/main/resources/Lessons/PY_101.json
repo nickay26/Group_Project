@@ -3,28 +3,83 @@
   "title": "Hello Python",
   "slides": [
     {
-      "slideId": "PY_101_S1",
-      "type": "CONCEPT",
-      "title": "Printing Text",
-      "prompt": "In Python, we use the print() function to display text on the screen.",
+      "title": "Welcome to Python",
+      "prompt": "Python is a powerful, beginner-friendly programming language used by companies like Google, Netflix, and NASA.",
+      "codeSnippet": null
+    },
+    {
+      "title": "Talking to the Computer",
+      "prompt": "To make Python display something on the screen, we use a built-in instruction called print().",
+      "codeSnippet": "print()"
+    },
+    {
+      "title": "Quick Check",
+      "prompt": "Which instruction is used to display output in Python?",
+      "options": [
+        "display()",
+        "print()",
+        "show()",
+        "output()"
+      ],
+      "correctAnswer": "print()",
+      "explanation": "print() is the universal Python function for sending output to the console."
+    },
+    {
+      "title": "Adding Text",
+      "prompt": "Inside the parentheses of print(), we place the text we want to display. In programming, text is called a String.",
       "codeSnippet": "print(\"Hello, World!\")"
     },
     {
-      "slideId": "PY_101_S2",
-      "type": "FILL_IN_BLANK",
-      "title": "Your First Code",
-      "prompt": "Complete the code to output 'Welcome!'",
-      "codeSnippet": "___(\"Welcome!\")",
-      "options": ["print", "output", "display", "log"],
-      "correctAnswer": "print"
+      "title": "The Golden Rule of Strings",
+      "prompt": "Strings MUST be surrounded by quotes. You can use double quotes (\"\") or single quotes (''), as long as they match.",
+      "codeSnippet": "print(\"This works\")\nprint('This also works')"
     },
     {
-      "slideId": "PY_101_S3",
-      "type": "MULTIPLE_CHOICE",
-      "title": "String Enclosure",
-      "prompt": "Which character must surround text strings in Python?",
-      "options": ["Quotes (\" or ')", "Parentheses ( )", "Brackets [ ]"],
-      "correctAnswer": "Quotes (\" or ')"
+      "title": "Spot the String",
+      "prompt": "Which of the following is a valid Python string?",
+      "options": [
+        "Hello World",
+        "\"Hello World\"",
+        "(Hello World)",
+        "print(Hello)"
+      ],
+      "correctAnswer": "\"Hello World\"",
+      "explanation": "Strings must be wrapped in quotation marks so the computer knows it is reading text, not a command."
+    },
+    {
+      "title": "Syntax Errors",
+      "prompt": "If you forget the quotes, Python will crash and throw a SyntaxError because it thinks you are trying to use a command that doesn't exist.",
+      "codeSnippet": "print(Hello)  # ❌ This will cause an error!"
+    },
+    {
+      "title": "Find the Bug",
+      "prompt": "Which of these lines of code will crash when you run it?",
+      "options": [
+        "print(\"Coding is fun\")",
+        "print('I love Python')",
+        "print(\"12345\")",
+        "print(Welcome to the matrix)"
+      ],
+      "correctAnswer": "print(Welcome to the matrix)",
+      "explanation": "Without quotes, Python tries to read 'Welcome' as a command instead of text."
+    },
+    {
+      "title": "Order Matters",
+      "prompt": "Python reads code strictly from top to bottom, line by line. This is called sequential execution.",
+      "codeSnippet": "print(\"First line\")\nprint(\"Second line\")"
+    },
+    {
+      "title": "Final Challenge",
+      "prompt": "If we run this code, what will be printed last?",
+      "codeSnippet": "print(\"Ready\")\nprint(\"Set\")\nprint(\"Go!\")",
+      "options": [
+        "Ready",
+        "Set",
+        "Go!",
+        "It will crash"
+      ],
+      "correctAnswer": "Go!",
+      "explanation": "Python executes line by line. \"Go!\" is on the final line, so it prints last."
     }
   ]
 }

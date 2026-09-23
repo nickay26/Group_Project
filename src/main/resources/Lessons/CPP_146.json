@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_146",
+  "title": "C-Style Null-Terminated Strings",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_146_S1",
+      "type": "CONCEPT",
+      "title": "C-Style String Structure",
+      "prompt": "A C-style string is an array of characters ending with a null terminator character '\\0' (ASCII 0).",
+      "codeSnippet": "char greeting[] = \"Hello\"; // Allocates 6 bytes ('H','e','l','l','o','\\0')"
+    },
+    {
+      "slideId": "CPP_146_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Null Terminator Symbol",
+      "prompt": "Fill in the escape sequence representing the null character.",
+      "codeSnippet": "char str[] = {'C', '+', '+', '___'};",
+      "options": ["\\0", "\\n", "\\t", "0"],
+      "correctAnswer": "\\0"
+    },
+    {
+      "slideId": "CPP_146_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Literal Memory Length",
+      "prompt": "How many bytes does string literal \"CPP\" occupy in memory?",
+      "options": ["4 bytes ('C', 'P', 'P', '\\0')", "3 bytes", "5 bytes", "8 bytes"],
+      "correctAnswer": "4 bytes ('C', 'P', 'P', '\\0')"
+    },
+    {
+      "slideId": "CPP_146_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "cstring Library Include",
+      "prompt": "Fill in the header file required for C-string functions like strlen or strcpy.",
+      "codeSnippet": "#include <___>",
+      "options": ["cstring", "string", "string.h", "cstdlib"],
+      "correctAnswer": "cstring"
+    },
+    {
+      "slideId": "CPP_146_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "strlen Function Behavior",
+      "prompt": "What does strlen(\"Hello\") return?",
+      "options": ["5 (excludes null terminator)", "6 (includes null terminator)", "4", "Address of string"],
+      "correctAnswer": "5 (excludes null terminator)"
+    },
+    {
+      "slideId": "CPP_146_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "strcpy Safety Hazard",
+      "prompt": "Fill in safer bounded copy function to prevent buffer overflow.",
+      "codeSnippet": "std::___(dest, src, sizeof(dest));",
+      "options": ["strncpy", "strcpy", "memcpy", "string_copy"],
+      "correctAnswer": "strncpy"
+    },
+    {
+      "slideId": "CPP_146_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "strcmp Return Logic",
+      "prompt": "What does strcmp(s1, s2) return if both strings are lexicographically equal?",
+      "options": ["0", "1", "true", "-1"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_146_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "C-String Concatenation",
+      "prompt": "Fill in function name that appends source string to destination.",
+      "codeSnippet": "std::___(dest, \" extra\");",
+      "options": ["strcat", "strcpy", "append", "stradd"],
+      "correctAnswer": "strcat"
+    },
+    {
+      "slideId": "CPP_146_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Pointer vs Character Array",
+      "prompt": "What is the key difference between 'char a[] = \"Hi\";' and 'const char* p = \"Hi\";'?",
+      "options": ["'a' is a stack array copy (modifiable); 'p' points to string literal in read-only memory", "They are identical in every way", "'a' cannot be modified", "'p' allocates array on heap"],
+      "correctAnswer": "'a' is a stack array copy (modifiable); 'p' points to string literal in read-only memory"
+    },
+    {
+      "slideId": "CPP_146_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading C-String with Spaces",
+      "prompt": "Fill in method on cin to safely read a line into char array.",
+      "codeSnippet": "std::cin.___(buffer, 100);",
+      "options": ["getline", "get", "read", "scan"],
+      "correctAnswer": "getline"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_120",
+  "title": "Logical Operators & Truth Tables",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_120_S1",
+      "type": "CONCEPT",
+      "title": "Logical Operators Overview",
+      "prompt": "Logical operators combines boolean values: && (AND), || (OR), and ! (NOT).",
+      "codeSnippet": "bool a = true, b = false;\nbool r1 = a && b; // false\nbool r2 = a || b; // true\nbool r3 = !a;     // false"
+    },
+    {
+      "slideId": "CPP_120_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical AND Operator",
+      "prompt": "Fill in the operator that requires BOTH conditions to be true.",
+      "codeSnippet": "bool canVote = (age >= 18) ___ (isCitizen == true);",
+      "options": ["&&", "||", "AND", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_120_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical OR Behavior",
+      "prompt": "When does the Logical OR (||) operator evaluate to true?",
+      "options": ["If AT LEAST ONE condition is true", "Only when both conditions are true", "Only when both conditions are false", "When conditions are opposite"],
+      "correctAnswer": "If AT LEAST ONE condition is true"
+    },
+    {
+      "slideId": "CPP_120_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical OR Operator",
+      "prompt": "Fill in the operator that requires AT LEAST ONE condition to be true.",
+      "codeSnippet": "bool hasDiscount = (isStudent) ___ (isSenior);",
+      "options": ["||", "&&", "OR", "|"],
+      "correctAnswer": "||"
+    },
+    {
+      "slideId": "CPP_120_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical NOT Function",
+      "prompt": "What does the Logical NOT (!) operator do?",
+      "options": ["Inverts true to false and false to true", "Doubles the value", "Checks for equality", "Clears the boolean"],
+      "correctAnswer": "Inverts true to false and false to true"
+    },
+    {
+      "slideId": "CPP_120_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical NOT Operator",
+      "prompt": "Fill in the logical negation symbol.",
+      "codeSnippet": "bool isOffline = ___isOnline;",
+      "options": ["!", "~", "not", "!= "],
+      "correctAnswer": "!"
+    },
+    {
+      "slideId": "CPP_120_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "AND Truth Table",
+      "prompt": "What is the result of (true && false)?",
+      "options": ["false", "true", "1", "undefined"],
+      "correctAnswer": "false"
+    },
+    {
+      "slideId": "CPP_120_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Ranged Condition Check",
+      "prompt": "Fill in the logical operator to check if 'val' is between 10 AND 20.",
+      "codeSnippet": "bool inRange = (val >= 10) ___ (val <= 20);",
+      "options": ["&&", "||", "&", "AND"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_120_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OR Truth Table",
+      "prompt": "What is the result of (false || true)?",
+      "options": ["true", "false", "0", "null"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "CPP_120_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Double Negation",
+      "prompt": "Fill in the result of !!true.",
+      "codeSnippet": "bool val = !!true; // Evaluates to ___",
+      "options": ["true", "false", "1", "0"],
+      "correctAnswer": "true"
+    }
+  ]
+}

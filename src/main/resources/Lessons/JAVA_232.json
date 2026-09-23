@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_232",
+  "title": "Practice: Functional Interface",
+  "slides": [
+    {
+      "slideId": "JAVA_232_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface Definition",
+      "prompt": "What is a functional interface?",
+      "options": ["An interface with exactly one abstract method", "An interface with no methods", "An interface with multiple methods", "A class"],
+      "correctAnswer": "An interface with exactly one abstract method"
+    },
+    {
+      "slideId": "JAVA_232_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface Annotation",
+      "prompt": "Which annotation marks a functional interface?",
+      "options": ["@FunctionalInterface", "@Interface", "@Function", "@Lambda"],
+      "correctAnswer": "@FunctionalInterface"
+    },
+    {
+      "slideId": "JAVA_232_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Method Count",
+      "prompt": "How many abstract methods does a functional interface have?",
+      "options": ["1", "2", "3", "0"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_232_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Functional Interface",
+      "prompt": "Complete the annotation.",
+      "codeSnippet": "@____________\ninterface Greeting {\n  void sayHello();\n}",
+      "options": ["FunctionalInterface", "Interface", "Function", "Lambda"],
+      "correctAnswer": "FunctionalInterface"
+    },
+    {
+      "slideId": "JAVA_232_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Interface Declaration",
+      "prompt": "Complete the interface declaration.",
+      "codeSnippet": "interface Greeting {\n  ____ sayHello();\n}",
+      "options": ["void", "int", "String", "boolean"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "JAVA_232_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Functional Interface Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "@FunctionalInterface\ninterface Greeting { void sayHello(); }\nGreeting g = () -> System.out.println(\"Hello!\");\ng.sayHello();",
+      "options": ["Hello!", "Greeting", "g", "Error"],
+      "correctAnswer": "Hello!"
+    },
+    {
+      "slideId": "JAVA_232_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Runnable Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Runnable r = () -> System.out.println(\"Running\");\nr.run();",
+      "options": ["Running", "Runnable", "r", "Error"],
+      "correctAnswer": "Running"
+    },
+    {
+      "slideId": "JAVA_232_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface Use",
+      "prompt": "What can be used with a functional interface?",
+      "options": ["Lambda expressions", "Normal classes", "Abstract classes", "Static methods"],
+      "correctAnswer": "Lambda expressions"
+    },
+    {
+      "slideId": "JAVA_232_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Built-in Functional Interface",
+      "prompt": "Which is a built-in functional interface?",
+      "options": ["Runnable", "String", "Integer", "ArrayList"],
+      "correctAnswer": "Runnable"
+    },
+    {
+      "slideId": "JAVA_232_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface Purpose",
+      "prompt": "Why do we use functional interfaces?",
+      "options": ["To enable lambda expressions", "To make code slower", "To create classes", "To hide data"],
+      "correctAnswer": "To enable lambda expressions"
+    },
+    {
+      "slideId": "JAVA_232_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Custom Functional Interface",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface MathOp { int operate(int a, int b); }\nMathOp add = (a, b) -> a + b;\nSystem.out.println(add.operate(10, 20));",
+      "options": ["30", "1020", "10 + 20", "Error"],
+      "correctAnswer": "30"
+    }
+  ]
+}

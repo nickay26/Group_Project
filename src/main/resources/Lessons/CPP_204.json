@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_204",
+  "title": "Static Members & Static Methods",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_204_S1",
+      "type": "CONCEPT",
+      "title": "Shared Class State",
+      "prompt": "'static' members are shared across all instances of a class. Static methods can be called without an instance and cannot access 'this'.",
+      "codeSnippet": "class Counter {\npublic:\n    static int count;\n};\nint Counter::count = 0; // Definition required"
+    },
+    {
+      "slideId": "CPP_204_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Variable Declaration",
+      "prompt": "Fill in keyword for class-wide shared variable.",
+      "codeSnippet": "class Texture {\n    ___ int maxSlots;\n};",
+      "options": ["static", "extern", "inline", "const"],
+      "correctAnswer": "static"
+    },
+    {
+      "slideId": "CPP_204_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static Method Access Rules",
+      "prompt": "Which variables can a 'static' member function access directly without an object reference?",
+      "options": [
+        "Only static member variables and other static methods",
+        "All private instance variables",
+        "Variables belonging to 'this' pointer",
+        "Global variables only"
+      ],
+      "correctAnswer": "Only static member variables and other static methods"
+    },
+    {
+      "slideId": "CPP_204_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Scope Resolution Definition",
+      "prompt": "Fill in operator used to define static variable outside class body.",
+      "codeSnippet": "int Counter___count = 0;",
+      "options": ["::", ".", "->", "#"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_204_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inline Static Members (C++17)",
+      "prompt": "What advantage does 'inline static' member declaration provide in C++17?",
+      "options": [
+        "Allows static variable initialization directly inside class definition header",
+        "Makes static variable thread-local automatically",
+        "Prevents modification of static variable",
+        "Converts variable to compile-time constant string"
+      ],
+      "correctAnswer": "Allows static variable initialization directly inside class definition header"
+    },
+    {
+      "slideId": "CPP_204_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Method Invocation",
+      "prompt": "Fill in syntax to call static method without object instance.",
+      "codeSnippet": "MathUtils___sqrt(16.0);",
+      "options": ["::", ".", "->", "@"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_204_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "This Pointer Availability",
+      "prompt": "Why is 'this' pointer unavailable inside static member functions?",
+      "options": [
+        "Static methods are not bound to any specific class instance",
+        "Static methods are compiled as plain C functions",
+        "'this' pointer is restricted to private methods",
+        "Static methods run before main() starts"
+      ],
+      "correctAnswer": "Static methods are not bound to any specific class instance"
+    },
+    {
+      "slideId": "CPP_204_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Inline Static Initialization",
+      "prompt": "Fill in C++17 keyword to define static member inside header.",
+      "codeSnippet": "class Config {\n    ___ static int timeout = 30;\n};",
+      "options": ["inline", "constexpr", "extern", "auto"],
+      "correctAnswer": "inline"
+    },
+    {
+      "slideId": "CPP_204_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static Member Memory Location",
+      "prompt": "Where is memory allocated for a class 'static' member variable?",
+      "options": [
+        "In global/static data segment, separate from object instances",
+        "Inside every instance of the class on Stack",
+        "Dynamically allocated on Heap during constructor execution",
+        "Inside CPU register memory"
+      ],
+      "correctAnswer": "In global/static data segment, separate from object instances"
+    },
+    {
+      "slideId": "CPP_204_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Constexpr Static Initialization",
+      "prompt": "Fill in keyword for compile-time static class constant.",
+      "codeSnippet": "static ___ int MAX_ITEMS = 100;",
+      "options": ["constexpr", "mutable", "auto", "register"],
+      "correctAnswer": "constexpr"
+    }
+  ]
+}

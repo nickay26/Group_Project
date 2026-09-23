@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_216",
+  "title": "Practice: HashMap",
+  "slides": [
+    {
+      "slideId": "JAVA_216_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashMap Definition",
+      "prompt": "What is a HashMap?",
+      "options": ["A key-value pair data structure", "A single array", "A method", "A class"],
+      "correctAnswer": "A key-value pair data structure"
+    },
+    {
+      "slideId": "JAVA_216_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Put Method",
+      "prompt": "Which method adds a key-value pair to a HashMap?",
+      "options": ["put()", "add()", "insert()", "set()"],
+      "correctAnswer": "put()"
+    },
+    {
+      "slideId": "JAVA_216_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Get Method",
+      "prompt": "Which method retrieves a value by key?",
+      "options": ["get()", "fetch()", "find()", "value()"],
+      "correctAnswer": "get()"
+    },
+    {
+      "slideId": "JAVA_216_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import HashMap",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["HashMap", "Map", "Hash", "Table"],
+      "correctAnswer": "HashMap"
+    },
+    {
+      "slideId": "JAVA_216_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Put Value",
+      "prompt": "Complete the code to add a key-value pair.",
+      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.____(\"Java\", 1995);",
+      "options": ["put", "add", "insert", "set"],
+      "correctAnswer": "put"
+    },
+    {
+      "slideId": "JAVA_216_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Get Value",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.put(\"Java\", 1995);\nSystem.out.println(map.get(\"Java\"));",
+      "options": ["1995", "Java", "0", "Error"],
+      "correctAnswer": "1995"
+    },
+    {
+      "slideId": "JAVA_216_S7",
+      "type": "CODE_OUTPUT",
+      "title": "HashMap Size",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.put(\"A\", 1);\nmap.put(\"B\", 2);\nSystem.out.println(map.size());",
+      "options": ["2", "1", "0", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_216_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unique Keys",
+      "prompt": "Can a HashMap have duplicate keys?",
+      "options": ["No", "Yes", "Only with put", "Only with add"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_216_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashMap Package",
+      "prompt": "Which package contains HashMap?",
+      "options": ["java.util", "java.io", "java.lang", "java.map"],
+      "correctAnswer": "java.util"
+    },
+    {
+      "slideId": "JAVA_216_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Contains Key",
+      "prompt": "What is the output?",
+      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.put(\"Java\", 1995);\nSystem.out.println(map.containsKey(\"Java\"));",
+      "options": ["true", "false", "Java", "Error"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "JAVA_216_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HashMap Loop",
+      "prompt": "Which method loops through keys?",
+      "options": ["keySet()", "keys()", "getKeys()", "allKeys()"],
+      "correctAnswer": "keySet()"
+    }
+  ]
+}

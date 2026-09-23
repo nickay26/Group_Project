@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_213",
+  "title": "Practice: Stack",
+  "slides": [
+    {
+      "slideId": "JAVA_213_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Definition",
+      "prompt": "What is a Stack?",
+      "options": ["A LIFO data structure", "A FIFO data structure", "A fixed array", "A method"],
+      "correctAnswer": "A LIFO data structure"
+    },
+    {
+      "slideId": "JAVA_213_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Push Method",
+      "prompt": "Which method adds an element to a Stack?",
+      "options": ["push()", "add()", "insert()", "put()"],
+      "correctAnswer": "push()"
+    },
+    {
+      "slideId": "JAVA_213_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pop Method",
+      "prompt": "Which method removes the top element from a Stack?",
+      "options": ["pop()", "remove()", "delete()", "take()"],
+      "correctAnswer": "pop()"
+    },
+    {
+      "slideId": "JAVA_213_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Stack",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["Stack", "Queue", "List", "Array"],
+      "correctAnswer": "Stack"
+    },
+    {
+      "slideId": "JAVA_213_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Push Element",
+      "prompt": "Complete the code to push an element.",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.____(\"Java\");",
+      "options": ["push", "add", "insert", "put"],
+      "correctAnswer": "push"
+    },
+    {
+      "slideId": "JAVA_213_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Pop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack.pop());",
+      "options": ["B", "A", "AB", "Error"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_213_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Peek Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack.peek());",
+      "options": ["B", "A", "AB", "Error"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_213_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Peek Method",
+      "prompt": "Which method returns the top element without removing it?",
+      "options": ["peek()", "top()", "get()", "first()"],
+      "correctAnswer": "peek()"
+    },
+    {
+      "slideId": "JAVA_213_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LIFO",
+      "prompt": "What does LIFO stand for?",
+      "options": ["Last In, First Out", "Last In, Final Out", "First In, Last Out", "First In, First Out"],
+      "correctAnswer": "Last In, First Out"
+    },
+    {
+      "slideId": "JAVA_213_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Stack Size",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack.size());",
+      "options": ["2", "1", "0", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_213_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Package",
+      "prompt": "Which package contains Stack?",
+      "options": ["java.util", "java.io", "java.lang", "java.stack"],
+      "correctAnswer": "java.util"
+    }
+  ]
+}

@@ -5,31 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
 
     <!-- PERMANENT LEFT SIDEBAR MENU -->
     <left>
-        <VBox prefWidth="220.0" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-width: 0 1px 0 0;" BorderPane.alignment="CENTER">
+        <VBox prefWidth="220.0" spacing="15.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="15.0" right="15.0" top="25.0" />
             </padding>
             <children>
-                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000000;" text="Mimo Platform" />
+                <Label styleClass="sidebar-title" text="Mimo Platform" />
 
                 <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets top="15.0" />
                     </padding>
                     <children>
-                        <Button fx:id="learnBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavLearn" prefHeight="35.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #FFFFFF; -fx-cursor: hand;" text="Learn" />
-                        <Button fx:id="coursesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavCourses" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Courses" />
-                        <Button fx:id="playgroundBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavPlayground" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Playground" />
-                        <Button fx:id="leaderboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleLeaderBoard" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Leaderboard" />
-                        <Button fx:id="practiceBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Practice or Review" />
-                        <Button fx:id="gamesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Games" />
+                        <Button fx:id="learnBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavLearn" prefHeight="38.0" styleClass="nav-button" text="Learn" />
+                        <Button fx:id="coursesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavCourses" prefHeight="38.0" styleClass="nav-button" text="Courses" />
+                        <Button fx:id="playgroundBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavPlayground" prefHeight="38.0" styleClass="nav-button" text="Playground" />
+                        <Button fx:id="leaderboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleLeaderBoard" prefHeight="38.0" styleClass="nav-button" text="Leaderboard" />
+                        <Button fx:id="practiceBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavPractice" prefHeight="38.0" styleClass="nav-button" text="Practice or Review" />
+                        <Button fx:id="gamesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="38.0" styleClass="nav-button" text="Games" />
                     </children>
                 </VBox>
             </children>
@@ -38,28 +41,66 @@
 
     <!-- CENTER AREA: TOP HEADER + DYNAMIC CONTENT CONTAINER -->
     <center>
-        <VBox spacing="10.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+        <VBox spacing="10.0" styleClass="root-pane" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
             </padding>
             <children>
 
                 <!-- PERMANENT TOP HEADER BAR -->
-                <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-border-color: #000000; -fx-border-width: 0 0 1px 0;">
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="top-header">
                     <padding>
                         <Insets bottom="15.0" />
                     </padding>
                     <children>
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="🔥 0" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="🧠 0" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #000000;" text="💎 0" />
-                        <Button style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5px; -fx-text-fill: #000000; -fx-cursor: hand;" text="Premium" />
-                        <Button style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 5px; -fx-text-fill: #000000; -fx-cursor: hand;" text="👤 Profile" />
+                        <!-- CURRENT COURSE DISPLAY -->
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <Label text="Course:" style="-fx-font-size: 14px; -fx-text-fill: #64748B; -fx-font-weight: bold;" />
+                            <Label fx:id="currentCourseLabel" text="Loading..." style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" />
+                        </HBox>
+
+                        <!-- PUSHES STATS & BUTTONS TO THE RIGHT -->
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <!-- HEADER STATS AND BUTTONS -->
+                        <!-- HEADER STATS AND BUTTONS -->
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/fire.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/brain.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/coin.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
+                        <Button styleClass="premium-button" text="Premium" />
+                        <Button styleClass="header-button" text="Profile" />
                     </children>
                 </HBox>
 
-                <!-- DYNAMIC CONTENT AREA (Page views load here) -->
-                <StackPane fx:id="contentArea" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS" />
+                <!-- DYNAMIC CONTENT AREA -->
+                <StackPane fx:id="contentArea" styleClass="content-area" VBox.vgrow="ALWAYS" />
 
             </children>
         </VBox>

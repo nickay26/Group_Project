@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_254",
+  "title": "Perfect Forwarding & std::forward",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_254_S1",
+      "type": "CONCEPT",
+      "title": "Perfect Forwarding Problem & Solution",
+      "prompt": "Perfect forwarding allows wrapper functions to pass arguments to target functions while preserving their exact value categories (lvalueness or rvalueness). This is achieved using forwarding references (T&&) and std::forward<T>.",
+      "codeSnippet": "#include <utility>\ntemplate <typename T>\nvoid wrapper(T&& arg) {\n    targetFunction(std::forward<T>(arg)); // Preserves lvalue/rvalue nature!\n}"
+    },
+    {
+      "slideId": "CPP_254_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::forward Template Argument Requirement",
+      "prompt": "Fill in the required template parameter that must be explicitly supplied to std::forward.",
+      "codeSnippet": "template <typename T>\nvoid relay(T&& arg) {\n    process(std::forward<___>(arg));\n}",
+      "options": ["T", "arg", "auto", "decltype(arg)"],
+      "correctAnswer": "T"
+    },
+    {
+      "slideId": "CPP_254_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Difference Between std::move and std::forward",
+      "prompt": "How does std::forward<T> differ fundamentally from std::move?",
+      "options": [
+        "std::move unconditionally casts to rvalue; std::forward conditionally casts to rvalue only if its template argument T was deduced as rvalue",
+        "std::forward executes faster at runtime than std::move",
+        "std::move requires template arguments; std::forward does not",
+        "std::forward creates deep copies while std::move does not"
+      ],
+      "correctAnswer": "std::move unconditionally casts to rvalue; std::forward conditionally casts to rvalue only if its template argument T was deduced as rvalue"
+    },
+    {
+      "slideId": "CPP_254_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Emplace Back Perfect Forwarding",
+      "prompt": "Fill in the vector member function that constructs elements in-place using perfect forwarding of constructor arguments.",
+      "codeSnippet": "std::vector<Widget> vec;\nvec.___ (arg1, arg2); // Perfect forwards args to Widget constructor",
+      "options": ["emplace_back", "push_back", "insert", "construct"],
+      "correctAnswer": "emplace_back"
+    },
+    {
+      "slideId": "CPP_254_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Why Name of Forwarding Parameter is Lvalue",
+      "prompt": "Inside 'template<typename T> void logAndPass(T&& arg)', why is 'arg' treated as an lvalue inside logAndPass function body even when initialized with an rvalue?",
+      "options": [
+        "Because 'arg' is a named variable, and all named variables are lvalue expressions",
+        "Because T&& automatically converts to a raw pointer",
+        "Because of missing const specifiers",
+        "Because function scope locks rvalue memory"
+      ],
+      "correctAnswer": "Because 'arg' is a named variable, and all named variables are lvalue expressions"
+    },
+    {
+      "slideId": "CPP_254_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Variadic Perfect Forwarding",
+      "prompt": "Fill in the parameter pack expansion syntax for perfect forwarding multiple arguments.",
+      "codeSnippet": "template <typename... Args>\nvoid makeObject(Args&&... args) {\n    TargetClass obj(std::forward<Args>(args)___);\n}",
+      "options": ["...", "..", "pack", "args"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_254_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::make_unique Internal Forwarding",
+      "prompt": "How does factory function std::make_unique<T>(args...) pass its arguments to the constructor of T?",
+      "options": [
+        "Uses variadic template perfect forwarding with std::forward<Args>(args)...",
+        "Uses std::move on every parameter unconditionally",
+        "Passes all parameters by const reference",
+        "Copies arguments into a temporary tuple"
+      ],
+      "correctAnswer": "Uses variadic template perfect forwarding with std::forward<Args>(args)..."
+    },
+    {
+      "slideId": "CPP_254_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "std::forward In Generic Lambda",
+      "prompt": "Fill in the decltype expression used inside generic lambdas to forward auto&& parameters perfectly.",
+      "codeSnippet": "[](auto&& param) {\n    worker(std::forward<decltype(___)>(param));\n};",
+      "options": ["param", "auto", "decltype", "args"],
+      "correctAnswer": "param"
+    },
+    {
+      "slideId": "CPP_254_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Consequence of Forgetting std::forward in Wrapper",
+      "prompt": "What happens if a wrapper function accepts T&& arg but passes 'arg' directly to targetFunction(arg) without std::forward?",
+      "options": [
+        "The target function will always receive 'arg' as an lvalue, forcing copy overloads instead of move overloads",
+        "Compilation failure due to missing type qualifiers",
+        "Runtime dangling reference crash",
+        "Automatic move conversion occurs anyway"
+      ],
+      "correctAnswer": "The target function will always receive 'arg' as an lvalue, forcing copy overloads instead of move overloads"
+    },
+    {
+      "slideId": "CPP_254_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Header for Perfect Forwarding",
+      "prompt": "Fill in the standard header name containing std::forward definition.",
+      "codeSnippet": "#include <___>\n// Contains std::forward and std::move definitions",
+      "options": ["utility", "memory", "functional", "type_traits"],
+      "correctAnswer": "utility"
+    }
+  ]
+}

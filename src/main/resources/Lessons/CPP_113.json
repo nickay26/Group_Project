@@ -1,70 +1,99 @@
 {
   "lessonId": "CPP_113",
-  "title": "C++ Break and Continue",
-  "isPremium": true,
+  "title": "Floating-Point Types & Precision",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_113_S1",
       "type": "CONCEPT",
-      "title": "Loop Control Statements",
-      "prompt": "'break' stops the loop, whereas 'continue' skips the current iteration and jumps to the next.",
-      "codeSnippet": "for (int i = 0; i < 10; i++) {\n    if (i == 4) break;\n    std::cout << i;\n}"
+      "title": "Floating Point Types",
+      "prompt": "Floating point types represent real numbers: float (single precision), double (double precision), and long double.",
+      "codeSnippet": "float f = 3.14f;\ndouble d = 3.1415926535;\nlong double ld = 3.141592653589793238L;"
     },
     {
       "slideId": "CPP_113_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Skipping Iteration",
-      "prompt": "Fill in the keyword to skip current iteration when i equals 3.",
-      "codeSnippet": "if (i == 3) {\n    ___;\n}",
-      "options": ["continue", "break", "skip", "pass"],
-      "correctAnswer": "continue"
+      "title": "Float Literal Suffix",
+      "prompt": "Fill in the suffix required for a float literal.",
+      "codeSnippet": "float price = 12.99___;",
+      "options": ["f", "d", "l", "m"],
+      "correctAnswer": "f"
     },
     {
       "slideId": "CPP_113_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Terminating Loops",
-      "prompt": "Which keyword completely exits a loop early?",
-      "options": ["break", "continue", "exit", "return"],
-      "correctAnswer": "break"
+      "title": "Default Decimal Type",
+      "prompt": "What is the default type of a literal decimal number like 5.5 in C++?",
+      "options": ["double", "float", "long double", "decimal"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_113_S4",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Break in Switch vs Loop",
-      "prompt": "What does the 'break' statement do inside a loop structure?",
-      "options": ["Exits the loop immediately", "Skips to the next iteration", "Restarts the loop from 0", "Pauses execution for 1 second"],
-      "correctAnswer": "Exits the loop immediately"
+      "type": "FILL_IN_BLANK",
+      "title": "Double Precision",
+      "prompt": "Fill in the keyword for standard double precision numbers.",
+      "codeSnippet": "___ gpa = 3.85;",
+      "options": ["double", "float", "real", "decimal"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_113_S5",
-      "type": "FILL_IN_BLANK",
-      "title": "Exiting Outer Loop",
-      "prompt": "Complete the statement to immediately terminate the running loop.",
-      "codeSnippet": "if (found) {\n    ___;\n}",
-      "options": ["break", "continue", "stop", "goto"],
-      "correctAnswer": "break"
+      "type": "MULTIPLE_CHOICE",
+      "title": "Float Precision Digits",
+      "prompt": "Roughly how many decimal digits of precision does 'float' offer?",
+      "options": ["6-7 digits", "15-17 digits", "3-4 digits", "30 digits"],
+      "correctAnswer": "6-7 digits"
     },
     {
       "slideId": "CPP_113_S6",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Nested Loop Break Scope",
-      "prompt": "When 'break' is executed inside an inner loop, which loop does it break out of?",
-      "options": [
-        "Only the innermost loop",
-        "All nested loops simultaneously",
-        "The outermost loop only",
-        "The main function execution"
-      ],
-      "correctAnswer": "Only the innermost loop"
+      "type": "FILL_IN_BLANK",
+      "title": "Long Double Keyword",
+      "prompt": "Fill in the data type for maximum floating point precision.",
+      "codeSnippet": "long ___ exactVal = 1.23456789012345L;",
+      "options": ["double", "float", "int", "real"],
+      "correctAnswer": "double"
     },
     {
       "slideId": "CPP_113_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Double Precision Digits",
+      "prompt": "Roughly how many decimal digits of precision does 'double' offer?",
+      "options": ["15-17 digits", "6-7 digits", "8-10 digits", "25 digits"],
+      "correctAnswer": "15-17 digits"
+    },
+    {
+      "slideId": "CPP_113_S8",
       "type": "FILL_IN_BLANK",
-      "title": "Filtering Output",
-      "prompt": "Fill in the keyword to skip printing negative values.",
-      "codeSnippet": "if (val < 0) {\n    ___;\n}\nstd::cout << val;",
-      "options": ["continue", "break", "return", "else"],
-      "correctAnswer": "continue"
+      "title": "Scientific Notation",
+      "prompt": "Fill in the exponent letter for scientific notation.",
+      "codeSnippet": "double force = 1.2___3; // 1.2 x 10^3",
+      "options": ["e", "x", "^", "p"],
+      "correctAnswer": "e"
+    },
+    {
+      "slideId": "CPP_113_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floating Point Comparison Issue",
+      "prompt": "Why should you avoid using '==' to compare floating point numbers directly?",
+      "options": ["Due to potential precision and rounding inaccuracies", "It causes a compile error", "They can only be compared with strings", "It always evaluates to true"],
+      "correctAnswer": "Due to potential precision and rounding inaccuracies"
+    },
+    {
+      "slideId": "CPP_113_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Stream Precision",
+      "prompt": "Fill in the manipulator to format output floating digits.",
+      "codeSnippet": "std::cout << std::___(2) << 3.14159;",
+      "options": ["setprecision", "precision", "fixed", "format"],
+      "correctAnswer": "setprecision"
+    },
+    {
+      "slideId": "CPP_113_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fixed Point Notation",
+      "prompt": "Which stream manipulator forces decimal notation instead of scientific notation?",
+      "options": ["std::fixed", "std::scientific", "std::hex", "std::showpoint"],
+      "correctAnswer": "std::fixed"
     }
   ]
 }

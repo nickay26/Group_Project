@@ -4,15 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import java.io.IOException;
 public class MainLayoutController {
 
+    private static MainLayoutController instance;
+
     @FXML private StackPane contentArea;
+    @FXML private Label currentCourseLabel;
 
     @FXML private Button learnBtn;
     @FXML private Button coursesBtn;
@@ -25,52 +32,128 @@ public class MainLayoutController {
 
     @FXML
     public void initialize() {
+        instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
+
+        // Automatically fetch and display active course title
+        updateCourseTitle();
 
         // Load default page on startup
         handleNavLearn();
     }
 
+    public static MainLayoutController getInstance() {
+        return instance;
+    }
+
+    public void setCourseTitle(String title) {
+        if (currentCourseLabel != null) {
+            currentCourseLabel.setText(title != null ? title : "No Active Course");
+        }
+    }
+
+    public void updateCourseTitle() {
+        String activeCourseId = UserSession.getActiveCourseId();
+        int userId = UserSession.getUserId();
+
+        if (activeCourseId != null) {
+            List<Course> courses = DatabaseManager.getCoursesForUser(userId);
+            if (courses != null) {
+                for (Course c : courses) {
+                    if (c.getCourseId().equalsIgnoreCase(activeCourseId)) {
+                        setCourseTitle(c.getTitle());
+                        return;
+                    }
+                }
+            }
+        }
+        setCourseTitle("No Active Course");
+    }
+
     @FXML
     public void handleNavLearn() {
         setActiveButton(learnBtn);
-        loadView("LearnPage.fxml");
+        loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
         setActiveButton(coursesBtn);
-        loadView("CoursePage.fxml");
+        loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
         setActiveButton(playgroundBtn);
-        loadView("PlaygroundDashboardView.fxml");
+        loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
-    public void handleLeaderBoard(){
+    public void handleLeaderBoard() {
         setActiveButton(leaderboardBtn);
-        loadView("LeaderboardView.fxml");
+        loadPage("LeaderboardView.fxml");
     }
-
-    private void loadView(String fxmlPath) {
+    @FXML
+    private void handleNavPractice() {
+        setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
+        loadPage("PracticeView.fxml");                          // ← loadPage သုံး
+    }
+    public FXMLLoader loadPage(String fxmlFileName) {
         try {
-            Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));
+            String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
+            URL resource = getClass().getResource(resourcePath);
+
+            if (resource == null) {
+                resource = getClass().getResource("/" + fxmlFileName);
+            }
+            if (resource == null) {
+                resource = getClass().getResource(fxmlFileName);
+            }
+
+            if (resource == null) {
+                System.err.println("Could not find FXML file: " + fxmlFileName);
+                return null;
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent view = loader.load();
+
             contentArea.getChildren().setAll(view);
+            updateSidebarHighlight(fxmlFileName);
+
+            return loader;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 
+    private void updateSidebarHighlight(String fxmlFileName) {
+        if (fxmlFileName.contains("LearnPage")) {
+            setActiveButton(learnBtn);
+        } else if (fxmlFileName.contains("Course")) {
+            setActiveButton(coursesBtn);
+        } else if (fxmlFileName.contains("Playground")) {
+            setActiveButton(playgroundBtn);
+        } else if (fxmlFileName.contains("Leaderboard")) {
+            setActiveButton(leaderboardBtn);
+        } else if (fxmlFileName.contains("Practice")) {
+            setActiveButton(practiceBtn);
+        } else if (fxmlFileName.contains("Game")) {
+            setActiveButton(gamesBtn);
+        }
+    }
     private void setActiveButton(Button activeButton) {
         for (Button btn : navButtons) {
-            if (btn == activeButton) {
-                btn.setStyle("-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #FFFFFF; -fx-cursor: hand;");
-            } else {
-                btn.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 6px; -fx-text-fill: #000000; -fx-cursor: hand;");
+            btn.getStyleClass().remove("nav-button-active");
+            if (!btn.getStyleClass().contains("nav-button")) {
+                btn.getStyleClass().add("nav-button");
             }
+        }
+
+        activeButton.getStyleClass().remove("nav-button");
+        if (!activeButton.getStyleClass().contains("nav-button-active")) {
+            activeButton.getStyleClass().add("nav-button-active");
         }
     }
 }

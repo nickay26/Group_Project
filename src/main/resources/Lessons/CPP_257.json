@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_257",
+  "title": "std::thread Basics & Thread Management",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_257_S1",
+      "type": "CONCEPT",
+      "title": "Introduction to std::thread",
+      "prompt": "C++11 introduced std::thread in the <thread> header to represent execution threads. When a std::thread object is constructed with a callable, a new thread of execution is spawned immediately.",
+      "codeSnippet": "#include <iostream>\n#include <thread>\n\nvoid printMessage() {\n    std::cout << \"Hello from thread!\" << std::endl;\n}\n\nint main() {\n    std::thread t(printMessage);\n    t.join(); // Wait for thread completion\n}"
+    },
+    {
+      "slideId": "CPP_257_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Joining a Thread",
+      "prompt": "Fill in the missing method name that blocks the current thread until the target thread finishes execution.",
+      "codeSnippet": "std::thread t(workerFunction);\nt.___(); // Blocks until workerFunction completes",
+      "options": ["join", "detach", "wait", "terminate"],
+      "correctAnswer": "join"
+    },
+    {
+      "slideId": "CPP_257_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Destruction without Join or Detach",
+      "prompt": "What happens if a std::thread object is destroyed while it is still joinable (neither join() nor detach() was called)?",
+      "options": [
+        "std::terminate is called, abruptly crashing the program",
+        "The thread automatically detaches and runs in the background",
+        "The thread is automatically joined at destruction",
+        "A runtime exception is thrown that can be caught"
+      ],
+      "correctAnswer": "std::terminate is called, abruptly crashing the program"
+    },
+    {
+      "slideId": "CPP_257_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Detaching Threads",
+      "prompt": "Fill in the method name used to separate the thread object from the execution thread, allowing it to run independently.",
+      "codeSnippet": "std::thread t(backgroundTask);\nt.___(); // Thread now runs independently in the background",
+      "options": ["detach", "join", "release", "split"],
+      "correctAnswer": "detach"
+    },
+    {
+      "slideId": "CPP_257_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Checking Joinability",
+      "prompt": "Which method checks whether a std::thread object represents an active thread of execution?",
+      "options": [
+        "t.joinable()",
+        "t.is_active()",
+        "t.valid()",
+        "t.is_running()"
+      ],
+      "correctAnswer": "t.joinable()"
+    },
+    {
+      "slideId": "CPP_257_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Passing Parameters to Threads",
+      "prompt": "Fill in the standard wrapper function needed to pass parameters by reference to a thread function.",
+      "codeSnippet": "void increment(int& val) { val++; }\nint n = 0;\nstd::thread t(increment, std::___(n));\nt.join();",
+      "options": ["ref", "move", "forward", "cref"],
+      "correctAnswer": "ref"
+    },
+    {
+      "slideId": "CPP_257_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Moving Threads",
+      "prompt": "Which statement regarding std::thread ownership is correct?",
+      "options": [
+        "std::thread is move-only; it cannot be copied",
+        "std::thread can be both copied and moved freely",
+        "std::thread can be copied but not moved",
+        "std::thread cannot be moved or copied"
+      ],
+      "correctAnswer": "std::thread is move-only; it cannot be copied"
+    },
+    {
+      "slideId": "CPP_257_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Thread Header",
+      "prompt": "Fill in the header file required for using std::thread.",
+      "codeSnippet": "#include <___>\n\nstd::thread t([]() {\n    // lambda body\n});",
+      "options": ["thread", "mutex", "future", "chrono"],
+      "correctAnswer": "thread"
+    },
+    {
+      "slideId": "CPP_257_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Hardware Concurrency Query",
+      "prompt": "Which static function returns the number of concurrent hardware threads supported by the system?",
+      "options": [
+        "std::thread::hardware_concurrency()",
+        "std::thread::max_threads()",
+        "std::thread::cpu_count()",
+        "std::thread::system_threads()"
+      ],
+      "correctAnswer": "std::thread::hardware_concurrency()"
+    },
+    {
+      "slideId": "CPP_257_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Getting Thread ID",
+      "prompt": "Fill in the member function name that returns a unique identifier for the thread.",
+      "codeSnippet": "std::thread t(task);\nstd::thread::id id = t.get____();\nt.join();",
+      "options": ["id", "handle", "name", "native_handle"],
+      "correctAnswer": "id"
+    }
+  ]
+}

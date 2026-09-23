@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_151",
+  "title": "std::span Contiguous Views (C++20)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_151_S1",
+      "type": "CONCEPT",
+      "title": "std::span Overview",
+      "prompt": "Introduced in C++20, std::span is a non-owning view over any contiguous sequence of objects (raw arrays, std::array, std::vector).",
+      "codeSnippet": "#include <span>\nvoid printSpan(std::span<const int> s) {\n    for (int x : s) std::cout << x << \" \";\n}"
+    },
+    {
+      "slideId": "CPP_151_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "span Header Include",
+      "prompt": "Fill in standard C++20 header.",
+      "codeSnippet": "#include <___>",
+      "options": ["span", "array_view", "ranges", "view"],
+      "correctAnswer": "span"
+    },
+    {
+      "slideId": "CPP_151_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "span Compatibility",
+      "prompt": "Which contiguous containers can be seamlessly bound to a std::span parameter?",
+      "options": ["Raw C arrays, std::array, std::vector, and std::string", "Only std::vector", "Only raw pointers", "std::list and std::map"],
+      "correctAnswer": "Raw C arrays, std::array, std::vector, and std::string"
+    },
+    {
+      "slideId": "CPP_151_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "First N Elements Subspan",
+      "prompt": "Fill in method taking first N elements of span.",
+      "codeSnippet": "auto head = s.___ (3);",
+      "options": ["first", "take", "head", "subspan"],
+      "correctAnswer": "first"
+    },
+    {
+      "slideId": "CPP_151_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Extent vs Static Extent",
+      "prompt": "What is std::dynamic_extent in std::span?",
+      "options": ["Indicates span size is determined at runtime rather than fixed compile-time template parameter", "Allocates heap dynamically", "Forces span resizing", "Means infinite size"],
+      "correctAnswer": "Indicates span size is determined at runtime rather than fixed compile-time template parameter"
+    },
+    {
+      "slideId": "CPP_151_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Last N Elements Subspan",
+      "prompt": "Fill in method taking last N elements of span.",
+      "codeSnippet": "auto tail = s.___(2);",
+      "options": ["last", "tail", "back", "subspan"],
+      "correctAnswer": "last"
+    },
+    {
+      "slideId": "CPP_151_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mutability in Span",
+      "prompt": "Can you modify underlying array elements through 'std::span<int>'?",
+      "options": ["Yes! std::span<int> allows mutating elements; use std::span<const int> for read-only access", "No, spans are strictly read-only", "Only if initialized from std::vector", "Only using const_cast"],
+      "correctAnswer": "Yes! std::span<int> allows mutating elements; use std::span<const int> for read-only access"
+    },
+    {
+      "slideId": "CPP_151_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Arbitrary Subspan Extraction",
+      "prompt": "Fill in method extracting offset and count sub-range.",
+      "codeSnippet": "auto middle = s.___(offset, count);",
+      "options": ["subspan", "slice", "substr", "range"],
+      "correctAnswer": "subspan"
+    },
+    {
+      "slideId": "CPP_151_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Span Size in Bytes Method",
+      "prompt": "Which method returns total memory size occupied by elements in span in bytes?",
+      "options": ["s.size_bytes()", "s.bytes()", "sizeof(s)", "s.length_bytes()"],
+      "correctAnswer": "s.size_bytes()"
+    },
+    {
+      "slideId": "CPP_151_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::as_bytes Helper",
+      "prompt": "Fill in C++20 function casting span elements into raw read-only byte view.",
+      "codeSnippet": "auto byteSpan = std::___(s);",
+      "options": ["as_bytes", "to_bytes", "cast_bytes", "byte_view"],
+      "correctAnswer": "as_bytes"
+    }
+  ]
+}

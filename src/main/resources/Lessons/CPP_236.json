@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_236",
+  "title": "Sorting & Partitioning Algorithms",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_236_S1",
+      "type": "CONCEPT",
+      "title": "Sorting & Partitioning",
+      "prompt": "Sorting algorithms reorder elements according to a comparator. Partitioning reorganizes elements so that those satisfying a predicate precede those that do not.",
+      "codeSnippet": "#include <algorithm>\n#include <vector>\nstd::vector<int> v = {4, 1, 3, 2};\nstd::sort(v.begin(), v.end()); // {1, 2, 3, 4}"
+    },
+    {
+      "slideId": "CPP_236_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic Sorting",
+      "prompt": "Fill in the function used to sort a range into ascending order.",
+      "codeSnippet": "std::___(v.begin(), v.end());",
+      "options": ["sort", "order", "arrange", "stable_sort"],
+      "correctAnswer": "sort"
+    },
+    {
+      "slideId": "CPP_236_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stable Sort Guarantee",
+      "prompt": "What operational guarantee does std::stable_sort provide over std::sort?",
+      "options": [
+        "Preserves the relative order of equivalent elements",
+        "Guarantees O(1) space complexity always",
+        "Runs faster on completely unsorted ranges",
+        "Can sort linked list containers"
+      ],
+      "correctAnswer": "Preserves the relative order of equivalent elements"
+    },
+    {
+      "slideId": "CPP_236_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Partitioning Range",
+      "prompt": "Fill in the algorithm that reorders elements such that elements matching the predicate come first.",
+      "codeSnippet": "auto bound = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",
+      "options": ["partition", "split", "group", "separate"],
+      "correctAnswer": "partition"
+    },
+    {
+      "slideId": "CPP_236_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::partial_sort Purpose",
+      "prompt": "When would you choose std::partial_sort over std::sort?",
+      "options": [
+        "When you only need the smallest N elements sorted at the beginning of a container",
+        "When sorting strings instead of numbers",
+        "When memory usage must be zero",
+        "When sorting bidirectional list iterators"
+      ],
+      "correctAnswer": "When you only need the smallest N elements sorted at the beginning of a container"
+    },
+    {
+      "slideId": "CPP_236_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Nth Element Algorithm",
+      "prompt": "Fill in the algorithm that places the element that would be at position N in a fully sorted range, rearranging other elements around it.",
+      "codeSnippet": "std::___(v.begin(), v.begin() + k, v.end());",
+      "options": ["nth_element", "partial_sort", "partition", "sort_index"],
+      "correctAnswer": "nth_element"
+    },
+    {
+      "slideId": "CPP_236_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::is_partitioned Function",
+      "prompt": "What does std::is_partitioned(begin, end, pred) check?",
+      "options": [
+        "Whether all elements satisfying the predicate precede all elements that do not",
+        "Whether the container is divided into two equal length halves",
+        "Whether elements are sorted in ascending order",
+        "Whether duplicate elements are grouped together"
+      ],
+      "correctAnswer": "Whether all elements satisfying the predicate precede all elements that do not"
+    },
+    {
+      "slideId": "CPP_236_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking Sort Status",
+      "prompt": "Fill in the algorithm that returns true if a range is sorted.",
+      "codeSnippet": "bool sorted = std::___(v.begin(), v.end());",
+      "options": ["is_sorted", "check_sorted", "sorted", "is_ordered"],
+      "correctAnswer": "is_sorted"
+    },
+    {
+      "slideId": "CPP_236_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::sort Complexity",
+      "prompt": "What is the average time complexity of std::sort?",
+      "options": [
+        "O(N log N)",
+        "O(N^2)",
+        "O(N)",
+        "O(log N)"
+      ],
+      "correctAnswer": "O(N log N)"
+    },
+    {
+      "slideId": "CPP_236_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Comparator Sort",
+      "prompt": "Fill in the functor used to sort a range in descending order with std::sort.",
+      "codeSnippet": "std::sort(v.begin(), v.end(), std::___<int>());",
+      "options": ["greater", "less", "descending", "reverse"],
+      "correctAnswer": "greater"
+    }
+  ]
+}

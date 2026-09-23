@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_224",
+  "title": "Template Metaprogramming & Compile-Time Evaluation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_224_S1",
+      "type": "CONCEPT",
+      "title": "Compile-Time Computation",
+      "prompt": "Template Metaprogramming (TMP) executes logic at compile time. Modern C++ simplifies TMP using `constexpr`, `consteval`, and `if constexpr`.",
+      "codeSnippet": "// Modern TMP with constexpr:\nconstexpr int factorial(int n) {\n    return (n <= 1) ? 1 : n * factorial(n - 1);\n}\nstatic_assert(factorial(5) == 120);"
+    },
+    {
+      "slideId": "CPP_224_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-Time If Branching Syntax",
+      "prompt": "Fill in the C++17 keyword for compile-time conditional branching.",
+      "codeSnippet": "if ___ (std::is_integral_v<T>) {\n    // Compiled only if T is integral\n}",
+      "options": ["constexpr", "consteval", "static", "concept"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_224_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "if constexpr Advantage over standard if",
+      "prompt": "What is the primary benefit of 'if constexpr' over a regular 'if' statement inside a template function?",
+      "options": [
+        "Discarded branches are not instantiated by the compiler, avoiding compilation errors for invalid sub-type operations",
+        "Executes branching faster at runtime",
+        "Allows dynamically changing variable types inside main()",
+        "Disables exception throwing inside both branches"
+      ],
+      "correctAnswer": "Discarded branches are not instantiated by the compiler, avoiding compilation errors for invalid sub-type operations"
+    },
+    {
+      "slideId": "CPP_224_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Consteval Keyword C++20",
+      "prompt": "C++20 introduced ___ for immediate functions that MUST execute at compile time.",
+      "codeSnippet": "___ int getSquare(int x) { return x * x; }",
+      "options": ["consteval", "constexpr", "constinit", "inline"],
+      "correctAnswer": "consteval"
+    },
+    {
+      "slideId": "CPP_224_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "constexpr vs consteval Difference",
+      "prompt": "How does 'consteval' differ from 'constexpr' in C++20?",
+      "options": [
+        "'consteval' guarantees function execution at compile-time only (fails if invoked with runtime values); 'constexpr' can run at runtime or compile-time",
+        "'consteval' allocates variables in thread-local storage",
+        "'constexpr' works only for templates; 'consteval' works only for void functions",
+        "There is no difference"
+      ],
+      "correctAnswer": "'consteval' guarantees function execution at compile-time only (fails if invoked with runtime values); 'constexpr' can run at runtime or compile-time"
+    },
+    {
+      "slideId": "CPP_224_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Assert Keyword",
+      "prompt": "Fill in the keyword used to perform compile-time assertion testing.",
+      "codeSnippet": "___(sizeof(int) == 4, \"Integers must be 4 bytes\");",
+      "options": ["static_assert", "assert", "concept_assert", "decltype_assert"],
+      "correctAnswer": "static_assert"
+    },
+    {
+      "slideId": "CPP_224_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "constinit Keyword C++20",
+      "prompt": "What does the C++20 'constinit' keyword guarantee for a variable?",
+      "options": [
+        "Guarantees the variable is initialized at compile time (prevents static initialization order fiasco), but permits runtime mutation if non-const",
+        "Forces the variable to be read-only constant throughout runtime",
+        "Replaces static_cast for template pointers",
+        "Forces function parameters to be initialized to zero"
+      ],
+      "correctAnswer": "Guarantees the variable is initialized at compile time (prevents static initialization order fiasco), but permits runtime mutation if non-const"
+    },
+    {
+      "slideId": "CPP_224_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Type Traits Value Extraction",
+      "prompt": "In struct Meta-functions, compile-time return values were traditionally passed via static constexpr ___ value.",
+      "codeSnippet": "template <int N>\nstruct Factorial {\n    static ___ value = N * Factorial<N-1>::value;\n};",
+      "options": ["constexpr int", "auto", "void", "typename"],
+      "correctAnswer": "constexpr int"
+    },
+    {
+      "slideId": "CPP_224_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Template Metaprogramming Drawback",
+      "prompt": "What is a well-known drawback of extensive traditional Template Metaprogramming?",
+      "options": [
+        "Increased compilation times and cryptic compiler error messages",
+        "Significant runtime CPU overhead and slow execution",
+        "Excessive dynamic heap allocations",
+        "Incompatibility with standard C++ destructors"
+      ],
+      "correctAnswer": "Increased compilation times and cryptic compiler error messages"
+    },
+    {
+      "slideId": "CPP_224_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::is_constant_evaluated C++20",
+      "prompt": "Fill in the function that detects if execution is currently occurring within a compile-time context.",
+      "codeSnippet": "if (std::___()) {\n    // Compile-time path\n}",
+      "options": ["is_constant_evaluated", "is_compile_time", "is_constexpr", "is_evaluated"],
+      "correctAnswer": "is_constant_evaluated"
+    }
+  ]
+}

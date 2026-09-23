@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_158",
+  "title": "Lambda Expressions & Captures Mechanics",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_158_S1",
+      "type": "CONCEPT",
+      "title": "Lambda Expression Structure",
+      "prompt": "Lambdas are anonymous inline function objects. Syntax: [captures](parameters) mutable -> return_type { body }.",
+      "codeSnippet": "auto add = [](int a, int b) -> int {\n    return a + b;\n};\nstd::cout << add(3, 4);"
+    },
+    {
+      "slideId": "CPP_158_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Capture Bracket Symbol",
+      "prompt": "Fill in capture list opening bracket symbol.",
+      "codeSnippet": "___ x ](int y) { return x + y; };",
+      "options": ["[", "{", "(", "<"],
+      "correctAnswer": "["
+    },
+    {
+      "slideId": "CPP_158_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Capture by Value vs Reference",
+      "prompt": "What is the difference between capture '[=]' and '[&]' in a lambda?",
+      "options": [
+        "'[=]' captures all local variables by value (read-only copy); '[&]' captures by reference",
+        "'[=]' captures by reference; '[&]' captures by value",
+        "'[=]' allocates on heap; '[&]' allocates on stack",
+        "There is no functional difference"
+      ],
+      "correctAnswer": "'[=]' captures all local variables by value (read-only copy); '[&]' captures by reference"
+    },
+    {
+      "slideId": "CPP_158_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Mutable Lambdas",
+      "prompt": "Fill in the keyword required to modify variables captured BY VALUE inside lambda body.",
+      "codeSnippet": "int count = 0;\nauto inc = [count]() ___ {\n    count++;\n};",
+      "options": ["mutable", "volatile", "static", "override"],
+      "correctAnswer": "mutable"
+    },
+    {
+      "slideId": "CPP_158_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Captureless Lambda Conversion",
+      "prompt": "Can a lambda expression with NO captures ('[]') be implicitly converted to a raw function pointer?",
+      "options": [
+        "Yes, stateless captureless lambdas can convert to raw function pointers",
+        "No, lambdas are always distinct functor types",
+        "Only if defined inside main()",
+        "Only when using C++20"
+      ],
+      "correctAnswer": "Yes, stateless captureless lambdas can convert to raw function pointers"
+    },
+    {
+      "slideId": "CPP_158_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Explicit Return Type Deduction",
+      "prompt": "Fill in trailing return type arrow operator.",
+      "codeSnippet": "auto divide = [](double a, double b) ___ double {\n    return a / b;\n};",
+      "options": ["->", "=>", ":", "returns"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_158_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Lambdas (C++14)",
+      "prompt": "What feature introduced in C++14 enables generic parameters in lambda parameter lists?",
+      "options": [
+        "Using 'auto' keyword in parameter types",
+        "Template specifier '<typename T>' inside capture list",
+        "Decltype parameters",
+        "Variadic macro expansion"
+      ],
+      "correctAnswer": "Using 'auto' keyword in parameter types"
+    },
+    {
+      "slideId": "CPP_158_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Init Capture (C++14 Generalized Capture)",
+      "prompt": "Fill in move capture expression to transfer ownership into lambda.",
+      "codeSnippet": "auto ptr = std::make_unique<int>(10);\nauto lambda = [p = std::___(ptr)]() {\n    // use p\n};",
+      "options": ["move", "copy", "forward", "pass"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_158_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Member Variable Capture in Classes",
+      "prompt": "How do you capture member variables of the current class inside a class method lambda?",
+      "options": [
+        "Capture '[this]' or '[*this]' (captures copy in C++17)",
+        "Capture '[class]'",
+        "Member variables are automatically accessible without captures",
+        "Capture '[self]'"
+      ],
+      "correctAnswer": "Capture '[this]' or '[*this]' (captures copy in C++17)"
+    },
+    {
+      "slideId": "CPP_158_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 Template Lambda Syntax",
+      "prompt": "Fill in template keyword for explicit C++20 template lambdas.",
+      "codeSnippet": "auto print = ___ <typename T>(T val) {\n    std::cout << val;\n};",
+      "options": ["template", "generic", "typename", "auto"],
+      "correctAnswer": "template"
+    }
+  ]
+}

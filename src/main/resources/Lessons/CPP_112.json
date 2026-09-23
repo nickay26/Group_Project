@@ -1,65 +1,136 @@
 {
   "lessonId": "CPP_112",
-  "title": "C++ Even/Odd Logic ",
-  "isPremium": true,
+  "title": "Signed vs Unsigned Modifiers",
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_112_S1",
       "type": "CONCEPT",
-      "title": "Checking Even Numbers",
-      "prompt": "An integer is even if it is divisible by 2 with no remainder (number % 2 == 0).",
-      "codeSnippet": "int num = 4;\nif (num % 2 == 0) {\n    std::cout << \"Even\";\n}"
+      "title": "Signed and Unsigned Concept",
+      "prompt": "Unsigned modifiers remove negative numbers, doubling the positive capacity of the variable.",
+      "codeSnippet": "unsigned int positiveOnly = 4000000000U;\nsigned int standardInt = -100;"
     },
     {
       "slideId": "CPP_112_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Even Condition",
-      "prompt": "Fill in the remainder value that checks for an even number.",
-      "codeSnippet": "if (num % 2 == ___) {\n    std::cout << \"Even\";\n}",
-      "options": ["0", "1", "2", "-1"],
-      "correctAnswer": "0"
+      "title": "Unsigned Keyword",
+      "prompt": "Fill in the modifier for non-negative integers.",
+      "codeSnippet": "___ int speed = 120;",
+      "options": [
+        "unsigned",
+        "signed",
+        "positive",
+        "nonneg"
+      ],
+      "correctAnswer": "unsigned"
     },
     {
       "slideId": "CPP_112_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Odd Number Condition",
-      "prompt": "What expression evaluates to true when 'n' is an odd number?",
-      "options": ["n % 2 != 0", "n % 2 == 0", "n / 2 == 0", "n * 2 == 1"],
-      "correctAnswer": "n % 2 != 0"
+      "title": "Unsigned Minimum Value",
+      "prompt": "What is the minimum value an unsigned integer can hold?",
+      "options": [
+        "0",
+        "-32768",
+        "-2147483648",
+        "-1"
+      ],
+      "correctAnswer": "0"
     },
     {
       "slideId": "CPP_112_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Printing Even Numbers in Loop",
-      "prompt": "Complete the loop increment expression to step through even numbers only.",
-      "codeSnippet": "for (int i = 0; i <= 10; i ___ 2) {\n    std::cout << i;\n}",
-      "options": ["+=", "++", "=", "*="],
-      "correctAnswer": "+="
+      "title": "Signed Keyword",
+      "prompt": "Fill in the explicit modifier that allows both positive and negative values.",
+      "codeSnippet": "___ int temperature = -5;",
+      "options": [
+        "signed",
+        "unsigned",
+        "negative",
+        "both"
+      ],
+      "correctAnswer": "signed"
     },
     {
       "slideId": "CPP_112_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Bitwise Even Check",
-      "prompt": "Which bitwise operation checks if an integer 'n' is even?",
-      "options": ["(n & 1) == 0", "(n | 1) == 0", "(n ^ 1) == 0", "(n ~ 1) == 0"],
-      "correctAnswer": "(n & 1) == 0"
+      "title": "Default Sign Status",
+      "prompt": "By default, is 'int' signed or unsigned in C++?",
+      "options": [
+        "Signed by default",
+        "Unsigned by default",
+        "Depends on variable name",
+        "Neither"
+      ],
+      "correctAnswer": "Signed by default"
     },
     {
       "slideId": "CPP_112_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Ternary Even Check",
-      "prompt": "Fill in the condition expression to print 'Even' or 'Odd'.",
-      "codeSnippet": "std::string result = (num % 2 ___ 0) ? \"Even\" : \"Odd\";",
-      "options": ["==", "=", "!=", ">"],
-      "correctAnswer": "=="
+      "title": "Unsigned Literal Suffix",
+      "prompt": "Fill in the literal suffix for unsigned numbers.",
+      "codeSnippet": "unsigned int score = 500___;",
+      "options": [
+        "U",
+        "L",
+        "F",
+        "S"
+      ],
+      "correctAnswer": "U"
     },
     {
       "slideId": "CPP_112_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Negative Modulus",
-      "prompt": "In C++, what is the result of -5 % 2?",
-      "options": ["-1", "1", "0", "Undefined"],
-      "correctAnswer": "-1"
+      "title": "Assigning Negative to Unsigned",
+      "prompt": "What happens if you assign -1 to an 'unsigned int'?",
+      "options": [
+        "It wraps around to the maximum unsigned value",
+        "It becomes 0",
+        "Compile error",
+        "Program terminates"
+      ],
+      "correctAnswer": "It wraps around to the maximum unsigned value"
+    },
+    {
+      "slideId": "CPP_112_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Unsigned Short",
+      "prompt": "Fill in the data type for an unsigned short integer.",
+      "codeSnippet": "unsigned ___ smallPositive = 65000;",
+      "options": [
+        "short",
+        "int",
+        "char",
+        "long"
+      ],
+      "correctAnswer": "short"
+    },
+    {
+      "slideId": "CPP_112_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Use Case for Unsigned",
+      "prompt": "When is using an 'unsigned int' recommended?",
+      "options": [
+        "For quantities that can never be negative, like array sizes or counts",
+        "For bank balances with debt",
+        "For coordinates that move in all directions",
+        "For degree temperatures"
+      ],
+      "correctAnswer": "For quantities that can never be negative, like array sizes or counts"
+    },
+    {
+      "slideId": "CPP_112_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Shortened Unsigned Syntax",
+      "prompt": "Writing 'unsigned' alone is shorthand for which type?",
+      "codeSnippet": "unsigned age = 20; // Shorthand for unsigned ___",
+      "options": [
+        "int",
+        "short",
+        "char",
+        "long"
+      ],
+      "correctAnswer": "int"
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_268",
+  "title": "Template Specialization (Full & Partial)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_268_S1",
+      "type": "CONCEPT",
+      "title": "Template Specialization Fundamentals",
+      "prompt": "Template specialization allows customizing implementation for specific data types. Full (explicit) specialization overrides the template for an exact type, while partial specialization modifies behavior for a family of types (e.g. pointers or specific parameter combinations).",
+      "codeSnippet": "#include <iostream>\n\ntemplate <typename T>\nstruct Formatter {\n    static void print(T v) { std::cout << \"Generic: \" << v << \"\\n\"; }\n};\n\n// Full Specialization for bool\ntemplate <>\nstruct Formatter<bool> {\n    static void print(bool v) { std::cout << (v ? \"true\" : \"false\") << \"\\n\"; }\n};"
+    },
+    {
+      "slideId": "CPP_268_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Full Specialization Syntax",
+      "prompt": "Fill in the empty angle brackets required for full explicit template specialization.",
+      "codeSnippet": "template <>\nstruct Printer<int> {\n    // Implementation specifically for int\n};",
+      "options": ["<>", "<int>", "<typename>", "<class>"],
+      "correctAnswer": "<>"
+    },
+    {
+      "slideId": "CPP_268_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Template Partial Specialization Rule",
+      "prompt": "Does standard C++ allow partial specialization of function templates?",
+      "options": [
+        "No, function templates cannot be partially specialized; function overloading or class templates must be used instead",
+        "Yes, function templates support partial specialization identically to class templates",
+        "Yes, but only if constexpr is applied",
+        "Only in C++20 and later standards"
+      ],
+      "correctAnswer": "No, function templates cannot be partially specialized; function overloading or class templates must be used instead"
+    },
+    {
+      "slideId": "CPP_268_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Partial Specialization for Pointer Types",
+      "prompt": "Fill in the specialized template parameter syntax for pointer types T*.",
+      "codeSnippet": "template <typename T>\nstruct TypeTraits {\n    static constexpr bool is_pointer = false;\n};\n\ntemplate <typename T>\nstruct TypeTraits<___> {\n    static constexpr bool is_pointer = true;\n};",
+      "options": ["T*", "T&", "const T", "T[]"],
+      "correctAnswer": "T*"
+    },
+    {
+      "slideId": "CPP_268_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Template Partial Specialization",
+      "prompt": "Given template <typename T, typename U> class Pair;, which syntax correctly partially specializes for cases where both arguments are the same type?",
+      "options": [
+        "template <typename T> class Pair<T, T> { ... };",
+        "template <> class Pair<T, T> { ... };",
+        "template <typename T, typename T> class Pair { ... };",
+        "class Pair<T, T> { ... };"
+      ],
+      "correctAnswer": "template <typename T> class Pair<T, T> { ... };"
+    },
+    {
+      "slideId": "CPP_268_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Full Specialization Function Template",
+      "prompt": "Fill in the specialized function declaration header for std::string.",
+      "codeSnippet": "template <typename T>\nvoid log(T data);\n\ntemplate ___\nvoid log(std::string data) {\n    // Specialized log behavior\n}",
+      "options": ["<>", "<std::string>", "<T>", "()"],
+      "correctAnswer": "<>"
+    },
+    {
+      "slideId": "CPP_268_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Specialization vs Overloading",
+      "prompt": "How does C++ compiler select between a non-template function overload and a fully specialized function template?",
+      "options": [
+        "Normal non-template functions are preferred over template specializations during overload resolution",
+        "Template specializations are always preferred over normal non-template functions",
+        "It results in an ambiguous call compile error",
+        "Selection depends on the order of header includes"
+      ],
+      "correctAnswer": "Normal non-template functions are preferred over template specializations during overload resolution"
+    },
+    {
+      "slideId": "CPP_268_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Const Type Partial Specialization",
+      "prompt": "Fill in the specialization argument to specialize a class template for const types.",
+      "codeSnippet": "template <typename T>\nstruct Unconst;\n\ntemplate <typename T>\nstruct Unconst<___ T> {\n    using type = T;\n};",
+      "options": ["const", "constexpr", "volatile", "static"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_268_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Template Requirement",
+      "prompt": "What happens if you declare a template specialization without defining a primary template first?",
+      "options": [
+        "Compilation error; a primary template must be declared prior to any specialization",
+        "The compiler creates an implicit primary template automatically",
+        "The specialization becomes a standalone non-template class",
+        "It works only for full specializations"
+      ],
+      "correctAnswer": "Compilation error; a primary template must be declared prior to any specialization"
+    },
+    {
+      "slideId": "CPP_268_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Specialization Member Redefinition",
+      "prompt": "Fill in the template header required when fully specializing a single static member variable of a primary class template.",
+      "codeSnippet": "template <typename T>\nstruct Config { static int id; };\n\ntemplate ___\nint Config<double>::id = 99;",
+      "options": ["<>", "<double>", "<int>", "<T>"],
+      "correctAnswer": "<>"
+    }
+  ]
+}

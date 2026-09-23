@@ -1,0 +1,91 @@
+{
+  "lessonId": "CPP_125",
+  "title": "Special Operators (sizeof, comma, member access)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_125_S1",
+      "type": "CONCEPT",
+      "title": "Special Purpose Operators",
+      "prompt": "C++ features special operators: sizeof (memory size), comma (,), dot (.), and arrow (->).",
+      "codeSnippet": "int a = 10;\nsize_t sz = sizeof(a);\nint x = (a = 3, a + 2); // comma operator (x becomes 5)"
+    },
+    {
+      "slideId": "CPP_125_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "sizeof Operator Syntax",
+      "prompt": "Fill in the operator that computes byte size of a variable.",
+      "codeSnippet": "size_t bytes = ___(double);",
+      "options": ["sizeof", "length", "size", "bytesof"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_125_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Comma Operator Behavior",
+      "prompt": "How does the comma operator (expr1, expr2) evaluate and return values?",
+      "options": ["Evaluates left-to-right and returns the result of the rightmost expression", "Returns the average of both", "Returns the leftmost expression", "Combines expressions into an array"],
+      "correctAnswer": "Evaluates left-to-right and returns the result of the rightmost expression"
+    },
+    {
+      "slideId": "CPP_125_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Member Access Dot Operator",
+      "prompt": "Fill in the operator used to access struct or class members from an object instance.",
+      "codeSnippet": "Person p;\np___name = \"Alice\";",
+      "options": [".", "->", "::", ":"],
+      "correctAnswer": "."
+    },
+    {
+      "slideId": "CPP_125_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Member Access Operator",
+      "prompt": "Which operator accesses struct/class members through a pointer to an object?",
+      "options": ["-> (arrow operator)", ". (dot operator)", ":: (scope resolution)", "* (asterisk)"],
+      "correctAnswer": "-> (arrow operator)"
+    },
+    {
+      "slideId": "CPP_125_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Arrow Operator Equivalence",
+      "prompt": "ptr->member is equivalent to (*ptr)___member.",
+      "codeSnippet": "ptr->age = (*ptr)___age;",
+      "options": [".", "->", "::", "&"],
+      "correctAnswer": "."
+    },
+    {
+      "slideId": "CPP_125_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "sizeof Evaluation Time",
+      "prompt": "Is 'sizeof' evaluated at compile-time or runtime for non-VLA types?",
+      "options": ["Compile-time", "Runtime", "Link-time", "During garbage collection"],
+      "correctAnswer": "Compile-time"
+    },
+    {
+      "slideId": "CPP_125_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Comma Operator Evaluation",
+      "prompt": "What is the value of 'val' in: int val = (1, 2, 3);?",
+      "codeSnippet": "int val = (1, 2, 3); // val becomes ___",
+      "options": ["3", "1", "6", "2"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_125_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Scope Resolution Operator Symbol",
+      "prompt": "Which operator symbol represents scope resolution in C++?",
+      "options": ["::", "->", ".", ":"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "CPP_125_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Address-of Operator",
+      "prompt": "Fill in the operator that retrieves the memory address of a variable.",
+      "codeSnippet": "int* ptr = ___myVar;",
+      "options": ["&", "*", "->", "ref"],
+      "correctAnswer": "&"
+    }
+  ]
+}

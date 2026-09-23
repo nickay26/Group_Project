@@ -1,65 +1,91 @@
 {
   "lessonId": "CPP_108",
-  "title": "C++ Math Functions(Premium)",
+  "title": "Increment & Decrement Operators",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_108_S1",
       "type": "CONCEPT",
-      "title": "cmath Header",
-      "prompt": "Header <cmath> allows performing mathematical functions on numbers.",
-      "codeSnippet": "#include <cmath>\n\nint x = std::max(5, 10);\ndouble y = sqrt(64); // returns 8"
+      "title": "Increment and Decrement Overview",
+      "prompt": "The increment operator (++) increases a value by 1, while decrement (--) decreases it by 1.",
+      "codeSnippet": "int x = 5;\nx++; // x becomes 6\nx--; // x becomes 5 again"
     },
     {
       "slideId": "CPP_108_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Square Root Function",
-      "prompt": "Fill in the math function name to calculate square root.",
-      "codeSnippet": "double result = ___(16);",
-      "options": ["sqrt", "square", "root", "pow"],
-      "correctAnswer": "sqrt"
+      "title": "Increment Operator Syntax",
+      "prompt": "Fill in the operator to increase 'counter' by 1.",
+      "codeSnippet": "counter___;",
+      "options": ["++", "+=", "+1", "~~"],
+      "correctAnswer": "++"
     },
     {
       "slideId": "CPP_108_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Rounding Numbers",
-      "prompt": "Which function rounds a floating-point number up to the nearest integer?",
-      "options": ["ceil()", "floor()", "round()", "abs()"],
-      "correctAnswer": "ceil()"
+      "title": "Postfix vs Prefix Concept",
+      "prompt": "What is the key difference between ++x (prefix) and x++ (postfix)?",
+      "options": ["Prefix increments before returning value, Postfix increments after", "Postfix increments by 2", "Prefix works only on constants", "There is no functional difference"],
+      "correctAnswer": "Prefix increments before returning value, Postfix increments after"
     },
     {
       "slideId": "CPP_108_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Power Function",
-      "prompt": "Fill in the function used to calculate 2 raised to the power of 3 (2^3).",
-      "codeSnippet": "double res = ___(2, 3);",
-      "options": ["pow", "power", "exp", "sqr"],
-      "correctAnswer": "pow"
+      "title": "Decrement Operator Syntax",
+      "prompt": "Fill in the operator to decrease 'lives' by 1.",
+      "codeSnippet": "lives___;",
+      "options": ["--", "-=", "-1", "!!"],
+      "correctAnswer": "--"
     },
     {
       "slideId": "CPP_108_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Round Down Function",
-      "prompt": "Which function rounds a floating-point number down to the nearest integer?",
-      "options": ["floor()", "ceil()", "min()", "trunc()"],
-      "correctAnswer": "floor()"
+      "title": "Postfix Evaluation",
+      "prompt": "If int x = 5; int y = x++; what is the value of y?",
+      "options": ["5", "6", "0", "4"],
+      "correctAnswer": "5"
     },
     {
       "slideId": "CPP_108_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Absolute Value",
-      "prompt": "Complete the code to get the absolute value of -5.5.",
-      "codeSnippet": "double val = ___(-5.5);",
-      "options": ["abs", "absolute", "pos", "val"],
-      "correctAnswer": "abs"
+      "title": "Prefix Decrement",
+      "prompt": "Fill in the prefix decrement operator.",
+      "codeSnippet": "___count;",
+      "options": ["--", "++", "-=", "-1"],
+      "correctAnswer": "--"
     },
     {
       "slideId": "CPP_108_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Max Value Function",
-      "prompt": "Which function can be used to find the highest value of two numbers?",
-      "options": ["std::max(x, y)", "std::highest(x, y)", "std::greater(x, y)", "std::top(x, y)"],
-      "correctAnswer": "std::max(x, y)"
+      "title": "Prefix Evaluation",
+      "prompt": "If int x = 5; int y = ++x; what is the value of y?",
+      "options": ["6", "5", "7", "4"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "CPP_108_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Standalone Increment",
+      "prompt": "Complete the standalone prefix increment statement.",
+      "codeSnippet": "___a;",
+      "options": ["++", "--", "+=", "=="],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_108_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Applying Increment to Literals",
+      "prompt": "Is the statement '5++' valid in C++?",
+      "options": ["No, increment requires an lvalue (variable)", "Yes, it evaluates to 6", "Yes, but gives a warning", "Only inside a loop"],
+      "correctAnswer": "No, increment requires an lvalue (variable)"
+    },
+    {
+      "slideId": "CPP_108_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Counter Step",
+      "prompt": "Fill in the operator commonly used to step loop counters.",
+      "codeSnippet": "i___;",
+      "options": ["++", "**", "//", "&&"],
+      "correctAnswer": "++"
     }
   ]
 }

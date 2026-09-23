@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_213",
+  "title": "Virtual Destructors & Polymorphic Memory Cleanup",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_213_S1",
+      "type": "CONCEPT",
+      "title": "Virtual Destructor Rule",
+      "prompt": "Always declare a virtual destructor in a base class intended for polymorphic deletion to prevent undefined behavior and memory leaks.",
+      "codeSnippet": "class Base {\npublic:\n    virtual ~Base() = default; // Essential!\n};\nBase* ptr = new Derived();\ndelete ptr; // Safely calls ~Derived() then ~Base()"
+    },
+    {
+      "slideId": "CPP_213_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Destructor Declaration",
+      "prompt": "Fill in the keyword to declare a safe polymorphic base destructor.",
+      "codeSnippet": "class Base {\npublic:\n    ___ ~Base() = default;\n};",
+      "options": ["virtual", "override", "explicit", "static"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_213_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-Virtual Destructor Bug",
+      "prompt": "What happens if you execute 'delete basePtr' where basePtr points to a Derived object, but Base destructor is NOT virtual?",
+      "options": [
+        "Undefined behavior (only Base destructor runs, causing memory leak of Derived resources)",
+        "Both Base and Derived destructors run safely",
+        "Compiler prevents program compilation",
+        "Derived destructor runs, but Base destructor is skipped"
+      ],
+      "correctAnswer": "Undefined behavior (only Base destructor runs, causing memory leak of Derived resources)"
+    },
+    {
+      "slideId": "CPP_213_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Destructor Generation",
+      "prompt": "Fill in the keyword to generate default virtual destructor implementation.",
+      "codeSnippet": "virtual ~Base() = ___;",
+      "options": ["default", "delete", "0", "inline"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_213_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "When to Omit Virtual Destructor",
+      "prompt": "When is it safe to omit a virtual destructor in a class?",
+      "options": [
+        "When the class is not intended to be used as a polymorphic base class",
+        "When the class contains private member variables",
+        "When using smart pointers exclusively",
+        "When the class inherits from std::string"
+      ],
+      "correctAnswer": "When the class is not intended to be used as a polymorphic base class"
+    },
+    {
+      "slideId": "CPP_213_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Protected Non-Virtual Destructor Pattern",
+      "prompt": "To prevent deletion via base pointer without adding vtable overhead, make destructor ___.",
+      "codeSnippet": "class Base {\n___:\n    ~Base() = default;\n};",
+      "options": ["protected", "private", "public", "friend"],
+      "correctAnswer": "protected"
+    },
+    {
+      "slideId": "CPP_213_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Smart Pointer Polymorphic Deletion",
+      "prompt": "How does 'std::shared_ptr<Base> sp = std::make_shared<Derived>();' handle deletion if ~Base() is non-virtual?",
+      "options": [
+        "shared_ptr captures the correct Derived deleter at construction, avoiding memory leak",
+        "Triggers runtime double free error",
+        "Throws std::bad_cast exception",
+        "Leaks the Derived class portion completely"
+      ],
+      "correctAnswer": "shared_ptr captures the correct Derived deleter at construction, avoiding memory leak"
+    },
+    {
+      "slideId": "CPP_213_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Unique Pointer Polymorphic Deletion Constraint",
+      "prompt": "Unlike shared_ptr, std::unique_ptr<Base> managed objects ___ require virtual base destructors.",
+      "codeSnippet": "// unique_ptr polymorphic deletion without virtual destructor is:\nUnsafe",
+      "options": ["Unsafe", "Safe", "Guaranteed", "Automatic"],
+      "correctAnswer": "Unsafe"
+    },
+    {
+      "slideId": "CPP_213_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Constructing Idiom",
+      "prompt": "Since constructors cannot be virtual in C++, how is 'virtual object cloning' implemented?",
+      "options": [
+        "By defining a custom virtual clone() method returning a copy of derived object",
+        "By calling new operator inside destructor",
+        "By type casting vtable pointer manually",
+        "By making constructor protected"
+      ],
+      "correctAnswer": "By defining a custom virtual clone() method returning a copy of derived object"
+    },
+    {
+      "slideId": "CPP_213_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Constructor Possibility",
+      "prompt": "Can a constructor be declared 'virtual' in C++?",
+      "codeSnippet": "// Virtual constructor declaration is:\nIllegal",
+      "options": ["Illegal", "Valid", "Recommended", "Optional"],
+      "correctAnswer": "Illegal"
+    }
+  ]
+}

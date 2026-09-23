@@ -1,0 +1,65 @@
+/* ScrollPane & Root Background */
+/* ScrollPane & Root Background */
+.learn-root {
+    -fx-background-color: #0F172A;
+}
+
+.learn-scroll-pane {
+    -fx-background-color: #0F172A;
+    -fx-background: #0F172A; /* Overrides default JavaFX viewport background */
+    -fx-viewport-background-color: #0F172A;
+}
+
+.learn-scroll-pane > .viewport {
+    -fx-background-color: #0F172A;
+}
+
+.learn-scroll-pane > .corner {
+    -fx-background-color: #0F172A;
+}
+
+/* Course Selector Dropdown */
+.dark-combo-box {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.dark-combo-box .label {
+    -fx-text-fill: #F8FAFC;
+    -fx-font-weight: bold;
+}
+
+.dark-combo-box .cell {
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #F8FAFC;
+}
+
+.dark-combo-box .cell:hover {
+    -fx-background-color: #334155;
+    -fx-text-fill: #F8FAFC;
+}
+
+/* Module Banners */
+.module-banner {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+    -fx-border-width: 1.5px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0, 0, 3);
+}
+
+.module-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #F8FAFC;
+}
+
+.module-arrow {
+    -fx-font-size: 12px;
+    -fx-text-fill: #3B82F6;
+}

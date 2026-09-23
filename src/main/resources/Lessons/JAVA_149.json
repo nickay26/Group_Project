@@ -1,0 +1,102 @@
+{
+  "lessonId": "JAVA_149",
+  "title": "Practice: Exception Output",
+  "slides": [
+    {
+      "slideId": "JAVA_149_S1",
+      "type": "CODE_OUTPUT",
+      "title": "Arithmetic Exception",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Error", "10", "0", "No Error"],
+      "correctAnswer": "Error"
+    },
+    {
+      "slideId": "JAVA_149_S2",
+      "type": "CODE_OUTPUT",
+      "title": "Array Exception",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int[] arr = {1, 2, 3};\n  System.out.println(arr[5]);\n} catch (ArrayIndexOutOfBoundsException e) {\n  System.out.println(\"Index Error\");\n}",
+      "options": ["Index Error", "3", "1", "No Error"],
+      "correctAnswer": "Index Error"
+    },
+    {
+      "slideId": "JAVA_149_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Null Exception",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  String s = null;\n  System.out.println(s.length());\n} catch (NullPointerException e) {\n  System.out.println(\"Null Error\");\n}",
+      "options": ["Null Error", "0", "null", "No Error"],
+      "correctAnswer": "Null Error"
+    },
+    {
+      "slideId": "JAVA_149_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Catch",
+      "prompt": "Complete the catch block for ArithmeticException.",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (________ e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["ArithmeticException", "Exception", "Error", "Throwable"],
+      "correctAnswer": "ArithmeticException"
+    },
+    {
+      "slideId": "JAVA_149_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Catch",
+      "prompt": "Complete the catch block for NullPointerException.",
+      "codeSnippet": "try {\n  String s = null;\n  s.length();\n} catch (________ e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["NullPointerException", "Exception", "Error", "Throwable"],
+      "correctAnswer": "NullPointerException"
+    },
+    {
+      "slideId": "JAVA_149_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Try-Catch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n  System.out.println(x);\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["5", "Error", "10", "0"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_149_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Try-Catch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Error", "10", "0", "No Error"],
+      "correctAnswer": "Error"
+    },
+    {
+      "slideId": "JAVA_149_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Multiple Catch",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int[] arr = {1, 2, 3};\n  System.out.println(arr[5]);\n} catch (ArrayIndexOutOfBoundsException e) {\n  System.out.println(\"Index Error\");\n}",
+      "options": ["Index Error", "3", "1", "No Error"],
+      "correctAnswer": "Index Error"
+    },
+    {
+      "slideId": "JAVA_149_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Handling",
+      "prompt": "Which keyword is used to handle exceptions?",
+      "options": ["catch", "throw", "throws", "try"],
+      "correctAnswer": "catch"
+    },
+    {
+      "slideId": "JAVA_149_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Try Block",
+      "prompt": "Which block contains the code that might throw an exception?",
+      "options": ["try", "catch", "finally", "throw"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "JAVA_149_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Block",
+      "prompt": "Which block always executes?",
+      "options": ["finally", "try", "catch", "throw"],
+      "correctAnswer": "finally"
+    }
+  ]
+}

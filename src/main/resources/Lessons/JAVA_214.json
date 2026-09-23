@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_214",
+  "title": "Practice: Queue",
+  "slides": [
+    {
+      "slideId": "JAVA_214_S1",
+      "type": "CONCEPT",
+      "title": "Queue",
+      "prompt": "A Queue is a FIFO (First In, First Out) data structure. Elements are added at the end and removed from the front.",
+      "codeSnippet": "import java.util.LinkedList;\nimport java.util.Queue;\n\npublic class Program {\n    public static void main(String[] args) {\n        Queue<String> queue = new LinkedList<>();\n        queue.add(\"Java\");\n        queue.add(\"Python\");\n        System.out.println(queue);\n    }\n}",
+      "output": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_214_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Queue Definition",
+      "prompt": "What is a Queue?",
+      "options": ["A FIFO data structure", "A LIFO data structure", "A fixed array", "A method"],
+      "correctAnswer": "A FIFO data structure"
+    },
+    {
+      "slideId": "JAVA_214_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FIFO",
+      "prompt": "What does FIFO stand for?",
+      "options": ["First In, First Out", "First In, Final Out", "Last In, First Out", "Last In, Final Out"],
+      "correctAnswer": "First In, First Out"
+    },
+    {
+      "slideId": "JAVA_214_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Add Method",
+      "prompt": "Which method adds an element to a Queue?",
+      "options": ["add()", "push()", "insert()", "put()"],
+      "correctAnswer": "add()"
+    },
+    {
+      "slideId": "JAVA_214_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Remove Method",
+      "prompt": "Which method removes the front element from a Queue?",
+      "options": ["remove()", "pop()", "delete()", "take()"],
+      "correctAnswer": "remove()"
+    },
+    {
+      "slideId": "JAVA_214_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Queue",
+      "prompt": "Complete the code to create a Queue.",
+      "codeSnippet": "Queue<String> queue = new ________<>();",
+      "options": ["LinkedList", "ArrayList", "Stack", "List"],
+      "correctAnswer": "LinkedList"
+    },
+    {
+      "slideId": "JAVA_214_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Add Element",
+      "prompt": "Complete the code to add an element to a Queue.",
+      "codeSnippet": "Queue<String> queue = new LinkedList<>();\nqueue.____(\"Java\");",
+      "options": ["add", "push", "insert", "put"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "JAVA_214_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Queue Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Queue<String> queue = new LinkedList<>();\nqueue.add(\"A\");\nqueue.add(\"B\");\nSystem.out.println(queue);",
+      "options": ["[A, B]", "[B, A]", "AB", "Error"],
+      "correctAnswer": "[A, B]"
+    },
+    {
+      "slideId": "JAVA_214_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Queue Remove",
+      "prompt": "What is the output?",
+      "codeSnippet": "Queue<String> queue = new LinkedList<>();\nqueue.add(\"A\");\nqueue.add(\"B\");\nSystem.out.println(queue.remove());",
+      "options": ["A", "B", "AB", "Error"],
+      "correctAnswer": "A"
+    },
+    {
+      "slideId": "JAVA_214_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Queue Peek",
+      "prompt": "What is the output?",
+      "codeSnippet": "Queue<String> queue = new LinkedList<>();\nqueue.add(\"A\");\nqueue.add(\"B\");\nSystem.out.println(queue.peek());",
+      "options": ["A", "B", "AB", "Error"],
+      "correctAnswer": "A"
+    },
+    {
+      "slideId": "JAVA_214_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Queue Package",
+      "prompt": "Which package contains Queue?",
+      "options": ["java.util", "java.io", "java.lang", "java.queue"],
+      "correctAnswer": "java.util"
+    }
+  ]
+}

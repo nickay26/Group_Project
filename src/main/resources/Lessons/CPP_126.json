@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_126",
+  "title": "Operator Precedence & Associativity",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_126_S1",
+      "type": "CONCEPT",
+      "title": "Precedence & Associativity Overview",
+      "prompt": "Precedence determines which operator executes first. Associativity dictates evaluation order for operators with equal precedence.",
+      "codeSnippet": "int a = 2 + 3 * 4;   // 14 (Multiplication higher than addition)\nint b = 10 - 4 - 2;  // 4  (Left-to-Right associativity: (10-4)-2)"
+    },
+    {
+      "slideId": "CPP_126_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Parentheses Priority",
+      "prompt": "Which symbols can be used to explicitly override operator precedence?",
+      "codeSnippet": "int res = ___2 + 3___ * 4; // Forces addition first",
+      "options": ["( , )", "[ , ]", "{ , }", "< , >"],
+      "correctAnswer": "( , )"
+    },
+    {
+      "slideId": "CPP_126_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Arithmetic vs Comparison Precedence",
+      "prompt": "Which group of operators has HIGHER precedence?",
+      "options": ["Arithmetic operators (+, -, *, /)", "Relational operators (<, >, ==)", "Logical operators (&&, ||)", "Assignment operators (=, +=)"],
+      "correctAnswer": "Arithmetic operators (+, -, *, /)"
+    },
+    {
+      "slideId": "CPP_126_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical Operator Hierarchy",
+      "prompt": "In expression 'a || b && c', which logical operator evaluates first?",
+      "codeSnippet": "bool res = a || b && c; // ___ evaluates before ||",
+      "options": ["&&", "||", "both together", "left-to-right"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_126_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Assignment Associativity Direction",
+      "prompt": "What is the associativity direction of assignment operators (=, +=, -=)?",
+      "options": ["Right-to-Left", "Left-to-Right", "Non-associative", "Random"],
+      "correctAnswer": "Right-to-Left"
+    },
+    {
+      "slideId": "CPP_126_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Precedence Order Evaluation",
+      "prompt": "What is the result of 10 + 5 * 2?",
+      "codeSnippet": "int val = 10 + 5 * 2; // Evaluates to ___",
+      "options": ["20", "30", "25", "15"],
+      "correctAnswer": "20"
+    },
+    {
+      "slideId": "CPP_126_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unary Operator Precedence",
+      "prompt": "Do unary operators (!, ++, --, sizeof) have higher precedence than binary arithmetic (+, -)?",
+      "options": ["Yes, unary operators evaluate before binary arithmetic operators", "No, binary arithmetic is always higher", "They have equal precedence", "Depends on variable type"],
+      "correctAnswer": "Yes, unary operators evaluate before binary arithmetic operators"
+    },
+    {
+      "slideId": "CPP_126_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Subtraction Associativity",
+      "prompt": "Evaluate 20 - 10 - 5 following Left-to-Right associativity.",
+      "codeSnippet": "int res = 20 - 10 - 5; // Evaluates to ___",
+      "options": ["5", "15", "25", "0"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "CPP_126_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lowest Precedence Operator",
+      "prompt": "Which C++ operator has the absolute LOWEST precedence in the entire language?",
+      "options": ["Comma operator (,)", "Assignment operator (=)", "Logical OR (||)", "Ternary operator (?)"],
+      "correctAnswer": "Comma operator (,)"
+    },
+    {
+      "slideId": "CPP_126_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Evaluation Parentheses Habit",
+      "prompt": "Best practice recommends using ___ when complex precedence is ambiguous.",
+      "codeSnippet": "bool check = ___a && b___ || c;",
+      "options": ["( , )", "{ , }", "[ , ]", "< , >"],
+      "correctAnswer": "( , )"
+    },
+    {
+      "slideId": "CPP_126_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Highest Precedence Group",
+      "prompt": "Which of the following operator types has the HIGHEST precedence?",
+      "options": ["Scope resolution operator (::)", "Post-increment (x++)", "Multiplication (*)", "Equality (==)"],
+      "correctAnswer": "Scope resolution operator (::)"
+    }
+  ]
+}

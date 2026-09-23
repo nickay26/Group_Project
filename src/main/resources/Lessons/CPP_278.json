@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_278",
+  "title": "Concepts & Constraints Basics (C++20)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_278_S1",
+      "type": "CONCEPT",
+      "title": "Introduction to Concepts (C++20)",
+      "prompt": "C++20 Concepts are compile-time predicates that constrain template arguments, yielding clearer error messages and making template requirements explicit.",
+      "codeSnippet": "#include <iostream>\n#include <concepts>\n\ntemplate <typename T>\nconcept Numeric = std::integral<T> || std::floating_point<T>;\n\ntemplate <Numeric T>\nT add(T a, T b) {\n    return a + b;\n}"
+    },
+    {
+      "slideId": "CPP_278_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Concept Definition Keyword",
+      "prompt": "Fill in the keyword used to define a custom concept.",
+      "codeSnippet": "template <typename T>\n___ Printable = requires(T x) { std::cout << x; };",
+      "options": ["concept", "requires", "predicate", "typename"],
+      "correctAnswer": "concept"
+    },
+    {
+      "slideId": "CPP_278_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requires Clause Syntax Placement",
+      "prompt": "Which of the following demonstrates a valid placement of a requires clause?",
+      "options": [
+        "template <typename T> requires std::integral<T> void process(T v);",
+        "template <typename T> void process(T v) concept std::integral<T>;",
+        "requires template <typename T> void process(T v);",
+        "template <typename T> process(T v) constraint std::integral<T>;"
+      ],
+      "correctAnswer": "template <typename T> requires std::integral<T> void process(T v);"
+    },
+    {
+      "slideId": "CPP_278_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Constrained Template Parameter Syntax",
+      "prompt": "Fill in the concept name directly replacing typename in the parameter list.",
+      "codeSnippet": "template <std::___ T>\n T multiply(T a, T b) { return a * b; }",
+      "options": ["integral", "is_integral", "is_integer", "number"],
+      "correctAnswer": "integral"
+    },
+    {
+      "slideId": "CPP_278_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abbreviated Function Template with Concepts",
+      "prompt": "How can concepts be used with C++20 auto parameter syntax?",
+      "options": [
+        "void print(std::integral auto x);",
+        "void print(auto<std::integral> x);",
+        "void print(concept auto x);",
+        "void print(auto x) requires concept;"
+      ],
+      "correctAnswer": "void print(std::integral auto x);"
+    },
+    {
+      "slideId": "CPP_278_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Requires Expression Syntax",
+      "prompt": "Fill in the keyword creating a requirement block inside a concept definition.",
+      "codeSnippet": "template <typename T>\nconcept HasSize = ___ (T a) {\n    { a.size() } -> std::same_as<std::size_t>;\n};",
+      "options": ["requires", "concept", "decltype", "noexcept"],
+      "correctAnswer": "requires"
+    },
+    {
+      "slideId": "CPP_278_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Benefits of Concepts over SFINAE",
+      "prompt": "What is a major advantage of Concepts over traditional SFINAE techniques?",
+      "options": [
+        "Significantly improved compiler diagnostic messages and faster build times",
+        "Concepts allow runtime type evaluation",
+        "Concepts eliminate the need for function templates",
+        "Concepts automatically fix bug logic inside template functions"
+      ],
+      "correctAnswer": "Significantly improved compiler diagnostic messages and faster build times"
+    },
+    {
+      "slideId": "CPP_278_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Compound Requirement Return Type Constraint",
+      "prompt": "Fill in the arrow token used in compound requirement constraints.",
+      "codeSnippet": "template <typename T>\nconcept Incrementable = requires(T a) {\n    { ++a } ___ std::same_as<T&>;\n};",
+      "options": ["->", "=>", ":", "::"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "CPP_278_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "<concepts> Standard Library Header",
+      "prompt": "Which of the following is a standard predefined concept in the <concepts> header?",
+      "options": [
+        "std::copy_constructible",
+        "std::is_pointer",
+        "std::enable_if",
+        "std::declval"
+      ],
+      "correctAnswer": "std::copy_constructible"
+    },
+    {
+      "slideId": "CPP_278_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Trailing Requires Clause",
+      "prompt": "Fill in the trailing clause keyword placed after function parameter list.",
+      "codeSnippet": "template <typename T>\nvoid logVal(T v) ___ std::equality_comparable<T> {}",
+      "options": ["requires", "concept", "where", "if"],
+      "correctAnswer": "requires"
+    }
+  ]
+}

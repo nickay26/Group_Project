@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_207",
+  "title": "Practice: OOP Concepts",
+  "slides": [
+    {
+      "slideId": "JAVA_207_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OOP Definition",
+      "prompt": "What is OOP?",
+      "options": ["Object-Oriented Programming", "Open Object Programming", "Object Operation Process", "Other Object Programming"],
+      "correctAnswer": "Object-Oriented Programming"
+    },
+    {
+      "slideId": "JAVA_207_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OOP Concepts",
+      "prompt": "Which is NOT an OOP concept?",
+      "options": ["Looping", "Encapsulation", "Inheritance", "Polymorphism"],
+      "correctAnswer": "Looping"
+    },
+    {
+      "slideId": "JAVA_207_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation",
+      "prompt": "What is encapsulation?",
+      "options": ["Hiding data with private fields", "Creating objects", "Inheriting classes", "Overloading methods"],
+      "correctAnswer": "Hiding data with private fields"
+    },
+    {
+      "slideId": "JAVA_207_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance",
+      "prompt": "What is inheritance?",
+      "options": ["A class inheriting from another class", "A method", "A variable", "An object"],
+      "correctAnswer": "A class inheriting from another class"
+    },
+    {
+      "slideId": "JAVA_207_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Polymorphism",
+      "prompt": "What is polymorphism?",
+      "options": ["Objects taking many forms", "Creating objects", "Hiding data", "Deleting data"],
+      "correctAnswer": "Objects taking many forms"
+    },
+    {
+      "slideId": "JAVA_207_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstraction",
+      "prompt": "What is abstraction?",
+      "options": ["Hiding implementation details", "Creating objects", "Hiding data", "Deleting data"],
+      "correctAnswer": "Hiding implementation details"
+    },
+    {
+      "slideId": "JAVA_207_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Keyword",
+      "prompt": "Complete the inheritance.",
+      "codeSnippet": "class Dog ______ Animal {\n}",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_207_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Abstract Keyword",
+      "prompt": "Complete the abstract class.",
+      "codeSnippet": "______ class Animal {\n  abstract void sound();\n}",
+      "options": ["abstract", "interface", "extends", "implements"],
+      "correctAnswer": "abstract"
+    },
+    {
+      "slideId": "JAVA_207_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Polymorphism Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal { void sound() { System.out.println(\"Animal\"); } }\nclass Dog extends Animal { void sound() { System.out.println(\"Bark\"); } }\nAnimal a = new Dog();\na.sound();",
+      "options": ["Bark", "Animal", "Dog", "Error"],
+      "correctAnswer": "Bark"
+    },
+    {
+      "slideId": "JAVA_207_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal { void sound() { System.out.println(\"Animal\"); } }\nclass Cat extends Animal { }\nCat c = new Cat();\nc.sound();",
+      "options": ["Animal", "Bark", "Cat", "Error"],
+      "correctAnswer": "Animal"
+    },
+    {
+      "slideId": "JAVA_207_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "OOP Concept Count",
+      "prompt": "How many main OOP concepts in Java?",
+      "options": ["4", "3", "5", "6"],
+      "correctAnswer": "4"
+    }
+  ]
+}

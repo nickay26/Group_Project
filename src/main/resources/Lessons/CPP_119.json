@@ -1,0 +1,99 @@
+{
+  "lessonId": "CPP_119",
+  "title": "Relational & Comparison Operators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_119_S1",
+      "type": "CONCEPT",
+      "title": "Comparison Operators Overview",
+      "prompt": "Relational operators compare two values and evaluate to a boolean result (true or false).",
+      "codeSnippet": "int a = 10, b = 20;\nbool r1 = (a == b); // false\nbool r2 = (a < b);  // true"
+    },
+    {
+      "slideId": "CPP_119_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Equality Operator",
+      "prompt": "Fill in the operator used to check if two values are equal.",
+      "codeSnippet": "bool isEqual = (x ___ y);",
+      "options": ["==", "=", "===", "equals"],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "CPP_119_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inequality Operator",
+      "prompt": "Which operator checks if two values are NOT equal?",
+      "options": ["!=", "<>", "==", "not="],
+      "correctAnswer": "!="
+    },
+    {
+      "slideId": "CPP_119_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Greater Than or Equal To",
+      "prompt": "Fill in the operator for greater than or equal comparison.",
+      "codeSnippet": "bool isPass = (score ___ 50);",
+      "options": [">=", "=>", ">", "=="],
+      "correctAnswer": ">="
+    },
+    {
+      "slideId": "CPP_119_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Common Assignment Bug",
+      "prompt": "What mistake occurs when using '=' instead of '==' in an if-condition?",
+      "options": ["Assigns the value instead of comparing it", "Causes an instant crash", "Always evaluates to false", "Creates an infinite loop"],
+      "correctAnswer": "Assigns the value instead of comparing it"
+    },
+    {
+      "slideId": "CPP_119_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Less Than Comparison",
+      "prompt": "Fill in the operator checking if temperature is below freezing (0).",
+      "codeSnippet": "bool isFreezing = (temp ___ 0);",
+      "options": ["<", ">", "<=", "=="],
+      "correctAnswer": "<"
+    },
+    {
+      "slideId": "CPP_119_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Result Type of Comparison",
+      "prompt": "What is the return data type of a relational expression like (5 > 3)?",
+      "options": ["bool", "int", "double", "void"],
+      "correctAnswer": "bool"
+    },
+    {
+      "slideId": "CPP_119_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Less Than or Equal To",
+      "prompt": "Fill in the operator for less than or equal to.",
+      "codeSnippet": "bool isValid = (age ___ 18);",
+      "options": ["<=", "=<", "<", "!="],
+      "correctAnswer": "<="
+    },
+    {
+      "slideId": "CPP_119_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Chained Comparison Caution",
+      "prompt": "How does C++ evaluate expression '1 < x < 5'?",
+      "options": ["Evaluates left-to-right as ((1 < x) < 5), comparing boolean (0/1) with 5", "Checks if x is strictly between 1 and 5", "Throws a syntax error", "Evaluates right-to-left"],
+      "correctAnswer": "Evaluates left-to-right as ((1 < x) < 5), comparing boolean (0/1) with 5"
+    },
+    {
+      "slideId": "CPP_119_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Greater Than Comparison",
+      "prompt": "Fill in the operator checking if balance exceeds total.",
+      "codeSnippet": "bool canAfford = (balance ___ total);",
+      "options": [">", "<", ">=", "=="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "CPP_119_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Three-Way Comparison Operator",
+      "prompt": "Which C++20 operator (spaceship operator) performs three-way comparison?",
+      "options": ["<=>", "<>", "===", "<->"],
+      "correctAnswer": "<=>"
+    }
+  ]
+}

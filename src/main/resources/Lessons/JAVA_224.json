@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_224",
+  "title": "Generic Method",
+  "slides": [
+    {
+      "slideId": "JAVA_224_S1",
+      "type": "CONCEPT",
+      "title": "Generic Method",
+      "prompt": "A generic method can work with different data types. The type parameter is declared before the return type.",
+      "codeSnippet": "public class Program {\n    public static <T> void print(T value) {\n        System.out.println(value);\n    }\n    \n    public static void main(String[] args) {\n        print(\"Hello\");\n        print(100);\n    }\n}",
+      "output": "Hello\n100"
+    },
+    {
+      "slideId": "JAVA_224_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method Definition",
+      "prompt": "What is a generic method?",
+      "options": ["A method with a type parameter", "A method with no type", "A method with static fields", "A method with abstract methods"],
+      "correctAnswer": "A method with a type parameter"
+    },
+    {
+      "slideId": "JAVA_224_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method Syntax",
+      "prompt": "Where is the type parameter declared in a generic method?",
+      "options": ["Before the return type", "After the return type", "Inside the method body", "After the method name"],
+      "correctAnswer": "Before the return type"
+    },
+    {
+      "slideId": "JAVA_224_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method Example",
+      "prompt": "How do you declare a generic method that returns T?",
+      "options": ["<T> T methodName()", "T<T> methodName()", "T methodName<T>()", "methodName<T>()"],
+      "correctAnswer": "<T> T methodName()"
+    },
+    {
+      "slideId": "JAVA_224_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method Benefit",
+      "prompt": "What is the benefit of a generic method?",
+      "options": ["Works with different data types", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Works with different data types"
+    },
+    {
+      "slideId": "JAVA_224_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Generic Method",
+      "prompt": "Complete the generic method declaration.",
+      "codeSnippet": "public static ____ void print(T value) {\n  System.out.println(value);\n}",
+      "options": ["<T>", "(T)", "[T]", "{T}"],
+      "correctAnswer": "<T>"
+    },
+    {
+      "slideId": "JAVA_224_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Return Type",
+      "prompt": "Complete the generic method that returns T.",
+      "codeSnippet": "public static <T> T ____(T value) {\n  return value;\n}",
+      "options": ["identity", "get", "value", "return"],
+      "correctAnswer": "identity"
+    },
+    {
+      "slideId": "JAVA_224_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T> void print(T value) {\n  System.out.println(value);\n}\nprint(\"Hello\");",
+      "options": ["Hello", "value", "T", "Error"],
+      "correctAnswer": "Hello"
+    },
+    {
+      "slideId": "JAVA_224_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Method Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T> void print(T value) {\n  System.out.println(value);\n}\nprint(100);",
+      "options": ["100", "value", "T", "Error"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "JAVA_224_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Generic Identity Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T> T identity(T value) {\n  return value;\n}\nSystem.out.println(identity(\"Java\"));",
+      "options": ["Java", "value", "T", "Error"],
+      "correctAnswer": "Java"
+    },
+    {
+      "slideId": "JAVA_224_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generic Method Type",
+      "prompt": "Can a generic method work with different data types?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    }
+  ]
+}

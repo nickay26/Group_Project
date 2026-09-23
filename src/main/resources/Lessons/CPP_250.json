@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_250",
+  "title": "Rvalue References (T&&)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_250_S1",
+      "type": "CONCEPT",
+      "title": "Rvalue Reference Syntax and Rules",
+      "prompt": "Introduced in C++11, rvalue references (declared with &&) bind exclusively to rvalues. They enable functions to detect temporaries and transfer resources instead of copying.",
+      "codeSnippet": "int&& rref = 20; // Binds to temporary rvalue 20\nrref = 30;       // Modifiable temporary storage\n// int x = 10; int&& invalid = x; // ERROR: Cannot bind rvalue reference to lvalue"
+    },
+    {
+      "slideId": "CPP_250_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Rvalue Reference Declaration",
+      "prompt": "Fill in the token used to declare an rvalue reference parameter type for std::string.",
+      "codeSnippet": "void processValue(std::string___ str) {\n    // Binds to temporary strings\n}",
+      "options": ["&&", "&", "*", "ref"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_250_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Named Rvalue Reference Variable Category",
+      "prompt": "Given 'int&& r = 42;', what is the value category of the named variable 'r' itself when evaluated in an expression?",
+      "options": [
+        "Lvalue (because 'r' has a name and address)",
+        "Rvalue (because its type is an rvalue reference)",
+        "Prvalue (because it was initialized from 42)",
+        "Xvalue (because it expires)"
+      ],
+      "correctAnswer": "Lvalue (because 'r' has a name and address)"
+    },
+    {
+      "slideId": "CPP_250_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Binding Non-Const Lvalue References",
+      "prompt": "Fill in the correct keyword to complete the valid binding rule: Non-const lvalue references bind only to ___values.",
+      "codeSnippet": "int x = 100;\nint& lref = x; // Valid because 'x' is an ___value",
+      "options": ["l", "r", "pr", "x"],
+      "correctAnswer": "l"
+    },
+    {
+      "slideId": "CPP_250_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Overload Resolution: Lvalue vs Rvalue Ref",
+      "prompt": "If void print(const std::string&) and void print(std::string&&) are both defined, which overload is selected for print(std::string(\"data\"))?",
+      "options": [
+        "void print(std::string&&) because rvalue reference matches temporaries exactly",
+        "void print(const std::string&) because const references take priority",
+        "Ambiguous call compile error",
+        "Selected randomly depending on compiler settings"
+      ],
+      "correctAnswer": "void print(std::string&&) because rvalue reference matches temporaries exactly"
+    },
+    {
+      "slideId": "CPP_250_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Casting Lvalue to Rvalue Reference",
+      "prompt": "Fill in the static_cast type expression equivalent to std::move(x) for integer x.",
+      "codeSnippet": "int x = 50;\nint&& rref = static_cast<___>(x);",
+      "options": ["int&&", "int&", "const int&", "int"],
+      "correctAnswer": "int&&"
+    },
+    {
+      "slideId": "CPP_250_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modifying Data via Rvalue Reference",
+      "prompt": "Can you mutate the underlying state of an object bound through a non-const rvalue reference T&&?",
+      "options": [
+        "Yes, rvalue references provide mutable access to the temporary resource",
+        "No, all rvalue references are automatically read-only",
+        "Only if the type T is a primitive integer",
+        "Only inside constructor initializer lists"
+      ],
+      "correctAnswer": "Yes, rvalue references provide mutable access to the temporary resource"
+    },
+    {
+      "slideId": "CPP_250_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Rvalue Reference Lifetime Rule",
+      "prompt": "Fill in the missing word: An rvalue reference variable extends the lifetime of a temporary object to which it is ___.",
+      "codeSnippet": "std::string&& ref = getTemporaryString(); // Temporary object is ___ to ref",
+      "options": ["bound", "copied", "moved", "casted"],
+      "correctAnswer": "bound"
+    },
+    {
+      "slideId": "CPP_250_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Rvalue Reference Usage",
+      "prompt": "Why are const rvalue references (const T&&) rarely used in C++ codebases?",
+      "options": [
+        "They prevent resource stealing/moving while providing no benefits over const T&",
+        "They are illegal syntax that triggers compiler errors",
+        "They force implicit deep copies on every function call",
+        "They can only bind to static variable addresses"
+      ],
+      "correctAnswer": "They prevent resource stealing/moving while providing no benefits over const T&"
+    },
+    {
+      "slideId": "CPP_250_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Return Type as Rvalue Ref",
+      "prompt": "Fill in the return type symbol for a method designed to return an internal member as an expiring rvalue reference.",
+      "codeSnippet": "class Container {\n    BigData data;\npublic:\n    BigData___ extractData() { return std::move(data); }\n};",
+      "options": ["&&", "&", "*", "val"],
+      "correctAnswer": "&&"
+    }
+  ]
+}

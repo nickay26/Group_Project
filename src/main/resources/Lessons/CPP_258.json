@@ -1,0 +1,111 @@
+{
+  "lessonId": "CPP_258",
+  "title": "Data Races & Mutual Exclusion (std::mutex)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_258_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Data Races & Mutexes",
+      "prompt": "A data race occurs when two or more threads access the same memory location concurrently, and at least one access is a write without synchronization. std::mutex provides mutual exclusion to protect shared data.",
+      "codeSnippet": "#include <mutex>\n\nstd::mutex mtx;\nint counter = 0;\n\nvoid safeIncrement() {\n    mtx.lock();\n    counter++; // Critical section\n    mtx.unlock();\n}"
+    },
+    {
+      "slideId": "CPP_258_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Locking a Mutex",
+      "prompt": "Fill in the method used to acquire ownership of a mutex, blocking if another thread holds it.",
+      "codeSnippet": "std::mutex m;\nm.___(); // Acquire lock",
+      "options": ["lock", "unlock", "try_lock", "acquire"],
+      "correctAnswer": "lock"
+    },
+    {
+      "slideId": "CPP_258_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Consequence of Data Races",
+      "prompt": "What is the result of a data race according to the C++ Standard?",
+      "options": [
+        "Undefined behavior",
+        "A compile-time warning",
+        "A std::system_error exception at runtime",
+        "Automatic lock insertion by the compiler"
+      ],
+      "correctAnswer": "Undefined behavior"
+    },
+    {
+      "slideId": "CPP_258_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Releasing Mutex Lock",
+      "prompt": "Fill in the method used to release ownership of a mutex.",
+      "codeSnippet": "std::mutex m;\nm.lock();\n// protected work\nm.___();",
+      "options": ["unlock", "release", "free", "clear"],
+      "correctAnswer": "unlock"
+    },
+    {
+      "slideId": "CPP_258_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-blocking Lock Attempt",
+      "prompt": "Which method attempts to acquire a lock on a std::mutex without blocking if it is unavailable?",
+      "options": [
+        "try_lock()",
+        "test_lock()",
+        "poll_lock()",
+        "lock_async()"
+      ],
+      "correctAnswer": "try_lock()"
+    },
+    {
+      "slideId": "CPP_258_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Recursive Mutex Usage",
+      "prompt": "Fill in the mutex class that allows the same thread to acquire multiple levels of ownership on the same mutex.",
+      "codeSnippet": "std::___ mtx;\n// Can lock multiple times from the same thread",
+      "options": ["recursive_mutex", "shared_mutex", "timed_mutex", "mutex"],
+      "correctAnswer": "recursive_mutex"
+    },
+    {
+      "slideId": "CPP_258_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Shared Mutex Purpose",
+      "prompt": "What is the primary benefit of std::shared_mutex introduced in C++17?",
+      "options": [
+        "It allows multiple reader threads to hold a shared lock concurrently while maintaining exclusive locks for writers",
+        "It automatically prevents deadlocks across threads",
+        "It provides zero-cost recursive locking",
+        "It synchronizes mutexes across multiple operating system processes"
+      ],
+      "correctAnswer": "It allows multiple reader threads to hold a shared lock concurrently while maintaining exclusive locks for writers"
+    },
+    {
+      "slideId": "CPP_258_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Timed Mutex Acquisition",
+      "prompt": "Fill in the method name used on std::timed_mutex to attempt locking for a specific duration.",
+      "codeSnippet": "std::timed_mutex tm;\nif (tm.___for(std::chrono::milliseconds(100))) {\n    // lock acquired\n    tm.unlock();\n}",
+      "options": ["try_lock_", "wait_", "lock_", "acquire_"],
+      "correctAnswer": "try_lock_"
+    },
+    {
+      "slideId": "CPP_258_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Manual Mutex Locking Risk",
+      "prompt": "Why is calling mtx.lock() and mtx.unlock() directly considered unsafe practice in C++?",
+      "options": [
+        "An exception thrown in the critical section will bypass unlock(), leaving the mutex permanently locked",
+        "Direct calls execute slower than lock guards",
+        "Mutex locking is non-deterministic without RAII wrappers",
+        "It invalidates memory ordering guarantees"
+      ],
+      "correctAnswer": "An exception thrown in the critical section will bypass unlock(), leaving the mutex permanently locked"
+    },
+    {
+      "slideId": "CPP_258_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Mutex Header File",
+      "prompt": "Fill in the header file required for std::mutex and related classes.",
+      "codeSnippet": "#include <___>\nstd::mutex m;",
+      "options": ["mutex", "thread", "shared_mutex", "atomic"],
+      "correctAnswer": "mutex"
+    }
+  ]
+}
