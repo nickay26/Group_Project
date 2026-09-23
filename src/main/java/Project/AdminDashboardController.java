@@ -59,7 +59,7 @@ public class AdminDashboardController {
 
         // Category ComboBox Initial Data
         if (categoryCombo != null) {
-            categoryCombo.setItems(FXCollections.observableArrayList("CPP", "JAVA", "PYTHON", "HTML", "CSS"));
+            categoryCombo.setItems(FXCollections.observableArrayList("CPP", "JAVA", "PYTHON"));
             categoryCombo.setOnAction(e -> {
                 loadLessonList(); // Category ပြောင်းသွားပါက သက်ဆိုင်ရာ Lesson ဖိုင်များကို Auto ပြန်ရှာမည်
                 loadLessonJson();

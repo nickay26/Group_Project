@@ -7,8 +7,9 @@ public class UserSession {
 
     private UserSession(User user) {
         currentUser = user;
-        // Fetch last active course from DB for this user
-        activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null) {
+            activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        }
     }
 
     public static void initSession(User user) {
@@ -18,7 +19,9 @@ public class UserSession {
 
     public static void setCurrentUser(User user) {
         currentUser = user;
-        activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null) {
+            activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        }
         if (instance == null) {
             instance = new UserSession(user);
         }
@@ -45,5 +48,12 @@ public class UserSession {
 
     public static void setActiveCourseId(String courseId) {
         activeCourseId = courseId;
+    }
+
+    // Logout လုပ်သည့်အခါ Session Clear လုပ်ရန် Helper Method
+    public static void clearSession() {
+        currentUser = null;
+        activeCourseId = null;
+        instance = null;
     }
 }

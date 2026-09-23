@@ -13,11 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class WelcomeController implements Initializable {
@@ -97,7 +92,7 @@ public class WelcomeController implements Initializable {
         alert.showAndWait();
     }
 
-    // Manual Form Registration in MySQL
+    // Manual Form Registration via PythonAnywhere API
     @FXML
     private void handleSignUp() {
         String username = usernameField.getText().trim();
@@ -109,36 +104,18 @@ public class WelcomeController implements Initializable {
             return;
         }
 
-        String insertSql = "INSERT INTO User_table (Name, Email, Password, last_login_date) VALUES (?, ?, ?, CURRENT_DATE())";
+        // DatabaseManager မှတစ်ဆင့် Cloud REST API သို့ Register လုပ်ခြင်း
+        User newUser = DatabaseManager.registerUser(username, email, password);
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
-
-            stmt.setString(1, username);
-            stmt.setString(2, email);
-            stmt.setString(3, password);
-            stmt.executeUpdate();
-
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) {
-                int newUserId = keys.getInt(1);
-                User newUser = new User(newUserId, username, email, null, 0, 0, 0, 5);
-                UserSession.initSession(newUser);
-
-                SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
-            }
-
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) { // Duplicate email error code
-                showAlert(Alert.AlertType.ERROR, "Registration Error", "This email is already registered.");
-            } else {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to connect to local database.");
-            }
+        if (newUser != null) {
+            UserSession.initSession(newUser);
+            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Registration Error", "Email is already registered or backend connection failed.");
         }
     }
 
-    // Google Authentication Flow using direct MySQL Sync
+    // Google Authentication Flow via Cloud API Sync
     @FXML
     private void handleGoogleSignUp() {
         System.out.println("Opening browser for Google Registration...");
@@ -146,15 +123,20 @@ public class WelcomeController implements Initializable {
         GoogleAuthService.startGoogleLogin(authCode -> {
             System.out.println("Received Google Code: " + authCode);
 
-            GoogleAuthService.fetchUserProfile(authCode, (userId, name, email) -> {
+            GoogleAuthService.fetchUserProfile(authCode, (googleUserId, name, email) -> {
                 System.out.println("Authenticated Real User: " + email + " (" + name + ")");
 
-                User user = new User(userId, email, name, "", 0, 0, 0, 0);
+                // Cloud Database ထဲတွင် Google User ကို တိုက်ရိုက် Sync/Save လုပ်ခြင်း
+                User user = DatabaseManager.findOrCreateGoogleUser(email, name, "");
 
-                Platform.runLater(() -> {
-                    UserSession.initSession(user);
-                    SceneManager.switchScene("MainLayoutView.fxml");
-                });
+                if (user != null) {
+                    Platform.runLater(() -> {
+                        UserSession.initSession(user);
+                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+                    });
+                } else {
+                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Authentication Error", "Failed to sync Google user with cloud backend."));
+                }
             });
         });
     }

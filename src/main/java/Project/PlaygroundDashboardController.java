@@ -54,8 +54,8 @@ public class PlaygroundDashboardController {
 
         // Language Icon ImageView
         ImageView iconView = new ImageView();
-        iconView.setFitWidth(60);
-        iconView.setFitHeight(60);
+        iconView.setFitWidth(50);
+        iconView.setFitHeight(50);
         iconView.setPreserveRatio(true);
 
         String iconPath = getLanguageIconPath(project.getLanguage());

@@ -136,8 +136,8 @@ public class CoursesPageController {
 
         if (LOGO_CACHE.containsKey(langKey)) {
             ImageView cachedView = new ImageView(LOGO_CACHE.get(langKey));
-            cachedView.setFitWidth(100);
-            cachedView.setFitHeight(100);
+            cachedView.setFitWidth(70);
+            cachedView.setFitHeight(70);
             cachedView.setPreserveRatio(true);
             return cachedView;
         }
@@ -154,8 +154,8 @@ public class CoursesPageController {
             Image img = new Image(is);
             LOGO_CACHE.put(langKey, img);
             ImageView logoView = new ImageView(img);
-            logoView.setFitWidth(100);
-            logoView.setFitHeight(100);
+            logoView.setFitWidth(70);
+            logoView.setFitHeight(70);
             logoView.setPreserveRatio(true);
             return logoView;
         }
