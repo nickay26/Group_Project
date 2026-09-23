@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="playgroundRoot" styleClass="playground-root" stylesheets="@../Css/playground_dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PlaygroundDashboardController">
+<StackPane fx:id="playgroundRoot" styleClass="playground-root" stylesheets="@../Css/playground_dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PlaygroundDashboardController">
     <children>
 
         <!-- MAIN DASHBOARD CONTENT -->

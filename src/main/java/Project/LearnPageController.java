@@ -27,7 +27,7 @@ public class LearnPageController {
     private static final double NODE_HEIGHT = 150.0;
     private static final double VERTICAL_SPACING = 200.0;
     private static final double AMPLITUDE = 85.0;
-    private static final double CANVAS_WIDTH = 540.0;
+    private static final double CANVAS_WIDTH = 540.0; // Staggered Card များမညှပ်စေရန် Canvas Width ကို ၅၄၀px သို့ တိုးထားပါသည်
 
     private final Set<String> expandedModules = new HashSet<>();
     private List<Lesson> currentLessons = new ArrayList<>();
@@ -42,8 +42,6 @@ public class LearnPageController {
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().updateCourseTitle();
         }
-
-        // PythonAnywhere REST API မှတစ်ဆင့် Lesson များကို ဆွဲယူခြင်း
         currentLessons = DatabaseManager.getLessonsForCourse(courseId);
 
         if (currentLessons == null || currentLessons.isEmpty()) {
@@ -55,7 +53,7 @@ public class LearnPageController {
         }
 
         // မော်ဂျူးအားလုံးကို စတင်ချိန်တွင် Expand ပြုလုပ်ထားရန်
-        if (expandedModules.isEmpty()) {
+        if (expandedModules.isEmpty() && !currentLessons.isEmpty()) {
             for (Lesson lesson : currentLessons) {
                 expandedModules.add(lesson.getModuleName());
             }
@@ -77,11 +75,14 @@ public class LearnPageController {
         int userId = UserSession.getUserId();
         int completedCount = DatabaseManager.getCompletedLessonCount(userId, UserSession.getActiveCourseId());
 
+        // Module ပေါင်း မည်မျှရှိသည်ကို ရေတွက်ရန် counter
+        int moduleIndex = 0;
+
         for (int i = 0; i < currentLessons.size(); i++) {
             Lesson lesson = currentLessons.get(i);
             String moduleName = lesson.getModuleName();
 
-            // 1. Render Module Banner
+            // 1. Render Module Banner (Staggered Left & Right)
             if (!moduleName.equals(currentModule)) {
                 currentModule = moduleName;
                 boolean isExpanded = expandedModules.contains(currentModule);
@@ -96,13 +97,16 @@ public class LearnPageController {
 
                 HBox banner = createModuleBanner(currentModule, isExpanded, progress);
 
-                double bannerWidth = 380.0;
-                double bannerX = (CANVAS_WIDTH - bannerWidth) / 2.0;
+                // မဂ္ဂဇင်း/Roadmap ပုံစံ ဘယ်/ညာ တစ်လှည့်စီ ရွှေ့ပေးခြင်း
+                // စုံကိန်း Module ဆိုလျှင် ဘယ်ဘက် -45px၊ မကိန်း ဆိုလျှင် ညာဘက် +45px
+                double bannerXOffset = (moduleIndex % 2 == 0) ? -60.0 : 60.0;
+                double bannerX = ((CANVAS_WIDTH - 360.0) / 2.0) + bannerXOffset;
 
                 banner.setLayoutX(bannerX);
                 banner.setLayoutY(currentY);
                 roadmapPane.getChildren().add(banner);
 
+                moduleIndex++;
                 currentY += 80.0;
                 previousNode = null; // Reset path connection for new module
             }
@@ -142,23 +146,20 @@ public class LearnPageController {
 
     private HBox createModuleBanner(String moduleTitle, boolean isExpanded, double progress) {
         Label label = new Label(moduleTitle);
-        label.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #F8FAFC;");
+        label.setStyle("-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #F8FAFC;");
 
         ProgressBar progressBar = new ProgressBar(progress);
-        progressBar.setPrefWidth(110);
+        progressBar.setPrefWidth(140);
         progressBar.setPrefHeight(8);
         progressBar.setStyle("-fx-accent: #3B82F6; -fx-control-inner-background: #0F172A;");
 
         Label arrowLabel = new Label(isExpanded ? "▲" : "▼");
         arrowLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #60A5FA;");
 
-        HBox banner = new HBox(14, label, progressBar, arrowLabel);
+        HBox banner = new HBox(16, label, progressBar, arrowLabel);
         banner.setAlignment(Pos.CENTER);
-        banner.setPadding(new Insets(10, 16, 10, 16));
-
-        banner.setPrefWidth(380.0);
-        banner.setMinWidth(380.0);
-        banner.setMaxWidth(380.0);
+        banner.setPadding(new Insets(12, 20, 12, 20));
+        banner.setPrefWidth(360.0);
         banner.setMaxHeight(50.0);
 
         banner.setStyle(
