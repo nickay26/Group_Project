@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="750.0" prefWidth="1000.0"
+            style="-fx-background-color: #0f172a;"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Project.AdminQuestionController">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12.0"
+              style="-fx-padding: 15 25; -fx-background-color: #1e293b;">
+            <children>
+                <Label text="⚙️ Admin — Add Question"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;
+                              -fx-text-fill: #ffffff;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleViewAll" text="📋 View All"
+                        style="-fx-background-color: rgba(56,189,248,0.2);
+                               -fx-text-fill: #38bdf8; -fx-background-radius: 6px;
+                               -fx-padding: 8 16; -fx-cursor: hand;" />
+                <Button onAction="#handleBack" text="← Back"
+                        style="-fx-background-color: rgba(255,255,255,0.1);
+                               -fx-text-fill: white; -fx-background-radius: 6px;
+                               -fx-padding: 8 16; -fx-cursor: hand;" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- FORM -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #0f172a;">
+            <content>
+                <VBox spacing="12.0" style="-fx-padding: 25;">
+                    <children>
+
+                        <!-- Language + Type -->
+                        <HBox spacing="15.0">
+                            <children>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Language"
+                                           style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                                    <ComboBox fx:id="languageCombo" maxWidth="Infinity"
+                                              style="-fx-background-color: #1e293b;" />
+                                </VBox>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <Label text="Question Type"
+                                           style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                                    <ComboBox fx:id="typeCombo" maxWidth="Infinity"
+                                              style="-fx-background-color: #1e293b;" />
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Title -->
+                        <VBox spacing="5.0">
+                            <Label text="Title *"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextField fx:id="titleField"
+                                       promptText="Variables &amp; Types"
+                                       style="-fx-background-color: #1e293b; -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #64748b; -fx-padding: 10;" />
+                        </VBox>
+
+                        <!-- Instructions -->
+                        <VBox spacing="5.0">
+                            <Label text="Instructions"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="instructionsArea" prefHeight="60.0"
+                                      style="-fx-control-inner-background: #1e293b;
+                                             -fx-text-fill: white;" />
+                        </VBox>
+
+                        <!-- Task -->
+                        <VBox spacing="5.0">
+                            <Label text="Task"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="taskArea" prefHeight="60.0"
+                                      style="-fx-control-inner-background: #1e293b;
+                                             -fx-text-fill: white;" />
+                        </VBox>
+
+                        <!-- Starter Code -->
+                        <VBox spacing="5.0">
+                            <Label text="Starter Code (use ___BLANK___ for blanks)"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="starterCodeArea" prefHeight="120.0"
+                                      style="-fx-font-family: 'Consolas', monospace;
+                                             -fx-control-inner-background: #0f172a;
+                                             -fx-text-fill: #e2e8f0;" />
+                        </VBox>
+
+                        <!-- Expected Output -->
+                        <VBox spacing="5.0">
+                            <Label text="Expected Output"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="expectedOutputArea" prefHeight="60.0"
+                                      style="-fx-font-family: 'Consolas', monospace;
+                                             -fx-control-inner-background: #000000;
+                                             -fx-text-fill: #4ade80;" />
+                        </VBox>
+
+                        <!-- Hint -->
+                        <VBox spacing="5.0">
+                            <Label text="Hint"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="hintArea" prefHeight="50.0"
+                                      style="-fx-control-inner-background: #1e293b;
+                                             -fx-text-fill: white;" />
+                        </VBox>
+
+                        <!-- Solution -->
+                        <VBox spacing="5.0">
+                            <Label text="Solution Code"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextArea fx:id="solutionArea" prefHeight="120.0"
+                                      style="-fx-font-family: 'Consolas', monospace;
+                                             -fx-control-inner-background: #0f172a;
+                                             -fx-text-fill: #e2e8f0;" />
+                        </VBox>
+
+                        <!-- Blanks -->
+                        <VBox spacing="5.0">
+                            <Label text="Blanks (comma-separated)"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextField fx:id="blanksField"
+                                       promptText="</h1>, </p>, </body>"
+                                       style="-fx-background-color: #1e293b;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #64748b;
+                                              -fx-padding: 10;" />
+                        </VBox>
+
+                        <!-- Choices -->
+                        <VBox spacing="5.0">
+                            <Label text="Choices (comma-separated)"
+                                   style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                            <TextField fx:id="choicesField"
+                                       promptText="</h1>, </p>, </body>, </html>"
+                                       style="-fx-background-color: #1e293b;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #64748b;
+                                              -fx-padding: 10;" />
+                        </VBox>
+
+                        <!-- Save Button -->
+                        <HBox spacing="15.0" alignment="CENTER_RIGHT">
+                            <children>
+                                <Label fx:id="statusLabel"
+                                       style="-fx-text-fill: #4ade80; -fx-font-weight: bold;" />
+                                <Button onAction="#handleClear" text="🗑 Clear"
+                                        style="-fx-background-color: rgba(239,68,68,0.2);
+                                               -fx-text-fill: #f87171;
+                                               -fx-background-radius: 8px;
+                                               -fx-padding: 12 20; -fx-cursor: hand;" />
+                                <Button onAction="#handleSave" text="💾 Save Question"
+                                        style="-fx-background-color: #10b981;
+                                               -fx-text-fill: white;
+                                               -fx-background-radius: 8px;
+                                               -fx-padding: 12 30;
+                                               -fx-font-weight: bold;
+                                               -fx-cursor: hand;" />
+                            </children>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

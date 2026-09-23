@@ -151,12 +151,26 @@ public class PracticeController {
     }
     private void openQuestion(CardData data) {
         try {
+            // ✅ JSON ကနေ Question ဆွဲ
+            QuestionData question = JsonUtils.getPracticeByTitle(data.language, data.title);
+
+            if (question == null) {
+                question = new QuestionData(
+                        data.language, data.title,
+                        "Complete the task below.",
+                        "Write code to solve this problem.",
+                        getStarterCode(data.language),
+                        "", "Think step by step.", "",
+                        null, null, "write-code", "console"
+                );
+            }
+
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeQuestion.fxml"));
+                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
             Parent root = loader.load();
 
             PracticeQuestionController controller = loader.getController();
-            controller.loadQuestion(data.language, data.title);
+            controller.setQuestion(question);
 
             Stage stage = (Stage) cardContainer.getScene().getWindow();
             stage.setScene(new Scene(root));

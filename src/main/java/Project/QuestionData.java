@@ -5,19 +5,31 @@ import java.util.List;
 public class QuestionData {
     private String language;
     private String title;
-    private String instructions;    // 📖 ရှင်းလင်းချက်
-    private String task;            // 📝 လုပ်ရမယ့်အလုပ်
-    private String starterCode;     // Code အစ
-    private String expectedOutput;  // မျှော်မှန်းရလဒ်
-    private String hint;            // 💡 အကြံပြုချက်
-    private String solutionCode;    // ✅ အဖြေ
+    private String instructions;
+    private String task;
+    private String starterCode;
+    private String expectedOutput;
+    private String hint;
+    private String solutionCode;
     private List<String> blanks;
     private List<String> choices;
-    private String questionType;
-    private String previewType;
+    private String questionType;   // "write-code" | "fill-blank" | "drag-drop"
+    private String previewType;    // "console" | "browser"
+
+    // Constructor ၁ — Write Code (arguments ၈ ခု)
     public QuestionData(String language, String title, String instructions,
                         String task, String starterCode, String expectedOutput,
-                        String hint, String solutionCode,List<String> blanks, List<String> choices,
+                        String hint, String solutionCode) {
+        this(language, title, instructions, task, starterCode,
+                expectedOutput, hint, solutionCode,
+                null, null, "write-code", "console");
+    }
+
+    // Constructor ၂ — Fill-Blank (arguments ၁၂ ခု)
+    public QuestionData(String language, String title, String instructions,
+                        String task, String starterCode, String expectedOutput,
+                        String hint, String solutionCode,
+                        List<String> blanks, List<String> choices,
                         String questionType, String previewType) {
         this.language = language;
         this.title = title;
