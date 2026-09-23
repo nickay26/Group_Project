@@ -166,7 +166,7 @@ public class PracticeController {
             }
 
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
+                    getClass().getResource("/Project/PracticeQuestion.fxml"));
             Parent root = loader.load();
 
             PracticeQuestionController controller = loader.getController();

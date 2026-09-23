@@ -92,12 +92,14 @@ public class MainLayoutController {
     public void handleLeaderBoard() {
         setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
+
     }
     @FXML
-    private void handleNavPractice() {
-        setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
-        loadPage("PracticeView.fxml");                          // ← loadPage သုံး
+    private void handlePractice() {
+        setActiveButton(practiceBtn);
+        loadPage("PracticeView.fxml");
     }
+
     public FXMLLoader loadPage(String fxmlFileName) {
         try {
             String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
