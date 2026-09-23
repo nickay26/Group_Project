@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_208",
+  "title": "ArrayList",
+  "slides": [
+    {
+      "slideId": "JAVA_208_S1",
+      "type": "CONCEPT",
+      "title": "ArrayList",
+      "prompt": "An ArrayList is a resizable array. Unlike regular arrays, ArrayList can grow or shrink in size. It is part of the java.util package.",
+      "codeSnippet": "import java.util.ArrayList;\n\npublic class Program {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        list.add(\"Java\");\n        list.add(\"Python\");\n        System.out.println(list);\n    }\n}",
+      "output": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_208_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ArrayList Definition",
+      "prompt": "What is an ArrayList?",
+      "options": ["A resizable array", "A fixed array", "A method", "A class"],
+      "correctAnswer": "A resizable array"
+    },
+    {
+      "slideId": "JAVA_208_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ArrayList Package",
+      "prompt": "Which package contains ArrayList?",
+      "options": ["java.util", "java.io", "java.lang", "java.array"],
+      "correctAnswer": "java.util"
+    },
+    {
+      "slideId": "JAVA_208_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Add Method",
+      "prompt": "Which method adds an element to an ArrayList?",
+      "options": ["add()", "put()", "insert()", "append()"],
+      "correctAnswer": "add()"
+    },
+    {
+      "slideId": "JAVA_208_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Size Method",
+      "prompt": "Which method returns the size of an ArrayList?",
+      "options": ["size()", "length()", "count()", "len()"],
+      "correctAnswer": "size()"
+    },
+    {
+      "slideId": "JAVA_208_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import ArrayList",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.________;",
+      "options": ["ArrayList", "List", "Array", "Collections"],
+      "correctAnswer": "ArrayList"
+    },
+    {
+      "slideId": "JAVA_208_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Add Element",
+      "prompt": "Complete the code to add an element.",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.____(\"Java\");",
+      "options": ["add", "put", "insert", "append"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "JAVA_208_S8",
+      "type": "CODE_OUTPUT",
+      "title": "ArrayList Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"Java\");\nlist.add(\"Python\");\nSystem.out.println(list);",
+      "options": ["[Java, Python]", "JavaPython", "Java, Python", "Error"],
+      "correctAnswer": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_208_S9",
+      "type": "CODE_OUTPUT",
+      "title": "ArrayList Size",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"A\");\nlist.add(\"B\");\nlist.add(\"C\");\nSystem.out.println(list.size());",
+      "options": ["3", "2", "1", "Error"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_208_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Get Element",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"Java\");\nlist.add(\"Python\");\nSystem.out.println(list.get(0));",
+      "options": ["Java", "Python", "0", "Error"],
+      "correctAnswer": "Java"
+    },
+    {
+      "slideId": "JAVA_208_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Get Method",
+      "prompt": "Which method gets an element at a specific index?",
+      "options": ["get()", "fetch()", "element()", "value()"],
+      "correctAnswer": "get()"
+    }
+  ]
+}

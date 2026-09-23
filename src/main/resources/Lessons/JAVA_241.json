@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_241",
+  "title": "Practice: Thread Synchronization",
+  "slides": [
+    {
+      "slideId": "JAVA_241_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronization Definition",
+      "prompt": "What is synchronization?",
+      "options": ["Preventing multiple threads from accessing a resource", "Creating threads", "Deleting threads", "Stopping threads"],
+      "correctAnswer": "Preventing multiple threads from accessing a resource"
+    },
+    {
+      "slideId": "JAVA_241_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronized Keyword",
+      "prompt": "Which keyword is used for synchronization?",
+      "options": ["synchronized", "sync", "thread", "lock"],
+      "correctAnswer": "synchronized"
+    },
+    {
+      "slideId": "JAVA_241_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronization Benefit",
+      "prompt": "What is the benefit of synchronization?",
+      "options": ["Thread safety", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Thread safety"
+    },
+    {
+      "slideId": "JAVA_241_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Synchronized Method",
+      "prompt": "Complete the synchronized method.",
+      "codeSnippet": "public __________ void increment() {\n  count++;\n}",
+      "options": ["synchronized", "sync", "thread", "lock"],
+      "correctAnswer": "synchronized"
+    },
+    {
+      "slideId": "JAVA_241_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Synchronized Block",
+      "prompt": "Complete the synchronized block.",
+      "codeSnippet": "__________ (this) {\n  count++;\n}",
+      "options": ["synchronized", "sync", "thread", "lock"],
+      "correctAnswer": "synchronized"
+    },
+    {
+      "slideId": "JAVA_241_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Synchronized Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Counter {\n  private int count = 0;\n  public synchronized void increment() { count++; }\n  public int getCount() { return count; }\n}\nCounter c = new Counter();\nc.increment();\nc.increment();\nSystem.out.println(c.getCount());",
+      "options": ["2", "1", "0", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_241_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronization Purpose",
+      "prompt": "Why do we use synchronization?",
+      "options": ["To prevent race conditions", "To make code slower", "To create more threads", "To delete threads"],
+      "correctAnswer": "To prevent race conditions"
+    },
+    {
+      "slideId": "JAVA_241_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Race Condition",
+      "prompt": "What is a race condition?",
+      "options": ["Two threads accessing shared data", "A type of thread", "A type of method", "A type of class"],
+      "correctAnswer": "Two threads accessing shared data"
+    },
+    {
+      "slideId": "JAVA_241_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronized Lock",
+      "prompt": "What does synchronized use to lock?",
+      "options": ["Object lock", "File lock", "Memory lock", "Class lock"],
+      "correctAnswer": "Object lock"
+    },
+    {
+      "slideId": "JAVA_241_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Synchronized Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Counter {\n  private int count = 0;\n  public synchronized void increment() { count++; }\n  public int getCount() { return count; }\n}\nCounter c = new Counter();\nfor (int i = 0; i < 5; i++) c.increment();\nSystem.out.println(c.getCount());",
+      "options": ["5", "4", "0", "Error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_241_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Synchronized Method",
+      "prompt": "Which method can be synchronized?",
+      "options": ["Any method", "Only static methods", "Only void methods", "Only private methods"],
+      "correctAnswer": "Any method"
+    }
+  ]
+}

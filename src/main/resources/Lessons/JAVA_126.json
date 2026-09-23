@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_126",
+  "title": "Method Overloading",
+  "slides": [
+    {
+      "slideId": "JAVA_126_S1",
+      "type": "CONCEPT",
+      "title": "Method Overloading",
+      "prompt": "Method overloading means having multiple methods with the same name but different parameters. Java decides which method to call based on the arguments.",
+      "codeSnippet": "public class Program {\n    static int add(int a, int b) {\n        return a + b;\n    }\n    \n    static double add(double a, double b) {\n        return a + b;\n    }\n    \n    static int add(int a, int b, int c) {\n        return a + b + c;\n    }\n    \n    public static void main(String[] args) {\n        System.out.println(add(5, 3));\n        System.out.println(add(5.5, 3.3));\n        System.out.println(add(1, 2, 3));\n    }\n}",
+      "output": "8\n8.8\n6"
+    },
+    {
+      "slideId": "JAVA_126_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Overloading",
+      "prompt": "What is method overloading?",
+      "options": ["Multiple methods with the same name but different parameters", "Multiple methods with different names", "Multiple classes", "Multiple variables"],
+      "correctAnswer": "Multiple methods with the same name but different parameters"
+    },
+    {
+      "slideId": "JAVA_126_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Overloading",
+      "prompt": "Can methods with the same name have different return types?",
+      "options": ["No, parameters must differ", "Yes, return types can differ", "Only for void methods", "Only for int methods"],
+      "correctAnswer": "No, parameters must differ"
+    },
+    {
+      "slideId": "JAVA_126_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method declaration for method overloading.",
+      "codeSnippet": "int add(int a, int b) { return a + b; }\ndouble add(____ a, double b) { return a + b; }",
+      "options": ["double", "int", "String", "boolean"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "JAVA_126_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method declaration for method overloading.",
+      "codeSnippet": "int add(int a, int b) { return a + b; }\nint add(int a, int b, int __) { return a + b + c; }",
+      "options": ["c", "d", "e", "f"],
+      "correctAnswer": "c"
+    },
+    {
+      "slideId": "JAVA_126_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Method Overloading Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) { return a + b; }\nstatic int add(int a, int b, int c) { return a + b + c; }\nSystem.out.println(add(1, 2, 3));",
+      "options": ["6", "3", "12", "Error"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "JAVA_126_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Method Overloading Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) { return a + b; }\nstatic double add(double a, double b) { return a + b; }\nSystem.out.println(add(5, 3));",
+      "options": ["8", "8.0", "53", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_126_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Method Overloading Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) { return a + b; }\nstatic double add(double a, double b) { return a + b; }\nSystem.out.println(add(5.5, 3.3));",
+      "options": ["8.8", "8", "5.5 3.3", "Error"],
+      "correctAnswer": "8.8"
+    },
+    {
+      "slideId": "JAVA_126_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Overloading",
+      "prompt": "Which method is called when add(5, 3) is invoked?",
+      "codeSnippet": "static int add(int a, int b) { return a + b; }\nstatic double add(double a, double b) { return a + b; }",
+      "options": ["int add(int a, int b)", "double add(double a, double b)", "Both", "Neither"],
+      "correctAnswer": "int add(int a, int b)"
+    },
+    {
+      "slideId": "JAVA_126_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Method Overloading Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) { return a + b; }\nstatic int add(int a, int b, int c) { return a + b + c; }\nSystem.out.println(add(10, 20, 30));",
+      "options": ["60", "30", "102030", "Error"],
+      "correctAnswer": "60"
+    },
+    {
+      "slideId": "JAVA_126_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Overloading",
+      "prompt": "How many methods can have the same name?",
+      "options": ["Multiple, if parameters differ", "Only one", "Only two", "Only three"],
+      "correctAnswer": "Multiple, if parameters differ"
+    }
+  ]
+}

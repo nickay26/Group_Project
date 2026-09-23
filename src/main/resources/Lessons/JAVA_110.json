@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_110",
+  "title": "Practice: If Statement",
+  "slides": [
+    {
+      "slideId": "JAVA_110_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If Keyword",
+      "prompt": "Which keyword is used for a conditional statement?",
+      "options": ["if", "for", "while", "do"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "JAVA_110_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of If",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nif (x > 5) {\n  System.out.println(\"Big\");\n}",
+      "options": ["Big", "Small", "10", "5"],
+      "correctAnswer": "Big"
+    },
+    {
+      "slideId": "JAVA_110_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Output of If-Else",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "3", "5"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_110_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Comparison Operator",
+      "prompt": "Which operator means 'greater than or equal to'?",
+      "options": [">=", ">", "<=", "<"],
+      "correctAnswer": ">="
+    },
+    {
+      "slideId": "JAVA_110_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is greater than 5.",
+      "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
+      "options": [">", "<", "==", "!="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "JAVA_110_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else",
+      "prompt": "Complete the code to output 'B'.",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_110_S7",
+      "type": "CODE_OUTPUT",
+      "title": "If Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 7;\nif (x > 5) {\n  System.out.println(\"Yes\");\n}",
+      "options": ["Yes", "No", "7", "5"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_110_S8",
+      "type": "CODE_OUTPUT",
+      "title": "If-Else Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 2;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "2", "5"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_110_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Even or Odd",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 4;\nif (x % 2 == 0) {\n  System.out.println(\"Even\");\n} else {\n  System.out.println(\"Odd\");\n}",
+      "options": ["Even", "Odd", "4", "Error"],
+      "correctAnswer": "Even"
+    },
+    {
+      "slideId": "JAVA_110_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Even or Odd",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 5;\nif (x % 2 == 0) {\n  System.out.println(\"Even\");\n} else {\n  System.out.println(\"Odd\");\n}",
+      "options": ["Even", "Odd", "5", "Error"],
+      "correctAnswer": "Odd"
+    },
+    {
+      "slideId": "JAVA_110_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Condition",
+      "prompt": "Complete the code to check if x is equal to 10.",
+      "codeSnippet": "int x = 10;\nif (x __ 10) {\n  System.out.println(\"Ten\");\n}",
+      "options": ["==", "=", "!=", ">="],
+      "correctAnswer": "=="
+    }
+  ]
+}

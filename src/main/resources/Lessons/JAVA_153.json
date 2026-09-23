@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_153",
+  "title": "Practice: FileWriter",
+  "slides": [
+    {
+      "slideId": "JAVA_153_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileWriter Class",
+      "prompt": "Which class is used to write files in Java?",
+      "options": ["FileWriter", "FileReader", "File", "Writer"],
+      "correctAnswer": "FileWriter"
+    },
+    {
+      "slideId": "JAVA_153_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileWriter Package",
+      "prompt": "Which package contains FileWriter?",
+      "options": ["java.io", "java.util", "java.lang", "java.file"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_153_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileWriter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileWriter writer = new FileWriter(\"test.txt\");\n  writer.write(\"Hello\");\n  writer.close();\n  System.out.println(\"File written\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["File written", "Hello", "Error", "No Error"],
+      "correctAnswer": "File written"
+    },
+    {
+      "slideId": "JAVA_153_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import FileWriter",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io.________;",
+      "options": ["FileWriter", "FileReader", "File", "Writer"],
+      "correctAnswer": "FileWriter"
+    },
+    {
+      "slideId": "JAVA_153_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Write to File",
+      "prompt": "Complete the code to write to a file.",
+      "codeSnippet": "FileWriter writer = new FileWriter(\"test.txt\");\nwriter.______(\"Hello\");",
+      "options": ["write", "read", "print", "output"],
+      "correctAnswer": "write"
+    },
+    {
+      "slideId": "JAVA_153_S6",
+      "type": "CODE_OUTPUT",
+      "title": "FileWriter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileWriter writer = new FileWriter(\"data.txt\");\n  writer.write(\"Java\");\n  writer.close();\n  System.out.println(\"Success\");\n} catch (Exception e) {\n  System.out.println(\"Failed\");\n}",
+      "options": ["Success or Failed", "Success", "Failed", "Error"],
+      "correctAnswer": "Success or Failed"
+    },
+    {
+      "slideId": "JAVA_153_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Close FileWriter",
+      "prompt": "Which method closes a FileWriter?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_153_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Write Method",
+      "prompt": "Which method writes a String to a file?",
+      "options": ["write()", "print()", "output()", "save()"],
+      "correctAnswer": "write()"
+    },
+    {
+      "slideId": "JAVA_153_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileWriter Purpose",
+      "prompt": "What does FileWriter do?",
+      "options": ["Writes characters to a file", "Reads characters from a file", "Deletes a file", "Renames a file"],
+      "correctAnswer": "Writes characters to a file"
+    },
+    {
+      "slideId": "JAVA_153_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileWriter Import",
+      "prompt": "Which import is needed for FileWriter?",
+      "options": ["import java.io.FileWriter;", "import java.file.FileWriter;", "import java.util.FileWriter;", "import java.lang.FileWriter;"],
+      "correctAnswer": "import java.io.FileWriter;"
+    },
+    {
+      "slideId": "JAVA_153_S11",
+      "type": "CODE_OUTPUT",
+      "title": "FileWriter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileWriter writer = new FileWriter(\"test.txt\");\n  writer.write(\"Hello World\");\n  writer.close();\n  System.out.println(\"Done\");\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Done or Error", "Done", "Error", "Hello World"],
+      "correctAnswer": "Done or Error"
+    }
+  ]
+}

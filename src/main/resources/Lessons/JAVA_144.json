@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_144",
+  "title": "Practice: Exception Keyword",
+  "slides": [
+    {
+      "slideId": "JAVA_144_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Try-Catch Keyword",
+      "prompt": "Which keyword is used to handle exceptions?",
+      "options": ["try-catch", "if-else", "for-while", "do-while"],
+      "correctAnswer": "try-catch"
+    },
+    {
+      "slideId": "JAVA_144_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw Keyword",
+      "prompt": "Which keyword is used to throw an exception?",
+      "options": ["throw", "throws", "catch", "try"],
+      "correctAnswer": "throw"
+    },
+    {
+      "slideId": "JAVA_144_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Block",
+      "prompt": "Which block always executes?",
+      "options": ["finally", "try", "catch", "throw"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_144_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Catch Block",
+      "prompt": "Which block handles the exception?",
+      "options": ["catch", "try", "finally", "throw"],
+      "correctAnswer": "catch"
+    },
+    {
+      "slideId": "JAVA_144_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Try-Catch",
+      "prompt": "Complete the try-catch block.",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} _____ (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["catch", "finally", "throw", "throws"],
+      "correctAnswer": "catch"
+    },
+    {
+      "slideId": "JAVA_144_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Finally",
+      "prompt": "Complete the finally block.",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "options": ["finally", "catch", "throw", "throws"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_144_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Try-Catch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["Error", "10", "0", "No Error"],
+      "correctAnswer": "Error"
+    },
+    {
+      "slideId": "JAVA_144_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n  System.out.println(x);\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["5 Done", "5", "Done", "Error"],
+      "correctAnswer": "5 Done"
+    },
+    {
+      "slideId": "JAVA_144_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Definition",
+      "prompt": "What is an exception?",
+      "options": ["An error that occurs during program execution", "A syntax error", "A compile error", "A variable"],
+      "correctAnswer": "An error that occurs during program execution"
+    },
+    {
+      "slideId": "JAVA_144_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Try Block",
+      "prompt": "Which block contains the code that might throw an exception?",
+      "options": ["try", "catch", "finally", "throw"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "JAVA_144_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Try-Catch Purpose",
+      "prompt": "Why do we use try-catch?",
+      "options": ["To handle exceptions", "To make code slower", "To delete code", "To confuse developers"],
+      "correctAnswer": "To handle exceptions"
+    }
+  ]
+}

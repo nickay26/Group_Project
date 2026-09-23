@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_138",
+  "title": "String Methods",
+  "slides": [
+    {
+      "slideId": "JAVA_138_S1",
+      "type": "CONCEPT",
+      "title": "String Methods",
+      "prompt": "Java provides many String methods: toUpperCase(), toLowerCase(), charAt(), substring().",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        String name = \"John\";\n        System.out.println(name.toUpperCase());\n        System.out.println(name.toLowerCase());\n        System.out.println(name.charAt(0));\n    }\n}",
+      "output": "JOHN\njohn\nJ"
+    },
+    {
+      "slideId": "JAVA_138_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uppercase Method",
+      "prompt": "Which method converts a String to uppercase?",
+      "options": ["toUpperCase()", "toLowerCase()", "upper()", "uppercase()"],
+      "correctAnswer": "toUpperCase()"
+    },
+    {
+      "slideId": "JAVA_138_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lowercase Method",
+      "prompt": "Which method converts a String to lowercase?",
+      "options": ["toLowerCase()", "toUpperCase()", "lower()", "lowercase()"],
+      "correctAnswer": "toLowerCase()"
+    },
+    {
+      "slideId": "JAVA_138_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Method",
+      "prompt": "Which method returns a character at a specific index?",
+      "options": ["charAt()", "charOf()", "getChar()", "characterAt()"],
+      "correctAnswer": "charAt()"
+    },
+    {
+      "slideId": "JAVA_138_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Uppercase",
+      "prompt": "Complete the code to convert to uppercase.",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.________());",
+      "options": ["toUpperCase", "toLower", "upper", "toUpper"],
+      "correctAnswer": "toUpperCase"
+    },
+    {
+      "slideId": "JAVA_138_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.toUpperCase());",
+      "options": ["JOHN", "john", "John", "Error"],
+      "correctAnswer": "JOHN"
+    },
+    {
+      "slideId": "JAVA_138_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Lowercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.toLowerCase());",
+      "options": ["john", "JOHN", "John", "Error"],
+      "correctAnswer": "john"
+    },
+    {
+      "slideId": "JAVA_138_S8",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(0));",
+      "options": ["J", "o", "h", "n"],
+      "correctAnswer": "J"
+    },
+    {
+      "slideId": "JAVA_138_S9",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(3));",
+      "options": ["n", "J", "o", "h"],
+      "correctAnswer": "n"
+    },
+    {
+      "slideId": "JAVA_138_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Index",
+      "prompt": "What is the index of the first character in a String?",
+      "options": ["0", "1", "-1", "10"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_138_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Multiple String Methods",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hi\";\nSystem.out.println(s.toUpperCase());\nSystem.out.println(s.toLowerCase());",
+      "options": ["HI\nhi", "hi\nHI", "Hi\nHi", "Error"],
+      "correctAnswer": "HI\nhi"
+    }
+  ]
+}

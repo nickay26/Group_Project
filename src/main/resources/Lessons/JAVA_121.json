@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_121",
+  "title": "Practice: Array Sum",
+  "slides": [
+    {
+      "slideId": "JAVA_121_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Sum",
+      "prompt": "What is the sum of {1, 2, 3}?",
+      "options": ["6", "5", "3", "9"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "JAVA_121_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Sum",
+      "prompt": "What is the sum of {10, 20, 30}?",
+      "options": ["60", "50", "30", "90"],
+      "correctAnswer": "60"
+    },
+    {
+      "slideId": "JAVA_121_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Sum",
+      "prompt": "What is the sum of {5, 5, 5}?",
+      "options": ["15", "10", "5", "20"],
+      "correctAnswer": "15"
+    },
+    {
+      "slideId": "JAVA_121_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Sum",
+      "prompt": "Complete the code to output 15.",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum __ arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["+=", "-=", "*=", "/="],
+      "correctAnswer": "+="
+    },
+    {
+      "slideId": "JAVA_121_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Sum",
+      "prompt": "Complete the code to start with 0.",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nint sum = __;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}",
+      "options": ["0", "1", "10", "-1"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_121_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["6", "5", "3", "9"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "JAVA_121_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["60", "50", "30", "90"],
+      "correctAnswer": "60"
+    },
+    {
+      "slideId": "JAVA_121_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {2, 4, 6, 8};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["20", "18", "16", "24"],
+      "correctAnswer": "20"
+    },
+    {
+      "slideId": "JAVA_121_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 1, 1, 1, 1};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["5", "4", "6", "1"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_121_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {100, 200, 300};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["600", "500", "300", "900"],
+      "correctAnswer": "600"
+    },
+    {
+      "slideId": "JAVA_121_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Sum",
+      "prompt": "What is the sum of {7, 3, 5}?",
+      "options": ["15", "10", "5", "20"],
+      "correctAnswer": "15"
+    }
+  ]
+}

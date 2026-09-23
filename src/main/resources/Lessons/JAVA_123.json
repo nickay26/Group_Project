@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_123",
+  "title": "Practice: Method Keyword",
+  "slides": [
+    {
+      "slideId": "JAVA_123_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Void Keyword",
+      "prompt": "What keyword is used for a method that returns nothing?",
+      "options": ["void", "int", "String", "boolean"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "JAVA_123_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Return Type",
+      "prompt": "What keyword is used for a method that returns an integer?",
+      "options": ["int", "void", "String", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_123_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Return Type",
+      "prompt": "What keyword is used for a method that returns a String?",
+      "options": ["String", "void", "int", "boolean"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_123_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method declaration.",
+      "codeSnippet": "public ____ void main(String[] args) {\n}",
+      "options": ["static", "final", "abstract", "public"],
+      "correctAnswer": "static"
+    },
+    {
+      "slideId": "JAVA_123_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method that returns nothing.",
+      "codeSnippet": "____ greet() {\n  System.out.println(\"Hello\");\n}",
+      "options": ["void", "int", "String", "boolean"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "JAVA_123_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Void Method",
+      "prompt": "What is the output?",
+      "codeSnippet": "static void greet() {\n  System.out.println(\"Hello\");\n}\ngreet();",
+      "options": ["Hello", "greet", "void", "Error"],
+      "correctAnswer": "Hello"
+    },
+    {
+      "slideId": "JAVA_123_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Int Method",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int add(int a, int b) {\n  return a + b;\n}\nSystem.out.println(add(5, 3));",
+      "options": ["8", "53", "5 + 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_123_S8",
+      "type": "CODE_OUTPUT",
+      "title": "String Method",
+      "prompt": "What is the output?",
+      "codeSnippet": "static String greet() {\n  return \"Hello\";\n}\nSystem.out.println(greet());",
+      "options": ["Hello", "greet", "String", "Error"],
+      "correctAnswer": "Hello"
+    },
+    {
+      "slideId": "JAVA_123_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Int Method",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(3));",
+      "options": ["9", "6", "3", "Error"],
+      "correctAnswer": "9"
+    },
+    {
+      "slideId": "JAVA_123_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Return Type",
+      "prompt": "What does a method with 'void' return?",
+      "options": ["Nothing", "0", "null", "false"],
+      "correctAnswer": "Nothing"
+    },
+    {
+      "slideId": "JAVA_123_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Return",
+      "prompt": "Which keyword is used to return a value from a method?",
+      "options": ["return", "void", "break", "continue"],
+      "correctAnswer": "return"
+    }
+  ]
+}

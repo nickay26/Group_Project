@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_156",
+  "title": "Practice: File Not Found",
+  "slides": [
+    {
+      "slideId": "JAVA_156_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Not Found Exception",
+      "prompt": "Which exception is thrown when a file is not found?",
+      "options": ["FileNotFoundException", "IOException", "NullPointerException", "ArithmeticException"],
+      "correctAnswer": "FileNotFoundException"
+    },
+    {
+      "slideId": "JAVA_156_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Not Found Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (FileNotFoundException e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["File not found", "Error", "FileNotFoundException", "No Error"],
+      "correctAnswer": "File not found"
+    },
+    {
+      "slideId": "JAVA_156_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Catch FileNotFoundException",
+      "prompt": "Which catch block handles FileNotFoundException?",
+      "options": ["catch (FileNotFoundException e)", "catch (IOException e)", "catch (Exception e)", "All of the above"],
+      "correctAnswer": "All of the above"
+    },
+    {
+      "slideId": "JAVA_156_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Catch FileNotFoundException",
+      "prompt": "Complete the catch block.",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (__________ e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["FileNotFoundException", "IOException", "Exception", "NullPointerException"],
+      "correctAnswer": "FileNotFoundException"
+    },
+    {
+      "slideId": "JAVA_156_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Catch IOException",
+      "prompt": "Complete the catch block for IOException.",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (________ e) {\n  System.out.println(\"IO Error\");\n}",
+      "options": ["IOException", "FileNotFoundException", "Exception", "NullPointerException"],
+      "correctAnswer": "IOException"
+    },
+    {
+      "slideId": "JAVA_156_S6",
+      "type": "CODE_OUTPUT",
+      "title": "File Not Found Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (FileNotFoundException e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["File not found", "Error", "No Error", "FileNotFoundException"],
+      "correctAnswer": "File not found"
+    },
+    {
+      "slideId": "JAVA_156_S7",
+      "type": "CODE_OUTPUT",
+      "title": "File Not Found Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (Exception e) {\n  System.out.println(\"Error: \" + e.getMessage());\n}",
+      "options": ["Error: ...", "File not found", "No Error", "Error"],
+      "correctAnswer": "Error: ..."
+    },
+    {
+      "slideId": "JAVA_156_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Not Found",
+      "prompt": "What happens if you open a file that does not exist?",
+      "options": ["FileNotFoundException", "No Error", "IOException", "NullPointerException"],
+      "correctAnswer": "FileNotFoundException"
+    },
+    {
+      "slideId": "JAVA_156_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Handling",
+      "prompt": "Which keyword is used to handle FileNotFoundException?",
+      "options": ["catch", "throw", "throws", "try"],
+      "correctAnswer": "catch"
+    },
+    {
+      "slideId": "JAVA_156_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Not Found",
+      "prompt": "Which package contains FileNotFoundException?",
+      "options": ["java.io", "java.util", "java.lang", "java.file"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_156_S11",
+      "type": "CODE_OUTPUT",
+      "title": "File Not Found Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"data.txt\");\n} catch (Exception e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["File not found or No Error", "File not found", "No Error", "Error"],
+      "correctAnswer": "File not found or No Error"
+    }
+  ]
+}

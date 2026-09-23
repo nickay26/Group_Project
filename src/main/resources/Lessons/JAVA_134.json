@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_134",
+  "title": "Practice: Inheritance",
+  "slides": [
+    {
+      "slideId": "JAVA_134_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Definition",
+      "prompt": "What is inheritance?",
+      "options": ["A class inheriting from another class", "A method", "A variable", "An object"],
+      "correctAnswer": "A class inheriting from another class"
+    },
+    {
+      "slideId": "JAVA_134_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Keyword",
+      "prompt": "Which keyword is used for inheritance?",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_134_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal {\n  void sound() {\n    System.out.println(\"Animal sound\");\n  }\n}\nclass Dog extends Animal {\n  void sound() {\n    System.out.println(\"Bark\");\n  }\n}\nAnimal a = new Dog();\na.sound();",
+      "options": ["Bark", "Animal sound", "Dog", "Error"],
+      "correctAnswer": "Bark"
+    },
+    {
+      "slideId": "JAVA_134_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Keyword",
+      "prompt": "Complete the class declaration with inheritance.",
+      "codeSnippet": "class Dog _____ Animal {\n}",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_134_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Keyword",
+      "prompt": "Complete the class declaration with inheritance.",
+      "codeSnippet": "class Car _____ Vehicle {\n}",
+      "options": ["extends", "implements", "inherits", "super"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_134_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Vehicle {\n  void start() {\n    System.out.println(\"Vehicle starts\");\n  }\n}\nclass Car extends Vehicle { }\nCar c = new Car();\nc.start();",
+      "options": ["Vehicle starts", "Car starts", "Car", "Error"],
+      "correctAnswer": "Vehicle starts"
+    },
+    {
+      "slideId": "JAVA_134_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Animal {\n  void sound() {\n    System.out.println(\"Animal sound\");\n  }\n}\nclass Cat extends Animal { }\nCat c = new Cat();\nc.sound();",
+      "options": ["Animal sound", "Cat sound", "Cat", "Error"],
+      "correctAnswer": "Animal sound"
+    },
+    {
+      "slideId": "JAVA_134_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Inheritance Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name = \"John\";\n}\nclass Student extends Person { }\nStudent s = new Student();\nSystem.out.println(s.name);",
+      "options": ["John", "Student", "name", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_134_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Type",
+      "prompt": "How many classes can a class extend?",
+      "options": ["One", "Two", "Three", "Unlimited"],
+      "correctAnswer": "One"
+    },
+    {
+      "slideId": "JAVA_134_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Purpose",
+      "prompt": "Why do we use inheritance?",
+      "options": ["To reuse code", "To make code slower", "To delete code", "To confuse developers"],
+      "correctAnswer": "To reuse code"
+    },
+    {
+      "slideId": "JAVA_134_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parent Class",
+      "prompt": "What is the parent class also called?",
+      "options": ["Superclass", "Subclass", "Child class", "Derived class"],
+      "correctAnswer": "Superclass"
+    }
+  ]
+}

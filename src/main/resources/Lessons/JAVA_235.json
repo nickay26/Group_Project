@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_235",
+  "title": "Practice: Stream API",
+  "slides": [
+    {
+      "slideId": "JAVA_235_S1",
+      "type": "CONCEPT",
+      "title": "Stream API",
+      "prompt": "The Stream API processes collections of data using functional programming. Methods include filter(), map(), and collect().",
+      "codeSnippet": "import java.util.Arrays;\nimport java.util.List;\nimport java.util.stream.Collectors;\n\npublic class Program {\n    public static void main(String[] args) {\n        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);\n        List<Integer> even = numbers.stream()\n            .filter(n -> n % 2 == 0)\n            .collect(Collectors.toList());\n        System.out.println(even);\n    }\n}",
+      "output": "[2, 4]"
+    },
+    {
+      "slideId": "JAVA_235_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stream Definition",
+      "prompt": "What is a Stream?",
+      "options": ["A way to process collections", "A class", "A method", "A variable"],
+      "correctAnswer": "A way to process collections"
+    },
+    {
+      "slideId": "JAVA_235_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Filter Method",
+      "prompt": "Which method filters elements?",
+      "options": ["filter()", "map()", "collect()", "forEach()"],
+      "correctAnswer": "filter()"
+    },
+    {
+      "slideId": "JAVA_235_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Map Method",
+      "prompt": "Which method transforms elements?",
+      "options": ["map()", "filter()", "collect()", "forEach()"],
+      "correctAnswer": "map()"
+    },
+    {
+      "slideId": "JAVA_235_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Collect Method",
+      "prompt": "Which method collects elements into a collection?",
+      "options": ["collect()", "filter()", "map()", "forEach()"],
+      "correctAnswer": "collect()"
+    },
+    {
+      "slideId": "JAVA_235_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Filter",
+      "prompt": "Complete the filter method.",
+      "codeSnippet": "list.stream().______(n -> n % 2 == 0)",
+      "options": ["filter", "map", "collect", "forEach"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "JAVA_235_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Stream Collect",
+      "prompt": "Complete the collect method.",
+      "codeSnippet": "list.stream().collect(Collectors.______())",
+      "options": ["toList", "toSet", "toMap", "toArray"],
+      "correctAnswer": "toList"
+    },
+    {
+      "slideId": "JAVA_235_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Stream Filter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);\nList<Integer> even = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());\nSystem.out.println(even);",
+      "options": ["[2, 4]", "[1, 3, 5]", "[1, 2, 3, 4, 5]", "Error"],
+      "correctAnswer": "[2, 4]"
+    },
+    {
+      "slideId": "JAVA_235_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Stream Map Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<Integer> numbers = Arrays.asList(1, 2, 3);\nList<Integer> doubled = numbers.stream().map(n -> n * 2).collect(Collectors.toList());\nSystem.out.println(doubled);",
+      "options": ["[2, 4, 6]", "[1, 2, 3]", "[3, 6, 9]", "Error"],
+      "correctAnswer": "[2, 4, 6]"
+    },
+    {
+      "slideId": "JAVA_235_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Stream Count Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);\nlong count = numbers.stream().filter(n -> n > 3).count();\nSystem.out.println(count);",
+      "options": ["2", "3", "5", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_235_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stream Package",
+      "prompt": "Which package contains Stream?",
+      "options": ["java.util.stream", "java.io", "java.lang", "java.stream"],
+      "correctAnswer": "java.util.stream"
+    }
+  ]
+}

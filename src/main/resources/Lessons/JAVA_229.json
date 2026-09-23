@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_229",
+  "title": "Lambda Expression",
+  "slides": [
+    {
+      "slideId": "JAVA_229_S1",
+      "type": "CONCEPT",
+      "title": "Lambda Expression",
+      "prompt": "A lambda expression is a short way to write an anonymous function. It has parameters, an arrow (->), and a body. It is used with functional interfaces.",
+      "codeSnippet": "interface Greeting {\n    void sayHello();\n}\n\npublic class Program {\n    public static void main(String[] args) {\n        Greeting g = () -> System.out.println(\"Hello!\");\n        g.sayHello();\n    }\n}",
+      "output": "Hello!"
+    },
+    {
+      "slideId": "JAVA_229_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Definition",
+      "prompt": "What is a lambda expression?",
+      "options": ["A short way to write an anonymous function", "A class", "A method", "A variable"],
+      "correctAnswer": "A short way to write an anonymous function"
+    },
+    {
+      "slideId": "JAVA_229_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Arrow",
+      "prompt": "Which symbol is used in a lambda expression?",
+      "options": ["->", "=>", "::", ">>"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "JAVA_229_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Interface",
+      "prompt": "Which interface can be used with lambda expressions?",
+      "options": ["Functional interface", "Abstract class", "Normal class", "Final class"],
+      "correctAnswer": "Functional interface"
+    },
+    {
+      "slideId": "JAVA_229_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface",
+      "prompt": "How many abstract methods does a functional interface have?",
+      "options": ["1", "2", "3", "0"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_229_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Syntax",
+      "prompt": "Complete the lambda expression.",
+      "codeSnippet": "Greeting g = () ____ System.out.println(\"Hello!\");",
+      "options": ["->", "=>", "::", ">>"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "JAVA_229_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Empty Body",
+      "prompt": "Complete the lambda expression with no parameters.",
+      "codeSnippet": "Greeting g = ____ -> System.out.println(\"Hi\");",
+      "options": ["()", "(x)", "[ ]", "{ }"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "JAVA_229_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface Greeting { void sayHello(); }\nGreeting g = () -> System.out.println(\"Hello!\");\ng.sayHello();",
+      "options": ["Hello!", "Greeting", "g", "Error"],
+      "correctAnswer": "Hello!"
+    },
+    {
+      "slideId": "JAVA_229_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda With Parameter",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface Greeting { void sayHello(String name); }\nGreeting g = (name) -> System.out.println(\"Hello, \" + name);\ng.sayHello(\"John\");",
+      "options": ["Hello, John", "Hello, name", "John", "Error"],
+      "correctAnswer": "Hello, John"
+    },
+    {
+      "slideId": "JAVA_229_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda With Return",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface MathOp { int operate(int a, int b); }\nMathOp add = (a, b) -> a + b;\nSystem.out.println(add.operate(5, 3));",
+      "options": ["8", "53", "5 + 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_229_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Benefit",
+      "prompt": "What is the benefit of lambda expressions?",
+      "options": ["Less code", "More code", "Slower code", "More errors"],
+      "correctAnswer": "Less code"
+    }
+  ]
+}

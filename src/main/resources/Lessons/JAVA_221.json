@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_221",
+  "title": "Practice: Iterator",
+  "slides": [
+    {
+      "slideId": "JAVA_221_S1",
+      "type": "CONCEPT",
+      "title": "Iterator",
+      "prompt": "An Iterator is used to loop through collections. It has hasNext() and next() methods.",
+      "codeSnippet": "import java.util.ArrayList;\nimport java.util.Iterator;\n\npublic class Program {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        list.add(\"Java\");\n        list.add(\"Python\");\n        \n        Iterator<String> it = list.iterator();\n        while (it.hasNext()) {\n            System.out.println(it.next());\n        }\n    }\n}",
+      "output": "Java\nPython"
+    },
+    {
+      "slideId": "JAVA_221_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Definition",
+      "prompt": "What is an Iterator?",
+      "options": ["A tool to loop through collections", "A method", "A class", "A variable"],
+      "correctAnswer": "A tool to loop through collections"
+    },
+    {
+      "slideId": "JAVA_221_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HasNext Method",
+      "prompt": "Which method checks if there are more elements?",
+      "options": ["hasNext()", "next()", "isEmpty()", "size()"],
+      "correctAnswer": "hasNext()"
+    },
+    {
+      "slideId": "JAVA_221_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Next Method",
+      "prompt": "Which method returns the next element?",
+      "options": ["next()", "hasNext()", "get()", "element()"],
+      "correctAnswer": "next()"
+    },
+    {
+      "slideId": "JAVA_221_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Package",
+      "prompt": "Which package contains Iterator?",
+      "options": ["java.util", "java.io", "java.lang", "java.iterator"],
+      "correctAnswer": "java.util"
+    },
+    {
+      "slideId": "JAVA_221_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Iterator",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.________;",
+      "options": ["Iterator", "Iterable", "List", "Collection"],
+      "correctAnswer": "Iterator"
+    },
+    {
+      "slideId": "JAVA_221_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Get Iterator",
+      "prompt": "Complete the code to get an Iterator.",
+      "codeSnippet": "Iterator<String> it = list.________();",
+      "options": ["iterator", "getIterator", "iter", "get"],
+      "correctAnswer": "iterator"
+    },
+    {
+      "slideId": "JAVA_221_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Iterator Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"A\");\nlist.add(\"B\");\nIterator<String> it = list.iterator();\nwhile (it.hasNext()) System.out.println(it.next());",
+      "options": ["A B (separate lines)", "AB", "A, B", "Error"],
+      "correctAnswer": "A B (separate lines)"
+    },
+    {
+      "slideId": "JAVA_221_S9",
+      "type": "CODE_OUTPUT",
+      "title": "HasNext Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"A\");\nIterator<String> it = list.iterator();\nSystem.out.println(it.hasNext());",
+      "options": ["true", "false", "A", "Error"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "JAVA_221_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Next Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"Java\");\nIterator<String> it = list.iterator();\nSystem.out.println(it.next());",
+      "options": ["Java", "true", "false", "Error"],
+      "correctAnswer": "Java"
+    },
+    {
+      "slideId": "JAVA_221_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Purpose",
+      "prompt": "Why do we use Iterator?",
+      "options": ["To loop through collections safely", "To sort collections", "To delete collections", "To create collections"],
+      "correctAnswer": "To loop through collections safely"
+    }
+  ]
+}

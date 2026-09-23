@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_238",
+  "title": "Runnable Interface",
+  "slides": [
+    {
+      "slideId": "JAVA_238_S1",
+      "type": "CONCEPT",
+      "title": "Runnable Interface",
+      "prompt": "The Runnable interface is used to create a thread. It has a single method run(). You can pass a Runnable to a Thread constructor.",
+      "codeSnippet": "class MyRunnable implements Runnable {\n    public void run() {\n        System.out.println(\"Runnable running\");\n    }\n}\n\nThread t = new Thread(new MyRunnable());\nt.start();",
+      "output": "Runnable running"
+    },
+    {
+      "slideId": "JAVA_238_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Interface",
+      "prompt": "Which method is in the Runnable interface?",
+      "options": ["run()", "start()", "execute()", "begin()"],
+      "correctAnswer": "run()"
+    },
+    {
+      "slideId": "JAVA_238_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable vs Thread",
+      "prompt": "What is the advantage of using Runnable?",
+      "options": ["You can extend another class", "It is faster", "It uses less memory", "It is easier"],
+      "correctAnswer": "You can extend another class"
+    },
+    {
+      "slideId": "JAVA_238_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Keyword",
+      "prompt": "Which keyword is used to implement Runnable?",
+      "options": ["implements", "extends", "inherits", "super"],
+      "correctAnswer": "implements"
+    },
+    {
+      "slideId": "JAVA_238_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Package",
+      "prompt": "Which package contains Runnable?",
+      "options": ["java.lang", "java.util", "java.io", "java.thread"],
+      "correctAnswer": "java.lang"
+    },
+    {
+      "slideId": "JAVA_238_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Implement Runnable",
+      "prompt": "Complete the Runnable implementation.",
+      "codeSnippet": "class MyRunnable ________ Runnable {\n  public void run() { }\n}",
+      "options": ["implements", "extends", "inherits", "super"],
+      "correctAnswer": "implements"
+    },
+    {
+      "slideId": "JAVA_238_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Thread",
+      "prompt": "Complete the code to create a Thread with Runnable.",
+      "codeSnippet": "Thread t = new Thread(new ________());\nt.start();",
+      "options": ["MyRunnable", "Thread", "Runnable", "Object"],
+      "correctAnswer": "MyRunnable"
+    },
+    {
+      "slideId": "JAVA_238_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Runnable Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class MyRunnable implements Runnable {\n  public void run() { System.out.println(\"Running\"); }\n}\nThread t = new Thread(new MyRunnable());\nt.start();",
+      "options": ["Running", "MyRunnable", "t", "Error"],
+      "correctAnswer": "Running"
+    },
+    {
+      "slideId": "JAVA_238_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Runnable Lambda",
+      "prompt": "What is the output?",
+      "codeSnippet": "Runnable r = () -> System.out.println(\"Lambda Runnable\");\nThread t = new Thread(r);\nt.start();",
+      "options": ["Lambda Runnable", "r", "t", "Error"],
+      "correctAnswer": "Lambda Runnable"
+    },
+    {
+      "slideId": "JAVA_238_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Method",
+      "prompt": "How many methods does Runnable have?",
+      "options": ["1", "2", "3", "0"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_238_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Benefit",
+      "prompt": "Why use Runnable instead of Thread?",
+      "options": ["To extend another class", "To make code slower", "To use more memory", "To create more threads"],
+      "correctAnswer": "To extend another class"
+    }
+  ]
+}

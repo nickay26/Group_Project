@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_219",
+  "title": "TreeMap",
+  "slides": [
+    {
+      "slideId": "JAVA_219_S1",
+      "type": "CONCEPT",
+      "title": "TreeMap",
+      "prompt": "A TreeMap stores key-value pairs in sorted order by key. It is part of the java.util package.",
+      "codeSnippet": "import java.util.TreeMap;\n\npublic class Program {\n    public static void main(String[] args) {\n        TreeMap<String, Integer> map = new TreeMap<>();\n        map.put(\"Python\", 1991);\n        map.put(\"Java\", 1995);\n        System.out.println(map);\n    }\n}",
+      "output": "{Java=1995, Python=1991}"
+    },
+    {
+      "slideId": "JAVA_219_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TreeMap Definition",
+      "prompt": "What is a TreeMap?",
+      "options": ["A sorted key-value pair data structure", "An unsorted map", "A single array", "A method"],
+      "correctAnswer": "A sorted key-value pair data structure"
+    },
+    {
+      "slideId": "JAVA_219_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TreeMap Order",
+      "prompt": "How does a TreeMap sort its elements?",
+      "options": ["By key (ascending)", "By value", "By insertion order", "Randomly"],
+      "correctAnswer": "By key (ascending)"
+    },
+    {
+      "slideId": "JAVA_219_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Put Method",
+      "prompt": "Which method adds a key-value pair to a TreeMap?",
+      "options": ["put()", "add()", "insert()", "set()"],
+      "correctAnswer": "put()"
+    },
+    {
+      "slideId": "JAVA_219_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "First Key",
+      "prompt": "Which method returns the first key?",
+      "options": ["firstKey()", "getFirst()", "first()", "head()"],
+      "correctAnswer": "firstKey()"
+    },
+    {
+      "slideId": "JAVA_219_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import TreeMap",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["TreeMap", "Map", "Tree", "SortedMap"],
+      "correctAnswer": "TreeMap"
+    },
+    {
+      "slideId": "JAVA_219_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Put Value",
+      "prompt": "Complete the code to add a key-value pair.",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.____(\"Java\", 1995);",
+      "options": ["put", "add", "insert", "set"],
+      "correctAnswer": "put"
+    },
+    {
+      "slideId": "JAVA_219_S8",
+      "type": "CODE_OUTPUT",
+      "title": "TreeMap Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"Python\", 1991);\nmap.put(\"Java\", 1995);\nSystem.out.println(map);",
+      "options": ["{Java=1995, Python=1991}", "{Python=1991, Java=1995}", "JavaPython", "Error"],
+      "correctAnswer": "{Java=1995, Python=1991}"
+    },
+    {
+      "slideId": "JAVA_219_S9",
+      "type": "CODE_OUTPUT",
+      "title": "TreeMap First Key",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"Python\", 1991);\nmap.put(\"Java\", 1995);\nSystem.out.println(map.firstKey());",
+      "options": ["Java", "Python", "1995", "Error"],
+      "correctAnswer": "Java"
+    },
+    {
+      "slideId": "JAVA_219_S10",
+      "type": "CODE_OUTPUT",
+      "title": "TreeMap Last Key",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"Python\", 1991);\nmap.put(\"Java\", 1995);\nSystem.out.println(map.lastKey());",
+      "options": ["Python", "Java", "1991", "Error"],
+      "correctAnswer": "Python"
+    },
+    {
+      "slideId": "JAVA_219_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TreeMap Package",
+      "prompt": "Which package contains TreeMap?",
+      "options": ["java.util", "java.io", "java.lang", "java.tree"],
+      "correctAnswer": "java.util"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_104",
+  "title": "Program Structure",
+  "slides": [
+    {
+      "slideId": "JAVA_104_S1",
+      "type": "CONCEPT",
+      "title": "Program Structure",
+      "prompt": "A Java program is built from a class. The class name should start with a capital letter, and the file name must match the class name. The entry point of every Java program is the main() method.",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Program Structure\");\n    }\n}",
+      "output": "Program Structure"
+    },
+    {
+      "slideId": "JAVA_104_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Entry Point",
+      "prompt": "What is the entry point of a Java program?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "correctAnswer": "main()"
+    },
+    {
+      "slideId": "JAVA_104_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Main Method Signature",
+      "prompt": "What is the correct signature of the main() method?",
+      "options": ["public static void main(String[] args)", "public void main()", "static main()", "void main()"],
+      "correctAnswer": "public static void main(String[] args)"
+    },
+    {
+      "slideId": "JAVA_104_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Block Delimiters",
+      "prompt": "How do you open and close a block in Java?",
+      "options": ["{ and }", "( and )", "[ and ]", "< and >"],
+      "correctAnswer": "{ and }"
+    },
+    {
+      "slideId": "JAVA_104_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Naming",
+      "prompt": "What should a Java class name start with?",
+      "options": ["Capital Letter", "Small Letter", "Number", "Symbol"],
+      "correctAnswer": "Capital Letter"
+    },
+    {
+      "slideId": "JAVA_104_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Method Parameter",
+      "prompt": "Complete the main method declaration.",
+      "codeSnippet": "public static void main(String[] ____) {\n}",
+      "options": ["args", "main", "String", "void"],
+      "correctAnswer": "args"
+    },
+    {
+      "slideId": "JAVA_104_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration",
+      "prompt": "Complete the class declaration.",
+      "codeSnippet": "public ____ Program {\n}",
+      "options": ["class", "Class", "interface", "struct"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "JAVA_104_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Test\");\n    }\n}",
+      "options": ["Test", "Program", "main", "Error"],
+      "correctAnswer": "Test"
+    },
+    {
+      "slideId": "JAVA_104_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello\");\n        System.out.println(\"World\");\n    }\n}",
+      "options": ["Hello World (separate lines)", "Hello World (same line)", "HelloWorld", "Error"],
+      "correctAnswer": "Hello World (separate lines)"
+    },
+    {
+      "slideId": "JAVA_104_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Java",
+      "prompt": "Complete the code to print \"Java\".",
+      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.____(\"Java\");\n    }\n}",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_104_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid Class Declaration",
+      "prompt": "Which of the following is a valid class declaration?",
+      "options": ["public class Main { }", "public Main class { }", "class public Main { }", "Main class { }"],
+      "correctAnswer": "public class Main { }"
+    }
+  ]
+}

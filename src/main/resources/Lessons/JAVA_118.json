@@ -1,0 +1,102 @@
+{
+  "lessonId": "JAVA_118",
+  "title": "Array Length",
+  "slides": [
+    {
+      "slideId": "JAVA_118_S1",
+      "type": "CONCEPT",
+      "title": "Array Length",
+      "prompt": "The length property returns the number of elements in an array. You can use it to loop through all elements safely.",
+      "codeSnippet": "int[] numbers = {10, 20, 30, 40, 50};\nSystem.out.println(\"Length: \" + numbers.length);\nfor (int i = 0; i < numbers.length; i++) {\n  System.out.println(numbers[i]);\n}",
+      "output": "Length: 5\n10\n20\n30\n40\n50"
+    },
+    {
+      "slideId": "JAVA_118_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Length",
+      "prompt": "How do you get the length of an array?",
+      "options": ["arr.length", "arr.size()", "arr.count()", "arr.length()"],
+      "correctAnswer": "arr.length"
+    },
+    {
+      "slideId": "JAVA_118_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Length Value",
+      "prompt": "What is the length of this array?",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};",
+      "options": ["5", "4", "6", "0"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_118_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Length",
+      "prompt": "Complete the code to get the length.",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.______);",
+      "options": ["length", "size", "count", "len"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "JAVA_118_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Length Loop",
+      "prompt": "Complete the loop to use the array length.",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.______; i++) {\n  System.out.println(arr[i]);\n}",
+      "options": ["length", "size", "count", "len"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "JAVA_118_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Array Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.length);",
+      "options": ["3", "2", "1", "Error"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_118_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Array Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {10, 20, 30, 40};\nSystem.out.println(arr.length);",
+      "options": ["4", "3", "5", "Error"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_118_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Array Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {5};\nSystem.out.println(arr.length);",
+      "options": ["1", "0", "5", "Error"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_118_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Array Loop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.length; i++) {\n  System.out.println(arr[i]);\n}",
+      "options": ["1 2 3 (separate lines)", "0 1 2", "1 2", "3 2 1"],
+      "correctAnswer": "1 2 3 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_118_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Last Element",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr[arr.length - 1]);",
+      "options": ["5", "4", "1", "Error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_118_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Length Type",
+      "prompt": "What does arr.length return?",
+      "options": ["Number of elements", "Last element", "First element", "Sum of elements"],
+      "correctAnswer": "Number of elements"
+    }
+  ]
+}

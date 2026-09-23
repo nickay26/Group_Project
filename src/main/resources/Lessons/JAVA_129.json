@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_129",
+  "title": "Class and Object",
+  "slides": [
+    {
+      "slideId": "JAVA_129_S1",
+      "type": "CONCEPT",
+      "title": "Class and Object",
+      "prompt": "A class is a blueprint for creating objects. An object is an instance of a class. You create objects using the new keyword.",
+      "codeSnippet": "public class Program {\n    static class Dog {\n        String name = \"Buddy\";\n    }\n    \n    public static void main(String[] args) {\n        Dog d = new Dog();\n        System.out.println(d.name);\n    }\n}",
+      "output": "Buddy"
+    },
+    {
+      "slideId": "JAVA_129_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Definition",
+      "prompt": "What is a class?",
+      "options": ["A blueprint for objects", "An object", "A method", "A variable"],
+      "correctAnswer": "A blueprint for objects"
+    },
+    {
+      "slideId": "JAVA_129_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Definition",
+      "prompt": "What is an object?",
+      "options": ["An instance of a class", "A class", "A method", "A variable"],
+      "correctAnswer": "An instance of a class"
+    },
+    {
+      "slideId": "JAVA_129_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Creation Keyword",
+      "prompt": "Which keyword is used to create an object?",
+      "options": ["new", "create", "make", "object"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "JAVA_129_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration",
+      "prompt": "Complete the class declaration.",
+      "codeSnippet": "____ MyClass {\n}",
+      "options": ["class", "Class", "interface", "struct"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "JAVA_129_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Create Object",
+      "prompt": "Complete the code to create an object of class Dog.",
+      "codeSnippet": "Dog d = _____ Dog();",
+      "options": ["new", "create", "make", "object"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "JAVA_129_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Dog {\n  String name = \"Buddy\";\n}\nDog d = new Dog();\nSystem.out.println(d.name);",
+      "options": ["Buddy", "Dog", "name", "Error"],
+      "correctAnswer": "Buddy"
+    },
+    {
+      "slideId": "JAVA_129_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  String model = \"Toyota\";\n}\nCar c = new Car();\nSystem.out.println(c.model);",
+      "options": ["Toyota", "Car", "model", "Error"],
+      "correctAnswer": "Toyota"
+    },
+    {
+      "slideId": "JAVA_129_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name = \"John\";\n  int age = 25;\n}\nPerson p = new Person();\nSystem.out.println(p.name + \" \" + p.age);",
+      "options": ["John 25", "John25", "Person", "Error"],
+      "correctAnswer": "John 25"
+    },
+    {
+      "slideId": "JAVA_129_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Object Creation",
+      "prompt": "How do you create an object of class Car?",
+      "options": ["Car c = new Car();", "Car c = Car();", "new Car c;", "c = Car();"],
+      "correctAnswer": "Car c = new Car();"
+    },
+    {
+      "slideId": "JAVA_129_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class vs Object",
+      "prompt": "Which is a blueprint?",
+      "options": ["Class", "Object", "Method", "Variable"],
+      "correctAnswer": "Class"
+    }
+  ]
+}

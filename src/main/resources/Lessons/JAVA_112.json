@@ -1,0 +1,105 @@
+{
+  "lessonId": "JAVA_112",
+  "title": "Practice: Output of If-Else",
+  "slides": [
+    {
+      "slideId": "JAVA_112_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If-Else Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "3", "5"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_112_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else If Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "10"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_112_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 2;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "2"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "JAVA_112_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else If",
+      "prompt": "Complete the code to output 'B'.",
+      "codeSnippet": "int x = 10;\nif (x > 15) {\n  System.out.println(\"A\");\n} ____ (x > 5) {\n  System.out.println(\"B\");\n}",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_112_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else",
+      "prompt": "Complete the code to output 'C'.",
+      "codeSnippet": "int x = 2;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} ____ {\n  System.out.println(\"C\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_112_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Score Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 85;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "85"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_112_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Score Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 92;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "92"],
+      "correctAnswer": "A"
+    },
+    {
+      "slideId": "JAVA_112_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Score Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 70;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
+      "options": ["A", "B", "C", "70"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "JAVA_112_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Grade Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 75;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "B", "C", "F"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "JAVA_112_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Grade Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 65;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "B", "C", "F"],
+      "correctAnswer": "F"
+    },
+    {
+      "slideId": "JAVA_112_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Condition",
+      "prompt": "Complete the code to check if x is less than 5.",
+      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Small\");\n}",
+      "options": ["<", ">", "==", "!="],
+      "correctAnswer": "<"
+    }
+  ]
+}

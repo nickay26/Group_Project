@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_202",
+  "title": "Practice: Encapsulation",
+  "slides": [
+    {
+      "slideId": "JAVA_202_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Definition",
+      "prompt": "What is encapsulation?",
+      "options": ["Hiding data with private fields", "Creating objects", "Inheriting classes", "Overloading methods"],
+      "correctAnswer": "Hiding data with private fields"
+    },
+    {
+      "slideId": "JAVA_202_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Getter Method",
+      "prompt": "What is a getter method?",
+      "options": ["A method that returns a field value", "A method that sets a field value", "A method that deletes a field", "A method that creates a field"],
+      "correctAnswer": "A method that returns a field value"
+    },
+    {
+      "slideId": "JAVA_202_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  private String name = \"John\";\n  public String getName() { return name; }\n}\nPerson p = new Person();\nSystem.out.println(p.getName());",
+      "options": ["John", "name", "Person", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_202_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Field",
+      "prompt": "Complete the code to make the field private.",
+      "codeSnippet": "class Person {\n  ______ String name;\n}",
+      "options": ["private", "public", "protected", "static"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "JAVA_202_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Setter",
+      "prompt": "Complete the setter method.",
+      "codeSnippet": "public void ________(String n) {\n  name = n;\n}",
+      "options": ["setName", "getName", "name", "set"],
+      "correctAnswer": "setName"
+    },
+    {
+      "slideId": "JAVA_202_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Setter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  private String name;\n  public void setName(String n) { name = n; }\n  public String getName() { return name; }\n}\nPerson p = new Person();\np.setName(\"Alice\");\nSystem.out.println(p.getName());",
+      "options": ["Alice", "name", "Person", "Error"],
+      "correctAnswer": "Alice"
+    },
+    {
+      "slideId": "JAVA_202_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Private Keyword",
+      "prompt": "Which keyword makes a field private?",
+      "options": ["private", "public", "protected", "static"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "JAVA_202_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Setter Method",
+      "prompt": "What is a setter method?",
+      "options": ["A method that sets a field value", "A method that returns a field value", "A method that deletes a field", "A method that creates a field"],
+      "correctAnswer": "A method that sets a field value"
+    },
+    {
+      "slideId": "JAVA_202_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Benefit",
+      "prompt": "What is the main benefit of encapsulation?",
+      "options": ["Data protection", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Data protection"
+    },
+    {
+      "slideId": "JAVA_202_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation Practice",
+      "prompt": "Which is an example of encapsulation?",
+      "options": ["private field + public getter/setter", "public field", "static field", "final field"],
+      "correctAnswer": "private field + public getter/setter"
+    },
+    {
+      "slideId": "JAVA_202_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Getter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  private String model = \"Toyota\";\n  public String getModel() { return model; }\n}\nCar c = new Car();\nSystem.out.println(c.getModel());",
+      "options": ["Toyota", "model", "Car", "Error"],
+      "correctAnswer": "Toyota"
+    }
+  ]
+}

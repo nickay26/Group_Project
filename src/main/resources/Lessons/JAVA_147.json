@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_147",
+  "title": "Throw Exception",
+  "slides": [
+    {
+      "slideId": "JAVA_147_S1",
+      "type": "CONCEPT",
+      "title": "Throw Exception",
+      "prompt": "Use the throw keyword to throw an exception manually.",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        try {\n            throw new ArithmeticException(\"Custom error\");\n        } catch (ArithmeticException e) {\n            System.out.println(e.getMessage());\n        }\n    }\n}",
+      "output": "Custom error"
+    },
+    {
+      "slideId": "JAVA_147_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw Keyword",
+      "prompt": "Which keyword is used to throw an exception?",
+      "options": ["throw", "throws", "catch", "try"],
+      "correctAnswer": "throw"
+    },
+    {
+      "slideId": "JAVA_147_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw vs Throws",
+      "prompt": "What is the difference between throw and throws?",
+      "options": ["throw throws an exception, throws declares it", "throws throws an exception, throw declares it", "They are the same", "Neither"],
+      "correctAnswer": "throw throws an exception, throws declares it"
+    },
+    {
+      "slideId": "JAVA_147_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Get Message",
+      "prompt": "Which method returns the exception message?",
+      "options": ["getMessage()", "getError()", "getException()", "getInfo()"],
+      "correctAnswer": "getMessage()"
+    },
+    {
+      "slideId": "JAVA_147_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Throw",
+      "prompt": "Complete the code to throw an exception.",
+      "codeSnippet": "_____ new ArithmeticException(\"Error\");",
+      "options": ["throw", "throws", "catch", "try"],
+      "correctAnswer": "throw"
+    },
+    {
+      "slideId": "JAVA_147_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Exception",
+      "prompt": "Complete the code to throw an exception with a message.",
+      "codeSnippet": "throw new ArithmeticException(________);",
+      "options": ["\"Error\"", "Error", "new", "throw"],
+      "correctAnswer": "\"Error\""
+    },
+    {
+      "slideId": "JAVA_147_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Throw Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  throw new ArithmeticException(\"Custom error\");\n} catch (ArithmeticException e) {\n  System.out.println(e.getMessage());\n}",
+      "options": ["Custom error", "Error", "ArithmeticException", "No Error"],
+      "correctAnswer": "Custom error"
+    },
+    {
+      "slideId": "JAVA_147_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Throw Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  throw new ArithmeticException(\"My Error\");\n} catch (ArithmeticException e) {\n  System.out.println(e.getMessage());\n}",
+      "options": ["My Error", "Error", "ArithmeticException", "No Error"],
+      "correctAnswer": "My Error"
+    },
+    {
+      "slideId": "JAVA_147_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Custom Exception",
+      "prompt": "Can you create custom exception messages?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_147_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Class",
+      "prompt": "Which class is a built-in exception?",
+      "options": ["ArithmeticException", "MyException", "CustomException", "UserException"],
+      "correctAnswer": "ArithmeticException"
+    },
+    {
+      "slideId": "JAVA_147_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw Keyword",
+      "prompt": "What does throw do?",
+      "options": ["Throws an exception", "Catches an exception", "Declares an exception", "Ignores an exception"],
+      "correctAnswer": "Throws an exception"
+    }
+  ]
+}

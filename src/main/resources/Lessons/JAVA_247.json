@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_247",
+  "title": "File Class Methods",
+  "slides": [
+    {
+      "slideId": "JAVA_247_S1",
+      "type": "CONCEPT",
+      "title": "File Class Methods",
+      "prompt": "The File class provides methods to work with files: exists(), createNewFile(), delete(), getName(), length(), etc.",
+      "codeSnippet": "import java.io.File;\n\npublic class Program {\n    public static void main(String[] args) {\n        File file = new File(\"test.txt\");\n        System.out.println(\"Exists: \" + file.exists());\n        System.out.println(\"Name: \" + file.getName());\n    }\n}",
+      "output": "Exists: false\nName: test.txt"
+    },
+    {
+      "slideId": "JAVA_247_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Class",
+      "prompt": "Which class represents a file?",
+      "options": ["File", "FileReader", "FileWriter", "Files"],
+      "correctAnswer": "File"
+    },
+    {
+      "slideId": "JAVA_247_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exists Method",
+      "prompt": "Which method checks if a file exists?",
+      "options": ["exists()", "isFile()", "isDirectory()", "check()"],
+      "correctAnswer": "exists()"
+    },
+    {
+      "slideId": "JAVA_247_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Create File Method",
+      "prompt": "Which method creates a new file?",
+      "options": ["createNewFile()", "newFile()", "makeFile()", "create()"],
+      "correctAnswer": "createNewFile()"
+    },
+    {
+      "slideId": "JAVA_247_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Delete Method",
+      "prompt": "Which method deletes a file?",
+      "options": ["delete()", "remove()", "destroy()", "erase()"],
+      "correctAnswer": "delete()"
+    },
+    {
+      "slideId": "JAVA_247_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "File Class",
+      "prompt": "Complete the File object creation.",
+      "codeSnippet": "File file = new ______(\"test.txt\");",
+      "options": ["File", "FileReader", "FileWriter", "Files"],
+      "correctAnswer": "File"
+    },
+    {
+      "slideId": "JAVA_247_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Exists Method",
+      "prompt": "Complete the code to check if a file exists.",
+      "codeSnippet": "System.out.println(file.______());",
+      "options": ["exists", "isFile", "isDirectory", "check"],
+      "correctAnswer": "exists"
+    },
+    {
+      "slideId": "JAVA_247_S8",
+      "type": "CODE_OUTPUT",
+      "title": "File Exists Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.exists());",
+      "options": ["true or false", "test.txt", "File", "Error"],
+      "correctAnswer": "true or false"
+    },
+    {
+      "slideId": "JAVA_247_S9",
+      "type": "CODE_OUTPUT",
+      "title": "File Name Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.getName());",
+      "options": ["test.txt", "File", "true", "Error"],
+      "correctAnswer": "test.txt"
+    },
+    {
+      "slideId": "JAVA_247_S10",
+      "type": "CODE_OUTPUT",
+      "title": "File Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.length());",
+      "options": ["File size in bytes", "File name", "File path", "Error"],
+      "correctAnswer": "File size in bytes"
+    },
+    {
+      "slideId": "JAVA_247_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Path Method",
+      "prompt": "Which method returns the file path?",
+      "options": ["getPath()", "getFilePath()", "path()", "getAbsolutePath()"],
+      "correctAnswer": "getPath()"
+    }
+  ]
+}

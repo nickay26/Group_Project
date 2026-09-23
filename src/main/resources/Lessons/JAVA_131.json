@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_131",
+  "title": "Constructors",
+  "slides": [
+    {
+      "slideId": "JAVA_131_S1",
+      "type": "CONCEPT",
+      "title": "Constructors",
+      "prompt": "A constructor is a special method used to initialize objects. It has the same name as the class.",
+      "codeSnippet": "public class Program {\n    static class Car {\n        String model;\n        \n        Car(String m) {\n            model = m;\n        }\n    }\n    \n    public static void main(String[] args) {\n        Car c = new Car(\"Toyota\");\n        System.out.println(c.model);\n    }\n}",
+      "output": "Toyota"
+    },
+    {
+      "slideId": "JAVA_131_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Definition",
+      "prompt": "What is a constructor?",
+      "options": ["A special method used to initialize objects", "A variable", "A class", "A method"],
+      "correctAnswer": "A special method used to initialize objects"
+    },
+    {
+      "slideId": "JAVA_131_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Name",
+      "prompt": "What is the name of a constructor?",
+      "options": ["Same as the class name", "Always 'constructor'", "Same as the method name", "Any name"],
+      "correctAnswer": "Same as the class name"
+    },
+    {
+      "slideId": "JAVA_131_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Constructor",
+      "prompt": "Complete the constructor declaration.",
+      "codeSnippet": "class Car {\n  String model;\n  ____(String m) {\n    model = m;\n  }\n}",
+      "options": ["Car", "car", "Constructor", "String"],
+      "correctAnswer": "Car"
+    },
+    {
+      "slideId": "JAVA_131_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Constructor Body",
+      "prompt": "Complete the constructor body.",
+      "codeSnippet": "class Car {\n  String model;\n  Car(String m) {\n    model __ m;\n  }\n}",
+      "options": ["=", "==", "!=", ":"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "JAVA_131_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Constructor Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  String model;\n  Car(String m) {\n    model = m;\n  }\n}\nCar c = new Car(\"Toyota\");\nSystem.out.println(c.model);",
+      "options": ["Toyota", "Car", "model", "Error"],
+      "correctAnswer": "Toyota"
+    },
+    {
+      "slideId": "JAVA_131_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Constructor Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name;\n  Person(String n) {\n    name = n;\n  }\n}\nPerson p = new Person(\"John\");\nSystem.out.println(p.name);",
+      "options": ["John", "Person", "name", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_131_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Constructor Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Dog {\n  String name;\n  int age;\n  Dog(String n, int a) {\n    name = n;\n    age = a;\n  }\n}\nDog d = new Dog(\"Buddy\", 3);\nSystem.out.println(d.name + \" \" + d.age);",
+      "options": ["Buddy 3", "Buddy3", "Dog", "Error"],
+      "correctAnswer": "Buddy 3"
+    },
+    {
+      "slideId": "JAVA_131_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Parameters",
+      "prompt": "Can a constructor have parameters?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_131_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Return Type",
+      "prompt": "Does a constructor have a return type?",
+      "options": ["No", "Yes", "Only void", "Only int"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_131_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Constructor Call",
+      "prompt": "Complete the object creation with constructor.",
+      "codeSnippet": "Car c = new Car(____);",
+      "options": ["\"Toyota\"", "Toyota", "new", "Car"],
+      "correctAnswer": "\"Toyota\""
+    }
+  ]
+}

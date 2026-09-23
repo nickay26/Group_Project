@@ -1,0 +1,104 @@
+{
+  "lessonId": "JAVA_105",
+  "title": "Fix the Errors",
+  "slides": [
+    {
+      "slideId": "JAVA_105_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Missing Semicolon",
+      "prompt": "What is wrong with this code?",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\")\n  }\n}",
+      "options": ["Missing semicolon", "Missing class", "Missing method", "No error"],
+      "correctAnswer": "Missing semicolon"
+    },
+    {
+      "slideId": "JAVA_105_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Main Method Case",
+      "prompt": "What is wrong with this code?",
+      "codeSnippet": "public class Main {\n  public static void Main(String[] args) {\n    System.out.println(\"Hello\");\n  }\n}",
+      "options": ["main should be lowercase", "Main should be uppercase", "Missing semicolon", "No error"],
+      "correctAnswer": "main should be lowercase"
+    },
+    {
+      "slideId": "JAVA_105_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "System Capitalization",
+      "prompt": "What is wrong with this code?",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    system.out.println(\"Hello\");\n  }\n}",
+      "options": ["System should be capitalized", "out should be capitalized", "println should be capitalized", "No error"],
+      "correctAnswer": "System should be capitalized"
+    },
+    {
+      "slideId": "JAVA_105_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Missing Semicolon",
+      "prompt": "What is wrong with this code?",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\")\n  }\n}",
+      "options": ["Missing semicolon", "Missing bracket", "Missing class", "No error"],
+      "correctAnswer": "Missing semicolon"
+    },
+    {
+      "slideId": "JAVA_105_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Fix Semicolon",
+      "prompt": "Fix the error by adding the missing semicolon.",
+      "codeSnippet": "System.out.println(\"Hello\")__",
+      "options": [";", ":", ".", ","],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "JAVA_105_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Fix Capitalization",
+      "prompt": "Fix the error by capitalizing the correct word.",
+      "codeSnippet": "____.out.println(\"Hello\");",
+      "options": ["System", "system", "SYSTEM", "Sys"],
+      "correctAnswer": "System"
+    },
+    {
+      "slideId": "JAVA_105_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Fixed Output",
+      "prompt": "What is the output after fixing the error?",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Fixed\");\n  }\n}",
+      "options": ["Fixed", "Error", "Main", "Hello"],
+      "correctAnswer": "Fixed"
+    },
+    {
+      "slideId": "JAVA_105_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Find the Error",
+      "prompt": "Which line has an error?",
+      "codeSnippet": "1. public class Main {\n2.   public static void main(String[] args) {\n3.     System.out.println(\"Hello\")\n4.   }\n5. }",
+      "options": ["Line 3", "Line 1", "Line 2", "Line 5"],
+      "correctAnswer": "Line 3"
+    },
+    {
+      "slideId": "JAVA_105_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Find the Error",
+      "prompt": "Which line has an error?",
+      "codeSnippet": "1. public class Main {\n2.   public static void main(String[] args) {\n3.     system.out.println(\"Hello\");\n4.   }\n5. }",
+      "options": ["Line 3", "Line 1", "Line 2", "Line 5"],
+      "correctAnswer": "Line 3"
+    },
+    {
+      "slideId": "JAVA_105_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Fix the Error",
+      "prompt": "Complete the code to fix the error.",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\")__;\n  }\n}",
+      "options": [";", ":", ".", ","],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "JAVA_105_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Common Error",
+      "prompt": "What is the most common error in Java?",
+      "options": ["Missing semicolon", "Missing class", "Missing method", "Missing bracket"],
+      "correctAnswer": "Missing semicolon"
+    }
+  ]
+}
