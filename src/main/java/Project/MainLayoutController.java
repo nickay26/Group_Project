@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import java.io.IOException;
 public class MainLayoutController {
 
     private static MainLayoutController instance;
@@ -91,7 +93,11 @@ public class MainLayoutController {
         setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
     }
-
+    @FXML
+    private void handleNavPractice() {
+        setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
+        loadPage("PracticeView.fxml");                          // ← loadPage သုံး
+    }
     public FXMLLoader loadPage(String fxmlFileName) {
         try {
             String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
@@ -131,9 +137,12 @@ public class MainLayoutController {
             setActiveButton(playgroundBtn);
         } else if (fxmlFileName.contains("Leaderboard")) {
             setActiveButton(leaderboardBtn);
+        } else if (fxmlFileName.contains("Practice")) {
+            setActiveButton(practiceBtn);
+        } else if (fxmlFileName.contains("Game")) {
+            setActiveButton(gamesBtn);
         }
     }
-
     private void setActiveButton(Button activeButton) {
         for (Button btn : navButtons) {
             btn.getStyleClass().remove("nav-button-active");

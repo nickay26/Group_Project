@@ -2,7 +2,7 @@
    1. GLOBAL & ROOT STYLES
    ========================================================================== */
 .root {
-    -fx-background-image: url("../Images/signup.jpg");
+    -fx-background-image: url("../Images/signup1.jpg");
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
@@ -120,94 +120,76 @@
 }
 
 /* ==========================================================================
-   6. LANGUAGE SELECTION CARDS
-   ========================================================================== */
-.language-card, .lang-card {
-    -fx-background-color: linear-gradient(to bottom right, rgba(14, 30, 52, 0.85), rgba(24, 48, 80, 0.85));
-    -fx-background-radius: 20px;
-    -fx-border-color: rgba(56, 189, 248, 0.35);
-    -fx-border-radius: 20px;
-    -fx-border-width: 1.5px;
-    -fx-padding: 20px 15px;
-    -fx-spacing: 12px;
-    -fx-alignment: center;
-    -fx-min-width: 160px;
-    -fx-min-height: 170px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
-}
-
-.language-card:hover, .lang-card:hover {
-    -fx-background-color: linear-gradient(to bottom right, rgba(30, 64, 110, 0.9), rgba(29, 78, 216, 0.9));
-    -fx-border-color: #38bdf8;
-    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.5), 18, 0, 0, 0);
-}
-
-/* Card ထဲမှ ImageView (Logo) စတိုင်ကို CSS ဖြင့် Overwrite မလုပ်စေရန် အကျယ်အမြင့် သတ်မှတ်ချက်ကို ရှင်းထုတ်ထားပါသည် */
-.language-card .image-view, .lang-card .image-view {
-    -fx-preserve-ratio: true;
-}
-
-/* ==========================================================================
-   7. DYNAMIC COURSE CARDS (CoursesPageController)
+   6. DYNAMIC COURSE CARDS (Dark Theme - Dashboard Style)
    ========================================================================== */
 .course-card {
-    -fx-background-color: #1E293B;
-    -fx-background-radius: 24px;
-    -fx-border-color: #334155;
-    -fx-border-radius: 24px;
+    -fx-background-color: #161f2e !important;
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(56, 189, 248, 0.25);
+    -fx-border-radius: 18px;
     -fx-border-width: 1.5px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 15, 0, 0, 4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 15, 0, 0, 4);
 }
 
 .course-card:hover {
-    -fx-border-color: #3B82F6;
-    -fx-effect: dropshadow(three-pass-box, rgba(59, 130, 246, 0.3), 18, 0, 0, 0);
+    -fx-border-color: #38bdf8 !important;
+    -fx-background-color: #1e293b !important;
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 189, 248, 0.35), 18, 0, 0, 0);
 }
 
 .course-card-title {
-    -fx-font-size: 22px;
+    -fx-font-size: 16px !important;
     -fx-font-weight: bold;
-    -fx-text-fill: #F8FAFC;
+    -fx-text-fill: #ffffff !important;
 }
 
-.course-card-description {
-    -fx-font-size: 14px;
-    -fx-text-fill: #94A3B8;
+.course-card-desc {
+    -fx-font-size: 11px !important;
+    -fx-text-fill: #94a3b8 !important;
+}
+
+/* HEXAGON / ICON CONTAINER */
+.hexagon-box {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #38bdf8;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-max-width: 38px;
+    -fx-max-height: 38px;
     -fx-alignment: center;
 }
 
-.course-ribbon-shape {
-    -fx-fill: #2563EB;
+/* PROGRESS BADGE (CIRCLE) */
+.progress-circle {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #38bdf8;
+    -fx-border-width: 1.5px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-padding: 4px 10px;
 }
 
-.course-ribbon-text {
-    -fx-text-fill: #FFFFFF;
+.progress-text {
+    -fx-font-size: 10px !important;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
+    -fx-text-fill: #38bdf8 !important;
 }
 
-.course-vector-badge {
-    -fx-fill: #2563EB;
-    -fx-stroke: #3B82F6;
-    -fx-stroke-width: 2px;
-}
-
-.course-vector-badge-text {
-    -fx-text-fill: #F8FAFC;
+/* CARD BUTTON (LEFT BOTTOM RIBBON) */
+.card-ribbon-btn {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: #ffffff !important;
+    -fx-font-size: 10px !important;
     -fx-font-weight: bold;
-    -fx-font-size: 11px;
+    -fx-background-radius: 0 10px 0 16px;
+    -fx-padding: 6px 14px;
+    -fx-cursor: hand;
 }
 
-.progress-ring-bg {
-    -fx-fill: #0F172A;
-    -fx-stroke: #3B82F6;
-    -fx-stroke-width: 5px;
-}
-
-.progress-ring-text {
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #3B82F6;
+.card-ribbon-btn:hover {
+    -fx-background-color: #1d4ed8;
 }

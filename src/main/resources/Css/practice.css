@@ -1,0 +1,204 @@
+/* ============================================ */
+/* ROOT — Deep Space Gradient                    */
+/* ============================================ */
+.practice-root {
+    -fx-background-image: url("../Images/practice.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ============================================ */
+/* TOP BAR                                       */
+/* ============================================ */
+.top-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 15px 25px;
+}
+
+/* ===== Toggle Group (Practice / Review) ===== */
+.toggle-group {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 25px;
+    -fx-padding: 4px;
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 25px;
+}
+
+.toggle-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 22px;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+.toggle-btn:hover {
+    -fx-text-fill: #e2e8f0;
+}
+
+.toggle-btn:selected {
+    -fx-background-color: linear-gradient(to right, #38bdf8, #2563eb);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.5), 12, 0, 0, 0);
+}
+
+/* ===== Category ComboBox ===== */
+.category-combo {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 20px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 6px 14px;
+    -fx-cursor: hand;
+}
+
+.category-combo .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+}
+
+.category-combo .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.category-combo .arrow {
+    -fx-background-color: #38bdf8;
+}
+
+/* Dropdown list (popup) */
+.category-combo .combo-box-popup .list-view {
+    -fx-background-color: #1e293b;
+    -fx-background-radius: 10px;
+    -fx-border-color: rgba(56, 189, 248, 0.3);
+    -fx-border-radius: 10px;
+}
+
+.category-combo .combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e2e8f0;
+    -fx-padding: 8px 15px;
+}
+
+.category-combo .combo-box-popup .list-cell:hover {
+    -fx-background-color: rgba(56, 189, 248, 0.2);
+    -fx-text-fill: #38bdf8;
+}
+
+/* ============================================ */
+/* SCROLL PANE                                   */
+/* ============================================ */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(56, 189, 248, 0.4);
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(56, 189, 248, 0.7);
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+/* ============================================ */
+/* CARD CONTAINER                                */
+/* ============================================ */
+.card-container {
+    -fx-background-color: transparent;
+}
+
+/* ============================================ */
+/* ROOT — Background (Overlay ဖြင့်)            */
+/* ============================================ */
+.practice-root {
+    -fx-background-color:
+        linear-gradient(rgba(10, 14, 39, 0.75), rgba(10, 14, 39, 0.75)),
+        url("../Images/practice.png");
+    -fx-background-size: cover, cover;
+    -fx-background-position: center center, center center;
+    -fx-background-repeat: no-repeat, no-repeat;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ============================================ */
+/* GLASS CARD — ပိုရင့်သော အရောင်                */
+/* ============================================ */
+.glass-card {
+    -fx-background-color: rgba(15, 25, 55, 0.55);
+    -fx-background-radius: 22px;
+    -fx-border-color: rgba(120, 180, 255, 0.35);
+    -fx-border-radius: 22px;
+    -fx-border-width: 1.5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 25, 0, 0, 10);
+    -fx-cursor: hand;
+}
+
+.glass-card:hover {
+    -fx-border-color: rgba(56, 189, 248, 0.7);
+    -fx-border-width: 1.8px;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.5), 30, 0, 0, 12);
+}
+/* ===== Card Icon ===== */
+.card-icon-bg {
+    -fx-fill: linear-gradient(to bottom right, #38bdf8, #1e40af);
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.5), 10, 0, 0, 0);
+}
+
+.card-icon-text {
+    -fx-text-fill: #ffffff;
+}
+
+/* ===== Card Title ===== */
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+}
+
+/* ===== Card Level ===== */
+.card-level {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 11px;
+    -fx-background-color: rgba(56, 189, 248, 0.15);
+    -fx-background-radius: 12px;
+    -fx-padding: 3px 10px;
+}
+
+/* ===== Start Button ===== */
+.card-start-btn {
+    -fx-background-color: linear-gradient(to right, #0284c7, #2563eb);
+    -fx-background-radius: 12px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+
+.card-start-btn:hover {
+    -fx-background-color: linear-gradient(to right, #0369a1, #1d4ed8);
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.6), 12, 0, 0, 4);
+}
+.glass-card {
+    -fx-padding: 18px;
+}
+.card-icon-bg {
+    -fx-fill: linear-gradient(to bottom right, #38bdf8, #1e40af);
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.5), 10, 0, 0, 0);
+}

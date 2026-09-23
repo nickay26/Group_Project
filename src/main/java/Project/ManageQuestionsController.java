@@ -12,13 +12,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDashboardController {
+public class ManageQuestionsController {
 
+    // Dropdown / Selection Controls
     @FXML private ComboBox<String> categoryCombo;
     @FXML private ComboBox<String> lessonCombo;
 
     // Slide Input Fields
-    @FXML private ComboBox<String> typeCombo; // CONCEPT, FILL_IN_BLANK, MULTIPLE_CHOICE
+    @FXML private ComboBox<String> typeCombo;
     @FXML private TextField slideTitleInput;
     @FXML private TextArea promptArea;
     @FXML private TextArea codeSnippetArea;
@@ -37,9 +38,11 @@ public class AdminDashboardController {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Lesson currentLesson;
 
+    // Select လုပ်ထားသော Slide ကို မှတ်ထားရန် Variable
+    private Slide selectedSlideForEdit = null;
+
     @FXML
     public void initialize() {
-        // TableView Column များ သတ်မှတ်ခြင်း
         if (colId != null) colId.setCellValueFactory(new PropertyValueFactory<>("slideId"));
         if (colType != null) colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         if (colTitle != null) colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -48,25 +51,22 @@ public class AdminDashboardController {
 
         if (slideTable != null) {
             slideTable.setItems(slideObservableList);
-
-            // Table Row ကို Select လုပ်ပါက Input Form များထဲသို့ Data ဖြည့်ပေးမည်
             slideTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null) {
+                    selectedSlideForEdit = newVal; // Edit ပြုလုပ်ရန် Select လုပ်ထားသော Slide ကို မှတ်မည်
                     populateForm(newVal);
                 }
             });
         }
 
-        // Category ComboBox Initial Data
         if (categoryCombo != null) {
             categoryCombo.setItems(FXCollections.observableArrayList("CPP", "JAVA", "PYTHON"));
             categoryCombo.setOnAction(e -> {
-                loadLessonList(); // Category ပြောင်းသွားပါက သက်ဆိုင်ရာ Lesson ဖိုင်များကို Auto ပြန်ရှာမည်
+                loadLessonList();
                 loadLessonJson();
             });
         }
 
-        // Lesson ComboBox - စိတ်ကြိုက် စာရိုက်ထည့်နိုင်ရန် Editable ပြုလုပ်ထားပါသည်
         if (lessonCombo != null) {
             lessonCombo.setEditable(true);
             lessonCombo.setOnAction(e -> loadLessonJson());
@@ -77,19 +77,15 @@ public class AdminDashboardController {
             typeCombo.setOnAction(e -> handleTypeChange());
         }
 
-        // စတင်ချိန်တွင် Lessons folder ထဲရှိ ဖိုင်များကို Scan ဖတ်၍ Lesson List တင်ပေးမည်
         loadLessonList();
     }
 
-    /**
-     * Lessons folder ထဲရှိ JSON ဖိုင်များကို Scan ဖတ်ပြီး ရွေးချယ်ထားသော Category အတွက် Lesson List ကို Auto တင်ပေးမည်
-     */
     private void loadLessonList() {
         if (categoryCombo == null || lessonCombo == null) return;
 
         String selectedCategory = categoryCombo.getValue();
         if (selectedCategory == null) {
-            selectedCategory = "CPP"; // Default Category
+            selectedCategory = "CPP";
             categoryCombo.setValue(selectedCategory);
         }
 
@@ -102,7 +98,6 @@ public class AdminDashboardController {
                 String prefix = selectedCategory.toUpperCase() + "_";
                 for (File file : files) {
                     if (file.getName().startsWith(prefix) && file.getName().endsWith(".json")) {
-                        // ဥပမာ - CPP_101.json မှ "101" ကို ခွဲထုတ်ယူမည်
                         String lessonNo = file.getName().replace(prefix, "").replace(".json", "");
                         lessonNumbers.add(lessonNo);
                     }
@@ -113,14 +108,10 @@ public class AdminDashboardController {
         if (!lessonNumbers.isEmpty()) {
             lessonCombo.setItems(FXCollections.observableArrayList(lessonNumbers));
         } else {
-            // ဖိုင်များ မရှိသေးပါက Default ရွေးချယ်နိုင်သော စာရင်း ပေးထားမည်
             lessonCombo.setItems(FXCollections.observableArrayList("101", "102", "103", "104", "105"));
         }
     }
 
-    /**
-     * Slide Type အလိုက် မလိုအပ်သော Input Field များကို Auto Disable / Enable လုပ်ပေးသည်
-     */
     @FXML
     private void handleTypeChange() {
         String type = typeCombo.getValue();
@@ -180,10 +171,11 @@ public class AdminDashboardController {
                 e.printStackTrace();
             }
         } else {
-            // ဖိုင်မရှိသေးပါက (Lesson သစ်) Table ကို ရှင်းပေးမည်
             slideObservableList.clear();
             currentLesson = null;
         }
+
+        clearInputs();
     }
 
     @FXML
@@ -201,17 +193,22 @@ public class AdminDashboardController {
 
             lessonNo = lessonNo.trim();
             String type = (typeCombo != null && typeCombo.getValue() != null) ? typeCombo.getValue() : "MULTIPLE_CHOICE";
-            String slideId = category.toUpperCase() + "_" + lessonNo + "_S" + (slideObservableList.size() + 1);
+
+            // Edit ပြုလုပ်ခြင်း သို့မဟုတ် အသစ်ထည့်ခြင်း ခွဲခြားစစ်ဆေးခြင်း
+            String slideId;
+            if (selectedSlideForEdit != null) {
+                slideId = selectedSlideForEdit.getSlideId(); // ID အဟောင်းအတိုင်းပြန်သုံးမည်
+            } else {
+                slideId = category.toUpperCase() + "_" + lessonNo + "_S" + (slideObservableList.size() + 1);
+            }
+
             String title = slideTitleInput != null ? slideTitleInput.getText() : "";
             String prompt = promptArea != null ? promptArea.getText() : "";
-
-            // Type အလိုက် Code Snippet သတ်မှတ်ခြင်း
             String codeSnippet = (type.equals("MULTIPLE_CHOICE") || codeSnippetArea == null) ? null : codeSnippetArea.getText();
 
             List<String> options = null;
             String correctAnswer = null;
 
-            // CONCEPT မှလွဲ၍ ကျန် Type များအတွက် Options နှင့် Answer ယူမည်
             if (!type.equals("CONCEPT")) {
                 options = new ArrayList<>();
                 if (optA != null && !optA.getText().isEmpty()) options.add(optA.getText());
@@ -224,16 +221,24 @@ public class AdminDashboardController {
 
             Slide newSlide = new Slide(slideId, type, title, prompt, codeSnippet, options, correctAnswer);
 
-            // List ထဲသို့ ပေါင်းထည့်ပြီး JSON သိမ်းဆည်းမည်
-            slideObservableList.add(newSlide);
+            if (selectedSlideForEdit != null) {
+                // Edit Mode: မူလ Index တွင် အစားထိုးမည်
+                int index = slideObservableList.indexOf(selectedSlideForEdit);
+                if (index >= 0) {
+                    slideObservableList.set(index, newSlide);
+                }
+            } else {
+                // Add Mode: အသစ်ထည့်မည်
+                slideObservableList.add(newSlide);
+            }
+
             saveToJsonFile(category, lessonNo);
 
-            // Save ပြီးပါက Lesson List ကို Update ပြုလုပ်ပေးမည် (ဖိုင်သစ်အတွက် ComboBox ထဲ ရောက်သွားစေရန်)
             loadLessonList();
             lessonCombo.setValue(lessonNo);
 
             clearInputs();
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Slide အသစ်ကို အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ!");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Slide ကို အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ!");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -314,7 +319,10 @@ public class AdminDashboardController {
         }
     }
 
+    @FXML
     private void clearInputs() {
+        selectedSlideForEdit = null; // Edit State ကို ပြန်ဖျက်ပေးမည်
+        if (slideTable != null) slideTable.getSelectionModel().clearSelection();
         if (slideTitleInput != null) slideTitleInput.clear();
         if (promptArea != null) promptArea.clear();
         if (codeSnippetArea != null) codeSnippetArea.clear();

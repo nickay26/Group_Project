@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="800.0" prefWidth="1150.0" styleClass="root" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.AdminController">
+    <stylesheets>
+        <URL value="@../Css/admin.css" />
+    </stylesheets>
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox prefWidth="220.0" spacing="20.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
+            </padding>
+            <children>
+                <Label styleClass="logo-text" text="⚡ Quiz Admin" />
+                <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button fx:id="btnDashboard" maxWidth="1.7976931348623157E308" onAction="#showDashboardView" styleClass="sidebar-btn-active" text="Dashboard" />
+                        <Button fx:id="btnManageQuestions" maxWidth="1.7976931348623157E308" onAction="#showManageQuestionsView" styleClass="sidebar-btn" text="Manage Questions" />
+                        <Button fx:id="btnUserAnalytics" maxWidth="1.7976931348623157E308" onAction="#showUserAnalyticsView" styleClass="sidebar-btn" text="User Analytics" />
+                        <Button fx:id="btnSettings" maxWidth="1.7976931348623157E308" onAction="#showSettingsView" styleClass="sidebar-btn" text="Settings" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- CENTER MAIN CONTENT -->
+    <center>
+        <VBox spacing="20.0">
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            <children>
+                <!-- TOP HEADER BAR -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <children>
+                        <VBox HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="pageTitle" styleClass="header-title" text="Dashboard Overview" />
+                                <Label fx:id="pageSubTitle" styleClass="header-sub" text="Monitor real-time user statistics and system performance" />
+                            </children>
+                        </VBox>
+                        <TextField promptText="🔍 Search questions..." styleClass="search-field" />
+                    </children>
+                </HBox>
+
+                <!-- DYNAMIC CONTENT AREA -->
+                <StackPane VBox.vgrow="ALWAYS">
+                    <children>
+                        <!-- 1. DASHBOARD VIEW INCLUDE -->
+                        <fx:include fx:id="dashboardView" source="AdminDashboard.fxml" />
+
+                        <!-- 2. MANAGE QUESTIONS VIEW INCLUDE -->
+                        <fx:include fx:id="manageQuestionsView" source="ManageQuestionsView.fxml" visible="false" />
+                    </children>
+                </StackPane>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
