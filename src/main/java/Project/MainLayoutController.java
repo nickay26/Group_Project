@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import java.io.IOException;
+
 public class MainLayoutController {
 
     private static MainLayoutController instance;
@@ -35,11 +33,15 @@ public class MainLayoutController {
         instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
-        // Automatically fetch and display active course title
+        // Active Course Title ကို Update လုပ်မည်
         updateCourseTitle();
 
-        // Load default page on startup
-        handleNavLearn();
+        // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
+        if (UserSession.isRedirectedFromOverview()) {
+            handleNavLearn();
+        } else {
+            handleNavCourses(); // ဒါကြောင့် Login ဝင်လာရင် Courses Page နဲ့ Active Highlight အော်တို ပေါ်ပါမည်
+        }
     }
 
     public static MainLayoutController getInstance() {
@@ -72,32 +74,34 @@ public class MainLayoutController {
 
     @FXML
     public void handleNavLearn() {
-        setActiveButton(learnBtn);
         loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
-        setActiveButton(coursesBtn);
         loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
-        setActiveButton(playgroundBtn);
         loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
-        setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
     }
+
     @FXML
-    private void handleNavPractice() {
-        setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
-        loadPage("PracticeView.fxml");                          // ← loadPage သုံး
+    public void handleNavPractice() {
+        loadPage("PracticeView.fxml");
     }
+
+    @FXML
+    public void handleNavGames() {
+        loadPage("GamesView.fxml");
+    }
+
     public FXMLLoader loadPage(String fxmlFileName) {
         try {
             String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
@@ -119,10 +123,13 @@ public class MainLayoutController {
             Parent view = loader.load();
 
             contentArea.getChildren().setAll(view);
+
+            // FXML Name အလိုက် Sidebar Highlight ပြောင်းမည်
             updateSidebarHighlight(fxmlFileName);
 
             return loader;
         } catch (IOException e) {
+            System.err.println("Error loading FXML: " + fxmlFileName);
             e.printStackTrace();
             return null;
         }
@@ -143,7 +150,10 @@ public class MainLayoutController {
             setActiveButton(gamesBtn);
         }
     }
+
     private void setActiveButton(Button activeButton) {
+        if (navButtons == null || activeButton == null) return;
+
         for (Button btn : navButtons) {
             btn.getStyleClass().remove("nav-button-active");
             if (!btn.getStyleClass().contains("nav-button")) {
