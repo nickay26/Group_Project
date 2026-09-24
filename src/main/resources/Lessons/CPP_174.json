@@ -1,0 +1,175 @@
+{
+  "lessonId": "CPP_174",
+  "title": "Final Comprehensive Test: C++ Basics (CPP_101 to CPP_173)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_174_S1",
+      "type": "CONCEPT",
+      "title": "C++ Basics Final Assessment",
+      "prompt": "This final assessment tests your complete understanding of C++ fundamentals including variables, operators, control flow, loops, arrays, strings, functions, and pointers.",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << \"Ready for the C++ Basics Final Test!\" << endl;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_174_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++ Entry Point",
+      "prompt": "Which function is the compulsory execution entry point for every standalone C++ program?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "correctAnswer": "main()"
+    },
+    {
+      "slideId": "CPP_174_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Standard Output Stream",
+      "prompt": "Fill in the standard stream object used to print output to the console.",
+      "codeSnippet": "___ << \"Hello C++\";",
+      "options": ["cout", "cin", "print", "output"],
+      "correctAnswer": "cout"
+    },
+    {
+      "slideId": "CPP_174_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Data Types & Memory Size",
+      "prompt": "Which data type is typically used to store a single precise decimal number like 3.14159?",
+      "options": ["double", "int", "char", "bool"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_174_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Constant Modifier",
+      "prompt": "Fill in the keyword used to prevent a variable's value from being modified after declaration.",
+      "codeSnippet": "___ double PI = 3.14159;",
+      "options": ["const", "static", "final", "immutable"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_174_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modulus Operator Behavior",
+      "prompt": "What is the evaluated output of '19 % 5' in C++?",
+      "options": ["4", "3", "3.8", "0"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "CPP_174_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Pre-increment Evaluation",
+      "prompt": "Fill in the increment operator to increase value BEFORE assigning to 'y'.",
+      "codeSnippet": "int x = 10;\nint y = ___x; // y becomes 11, x becomes 11",
+      "options": ["++", "+=", "+", "1+"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_174_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical Operator Evaluation",
+      "prompt": "Which condition evaluates to 'true' in C++?",
+      "options": ["(5 > 3) && (2 < 4)", "(5 == 3) || (2 > 4)", "!(10 > 2)", "(4 != 4)"],
+      "correctAnswer": "(5 > 3) && (2 < 4)"
+    },
+    {
+      "slideId": "CPP_174_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Switch Statement Default",
+      "prompt": "Fill in the fallback keyword in a switch block when no cases match.",
+      "codeSnippet": "switch(x) {\n    case 1: cout << \"One\"; break;\n    ___: cout << \"Other\";\n}",
+      "options": ["default", "else", "otherwise", "final"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_174_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Do-While Loop Trait",
+      "prompt": "Which loop structure guarantees that its body will execute at least once regardless of the condition?",
+      "options": ["do-while loop", "while loop", "for loop", "range-based for loop"],
+      "correctAnswer": "do-while loop"
+    },
+    {
+      "slideId": "CPP_174_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Interruption",
+      "prompt": "Fill in the keyword to immediately skip the current iteration and jump to the next evaluation.",
+      "codeSnippet": "for(int i=0; i<10; i++) {\n    if (i % 2 == 0) ___;\n    cout << i;\n}",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "CPP_174_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Zero-based Array Indexing",
+      "prompt": "Given 'int scores[5] = {10, 20, 30, 40, 50};', what is the value of 'scores[3]'?",
+      "options": ["40", "30", "50", "20"],
+      "correctAnswer": "40"
+    },
+    {
+      "slideId": "CPP_174_S13",
+      "type": "FILL_IN_BLANK",
+      "title": "C++ String Concatenation",
+      "prompt": "Fill in the operator used to join two std::string variables.",
+      "codeSnippet": "string full = firstName ___ lastName;",
+      "options": ["+", "&", ".", "->"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_174_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reading Full Line Input",
+      "prompt": "Which function should be used to read a string containing spaces (e.g., full name) from cin?",
+      "options": ["getline(cin, str)", "cin >> str", "cin.read(str)", "gets(str)"],
+      "correctAnswer": "getline(cin, str)"
+    },
+    {
+      "slideId": "CPP_174_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass by Reference Parameter",
+      "prompt": "Fill in the missing character to pass 'val' by reference so modifications persist.",
+      "codeSnippet": "void doubleValue(int ___val) {\n    val *= 2;\n}",
+      "options": ["&", "*", "%", "$"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_174_S16",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Overloading Rule",
+      "prompt": "What must differ between two overloaded functions with the same name?",
+      "options": ["Parameter count or parameter data types", "Return types only", "Names of internal local variables", "Calling scope"],
+      "correctAnswer": "Parameter count or parameter data types"
+    },
+    {
+      "slideId": "CPP_174_S17",
+      "type": "FILL_IN_BLANK",
+      "title": "Pointer Initialization",
+      "prompt": "Fill in the operator used to assign the address of 'num' to the pointer 'p'.",
+      "codeSnippet": "int num = 99;\nint* p = ___num;",
+      "options": ["&", "*", "->", "ptr"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_174_S18",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dereferencing Pointers",
+      "prompt": "If 'int* ptr = &val;', what does '*ptr' access?",
+      "options": ["The actual value stored in variable 'val'", "The memory address of 'val'", "The size of the pointer in bytes", "The memory address of 'ptr'"],
+      "correctAnswer": "The actual value stored in variable 'val'"
+    },
+    {
+      "slideId": "CPP_174_S19",
+      "type": "FILL_IN_BLANK",
+      "title": "Dynamic Heap Allocation",
+      "prompt": "Fill in the operator used to allocate dynamic memory on the heap.",
+      "codeSnippet": "int* dynamicNum = ___ int(500);",
+      "options": ["new", "malloc", "alloc", "create"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "CPP_174_S20",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Safe Memory Management",
+      "prompt": "What best practice prevents dangling pointers after calling 'delete ptr;'?",
+      "options": ["Set ptr = nullptr;", "Delete ptr a second time", "Increment ptr", "Re-declare ptr as int"],
+      "correctAnswer": "Set ptr = nullptr;"
+    }
+  ]
+}

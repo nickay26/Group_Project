@@ -1,0 +1,125 @@
+{
+  "lessonId": "CPP_168",
+  "title": "Module Review Quiz: Operators & Expressions (CPP_119 to CPP_126)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_168_S1",
+      "type": "CONCEPT",
+      "title": "Operators & Expressions Overview",
+      "prompt": "This Module Quiz covers arithmetic, relational, logical, assignment, bitwise, increment/decrement operators, and expression evaluation in C++ (CPP_119 to CPP_126).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 10, b = 3;\n    int result = (a + b) * 2;\n    bool isGreater = (a > b) && (b > 0);\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_168_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Modulus Operator (CPP_119)",
+      "prompt": "Fill in the operator used to get the remainder of an integer division.",
+      "codeSnippet": "int remainder = 25 ___ 4; // remainder is 1",
+      "options": ["%", "/", "*", "mod"],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "CPP_168_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pre-increment vs Post-increment (CPP_120)",
+      "prompt": "What will be printed by the following code: int x = 5; cout << ++x;",
+      "options": ["6", "5", "4", "Compilation Error"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "CPP_168_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Post-increment Operator (CPP_120)",
+      "prompt": "Fill in the operator that increments the value after evaluating the current expression.",
+      "codeSnippet": "int a = 5;\nint b = a___; // b gets 5, then a becomes 6",
+      "options": ["++", "+=", "+", "1+"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_168_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Relational Operators (CPP_121)",
+      "prompt": "Which operator is used to check if two values are equal in C++?",
+      "options": ["==", "=", "equals", "==="],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "CPP_168_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Not Equal Operator (CPP_121)",
+      "prompt": "Fill in the correct operator to test if two variables are NOT equal.",
+      "codeSnippet": "if (a ___ b) {\n    cout << \"a and b are different\";\n}",
+      "options": ["!=", "><", "<>", "NOT="],
+      "correctAnswer": "!="
+    },
+    {
+      "slideId": "CPP_168_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical AND Operator (CPP_122)",
+      "prompt": "Which operator evaluates to 'true' only if BOTH operands are true?",
+      "options": ["&&", "||", "!", "&"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_168_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical OR Operator (CPP_122)",
+      "prompt": "Fill in the logical operator that yields true if AT LEAST ONE condition is true.",
+      "codeSnippet": "if (isWeekend ___ isHoliday) {\n    cout << \"Time to relax!\";\n}",
+      "options": ["||", "&&", "|", "OR"],
+      "correctAnswer": "||"
+    },
+    {
+      "slideId": "CPP_168_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compound Assignment (CPP_123)",
+      "prompt": "What is the equivalent shorthand for 'x = x + 5'?",
+      "options": ["x += 5", "x =+ 5", "x ++ 5", "x + 5"],
+      "correctAnswer": "x += 5"
+    },
+    {
+      "slideId": "CPP_168_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Ternary Operator (CPP_124)",
+      "prompt": "Fill in the missing symbol in the conditional (ternary) operator.",
+      "codeSnippet": "int max = (a > b) ___ a : b;",
+      "options": ["?", ":", "->", "if"],
+      "correctAnswer": "?"
+    },
+    {
+      "slideId": "CPP_168_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Precedence (CPP_125)",
+      "prompt": "What is the result of the expression: 10 + 2 * 5 ?",
+      "options": ["20", "60", "17", "25"],
+      "correctAnswer": "20"
+    },
+    {
+      "slideId": "CPP_168_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Bitwise AND (CPP_126)",
+      "prompt": "Fill in the single bitwise operator that performs a bitwise AND operation.",
+      "codeSnippet": "int result = 5 ___ 3; // Bitwise operation",
+      "options": ["&", "&&", "and", "^"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_168_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bitwise Left Shift (CPP_126)",
+      "prompt": "What does shifting an integer to the left by 1 bit (x << 1) usually accomplish mathematically?",
+      "options": ["Multiplies the number by 2", "Divides the number by 2", "Adds 1 to the number", "Subtracts 1 from the number"],
+      "correctAnswer": "Multiplies the number by 2"
+    },
+    {
+      "slideId": "CPP_168_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Logical NOT Operator (CPP_122)",
+      "prompt": "Fill in the operator used to reverse the logical state of its operand.",
+      "codeSnippet": "bool isOnline = false;\nif (___isOnline) {\n    cout << \"User is offline\";\n}",
+      "options": ["!", "~", "NOT", "!= "],
+      "correctAnswer": "!"
+    }
+  ]
+}

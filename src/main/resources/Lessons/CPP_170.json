@@ -1,0 +1,125 @@
+{
+  "lessonId": "CPP_170",
+  "title": "Module Review Quiz: Loops & Iteration (CPP_137 to CPP_143)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_170_S1",
+      "type": "CONCEPT",
+      "title": "Loops & Iteration Overview",
+      "prompt": "This Module Quiz covers while loops, do-while loops, for loops, ranged-based for loops, break/continue statement behaviors, and infinite loops in C++ (CPP_137 to CPP_143).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    for (int i = 1; i <= 5; i++) {\n        if (i == 3) continue;\n        cout << i << \" \";\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_170_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "While Loop Syntax (CPP_137)",
+      "prompt": "Fill in the keyword used to repeat a block of code as long as a condition remains true.",
+      "codeSnippet": "___ (count < 5) {\n    cout << count;\n    count++;\n}",
+      "options": ["while", "loop", "repeat", "until"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "CPP_170_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Do-While Loop Execution (CPP_138)",
+      "prompt": "How many times is a 'do-while' loop guaranteed to execute at minimum?",
+      "options": ["At least once", "Zero times", "Exactly two times", "Depends on initial condition"],
+      "correctAnswer": "At least once"
+    },
+    {
+      "slideId": "CPP_170_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Do-While Termination (CPP_138)",
+      "prompt": "Fill in the keyword that concludes a do-while loop structure.",
+      "codeSnippet": "do {\n    cout << \"Processing...\";\n} ___ (status == true);",
+      "options": ["while", "until", "for", "loop"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "CPP_170_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "For Loop Structure (CPP_139)",
+      "prompt": "What are the three core expressions in a standard C++ for-loop header (in order)?",
+      "options": ["Initialization, Condition, Update", "Condition, Initialization, Update", "Update, Condition, Initialization", "Initialization, Update, Termination"],
+      "correctAnswer": "Initialization, Condition, Update"
+    },
+    {
+      "slideId": "CPP_170_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "For Loop Keyword (CPP_139)",
+      "prompt": "Fill in the keyword used to declare a counter-controlled iteration loop.",
+      "codeSnippet": "___ (int i = 0; i < 10; i++) {\n    cout << i;\n}",
+      "options": ["for", "repeat", "foreach", "loop"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "CPP_170_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Break Keyword in Loops (CPP_140)",
+      "prompt": "What does the 'break' statement do when executed inside a loop?",
+      "options": ["Exits the loop immediately", "Skips to the next iteration", "Restarts the loop from index 0", "Pauses the execution for 1 second"],
+      "correctAnswer": "Exits the loop immediately"
+    },
+    {
+      "slideId": "CPP_170_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Continue Statement (CPP_141)",
+      "prompt": "Fill in the keyword used to skip the remaining code in the current iteration and jump to the next.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n    if (i == 2) ___;\n    cout << i;\n}",
+      "options": ["continue", "skip", "next", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "CPP_170_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Range-based For Loop (CPP_142)",
+      "prompt": "Which loop syntax is used to easily iterate through all elements of an array or vector in C++11?",
+      "options": ["for (auto item : collection)", "foreach (item in collection)", "for (item -> collection)", "repeat (item : collection)"],
+      "correctAnswer": "for (auto item : collection)"
+    },
+    {
+      "slideId": "CPP_170_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Range-based Syntax (CPP_142)",
+      "prompt": "Fill in the symbol used in a range-based for loop header to separate element variable and container.",
+      "codeSnippet": "int nums[] = {1, 2, 3};\nfor (int num ___ nums) {\n    cout << num;\n}",
+      "options": [":", "in", "->", "of"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_170_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Infinite Loop Condition (CPP_143)",
+      "prompt": "Which of the following creates an intentional infinite loop in C++?",
+      "options": ["while (true)", "for (int i=0; i<10; i--)", "do { } while (false)", "while (0)"],
+      "correctAnswer": "while (true)"
+    },
+    {
+      "slideId": "CPP_170_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Increment in For Loop (CPP_139)",
+      "prompt": "Fill in the operator to increment the loop counter variable 'i' by 1.",
+      "codeSnippet": "for (int i = 0; i < 5; i___) {\n    // body\n}",
+      "options": ["++", "+=1", "+1", "+="],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_170_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Loops (CPP_137)",
+      "prompt": "How many total iterations occur in a nested loop where the outer loop runs 3 times and the inner loop runs 4 times?",
+      "options": ["12", "7", "34", "1"],
+      "correctAnswer": "12"
+    },
+    {
+      "slideId": "CPP_170_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Loop Condition Check (CPP_137)",
+      "prompt": "Fill in the condition so the while loop runs exactly 3 times (starting at x = 0).",
+      "codeSnippet": "int x = 0;\nwhile (x ___ 3) {\n    x++;\n}",
+      "options": ["<", "<=", "==", "!="],
+      "correctAnswer": "<"
+    }
+  ]
+}

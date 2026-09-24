@@ -1,0 +1,133 @@
+{
+  "lessonId": "CPP_169",
+  "title": "Module Review Quiz: Conditionals & Control Flow (CPP_127 to CPP_136)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_169_S1",
+      "type": "CONCEPT",
+      "title": "Conditionals & Control Flow Overview",
+      "prompt": "This Module Quiz covers if, else, else-if statements, nested conditionals, switch statements, break/continue keywords, and truthy/falsy evaluation in C++ (CPP_127 to CPP_136).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int score = 85;\n    if (score >= 90) {\n        cout << \"Grade A\";\n    } else if (score >= 80) {\n        cout << \"Grade B\";\n    } else {\n        cout << \"Grade C\";\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_169_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic If Statement (CPP_127)",
+      "prompt": "Fill in the keyword used to execute a code block only if a specified condition is true.",
+      "codeSnippet": "___ (age >= 18) {\n    cout << \"Adult\";\n}",
+      "options": ["if", "when", "check", "case"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "CPP_169_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else Branch (CPP_128)",
+      "prompt": "Which keyword provides an alternative code block to execute when the 'if' condition evaluates to false?",
+      "options": ["else", "then", "otherwise", "default"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "CPP_169_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Else-If Ladder (CPP_129)",
+      "prompt": "Fill in the missing keywords to test a second condition if the first condition is false.",
+      "codeSnippet": "if (temp > 30) {\n    cout << \"Hot\";\n} ___ (temp > 20) {\n    cout << \"Warm\";\n}",
+      "options": ["else if", "elif", "else if", "or if"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "CPP_169_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Conditionals (CPP_130)",
+      "prompt": "What is a 'nested if statement' in C++?",
+      "options": ["An if statement placed inside another if or else block", "An if statement with multiple conditions using &&", "A switch statement converted into if statements", "An if statement placed inside a loop only"],
+      "correctAnswer": "An if statement placed inside another if or else block"
+    },
+    {
+      "slideId": "CPP_169_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Switch Statement (CPP_131)",
+      "prompt": "Fill in the keyword used to introduce a multi-way branch selection based on a discrete value.",
+      "codeSnippet": "___ (dayNumber) {\n    case 1: cout << \"Monday\"; break;\n}",
+      "options": ["switch", "match", "select", "choose"],
+      "correctAnswer": "switch"
+    },
+    {
+      "slideId": "CPP_169_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Switch Case Labels (CPP_132)",
+      "prompt": "Which keyword is used inside a switch statement to define an individual match condition?",
+      "options": ["case", "label", "when", "option"],
+      "correctAnswer": "case"
+    },
+    {
+      "slideId": "CPP_169_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Switch Break Keyword (CPP_133)",
+      "prompt": "Fill in the keyword used to exit a switch block after a case is executed.",
+      "codeSnippet": "case 10:\n    cout << \"Ten\";\n    ___;",
+      "options": ["break", "exit", "stop", "return"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "CPP_169_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Switch Case (CPP_134)",
+      "prompt": "What role does the 'default' case play in a switch statement?",
+      "options": ["It executes when none of the specified case values match", "It resets all variables to 0", "It runs before any other case statement", "It terminates the entire program"],
+      "correctAnswer": "It executes when none of the specified case values match"
+    },
+    {
+      "slideId": "CPP_169_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Keyword (CPP_134)",
+      "prompt": "Fill in the keyword for the fallback block in a switch statement.",
+      "codeSnippet": "switch (grade) {\n    case 'A': cout << \"Excellent\"; break;\n    ___: cout << \"Unknown Grade\";\n}",
+      "options": ["default", "else", "otherwise", "catch"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "CPP_169_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Operator vs If-Else (CPP_135)",
+      "prompt": "Which expression is equivalent to: if (x > 0) y = 1; else y = 0;",
+      "options": ["y = (x > 0) ? 1 : 0;", "y = (x > 0) : 1 ? 0;", "y = if(x > 0, 1, 0);", "y = (x > 0) -> 1 :: 0;"],
+      "correctAnswer": "y = (x > 0) ? 1 : 0;"
+    },
+    {
+      "slideId": "CPP_169_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Short-Circuit Evaluation (CPP_136)",
+      "prompt": "Fill in the logical operator that skips evaluating the second condition if the first is false.",
+      "codeSnippet": "if (ptr != nullptr ___ ptr->isValid()) {\n    // safe access\n}",
+      "options": ["&&", "||", "&", "and_then"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_169_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Switch Statement Data Types (CPP_131)",
+      "prompt": "Which of the following data types CANNOT be evaluated in a standard C++ switch expression?",
+      "options": ["std::string", "int", "char", "enum"],
+      "correctAnswer": "std::string"
+    },
+    {
+      "slideId": "CPP_169_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Condition (CPP_127)",
+      "prompt": "Fill in the boolean value needed to ensure an 'if' block always executes.",
+      "codeSnippet": "if (___) {\n    cout << \"Always prints\";\n}",
+      "options": ["true", "1", "TRUE", "yes"],
+      "correctAnswer": "true"
+    },
+    {
+      "slideId": "CPP_169_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Fall-Through Behavior (CPP_133)",
+      "prompt": "What happens if a 'case' in a switch statement does not end with a 'break' statement?",
+      "options": ["Execution continues into the next case automatically", "A compilation error is thrown", "The program crashes at runtime", "The switch statement restarts"],
+      "correctAnswer": "Execution continues into the next case automatically"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "lessonId": "CPP_171",
+  "title": "Module Review Quiz: Arrays & Strings (CPP_144 to CPP_151)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_171_S1",
+      "type": "CONCEPT",
+      "title": "Arrays & Strings Overview",
+      "prompt": "This Module Quiz covers single and multi-dimensional arrays, C-style strings, C++ std::string methods, array traversal, and bounds checking (CPP_144 to CPP_151).",
+      "codeSnippet": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int numbers[5] = {10, 20, 30, 40, 50};\n    string greeting = \"Hello World\";\n    cout << greeting.length() << endl;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_171_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Declaration (CPP_144)",
+      "prompt": "Fill in the correct index value to access the first element of an array.",
+      "codeSnippet": "int marks[5] = {80, 85, 90, 95, 100};\nint firstMark = marks[___];",
+      "options": ["0", "1", "-1", "first"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_171_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Indexing (CPP_144)",
+      "prompt": "In an array declared as 'int arr[10];', what is the index of the last element?",
+      "options": ["9", "10", "8", "11"],
+      "correctAnswer": "9"
+    },
+    {
+      "slideId": "CPP_171_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Size Initialization (CPP_145)",
+      "prompt": "Fill in the missing array size in brackets for declaring 3 integer elements.",
+      "codeSnippet": "double prices[___] = {10.5, 20.0, 15.75};",
+      "options": ["3", "2", "4", "0"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "CPP_171_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "2D Array Concept (CPP_146)",
+      "prompt": "How is a 2D array typically visualized in C++?",
+      "options": ["A table with rows and columns", "A single linear chain", "A key-value dictionary", "A circular stack"],
+      "correctAnswer": "A table with rows and columns"
+    },
+    {
+      "slideId": "CPP_171_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "2D Array Access (CPP_146)",
+      "prompt": "Fill in the brackets to access row 0, column 1 of a 2D matrix.",
+      "codeSnippet": "int matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};\nint val = matrix[0][___];",
+      "options": ["1", "0", "2", "3"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "CPP_171_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C-Style String Terminator (CPP_147)",
+      "prompt": "Which character automatically marks the end of a C-style character string (char array)?",
+      "options": ["'\\0'", "'\\n'", "' '", "';'"],
+      "correctAnswer": "'\\0'"
+    },
+    {
+      "slideId": "CPP_171_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "String Length (CPP_148)",
+      "prompt": "Fill in the method name used to retrieve the number of characters in a std::string.",
+      "codeSnippet": "string name = \"Code\";\nint len = name.___();",
+      "options": ["length", "size_of", "count", "capacity"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "CPP_171_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Concatenation (CPP_148)",
+      "prompt": "Which operator is used to concatenate two std::string objects together in C++?",
+      "options": ["+", "&", ".", "->"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_171_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "String Append Method (CPP_149)",
+      "prompt": "Fill in the method used to attach text to the end of an existing std::string variable.",
+      "codeSnippet": "string text = \"Hello \";\ntext.___(\"World\");",
+      "options": ["append", "push", "add", "concat"],
+      "correctAnswer": "append"
+    },
+    {
+      "slideId": "CPP_171_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Bounds Checking (CPP_150)",
+      "prompt": "What happens if you try to access an index outside the declared size of a standard C++ array?",
+      "options": ["Undefined behavior (may crash or read garbage memory)", "Automatic size expansion", "A clear compile error is always generated", "It returns 0 safely"],
+      "correctAnswer": "Undefined behavior (may crash or read garbage memory)"
+    },
+    {
+      "slideId": "CPP_171_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading Strings with Spaces (CPP_151)",
+      "prompt": "Fill in the function used to read an entire line of text including spaces from cin.",
+      "codeSnippet": "string fullLine;\n___(cin, fullLine);",
+      "options": ["getline", "readline", "get_text", "cin.line"],
+      "correctAnswer": "getline"
+    },
+    {
+      "slideId": "CPP_171_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Size Calculation (CPP_145)",
+      "prompt": "Which formula correctly computes the number of elements in an array 'arr'?",
+      "options": ["sizeof(arr) / sizeof(arr[0])", "sizeof(arr)", "arr.length()", "sizeof(arr[0]) / sizeof(arr)"],
+      "correctAnswer": "sizeof(arr) / sizeof(arr[0])"
+    },
+    {
+      "slideId": "CPP_171_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Character Access in String (CPP_148)",
+      "prompt": "Fill in the bracket syntax to get the first character of string 'str'.",
+      "codeSnippet": "string str = \"C++\";\nchar ch = str[___];",
+      "options": ["0", "1", "first", "start"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_171_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Substring Method (CPP_149)",
+      "prompt": "Which method is used to extract a portion of a string in C++?",
+      "options": ["substr()", "slice()", "substring()", "part()"],
+      "correctAnswer": "substr()"
+    }
+  ]
+}
