@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_146",
+  "title": "Practice: Finally Block",
+  "slides": [
+    {
+      "slideId": "JAVA_146_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Keyword",
+      "prompt": "Which block always executes?",
+      "options": ["finally", "try", "catch", "throw"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_146_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n  System.out.println(x);\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["5 Done", "5", "Done", "Error"],
+      "correctAnswer": "5 Done"
+    },
+    {
+      "slideId": "JAVA_146_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["Error Done", "Error", "Done", "No Error"],
+      "correctAnswer": "Error Done"
+    },
+    {
+      "slideId": "JAVA_146_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Finally",
+      "prompt": "Complete the finally block.",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "options": ["finally", "catch", "throw", "throws"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_146_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Finally",
+      "prompt": "Complete the finally block.",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "options": ["finally", "catch", "throw", "throws"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "JAVA_146_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  System.out.println(\"Try\");\n} finally {\n  System.out.println(\"Finally\");\n}",
+      "options": ["Try Finally", "Try", "Finally", "Error"],
+      "correctAnswer": "Try Finally"
+    },
+    {
+      "slideId": "JAVA_146_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n  System.out.println(x);\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} finally {\n  System.out.println(\"Done\");\n}",
+      "options": ["5 Done", "5", "Done", "Error"],
+      "correctAnswer": "5 Done"
+    },
+    {
+      "slideId": "JAVA_146_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Finally Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  System.out.println(\"A\");\n} finally {\n  System.out.println(\"B\");\n}\nSystem.out.println(\"C\");",
+      "options": ["A B C", "A C", "B C", "C"],
+      "correctAnswer": "A B C"
+    },
+    {
+      "slideId": "JAVA_146_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Purpose",
+      "prompt": "Why do we use finally?",
+      "options": ["To close resources", "To make code slower", "To delete code", "To confuse developers"],
+      "correctAnswer": "To close resources"
+    },
+    {
+      "slideId": "JAVA_146_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally and Catch",
+      "prompt": "Can finally be used without catch?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_146_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finally Execution",
+      "prompt": "Does finally execute even if try returns?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    }
+  ]
+}

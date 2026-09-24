@@ -1,36 +1,61 @@
 package Project;
+
 import java.util.List;
 
     public class Question {
         private int id;
-        private String language;
-        private String difficulty;
-        private String questionText;
-        private String codeSnippet;
+        private String category;
+        private String question;
         private List<String> options;
-        private int correctOptionIndex;
+        private String answer;
+
+        // Constructor
+        public Question(int id, String category, String question, List<String> options, String answer) {
+            this.id = id;
+            this.category = category;
+            this.question = question;
+            this.options = options;
+            this.answer = answer;
+        }
 
         // Getters and Setters
-        public int getId() { return id; }
-        public void setId(int id) { this.id = id; }
+        public int getId() {
+            return id;
+        }
 
-        public String getLanguage() { return language; }
-        public void setLanguage(String language) { this.language = language; }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-        public String getDifficulty() { return difficulty; }
-        public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+        public String getCategory() {
+            return category;
+        }
 
-        public String getQuestionText() { return questionText; }
-        public void setQuestionText(String questionText) { this.questionText = questionText; }
+        public void setCategory(String category) {
+            this.category = category;
+        }
 
-        public String getCodeSnippet() { return codeSnippet; }
-        public void setCodeSnippet(String codeSnippet) { this.codeSnippet = codeSnippet; }
+        public String getQuestion() {
+            return question;
+        }
 
-        public List<String> getOptions() { return options; }
-        public void setOptions(List<String> options) { this.options = options; }
+        public void setQuestion(String question) {
+            this.question = question;
+        }
 
-        public int getCorrectOptionIndex() { return correctOptionIndex; }
-        public void setCorrectOptionIndex(int correctOptionIndex) { this.correctOptionIndex = correctOptionIndex;
+        public List<String> getOptions() {
+            return options;
+        }
+
+        public void setOptions(List<String> options) {
+            this.options = options;
+        }
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(String answer) {
+            this.answer = answer;
         }
     }
-

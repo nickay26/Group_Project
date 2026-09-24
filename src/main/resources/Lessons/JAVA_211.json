@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_211",
+  "title": "Practice: LinkedList",
+  "slides": [
+    {
+      "slideId": "JAVA_211_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LinkedList Definition",
+      "prompt": "What is a LinkedList?",
+      "options": ["A linear data structure with nodes", "A fixed array", "A method", "A class"],
+      "correctAnswer": "A linear data structure with nodes"
+    },
+    {
+      "slideId": "JAVA_211_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Add First Method",
+      "prompt": "Which method adds an element at the beginning?",
+      "options": ["addFirst()", "add()", "addLast()", "insert()"],
+      "correctAnswer": "addFirst()"
+    },
+    {
+      "slideId": "JAVA_211_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LinkedList Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.add(\"Java\");\nlist.add(\"Python\");\nSystem.out.println(list);",
+      "options": ["[Java, Python]", "JavaPython", "Java, Python", "Error"],
+      "correctAnswer": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_211_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import LinkedList",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.________;",
+      "options": ["LinkedList", "List", "Array", "Collections"],
+      "correctAnswer": "LinkedList"
+    },
+    {
+      "slideId": "JAVA_211_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Add First",
+      "prompt": "Complete the code to add at the beginning.",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.________(\"Java\");",
+      "options": ["addFirst", "addLast", "add", "insert"],
+      "correctAnswer": "addFirst"
+    },
+    {
+      "slideId": "JAVA_211_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Add First Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.add(\"B\");\nlist.addFirst(\"A\");\nSystem.out.println(list);",
+      "options": ["[A, B]", "[B, A]", "AB", "Error"],
+      "correctAnswer": "[A, B]"
+    },
+    {
+      "slideId": "JAVA_211_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Get First Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.add(\"Java\");\nlist.add(\"Python\");\nSystem.out.println(list.getFirst());",
+      "options": ["Java", "Python", "0", "Error"],
+      "correctAnswer": "Java"
+    },
+    {
+      "slideId": "JAVA_211_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LinkedList Package",
+      "prompt": "Which package contains LinkedList?",
+      "options": ["java.util", "java.io", "java.lang", "java.list"],
+      "correctAnswer": "java.util"
+    },
+    {
+      "slideId": "JAVA_211_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LinkedList vs ArrayList",
+      "prompt": "Which is faster for insertion at the beginning?",
+      "options": ["LinkedList", "ArrayList", "Both same", "Neither"],
+      "correctAnswer": "LinkedList"
+    },
+    {
+      "slideId": "JAVA_211_S10",
+      "type": "CODE_OUTPUT",
+      "title": "LinkedList Size",
+      "prompt": "What is the output?",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.add(\"A\");\nlist.add(\"B\");\nlist.add(\"C\");\nSystem.out.println(list.size());",
+      "options": ["3", "2", "1", "Error"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_211_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Add Last Method",
+      "prompt": "Which method adds an element at the end?",
+      "options": ["addLast()", "add()", "addFirst()", "insert()"],
+      "correctAnswer": "addLast()"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_103",
+  "title": "Video Game Score",
+  "slides": [
+    {
+      "slideId": "JAVA_103_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Addition Output",
+      "prompt": "What is the output of 5 + 3?",
+      "options": ["8", "53", "5 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_103_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Subtraction Output",
+      "prompt": "What is the output of 10 - 4?",
+      "options": ["6", "14", "40", "Error"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "JAVA_103_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiplication Output",
+      "prompt": "What is the output of 3 * 4?",
+      "options": ["12", "7", "34", "Error"],
+      "correctAnswer": "12"
+    },
+    {
+      "slideId": "JAVA_103_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Division Output",
+      "prompt": "What is the output of 10 / 2?",
+      "options": ["5", "8", "12", "Error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_103_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modulus Output",
+      "prompt": "What is the output of 10 % 3?",
+      "options": ["1", "3", "0", "Error"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_103_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Addition",
+      "prompt": "Complete the code to output 8.",
+      "codeSnippet": "System.out.println(5 __ 3);",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "JAVA_103_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Multiplication",
+      "prompt": "Complete the code to output 21.",
+      "codeSnippet": "System.out.println(7 __ 3);",
+      "options": ["*", "+", "-", "/"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "JAVA_103_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Multiple Outputs",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 + 3);\nSystem.out.println(10 - 4);\nSystem.out.println(3 * 4);",
+      "options": ["8 6 12 (separate lines)", "8 6 12 (same line)", "8, 6, 12", "Error"],
+      "correctAnswer": "8 6 12 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_103_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Division Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(100 / 10);",
+      "options": ["10", "100", "0", "Error"],
+      "correctAnswer": "10"
+    },
+    {
+      "slideId": "JAVA_103_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Modulus Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(15 % 4);",
+      "options": ["3", "4", "15", "Error"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_103_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Precedence",
+      "prompt": "What is the output of 2 + 3 * 4?",
+      "options": ["14", "20", "24", "10"],
+      "correctAnswer": "14"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_108",
+  "title": "Print Hello World",
+  "slides": [
+    {
+      "slideId": "JAVA_108_S1",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Hello World",
+      "prompt": "Insert the missing part of the code to output \"Hello World\".",
+      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ____.____.____(\"Hello World\");\n  }\n}",
+      "options": ["System.out.println", "print", "console.log", "echo"],
+      "correctAnswer": "System.out.println"
+    },
+    {
+      "slideId": "JAVA_108_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Hello",
+      "prompt": "Complete the code to print \"Hello\".",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello\");\n  }\n}",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_108_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Print World",
+      "prompt": "Complete the code to print \"World\".",
+      "codeSnippet": "System.out.____(\"World\");",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_108_S4",
+      "type": "CODE_OUTPUT",
+      "title": "Hello World Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Hello World\");",
+      "options": ["Hello World", "\"Hello World\"", "HelloWorld", "Error"],
+      "correctAnswer": "Hello World"
+    },
+    {
+      "slideId": "JAVA_108_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Two Lines Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Hello\");\nSystem.out.println(\"World\");",
+      "options": ["Hello World (separate lines)", "Hello World (same line)", "HelloWorld", "Error"],
+      "correctAnswer": "Hello World (separate lines)"
+    },
+    {
+      "slideId": "JAVA_108_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Same Line Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.print(\"Hello \");\nSystem.out.print(\"World\");",
+      "options": ["Hello World", "Hello World (separate lines)", "HelloWorld", "Error"],
+      "correctAnswer": "Hello World"
+    },
+    {
+      "slideId": "JAVA_108_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Hello World",
+      "prompt": "Complete the code to print \"Hello World\".",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello World\");\n  }\n}",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_108_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Println Method",
+      "prompt": "Which method prints text and adds a new line?",
+      "options": ["println()", "print()", "write()", "output()"],
+      "correctAnswer": "println()"
+    },
+    {
+      "slideId": "JAVA_108_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Print Method",
+      "prompt": "Which method prints text without adding a new line?",
+      "options": ["print()", "println()", "write()", "output()"],
+      "correctAnswer": "print()"
+    },
+    {
+      "slideId": "JAVA_108_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Java Programming Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Java\");\nSystem.out.println(\"Programming\");",
+      "options": ["Java Programming (separate lines)", "Java Programming (same line)", "JavaProgramming", "Error"],
+      "correctAnswer": "Java Programming (separate lines)"
+    },
+    {
+      "slideId": "JAVA_108_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Print with New Line",
+      "prompt": "Complete the code to print \"Hello\" with a new line.",
+      "codeSnippet": "System.out.____(\"Hello\");",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    }
+  ]
+}

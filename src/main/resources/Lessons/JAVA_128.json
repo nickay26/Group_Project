@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_128",
+  "title": "Practice: Method Square",
+  "slides": [
+    {
+      "slideId": "JAVA_128_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Square",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(4));",
+      "options": ["16", "8", "4", "Error"],
+      "correctAnswer": "16"
+    },
+    {
+      "slideId": "JAVA_128_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Square",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(5));",
+      "options": ["25", "10", "5", "Error"],
+      "correctAnswer": "25"
+    },
+    {
+      "slideId": "JAVA_128_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Square",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(3));",
+      "options": ["9", "6", "3", "Error"],
+      "correctAnswer": "9"
+    },
+    {
+      "slideId": "JAVA_128_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method",
+      "prompt": "Complete the method.",
+      "codeSnippet": "static int square(int x) {\n  return x __ x;\n}",
+      "options": ["*", "+", "-", "/"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "JAVA_128_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Method Call",
+      "prompt": "Complete the method call to output 16.",
+      "codeSnippet": "System.out.println(square(__));",
+      "options": ["4", "2", "8", "16"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_128_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Method Square Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(6));",
+      "options": ["36", "12", "6", "Error"],
+      "correctAnswer": "36"
+    },
+    {
+      "slideId": "JAVA_128_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Method Square Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(10));",
+      "options": ["100", "20", "10", "Error"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "JAVA_128_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Method Square Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(2));",
+      "options": ["4", "2", "8", "Error"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_128_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Method Square Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "static int square(int x) {\n  return x * x;\n}\nSystem.out.println(square(7));",
+      "options": ["49", "14", "7", "Error"],
+      "correctAnswer": "49"
+    },
+    {
+      "slideId": "JAVA_128_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Square Calculation",
+      "prompt": "What is the square of 8?",
+      "options": ["64", "16", "8", "32"],
+      "correctAnswer": "64"
+    },
+    {
+      "slideId": "JAVA_128_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Square Calculation",
+      "prompt": "What is the square of 9?",
+      "options": ["81", "18", "9", "27"],
+      "correctAnswer": "81"
+    }
+  ]
+}

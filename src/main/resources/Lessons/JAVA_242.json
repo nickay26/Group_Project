@@ -1,0 +1,97 @@
+{
+  "lessonId": "JAVA_242",
+  "title": "Practice: Thread Lifecycle",
+  "slides": [
+    {
+      "slideId": "JAVA_242_S1",
+      "type": "CONCEPT",
+      "title": "Thread Lifecycle",
+      "prompt": "A thread has several states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, and TERMINATED. Use methods like sleep(), join(), and yield() to control threads.",
+      "codeSnippet": "class MyThread extends Thread {\n    public void run() {\n        try {\n            Thread.sleep(1000);\n            System.out.println(\"After sleep\");\n        } catch (InterruptedException e) {\n            e.printStackTrace();\n        }\n    }\n}\nMyThread t = new MyThread();\nt.start();",
+      "output": "After sleep"
+    },
+    {
+      "slideId": "JAVA_242_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread States",
+      "prompt": "How many states does a thread have?",
+      "options": ["6", "4", "5", "3"],
+      "correctAnswer": "6"
+    },
+    {
+      "slideId": "JAVA_242_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Sleep Method",
+      "prompt": "Which method pauses a thread for a specified time?",
+      "options": ["sleep()", "wait()", "pause()", "stop()"],
+      "correctAnswer": "sleep()"
+    },
+    {
+      "slideId": "JAVA_242_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Join Method",
+      "prompt": "Which method waits for a thread to finish?",
+      "options": ["join()", "wait()", "sleep()", "yield()"],
+      "correctAnswer": "join()"
+    },
+    {
+      "slideId": "JAVA_242_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Yield Method",
+      "prompt": "Which method pauses the current thread to let others run?",
+      "options": ["yield()", "sleep()", "wait()", "join()"],
+      "correctAnswer": "yield()"
+    },
+    {
+      "slideId": "JAVA_242_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Sleep Thread",
+      "prompt": "Complete the code to pause a thread.",
+      "codeSnippet": "Thread.______(1000);",
+      "options": ["sleep", "wait", "pause", "stop"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "JAVA_242_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Join Thread",
+      "prompt": "Complete the code to wait for a thread.",
+      "codeSnippet": "t._____();",
+      "options": ["join", "wait", "sleep", "yield"],
+      "correctAnswer": "join"
+    },
+    {
+      "slideId": "JAVA_242_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Sleep Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class MyThread extends Thread {\n  public void run() {\n    try { Thread.sleep(100); System.out.println(\"After sleep\"); }\n    catch (InterruptedException e) { e.printStackTrace(); }\n  }\n}\nMyThread t = new MyThread();\nt.start();",
+      "options": ["After sleep", "MyThread", "t", "Error"],
+      "correctAnswer": "After sleep"
+    },
+    {
+      "slideId": "JAVA_242_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "InterruptedException",
+      "prompt": "Which exception does sleep() throw?",
+      "options": ["InterruptedException", "IOException", "NullPointerException", "ArithmeticException"],
+      "correctAnswer": "InterruptedException"
+    },
+    {
+      "slideId": "JAVA_242_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread State",
+      "prompt": "What state is a thread in when it is created but not started?",
+      "options": ["NEW", "RUNNABLE", "BLOCKED", "TERMINATED"],
+      "correctAnswer": "NEW"
+    },
+    {
+      "slideId": "JAVA_242_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread State",
+      "prompt": "What state is a thread in when it finishes execution?",
+      "options": ["TERMINATED", "NEW", "RUNNABLE", "BLOCKED"],
+      "correctAnswer": "TERMINATED"
+    }
+  ]
+}

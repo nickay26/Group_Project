@@ -1,6 +1,6 @@
 {
   "lessonId": "JAVA_101",
-  "title": "Welcome to Java",
+  "title": "Getting Started with Java",
   "slides": [
     {
       "slideId": "JAVA_101_S1",
@@ -12,150 +12,136 @@
     },
     {
       "slideId": "JAVA_101_S2",
-      "type": "CONCEPT",
-      "title": "Multiple Statements",
-      "prompt": "You can add as many statements (lines of code) as you need. The following piece of code consists of 2 statements. It outputs two messages in different lines.",
-      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Name:\");\n        System.out.println(\"Surname:\");\n    }\n}",
-      "output": "Name:\nSurname:"
+      "type": "MULTIPLE_CHOICE",
+      "title": "Who Invented Java?",
+      "prompt": "Who invented Java?",
+      "options": [
+        "James Gosling",
+        "Dennis Ritchie",
+        "Bjarne Stroustrup",
+        "Guido van Rossum"
+      ],
+      "correctAnswer": "James Gosling"
     },
     {
       "slideId": "JAVA_101_S3",
-      "type": "CONCEPT",
-      "title": "Print vs Println",
-      "prompt": "The println() method is used to print text to the screen. Each println() statement adds a new line after printing. You can also use print() if you don't want a new line.",
-      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.print(\"Hello \");\n        System.out.print(\"World\");\n    }\n}",
-      "output": "Hello World"
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Release Year",
+      "prompt": "In which year was Java first released?",
+      "options": [
+        "1995",
+        "1990",
+        "2000",
+        "1985"
+      ],
+      "correctAnswer": "1995"
     },
     {
       "slideId": "JAVA_101_S4",
       "type": "MULTIPLE_CHOICE",
-      "title": "Who Invented Java?",
-      "prompt": "Who Invented Java?",
-      "options": ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup", "Guido van Rossum"],
-      "correctAnswer": "James Gosling"
+      "title": "Java Original Name",
+      "prompt": "What was Java's original name?",
+      "options": [
+        "Oak",
+        "Pine",
+        "Maple",
+        "Cedar"
+      ],
+      "correctAnswer": "Oak"
     },
     {
       "slideId": "JAVA_101_S5",
-      "type": "FILL_IN_BLANK",
-      "title": "Class Name",
-      "prompt": "Drag and drop the correct class name to match the file name Main.java.",
-      "codeSnippet": "public class ______ {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\");\n  }\n}",
-      "options": ["main", "Main", "class", "JavaClass"],
-      "correctAnswer": "Main"
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Company",
+      "prompt": "Which company originally developed Java?",
+      "options": [
+        "Sun Microsystems",
+        "Oracle",
+        "Microsoft",
+        "Google"
+      ],
+      "correctAnswer": "Sun Microsystems"
     },
     {
       "slideId": "JAVA_101_S6",
-      "type": "FILL_IN_BLANK",
-      "title": "Output 15",
-      "prompt": "Drag and drop the correct number so the program prints 15.",
-      "codeSnippet": "System.out.println(_____);",
-      "options": ["15", "\"15\"", "fifteen", "1.5"],
-      "correctAnswer": "15"
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Slogan",
+      "prompt": "What is Java's slogan?",
+      "options": [
+        "Write Once, Run Anywhere",
+        "Code Once, Use Everywhere",
+        "Run Once, Write Anywhere",
+        "Write Fast, Run Fast"
+      ],
+      "correctAnswer": "Write Once, Run Anywhere"
     },
     {
       "slideId": "JAVA_101_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Primitive Data Types",
-      "prompt": "Number of primitive data types in Java are?",
-      "options": ["6", "7", "8", "9"],
-      "correctAnswer": "8"
+      "title": "Java Type",
+      "prompt": "Java is a ___________ programming language.",
+      "options": [
+        "Object-Oriented",
+        "Procedural",
+        "Functional",
+        "Scripting"
+      ],
+      "correctAnswer": "Object-Oriented"
     },
     {
       "slideId": "JAVA_101_S8",
       "type": "MULTIPLE_CHOICE",
-      "title": "Semicolon",
-      "prompt": "In Java, each code statement must end with a semicolon (;)",
-      "options": ["True", "False"],
-      "correctAnswer": "True"
+      "title": "Java File Extension",
+      "prompt": "What is the file extension for Java source code?",
+      "options": [
+        ".java",
+        ".class",
+        ".jar",
+        ".jav"
+      ],
+      "correctAnswer": ".java"
     },
     {
       "slideId": "JAVA_101_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "File Naming",
-      "prompt": "A file containing a class called MyClass should be saved as:",
-      "options": ["MyClass.jv", "MyClass.java", "MyClass.js"],
-      "correctAnswer": "MyClass.java"
+      "title": "Java Compiler",
+      "prompt": "What is the name of the Java compiler?",
+      "options": [
+        "javac",
+        "java",
+        "jdb",
+        "javadoc"
+      ],
+      "correctAnswer": "javac"
     },
     {
       "slideId": "JAVA_101_S10",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Increment Output",
-      "prompt": "What will be the output of the following Java code?",
-      "codeSnippet": "class increment {\n  public static void main(String args[]) {\n    int g = 3;\n    System.out.print(++g * 8);\n  }\n}",
-      "options": ["32", "33", "24", "25"],
-      "correctAnswer": "32"
-    },
-    {
-      "slideId": "JAVA_101_S11",
-      "type": "FILL_IN_BLANK",
-      "title": "Main Method Parameter",
-      "prompt": "Drag and drop the correct parameter for the main method.",
-      "codeSnippet": "public class MyClass {\n  public static void main(________) {\n    System.out.println(\"Hello\");\n  }\n}",
-      "options": ["String[] args", "int main", "args[]String", "main()"],
-      "correctAnswer": "String[] args"
-    },
-    {
-      "slideId": "JAVA_101_S12",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Print vs Println Difference",
-      "prompt": "The difference between println() and print() is that:",
-      "options": [
-        "The println() method adds a line break after printing, while print() does not",
-        "The print() method adds a line break after printing, while println() does not"
-      ],
-      "correctAnswer": "The println() method adds a line break after printing, while print() does not"
-    },
-    {
-      "slideId": "JAVA_101_S13",
-      "type": "FILL_IN_BLANK",
-      "title": "Output 21",
-      "prompt": "Drag and drop the correct number so the program prints 21.",
-      "codeSnippet": "System.out.println(7 * ______);",
-      "options": ["2", "3", "7", "\"3\""],
-      "correctAnswer": "3"
-    },
-    {
-      "slideId": "JAVA_101_S14",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Case Sensitivity",
-      "prompt": "Is Java case-sensitive?",
-      "options": ["Yes", "No"],
-      "correctAnswer": "Yes"
-    },
-    {
-      "slideId": "JAVA_101_S15",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Running Java",
-      "prompt": "What is needed to run Java code?",
-      "options": ["JDK", "JRE", "JVM", "All of the above"],
-      "correctAnswer": "All of the above"
-    },
-    {
-      "slideId": "JAVA_101_S16",
-      "type": "FILL_IN_BLANK",
-      "title": "Character Assignment",
-      "prompt": "Drag and drop the correct character to assign the letter A to grade.",
-      "codeSnippet": "char grade = ______;",
-      "options": ["A", "'A'", "\"A\"", "grade"],
-      "correctAnswer": "'A'"
-    },
-    {
-      "slideId": "JAVA_101_S17",
       "type": "FILL_IN_BLANK",
       "title": "Print Hello World",
-      "prompt": "Insert the missing part of the code below to output \"Hello World\".",
+      "prompt": "Insert the missing part of the code to output \"Hello World\".",
       "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ____.____.____(\"Hello World\");\n  }\n}",
-      "options": ["System.out.println", "print", "console.log", "echo"],
+      "options": [
+        "System.out.println",
+        "print",
+        "console.log",
+        "echo"
+      ],
       "correctAnswer": "System.out.println"
     },
     {
-      "slideId": "JAVA_101_S18",
-      "type": "FILL_IN_BLANK",
-      "title": "String Concatenation Output",
+      "slideId": "JAVA_101_S11",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
       "prompt": "What is the output?",
-      "codeSnippet": "System.out.println(\"5\" + 3);",
-      "options": ["53", "8", "5 3", "Error"],
-      "correctAnswer": "53"
+      "codeSnippet": "System.out.println(\"Hello Java!\");",
+      "options": [
+        "Hello Java!",
+        "\"Hello Java!\"",
+        "HelloJava!",
+        "Error"
+      ],
+      "correctAnswer": "Hello Java!"
     }
   ]
 }
+

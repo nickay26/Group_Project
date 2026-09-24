@@ -5,20 +5,36 @@ public class UserSession {
     private static User currentUser;
     private static String activeCourseId;
 
+    // Overview Page မှ နှိပ်ပြီး Login သို့ ရောက်လာခြင်း ရှိ/မရှိ မှတ်ရန် Flag
+    private static boolean isRedirectedFromOverview = false;
+
     private UserSession(User user) {
         currentUser = user;
-        // Fetch last active course from DB for this user
-        activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null) {
+            // ⭐ ပြင်ဆင်ရန် အပိုင်း: activeCourseId တွင် တန်ဖိုးမရှိသေးပါကမှ Database မှ ယူမည်
+            if (activeCourseId == null) {
+                activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+            }
+        }
     }
 
     public static void initSession(User user) {
         currentUser = user;
-        instance = new UserSession(user);
+        if (instance == null) {
+            instance = new UserSession(user);
+        } else {
+            // Instance ရှိပြီးသားဖြစ်ပါကလည်း activeCourseId မရှိမှသာ DB မှယူမည်
+            if (activeCourseId == null) {
+                activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+            }
+        }
     }
 
     public static void setCurrentUser(User user) {
         currentUser = user;
-        activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null && activeCourseId == null) {
+            activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        }
         if (instance == null) {
             instance = new UserSession(user);
         }
@@ -45,5 +61,20 @@ public class UserSession {
 
     public static void setActiveCourseId(String courseId) {
         activeCourseId = courseId;
+    }
+
+    public static boolean isRedirectedFromOverview() {
+        return isRedirectedFromOverview;
+    }
+
+    public static void setRedirectedFromOverview(boolean redirected) {
+        isRedirectedFromOverview = redirected;
+    }
+
+    public static void clearSession() {
+        currentUser = null;
+        activeCourseId = null;
+        isRedirectedFromOverview = false;
+        instance = null;
     }
 }

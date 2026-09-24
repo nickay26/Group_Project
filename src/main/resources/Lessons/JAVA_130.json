@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_130",
+  "title": "Practice: Class Definition",
+  "slides": [
+    {
+      "slideId": "JAVA_130_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Definition",
+      "prompt": "What is a class?",
+      "options": ["A blueprint for objects", "An object", "A method", "A variable"],
+      "correctAnswer": "A blueprint for objects"
+    },
+    {
+      "slideId": "JAVA_130_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Keyword",
+      "prompt": "Which keyword is used to define a class?",
+      "options": ["class", "Class", "interface", "struct"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "JAVA_130_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  String model = \"Toyota\";\n}\nCar c = new Car();\nSystem.out.println(c.model);",
+      "options": ["Toyota", "Car", "model", "Error"],
+      "correctAnswer": "Toyota"
+    },
+    {
+      "slideId": "JAVA_130_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration",
+      "prompt": "Complete the class declaration.",
+      "codeSnippet": "____ MyClass {\n}",
+      "options": ["class", "Class", "interface", "struct"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "JAVA_130_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Field",
+      "prompt": "Complete the class field declaration.",
+      "codeSnippet": "class Dog {\n  ____ name = \"Buddy\";\n}",
+      "options": ["String", "int", "void", "boolean"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_130_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Dog {\n  String name = \"Buddy\";\n}\nDog d = new Dog();\nSystem.out.println(d.name);",
+      "options": ["Buddy", "Dog", "name", "Error"],
+      "correctAnswer": "Buddy"
+    },
+    {
+      "slideId": "JAVA_130_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name = \"John\";\n}\nPerson p = new Person();\nSystem.out.println(p.name);",
+      "options": ["John", "Person", "name", "Error"],
+      "correctAnswer": "John"
+    },
+    {
+      "slideId": "JAVA_130_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Car {\n  int year = 2020;\n}\nCar c = new Car();\nSystem.out.println(c.year);",
+      "options": ["2020", "Car", "year", "Error"],
+      "correctAnswer": "2020"
+    },
+    {
+      "slideId": "JAVA_130_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Object Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Person {\n  String name = \"John\";\n  int age = 25;\n}\nPerson p = new Person();\nSystem.out.println(p.name + \" \" + p.age);",
+      "options": ["John 25", "John25", "Person", "Error"],
+      "correctAnswer": "John 25"
+    },
+    {
+      "slideId": "JAVA_130_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid Class Declaration",
+      "prompt": "Which of the following is a valid class declaration?",
+      "options": ["class Main { }", "Main class { }", "public Main class { }", "class public Main { }"],
+      "correctAnswer": "class Main { }"
+    },
+    {
+      "slideId": "JAVA_130_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Instance",
+      "prompt": "What is an instance of a class called?",
+      "options": ["Object", "Method", "Variable", "Package"],
+      "correctAnswer": "Object"
+    }
+  ]
+}

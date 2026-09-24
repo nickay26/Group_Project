@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_212",
+  "title": "Stack",
+  "slides": [
+    {
+      "slideId": "JAVA_212_S1",
+      "type": "CONCEPT",
+      "title": "Stack",
+      "prompt": "A Stack is a LIFO (Last In, First Out) data structure. Elements are added and removed from the top.",
+      "codeSnippet": "import java.util.Stack;\n\npublic class Program {\n    public static void main(String[] args) {\n        Stack<String> stack = new Stack<>();\n        stack.push(\"Java\");\n        stack.push(\"Python\");\n        System.out.println(stack);\n    }\n}",
+      "output": "[Java, Python]"
+    },
+    {
+      "slideId": "JAVA_212_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Definition",
+      "prompt": "What is a Stack?",
+      "options": ["A LIFO data structure", "A FIFO data structure", "A fixed array", "A method"],
+      "correctAnswer": "A LIFO data structure"
+    },
+    {
+      "slideId": "JAVA_212_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Push Method",
+      "prompt": "Which method adds an element to a Stack?",
+      "options": ["push()", "add()", "insert()", "put()"],
+      "correctAnswer": "push()"
+    },
+    {
+      "slideId": "JAVA_212_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pop Method",
+      "prompt": "Which method removes the top element from a Stack?",
+      "options": ["pop()", "remove()", "delete()", "take()"],
+      "correctAnswer": "pop()"
+    },
+    {
+      "slideId": "JAVA_212_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Peek Method",
+      "prompt": "Which method returns the top element without removing it?",
+      "options": ["peek()", "top()", "get()", "first()"],
+      "correctAnswer": "peek()"
+    },
+    {
+      "slideId": "JAVA_212_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Stack",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["Stack", "Queue", "List", "Array"],
+      "correctAnswer": "Stack"
+    },
+    {
+      "slideId": "JAVA_212_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Push Element",
+      "prompt": "Complete the code to push an element.",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.____(\"Java\");",
+      "options": ["push", "add", "insert", "put"],
+      "correctAnswer": "push"
+    },
+    {
+      "slideId": "JAVA_212_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Stack Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack);",
+      "options": ["[A, B]", "[B, A]", "AB", "Error"],
+      "correctAnswer": "[A, B]"
+    },
+    {
+      "slideId": "JAVA_212_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Pop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack.pop());",
+      "options": ["B", "A", "AB", "Error"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_212_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Peek Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.push(\"A\");\nstack.push(\"B\");\nSystem.out.println(stack.peek());",
+      "options": ["B", "A", "AB", "Error"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_212_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Order",
+      "prompt": "What does LIFO stand for?",
+      "options": ["Last In, First Out", "Last In, Final Out", "First In, Last Out", "First In, First Out"],
+      "correctAnswer": "Last In, First Out"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_233",
+  "title": "Method Reference",
+  "slides": [
+    {
+      "slideId": "JAVA_233_S1",
+      "type": "CONCEPT",
+      "title": "Method Reference",
+      "prompt": "A method reference is a shorthand for a lambda expression that calls a method. The syntax is ClassName::methodName.",
+      "codeSnippet": "import java.util.Arrays;\nimport java.util.List;\n\npublic class Program {\n    public static void main(String[] args) {\n        List<String> list = Arrays.asList(\"Java\", \"Python\", \"C++\");\n        list.forEach(System.out::println);\n    }\n}",
+      "output": "Java\nPython\nC++"
+    },
+    {
+      "slideId": "JAVA_233_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference Definition",
+      "prompt": "What is a method reference?",
+      "options": ["A shorthand for a lambda expression", "A class", "A method", "A variable"],
+      "correctAnswer": "A shorthand for a lambda expression"
+    },
+    {
+      "slideId": "JAVA_233_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference Syntax",
+      "prompt": "What is the syntax of a method reference?",
+      "options": ["ClassName::methodName", "ClassName->methodName", "ClassName.methodName", "ClassName=>methodName"],
+      "correctAnswer": "ClassName::methodName"
+    },
+    {
+      "slideId": "JAVA_233_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ForEach Method",
+      "prompt": "Which method accepts a lambda or method reference?",
+      "options": ["forEach()", "forLoop()", "each()", "loop()"],
+      "correctAnswer": "forEach()"
+    },
+    {
+      "slideId": "JAVA_233_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Println Reference",
+      "prompt": "What does System.out::println do?",
+      "options": ["Prints each element", "Sorts elements", "Deletes elements", "Adds elements"],
+      "correctAnswer": "Prints each element"
+    },
+    {
+      "slideId": "JAVA_233_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Method Reference",
+      "prompt": "Complete the method reference.",
+      "codeSnippet": "list.forEach(System.out::______);",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_233_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Method Reference Syntax",
+      "prompt": "Complete the method reference syntax.",
+      "codeSnippet": "ClassName____methodName",
+      "options": ["::", "->", ".", "=>"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "JAVA_233_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Method Reference Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<String> list = Arrays.asList(\"Java\", \"Python\");\nlist.forEach(System.out::println);",
+      "options": ["Java and Python (separate lines)", "JavaPython", "Java, Python", "Error"],
+      "correctAnswer": "Java and Python (separate lines)"
+    },
+    {
+      "slideId": "JAVA_233_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Method Reference Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<String> list = Arrays.asList(\"A\", \"B\", \"C\");\nlist.forEach(System.out::println);",
+      "options": ["A B C (separate lines)", "ABC", "A, B, C", "Error"],
+      "correctAnswer": "A B C (separate lines)"
+    },
+    {
+      "slideId": "JAVA_233_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference Benefit",
+      "prompt": "What is the benefit of method references?",
+      "options": ["Less code", "More code", "Slower code", "More errors"],
+      "correctAnswer": "Less code"
+    },
+    {
+      "slideId": "JAVA_233_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference vs Lambda",
+      "prompt": "Is a method reference shorter than a lambda?",
+      "options": ["Yes", "No", "Same length", "Depends"],
+      "correctAnswer": "Yes"
+    }
+  ]
+}

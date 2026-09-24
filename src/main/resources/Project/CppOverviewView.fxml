@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="950.0" style="-fx-background-color: #0b111e;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CppOverviewController">
+    <top>
+        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
+            </padding>
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="backBtn" onAction="#handleBack" style="-fx-background-color: transparent; -fx-text-fill: #38bdf8; -fx-font-size: 14px; -fx-cursor: hand;" text="← Back to Welcome" />
+
+                <!-- Main Title & Subtitle -->
+                <VBox spacing="2.0">
+                    <children>
+                        <Label fx:id="titleLabel" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="C++" textFill="#e1e7f0" />
+                        <Label fx:id="subtitleLabel" style="-fx-font-size: 14px;" text="Language Overview" textFill="#8a99ad" />
+                    </children>
+                </VBox>
+
+                <!-- Overview Details Section -->
+                <Label fx:id="detailsLabel" style="-fx-font-size: 13px; -fx-line-spacing: 4px;" textFill="#b2c0d3" wrapText="true" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" BorderPane.alignment="CENTER">
+            <content>
+                <GridPane hgap="25.0" vgap="25.0">
+                    <padding>
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                    </padding>
+                    <children>
+
+                        <!-- C++ Basic Card -->
+                        <AnchorPane onMouseClicked="#handleStartBasic" prefHeight="180.0" prefWidth="380.0" style="-fx-background-color: #162238; -fx-background-radius: 12px; -fx-border-color: #233554; -fx-border-radius: 12px; -fx-cursor: hand;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <children>
+                                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../Images/c++.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="basicTitleLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="C++ Basic" textFill="WHITE" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="basicDescLabel" style="-fx-font-size: 13px; -fx-line-spacing: 3px;" text="Understand C++ syntax, basic data types, condition statements, and loops." textFill="#9ab0cc" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0" />
+                                <Button onAction="#handleStartBasic" style="-fx-background-color: #38bdf8; -fx-text-fill: #0b111e; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-cursor: hand;" text="Start Basic →" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                            </children>
+                        </AnchorPane>
+
+                        <!-- C++ Intermediate Card -->
+                        <AnchorPane onMouseClicked="#handleStartIntermediate" prefHeight="180.0" prefWidth="380.0" style="-fx-background-color: #162238; -fx-background-radius: 12px; -fx-border-color: #233554; -fx-border-radius: 12px; -fx-cursor: hand;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <children>
+                                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../Images/c++.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="interTitleLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="C++ Intermediate" textFill="WHITE" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="interDescLabel" style="-fx-font-size: 13px; -fx-line-spacing: 3px;" text="Master Pointers, Memory Management (Stack/Heap), References, and OOP concepts." textFill="#9ab0cc" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0" />
+                                <Button onAction="#handleStartIntermediate" style="-fx-background-color: #38bdf8; -fx-text-fill: #0b111e; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-cursor: hand;" text="Start Intermediate →" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+                            </children>
+                        </AnchorPane>
+
+                    </children>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

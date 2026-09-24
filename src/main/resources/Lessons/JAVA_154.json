@@ -1,0 +1,97 @@
+{
+  "lessonId": "JAVA_154",
+  "title": "File Exists",
+  "slides": [
+    {
+      "slideId": "JAVA_154_S1",
+      "type": "CONCEPT",
+      "title": "File Exists",
+      "prompt": "The File class is used to work with files and directories. The exists() method checks if a file exists.",
+      "codeSnippet": "import java.io.File;\n\npublic class Program {\n    public static void main(String[] args) {\n        File file = new File(\"test.txt\");\n        System.out.println(file.exists());\n    }\n}",
+      "output": "true or false"
+    },
+    {
+      "slideId": "JAVA_154_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Class",
+      "prompt": "Which class represents a file?",
+      "options": ["File", "FileReader", "FileWriter", "Files"],
+      "correctAnswer": "File"
+    },
+    {
+      "slideId": "JAVA_154_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exists Method",
+      "prompt": "Which method checks if a file exists?",
+      "options": ["exists()", "isFile()", "isDirectory()", "check()"],
+      "correctAnswer": "exists()"
+    },
+    {
+      "slideId": "JAVA_154_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Package",
+      "prompt": "Which package contains File?",
+      "options": ["java.io", "java.util", "java.lang", "java.file"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_154_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "File Import",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io.______;",
+      "options": ["File", "FileReader", "FileWriter", "Files"],
+      "correctAnswer": "File"
+    },
+    {
+      "slideId": "JAVA_154_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Exists Method",
+      "prompt": "Complete the code to check if a file exists.",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.______());",
+      "options": ["exists", "isFile", "isDirectory", "check"],
+      "correctAnswer": "exists"
+    },
+    {
+      "slideId": "JAVA_154_S7",
+      "type": "CODE_OUTPUT",
+      "title": "File Exists Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.exists());",
+      "options": ["true or false", "test.txt", "File", "Error"],
+      "correctAnswer": "true or false"
+    },
+    {
+      "slideId": "JAVA_154_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Path",
+      "prompt": "What does the File class take as a parameter?",
+      "options": ["File path", "File content", "File size", "File type"],
+      "correctAnswer": "File path"
+    },
+    {
+      "slideId": "JAVA_154_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Name",
+      "prompt": "Which method returns the file name?",
+      "options": ["getName()", "getFileName()", "fileName()", "name()"],
+      "correctAnswer": "getName()"
+    },
+    {
+      "slideId": "JAVA_154_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Delete",
+      "prompt": "Which method deletes a file?",
+      "options": ["delete()", "remove()", "destroy()", "erase()"],
+      "correctAnswer": "delete()"
+    },
+    {
+      "slideId": "JAVA_154_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Exists",
+      "prompt": "What does exists() return?",
+      "options": ["true or false", "File name", "File size", "File path"],
+      "correctAnswer": "true or false"
+    }
+  ]
+}

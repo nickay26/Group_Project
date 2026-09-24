@@ -1,0 +1,101 @@
+{
+  "lessonId": "JAVA_109",
+  "title": "If Statement",
+  "slides": [
+    {
+      "slideId": "JAVA_109_S1",
+      "type": "CONCEPT",
+      "title": "If Statement",
+      "prompt": "Conditions allow your program to make decisions. Use if to run code when a condition is true. Use else to run code when the condition is false.",
+      "codeSnippet": "int age = 18;\nif (age >= 18) {\n    System.out.println(\"You can vote\");\n} else {\n    System.out.println(\"You cannot vote\");\n}",
+      "output": "You can vote"
+    },
+    {
+      "slideId": "JAVA_109_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If Keyword",
+      "prompt": "Which keyword is used for a conditional statement?",
+      "options": ["if", "for", "while", "do"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "JAVA_109_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If Condition",
+      "prompt": "What does the if statement do?",
+      "options": ["Runs code when a condition is true", "Runs code when a condition is false", "Repeats code", "Declares a variable"],
+      "correctAnswer": "Runs code when a condition is true"
+    },
+    {
+      "slideId": "JAVA_109_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else Keyword",
+      "prompt": "Which keyword is used to run code when the if condition is false?",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_109_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the If",
+      "prompt": "Complete the code to check if x is greater than 5.",
+      "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
+      "options": [">", "<", "==", "!="],
+      "correctAnswer": ">"
+    },
+    {
+      "slideId": "JAVA_109_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Else",
+      "prompt": "Complete the code to output 'B'.",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "options": ["else", "else if", "elif", "otherwise"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "JAVA_109_S7",
+      "type": "CODE_OUTPUT",
+      "title": "If Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nif (x > 5) {\n  System.out.println(\"Big\");\n}",
+      "options": ["Big", "Small", "10", "5"],
+      "correctAnswer": "Big"
+    },
+    {
+      "slideId": "JAVA_109_S8",
+      "type": "CODE_OUTPUT",
+      "title": "If-Else Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "3", "5"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_109_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Vote Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "int age = 18;\nif (age >= 18) {\n  System.out.println(\"You can vote\");\n} else {\n  System.out.println(\"You cannot vote\");\n}",
+      "options": ["You can vote", "You cannot vote", "18", "Error"],
+      "correctAnswer": "You can vote"
+    },
+    {
+      "slideId": "JAVA_109_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Vote Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "int age = 15;\nif (age >= 18) {\n  System.out.println(\"You can vote\");\n} else {\n  System.out.println(\"You cannot vote\");\n}",
+      "options": ["You can vote", "You cannot vote", "15", "Error"],
+      "correctAnswer": "You cannot vote"
+    },
+    {
+      "slideId": "JAVA_109_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete the Condition",
+      "prompt": "Complete the code to check if age is 18 or older.",
+      "codeSnippet": "int age = 18;\nif (age __ 18) {\n  System.out.println(\"Adult\");\n}",
+      "options": [">=", "<=", "==", "!="],
+      "correctAnswer": ">="
+    }
+  ]
+}

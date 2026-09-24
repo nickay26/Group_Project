@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_102",
+  "title": "Multiple Statements",
+  "slides": [
+    {
+      "slideId": "JAVA_102_S1",
+      "type": "CONCEPT",
+      "title": "Multiple Statements",
+      "prompt": "You can add as many statements (lines of code) as you need. The following piece of code consists of 2 statements. It outputs two messages in different lines.",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        System.out.println(\"Name:\");\n        System.out.println(\"Surname:\");\n    }\n}",
+      "output": "Name:\nSurname:"
+    },
+    {
+      "slideId": "JAVA_102_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "End of Statement",
+      "prompt": "How do you end a statement in Java?",
+      "options": ["Semicolon (;)", "Colon (:)", "Period (.)", "Comma (,)"],
+      "correctAnswer": "Semicolon (;)"
+    },
+    {
+      "slideId": "JAVA_102_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Statements",
+      "prompt": "Can you have multiple statements in a Java program?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_102_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Println Method",
+      "prompt": "Which method adds a new line after printing?",
+      "options": ["println()", "print()", "write()", "output()"],
+      "correctAnswer": "println()"
+    },
+    {
+      "slideId": "JAVA_102_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Print Method",
+      "prompt": "Which method does NOT add a new line after printing?",
+      "options": ["print()", "println()", "write()", "output()"],
+      "correctAnswer": "print()"
+    },
+    {
+      "slideId": "JAVA_102_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Name",
+      "prompt": "Complete the code to print \"Name:\" and \"Surname:\".",
+      "codeSnippet": "System.out.____(\"Name:\");\nSystem.out.println(\"Surname:\");",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_102_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Same Line",
+      "prompt": "Complete the code to print \"Hello\" and \"World\" on the same line.",
+      "codeSnippet": "System.out.____(\"Hello \");\nSystem.out.print(\"World\");",
+      "options": ["print", "println", "write", "output"],
+      "correctAnswer": "print"
+    },
+    {
+      "slideId": "JAVA_102_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Name:\");\nSystem.out.println(\"Surname:\");",
+      "options": ["Name: Surname: (separate lines)", "Name: Surname: (same line)", "Name:Surname:", "Error"],
+      "correctAnswer": "Name: Surname: (separate lines)"
+    },
+    {
+      "slideId": "JAVA_102_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.print(\"A\");\nSystem.out.print(\"B\");\nSystem.out.print(\"C\");",
+      "options": ["ABC", "A B C", "A\nB\nC", "Error"],
+      "correctAnswer": "ABC"
+    },
+    {
+      "slideId": "JAVA_102_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.print(\"A\");\nSystem.out.println(\"B\");\nSystem.out.print(\"C\");",
+      "options": ["AB\nC", "ABC", "A\nB\nC", "Error"],
+      "correctAnswer": "AB\nC"
+    },
+    {
+      "slideId": "JAVA_102_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Statement End",
+      "prompt": "What is the correct way to end a statement in Java?",
+      "options": ["System.out.println(\"Hello\");", "System.out.println(\"Hello\")", "System.out.println(\"Hello\").", "System.out.println(\"Hello\"),"],
+      "correctAnswer": "System.out.println(\"Hello\");"
+    }
+  ]
+}

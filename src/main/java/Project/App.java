@@ -11,7 +11,7 @@ public class App extends Application {
 
         // Launch initial welcome screen
         stage.setMaximized(true);
-        SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("AdminView.fxml", "Mimo Platform - Welcome");
     }
 
     public static void main(String[] args) {

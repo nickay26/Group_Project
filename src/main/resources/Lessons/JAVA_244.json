@@ -1,0 +1,99 @@
+{
+  "lessonId": "JAVA_244",
+  "title": "Practice: BufferedReader",
+  "slides": [
+    {
+      "slideId": "JAVA_244_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Class",
+      "prompt": "Which class reads text efficiently?",
+      "options": ["BufferedReader", "FileReader", "File", "Reader"],
+      "correctAnswer": "BufferedReader"
+    },
+    {
+      "slideId": "JAVA_244_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ReadLine Method",
+      "prompt": "Which method reads a line of text?",
+      "options": ["readLine()", "read()", "nextLine()", "getLine()"],
+      "correctAnswer": "readLine()"
+    },
+    {
+      "slideId": "JAVA_244_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Benefit",
+      "prompt": "Why use BufferedReader?",
+      "options": ["Efficient reading", "Faster writing", "Less memory", "More errors"],
+      "correctAnswer": "Efficient reading"
+    },
+    {
+      "slideId": "JAVA_244_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Import BufferedReader",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io._____________;",
+      "options": ["BufferedReader", "FileReader", "File", "Reader"],
+      "correctAnswer": "BufferedReader"
+    },
+    {
+      "slideId": "JAVA_244_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Read Line",
+      "prompt": "Complete the code to read a line.",
+      "codeSnippet": "String line = br.________();",
+      "options": ["readLine", "read", "nextLine", "getLine"],
+      "correctAnswer": "readLine"
+    },
+    {
+      "slideId": "JAVA_244_S6",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedReader Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n  String line = br.readLine();\n  System.out.println(line);\n  br.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["File content or Error", "File content", "Error", "No Error"],
+      "correctAnswer": "File content or Error"
+    },
+    {
+      "slideId": "JAVA_244_S7",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedReader Loop",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n  String line;\n  while ((line = br.readLine()) != null) {\n    System.out.println(line);\n  }\n  br.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["All lines in file", "First line", "Error", "No Error"],
+      "correctAnswer": "All lines in file"
+    },
+    {
+      "slideId": "JAVA_244_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Close",
+      "prompt": "Which method closes a BufferedReader?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_244_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Package",
+      "prompt": "Which package contains BufferedReader?",
+      "options": ["java.io", "java.util", "java.lang", "java.buffer"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_244_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "BufferedReader Constructor",
+      "prompt": "What does BufferedReader take as parameter?",
+      "options": ["Reader", "File", "String", "Writer"],
+      "correctAnswer": "Reader"
+    },
+    {
+      "slideId": "JAVA_244_S11",
+      "type": "CODE_OUTPUT",
+      "title": "BufferedReader First Line",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  BufferedReader br = new BufferedReader(new FileReader(\"test.txt\"));\n  System.out.println(br.readLine());\n  br.close();\n} catch (Exception e) {\n  System.out.println(\"Error\");\n}",
+      "options": ["First line or Error", "First line", "Error", "No Error"],
+      "correctAnswer": "First line or Error"
+    }
+  ]
+}

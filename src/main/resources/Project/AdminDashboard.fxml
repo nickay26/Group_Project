@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="dashboardView" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.AdminDashboardController">
+    <children>
+        <!-- STATS CARDS OVERVIEW -->
+        <HBox spacing="20.0">
+            <children>
+                <VBox styleClass="glass-panel" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label styleClass="card-title" text="Daily Active Users" />
+                        <Label fx:id="totalActiveUsersLabel" styleClass="card-value" text="1,248" />
+                        <Label styleClass="card-growth" text="+12.5% from yesterday" />
+                    </children>
+                </VBox>
+                <VBox styleClass="glass-panel" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label styleClass="card-title" text="Total Questions" />
+                        <Label fx:id="totalTimeSpentLabel" styleClass="card-value" text="450" />
+                        <Label styleClass="card-sub" text="Across all active lessons" />
+                    </children>
+                </VBox>
+                <VBox styleClass="glass-panel" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label styleClass="card-title" text="Quiz Completion Rate" />
+                        <Label fx:id="quizCompletionRateLabel" styleClass="card-value" text="88.4%" />
+                        <Label styleClass="card-growth" text="+3.2% this week" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <!-- USER DAILY USAGE LINE CHART -->
+        <VBox styleClass="glass-panel" VBox.vgrow="ALWAYS">
+            <children>
+                <Label styleClass="section-title" text="User Daily Activity (Weekly Overview)" />
+                <LineChart fx:id="userActivityChart" createSymbols="true" legendVisible="false" VBox.vgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis label="Days" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Active Users" />
+                    </yAxis>
+                </LineChart>
+            </children>
+        </VBox>
+    </children>
+</VBox>

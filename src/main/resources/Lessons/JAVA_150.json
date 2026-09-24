@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_150",
+  "title": "FileReader",
+  "slides": [
+    {
+      "slideId": "JAVA_150_S1",
+      "type": "CONCEPT",
+      "title": "FileReader",
+      "prompt": "The FileReader class is used to read files in Java. It reads characters from a file.",
+      "codeSnippet": "import java.io.FileReader;\n\npublic class Program {\n    public static void main(String[] args) {\n        try {\n            FileReader reader = new FileReader(\"test.txt\");\n            System.out.println(\"File opened\");\n            reader.close();\n        } catch (Exception e) {\n            System.out.println(\"File not found\");\n        }\n    }\n}",
+      "output": "File opened"
+    },
+    {
+      "slideId": "JAVA_150_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileReader Class",
+      "prompt": "Which class is used to read files in Java?",
+      "options": ["FileReader", "FileWriter", "File", "Reader"],
+      "correctAnswer": "FileReader"
+    },
+    {
+      "slideId": "JAVA_150_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileReader Package",
+      "prompt": "Which package contains FileReader?",
+      "options": ["java.io", "java.util", "java.lang", "java.file"],
+      "correctAnswer": "java.io"
+    },
+    {
+      "slideId": "JAVA_150_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileReader Purpose",
+      "prompt": "What does FileReader do?",
+      "options": ["Reads characters from a file", "Writes characters to a file", "Deletes a file", "Creates a file"],
+      "correctAnswer": "Reads characters from a file"
+    },
+    {
+      "slideId": "JAVA_150_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Import FileReader",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.io.________;",
+      "options": ["FileReader", "FileWriter", "File", "Reader"],
+      "correctAnswer": "FileReader"
+    },
+    {
+      "slideId": "JAVA_150_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Create FileReader",
+      "prompt": "Complete the code to create a FileReader.",
+      "codeSnippet": "FileReader reader = new ________(\"test.txt\");",
+      "options": ["FileReader", "FileWriter", "File", "Reader"],
+      "correctAnswer": "FileReader"
+    },
+    {
+      "slideId": "JAVA_150_S7",
+      "type": "CODE_OUTPUT",
+      "title": "FileReader Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"test.txt\");\n  System.out.println(\"File opened\");\n} catch (Exception e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["File opened or File not found", "File opened", "File not found", "Error"],
+      "correctAnswer": "File opened or File not found"
+    },
+    {
+      "slideId": "JAVA_150_S8",
+      "type": "CODE_OUTPUT",
+      "title": "FileReader Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (Exception e) {\n  System.out.println(\"File not found\");\n}",
+      "options": ["File not found", "File opened", "No Error", "Error"],
+      "correctAnswer": "File not found"
+    },
+    {
+      "slideId": "JAVA_150_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileReader Exception",
+      "prompt": "Which exception is thrown when a file is not found?",
+      "options": ["FileNotFoundException", "IOException", "NullPointerException", "ArithmeticException"],
+      "correctAnswer": "FileNotFoundException"
+    },
+    {
+      "slideId": "JAVA_150_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Close File",
+      "prompt": "Which method closes a FileReader?",
+      "options": ["close()", "end()", "stop()", "exit()"],
+      "correctAnswer": "close()"
+    },
+    {
+      "slideId": "JAVA_150_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileReader Import",
+      "prompt": "Which import is needed for FileReader?",
+      "options": ["import java.io.FileReader;", "import java.file.FileReader;", "import java.util.FileReader;", "import java.lang.FileReader;"],
+      "correctAnswer": "import java.io.FileReader;"
+    }
+  ]
+}

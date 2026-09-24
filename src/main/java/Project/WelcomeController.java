@@ -26,6 +26,7 @@ public class WelcomeController implements Initializable {
     @FXML private Button helpBtn;
     @FXML private Button loginBtn;
     @FXML private Button signUpButton;
+    @FXML private Button adminBtn;
 
     @FXML private TextField usernameField;
     @FXML private TextField emailField;
@@ -97,7 +98,6 @@ public class WelcomeController implements Initializable {
         alert.showAndWait();
     }
 
-    // Manual Form Registration in MySQL
     @FXML
     private void handleSignUp() {
         String username = usernameField.getText().trim();
@@ -109,36 +109,16 @@ public class WelcomeController implements Initializable {
             return;
         }
 
-        String insertSql = "INSERT INTO User_table (Name, Email, Password, last_login_date) VALUES (?, ?, ?, CURRENT_DATE())";
+        // DatabaseManager ရှိ API registerUser ကို တိုက်ရိုက် ခေါ်သုံးခြင်း
+        User registeredUser = DatabaseManager.registerUser(username, email, password);
 
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
-
-            stmt.setString(1, username);
-            stmt.setString(2, email);
-            stmt.setString(3, password);
-            stmt.executeUpdate();
-
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) {
-                int newUserId = keys.getInt(1);
-                User newUser = new User(newUserId, username, email, null, 0, 0, 0, 5);
-                UserSession.initSession(newUser);
-
-                SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
-            }
-
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) { // Duplicate email error code
-                showAlert(Alert.AlertType.ERROR, "Registration Error", "This email is already registered.");
-            } else {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to connect to local database.");
-            }
+        if (registeredUser != null) {
+            UserSession.initSession(registeredUser);
+            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
         }
     }
-
-    // Google Authentication Flow using direct MySQL Sync
     @FXML
     private void handleGoogleSignUp() {
         System.out.println("Opening browser for Google Registration...");
@@ -146,14 +126,19 @@ public class WelcomeController implements Initializable {
         GoogleAuthService.startGoogleLogin(authCode -> {
             System.out.println("Received Google Code: " + authCode);
 
-            GoogleAuthService.fetchUserProfile(authCode, (userId, name, email) -> {
+            GoogleAuthService.fetchUserProfile(authCode, (googleId, name, email) -> {
                 System.out.println("Authenticated Real User: " + email + " (" + name + ")");
 
-                User user = new User(userId, email, name, "", 0, 0, 0, 0);
-
                 Platform.runLater(() -> {
-                    UserSession.initSession(user);
-                    SceneManager.switchScene("MainLayoutView.fxml");
+                    // DatabaseManager ရှိ Google API Endpoint ကို တိုက်ရိုက် ခေါ်ယူခြင်း
+                    User googleUser = DatabaseManager.findOrCreateGoogleUser(email, name, null);
+
+                    if (googleUser != null) {
+                        UserSession.initSession(googleUser);
+                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
+                    }
                 });
             });
         });
@@ -170,62 +155,17 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleJavaCard() {
-        String title = "Java";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "Java is a high-level, object-oriented programming language designed to build robust, secure, and scalable applications with minimal implementation dependencies.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Enterprise Software & Backend Systems\n" +
-                "• Android Mobile Application Development\n" +
-                "• High-Scale Web Services & Cloud Architecture";
-
-        String[] titles = {"Java Basic", "Java Intermediate"};
-        String[] descriptions = {
-                "Learn basic syntax, variables, primitive types, and control flow.",
-                "Master Object-Oriented Programming (OOP), Classes, Inheritance, and Exceptions."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("JavaOverviewView.fxml", "Mimo Platform - Java Overview");
     }
 
     @FXML
     private void handleCppCard() {
-        String title = "C++";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "C++ is a high-performance general-purpose programming language that provides low-level memory control, extreme speed, and direct hardware access.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Game Engines & 3D Real-time Graphics\n" +
-                "• Operating Systems & Low-level System Drivers\n" +
-                "• High-Frequency Financial Trading & Embedded Systems";
-
-        String[] titles = {"C++ Basic", "C++ Intermediate"};
-        String[] descriptions = {
-                "Understand C++ syntax, basic data types, condition statements, and loops.",
-                "Master Pointers, Memory Management (Stack/Heap), References, and OOP concepts."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("CppOverviewView.fxml", "Mimo Platform - C++ Overview");
     }
 
     @FXML
     private void handlePythonCard() {
-        String title = "Python";
-        String subtitle = "Language Overview";
-        String details = "🚀 INTRODUCTION\n" +
-                "Python is a beginner-friendly, interpreted programming language known for its clean syntax, rapid development capabilities, and powerful libraries.\n\n" +
-                "🎯 USE FOR WHAT\n" +
-                "• Artificial Intelligence & Machine Learning\n" +
-                "• Data Science, Analytics & Visualization\n" +
-                "• Web Backend Services & Automation Scripts";
-
-        String[] titles = {"Python Basic", "Python Intermediate"};
-        String[] descriptions = {
-                "Learn Python basics, variables, user input, and string formatting.",
-                "Work with Data Structures (Lists, Dicts, Sets), Control Flow, and Functions."
-        };
-
-        navigateToDetail(title, subtitle, details, titles, descriptions);
+        SceneManager.switchScene("PythonOverviewView.fxml", "Mimo Platform - Python Overview");
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

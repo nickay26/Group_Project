@@ -1,0 +1,98 @@
+{
+  "lessonId": "JAVA_226",
+  "title": "Bounded Type Parameters",
+  "slides": [
+    {
+      "slideId": "JAVA_226_S1",
+      "type": "CONCEPT",
+      "title": "Bounded Type Parameters",
+      "prompt": "Bounded type parameters restrict the types that can be used as arguments. Use extends to set an upper bound.",
+      "codeSnippet": "public class Program {\n    public static <T extends Number> void print(T value) {\n        System.out.println(value);\n    }\n    \n    public static void main(String[] args) {\n        print(100);\n        print(3.14);\n    }\n}",
+      "output": "100\n3.14"
+    },
+    {
+      "slideId": "JAVA_226_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Definition",
+      "prompt": "What is a bounded type parameter?",
+      "options": ["A type parameter with a restriction", "A type parameter with no restriction", "A type parameter with multiple types", "A type parameter with no type"],
+      "correctAnswer": "A type parameter with a restriction"
+    },
+    {
+      "slideId": "JAVA_226_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Keyword",
+      "prompt": "Which keyword is used to set an upper bound?",
+      "options": ["extends", "implements", "super", "this"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_226_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Number",
+      "prompt": "What does <T extends Number> mean?",
+      "options": ["T can be any Number type", "T can be any type", "T can be String", "T can be Object"],
+      "correctAnswer": "T can be any Number type"
+    },
+    {
+      "slideId": "JAVA_226_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Benefit",
+      "prompt": "What is the benefit of bounded types?",
+      "options": ["Type restriction", "Faster code", "Less memory", "More errors"],
+      "correctAnswer": "Type restriction"
+    },
+    {
+      "slideId": "JAVA_226_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Bounded Type",
+      "prompt": "Complete the bounded type parameter.",
+      "codeSnippet": "public static <T ______ Number> void print(T value) {\n}",
+      "options": ["extends", "implements", "super", "this"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_226_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Bounded Type Class",
+      "prompt": "Complete the bounded type parameter.",
+      "codeSnippet": "class Box<T ______ Number> {\n}",
+      "options": ["extends", "implements", "super", "this"],
+      "correctAnswer": "extends"
+    },
+    {
+      "slideId": "JAVA_226_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Bounded Type Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T extends Number> void print(T value) {\n  System.out.println(value);\n}\nprint(100);",
+      "options": ["100", "value", "T", "Error"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "JAVA_226_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Bounded Type Double",
+      "prompt": "What is the output?",
+      "codeSnippet": "public static <T extends Number> void print(T value) {\n  System.out.println(value);\n}\nprint(3.14);",
+      "options": ["3.14", "value", "T", "Error"],
+      "correctAnswer": "3.14"
+    },
+    {
+      "slideId": "JAVA_226_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Restriction",
+      "prompt": "Which type is NOT allowed with <T extends Number>?",
+      "options": ["String", "Integer", "Double", "Float"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_226_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Type Upper Bound",
+      "prompt": "What is an upper bound?",
+      "options": ["The maximum type that can be used", "The minimum type that can be used", "The default type", "The null type"],
+      "correctAnswer": "The maximum type that can be used"
+    }
+  ]
+}

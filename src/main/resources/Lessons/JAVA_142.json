@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_142",
+  "title": "Practice: Char At",
+  "slides": [
+    {
+      "slideId": "JAVA_142_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Method",
+      "prompt": "Which method returns a character at a specific index?",
+      "options": ["charAt()", "charOf()", "getChar()", "characterAt()"],
+      "correctAnswer": "charAt()"
+    },
+    {
+      "slideId": "JAVA_142_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(0));",
+      "options": ["J", "o", "h", "n"],
+      "correctAnswer": "J"
+    },
+    {
+      "slideId": "JAVA_142_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(3));",
+      "options": ["n", "J", "o", "h"],
+      "correctAnswer": "n"
+    },
+    {
+      "slideId": "JAVA_142_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "CharAt",
+      "prompt": "Complete the code to output \"J\".",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(__));",
+      "options": ["0", "1", "2", "3"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_142_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "CharAt",
+      "prompt": "Complete the code to output \"n\".",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(__));",
+      "options": ["3", "0", "1", "2"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_142_S6",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.charAt(0));",
+      "options": ["J", "a", "v", "Error"],
+      "correctAnswer": "J"
+    },
+    {
+      "slideId": "JAVA_142_S7",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.charAt(2));",
+      "options": ["v", "J", "a", "Error"],
+      "correctAnswer": "v"
+    },
+    {
+      "slideId": "JAVA_142_S8",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hello\";\nSystem.out.println(s.charAt(1));",
+      "options": ["e", "H", "l", "o"],
+      "correctAnswer": "e"
+    },
+    {
+      "slideId": "JAVA_142_S9",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hello\";\nSystem.out.println(s.charAt(4));",
+      "options": ["o", "H", "e", "l"],
+      "correctAnswer": "o"
+    },
+    {
+      "slideId": "JAVA_142_S10",
+      "type": "CODE_OUTPUT",
+      "title": "CharAt Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hi\";\nSystem.out.println(s.charAt(0));",
+      "options": ["H", "i", "Hi", "Error"],
+      "correctAnswer": "H"
+    },
+    {
+      "slideId": "JAVA_142_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CharAt Index",
+      "prompt": "What is the index of the first character in a String?",
+      "options": ["0", "1", "-1", "10"],
+      "correctAnswer": "0"
+    }
+  ]
+}

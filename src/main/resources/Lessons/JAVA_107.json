@@ -1,0 +1,104 @@
+{
+  "lessonId": "JAVA_107",
+  "title": "Output Check",
+  "slides": [
+    {
+      "slideId": "JAVA_107_S1",
+      "type": "CODE_OUTPUT",
+      "title": "String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"5\" + 3);",
+      "options": ["53", "8", "5 3", "Error"],
+      "correctAnswer": "53"
+    },
+    {
+      "slideId": "JAVA_107_S2",
+      "type": "CODE_OUTPUT",
+      "title": "String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 + \"3\");",
+      "options": ["53", "8", "5 3", "Error"],
+      "correctAnswer": "53"
+    },
+    {
+      "slideId": "JAVA_107_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Empty String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 + 3 + \"\");",
+      "options": ["8", "53", "5 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_107_S4",
+      "type": "CODE_OUTPUT",
+      "title": "Empty String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"\" + 5 + 3);",
+      "options": ["53", "8", "5 3", "Error"],
+      "correctAnswer": "53"
+    },
+    {
+      "slideId": "JAVA_107_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Mixed Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(1 + 2 + \"3\" + 4 + 5);",
+      "options": ["3345", "12345", "15", "Error"],
+      "correctAnswer": "3345"
+    },
+    {
+      "slideId": "JAVA_107_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "String Concatenation",
+      "prompt": "Complete the code to output \"53\".",
+      "codeSnippet": "System.out.println(\"5\" __ 3);",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "JAVA_107_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Number Concatenation",
+      "prompt": "Complete the code to output 8.",
+      "codeSnippet": "System.out.println(5 __ 3 + \"\");",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "JAVA_107_S8",
+      "type": "CODE_OUTPUT",
+      "title": "String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Java\" + \" \" + \"Rocks\");",
+      "options": ["Java Rocks", "JavaRocks", "Java+Rocks", "Error"],
+      "correctAnswer": "Java Rocks"
+    },
+    {
+      "slideId": "JAVA_107_S9",
+      "type": "CODE_OUTPUT",
+      "title": "String Number Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Java\" + 5);",
+      "options": ["Java5", "5Java", "Java 5", "Error"],
+      "correctAnswer": "Java5"
+    },
+    {
+      "slideId": "JAVA_107_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Number String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 + \"Java\");",
+      "options": ["5Java", "Java5", "5 Java", "Error"],
+      "correctAnswer": "5Java"
+    },
+    {
+      "slideId": "JAVA_107_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Rule",
+      "prompt": "When one operand is a String, what happens to the other operand?",
+      "options": ["It is converted to a String", "It is ignored", "It causes an error", "It is converted to an integer"],
+      "correctAnswer": "It is converted to a String"
+    }
+  ]
+}

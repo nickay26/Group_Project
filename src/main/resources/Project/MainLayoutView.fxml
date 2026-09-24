@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
 
     <!-- PERMANENT LEFT SIDEBAR MENU -->
@@ -29,7 +31,7 @@
                         <Button fx:id="coursesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavCourses" prefHeight="38.0" styleClass="nav-button" text="Courses" />
                         <Button fx:id="playgroundBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavPlayground" prefHeight="38.0" styleClass="nav-button" text="Playground" />
                         <Button fx:id="leaderboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleLeaderBoard" prefHeight="38.0" styleClass="nav-button" text="Leaderboard" />
-                        <Button fx:id="practiceBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="38.0" styleClass="nav-button" text="Practice or Review" />
+                        <Button fx:id="practiceBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleNavPractice" prefHeight="38.0" styleClass="nav-button" text="Practice or Review" />
                         <Button fx:id="gamesBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" prefHeight="38.0" styleClass="nav-button" text="Games" />
                     </children>
                 </VBox>
@@ -61,11 +63,39 @@
                         <Region HBox.hgrow="ALWAYS" />
 
                         <!-- HEADER STATS AND BUTTONS -->
-                        <Label styleClass="header-stat" text="🔥 0" />
-                        <Label styleClass="header-stat" text="🧠 0" />
-                        <Label styleClass="header-stat" text="💎 0" />
+                        <!-- HEADER STATS AND BUTTONS -->
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/fire.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/brain.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
+                        <Label styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/coin.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+
                         <Button styleClass="premium-button" text="Premium" />
-                        <Button styleClass="header-button" text="👤 Profile" />
+                        <Button styleClass="header-button" text="Profile" />
                     </children>
                 </HBox>
 

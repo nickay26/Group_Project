@@ -1,0 +1,100 @@
+{
+  "lessonId": "JAVA_136",
+  "title": "String Length",
+  "slides": [
+    {
+      "slideId": "JAVA_136_S1",
+      "type": "CONCEPT",
+      "title": "String Length",
+      "prompt": "The length() method returns the number of characters in a String.",
+      "codeSnippet": "public class Program {\n    public static void main(String[] args) {\n        String name = \"John\";\n        System.out.println(name.length());\n    }\n}",
+      "output": "4"
+    },
+    {
+      "slideId": "JAVA_136_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Length Method",
+      "prompt": "How do you get the length of a String?",
+      "options": ["str.length()", "str.length", "str.size()", "str.count()"],
+      "correctAnswer": "str.length()"
+    },
+    {
+      "slideId": "JAVA_136_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Length Value",
+      "prompt": "What is the length of \"Java\"?",
+      "options": ["4", "3", "5", "0"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_136_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Length Value",
+      "prompt": "What is the length of \"Hello World\"?",
+      "options": ["11", "10", "12", "9"],
+      "correctAnswer": "11"
+    },
+    {
+      "slideId": "JAVA_136_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "String Length",
+      "prompt": "Complete the code to get the length.",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.______());",
+      "options": ["length", "size", "count", "len"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "JAVA_136_S6",
+      "type": "CODE_OUTPUT",
+      "title": "String Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.length());",
+      "options": ["4", "5", "John", "Error"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_136_S7",
+      "type": "CODE_OUTPUT",
+      "title": "String Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.length());",
+      "options": ["4", "5", "Java", "Error"],
+      "correctAnswer": "4"
+    },
+    {
+      "slideId": "JAVA_136_S8",
+      "type": "CODE_OUTPUT",
+      "title": "String Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hi\";\nSystem.out.println(s.length());",
+      "options": ["2", "1", "3", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_136_S9",
+      "type": "CODE_OUTPUT",
+      "title": "String Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"\";\nSystem.out.println(s.length());",
+      "options": ["0", "1", "null", "Error"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_136_S10",
+      "type": "CODE_OUTPUT",
+      "title": "String Length Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Programming\";\nSystem.out.println(s.length());",
+      "options": ["11", "10", "12", "Error"],
+      "correctAnswer": "11"
+    },
+    {
+      "slideId": "JAVA_136_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Length",
+      "prompt": "What does str.length() return?",
+      "options": ["Number of characters", "Last character", "First character", "Sum of characters"],
+      "correctAnswer": "Number of characters"
+    }
+  ]
+}

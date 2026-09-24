@@ -1,0 +1,103 @@
+{
+  "lessonId": "JAVA_139",
+  "title": "Practice: String Upper Case",
+  "slides": [
+    {
+      "slideId": "JAVA_139_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uppercase Method",
+      "prompt": "Which method converts a String to uppercase?",
+      "options": ["toUpperCase()", "toLowerCase()", "upper()", "uppercase()"],
+      "correctAnswer": "toUpperCase()"
+    },
+    {
+      "slideId": "JAVA_139_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hello\";\nSystem.out.println(s.toUpperCase());",
+      "options": ["HELLO", "hello", "Hello", "Error"],
+      "correctAnswer": "HELLO"
+    },
+    {
+      "slideId": "JAVA_139_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.toUpperCase());",
+      "options": ["JAVA", "java", "Java", "Error"],
+      "correctAnswer": "JAVA"
+    },
+    {
+      "slideId": "JAVA_139_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Uppercase",
+      "prompt": "Complete the code to convert to uppercase.",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.________());",
+      "options": ["toUpperCase", "toLower", "upper", "toUpper"],
+      "correctAnswer": "toUpperCase"
+    },
+    {
+      "slideId": "JAVA_139_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Uppercase",
+      "prompt": "Complete the code to convert to uppercase.",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.________());",
+      "options": ["toUpperCase", "toLower", "upper", "toUpper"],
+      "correctAnswer": "toUpperCase"
+    },
+    {
+      "slideId": "JAVA_139_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.toUpperCase());",
+      "options": ["JOHN", "john", "John", "Error"],
+      "correctAnswer": "JOHN"
+    },
+    {
+      "slideId": "JAVA_139_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"hello\";\nSystem.out.println(s.toUpperCase());",
+      "options": ["HELLO", "hello", "Hello", "Error"],
+      "correctAnswer": "HELLO"
+    },
+    {
+      "slideId": "JAVA_139_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Java Programming\";\nSystem.out.println(s.toUpperCase());",
+      "options": ["JAVA PROGRAMMING", "java programming", "Java Programming", "Error"],
+      "correctAnswer": "JAVA PROGRAMMING"
+    },
+    {
+      "slideId": "JAVA_139_S9",
+      "type": "CODE_OUTPUT",
+      "title": "Lowercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"HELLO\";\nSystem.out.println(s.toLowerCase());",
+      "options": ["hello", "HELLO", "Hello", "Error"],
+      "correctAnswer": "hello"
+    },
+    {
+      "slideId": "JAVA_139_S10",
+      "type": "CODE_OUTPUT",
+      "title": "Uppercase Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String s = \"Hi\";\nSystem.out.println(s.toUpperCase());",
+      "options": ["HI", "hi", "Hi", "Error"],
+      "correctAnswer": "HI"
+    },
+    {
+      "slideId": "JAVA_139_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Method",
+      "prompt": "What does toUpperCase() return?",
+      "options": ["A new uppercase String", "The same String", "A number", "A boolean"],
+      "correctAnswer": "A new uppercase String"
+    }
+  ]
+}
