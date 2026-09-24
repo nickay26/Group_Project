@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.json.JSONObject;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,11 +15,22 @@ public class FriendMatchController {
     @FXML private TextField joinCodeInput;
     @FXML private Label statusLabel;
 
+    // Render Cloud WebSocket Server URL
+    private static final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
+
     @FXML
     public void initialize() {
 
+        // ====================================================================
+        // [1] Production Mode (အကောင့်အစစ်ဖြင့် သုံးရန်)
         String currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
-        WebSocketService.getInstance().connect("ws://localhost:8080/ws", currentUserId, new WebSocketService.NotificationListener() {
+
+        // [2] Testing Mode (စက်တစ်လုံးတည်း App ၂ ခုပြိုင်ဖွင့် စမ်းလိုပါက အောက်ပါလိုင်းကို Uncomment လုပ်ပါ)
+        // String currentUserId = "TEST_USER_" + (int)(Math.random() * 1000);
+        // ====================================================================
+
+        // WebSocket Server ဆီ ချိတ်ဆက်ခြင်း
+        WebSocketService.getInstance().connect(SERVER_URL, currentUserId, new WebSocketService.NotificationListener() {
 
             @Override
             public void onInviteReceived(String fromUser, String language) {
@@ -31,47 +41,38 @@ public class FriendMatchController {
                 alert.setContentText("Do you want to accept?");
 
                 alert.showAndWait().ifPresent(response -> {
-                    JSONObject res = new JSONObject();
-                    res.put("type", "INVITE_RESPONSE");
-                    res.put("fromUser", currentUserId);
-                    res.put("toUser", fromUser);
-
                     if (response == ButtonType.OK) {
-                        res.put("action", "ACCEPT");
+                        WebSocketService.getInstance().respondInvite(fromUser, "ACCEPT");
                     } else {
-                        res.put("action", "DECLINE");
+                        WebSocketService.getInstance().respondInvite(fromUser, "REJECT");
                     }
-                    WebSocketService.getInstance().sendText(res.toString());
                 });
             }
 
             @Override
             public void onGameStart(String roomId, String language) {
-                // နှစ်ဘက်လုံး Accept လုပ်ပြီးပါက Server မှ START_GAME ရောက်လာပြီး Game Panel ပွင့်မည်
+                // နှစ်ဘက်လုံး Accept လုပ်ပြီးပါက Game View သို့ ကူးမည်
                 loadGameViewAndStart(language);
             }
         });
     }
 
-    // 1. Invite Following စာရင်းထဲမှ Friend ကို Invite နှိပ်ချိန် ခေါ်ရမည့် မက်သဒ်
+    // 1. Friend List မှတစ်ဆင့် Invite ပို့ခြင်း
     public void handleInvitePlayer(String targetUserId) {
-        JSONObject inviteJson = new JSONObject();
-        inviteJson.put("type", "INVITE_SEND");
-        inviteJson.put("fromUser", UserSession.getInstance().getCurrentUser().getUserId());
-        inviteJson.put("toUser", targetUserId);
-        inviteJson.put("language", "java");
+        String currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
 
-        WebSocketService.getInstance().sendText(inviteJson.toString());
+        WebSocketService.getInstance().sendInvite(currentUserId, targetUserId, "java");
 
         if (statusLabel != null) {
             statusLabel.setText("Invite sent to " + targetUserId + "...");
         }
     }
 
-    // 2. Code ရိုက်ပြီး Join မည့် မက်သဒ်
+    // 2. Room Code ရိုက်ထည့်၍ Join/Invite ပို့ခြင်း
     @FXML
     private void handleJoinMatch() {
         String enteredCode = joinCodeInput.getText().trim();
+        String currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
 
         if (enteredCode.isEmpty()) {
             if (statusLabel != null) {
@@ -81,18 +82,14 @@ public class FriendMatchController {
         }
 
         if (statusLabel != null) {
-            statusLabel.setText("Joining room " + enteredCode + "...");
+            statusLabel.setText("Connecting to room " + enteredCode + "...");
         }
 
-        // Server သို့ Code ဖြင့် Join ကြောင်း သတင်းပို့မည်
-        JSONObject joinJson = new JSONObject();
-        joinJson.put("type", "JOIN_ROOM");
-        joinJson.put("userId", UserSession.getInstance().getCurrentUser().getUserId());
-        joinJson.put("roomCode", enteredCode);
-        WebSocketService.getInstance().sendText(joinJson.toString());
+        // Host ၏ Room Code/User ID ထံ Invite Request ပို့မည်
+        WebSocketService.getInstance().sendInvite(currentUserId, enteredCode, "java");
     }
 
-    // 3. AI Question Load လုပ်ပြီး GamePanel (Gameview.fxml) သို့ ကူးပြောင်းပေးမည့် Helper Method
+    // 3. AI Question Load လုပ်ပြီး GamePanel (Gameview.fxml) သို့ သွားမည်
     private void loadGameViewAndStart(String language) {
         if (statusLabel != null) {
             statusLabel.setText("Loading question from AI...");
@@ -100,6 +97,7 @@ public class FriendMatchController {
 
         CompletableFuture.supplyAsync(() -> AiQuestionService.fetchAiQuestion(language))
                 .thenAccept(aiJsonResponse -> Platform.runLater(() -> {
+                    // FXML File Path Case Sensitivity စစ်ဆေးပါ (GameView.fxml သို့မဟုတ် Gameview.fxml)
                     FXMLLoader loader = SceneManager.switchScene("/Project/Gameview.fxml", "Mimo Platform - Code Challenge");
 
                     if (loader != null) {

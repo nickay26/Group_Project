@@ -2,21 +2,16 @@ package Project;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import java.io.IOException;
+
 public class MainLayoutController {
 
     private static MainLayoutController instance;
@@ -48,8 +43,12 @@ public class MainLayoutController {
         updateHeaderStats();
         updateCourseTitle();
 
-        // Load default page on startup
-        handleNavLearn();
+        // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
+        if (UserSession.isRedirectedFromOverview()) {
+            handleNavLearn();
+        } else {
+            handleNavCourses(); // ဒါကြောင့် Login ဝင်လာရင် Courses Page နဲ့ Active Highlight အော်တို ပေါ်ပါမည်
+        }
     }
 
     public static MainLayoutController getInstance() {
@@ -91,31 +90,26 @@ public class MainLayoutController {
 
     @FXML
     public void handleNavLearn() {
-        setActiveButton(learnBtn);
         loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
-        setActiveButton(coursesBtn);
         loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
-        setActiveButton(playgroundBtn);
         loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
-        setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
-
     }
+
     @FXML
-    private void handlePractice() {
-        setActiveButton(practiceBtn);
+    public void handleNavPractice() {
         loadPage("PracticeView.fxml");
     }
 
@@ -190,10 +184,13 @@ public class MainLayoutController {
             Parent view = loader.load();
 
             contentArea.getChildren().setAll(view);
+
+            // FXML Name အလိုက် Sidebar Highlight ပြောင်းမည်
             updateSidebarHighlight(fxmlFileName);
 
             return loader;
         } catch (IOException e) {
+            System.err.println("Error loading FXML: " + fxmlFileName);
             e.printStackTrace();
             return null;
         }
@@ -214,7 +211,10 @@ public class MainLayoutController {
             setActiveButton(gamesBtn);
         }
     }
+
     private void setActiveButton(Button activeButton) {
+        if (navButtons == null || activeButton == null) return;
+
         for (Button btn : navButtons) {
             btn.getStyleClass().remove("nav-button-active");
             if (!btn.getStyleClass().contains("nav-button")) {
