@@ -165,17 +165,7 @@ public class PracticeController {
                 );
             }
 
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeQuestion.fxml"));
-            Parent root = loader.load();
-
-            PracticeQuestionController controller = loader.getController();
-            controller.setQuestion(question);
-
-            Stage stage = (Stage) cardContainer.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Practice - " + data.title);
-            stage.show();
+            SceneManager.switchScene("PracticeQuestion.fxml");
 
         } catch (Exception ex) {
             ex.printStackTrace();

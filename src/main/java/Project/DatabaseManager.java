@@ -97,14 +97,17 @@ public class DatabaseManager {
         if (userId <= 0) return "CPP_BASIC";
 
         try {
-            List<Course> courses = getCoursesForUser(userId);
-            if (courses != null && !courses.isEmpty()) {
-                return courses.get(0).getCourseId(); // ပထမဆုံး Course ကို Default ယူခြင်း
+            String response = sendGetRequest("/api/user/last-course/" + userId);
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                if (json.has("course_id")) {
+                    return json.getString("course_id");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "CPP_BASIC"; // Connection မရပါက သို့မဟုတ် Dataset မရှိပါက Default ပေးမည့် Course ID
+        return "CPP_BASIC";
     }
 
     // ==========================================
@@ -295,17 +298,35 @@ public class DatabaseManager {
         return false;
     }
 
-    // Helper Mapping Method
+    // ==========================================
+    // HELPER METHODS
+    // ==========================================
+
+    // GET Request များ ခေါ်ယူရာတွင် အသုံးပြုရန် Generic Helper
+    private static String sendGetRequest(String path) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
+        }
+        return "";
+    }
+
+    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
     private static User mapJsonToUser(JSONObject obj) {
-        return new User(
-                obj.getInt("User_ID"),
-                obj.getString("Name"),
-                obj.getString("Email"),
-                obj.optString("Profile", null),
-                obj.optInt("XP", 0),
-                obj.optInt("Streak", 0),
-                obj.optInt("coin", 0),
-                obj.optInt("brain_count", 5)
-        );
+        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
+        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
+        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+        String profile = obj.optString("Profile", obj.optString("profile", null));
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
+        int coin = obj.optInt("coin", obj.optInt("Coin", 0));
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+
+        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
 }

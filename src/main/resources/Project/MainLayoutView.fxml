@@ -63,8 +63,7 @@
                         <Region HBox.hgrow="ALWAYS" />
 
                         <!-- HEADER STATS AND BUTTONS -->
-                        <!-- HEADER STATS AND BUTTONS -->
-                        <Label styleClass="header-stat" text=" 0">
+                        <Label fx:id="topStreakLabel" styleClass="header-stat" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
@@ -74,7 +73,7 @@
                             </graphic>
                         </Label>
 
-                        <Label styleClass="header-stat" text=" 0">
+                        <Label fx:id="topBrainLabel" styleClass="header-stat" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
@@ -84,7 +83,7 @@
                             </graphic>
                         </Label>
 
-                        <Label styleClass="header-stat" text=" 0">
+                        <Label fx:id="topCoinLabel" styleClass="header-stat" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
@@ -95,7 +94,7 @@
                         </Label>
 
                         <Button styleClass="premium-button" text="Premium" />
-                        <Button styleClass="header-button" text="Profile" />
+                        <Button fx:id="profileBtn" onAction="#handleProfileClick" styleClass="header-button" text="Profile" />
                     </children>
                 </HBox>
 

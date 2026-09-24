@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" styleClass="practice-root"
+<BorderPane styleClass="practice-root"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Project.PracticeController">
