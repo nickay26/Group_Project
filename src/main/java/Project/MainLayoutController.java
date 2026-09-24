@@ -98,8 +98,8 @@ public class MainLayoutController {
     }
 
     @FXML
-    public void handleNavGames() {
-        loadPage("GamesView.fxml");
+    public void handleGame() {
+        loadPage("GameModeView.fxml");
     }
 
     public FXMLLoader loadPage(String fxmlFileName) {
