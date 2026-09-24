@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="30" prefWidth="850" prefHeight="650"
+      style="-fx-background-color: #ffffff; -fx-padding: 40;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Project.FriendMatchController">
+
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="6">
+        <Label text="FRIEND MATCH" style="-fx-text-fill: #666666; -fx-font-weight: bold; -fx-font-size: 13px; -fx-letter-spacing: 2px;"/>
+        <Label text="Play with a Friend" style="-fx-text-fill: #000000; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+    </VBox>
+
+    <HBox alignment="CENTER" spacing="30" prefWidth="750">
+
+        <!-- Create Room Card -->
+        <VBox alignment="CENTER" spacing="18" prefWidth="340" prefHeight="230"
+              style="-fx-background-color: #ffffff; -fx-padding: 24; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+            <Label text="🏠" style="-fx-font-size: 32px;"/>
+            <Label text="Host a Game" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Create a new room and invite your friends to play." wrapText="true" alignment="CENTER" style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+
+            <Button text="Create Room ➔" onAction="#handleCreateRoom" prefWidth="220" prefHeight="42"
+                    style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        </VBox>
+
+        <!-- Join Room Card -->
+        <VBox alignment="CENTER" spacing="15" prefWidth="340" prefHeight="230"
+              style="-fx-background-color: #ffffff; -fx-padding: 24; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+            <Label text="🔑" style="-fx-font-size: 32px;"/>
+            <Label text="Join a Game" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <TextField fx:id="joinCodeInput" promptText="Enter Room Code (e.g. X7K9P2)" alignment="CENTER" prefHeight="40" maxWidth="220"
+                       style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+
+            <Button text="Join Match ➔" onAction="#handleJoinMatch" prefWidth="220" prefHeight="42"
+                    style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;"/>
+        </VBox>
+
+    </HBox>
+
+    <Button text="← Back to Game Modes" onAction="#handleBack"
+            style="-fx-background-color: transparent; -fx-text-fill: #666666; -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+</VBox>

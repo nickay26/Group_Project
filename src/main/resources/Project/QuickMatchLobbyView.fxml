@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="30" prefWidth="850" prefHeight="650"
+      style="-fx-background-color: #ffffff; -fx-padding: 40;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Project.QuickMatchLobbyController">
+
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="6">
+        <Label text="QUICK MATCH" style="-fx-text-fill: #666666; -fx-font-weight: bold; -fx-font-size: 13px; -fx-letter-spacing: 2px;"/>
+        <Label fx:id="statusTitleLabel" text="Finding Opponent..." style="-fx-text-fill: #000000; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+    </VBox>
+
+    <!-- VS Profile Matchup Container -->
+    <HBox alignment="CENTER" spacing="25">
+
+        <!-- User Profile (You) -->
+        <VBox alignment="CENTER" spacing="12" prefWidth="280" prefHeight="260"
+              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+            <Label text="👤" style="-fx-font-size: 48px;"/>
+            <Label fx:id="userNameLabel" text="You" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Level 12 • Pro" style="-fx-text-fill: #16a34a; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- VS Icon -->
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="VS" style="-fx-text-fill: #000000; -fx-font-size: 28px; -fx-font-weight: bold; -fx-font-style: italic;"/>
+        </VBox>
+
+        <!-- Random Opponent Profile -->
+        <VBox alignment="CENTER" spacing="12" prefWidth="280" prefHeight="260"
+              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+            <Label fx:id="opponentAvatarLabel" text="🔍" style="-fx-font-size: 48px;"/>
+            <Label fx:id="opponentNameLabel" text="Searching..." style="-fx-text-fill: #666666; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label fx:id="opponentStatusLabel" text="Matching skill level..." style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+        </VBox>
+
+    </HBox>
+
+    <!-- Sub Status / Countdown -->
+    <VBox alignment="CENTER" spacing="8">
+        <Label fx:id="countdownLabel" text="Searching for online players..." style="-fx-text-fill: #2563eb; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+    </VBox>
+
+    <!-- Cancel Button -->
+    <Button text="Cancel Matchmaking" onAction="#handleCancel"
+            style="-fx-background-color: transparent; -fx-text-fill: #dc2626; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+</VBox>
