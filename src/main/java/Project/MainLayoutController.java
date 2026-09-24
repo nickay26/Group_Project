@@ -2,12 +2,9 @@ package Project;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -24,18 +21,12 @@ public class MainLayoutController {
     @FXML private StackPane contentArea;
     @FXML private Label currentCourseLabel;
 
-    @FXML private Label topStreakLabel;
-    @FXML private Label topBrainLabel;
-    @FXML private Label topCoinLabel;
-
     @FXML private Button learnBtn;
     @FXML private Button coursesBtn;
     @FXML private Button playgroundBtn;
     @FXML private Button leaderboardBtn;
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
-    @FXML private Button profileBtn;
-    private ContextMenu profileMenu;
 
     private List<Button> navButtons;
 
@@ -45,7 +36,6 @@ public class MainLayoutController {
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
         // Automatically fetch and display active course title
-        updateHeaderStats();
         updateCourseTitle();
 
         // Load default page on startup
@@ -59,15 +49,6 @@ public class MainLayoutController {
     public void setCourseTitle(String title) {
         if (currentCourseLabel != null) {
             currentCourseLabel.setText(title != null ? title : "No Active Course");
-        }
-    }
-
-    public void updateHeaderStats() {
-        User currentUser = UserSession.getCurrentUser();
-        if (currentUser != null) {
-            topStreakLabel.setText(" " + currentUser.getStreak());
-            topBrainLabel.setText(" " + currentUser.getBrainCount());
-            topCoinLabel.setText(" " + currentUser.getCoin());
         }
     }
 
@@ -111,59 +92,12 @@ public class MainLayoutController {
     public void handleLeaderBoard() {
         setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
-
     }
     @FXML
-    private void handlePractice() {
-        setActiveButton(practiceBtn);
-        loadPage("PracticeView.fxml");
+    private void handleNavPractice() {
+        setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
+        loadPage("PracticeView.fxml");                          // ← loadPage သုံး
     }
-
-    @FXML
-    private void handleProfileClick() {
-        if (profileMenu == null) {
-            profileMenu = new ContextMenu();
-
-            MenuItem editProfileItem = new MenuItem("Edit profile");
-            MenuItem settingsItem = new MenuItem("Settings");
-            MenuItem helpItem = new MenuItem("Help");
-            MenuItem logoutItem = new MenuItem("Log out");
-
-            // Event Handlers
-            editProfileItem.setOnAction(e -> handleEditProfile());
-            settingsItem.setOnAction(e -> handleSettings());
-            helpItem.setOnAction(e -> handleHelp());
-            logoutItem.setOnAction(e -> handleLogout());
-
-            profileMenu.getItems().addAll(editProfileItem, settingsItem, helpItem, logoutItem);
-        }
-
-        // Dropdown Menu ဖွင့်/ပိတ် ပြုလုပ်ခြင်း
-        if (profileMenu.isShowing()) {
-            profileMenu.hide();
-        } else {
-            profileMenu.show(profileBtn, Side.BOTTOM, -30, 8);
-        }
-    }
-
-    private void handleEditProfile() {
-        loadPage("ProfileView.fxml");
-    }
-
-    private void handleSettings() {
-        loadPage("SettingsView.fxml");
-    }
-
-    private void handleHelp() {
-        loadPage("HelpView.fxml");
-    }
-
-    private void handleLogout() {
-        // Session clear ပြုလုပ်ခြင်း
-        UserSession.clearSession();
-        SceneManager.switchScene("WelcomeView.fxml");
-    }
-
     public FXMLLoader loadPage(String fxmlFileName) {
         try {
             String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;

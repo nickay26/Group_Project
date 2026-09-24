@@ -1,30 +1,91 @@
 {
   "lessonId": "CPP_101",
-  "lessonOrder": 0,
-  "title": "CPP Lesson 101",
-  "xp": 0,
+  "title": "C++ Introduction & Syntax",
   "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_101_S1",
       "type": "CONCEPT",
-      "title": "\"Basic Syntax Overview\"",
-      "prompt": "\"Every C++ program starts with a main() function and uses standard header files like iostream.\"",
-      "codeSnippet": "\"#include \u003ciostream\u003e\\nint main() {\\n    std::cout \u003c\u003c \\\"Hello World!\\\";\\n    return 0;\\n}\""
+      "title": "Basic Syntax Overview",
+      "prompt": "Every C++ program starts with a main() function and uses standard header files like iostream.",
+      "codeSnippet": "#include <iostream>\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}"
     },
     {
       "slideId": "CPP_101_S2",
       "type": "FILL_IN_BLANK",
-      "title": "\"Header File Inclusion\"",
-      "prompt": "\"Fill in the correct header file for input/output operations.\"",
-      "codeSnippet": "\"#include \u003c___\u003e\"",
-      "options": [
-        "\"iostream\"",
-        "\"stdio.h\"",
-        "\"string\"",
-        "\"cmath\""
-      ],
-      "correctAnswer": "\"iostream\""
+      "title": "Header File Inclusion",
+      "prompt": "Fill in the correct header file for input/output operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["iostream", "stdio.h", "string", "cmath"],
+      "correctAnswer": "iostream"
+    },
+    {
+      "slideId": "CPP_101_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Program Entry Point",
+      "prompt": "Which function is mandatory for executing any C++ program?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "correctAnswer": "main()"
+    },
+    {
+      "slideId": "CPP_101_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Statement Terminator",
+      "prompt": "Fill in the required character that ends almost every statement in C++.",
+      "codeSnippet": "std::cout << \"C++\"___",
+      "options": [";", ":", ".", ","],
+      "correctAnswer": ";"
+    },
+    {
+      "slideId": "CPP_101_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Extension",
+      "prompt": "What is the standard file extension for C++ source code files?",
+      "options": [".cpp", ".c", ".java", ".exe"],
+      "correctAnswer": ".cpp"
+    },
+    {
+      "slideId": "CPP_101_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Value",
+      "prompt": "Complete the return statement indicating successful execution.",
+      "codeSnippet": "return ___;",
+      "options": ["0", "1", "null", "true"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_101_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Case Sensitivity",
+      "prompt": "Is C++ a case-sensitive programming language?",
+      "options": ["Yes, uppercase and lowercase matter", "No, it ignores case", "Only for variable names", "Only for keywords"],
+      "correctAnswer": "Yes, uppercase and lowercase matter"
+    },
+    {
+      "slideId": "CPP_101_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Function Return Type",
+      "prompt": "Fill in the correct return type for the main function.",
+      "codeSnippet": "___ main() {\n    return 0;\n}",
+      "options": ["int", "void", "double", "string"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_101_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compiler Role",
+      "prompt": "What is the purpose of a C++ compiler?",
+      "options": ["Translates C++ code into machine code", "Runs the operating system", "Styles text on screen", "Connects to the database"],
+      "correctAnswer": "Translates C++ code into machine code"
+    },
+    {
+      "slideId": "CPP_101_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Keyword",
+      "prompt": "Fill in the keyword used to avoid typing std:: repeatedly.",
+      "codeSnippet": "using ___ std;",
+      "options": ["namespace", "package", "library", "module"],
+      "correctAnswer": "namespace"
     }
   ]
 }
