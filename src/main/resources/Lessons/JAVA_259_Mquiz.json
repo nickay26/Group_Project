@@ -1,0 +1,74 @@
+{
+  "lessonId": "JAVA_259_Mquiz",
+  "title": "Module Quiz - Program Structure",
+  "slides": [
+    {
+      "slideId": "JAVA_259_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Naming",
+      "prompt": "What should a Java class name start with?",
+      "options": ["Capital Letter", "Small Letter", "Number", "Symbol"],
+      "correctAnswer": "Capital Letter"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Main Method Return",
+      "prompt": "What is the return type of the main method?",
+      "options": ["void", "int", "String", "boolean"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Method",
+      "prompt": "Complete the main method declaration.",
+      "codeSnippet": "public static void main(String[] ____) {\n}",
+      "options": ["args", "main", "String", "void"],
+      "correctAnswer": "args"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Static Keyword",
+      "prompt": "Complete the main method declaration.",
+      "codeSnippet": "public ______ void main(String[] args) {\n}",
+      "options": ["static", "final", "abstract", "private"],
+      "correctAnswer": "static"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Program Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\");\n    System.out.println(\"World\");\n  }\n}",
+      "options": ["Hello World (separate lines)", "HelloWorld", "Hello, World", "Error"],
+      "correctAnswer": "Hello World (separate lines)"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Program Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "public class Test {\n  public static void main(String[] args) {\n    System.out.print(\"A\");\n    System.out.print(\"B\");\n  }\n}",
+      "options": ["AB", "A B", "A\\nB", "Error"],
+      "correctAnswer": "AB"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Entry Point",
+      "prompt": "What is the entry point of a Java program?",
+      "options": ["main()", "start()", "init()", "run()"],
+      "correctAnswer": "main()"
+    },
+    {
+      "slideId": "JAVA_259_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Block Delimiters",
+      "prompt": "How do you open and close a block in Java?",
+      "options": ["{ and }", "( and )", "[ and ]", "< and >"],
+      "correctAnswer": "{ and }"
+    }
+  ]
+}

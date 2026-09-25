@@ -1,0 +1,74 @@
+{
+  "lessonId": "JAVA_268_Mquiz",
+  "title": "Module Quiz - Functional Interface",
+  "slides": [
+    {
+      "slideId": "JAVA_268_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface",
+      "prompt": "A functional interface has exactly ___________ abstract method(s).",
+      "options": ["1", "2", "3", "0"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Functional Annotation",
+      "prompt": "Complete the annotation.",
+      "codeSnippet": "@____________\ninterface Greeting {\n  void sayHello();\n}",
+      "options": ["FunctionalInterface", "Interface", "Function", "Lambda"],
+      "correctAnswer": "FunctionalInterface"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Runnable Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "Runnable r = () -> System.out.println(\"Running\");\nr.run();",
+      "options": ["Running", "Runnable", "r", "Error"],
+      "correctAnswer": "Running"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Built-in Functional",
+      "prompt": "Which is a built-in functional interface?",
+      "options": ["Runnable", "String", "Integer", "ArrayList"],
+      "correctAnswer": "Runnable"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Interface Method",
+      "prompt": "Complete the interface declaration.",
+      "codeSnippet": "interface Greeting {\n  ____ sayHello();\n}",
+      "options": ["void", "int", "String", "boolean"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface Use",
+      "prompt": "What can be used with a functional interface?",
+      "options": ["Lambda expressions", "Normal classes", "Abstract classes", "Static methods"],
+      "correctAnswer": "Lambda expressions"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Custom Functional",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface MathOp { int operate(int a, int b); }\nMathOp add = (a, b) -> a + b;\nSystem.out.println(add.operate(10, 20));",
+      "options": ["30", "1020", "10 + 20", "Error"],
+      "correctAnswer": "30"
+    },
+    {
+      "slideId": "JAVA_268_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Purpose",
+      "prompt": "Why do we use functional interfaces?",
+      "options": ["To enable lambda expressions", "To make code slower", "To create classes", "To hide data"],
+      "correctAnswer": "To enable lambda expressions"
+    }
+  ]
+}

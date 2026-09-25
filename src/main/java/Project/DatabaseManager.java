@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -307,5 +308,9 @@ public class DatabaseManager {
                 obj.optInt("coin", 0),
                 obj.optInt("brain_count", 5)
         );
+    }
+
+    public static Connection getConnection() {
+        return null;
     }
 }
