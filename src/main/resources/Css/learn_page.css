@@ -50,7 +50,6 @@
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0, 0, 3);
 }
 
 .module-title {

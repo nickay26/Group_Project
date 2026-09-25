@@ -245,17 +245,8 @@ public class PracticeQuestionController {
     // ============================================
     @FXML
     public void handleBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeView.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) titleLabel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Mimo Platform - Practice");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SceneManager.switchScene("MainLayoutView.fxml");
+        MainLayoutController.getInstance().loadPage("PracticeView.fxml");
     }
 
     // ============================================

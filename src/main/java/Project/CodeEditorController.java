@@ -243,17 +243,8 @@ public class CodeEditorController {
     @FXML
     public void handleBackToDashboard() {
         if (currentProject != null) handleSaveCode();
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("PracticeView.fxml"));
-            Parent view = loader.load();
-            StackPane contentArea = (StackPane) codeEditor.getScene().lookup("#contentArea");
-            if (contentArea != null) {
-                contentArea.getChildren().setAll(view);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SceneManager.switchScene("MainLayoutView.fxml");
+        MainLayoutController.getInstance().loadPage("PlaygroundDashboardView.fxml");
     }
 
     // ============================================

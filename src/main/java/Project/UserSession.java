@@ -44,7 +44,7 @@ public class UserSession {
         return instance;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 

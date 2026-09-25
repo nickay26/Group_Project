@@ -19,12 +19,18 @@ public class MainLayoutController {
     @FXML private StackPane contentArea;
     @FXML private Label currentCourseLabel;
 
+    @FXML private Label topStreakLabel;
+    @FXML private Label topBrainLabel;
+    @FXML private Label topCoinLabel;
+
     @FXML private Button learnBtn;
     @FXML private Button coursesBtn;
     @FXML private Button playgroundBtn;
     @FXML private Button leaderboardBtn;
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
+    @FXML private Button profileBtn;
+    private ContextMenu profileMenu;
 
     private List<Button> navButtons;
 
@@ -33,7 +39,8 @@ public class MainLayoutController {
         instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
-        // Active Course Title ကို Update လုပ်မည်
+        // Automatically fetch and display active course title
+        updateHeaderStats();
         updateCourseTitle();
 
         // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
@@ -51,6 +58,15 @@ public class MainLayoutController {
     public void setCourseTitle(String title) {
         if (currentCourseLabel != null) {
             currentCourseLabel.setText(title != null ? title : "No Active Course");
+        }
+    }
+
+    public void updateHeaderStats() {
+        User currentUser = UserSession.getCurrentUser();
+        if (currentUser != null) {
+            topStreakLabel.setText(" " + currentUser.getStreak());
+            topBrainLabel.setText(" " + currentUser.getBrainCount());
+            topCoinLabel.setText(" " + currentUser.getCoin());
         }
     }
 
@@ -98,8 +114,53 @@ public class MainLayoutController {
     }
 
     @FXML
-    public void handleGame() {
+    private void handleGame() {
+        setActiveButton(gamesBtn);
         loadPage("GameModeView.fxml");
+    }
+    @FXML
+    private void handleProfileClick() {
+        if (profileMenu == null) {
+            profileMenu = new ContextMenu();
+
+            MenuItem editProfileItem = new MenuItem("Edit profile");
+            MenuItem settingsItem = new MenuItem("Settings");
+            MenuItem helpItem = new MenuItem("Help");
+            MenuItem logoutItem = new MenuItem("Log out");
+
+            // Event Handlers
+            editProfileItem.setOnAction(e -> handleEditProfile());
+            settingsItem.setOnAction(e -> handleSettings());
+            helpItem.setOnAction(e -> handleHelp());
+            logoutItem.setOnAction(e -> handleLogout());
+
+            profileMenu.getItems().addAll(editProfileItem, settingsItem, helpItem, logoutItem);
+        }
+
+        // Dropdown Menu ဖွင့်/ပိတ် ပြုလုပ်ခြင်း
+        if (profileMenu.isShowing()) {
+            profileMenu.hide();
+        } else {
+            profileMenu.show(profileBtn, Side.BOTTOM, -30, 8);
+        }
+    }
+
+    private void handleEditProfile() {
+        loadPage("ProfileView.fxml");
+    }
+
+    private void handleSettings() {
+        loadPage("SettingsView.fxml");
+    }
+
+    private void handleHelp() {
+        loadPage("HelpView.fxml");
+    }
+
+    private void handleLogout() {
+        // Session clear ပြုလုပ်ခြင်း
+        UserSession.clearSession();
+        SceneManager.switchScene("WelcomeView.fxml");
     }
 
     public FXMLLoader loadPage(String fxmlFileName) {
