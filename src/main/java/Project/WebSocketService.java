@@ -26,26 +26,45 @@ public class WebSocketService implements WebSocket.Listener {
         return instance;
     }
 
-    // 1. Server သို့ Connection စတင်ချိတ်ဆက်ခြင်း
+    // 1. Server သို့ Connection စတင်ချိတ်ဆက်ခြင်း (Duplicate Connection ကာကွယ်ထားပါသည်)
     public void connect(String serverUrl, String currentUserId, NotificationListener listener) {
         this.notificationListener = listener;
+
+        // Connection ရှိပြီးသား ဖြစ်နေပါက အသစ် ထပ်မချိတ်ဘဲ REGISTER သာ ပြန်လုပ်ပေးမည်
+        if (webSocket != null && !webSocket.isInputClosed()) {
+            System.out.println("WebSocket connection already active. Re-registering user: " + currentUserId);
+            registerUser(currentUserId);
+            return;
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         client.newWebSocketBuilder()
                 .buildAsync(URI.create(serverUrl), this)
                 .thenAccept(ws -> {
                     this.webSocket = ws;
-                    // Connect ရသည်နှင့် မိမိ UserId ကို Server သို့ မှတ်ပုံတင်ပါ
-                    JSONObject reg = new JSONObject();
-                    reg.put("type", "REGISTER");
-                    reg.put("userId", currentUserId);
-                    sendText(reg.toString());
+                    System.out.println("Connected to Render WebSocket Server!");
+                    registerUser(currentUserId);
+                })
+                .exceptionally(ex -> {
+                    System.err.println("WebSocket Connection Failed: " + ex.getMessage());
+                    return null;
                 });
+    }
+
+    // Helper Method: User ကို Server တွင် မှတ်ပုံတင်ခြင်း
+    private void registerUser(String currentUserId) {
+        JSONObject reg = new JSONObject();
+        reg.put("type", "REGISTER");
+        reg.put("userId", currentUserId);
+        sendText(reg.toString());
     }
 
     // 2. Text Message ပို့ရန် အခြေခံ Method
     public void sendText(String text) {
-        if (webSocket != null) {
+        if (webSocket != null && !webSocket.isOutputClosed()) {
             webSocket.sendText(text, true);
+        } else {
+            System.err.println("Cannot send message. WebSocket is not connected.");
         }
     }
 
@@ -59,7 +78,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // 4. Invite လက်ခံ/ငြင်းပယ်ရန် Helper Method (action = "ACCEPT" သို့မဟုတ် "REJECT")
+    // 4. Invite လက်ခံ/ငင်းပယ်ရန် Helper Method (action = "ACCEPT" သို့မဟုတ် "REJECT")
     public void respondInvite(String toUser, String action) {
         JSONObject json = new JSONObject();
         json.put("type", "INVITE_RESPONSE");
@@ -72,6 +91,8 @@ public class WebSocketService implements WebSocket.Listener {
     @Override
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         String message = data.toString();
+        System.out.println("Received from Server: " + message);
+
         JSONObject json = new JSONObject(message);
         String type = json.optString("type");
 
@@ -81,15 +102,26 @@ public class WebSocketService implements WebSocket.Listener {
 
             if ("INVITE_RECEIVED".equals(type)) {
                 String fromUser = json.getString("fromUser");
-                String language = json.optString("language", "C++");
+                String language = json.optString("language", "java");
                 notificationListener.onInviteReceived(fromUser, language);
             } else if ("START_GAME".equals(type)) {
                 String roomId = json.getString("roomId");
-                String language = json.optString("language", "C++");
+                String language = json.optString("language", "java");
                 notificationListener.onGameStart(roomId, language);
             }
         });
 
         return WebSocket.Listener.super.onText(webSocket, data, last);
+    }
+
+    @Override
+    public void onError(WebSocket webSocket, Throwable error) {
+        System.err.println("WebSocket Error: " + error.getMessage());
+    }
+
+    @Override
+    public CompletionStage<?> onClose(WebSocket webSocket, int statusCode, String reason) {
+        System.out.println("WebSocket Disconnected: " + reason);
+        return WebSocket.Listener.super.onClose(webSocket, statusCode, reason);
     }
 }
