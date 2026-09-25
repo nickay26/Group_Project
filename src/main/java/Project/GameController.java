@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -91,31 +92,43 @@ public class GameController {
             handleLoadingFailure();
         }
     }
+    private void parseAndStoreQuestions(String jsonText) {
+        try {
+            if (jsonText == null || jsonText.isBlank()) {
+                System.err.println("JSON Text is empty!");
+                return;
+            }
 
-    private void parseAndStoreQuestions(String rawText) throws Exception {
-        questionList.clear();
+            JSONArray questionsArray;
+            String trimmed = jsonText.trim();
 
-        if (rawText.contains("candidates")) {
-            JSONObject json = new JSONObject(rawText);
-            JSONArray candidates = json.getJSONArray("candidates");
-            rawText = candidates.getJSONObject(0)
-                    .getJSONObject("content")
-                    .getJSONArray("parts")
-                    .getJSONObject(0)
-                    .getString("text");
-        }
+            // ရောက်လာသော JSON သည် Object ဖြစ်နေပါက Handle လုပ်မည်
+            if (trimmed.startsWith("{")) {
+                JSONObject obj = new JSONObject(trimmed);
+                if (obj.has("questions")) {
+                    questionsArray = obj.getJSONArray("questions");
+                } else {
+                    int start = trimmed.indexOf('[');
+                    int end = trimmed.lastIndexOf(']');
+                    if (start != -1 && end > start) {
+                        questionsArray = new JSONArray(trimmed.substring(start, end + 1));
+                    } else {
+                        throw new JSONException("No valid JSON Array found in response");
+                    }
+                }
+            } else {
+                questionsArray = new JSONArray(trimmed);
+            }
 
-        rawText = rawText.replaceAll("```json", "").replaceAll("```", "").trim();
+            // JSONArray မှ မေးခွန်းများ ထုတ်ယူသည့် Logic
+            for (int i = 0; i < questionsArray.length(); i++) {
+                JSONObject qObj = questionsArray.getJSONObject(i);
+                // မိမိ၏ Question Object ထည့်သွင်းသည့် logic များကို ဒီနေရာတွင် ဆက်လက်ရေးသားပါ
+            }
 
-        int firstBracket = rawText.indexOf("[");
-        int lastBracket = rawText.lastIndexOf("]");
-        if (firstBracket != -1 && lastBracket != -1) {
-            rawText = rawText.substring(firstBracket, lastBracket + 1);
-        }
-
-        JSONArray array = new JSONArray(rawText);
-        for (int i = 0; i < array.length(); i++) {
-            questionList.add(array.getJSONObject(i));
+        } catch (Exception e) {
+            System.err.println("Error parsing questions JSON: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

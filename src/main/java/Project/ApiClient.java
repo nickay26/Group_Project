@@ -125,4 +125,25 @@ public class ApiClient {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body);
     }
+
+    // ==========================================
+    // 8. BATCH AI QUESTIONS GENERATION
+    // ==========================================
+    public static CompletableFuture<String> fetchAiQuestionsBatchAsync(String language, String level, int count) {
+        String jsonPayload = String.format(
+                "{\"language\": \"%s\", \"level\": \"%s\", \"count\": %d}",
+                escapeJson(language),
+                escapeJson(level),
+                count
+        );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/questions/batch"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body);
+    }
 }
