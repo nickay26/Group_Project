@@ -9,8 +9,12 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "https://NickayJohn26.pythonanywhere.com";
+    // 1. URL Hostname ကို စာလုံးသေး ပြောင်းထားသည်
+    private static final String BASE_URL = "https://nickayjohn26.pythonanywhere.com";
+
+    // 2. HttpClient တွင် Redirects များကို ခွင့်ပြုပေးထားသည်
     private static final HttpClient client = HttpClient.newBuilder()
+            .followRedirects(HttpClient.Redirect.ALWAYS)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
@@ -31,7 +35,11 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Execute Code Error: " + ex.getMessage());
+                    return null;
+                });
     }
 
     // ==========================================
@@ -51,15 +59,16 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Review Code Error: " + ex.getMessage());
+                    return null;
+                });
     }
+
     // ==========================================
     // 6. PRACTICE QUESTIONS API
     // ==========================================
-
-    /**
-     * Practice Question အတွက် Code ကို Gemini နဲ့ Review လုပ်
-     */
     public static CompletableFuture<String> reviewPracticeCodeAsync(
             String language, String code, String task) {
         String jsonPayload = String.format(
@@ -76,8 +85,13 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Review Practice Error: " + ex.getMessage());
+                    return null;
+                });
     }
+
     // ==========================================
     // 7. SAVE PROJECT CODE
     // ==========================================
@@ -94,9 +108,13 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Save Project Error: " + ex.getMessage());
+                    return null;
+                });
     }
-    // Utility helper to safely sanitize raw code into valid JSON strings
+
     private static String escapeJson(String raw) {
         if (raw == null) return "";
         return raw.replace("\\", "\\\\")
@@ -105,9 +123,9 @@ public class ApiClient {
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
     }
+
     public static CompletableFuture<String> generateQuestionAsync(
             String language, String topic, int level) {
-        // Type ကို random ရွေး
         String[] types = {"fill-blank", "drag-drop", "write-code"};
         String type = types[(int)(Math.random() * types.length)];
 
@@ -123,7 +141,11 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Generate Question Error: " + ex.getMessage());
+                    return null;
+                });
     }
 
     // ==========================================
@@ -144,6 +166,11 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Batch Questions API Error: " + ex.getMessage());
+                    ex.printStackTrace();
+                    return null;
+                });
     }
 }

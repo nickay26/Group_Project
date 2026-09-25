@@ -120,10 +120,10 @@ public class GameController {
                 questionsArray = new JSONArray(trimmed);
             }
 
-            // JSONArray မှ မေးခွန်းများ ထုတ်ယူသည့် Logic
+            // JSONArray မှ မေးခွန်းများကို questionList ထဲသို့ ထည့်သွင်းပေးမည်
             for (int i = 0; i < questionsArray.length(); i++) {
                 JSONObject qObj = questionsArray.getJSONObject(i);
-                // မိမိ၏ Question Object ထည့်သွင်းသည့် logic များကို ဒီနေရာတွင် ဆက်လက်ရေးသားပါ
+                questionList.add(qObj); // <-- ဒီလိုင်း ကျန်ခဲ့ခြင်း ဖြစ်ပါသည်
             }
 
         } catch (Exception e) {
