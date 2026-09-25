@@ -1,18 +1,9 @@
 package Project;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class AiQuestionService {
-
-    // ⚠️ မိမိ၏ Gemini API Key (AIzaSy...) ကို ဒီနေရာတွင် ထည့်ပါ
-    private static final String API_KEY = "AQ.Ab8RN6IGju_XNY-bAgyVdvQic7vwOskvS5alYQm6dZCljVuKFA";
-    private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
 
     public static String fetchAiQuestion(String selectedOption) {
         return fetchAiQuestionsBatch(selectedOption, 5);
@@ -29,59 +20,94 @@ public class AiQuestionService {
                 level = parts[1].replace(")", "");
             }
 
-            String promptText = """
-                Generate a JSON array of %d COMPLETELY DIFFERENT, UNIQUE multiple-choice questions about %s programming language at %s level.
-                Do NOT repeat any questions. Each question MUST be unique.
-                Format strictly as a JSON array:
-                [
-                  {
-                    "question": "Question text here?",
-                    "options": ["Option A", "Option B", "Option C", "Option D"],
-                    "correctIndex": 0
-                  }
-                ]
-                Do NOT include markdown backticks like ```json. Return ONLY valid raw JSON array text.
-                """.formatted(count, language.toUpperCase(), level.toUpperCase());
+            // ApiClient မှတစ်ဆင့် Async ဖြင့် ခေါ်ယူပြီး ရလဒ်ကို စောင့်ယူခြင်း
+            String responseBody = ApiClient.fetchAiQuestionsBatchAsync(language, level, count)
+                    .join(); // Async ရလဒ် ရောက်သည်အထိ စောင့်မည်
 
-            JSONObject partObj = new JSONObject();
-            partObj.put("text", promptText);
+            if (responseBody != null && !responseBody.isBlank()) {
+                // Backend မှ Gemini Response Envelope (candidates -> content -> parts) ပါလာပါက parse လုပ်မည်
+                if (responseBody.contains("candidates")) {
+                    JSONObject jsonResponse = new JSONObject(responseBody);
+                    String rawText = jsonResponse
+                            .getJSONArray("candidates")
+                            .getJSONObject(0)
+                            .getJSONObject("content")
+                            .getJSONArray("parts")
+                            .getJSONObject(0)
+                            .getString("text");
 
-            JSONArray partsArray = new JSONArray();
-            partsArray.put(partObj);
+                    return cleanJsonString(rawText);
+                }
 
-            JSONObject contentObj = new JSONObject();
-            contentObj.put("parts", partsArray);
-
-            JSONArray contentsArray = new JSONArray();
-            contentsArray.put(contentObj);
-
-            JSONObject requestJson = new JSONObject();
-            requestJson.put("contents", contentsArray);
-
-            HttpClient client = HttpClient.newBuilder()
-                    .connectTimeout(Duration.ofSeconds(15))
-                    .build();
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(API_URL))
-                    .timeout(Duration.ofSeconds(15))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(requestJson.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                return response.body();
+                // Backend မှ တိုက်ရိုက် JSON Array ပြန်ပေးပါက သန့်စင်ပြီး ပြန်ပေးမည်
+                return cleanJsonString(responseBody);
             } else {
-                System.err.println("Gemini Error Code: " + response.statusCode());
-                System.err.println("Response: " + response.body());
-                return null;
+                System.err.println("Empty response from ApiClient backend");
+                return getFallbackQuestions(language);
             }
 
         } catch (Exception e) {
-            System.err.println("API Exception: " + e.getMessage());
-            return null;
+            System.err.println("API Exception via ApiClient: " + e.getMessage());
+            return getFallbackQuestions("C++");
         }
+    }
+    private static String cleanJsonString(String rawText) {
+        if (rawText == null || rawText.isBlank()) return getFallbackQuestions("C++");
+
+        String cleaned = rawText.trim();
+        if (cleaned.startsWith("```json")) {
+            cleaned = cleaned.substring(7);
+        } else if (cleaned.startsWith("```")) {
+            cleaned = cleaned.substring(3);
+        }
+        if (cleaned.endsWith("```")) {
+            cleaned = cleaned.substring(0, cleaned.length() - 3);
+        }
+        cleaned = cleaned.trim();
+
+        // Object ဖြစ်နေပါက Array ပါသော နေရာကို ရှာပြီး ဆွဲထုတ်မည်
+        if (cleaned.startsWith("{")) {
+            try {
+                JSONObject obj = new JSONObject(cleaned);
+                if (obj.has("questions")) {
+                    return obj.getJSONArray("questions").toString();
+                } else if (obj.has("candidates")) {
+                    String extractedText = obj.getJSONArray("candidates")
+                            .getJSONObject(0)
+                            .getJSONObject("content")
+                            .getJSONArray("parts")
+                            .getJSONObject(0)
+                            .getString("text");
+                    return cleanJsonString(extractedText); // Recursive Clean
+                }
+            } catch (Exception ignored) {}
+
+            // String ထဲမှ '[' နှင့် ']' ကြားရှိ စာသားကို သီးသန့် ဖြတ်ယူမည်
+            int firstBracket = cleaned.indexOf('[');
+            int lastBracket = cleaned.lastIndexOf(']');
+            if (firstBracket != -1 && lastBracket > firstBracket) {
+                return cleaned.substring(firstBracket, lastBracket + 1);
+            }
+        }
+
+        // JSON Array မဟုတ်ပါက Fallback မေးခွန်း ပြန်ပေးမည်
+        if (!cleaned.startsWith("[")) {
+            return getFallbackQuestions("C++");
+        }
+
+        return cleaned;
+    }
+
+    // Backend/Network အဆင်မပြေပါက သုံးမည့် Fallback Question
+    private static String getFallbackQuestions(String language) {
+        return """
+            [
+              {
+                "question": "What is the correct way to output text in %s?",
+                "options": ["Standard output stream", "System print stream", "Console log", "File writer"],
+                "correctIndex": 0
+              }
+            ]
+            """.formatted(language);
     }
 }
