@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_208",
+  "title": "Context Managers & Resource Management",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_208_S1",
+      "type": "CONCEPT",
+      "title": "Context Managers & Resource Management Overview",
+      "prompt": "Context managers handle the precise allocation and release of resources (like file descriptors or network connections) using the 'with' statement. They guarantee proper cleanup even if exceptions occur during execution.",
+      "codeSnippet": "# Class-based Context Manager\nclass FileManager:\n    def __init__(self, filename, mode):\n        self.filename = filename\n        self.mode = mode\n\n    def __enter__(self):\n        self.file = open(self.filename, self.mode)\n        return self.file\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        if self.file:\n            self.file.close()\n\nwith FileManager('test.txt', 'w') as f:\n    f.write('Hello World!')"
+    },
+    {
+      "slideId": "PY_208_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Context Manager Setup Method",
+      "prompt": "Fill in the magic method name executed when entering a 'with' block to acquire resources.",
+      "codeSnippet": "class Database:\n    def ___enter___(self):\n        self.connect()\n        return self",
+      "options": ["enter", "start", "init", "open"],
+      "correctAnswer": "enter"
+    },
+    {
+      "slideId": "PY_208_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exit Method Exception Suppression",
+      "prompt": "How can an __exit__ method prevent an exception that occurred inside a 'with' block from propagating upwards?",
+      "options": [
+        "By returning True from the __exit__ method",
+        "By returning False from the __exit__ method",
+        "By calling sys.exit() inside __exit__",
+        "By raising a StopIteration exception"
+      ],
+      "correctAnswer": "By returning True from the __exit__ method"
+    },
+    {
+      "slideId": "PY_208_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Contextlib Decorator Usage",
+      "prompt": "Fill in the decorator name from 'contextlib' used to turn a generator function into a context manager.",
+      "codeSnippet": "from contextlib import contextmanager\n\n@___\ndef open_file(name):\n    f = open(name, 'w')\n    try:\n        yield f\n    finally:\n        f.close()",
+      "options": ["contextmanager", "context", "resource", "with_statement"],
+      "correctAnswer": "contextmanager"
+    },
+    {
+      "slideId": "PY_208_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parameters of __exit__ Method",
+      "prompt": "Which three parameters must the __exit__ method accept besides 'self' to handle exception details?",
+      "options": [
+        "exc_type, exc_val, exc_tb",
+        "error_code, error_msg, trace",
+        "exception, message, stack",
+        "type, data, traceback"
+      ],
+      "correctAnswer": "exc_type, exc_val, exc_tb"
+    },
+    {
+      "slideId": "PY_208_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "The With Statement Keyword",
+      "prompt": "Fill in the keyword used to bind the target object returned by __enter__ to a variable name.",
+      "codeSnippet": "with open('data.txt') ___ file_obj:\n    data = file_obj.read()",
+      "options": ["as", "into", "to", "for"],
+      "correctAnswer": "as"
+    },
+    {
+      "slideId": "PY_208_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Context Managers Syntax",
+      "prompt": "Which syntax allows managing multiple resources simultaneously in Python 3.10+?",
+      "options": [
+        "with (open('f1.txt') as f1, open('f2.txt') as f2):",
+        "with open('f1.txt') as f1 and open('f2.txt') as f2:",
+        "with [open('f1.txt') as f1, open('f2.txt') as f2]:",
+        "with open('f1.txt') as f1 ; open('f2.txt') as f2:"
+      ],
+      "correctAnswer": "with (open('f1.txt') as f1, open('f2.txt') as f2):"
+    }
+  ]
+}

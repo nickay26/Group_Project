@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_227",
+  "title": "Generators & Iterators: Advanced Generator Methods",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_227_S1",
+      "type": "CONCEPT",
+      "title": "Bi-directional Communication with Generators",
+      "prompt": "Generators can receive values and handle signals dynamically. `send(val)` sends data into a yield expression, `throw(exc)` raises an exception inside the generator, and `close()` shuts down execution.",
+      "codeSnippet": "def accumulator():\n    total = 0\n    while True:\n        val = yield total\n        if val is None:\n            break\n        total += val\n\nacc = accumulator()\nnext(acc)          # Prime generator (returns 0)\nprint(acc.send(10)) # 10\nprint(acc.send(5))  # 15\nacc.close()"
+    },
+    {
+      "slideId": "PY_227_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Priming a Generator with send",
+      "prompt": "Fill in the method name used to resume execution and pass data to a suspended generator.",
+      "codeSnippet": "gen = my_gen()\nnext(gen)\ngen.___(\"Data\")",
+      "options": ["send", "push", "put", "pass"],
+      "correctAnswer": "send"
+    },
+    {
+      "slideId": "PY_227_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Priming Requirement for send()",
+      "prompt": "What must be done before sending a non-None value into a freshly created generator?",
+      "options": [
+        "The generator must be primed first by calling next(gen) or gen.send(None)",
+        "The generator must be registered with a decorator",
+        "The generator must be converted into a list",
+        "Nothing, non-None values can be sent immediately"
+      ],
+      "correctAnswer": "The generator must be primed first by calling next(gen) or gen.send(None)"
+    },
+    {
+      "slideId": "PY_227_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Injecting Exceptions with throw",
+      "prompt": "Fill in the method used to raise an exception inside a paused generator.",
+      "codeSnippet": "gen.___ (ValueError(\"Invalid input\"))",
+      "options": ["throw", "raise", "error", "catch"],
+      "correctAnswer": "throw"
+    },
+    {
+      "slideId": "PY_227_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Closing Generators Cleanly",
+      "prompt": "Which exception is raised inside a generator when its `close()` method is invoked?",
+      "options": [
+        "GeneratorExit",
+        "StopIteration",
+        "KeyboardInterrupt",
+        "SystemExit"
+      ],
+      "correctAnswer": "GeneratorExit"
+    },
+    {
+      "slideId": "PY_227_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Generator Exit Catching Keyword",
+      "prompt": "Fill in the exception type keyword caught during cleanup inside a generator upon close().",
+      "codeSnippet": "try:\n    yield 1\nexcept ___:\n    print(\"Cleaning up...\")",
+      "options": ["GeneratorExit", "StopIteration", "Exception", "BaseException"],
+      "correctAnswer": "GeneratorExit"
+    },
+    {
+      "slideId": "PY_227_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Yielding inside GeneratorExit Catch Block",
+      "prompt": "What happens if a generator yields a new value while handling a GeneratorExit exception during close()?",
+      "options": [
+        "Python raises a RuntimeError: generator ignored GeneratorExit",
+        "The generator resumes normal execution",
+        "The close() function returns the new value",
+        "The generator is converted to a coroutine"
+      ],
+      "correctAnswer": "Python raises a RuntimeError: generator ignored GeneratorExit"
+    }
+  ]
+}
