@@ -114,11 +114,18 @@ public class WelcomeController implements Initializable {
 
         if (registeredUser != null) {
             UserSession.initSession(registeredUser);
-            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+
+            // Overview (Java/CPP) မှ လာခဲ့ခြင်း ဟုတ်/မဟုတ် စစ်ဆေး၍ ရောက်ရှိမည့် View ကို ခွဲခြားခြင်း
+            if (UserSession.isRedirectedFromOverview()) {
+                SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+            } else {
+                SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+            }
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
         }
     }
+
     @FXML
     private void handleGoogleSignUp() {
         System.out.println("Opening browser for Google Registration...");
@@ -135,7 +142,13 @@ public class WelcomeController implements Initializable {
 
                     if (googleUser != null) {
                         UserSession.initSession(googleUser);
-                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+
+                        // Google Sign-Up အောင်မြင်ပြီးနောက် Overview မှ လာလျှင် MainLayout (Learn Screen) သို့ ပို့ပေးခြင်း
+                        if (UserSession.isRedirectedFromOverview()) {
+                            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+                        } else {
+                            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+                        }
                     } else {
                         showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
                     }

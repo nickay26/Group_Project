@@ -73,7 +73,7 @@ public class CppOverviewController implements Initializable {
             SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
         } else {
             // Login မဝင်ရသေးပါက Login View သို့ ပို့ပေးမည်
-            SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+            SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Login");
         }
     }
 }
