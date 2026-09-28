@@ -27,6 +27,8 @@
                     <children>
                         <Button fx:id="btnDashboard" maxWidth="1.7976931348623157E308" onAction="#showDashboardView" styleClass="sidebar-btn-active" text="Dashboard" />
                         <Button fx:id="btnManageQuestions" maxWidth="1.7976931348623157E308" onAction="#showManageQuestionsView" styleClass="sidebar-btn" text="Manage Questions" />
+                        <Button fx:id="btnManagePractice" maxWidth="1.7976931348623157E308" onAction="#showManagePracticeView" styleClass="sidebar-btn"
+                                text="Manage Practice" />
                         <Button fx:id="btnUserAnalytics" maxWidth="1.7976931348623157E308" onAction="#showUserAnalyticsView" styleClass="sidebar-btn" text="User Analytics" />
                         <Button fx:id="btnSettings" maxWidth="1.7976931348623157E308" onAction="#showSettingsView" styleClass="sidebar-btn" text="Settings" />
                     </children>
@@ -63,6 +65,8 @@
 
                         <!-- 2. MANAGE QUESTIONS VIEW INCLUDE -->
                         <fx:include fx:id="manageQuestionsView" source="ManageQuestionsView.fxml" visible="false" />
+                        <!-- ✅ 3. MANAGE PRACTICE VIEW (အသစ်) -->
+                        <fx:include fx:id="managePracticeView" source="AdminPracticeView.fxml" visible="false" />
                     </children>
                 </StackPane>
             </children>
