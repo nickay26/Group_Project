@@ -1,6 +1,10 @@
 /* Course Page Main Root */
 .course-root {
-    -fx-background-color: #0F172A;
+    -fx-background-image: url("../Images/background.png");
+        -fx-background-size: cover;
+        -fx-background-position: center center;
+        -fx-background-repeat: no-repeat;
+        -fx-font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 /* Header Labels */

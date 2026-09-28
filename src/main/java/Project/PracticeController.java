@@ -131,8 +131,8 @@ public class PracticeController {
                 if (is != null) {
                     Image img = new Image(is);
                     iconImage.setImage(img);
-                    iconImage.setFitWidth(120);
-                    iconImage.setFitHeight(120);
+                    iconImage.setFitWidth(100);
+                    iconImage.setFitHeight(100);
                     iconImage.setPreserveRatio(true);
                     iconImage.setSmooth(true);
                 }

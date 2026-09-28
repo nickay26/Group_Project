@@ -58,24 +58,30 @@ public class QuickMatchLobbyController {
             opponentStatusLabel.setText("Level " + (rnd.nextInt(10) + 5) + " • Ready");
             countdownLabel.setText("Starting game in 2 seconds...");
 
-            // 1. ရွေးချယ်ထားသော selectedLanguage ဖြင့် AI မေးခွန်းကို တောင်းယူပါမည်
-            CompletableFuture<String> aiQuestionFuture = CompletableFuture.supplyAsync(() ->
-                    AiQuestionService.fetchAiQuestion(selectedLanguage)
-            );
+            // "C++ (Basic)" စာသားမှ Language နှင့် Level ကို ခွဲထုတ်ခြင်း
+            String langName = selectedLanguage;
+            String levelName = "Basic";
+
+            if (selectedLanguage.contains("(")) {
+                langName = selectedLanguage.substring(0, selectedLanguage.indexOf("(")).trim();
+                levelName = selectedLanguage.substring(selectedLanguage.indexOf("(") + 1, selectedLanguage.indexOf(")")).trim();
+            }
+
+            // 1. အသစ်ထည့်သွင်းထားသော ApiClient.generateCodeChallengeAsync ကို ခေါ်ယူခြင်း
+            CompletableFuture<String> aiQuestionFuture = ApiClient.generateCodeChallengeAsync(langName, levelName);
 
             // 2. CountDown ပြီးမှ GameView သို့ ပြောင်းပါမည်
             transitionDelay = new PauseTransition(Duration.seconds(1.5));
+
             transitionDelay.setOnFinished(evt -> {
                 aiQuestionFuture.thenAccept(aiJsonResponse ->
                         Platform.runLater(() -> {
-                            FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
+                            FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
                             if (loader != null) {
                                 GameController gameController = loader.getController();
 
-                                // (က) GameController ထံသို့ ရွေးချယ်ထားသော Language ပို့ပေးခြင်း (Header Title ပြောင်းရန်)
+                                // Language နှင့် Coding Challenge တိုက်ရိုက် ထည့်သွင်းခြင်း
                                 gameController.setCourseData(selectedLanguage);
-
-                                // (ခ) ပထမမေးခွန်း JSON ကို ပို့ပေးခြင်း
                                 gameController.loadQuestionFromJson(aiJsonResponse);
                             }
                         })
@@ -93,6 +99,7 @@ public class QuickMatchLobbyController {
         if (searchTimeline != null) searchTimeline.stop();
         if (transitionDelay != null) transitionDelay.stop();
 
-        SceneManager.switchScene("/Project/GameModeView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }

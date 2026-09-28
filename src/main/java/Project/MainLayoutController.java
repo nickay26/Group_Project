@@ -153,26 +153,31 @@ public class MainLayoutController {
     }
     @FXML
     public void handleNavLearn() {
+        setActiveButton(learnBtn);
         loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
+        setActiveButton(coursesBtn);
         loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
+        setActiveButton(playgroundBtn);
         loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
+        setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
     }
 
     @FXML
-    public void handleNavPractice() {
+    public void handlePractice() {
+        setActiveButton(practiceBtn);
         loadPage("PracticeView.fxml");
     }
 

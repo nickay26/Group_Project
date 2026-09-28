@@ -149,7 +149,7 @@ public class LoginController {
             GoogleAuthService.fetchUserProfile(authCode, (userIdFromAuth, email, name) -> {
 
                 // 1. Fetch or create local MySQL record to obtain correct User_ID
-                User dbUser = DatabaseManager.findOrCreateGoogleUser(email, name, null);
+                User dbUser = DatabaseManager.findOrCreateGoogleUser(name, email, null);
 
                 if (dbUser != null) {
                     // JavaFX UI Thread ပေါ်တွင် Scene ပြောင်းရန် Platform.runLater သုံးသည်

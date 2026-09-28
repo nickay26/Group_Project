@@ -98,7 +98,7 @@ public class FriendMatchController {
         CompletableFuture.supplyAsync(() -> AiQuestionService.fetchAiQuestion(language))
                 .thenAccept(aiJsonResponse -> Platform.runLater(() -> {
                     // FXML File Path Case Sensitivity စစ်ဆေးပါ (GameView.fxml သို့မဟုတ် Gameview.fxml)
-                    FXMLLoader loader = SceneManager.switchScene("/Project/Gameview.fxml", "Mimo Platform - Code Challenge");
+                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
 
                     if (loader != null) {
                         GameController gameController = loader.getController();
@@ -114,6 +114,7 @@ public class FriendMatchController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("/Project/GameModeView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }
