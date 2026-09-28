@@ -17,6 +17,8 @@ public class WebSocketService implements WebSocket.Listener {
     public interface NotificationListener {
         void onInviteReceived(String fromUser, String language);
         void onGameStart(String roomId, String language);
+        // 📌 [သစ်ထည့်ထားသည်] Quick Match အတွက် Listener Callback
+        void onQuickMatchStart(String roomId, String language, String questionsJson);
     }
 
     public static WebSocketService getInstance() {
@@ -87,6 +89,23 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
+    // 📌 [သစ်ထည့်ထားသည်] Quick Match Queue ထဲ ဝင်ရောက်ရန် Signal ပို့ပေးသည့် Method
+    public void joinQuickMatch(String currentUserId, String language) {
+        JSONObject json = new JSONObject();
+        json.put("type", "QUICK_MATCH_JOIN");
+        json.put("userId", currentUserId);
+        json.put("language", language);
+        sendText(json.toString());
+    }
+
+    // 📌 [သစ်ထည့်ထားသည်] Quick Match စောင့်ဆိုင်းမှုကို ပယ်ဖျက်သည့် Method
+    public void cancelQuickMatch(String currentUserId) {
+        JSONObject json = new JSONObject();
+        json.put("type", "QUICK_MATCH_CANCEL");
+        json.put("userId", currentUserId);
+        sendText(json.toString());
+    }
+
     // 5. Server ထံမှ Message ရောက်ရှိလာပါက လက်ခံသည့် Method
     @Override
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
@@ -108,6 +127,14 @@ public class WebSocketService implements WebSocket.Listener {
                 String roomId = json.getString("roomId");
                 String language = json.optString("language", "java");
                 notificationListener.onGameStart(roomId, language);
+            } else if ("QUICK_MATCH_START".equals(type)) {
+                // 📌 [သစ်ထည့်ထားသည်] Server မှ Quick Match စတင်သည့်အခါ GameView သို့ ပို့ပေးရန် Data ထုတ်ယူခြင်း
+                String roomId = json.optString("roomId", "");
+                String language = json.optString("language", "Python");
+                Object questionsObj = json.opt("questions");
+                String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+
+                notificationListener.onQuickMatchStart(roomId, language, questionsJson);
             }
         });
 

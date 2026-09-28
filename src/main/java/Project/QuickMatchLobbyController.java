@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 public class QuickMatchLobbyController {
 
@@ -23,6 +22,7 @@ public class QuickMatchLobbyController {
     private Timeline searchTimeline;
     private PauseTransition transitionDelay;
     private String selectedLanguage = "C++ (Basic)"; // Default Value
+    private String currentUserId = "Player_" + (int)(Math.random() * 1000); // 📌 Unique Player ID
 
     private final String[] randomNames = {"CodeNinja_99", "DevMaster_X", "JavaGuru", "ByteCoder", "AlgoWizard"};
     private final String[] randomAvatars = {"🤖", "🦊", "🦁", "👾", "🐯"};
@@ -42,62 +42,51 @@ public class QuickMatchLobbyController {
     }
 
     private void startMatchmaking() {
-        // ထပ်ခါထပ်ခါ Run ခြင်းမှ ကာကွယ်ရန် Timeline ဟောင်းကို ရပ်ပါမည်
-        if (searchTimeline != null) {
-            searchTimeline.stop();
-        }
+        if (statusTitleLabel != null) statusTitleLabel.setText("Searching for Online Opponent...");
 
-        searchTimeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-            Random rnd = new Random();
-            String foundName = randomNames[rnd.nextInt(randomNames.length)];
-            String foundAvatar = randomAvatars[rnd.nextInt(randomAvatars.length)];
+        // 📌 Python Flask WebSocket URL (Local Host သို့မဟုတ် Render Server)
+        String serverWsUrl = "ws://localhost:5000/ws";
 
-            statusTitleLabel.setText("Match Found!");
-            opponentAvatarLabel.setText(foundAvatar);
-            opponentNameLabel.setText(foundName);
-            opponentStatusLabel.setText("Level " + (rnd.nextInt(10) + 5) + " • Ready");
-            countdownLabel.setText("Starting game in 2 seconds...");
+        // 1. WebSocket Server သို့ ချိတ်ဆက်၍ Event စောင့်ဆိုင်းခြင်း
+        WebSocketService.getInstance().connect(serverWsUrl, currentUserId, new WebSocketService.NotificationListener() {
+            @Override
+            public void onInviteReceived(String fromUser, String language) {}
 
-            // "C++ (Basic)" စာသားမှ Language နှင့် Level ကို ခွဲထုတ်ခြင်း
-            String langName = selectedLanguage;
-            String levelName = "Basic";
+            @Override
+            public void onGameStart(String roomId, String language) {}
 
-            if (selectedLanguage.contains("(")) {
-                langName = selectedLanguage.substring(0, selectedLanguage.indexOf("(")).trim();
-                levelName = selectedLanguage.substring(selectedLanguage.indexOf("(") + 1, selectedLanguage.indexOf(")")).trim();
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String questionsJson) {
+                Platform.runLater(() -> {
+                    Random rnd = new Random();
+                    if (statusTitleLabel != null) statusTitleLabel.setText("Match Found!");
+                    if (opponentAvatarLabel != null) opponentAvatarLabel.setText(randomAvatars[rnd.nextInt(randomAvatars.length)]);
+                    if (opponentNameLabel != null) opponentNameLabel.setText(randomNames[rnd.nextInt(randomNames.length)]);
+                    if (opponentStatusLabel != null) opponentStatusLabel.setText("Level " + (rnd.nextInt(10) + 5) + " • Ready");
+                    if (countdownLabel != null) countdownLabel.setText("Starting game...");
+
+                    // GameView.fxml သို့ ပြောင်းလဲပြီး မေးခွန်း JSON ပေးပို့မည်
+                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
+                    if (loader != null) {
+                        GameController gameController = loader.getController();
+                        gameController.setCourseData(selectedLanguage);
+                        gameController.loadQuestionFromJson(questionsJson);
+                    }
+                });
             }
+        });
 
-            // 1. အသစ်ထည့်သွင်းထားသော ApiClient.generateCodeChallengeAsync ကို ခေါ်ယူခြင်း
-            CompletableFuture<String> aiQuestionFuture = ApiClient.generateCodeChallengeAsync(langName, levelName);
-
-            // 2. CountDown ပြီးမှ GameView သို့ ပြောင်းပါမည်
-            transitionDelay = new PauseTransition(Duration.seconds(1.5));
-
-            transitionDelay.setOnFinished(evt -> {
-                aiQuestionFuture.thenAccept(aiJsonResponse ->
-                        Platform.runLater(() -> {
-                            FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
-                            if (loader != null) {
-                                GameController gameController = loader.getController();
-
-                                // Language နှင့် Coding Challenge တိုက်ရိုက် ထည့်သွင်းခြင်း
-                                gameController.setCourseData(selectedLanguage);
-                                gameController.loadQuestionFromJson(aiJsonResponse);
-                            }
-                        })
-                );
-            });
-            transitionDelay.play();
-        }));
-
-        searchTimeline.setCycleCount(1);
-        searchTimeline.play();
+        // 2. Queue ထဲ ဝင်ရောက်ရန် Server ထံ Signal ပို့မည်
+        WebSocketService.getInstance().joinQuickMatch(currentUserId, selectedLanguage);
     }
 
     @FXML
     private void handleCancel() {
         if (searchTimeline != null) searchTimeline.stop();
         if (transitionDelay != null) transitionDelay.stop();
+
+        // 📌 Match Cancel လုပ်သည့် Signal ပို့မည်
+        WebSocketService.getInstance().cancelQuickMatch(currentUserId);
 
         SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
         MainLayoutController.getInstance().loadPage("GameModeView.fxml");
