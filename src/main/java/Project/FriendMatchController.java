@@ -54,6 +54,11 @@ public class FriendMatchController {
                 // နှစ်ဘက်လုံး Accept လုပ်ပြီးပါက Game View သို့ ကူးမည်
                 loadGameViewAndStart(language);
             }
+
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String questionsJson) {
+
+            }
         });
     }
 

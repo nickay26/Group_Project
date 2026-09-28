@@ -49,6 +49,11 @@ public class CreateRoomLobbyController {
                 System.out.println("Friend accepted! Starting Game... Room: " + roomId);
                 handleStartMatch();
             }
+
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String questionsJson) {
+
+            }
         });
     }
 
