@@ -1,13 +1,11 @@
 package Project;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -22,7 +20,11 @@ public class QuickMatchLobbyController {
     private Timeline searchTimeline;
     private PauseTransition transitionDelay;
     private String selectedLanguage = "C++ (Basic)";
-    private String currentUserId = "Player_" + (int)(Math.random() * 1000);
+
+    // 📌 Random ID မသုံးဘဲ Google Login အကောင့်၏ User ID အမှန်ကို ယူသုံးပေးပါ
+    private String currentUserId;
+
+    private static final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
 
     private final String[] randomNames = {"CodeNinja_99", "DevMaster_X", "JavaGuru", "ByteCoder", "AlgoWizard"};
     private final String[] randomAvatars = {"🤖", "🦊", "🦁", "👾", "🐯"};
@@ -31,6 +33,14 @@ public class QuickMatchLobbyController {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
         }
+
+        // 📌 User ID ကို UserSession မှ ယူပေးပါ
+        if (UserSession.getInstance().getCurrentUser() != null) {
+            this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
+        } else {
+            this.currentUserId = "GUEST_USER";
+        }
+
         startMatchmaking();
     }
 
@@ -41,12 +51,8 @@ public class QuickMatchLobbyController {
     private void startMatchmaking() {
         if (statusTitleLabel != null) statusTitleLabel.setText("Searching for Online Opponent...");
 
-        // Python Flask WebSocket URL
-        String serverWsUrl = "ws://localhost:5000/ws";
-
-        // 📌 Connection အောင်မြင်မှသာ joinQuickMatch(...) ကို ပို့မည်ဖြစ်၍ Error ကျမည်မဟုတ်ပါ
         WebSocketService.getInstance().connect(
-                serverWsUrl,
+                SERVER_URL,
                 currentUserId,
                 new WebSocketService.NotificationListener() {
                     @Override
@@ -74,7 +80,7 @@ public class QuickMatchLobbyController {
                         });
                     }
                 },
-                // 📌 Callback Parameter: Connection အဆင်သင့်ဖြစ်မှ Queue ထဲဝင်ရန် Signal ပို့ပေးခြင်း
+                // WebSocket Connection တကယ် ပွင့်သွားမှသာ Join ခေါ်ပေးပါမည်
                 () -> WebSocketService.getInstance().joinQuickMatch(currentUserId, selectedLanguage)
         );
     }
