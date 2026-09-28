@@ -17,7 +17,6 @@ public class WebSocketService implements WebSocket.Listener {
     public interface NotificationListener {
         void onInviteReceived(String fromUser, String language);
         void onGameStart(String roomId, String language);
-        // 📌 [သစ်ထည့်ထားသည်] Quick Match အတွက် Listener Callback
         void onQuickMatchStart(String roomId, String language, String questionsJson);
     }
 
@@ -28,14 +27,22 @@ public class WebSocketService implements WebSocket.Listener {
         return instance;
     }
 
-    // 1. Server သို့ Connection စတင်ချိတ်ဆက်ခြင်း (Duplicate Connection ကာကွယ်ထားပါသည်)
+    // 📌 [၁] မူလ Class များမှ connect(...) ခေါ်ဆိုမှုကို မထိခိုက်စေရန် Method Overloading လုပ်ပေးထားခြင်း
     public void connect(String serverUrl, String currentUserId, NotificationListener listener) {
+        connect(serverUrl, currentUserId, listener, null);
+    }
+
+    // 📌 [၂] Connection ကျပြီးမှ အလုပ်လုပ်မည့် Runnable Callback အပါအဝင် connect Method
+    public void connect(String serverUrl, String currentUserId, NotificationListener listener, Runnable onConnected) {
         this.notificationListener = listener;
 
         // Connection ရှိပြီးသား ဖြစ်နေပါက အသစ် ထပ်မချိတ်ဘဲ REGISTER သာ ပြန်လုပ်ပေးမည်
         if (webSocket != null && !webSocket.isInputClosed()) {
             System.out.println("WebSocket connection already active. Re-registering user: " + currentUserId);
             registerUser(currentUserId);
+            if (onConnected != null) {
+                onConnected.run();
+            }
             return;
         }
 
@@ -44,8 +51,12 @@ public class WebSocketService implements WebSocket.Listener {
                 .buildAsync(URI.create(serverUrl), this)
                 .thenAccept(ws -> {
                     this.webSocket = ws;
-                    System.out.println("Connected to Render WebSocket Server!");
+                    System.out.println("Connected to WebSocket Server!");
                     registerUser(currentUserId);
+                    // Connection အောင်မြင်စွာ ရရှိပြီးမှ Callback ကို ခေါ်ပေးမည်
+                    if (onConnected != null) {
+                        onConnected.run();
+                    }
                 })
                 .exceptionally(ex -> {
                     System.err.println("WebSocket Connection Failed: " + ex.getMessage());
@@ -61,7 +72,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(reg.toString());
     }
 
-    // 2. Text Message ပို့ရန် အခြေခံ Method
+    // Text Message ပို့ရန် အခြေခံ Method
     public void sendText(String text) {
         if (webSocket != null && !webSocket.isOutputClosed()) {
             webSocket.sendText(text, true);
@@ -70,7 +81,7 @@ public class WebSocketService implements WebSocket.Listener {
         }
     }
 
-    // 3. Invite ပို့ရန် Helper Method
+    // Invite ပို့ရန် Helper Method
     public void sendInvite(String fromUser, String toUser, String language) {
         JSONObject json = new JSONObject();
         json.put("type", "INVITE_SEND");
@@ -80,7 +91,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // 4. Invite လက်ခံ/ငင်းပယ်ရန် Helper Method (action = "ACCEPT" သို့မဟုတ် "REJECT")
+    // Invite လက်ခံ/ငင်းပယ်ရန် Helper Method (action = "ACCEPT" သို့မဟုတ် "REJECT")
     public void respondInvite(String toUser, String action) {
         JSONObject json = new JSONObject();
         json.put("type", "INVITE_RESPONSE");
@@ -89,7 +100,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // 📌 [သစ်ထည့်ထားသည်] Quick Match Queue ထဲ ဝင်ရောက်ရန် Signal ပို့ပေးသည့် Method
+    // Quick Match Queue ထဲ ဝင်ရောက်ရန် Signal ပို့ပေးသည့် Method
     public void joinQuickMatch(String currentUserId, String language) {
         JSONObject json = new JSONObject();
         json.put("type", "QUICK_MATCH_JOIN");
@@ -98,7 +109,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // 📌 [သစ်ထည့်ထားသည်] Quick Match စောင့်ဆိုင်းမှုကို ပယ်ဖျက်သည့် Method
+    // Quick Match စောင့်ဆိုင်းမှုကို ပယ်ဖျက်သည့် Method
     public void cancelQuickMatch(String currentUserId) {
         JSONObject json = new JSONObject();
         json.put("type", "QUICK_MATCH_CANCEL");
@@ -106,7 +117,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // 5. Server ထံမှ Message ရောက်ရှိလာပါက လက်ခံသည့် Method
+    // Server ထံမှ Message ရောက်ရှိလာပါက လက်ခံသည့် Method
     @Override
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         String message = data.toString();
@@ -115,7 +126,6 @@ public class WebSocketService implements WebSocket.Listener {
         JSONObject json = new JSONObject(message);
         String type = json.optString("type");
 
-        // JavaFX UI Thread ပေါ်တွင် အလုပ်လုပ်စေရန် Platform.runLater သုံးရပါမည်
         Platform.runLater(() -> {
             if (notificationListener == null) return;
 
@@ -128,7 +138,6 @@ public class WebSocketService implements WebSocket.Listener {
                 String language = json.optString("language", "java");
                 notificationListener.onGameStart(roomId, language);
             } else if ("QUICK_MATCH_START".equals(type)) {
-                // 📌 [သစ်ထည့်ထားသည်] Server မှ Quick Match စတင်သည့်အခါ GameView သို့ ပို့ပေးရန် Data ထုတ်ယူခြင်း
                 String roomId = json.optString("roomId", "");
                 String language = json.optString("language", "Python");
                 Object questionsObj = json.opt("questions");
