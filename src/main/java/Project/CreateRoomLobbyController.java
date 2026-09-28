@@ -127,7 +127,7 @@ public class CreateRoomLobbyController {
 
     @FXML
     private void handleLeaveRoom() {
-        SceneManager.switchScene("/Project/FriendMatchView.fxml", "Play with a Friend");
+        SceneManager.switchScene("/Project/FRIEND.fxml", "Play with a Friend");
     }
 
     private String generateRandomCode() {

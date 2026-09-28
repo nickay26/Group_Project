@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
-<AnchorPane style="-fx-background-color: #0F172A;" stylesheets="@../Css/learn_page.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
+<AnchorPane styleClass="learn-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
+    <stylesheets>
+            <URL value = "@../Css/learn_page.css" />
+    </stylesheets>
     <children>
         <!-- SCROLLABLE ROADMAP CONTENT -->
         <ScrollPane fx:id="roadmapScrollPane" fitToWidth="true" styleClass="learn-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

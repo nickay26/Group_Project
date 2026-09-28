@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="25" prefWidth="850" prefHeight="650"
-      style="-fx-background-color: #ffffff; -fx-padding: 40;"
+<VBox alignment="CENTER" spacing="20" prefWidth="850" prefHeight="650"
+      styleClass="main-container"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Project.GameModeController">
 
+    <stylesheets>
+        <URL value="@../Css/game_mode.css"/>
+    </stylesheets>
+
     <!-- Header -->
     <VBox alignment="CENTER" spacing="6">
-        <Label text="CODE CHALLENGE"
-               style="-fx-text-fill: #666666; -fx-font-weight: bold; -fx-font-size: 13px; -fx-letter-spacing: 2px;"/>
-        <Label text="Choose Match Mode"
-               style="-fx-text-fill: #000000; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+        <Label text="CODE CHALLENGE" styleClass="header-subtitle"/>
+        <Label text="Choose Match Mode to Start" styleClass="header-title"/>
     </VBox>
 
-    <!-- Mode Cards -->
-    <HBox alignment="CENTER" spacing="20" prefWidth="750">
+    <!-- Language Selection Box (First Step) -->
+    <VBox alignment="CENTER" spacing="10" maxWidth="420" styleClass="language-box">
+        <Label text="Select Programming Language" styleClass="language-label"/>
+        <ComboBox fx:id="languageComboBox" prefWidth="340" prefHeight="42" styleClass="custom-combo-box"/>
+    </VBox>
+
+    <!-- Action Mode Cards (Direct Click to Play) -->
+    <HBox alignment="CENTER" spacing="24" prefWidth="750">
 
         <!-- Quick Match Card -->
-        <VBox fx:id="quickMatchCard" onMouseClicked="#handleQuickMatch" alignment="CENTER" spacing="10" prefWidth="320" prefHeight="170"
-              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2.5; -fx-cursor: hand;">
-            <Label text="⚡" style="-fx-font-size: 28px;"/>
-            <Label text="Quick Match" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <Label text="Play against a random player immediately" wrapText="true" alignment="CENTER"
-                   style="-fx-text-fill: #555555; -fx-font-size: 12px;"/>
+        <VBox fx:id="quickMatchCard" onMouseClicked="#handleQuickMatch"
+              alignment="CENTER" spacing="12" prefWidth="320" prefHeight="190"
+              styleClass="mode-card, quick-match-card">
+
+            <StackPane styleClass="icon-badge, quick-icon-badge">
+                <Label text="⚡" styleClass="card-icon"/>
+            </StackPane>
+
+            <Label text="Quick Match ➔" styleClass="card-title"/>
+            <Label text="Play against a random player immediately" wrapText="true" alignment="CENTER" styleClass="card-desc"/>
         </VBox>
 
         <!-- Friend Match Card -->
-        <VBox fx:id="friendMatchCard" onMouseClicked="#handleFriendMatch" alignment="CENTER" spacing="10" prefWidth="320" prefHeight="170"
-              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #cccccc; -fx-border-radius: 16; -fx-border-width: 1.5; -fx-cursor: hand;">
-            <Label text="👥" style="-fx-font-size: 28px;"/>
-            <Label text="Friend Match" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <Label text="Challenge a friend or send an invite code" wrapText="true" alignment="CENTER"
-                   style="-fx-text-fill: #555555; -fx-font-size: 12px;"/>
+        <VBox fx:id="friendMatchCard" onMouseClicked="#handleFriendMatch"
+              alignment="CENTER" spacing="12" prefWidth="320" prefHeight="190"
+              styleClass="mode-card">
+
+            <StackPane styleClass="icon-badge, friend-icon-badge">
+                <Label text="👥" styleClass="card-icon"/>
+            </StackPane>
+
+            <Label text="Friend Match ➔" styleClass="card-title"/>
+            <Label text="Challenge a friend or send an invite code" wrapText="true" alignment="CENTER" styleClass="card-desc"/>
         </VBox>
 
     </HBox>
-
-    <!-- Language Selection -->
-    <VBox alignment="CENTER" spacing="10" maxWidth="400"
-          style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 14; -fx-border-color: #000000; -fx-border-radius: 14; -fx-border-width: 1;">
-        <Label text="Select Programming Language" style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
-
-        <ComboBox fx:id="languageComboBox" prefWidth="320" prefHeight="40"
-                  style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
-    </VBox>
-
-    <!-- Start Button -->
-    <Button text="Start Challenge ➔" onAction="#handleStartGame" prefWidth="300" prefHeight="48"
-            style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 24; -fx-cursor: hand;"/>
-
-    <!-- Back Button -->
-    <Button text="Back to Dashboard" onAction="#handleBack"
-            style="-fx-background-color: transparent; -fx-text-fill: #666666; -fx-font-size: 13px; -fx-cursor: hand;"/>
 
 </VBox>

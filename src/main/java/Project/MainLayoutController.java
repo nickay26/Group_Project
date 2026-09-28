@@ -2,9 +2,12 @@ package Project;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -90,26 +93,31 @@ public class MainLayoutController {
 
     @FXML
     public void handleNavLearn() {
+        setActiveButton(learnBtn);
         loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
+        setActiveButton(coursesBtn);
         loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
+        setActiveButton(playgroundBtn);
         loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
+        setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
     }
 
     @FXML
-    public void handleNavPractice() {
+    public void handlePractice() {
+        setActiveButton(practiceBtn);
         loadPage("PracticeView.fxml");
     }
 

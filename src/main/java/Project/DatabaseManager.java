@@ -18,11 +18,11 @@ public class DatabaseManager {
     // 1. USER AUTHENTICATION & SYNC
     // ==========================================
 
-    public static User findOrCreateGoogleUser(String email, String name, String profilePicUrl) {
+    public static User findOrCreateGoogleUser(String name, String email, String profilePicUrl) {
         try {
             JSONObject body = new JSONObject();
-            body.put("email", email);
             body.put("name", name != null ? name : "Google User");
+            body.put("email", email);
             body.put("profile_pic", profilePicUrl);
 
             HttpRequest request = HttpRequest.newBuilder()

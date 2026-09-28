@@ -70,7 +70,7 @@
                                                 <!-- 1. Nebula -->
                                                 <VBox fx:id="nebulaContainer" alignment="CENTER" spacing="6.0">
                                                     <children>
-                                                        <ImageView fx:id="nebulaImage" fitHeight="72.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fx:id="nebulaImg" fitHeight="72.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
                                                                 <Image url="@../Images/Nebula.png" />
                                                             </image>
@@ -81,7 +81,7 @@
                                                 <!-- 2. Protostar -->
                                                 <VBox fx:id="protostarContainer" alignment="CENTER" prefHeight="66.0" prefWidth="58.0" spacing="6.0">
                                                     <children>
-                                                        <ImageView fx:id="protostarImage" fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fx:id="protostarImg" fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
                                                                 <Image url="@../Images/Protostar.png" />
                                                             </image>
@@ -92,7 +92,7 @@
                                                 <!-- 3. Supernova -->
                                                 <VBox fx:id="supernovaContainer" alignment="CENTER" spacing="6.0">
                                                     <children>
-                                                        <ImageView fx:id="supernovaImage" fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fx:id="supernovaImg" fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
                                                                 <Image url="@../Images/Supernova.png" />
                                                             </image>

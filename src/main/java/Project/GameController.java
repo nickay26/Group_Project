@@ -1,275 +1,220 @@
 package Project;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.util.Duration;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class GameController {
 
     @FXML private Label challengeTitleLabel;
     @FXML private Label progressLabel;
     @FXML private Label timerLabel;
-    @FXML private Label questionTextLabel;
-    @FXML private Button option1Btn, option2Btn, option3Btn, option4Btn;
+    @FXML private Label questionTextLabel; // Challenge Problem Description
 
-    private int timeRemaining = 15;
+    @FXML private TextArea codeEditorArea;     // Code ရေးသားရမည့်နေရာ
+    @FXML private TextArea consoleOutputArea;  // Run ရလဒ် ထွက်မည့်နေရာ
+    @FXML private Button runBtn;
+    @FXML private Button submitBtn;
+
+    private int timeRemaining = 300; // မိနစ် ၅ မိနစ် (စက္ကန့် ၃၀၀)
     private Timeline timer;
-    private int correctIndex = 0;
-    private boolean isAnswered = false;
-
-    private String selectedLanguage = "C++ (Basic)";
-    private int currentQuestionIndex = 0;
-    private final int TOTAL_QUESTIONS = 5;
-    private int score = 0;
-
-    private final List<JSONObject> questionList = new ArrayList<>();
-
-    @FXML
-    public void initialize() {
-        this.isAnswered = false;
-        resetOptionStyles();
-        startNewGame();
-    }
+    private String selectedLanguage = "Python";
+    private String currentProblemTask = "";
 
     public void setCourseData(String lang) {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
         }
         if (challengeTitleLabel != null) {
-            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " CODE CHALLENGE");
+            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " LIVE CODING ARENA");
         }
-        startNewGame();
     }
 
-    public void startNewGame() {
-        this.currentQuestionIndex = 0;
-        this.score = 0;
-        this.questionList.clear();
-
-        if (questionTextLabel != null) {
-            questionTextLabel.setText("Generating 5 unique questions using AI...");
+    @FXML
+    public void initialize() {
+        if (consoleOutputArea != null) {
+            consoleOutputArea.setText("Ready. Click 'Run Code' to execute output.");
         }
-        disableOptions(true);
-
-        CompletableFuture.supplyAsync(() -> AiQuestionService.fetchAiQuestionsBatch(selectedLanguage, TOTAL_QUESTIONS))
-                .thenAccept(json -> Platform.runLater(() -> loadQuestionFromJson(json)))
-                .exceptionally(ex -> {
-                    Platform.runLater(this::handleLoadingFailure);
-                    return null;
-                });
     }
 
+    // Lobby မှတစ်ဆင့် ပုစ္ဆာ JSON ရောက်ရှိလာပါက Loading လုပ်ပေးမည်
     public void loadQuestionFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
+            System.err.println("Error: Empty response received from server.");
             handleLoadingFailure();
             return;
         }
 
-        try {
-            parseAndStoreQuestions(jsonResponse);
+        // Backend မှ ပြန်လာသော Raw Response ကို Console တွင် စစ်ဆေးရန် Log ထုတ်ကြည့်ခြင်း
+        System.out.println("DEBUG - Received Response: " + jsonResponse);
 
-            if (!questionList.isEmpty()) {
-                currentQuestionIndex = 0;
-                displayCurrentQuestion();
-            } else {
-                handleLoadingFailure();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            handleLoadingFailure();
-        }
-    }
-    private void parseAndStoreQuestions(String jsonText) {
         try {
-            if (jsonText == null || jsonText.isBlank()) {
-                System.err.println("JSON Text is empty!");
+            String cleanJson = jsonResponse.trim();
+            JSONObject obj = null;
+
+            // Response သည် Array format ([...]) ဖြစ်နေပါက
+            if (cleanJson.startsWith("[")) {
+                org.json.JSONArray array = new org.json.JSONArray(cleanJson);
+                if (array.length() > 0) {
+                    obj = array.getJSONObject(0);
+                }
+            }
+            // Response သည် Object format ({...}) ဖြစ်နေပါက
+            else if (cleanJson.startsWith("{")) {
+                obj = new JSONObject(cleanJson);
+                if (obj.has("questions")) {
+                    org.json.JSONArray questionsArr = obj.getJSONArray("questions");
+                    if (questionsArr.length() > 0) {
+                        obj = questionsArr.getJSONObject(0);
+                    }
+                }
+            }
+            // JSON မဟုတ်သော Error Text သို့မဟုတ် HTML ပြန်လာပါက
+            else {
+                System.err.println("Error: Server did not return a valid JSON format -> " + cleanJson);
+                handleLoadingFailure();
                 return;
             }
 
-            JSONArray questionsArray;
-            String trimmed = jsonText.trim();
-
-            // ရောက်လာသော JSON သည် Object ဖြစ်နေပါက Handle လုပ်မည်
-            if (trimmed.startsWith("{")) {
-                JSONObject obj = new JSONObject(trimmed);
-                if (obj.has("questions")) {
-                    questionsArray = obj.getJSONArray("questions");
-                } else {
-                    int start = trimmed.indexOf('[');
-                    int end = trimmed.lastIndexOf(']');
-                    if (start != -1 && end > start) {
-                        questionsArray = new JSONArray(trimmed.substring(start, end + 1));
-                    } else {
-                        throw new JSONException("No valid JSON Array found in response");
-                    }
-                }
-            } else {
-                questionsArray = new JSONArray(trimmed);
+            if (obj == null) {
+                handleLoadingFailure();
+                return;
             }
 
-            // JSONArray မှ မေးခွန်းများကို questionList ထဲသို့ ထည့်သွင်းပေးမည်
-            for (int i = 0; i < questionsArray.length(); i++) {
-                JSONObject qObj = questionsArray.getJSONObject(i);
-                questionList.add(qObj); // <-- ဒီလိုင်း ကျန်ခဲ့ခြင်း ဖြစ်ပါသည်
-            }
+            String title = obj.optString("title", selectedLanguage + " Challenge");
+            String description = obj.optString("description", "Solve the challenge using correct logic.");
+            String starterCode = obj.optString("starter_code", "// Write your code here");
+
+            this.currentProblemTask = description;
+
+            if (challengeTitleLabel != null) challengeTitleLabel.setText(title.toUpperCase());
+            if (questionTextLabel != null) questionTextLabel.setText(description);
+            if (codeEditorArea != null) codeEditorArea.setText(starterCode);
+            if (progressLabel != null) progressLabel.setText("LIVE MATCH IN PROGRESS");
+
+            startTimer();
 
         } catch (Exception e) {
-            System.err.println("Error parsing questions JSON: " + e.getMessage());
+            System.err.println("JSON Parsing Error: " + e.getMessage());
             e.printStackTrace();
+            handleLoadingFailure();
         }
     }
 
-    private void handleLoadingFailure() {
-        if (questionTextLabel != null) {
-            questionTextLabel.setText("Failed to load questions from AI.");
+    // 1. Code ကို Execution Server တွင် Run ကြည့်ခြင်း[cite: 12]
+    @FXML
+    private void handleRunCode() {
+        if (codeEditorArea == null || consoleOutputArea == null) return;
+
+        String code = codeEditorArea.getText();
+
+        // Playground ကဲ့သို့ "Python" / "C++" သန့်သန့်ဖြစ်စေရန် (Basic) စာသားကို ဖယ်ထုတ်ခြင်း
+        String cleanLanguage = selectedLanguage;
+        if (cleanLanguage != null && cleanLanguage.contains("(")) {
+            cleanLanguage = cleanLanguage.substring(0, cleanLanguage.indexOf("(")).trim();
         }
-        disableOptions(true);
-        if (timer != null) timer.stop();
-        if (timerLabel != null) timerLabel.setText("Time: --");
+
+        consoleOutputArea.setText("Executing code...");
+
+        ApiClient.executeCodeAsync(cleanLanguage, code).thenAccept(response -> {
+            Platform.runLater(() -> {
+                if (response != null && !response.isEmpty()) {
+                    try {
+                        // Response JSON ထဲမှ "output" စာသားကို သီးသန့် ထုတ်ပြခြင်း
+                        org.json.JSONObject json = new org.json.JSONObject(response);
+                        if (json.has("output")) {
+                            consoleOutputArea.setText(json.getString("output"));
+                        } else {
+                            consoleOutputArea.setText(response);
+                        }
+                    } catch (Exception e) {
+                        // Raw string ဖြစ်နေပါက တိုက်ရိုက်ပြမည်
+                        consoleOutputArea.setText(response);
+                    }
+                } else {
+                    consoleOutputArea.setText("Error: Could not reach execution server.");
+                }
+            });
+        });
     }
 
-    private void displayCurrentQuestion() {
-        if (currentQuestionIndex >= questionList.size() || currentQuestionIndex >= TOTAL_QUESTIONS) {
-            showFinalResults();
-            return;
-        }
+    // 2. ရေးထားသော Code ကို AI စစ်ဆေးရေးထံ ပို့ပြီး Match အမှတ်ဆုံးဖြတ်ခြင်း[cite: 12]
+    @FXML
+    public void handleSubmitCode(ActionEvent event) {
+        String code = codeEditorArea.getText();
+        if (consoleOutputArea != null) consoleOutputArea.setText("Submitting code for AI Evaluation...");
 
-        updateProgressUI();
-        resetOptionStyles();
-        disableOptions(false);
+        disableControls(true);
 
-        JSONObject qObject = questionList.get(currentQuestionIndex);
+        // Submit Solution သို့မဟုတ် Match Result Processing လုပ်သည့် Method ထဲတွင်
+        ApiClient.reviewCodeAsync(selectedLanguage, code).thenAccept(response -> {
+            Platform.runLater(() -> {
+                if (response != null && !response.isEmpty()) {
+                    String formattedReview = response;
 
-        if (questionTextLabel != null) questionTextLabel.setText(qObject.getString("question"));
+                    try {
+                        // Backend မှလာသော JSON ကို Parse လုပ်ပြီး "review" field ကိုသာ သီးခြားထုတ်ယူခြင်း
+                        org.json.JSONObject json = new org.json.JSONObject(response);
+                        if (json.has("review")) {
+                            formattedReview = json.getString("review");
+                        }
+                    } catch (Exception e) {
+                        // JSON parsing မရပါက raw response အတိုင်း ထားမည်
+                    }
 
-        JSONArray options = qObject.getJSONArray("options");
-        if (option1Btn != null) option1Btn.setText(options.getString(0));
-        if (option2Btn != null) option2Btn.setText(options.getString(1));
-        if (option3Btn != null) option3Btn.setText(options.getString(2));
-        if (option4Btn != null) option4Btn.setText(options.getString(3));
-
-        this.correctIndex = qObject.getInt("correctIndex");
-        this.isAnswered = false;
-
-        startTimer();
-    }
-
-    private void updateProgressUI() {
-        if (progressLabel != null) {
-            progressLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " OF " + TOTAL_QUESTIONS);
-        }
+                    // Console Output တွင် သန့်ရှင်းသော AI Review စာသားကိုသာ ပြသမည်
+                    consoleOutputArea.setText("=== MATCH RESULT & AI REVIEW ===\n\n" + formattedReview);
+                } else {
+                    consoleOutputArea.setText("=== MATCH RESULT & AI REVIEW ===\n\nFailed to fetch AI Review.");
+                }
+            });
+        });
     }
 
     private void startTimer() {
         if (timer != null) timer.stop();
-        timeRemaining = 15;
-        if (timerLabel != null) timerLabel.setText("Time: " + timeRemaining + "s");
+        timeRemaining = 300;
 
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             timeRemaining--;
-            if (timerLabel != null) timerLabel.setText("Time: " + timeRemaining + "s");
+            int mins = timeRemaining / 60;
+            int secs = timeRemaining % 60;
+
+            if (timerLabel != null) {
+                timerLabel.setText(String.format("Time Left: %02d:%02d", mins, secs));
+            }
+
             if (timeRemaining <= 0) {
                 timer.stop();
-                this.isAnswered = true;
-                highlightCorrectOption();
-                scheduleNextQuestion();
+                handleSubmitCode(null); // အချိန်ပြည့်ပါက အော်တို Submit လုပ်မည်
             }
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();
     }
 
-    private void onAnswerClicked(int chosenIndex, Button clickedBtn) {
-        if (isAnswered) return;
-        isAnswered = true;
-
-        if (timer != null) timer.stop();
-
-        if (chosenIndex == correctIndex) {
-            score++;
-            if (clickedBtn != null) {
-                clickedBtn.setStyle("-fx-background-color: #16a34a; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 16 22; -fx-background-radius: 12; -fx-border-color: #15803d; -fx-border-radius: 12; -fx-border-width: 2;");
-            }
-        } else {
-            if (clickedBtn != null) {
-                clickedBtn.setStyle("-fx-background-color: #dc2626; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 16 22; -fx-background-radius: 12; -fx-border-color: #b91c1c; -fx-border-radius: 12; -fx-border-width: 2;");
-            }
-            highlightCorrectOption();
-        }
-
-        scheduleNextQuestion();
+    private void handleLoadingFailure() {
+        if (questionTextLabel != null) questionTextLabel.setText("Failed to load coding challenge.");
+        disableControls(true);
     }
 
-    private void scheduleNextQuestion() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.2));
-        pause.setOnFinished(e -> {
-            currentQuestionIndex++;
-            displayCurrentQuestion();
-        });
-        pause.play();
+    private void disableControls(boolean disable) {
+        if (codeEditorArea != null) codeEditorArea.setDisable(disable);
+        if (runBtn != null) runBtn.setDisable(disable);
+        if (submitBtn != null) submitBtn.setDisable(disable);
     }
-
-    private void highlightCorrectOption() {
-        Button correctBtn = switch (correctIndex) {
-            case 0 -> option1Btn;
-            case 1 -> option2Btn;
-            case 2 -> option3Btn;
-            case 3 -> option4Btn;
-            default -> null;
-        };
-        if (correctBtn != null) {
-            correctBtn.setStyle("-fx-background-color: #16a34a; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 16 22; -fx-background-radius: 12; -fx-border-color: #15803d; -fx-border-radius: 12; -fx-border-width: 2;");
-        }
-    }
-
-    private void resetOptionStyles() {
-        String defaultStyle = "-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 16 22; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-cursor: hand;";
-
-        if (option1Btn != null) option1Btn.setStyle(defaultStyle);
-        if (option2Btn != null) option2Btn.setStyle(defaultStyle);
-        if (option3Btn != null) option3Btn.setStyle(defaultStyle);
-        if (option4Btn != null) option4Btn.setStyle(defaultStyle);
-    }
-
-    private void disableOptions(boolean disable) {
-        if (option1Btn != null) option1Btn.setDisable(disable);
-        if (option2Btn != null) option2Btn.setDisable(disable);
-        if (option3Btn != null) option3Btn.setDisable(disable);
-        if (option4Btn != null) option4Btn.setDisable(disable);
-    }
-
-    private void showFinalResults() {
-        if (timer != null) timer.stop();
-        disableOptions(true);
-        if (questionTextLabel != null) {
-            questionTextLabel.setText("Game Finished!\nYour Final Score: " + score + " / " + TOTAL_QUESTIONS);
-        }
-        if (progressLabel != null) {
-            progressLabel.setText("COMPLETED");
-        }
-    }
-
-    @FXML public void handleOption1(ActionEvent event) { onAnswerClicked(0, option1Btn); }
-    @FXML public void handleOption2(ActionEvent event) { onAnswerClicked(1, option2Btn); }
-    @FXML public void handleOption3(ActionEvent event) { onAnswerClicked(2, option3Btn); }
-    @FXML public void handleOption4(ActionEvent event) { onAnswerClicked(3, option4Btn); }
 
     @FXML
     public void handleBack(ActionEvent event) {
         if (timer != null) timer.stop();
-        SceneManager.switchScene("/Project/GameModeView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml");
+        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }

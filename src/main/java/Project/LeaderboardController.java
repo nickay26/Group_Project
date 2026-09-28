@@ -37,9 +37,9 @@ public class LeaderboardController {
 
     private void loadImages() {
         try {
-            nebulaImg.setImage(new Image(getClass().getResourceAsStream("/Nebula.png")));
-            protostarImg.setImage(new Image(getClass().getResourceAsStream("/Protostar.png")));
-            supernovaImg.setImage(new Image(getClass().getResourceAsStream("/Supernova.png")));
+            nebulaImg.setImage(new Image(getClass().getResourceAsStream("/Images/Nebula.png")));
+            protostarImg.setImage(new Image(getClass().getResourceAsStream("/Images/Protostar.png")));
+            supernovaImg.setImage(new Image(getClass().getResourceAsStream("/Images/Supernova.png")));
         } catch (Exception e) {
             System.err.println("Images could not be loaded: " + e.getMessage());
         }
@@ -58,7 +58,7 @@ public class LeaderboardController {
         } else if (userLevel >= NEBULA_LEVEL) {
             leagueTitleLabel.setText("Nebula league");
         } else {
-            leagueTitleLabel.setText("Venus league");
+            leagueTitleLabel.setText("");
         }
 
         // Dynamic Lock / Unlock States
