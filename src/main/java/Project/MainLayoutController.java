@@ -90,7 +90,67 @@ public class MainLayoutController {
         }
         setCourseTitle("No Active Course");
     }
+    // ============================================
+// LOAD PRACTICE QUESTION (Sidebar ထဲ)
+// ============================================
+    public void loadPracticeQuestion(String language, String type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
+            Parent view = loader.load();
 
+            // Controller ကို ယူ
+            PracticeQuestionController controller = loader.getController();
+
+            // Question ဆွဲ
+            List<QuestionData> list = JsonUtils.getPracticeListByType(language, type);
+            QuestionData question;
+
+            if (list.isEmpty()) {
+                question = new QuestionData(
+                        language, type,
+                        "Complete the task below.",
+                        "Write code to solve this problem.",
+                        getStarterCode(language),
+                        "", "Think step by step.", "",
+                        null, null, "write-code", "console"
+                );
+            } else {
+                java.util.Random rand = new java.util.Random();
+                question = list.get(rand.nextInt(list.size()));
+            }
+
+            controller.setQuestion(question);
+
+            // ✅ contentArea ထဲ ထည့် (Sidebar မပျောက်)
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Starter Code Helper
+    private String getStarterCode(String language) {
+        switch (language) {
+            case "Java":
+                return "public class Main {\n" +
+                        "    public static void main(String[] args) {\n" +
+                        "        // Write your code here\n" +
+                        "    }\n" +
+                        "}";
+            case "C++":
+                return "#include <iostream>\nusing namespace std;\n\n" +
+                        "int main() {\n" +
+                        "    // Write your code here\n" +
+                        "    return 0;\n" +
+                        "}";
+            case "Python":
+                return "# Write your Python code here\n";
+            default:
+                return "";
+        }
+    }
     @FXML
     public void handleNavLearn() {
         setActiveButton(learnBtn);
