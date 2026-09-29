@@ -176,11 +176,10 @@ public class MainLayoutController {
     }
 
     @FXML
-    public void handlePractice() {
+    public void handleNavPractice() {
         setActiveButton(practiceBtn);
         loadPage("PracticeView.fxml");
     }
-
     @FXML
     private void handleGame() {
         setActiveButton(gamesBtn);

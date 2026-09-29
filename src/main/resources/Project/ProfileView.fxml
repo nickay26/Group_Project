@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
 <ScrollPane fitToWidth="true" styleClass="profile-scroll-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.ProfileViewController">
     <content>
@@ -24,12 +26,21 @@
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </padding>
                     <children>
-                        <!-- Avatar Image -->
-                        <ImageView fx:id="avatarImageView" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../Images/brain.png" />
-                            </image>
-                        </ImageView>
+
+                        <!-- ✅ Avatar — ကြီးပြီး ကြည်လင် -->
+                        <StackPane prefWidth="120.0" prefHeight="120.0"
+                                   minWidth="120.0" minHeight="120.0"
+                                   maxWidth="120.0" maxHeight="120.0">
+                            <children>
+                                <ImageView fx:id="avatarImageView"
+                                           fitHeight="120.0" fitWidth="120.0"
+                                           preserveRatio="false"
+                                           smooth="true" />
+                            </children>
+                            <clip>
+                                <Circle centerX="60.0" centerY="60.0" radius="60.0" />
+                            </clip>
+                        </StackPane>
 
                         <!-- User Info -->
                         <VBox alignment="CENTER_LEFT" spacing="6.0">
