@@ -71,18 +71,113 @@ public class LoginController {
     /** Register Button (Top Right) နှိပ်ရင် Welcome Page ကို သွား */
     @FXML
     private void handleRegister() {
-        SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
     }
 
-    /** About Dialog ဖွင့် */
     @FXML
     private void handleAbout() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About Mimo Platform");
-        alert.setHeaderText("Mimo-style Gamified Coding App");
-        alert.setContentText("Learn Java, C++, and Python through interactive micro-lessons, " +
-                "live execution, and instant AI code reviews!");
-        alert.showAndWait();
+        javafx.stage.Stage dialog = new javafx.stage.Stage();
+        dialog.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+        dialog.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+
+        // Main Dark Container
+        javafx.scene.layout.VBox root = new javafx.scene.layout.VBox(16);
+        root.setPadding(new javafx.geometry.Insets(24));
+        root.setStyle(
+                "-fx-background-color: #0b1329;" +
+                        "-fx-border-color: #1e3a8a;" +
+                        "-fx-border-width: 1.5px;" +
+                        "-fx-border-radius: 16px;" +
+                        "-fx-background-radius: 16px;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.85), 25, 0, 0, 10);"
+        );
+        root.setPrefWidth(620);
+
+        // Header Title
+        Label titleLabel = new Label("🚀 Sodex Platform - About");
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #38bdf8;");
+
+        Label subTitleLabel = new Label("Gamified Interactive Coding & Multi-Track Learning Platform");
+        subTitleLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #94a3b8;");
+
+        javafx.scene.layout.VBox headerBox = new javafx.scene.layout.VBox(4, titleLabel, subTitleLabel);
+
+        // Feature Cards Container
+        javafx.scene.layout.VBox featuresBox = new javafx.scene.layout.VBox(10);
+
+        featuresBox.getChildren().addAll(
+                createFeatureCard(
+                        "🎓 Courses Track",
+                        "Standard login or registration lands directly on the Courses page to let users freely browse and select any available course (Java, C++, Python)."
+                ),
+                createFeatureCard(
+                        "📚 Learn Path",
+                        "If a user selects a course from the Welcome/Overview screen before logging in or registering, they are navigated directly to that course's Learn page (e.g., C++ Basic)."
+                ),
+                createFeatureCard(
+                        "💻 Playground",
+                        "Create new coding projects for your preferred language (C++, Java, Python), write custom scripts, and run/execute code live."
+                ),
+                createFeatureCard(
+                        "🏆 Leaderboard & Leagues",
+                        "Competitions are divided into 3 League Levels based on XP. Top 1-5 performers within a week advance to the next higher level!"
+                ),
+                createFeatureCard(
+                        "🎯 Practice",
+                        "Practice targeted topics divided into 3 sub-categories per course (e.g., Variables, Loops, Classes) to solidify your skills."
+                ),
+                createFeatureCard(
+                        "🔄 Review",
+                        "Easily revisit and review all your saved notes, code snippets, and previous lesson progress in one organized view."
+                )
+        );
+
+        // Close Button
+        Button closeBtn = new Button("Close");
+        closeBtn.setMaxWidth(Double.MAX_VALUE);
+        closeBtn.setStyle(
+                "-fx-background-color: linear-gradient(to right, #2563eb, #3b82f6);" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 8px;" +
+                        "-fx-padding: 10 0;" +
+                        "-fx-cursor: hand;"
+        );
+        closeBtn.setOnAction(e -> dialog.close());
+
+        root.getChildren().addAll(headerBox, featuresBox, closeBtn);
+
+        javafx.scene.Scene scene = new javafx.scene.Scene(root);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        dialog.setScene(scene);
+        dialog.showAndWait();
+    }
+
+    // Helper method to build custom dark feature cards
+    private javafx.scene.layout.HBox createFeatureCard(String title, String desc) {
+        javafx.scene.layout.HBox card = new javafx.scene.layout.HBox(12);
+        card.setPadding(new javafx.geometry.Insets(10, 14, 10, 14));
+        card.setStyle(
+                "-fx-background-color: #15203b;" +
+                        "-fx-background-radius: 10px;" +
+                        "-fx-border-color: #24345d;" +
+                        "-fx-border-radius: 10px;" +
+                        "-fx-border-width: 1px;"
+        );
+
+        Label titleLbl = new Label(title);
+        titleLbl.setStyle("-fx-font-weight: bold; -fx-text-fill: #38bdf8; -fx-font-size: 13px;");
+        titleLbl.setMinWidth(170);
+
+        Label descLbl = new Label(desc);
+        descLbl.setStyle("-fx-text-fill: #cbd5e1; -fx-font-size: 12px;");
+        descLbl.setWrapText(true);
+
+        card.getChildren().addAll(titleLbl, descLbl);
+        javafx.scene.layout.HBox.setHgrow(descLbl, javafx.scene.layout.Priority.ALWAYS);
+
+        return card;
     }
 
     /** Help Dialog ဖွင့် */
@@ -174,7 +269,7 @@ public class LoginController {
      * MainLayoutController က redirectedFromOverview Flag ပေါ်မူတည်ပြီး Learn သို့မဟုတ် Courses Page ကို အလိုအလျောက် ရွေးဖွင့်ပါမည်။
      */
     private void navigateToNextScene() {
-        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+        SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
     }
 
     /** Flask Backend ကို Auth Code ပို့ */
