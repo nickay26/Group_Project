@@ -5,7 +5,7 @@
   "slides": [
     {
       "slideId": "CPP_167_S1",
-      "type": "CONCEPT",
+      "type": "CONCEPT" ,
       "title": "Variables & Data Types Overview",
       "prompt": "This Module Quiz covers data types, variable declarations, initialization, type casting, scopes, and string basics in C++ (CPP_111 to CPP_118).",
       "codeSnippet": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int age = 25;\n    double score = 98.5;\n    char grade = 'A';\n    bool isPassed = true;\n    string name = \"Alex\";\n    return 0;\n}"
