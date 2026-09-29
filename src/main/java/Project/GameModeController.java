@@ -63,7 +63,7 @@ public class GameModeController {
     private void launchGameView(String mode, String language) {
         try {
             if ("QUICK".equals(mode)) {
-                // 📌 မူရင်း ဖိုင်အမည် QUICK.fxml သို့ ပြန်ပြောင်းထားပြီး Controller ဆီ language ပို့ပေးပါသည်
+
                 FXMLLoader loader = SceneManager.switchScene("QUICK.fxml");
                 if (loader != null) {
                     QuickMatchLobbyController controller = loader.getController();
