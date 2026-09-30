@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_265_Mquiz",
+  "title": "Module Quiz - TreeMap",
+  "slides": [
+    {
+      "slideId": "JAVA_265_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TreeMap Type",
+      "prompt": "A TreeMap stores data in ___________ order.",
+      "options": ["Sorted", "Random", "Reverse", "Unordered"],
+      "correctAnswer": "Sorted"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "TreeMap Import",
+      "prompt": "Complete the import statement.",
+      "codeSnippet": "import java.util.______;",
+      "options": ["TreeMap", "HashMap", "Map", "Tree"],
+      "correctAnswer": "TreeMap"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S3",
+      "type": "CODE_OUTPUT",
+      "title": "TreeMap Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"Banana\", 2);\nmap.put(\"Apple\", 1);\nmap.put(\"Cherry\", 3);\nSystem.out.println(map);",
+      "options": ["{Apple=1, Banana=2, Cherry=3}", "{Banana=2, Apple=1, Cherry=3}", "{Cherry=3, Banana=2, Apple=1}", "Error"],
+      "correctAnswer": "{Apple=1, Banana=2, Cherry=3}"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "First Key Method",
+      "prompt": "Which method returns the smallest key in a TreeMap?",
+      "options": ["firstKey()", "lastKey()", "getFirst()", "minKey()"],
+      "correctAnswer": "firstKey()"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "TreeMap Put",
+      "prompt": "Complete the code to add an element.",
+      "codeSnippet": "TreeMap<Integer, String> map = new TreeMap<>();\nmap.____(1, \"One\");",
+      "options": ["put", "add", "insert", "set"],
+      "correctAnswer": "put"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "First Key Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<Integer, String> map = new TreeMap<>();\nmap.put(3, \"Three\");\nmap.put(1, \"One\");\nmap.put(2, \"Two\");\nSystem.out.println(map.firstKey());",
+      "options": ["1", "3", "2", "Error"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TreeMap Duplicate Keys",
+      "prompt": "Can a TreeMap have duplicate keys?",
+      "options": ["No", "Yes", "Only with put", "Only with add"],
+      "correctAnswer": "No"
+    },
+    {
+      "slideId": "JAVA_265_Mquiz_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Last Key Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"C\", 3);\nmap.put(\"A\", 1);\nmap.put(\"B\", 2);\nSystem.out.println(map.lastKey());",
+      "options": ["C", "A", "B", "Error"],
+      "correctAnswer": "C"
+    }
+  ]
+}
