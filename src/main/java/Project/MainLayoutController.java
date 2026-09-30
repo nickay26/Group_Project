@@ -1,11 +1,16 @@
 package Project;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +45,7 @@ public class MainLayoutController {
         if (UserSession.isRedirectedFromOverview()) {
             handleNavLearn();
         } else {
-            handleNavCourses(); // ဒါကြောင့် Login ဝင်လာရင် Courses Page နဲ့ Active Highlight အော်တို ပေါ်ပါမည်
+            handleNavCourses();
         }
     }
 
@@ -74,65 +79,126 @@ public class MainLayoutController {
 
     @FXML
     public void handleNavLearn() {
-        loadPage("LearnPage.fxml");
+        loadPageWithLoading("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
-        loadPage("CoursePage.fxml");
+        loadPageWithLoading("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
-        loadPage("PlaygroundDashboardView.fxml");
+        loadPageWithLoading("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
-        loadPage("LeaderboardView.fxml");
+        loadPageWithLoading("LeaderboardView.fxml");
     }
 
     @FXML
     public void handleNavPractice() {
-        loadPage("PracticeView.fxml");
+        loadPageWithLoading("PracticeView.fxml");
     }
 
     @FXML
     public void handleNavGames() {
-        loadPage("GamesView.fxml");
+        loadPageWithLoading("GamesView.fxml");
     }
 
-    public FXMLLoader loadPage(String fxmlFileName) {
-        try {
-            String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
-            URL resource = getClass().getResource(resourcePath);
+    // ⭐ Emoji နဲ့ စာသားပါဝင်သော Center Loading Spinner Method
+    public void loadPageWithLoading(String fxmlFileName) {
+        // 1. Spinner ပြုလုပ်ခြင်း
+        ProgressIndicator spinner = new ProgressIndicator();
+        spinner.setStyle("-fx-progress-color: #38BDF8;");
+        spinner.setMaxSize(45, 45);
 
-            if (resource == null) {
-                resource = getClass().getResource("/" + fxmlFileName);
-            }
-            if (resource == null) {
-                resource = getClass().getResource(fxmlFileName);
-            }
+        // 2. FXML နာမည်အလိုက် Emoji နှင့် စာသား ရွေးချယ်ခြင်း
+        String emoji = "🚀";
+        String pageTitle = "Loading...";
 
-            if (resource == null) {
-                System.err.println("Could not find FXML file: " + fxmlFileName);
-                return null;
-            }
-
-            FXMLLoader loader = new FXMLLoader(resource);
-            Parent view = loader.load();
-
-            contentArea.getChildren().setAll(view);
-
-            // FXML Name အလိုက် Sidebar Highlight ပြောင်းမည်
-            updateSidebarHighlight(fxmlFileName);
-
-            return loader;
-        } catch (IOException e) {
-            System.err.println("Error loading FXML: " + fxmlFileName);
-            e.printStackTrace();
-            return null;
+        if (fxmlFileName.contains("LearnPage")) {
+            emoji = "\uD83E\uDD16";
+            pageTitle = "Loading Lessons...";
+        } else if (fxmlFileName.contains("Course")) {
+            emoji = "📚";
+            pageTitle = "Loading Available Courses...";
+        } else if (fxmlFileName.contains("Playground")) {
+            emoji = "💻";
+            pageTitle = "Preparing Playground...";
+        } else if (fxmlFileName.contains("Leaderboard")) {
+            emoji = "🏆";
+            pageTitle = "Loading Leaderboard...";
+        } else if (fxmlFileName.contains("Practice")) {
+            emoji = "⚡";
+            pageTitle = "Preparing Practice Mode...";
+        } else if (fxmlFileName.contains("Game")) {
+            emoji = "🎮";
+            pageTitle = "Loading Games...";
         }
+
+        // Label စာသား ပြင်ဆင်ခြင်း
+        Label loadingText = new Label(emoji + " " + pageTitle);
+        loadingText.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #94A3B8;");
+
+        // 3. Spinner နဲ့ Text ကို VBox ထဲ စုစည်းခြင်း
+        VBox loadingBox = new VBox(12, spinner, loadingText);
+        loadingBox.setAlignment(Pos.CENTER);
+        loadingBox.setStyle("-fx-background-color: #0F172A;"); // Dark Theme Background
+
+        // 4. Loading Box ကို Content Area ထဲသို့ ခဏ အစားထိုးခြင်း
+        contentArea.getChildren().setAll(loadingBox);
+
+        // Sidebar Highlight ကို ချက်ချင်း အရင်ပြောင်းထားမည်
+        updateSidebarHighlight(fxmlFileName);
+
+        // 5. Background Thread ဖြင့် FXML Load လုပ်ခြင်း
+        Task<Parent> loadTask = new Task<>() {
+            @Override
+            protected Parent call() throws Exception {
+                // Animation လှလှလေး မြင်ရအောင် အနည်းဆုံး 300ms စောင့်မည်
+                Thread.sleep(300);
+
+                String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
+                URL resource = getClass().getResource(resourcePath);
+
+                if (resource == null) resource = getClass().getResource("/" + fxmlFileName);
+                if (resource == null) resource = getClass().getResource(fxmlFileName);
+
+                if (resource == null) {
+                    throw new IOException("Could not find FXML file: " + fxmlFileName);
+                }
+
+                FXMLLoader loader = new FXMLLoader(resource);
+                return loader.load();
+            }
+        };
+
+        loadTask.setOnSucceeded(e -> {
+            Parent newPage = loadTask.getValue();
+            if (newPage != null) {
+                // Load ပြီးသွားပါက စာမျက်နှာသစ်သို့ လဲလှယ်မည်
+                contentArea.getChildren().setAll(newPage);
+            }
+        });
+
+        loadTask.setOnFailed(e -> {
+            System.err.println("Error loading FXML: " + fxmlFileName);
+            if (loadTask.getException() != null) {
+                loadTask.getException().printStackTrace();
+            }
+        });
+
+        Thread thread = new Thread(loadTask);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    // တိုက်ရိုက် load လုပ်ရန် လိုအပ်ပါက သုံးနိုင်သော မူလ loadPage မက်သဒ်
+    public FXMLLoader loadPage(String fxmlFileName) {
+        loadPageWithLoading(fxmlFileName);
+        return null;
     }
 
     private void updateSidebarHighlight(String fxmlFileName) {
