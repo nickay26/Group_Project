@@ -297,7 +297,33 @@ public class DatabaseManager {
         }
         return false;
     }
+    // ============================================
+// UPDATE USER PROFILE
+// ============================================
+    public static boolean updateUserProfile(int userId, String name, String profile) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            if (profile != null) {
+                body.put("profile", profile);
+            } else {
+                body.put("profile", JSONObject.NULL);
+            }
 
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     // ==========================================
     // HELPER METHODS
     // ==========================================

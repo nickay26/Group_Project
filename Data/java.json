@@ -299,7 +299,7 @@
   },
   {
     "instructions": "Constructor runs when object is created.",
-    "task": "Create class 'Person' with constructor setting name. Create object with 'Mimo' and print p.name.",
+    "task": "Create class 'Person' with constructor setting name. Create object with 'Sodex' and print p.name.",
     "blanks": [],
     "starterCode": "public class Main {\n    // TODO: Define Person class\n    \n    public static void main(String[] args) {\n        // TODO: Create object and print\n        \n    }\n}",
     "hint": "Person(String name) { this.name = name; }",

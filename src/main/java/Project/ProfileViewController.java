@@ -2,10 +2,13 @@ package Project;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -80,94 +84,20 @@ public class ProfileViewController {
     // ============================================
     @FXML
     private void handleEditProfile() {
-        User currentUser = UserSession.getCurrentUser();
-        if (currentUser == null) return;
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/Project/SettingsView.fxml"));
+            Parent root = loader.load();
 
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Edit Profile");
-        dialog.setHeaderText("Update your profile information");
+            Stage stage = new Stage();
+            stage.setTitle("Edit Profile");
+            stage.setScene(new Scene(root));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.showAndWait();
 
-        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(15);
-        grid.setVgap(15);
-        grid.setPadding(new Insets(20));
-
-        // Name Field
-        TextField nameField = new TextField(currentUser.getName());
-        nameField.setPrefWidth(250);
-
-        // Avatar Preview — အဝိုင်း
-        ImageView previewAvatar = new ImageView();
-        previewAvatar.setFitWidth(100);
-        previewAvatar.setFitHeight(100);
-        previewAvatar.setPreserveRatio(false);
-
-        Circle previewClip = new Circle(50, 50, 50);
-        previewAvatar.setClip(previewClip);
-
-        if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
-            try {
-                Image img = new Image(currentUser.getProfile(), 100, 100, false, true);
-                previewAvatar.setImage(img);
-            } catch (Exception e) {
-                System.out.println("Could not load avatar: " + e.getMessage());
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        final String[] selectedImagePath = {currentUser.getProfile()};
-
-        // Choose Image Button
-        Button chooseImageBtn = new Button("📷 Choose Image");
-        chooseImageBtn.setOnAction(e -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Choose Profile Picture");
-            fileChooser.getExtensionFilters().add(
-                    new FileChooser.ExtensionFilter("Image Files",
-                            "*.png", "*.jpg", "*.jpeg", "*.gif"));
-
-            File selectedFile = fileChooser.showOpenDialog(
-                    editProfileBtn.getScene().getWindow());
-
-            if (selectedFile != null) {
-                String croppedPath = showCropDialog(selectedFile);
-                if (croppedPath != null) {
-                    selectedImagePath[0] = croppedPath;
-                    previewAvatar.setImage(new Image(croppedPath, 100, 100, false, true));
-                    previewAvatar.setClip(previewClip);
-                }
-            }
-        });
-
-        grid.add(new Label("Name:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Avatar:"), 0, 1);
-        grid.add(previewAvatar, 1, 1);
-        grid.add(chooseImageBtn, 1, 2);
-
-        dialog.getDialogPane().setContent(grid);
-
-        dialog.showAndWait().ifPresent(response -> {
-            if (response == saveButtonType) {
-                String newName = nameField.getText().trim();
-                if (!newName.isEmpty()) {
-                    currentUser.setName(newName);
-                }
-                if (selectedImagePath[0] != null) {
-                    currentUser.setProfile(selectedImagePath[0]);
-                }
-
-                loadUserData();
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("✅ Profile updated!");
-                alert.showAndWait();
-            }
-        });
     }
 
     // ============================================
