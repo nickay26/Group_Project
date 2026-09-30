@@ -14,10 +14,17 @@ public class WebSocketService implements WebSocket.Listener {
     private WebSocket webSocket;
     private NotificationListener notificationListener;
 
+    private final StringBuilder messageBuffer = new StringBuilder();
+
     public interface NotificationListener {
         void onInviteReceived(String fromUser, String language);
         void onGameStart(String roomId, String language);
-        void onQuickMatchStart(String roomId, String language, String questionsJson);
+        void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson);
+        void onQuickMatchTimeout();
+
+        // ⭐ Game Sync အတွက် ထပ်တိုး Listener များ (default သုံးထားသဖြင့် အခြား Controller များ မပျက်ပါ)
+        default void onOpponentProgress(String userId, int progress) {}
+        default void onGameOver(String winnerId) {}
     }
 
     public static WebSocketService getInstance() {
@@ -27,16 +34,17 @@ public class WebSocketService implements WebSocket.Listener {
         return instance;
     }
 
-    // မူလ Overload Method
+    public void setNotificationListener(NotificationListener listener) {
+        this.notificationListener = listener;
+    }
+
     public void connect(String serverUrl, String currentUserId, NotificationListener listener) {
         connect(serverUrl, currentUserId, listener, null);
     }
 
-    // Connection ကျပြီးမှ အလုပ်လုပ်မည့် Callback ပါဝင်သော Connect Method
     public void connect(String serverUrl, String currentUserId, NotificationListener listener, Runnable onConnected) {
         this.notificationListener = listener;
 
-        // Connection ပွင့်နေဆဲ ဖြစ်ပါက Register သာ ထပ်လုပ်မည်
         if (webSocket != null && !webSocket.isInputClosed() && !webSocket.isOutputClosed()) {
             System.out.println("WebSocket active. Re-registering user: " + currentUserId);
             registerUser(currentUserId);
@@ -56,7 +64,6 @@ public class WebSocketService implements WebSocket.Listener {
                     System.out.println("Connected to Render WebSocket Server: " + serverUrl);
                     registerUser(currentUserId);
 
-                    // Connection အောင်မြင်စွာ ရပြီးမှ Callback ကို ခေါ်ပေးမည်
                     if (onConnected != null) {
                         onConnected.run();
                     }
@@ -114,35 +121,83 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
+    // ⭐ Progress ပို့မည့် Method
+    public void sendProgressUpdate(String roomId, String userId, int progress) {
+        JSONObject json = new JSONObject();
+        json.put("type", "GAME_PROGRESS");
+        json.put("roomId", roomId);
+        json.put("userId", userId);
+        json.put("progress", progress);
+        sendText(json.toString());
+    }
+
+    // ⭐ Game Over / Match ပြီးဆုံးမှု ပို့မည့် Method
+    public void sendGameOver(String roomId, String winnerId) {
+        JSONObject json = new JSONObject();
+        json.put("type", "GAME_OVER");
+        json.put("roomId", roomId);
+        json.put("winnerId", winnerId);
+        sendText(json.toString());
+    }
+
     @Override
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
-        String message = data.toString();
-        System.out.println("Received from Server: " + message);
+        messageBuffer.append(data);
 
-        JSONObject json = new JSONObject(message);
-        String type = json.optString("type");
+        if (last) {
+            String fullMessage = messageBuffer.toString();
+            messageBuffer.setLength(0);
+            System.out.println("Received from Server: " + fullMessage);
 
-        Platform.runLater(() -> {
-            if (notificationListener == null) return;
+            try {
+                JSONObject json = new JSONObject(fullMessage);
+                String type = json.optString("type");
 
-            if ("INVITE_RECEIVED".equals(type)) {
-                String fromUser = json.getString("fromUser");
-                String language = json.optString("language", "java");
-                notificationListener.onInviteReceived(fromUser, language);
-            } else if ("START_GAME".equals(type)) {
-                String roomId = json.getString("roomId");
-                String language = json.optString("language", "java");
-                notificationListener.onGameStart(roomId, language);
-            } else if ("QUICK_MATCH_START".equals(type)) {
-                String roomId = json.optString("roomId", "");
-                String language = json.optString("language", "Python");
-                Object questionsObj = json.opt("questions");
-                String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+                Platform.runLater(() -> {
+                    if (notificationListener == null) return;
 
-                notificationListener.onQuickMatchStart(roomId, language, questionsJson);
+                    if ("INVITE_RECEIVED".equals(type)) {
+                        String fromUser = json.optString("fromUser", "");
+                        String language = json.optString("language", "java");
+                        notificationListener.onInviteReceived(fromUser, language);
+
+                    } else if ("START_GAME".equals(type)) {
+                        String roomId = json.optString("roomId", "");
+                        String language = json.optString("language", "java");
+                        notificationListener.onGameStart(roomId, language);
+
+                    } else if ("QUICK_MATCH_START".equals(type)) {
+                        String roomId = json.optString("roomId", "");
+                        String language = json.optString("language", "Python");
+                        String opponentId = json.optString("opponentId", "Unknown");
+                        Object questionsObj = json.opt("questions");
+                        String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+
+                        notificationListener.onQuickMatchStart(roomId, language, opponentId, questionsJson);
+
+                    } else if ("QUICK_MATCH_TIMEOUT".equals(type)) {
+                        System.out.println("Executing Client Timeout Listener...");
+                        notificationListener.onQuickMatchTimeout();
+
+                        // ⭐ Real-time Progress Parsing
+                    } else if ("GAME_PROGRESS".equals(type)) {
+                        String userId = json.optString("userId", "");
+                        int progress = json.optInt("progress", 0);
+                        notificationListener.onOpponentProgress(userId, progress);
+
+                        // ⭐ Real-time Game Over Parsing
+                    } else if ("GAME_OVER".equals(type)) {
+                        String winnerId = json.optString("winnerId", "");
+                        notificationListener.onGameOver(winnerId);
+                    }
+                });
+
+            } catch (Exception e) {
+                System.err.println("JSON Parsing Error in Client: " + e.getMessage() + " | Raw: " + fullMessage);
             }
-        });
+        }
 
+        webSocket.request(1);
         return WebSocket.Listener.super.onText(webSocket, data, last);
     }
 
@@ -156,5 +211,12 @@ public class WebSocketService implements WebSocket.Listener {
         System.out.println("WebSocket Disconnected: " + reason);
         this.webSocket = null;
         return WebSocket.Listener.super.onClose(webSocket, statusCode, reason);
+    }
+
+    @Override
+    public void onOpen(WebSocket webSocket) {
+        System.out.println("WebSocket Connection Opened Successfully.");
+        webSocket.request(1);
+        WebSocket.Listener.super.onOpen(webSocket);
     }
 }
