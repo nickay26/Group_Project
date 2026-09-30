@@ -309,8 +309,73 @@ public class DatabaseManager {
                 obj.optInt("brain_count", 5)
         );
     }
+    // ==========================================
+// 4. PREMIUM & PAYMENT
+// ==========================================
 
-    public static Connection getConnection() {
-        return null;
+    public static boolean subscribePremium(int userId, int planId, String durationType) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("plan_id", planId);
+            body.put("duration_type", durationType);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/premium/subscribe"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+
+    public static boolean isPremium(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/premium"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject res = new JSONObject(response.body());
+                return res.optBoolean("is_premium", false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean savePaymentScreenshot(int userId, String fileName,
+                                                String method, int amount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("screenshot_path", fileName);
+            body.put("method", method);
+            body.put("amount", amount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/payment/upload"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

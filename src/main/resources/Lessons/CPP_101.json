@@ -1,30 +1,81 @@
 {
-  "lessonId": "CPP_101",
-  "lessonOrder": 0,
-  "title": "CPP Lesson 101",
-  "xp": 0,
+  "lessonId": "JAVA_101",
+  "title": "Java Programming Basics",
   "isPremium": false,
   "slides": [
     {
-      "slideId": "CPP_101_S1",
+      "slideId": "JAVA_101_S1",
       "type": "CONCEPT",
-      "title": "\"Basic Syntax Overview\"",
-      "prompt": "\"Every C++ program starts with a main() function and uses standard header files like iostream.\"",
-      "codeSnippet": "\"#include \u003ciostream\u003e\\nint main() {\\n    std::cout \u003c\u003c \\\"Hello World!\\\";\\n    return 0;\\n}\""
+      "title": "Java Program Structure",
+      "prompt": "A basic Java program contains a class and a main method.",
+      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World\");\n    }\n}"
     },
     {
-      "slideId": "CPP_101_S2",
-      "type": "FILL_IN_BLANK",
-      "title": "\"Header File Inclusion\"",
-      "prompt": "\"Fill in the correct header file for input/output operations.\"",
-      "codeSnippet": "\"#include \u003c___\u003e\"",
+      "slideId": "JAVA_101_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Entry Point",
+      "prompt": "Which method is the entry point of a Java program?",
       "options": [
-        "\"iostream\"",
-        "\"stdio.h\"",
-        "\"string\"",
-        "\"cmath\""
+        "start()",
+        "main()",
+        "run()",
+        "execute()"
       ],
-      "correctAnswer": "\"iostream\""
-    }
-  ]
-}
+      "correctAnswer": "main()"
+    },
+    {
+      "slideId": "JAVA_101_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Statement",
+      "prompt": "Fill in the missing method to print text to the console.",
+      "codeSnippet": "System.out.___(\"Hello Java\");",
+      "options": [
+        "print",
+        "println",
+        "write",
+        "display"
+      ],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_101_S4",
+      "type": "CODE",
+      "title": "Hello World",
+      "prompt": "Write a Java program that prints Hello World.",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}",
+      "expectedOutput": "Hello World"
+    },
+    {
+      "slideId": "JAVA_101_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "For Loop",
+      "prompt": "Which loop is commonly used when you know how many times you want to repeat a block of code?",
+      "options": [
+        "if",
+        "for",
+        "switch",
+        "try"
+      ],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "JAVA_101_S17",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Comment Syntax",
+      "prompt": "Which symbol is used to create a single-line comment in Java?",
+      "options": [
+        "//",
+        "#",
+        "<!--",
+        "**"
+      ],
+      "correctAnswer": "//"
+    },
+    {
+      "slideId": "JAVA_101_S19",
+      "type": "CODE",
+      "title": "Multiplication Table",
+      "prompt": "Write a Java program that prints the multiplication table of 5 from 1 to 10.",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int number = 5;\n\n        // Write your code here\n    }\n}",
+      "expectedOutput": "5\n10\n15\n20\n25\n30\n35\n40\n45\n50"
+    },

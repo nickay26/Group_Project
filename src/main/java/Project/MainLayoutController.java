@@ -27,6 +27,7 @@ public class MainLayoutController {
     @FXML private Button leaderboardBtn;
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
+    @FXML private Button premiumBtn;
 
     private List<Button> navButtons;
 
@@ -98,6 +99,13 @@ public class MainLayoutController {
         setActiveButton(practiceBtn);                          // ← ဒါ ထည့်
         loadPage("PracticeView.fxml");                          // ← loadPage သုံး
     }
+
+    @FXML
+    public void handlePremium() {
+        // Premium Page ကို content area ထဲမှာ Load လုပ်
+        loadPage("PremiumView.fxml");
+    }
+
     public FXMLLoader loadPage(String fxmlFileName) {
         try {
             String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
