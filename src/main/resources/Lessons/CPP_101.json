@@ -1,81 +1,91 @@
 {
-  "lessonId": "JAVA_101",
-  "title": "Java Programming Basics",
+  "lessonId": "CPP_101",
+  "title": "C++ Introduction & Syntax",
   "isPremium": false,
   "slides": [
     {
-      "slideId": "JAVA_101_S1",
+      "slideId": "CPP_101_S1",
       "type": "CONCEPT",
-      "title": "Java Program Structure",
-      "prompt": "A basic Java program contains a class and a main method.",
-      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World\");\n    }\n}"
+      "title": "Basic Syntax Overview",
+      "prompt": "Every C++ program starts with a main() function and uses standard header files like iostream.",
+      "codeSnippet": "#include <iostream>\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}"
     },
     {
-      "slideId": "JAVA_101_S2",
+      "slideId": "CPP_101_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Header File Inclusion",
+      "prompt": "Fill in the correct header file for input/output operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["iostream", "stdio.h", "string", "cmath"],
+      "correctAnswer": "iostream"
+    },
+    {
+      "slideId": "CPP_101_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Java Entry Point",
-      "prompt": "Which method is the entry point of a Java program?",
-      "options": [
-        "start()",
-        "main()",
-        "run()",
-        "execute()"
-      ],
+      "title": "Program Entry Point",
+      "prompt": "Which function is mandatory for executing any C++ program?",
+      "options": ["main()", "start()", "init()", "run()"],
       "correctAnswer": "main()"
     },
     {
-      "slideId": "JAVA_101_S3",
+      "slideId": "CPP_101_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Print Statement",
-      "prompt": "Fill in the missing method to print text to the console.",
-      "codeSnippet": "System.out.___(\"Hello Java\");",
-      "options": [
-        "print",
-        "println",
-        "write",
-        "display"
-      ],
-      "correctAnswer": "println"
+      "title": "Statement Terminator",
+      "prompt": "Fill in the required character that ends almost every statement in C++.",
+      "codeSnippet": "std::cout << \"C++\"___",
+      "options": [";", ":", ".", ","],
+      "correctAnswer": ";"
     },
     {
-      "slideId": "JAVA_101_S4",
-      "type": "CODE",
-      "title": "Hello World",
-      "prompt": "Write a Java program that prints Hello World.",
-      "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}",
-      "expectedOutput": "Hello World"
-    },
-    {
-      "slideId": "JAVA_101_S14",
+      "slideId": "CPP_101_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "For Loop",
-      "prompt": "Which loop is commonly used when you know how many times you want to repeat a block of code?",
-      "options": [
-        "if",
-        "for",
-        "switch",
-        "try"
-      ],
-      "correctAnswer": "for"
+      "title": "File Extension",
+      "prompt": "What is the standard file extension for C++ source code files?",
+      "options": [".cpp", ".c", ".java", ".exe"],
+      "correctAnswer": ".cpp"
     },
     {
-      "slideId": "JAVA_101_S17",
+      "slideId": "CPP_101_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Value",
+      "prompt": "Complete the return statement indicating successful execution.",
+      "codeSnippet": "return ___;",
+      "options": ["0", "1", "null", "true"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_101_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Comment Syntax",
-      "prompt": "Which symbol is used to create a single-line comment in Java?",
-      "options": [
-        "//",
-        "#",
-        "<!--",
-        "**"
-      ],
-      "correctAnswer": "//"
+      "title": "Case Sensitivity",
+      "prompt": "Is C++ a case-sensitive programming language?",
+      "options": ["Yes, uppercase and lowercase matter", "No, it ignores case", "Only for variable names", "Only for keywords"],
+      "correctAnswer": "Yes, uppercase and lowercase matter"
     },
     {
-      "slideId": "JAVA_101_S19",
-      "type": "CODE",
-      "title": "Multiplication Table",
-      "prompt": "Write a Java program that prints the multiplication table of 5 from 1 to 10.",
-      "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int number = 5;\n\n        // Write your code here\n    }\n}",
-      "expectedOutput": "5\n10\n15\n20\n25\n30\n35\n40\n45\n50"
+      "slideId": "CPP_101_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Function Return Type",
+      "prompt": "Fill in the correct return type for the main function.",
+      "codeSnippet": "___ main() {\n    return 0;\n}",
+      "options": ["int", "void", "double", "string"],
+      "correctAnswer": "int"
     },
+    {
+      "slideId": "CPP_101_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compiler Role",
+      "prompt": "What is the purpose of a C++ compiler?",
+      "options": ["Translates C++ code into machine code", "Runs the operating system", "Styles text on screen", "Connects to the database"],
+      "correctAnswer": "Translates C++ code into machine code"
+    },
+    {
+      "slideId": "CPP_101_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Namespace Keyword",
+      "prompt": "Fill in the keyword used to avoid typing std:: repeatedly.",
+      "codeSnippet": "using ___ std;",
+      "options": ["namespace", "package", "library", "module"],
+      "correctAnswer": "namespace"
+    }
+  ]
+}

@@ -79,11 +79,6 @@ public class WelcomeController implements Initializable {
     }
 
     @FXML
-    private void handleAdmin() {
-        SceneManager.switchScene("AdminLoginView.fxml", "Mimo Platform - Admin Login");
-    }
-
-    @FXML
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About Mimo Platform");
@@ -136,7 +131,7 @@ public class WelcomeController implements Initializable {
 
                 Platform.runLater(() -> {
                     // DatabaseManager ရှိ Google API Endpoint ကို တိုက်ရိုက် ခေါ်ယူခြင်း
-                    User googleUser = DatabaseManager.findOrCreateGoogleUser(email, name, null);
+                    User googleUser = DatabaseManager.findOrCreateGoogleUser(name, email, null);
 
                     if (googleUser != null) {
                         UserSession.initSession(googleUser);

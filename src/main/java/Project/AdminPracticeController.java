@@ -3,12 +3,8 @@ package Project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +36,24 @@ public class AdminPracticeController {
 
     @FXML
     public void initialize() {
-        languageCombo.getItems().addAll("Python", "Java", "C++", "HTML");
+        // Languages
+        languageCombo.getItems().addAll("Python", "Java", "C++");
         languageCombo.setValue("Python");
 
-        typeCombo.getItems().addAll("write-code", "fill-blank", "drag-drop");
-        typeCombo.setValue("write-code");
+        // ✅ Language ရွေးရင် Type update + Table refresh
+        languageCombo.setOnAction(e -> {
+            updateTypeCombo();
+            refreshTable();
 
+        });
+        typeCombo.setOnAction(e -> refreshTable());
+        updateTypeCombo();
+        refreshTable();
         // Table columns
+        colId.setCellValueFactory(data -> {
+            int idx = tableData.indexOf(data.getValue()) + 1;
+            return new javafx.beans.property.SimpleStringProperty(String.valueOf(idx));
+        });
         colLanguage.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleStringProperty(data.getValue().getLanguage()));
         colTitle.setCellValueFactory(data ->
@@ -58,22 +65,80 @@ public class AdminPracticeController {
 
         questionTable.setItems(tableData);
 
-        // Load data
+        // ပထမဆုံး Type update
+        updateTypeCombo();
+
+        // Load
         refreshTable();
     }
 
     // ============================================
-    // REFRESH TABLE
+    // TYPE COMBO — Language အလိုက် ပြောင်း
     // ============================================
-    @FXML
-    public void handleRefresh() {
-        refreshTable();
-        statusLabel.setText("🔄 Refreshed");
+    private void updateTypeCombo() {
+        String lang = languageCombo.getValue();
+        typeCombo.getItems().clear();
+
+        if (lang == null) return;
+
+        switch (lang) {
+            case "Python":
+                typeCombo.getItems().addAll(
+                        "Lists & Dicts",
+                        "Functions",
+                        "OOP Basics"
+                );
+                break;
+            case "Java":
+                typeCombo.getItems().addAll(
+                        "Variables & Types",
+                        "Loops",
+                        "Classes & Objects"
+                );
+                break;
+            case "C++":
+                typeCombo.getItems().addAll(
+                        "Pointers",
+                        "Arrays",
+                        "Inheritance"
+                );
+                break;
+        }
+
+        if (!typeCombo.getItems().isEmpty()) {
+            typeCombo.setValue(typeCombo.getItems().get(0));
+        }
     }
 
+    // ============================================
+    // REFRESH — Language Filter
+    // ============================================
     private void refreshTable() {
-        List<QuestionData> list = JsonUtils.loadPracticeQuestions();
-        tableData.setAll(list);
+        String selectedLang = languageCombo.getValue();
+        String selectedType = typeCombo.getValue();
+
+        // Language အလိုက် load
+        List<QuestionData> all = JsonUtils.loadPracticeQuestionsByLanguage(selectedLang);
+
+        // Type အလိုက် filter
+        List<QuestionData> filtered = new ArrayList<>();
+        if (selectedType == null || selectedType.isEmpty()) {
+            filtered = all;
+        } else {
+            for (QuestionData q : all) {
+                if (q.getQuestionType().equalsIgnoreCase(selectedType)) {
+                    filtered.add(q);
+                }
+            }
+        }
+
+        tableData.setAll(filtered);
+
+        if (statusLabel != null) {
+            statusLabel.setText("📋 " + filtered.size() + " questions ("
+                    + selectedLang + " - " + selectedType + ")");
+            statusLabel.setStyle("-fx-text-fill: #38bdf8; -fx-font-weight: bold;");
+        }
     }
 
     // ============================================
@@ -91,10 +156,14 @@ public class AdminPracticeController {
             return;
         }
 
-        List<String> blanks = parseList(blanksField.getText());
-        List<String> choices = parseList(choicesField.getText());
+        if (type == null || type.isEmpty()) {
+            statusLabel.setText("❌ Type is required");
+            return;
+        }
 
-        String previewType = language.equals("HTML") ? "browser" : "console";
+        List<String> blanks = new ArrayList<>();
+        List<String> choices = new ArrayList<>();
+        String previewType = "console";
 
         QuestionData q = new QuestionData(
                 language, title,
@@ -110,19 +179,17 @@ public class AdminPracticeController {
 
         boolean success;
         if (editingQuestion != null) {
-            // UPDATE
             success = JsonUtils.updatePracticeQuestion(
                     editingQuestion.getLanguage(),
                     editingQuestion.getTitle(),
                     q
             );
         } else {
-            // CREATE
             success = JsonUtils.savePracticeQuestion(q);
         }
 
         if (success) {
-            statusLabel.setText("✅ Saved to questions.json");
+            statusLabel.setText("✅ Saved! (" + language + " - " + type + ")");
             statusLabel.setStyle("-fx-text-fill: #4ade80; -fx-font-weight: bold;");
             clearForm();
             editingQuestion = null;
@@ -134,7 +201,43 @@ public class AdminPracticeController {
     }
 
     // ============================================
-    // LOAD SELECTED FOR EDIT
+    // CLEAR / DELETE
+    // ============================================
+    @FXML
+    public void handleClear() {
+        QuestionData q = questionTable.getSelectionModel().getSelectedItem();
+        if (q != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete");
+            alert.setHeaderText("Delete question?");
+            alert.setContentText(q.getTitle());
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    JsonUtils.deletePracticeQuestion(q.getLanguage(), q.getTitle());
+                    statusLabel.setText("✅ Deleted: " + q.getTitle());
+                    refreshTable();
+                }
+            });
+            return;
+        }
+
+        clearForm();
+        editingQuestion = null;
+        statusLabel.setText("");
+    }
+
+    private void clearForm() {
+        titleField.clear();
+        instructionsArea.clear();
+        taskArea.clear();
+        starterCodeArea.clear();
+        expectedOutputArea.clear();
+        hintArea.clear();
+        solutionArea.clear();
+    }
+
+    // ============================================
+    // LOAD SELECTED → Form
     // ============================================
     @FXML
     public void handleLoadSelected() {
@@ -146,7 +249,15 @@ public class AdminPracticeController {
 
         editingQuestion = q;
         languageCombo.setValue(q.getLanguage());
-        typeCombo.setValue(q.getQuestionType());
+
+        // Type update
+        updateTypeCombo();
+
+        // Type ကို select
+        if (q.getQuestionType() != null) {
+            typeCombo.setValue(q.getQuestionType());
+        }
+
         titleField.setText(q.getTitle());
         instructionsArea.setText(q.getInstructions());
         taskArea.setText(q.getTask());
@@ -154,9 +265,6 @@ public class AdminPracticeController {
         expectedOutputArea.setText(q.getExpectedOutput());
         hintArea.setText(q.getHint());
         solutionArea.setText(q.getSolutionCode());
-
-        if (q.getBlanks() != null) blanksField.setText(String.join(", ", q.getBlanks()));
-        if (q.getChoices() != null) choicesField.setText(String.join(", ", q.getChoices()));
 
         statusLabel.setText("✏️ Editing: " + q.getTitle());
         statusLabel.setStyle("-fx-text-fill: #38bdf8; -fx-font-weight: bold;");
@@ -172,70 +280,16 @@ public class AdminPracticeController {
             statusLabel.setText("⚠️ Select a question first");
             return;
         }
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete");
         alert.setHeaderText("Delete question?");
         alert.setContentText(q.getTitle());
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                boolean success = JsonUtils.deletePracticeQuestion(
-                        q.getLanguage(), q.getTitle());
-                if (success) {
-                    statusLabel.setText("✅ Deleted");
-                    refreshTable();
-                }
+                JsonUtils.deletePracticeQuestion(q.getLanguage(), q.getTitle());
+                statusLabel.setText("✅ Deleted: " + q.getTitle());
+                refreshTable();
             }
         });
-    }
-
-    // ============================================
-    // CLEAR FORM
-    // ============================================
-    @FXML
-    public void handleClear() {
-        clearForm();
-        editingQuestion = null;
-        statusLabel.setText("");
-    }
-
-    private void clearForm() {
-        titleField.clear();
-        instructionsArea.clear();
-        taskArea.clear();
-        starterCodeArea.clear();
-        expectedOutputArea.clear();
-        hintArea.clear();
-        solutionArea.clear();
-        blanksField.clear();
-        choicesField.clear();
-    }
-
-    private List<String> parseList(String text) {
-        List<String> result = new ArrayList<>();
-        if (text == null || text.trim().isEmpty()) return result;
-        for (String p : text.split(",")) {
-            String t = p.trim();
-            if (!t.isEmpty()) result.add(t);
-        }
-        return result;
-    }
-
-    // ============================================
-    // BACK
-    // ============================================
-    @FXML
-    public void handleBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeView.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) titleField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Mimo Platform - Practice");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

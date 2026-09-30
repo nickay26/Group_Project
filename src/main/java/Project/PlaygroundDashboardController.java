@@ -41,21 +41,24 @@ public class PlaygroundDashboardController {
         }
     }
 
-    private HBox createProjectCard(Project project) {
-        HBox card = new HBox();
-        card.setPrefWidth(300.0);
-        card.setPrefHeight(64.0);
-        card.setAlignment(Pos.CENTER_LEFT);
-        card.setPadding(new Insets(12, 16, 12, 16));
-        card.setSpacing(12);
+    private VBox createProjectCard(Project project) {
+        VBox card = new VBox();
+        card.setPrefWidth(220.0);
+        card.setPrefHeight(270.0);
+        card.setAlignment(Pos.CENTER);
+        card.setPadding(new Insets(20, 16, 20, 16));
+        card.setSpacing(14);
 
-        // Apply base CSS card class
-        card.getStyleClass().add("project-card");
+        // Apply base Liquid CSS class
+        card.getStyleClass().add("liquid-project-card");
 
-        // Language Icon ImageView
+        // 1. Language Icon Container
+        StackPane iconContainer = new StackPane();
+        iconContainer.getStyleClass().add("card-icon-container");
+
         ImageView iconView = new ImageView();
-        iconView.setFitWidth(50);
-        iconView.setFitHeight(50);
+        iconView.setFitWidth(70);
+        iconView.setFitHeight(70);
         iconView.setPreserveRatio(true);
 
         String iconPath = getLanguageIconPath(project.getLanguage());
@@ -67,13 +70,32 @@ public class PlaygroundDashboardController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        iconContainer.getChildren().add(iconView);
 
-        // Title Label
+        // 2. Project Title & Language Labels
+        VBox textContainer = new VBox(4);
+        textContainer.setAlignment(Pos.CENTER);
+
         Label titleLabel = new Label(project.getTitle());
         titleLabel.getStyleClass().add("card-title");
 
-        card.getChildren().addAll(iconView, titleLabel);
+        Label langLabel = new Label(project.getLanguage() != null ? project.getLanguage() : "C++");
+        langLabel.getStyleClass().add("card-subtitle");
+
+        textContainer.getChildren().addAll(titleLabel, langLabel);
+
+        // 3. Open Project Action Button
+        Button openBtn = new Button("Open Project ➔");
+        openBtn.setPrefWidth(180);
+        openBtn.setPrefHeight(38);
+        openBtn.getStyleClass().add("btn-card-action");
+        openBtn.setOnAction(e -> openWorkspace(project));
+
+        // Click anywhere on the card to open workspace
         card.setOnMouseClicked(e -> openWorkspace(project));
+
+        // Add elements to VBox
+        card.getChildren().addAll(iconContainer, textContainer, openBtn);
         return card;
     }
 
@@ -105,8 +127,15 @@ public class PlaygroundDashboardController {
         if (title.isEmpty()) return;
 
         int currentUserId = UserSession.getUserId();
-        String defaultCode = getBoilerplate(lang);
 
+        // ❌ User Session မရှိပါက (-1 ဖြစ်နေပါက) Project ဖန်တီးခွင့် မပြုရန် တားဆီးခြင်း
+        if (currentUserId <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "User session expired. Please log in again.");
+            alert.show();
+            return;
+        }
+
+        String defaultCode = getBoilerplate(lang);
         Project newProject = DatabaseManager.createProject(currentUserId, title, lang, defaultCode);
         if (newProject != null) {
             closeCreateModal();

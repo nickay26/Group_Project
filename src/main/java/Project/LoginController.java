@@ -1,5 +1,6 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -10,7 +11,7 @@ public class LoginController {
     // ============================================
     @FXML private Button aboutBtn;
     @FXML private Button helpBtn;
-    @FXML private Button registerNavBtn;   // ← FXML မှာ registerNavBtn ဖြစ်လို့
+    @FXML private Button registerNavBtn;
 
     // ============================================
     // LOGIN FORM CONTROLS
@@ -21,28 +22,31 @@ public class LoginController {
     @FXML private Hyperlink forgotLink;
     @FXML private Button loginBtn;
     @FXML private Button googleBtn;
+
     // Floating Labels
     @FXML private Label emailFloatLabel;
     @FXML private Label passwordFloatLabel;
+
     // ============================================
-    // NAVIGATION HANDLERS
+    // INITIALIZE & FLOATING LABELS
     // ============================================
     @FXML
     public void initialize() {
         setupFloatingLabel(emailField, emailFloatLabel);
         setupFloatingLabel(passwordField, passwordFloatLabel);
     }
+
     private void setupFloatingLabel(TextField field, Label label) {
-        // Focus listener — cursor ချလိုက်ရင် label ပေါ်
         field.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
             updateFloatingLabel(field, label, isFocused);
         });
         field.textProperty().addListener((obs, oldVal, newVal) -> {
-            updateFloatingLabel(field, label,field.isFocused());
+            updateFloatingLabel(field, label, field.isFocused());
         });
     }
+
     private void updateFloatingLabel(TextField field, Label label, boolean focused) {
-        boolean hasText = !field.getText().isEmpty();
+        boolean hasText = field.getText() != null && !field.getText().isEmpty();
         boolean showLabel = focused || hasText;
 
         if (showLabel) {
@@ -53,12 +57,17 @@ public class LoginController {
             label.getStyleClass().remove("floating-label-visible");
         }
 
-    if (focused || hasText) {
-        field.setStyle("-fx-prompt-text-fill: transparent;");
-    } else {
-        field.setStyle("-fx-prompt-text-fill: rgba(255, 255, 255, 0.55);");
+        if (focused || hasText) {
+            field.setStyle("-fx-prompt-text-fill: transparent;");
+        } else {
+            field.setStyle("-fx-prompt-text-fill: rgba(255, 255, 255, 0.55);");
+        }
     }
-}
+
+    // ============================================
+    // NAVIGATION HANDLERS
+    // ============================================
+
     /** Register Button (Top Right) နှိပ်ရင် Welcome Page ကို သွား */
     @FXML
     private void handleRegister() {
@@ -99,44 +108,36 @@ public class LoginController {
 
         // Validation
         if (email.isEmpty() || password.isEmpty()) {
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Missing Fields");
-            warning.setHeaderText(null);
-            warning.setContentText("Please enter both your email/username and password.");
-            warning.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please enter both your email/username and password.");
             return;
         }
 
-        // Email format စစ်
         if (!email.contains("@") && !email.matches("^[a-zA-Z0-9_]+$")) {
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Invalid Input");
-            warning.setHeaderText(null);
-            warning.setContentText("Please enter a valid email address or username.");
-            warning.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please enter a valid email address or username.");
             return;
         }
 
-        // Password အနည်းဆုံး 6 လုံး စစ်
         if (password.length() < 6) {
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Weak Password");
-            warning.setHeaderText(null);
-            warning.setContentText("Password must be at least 6 characters long.");
-            warning.showAndWait();
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be at least 6 characters long.");
             return;
         }
 
-        // Remember me စစ်
         boolean remember = rememberCheck != null && rememberCheck.isSelected();
         System.out.println("Remember me: " + remember);
-
-        // Login လုပ်နေတဲ့ အခြေအနေ
         System.out.println("Attempting login for: " + email);
 
-        // TODO: Future HTTP POST to Flask /api/login endpoint
-        // အောင်မြင်ရင် Dashboard ကို သွား
-        // SceneManager.switchScene("LearnPage.fxml", "Mimo Platform - Dashboard");
+        // Database မှ Authenticate လုပ်ခြင်း
+        User user = DatabaseManager.authenticateUser(email, password);
+
+        if (user != null) {
+            UserSession.initSession(user);
+            System.out.println("Login successful for User ID: " + user.getUserId());
+
+            // Redirection Logic ခေါ်ယူခြင်း
+            navigateToNextScene();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email/username or password. Please try again.");
+        }
     }
 
     /** Google Button နှိပ်ရင် Google Login လုပ် */
@@ -147,16 +148,20 @@ public class LoginController {
         GoogleAuthService.startGoogleLogin(authCode -> {
             GoogleAuthService.fetchUserProfile(authCode, (userIdFromAuth, email, name) -> {
 
-                // 1. Fetch or create local MySQL record to obtain correct User_ID (3)
-                User dbUser = DatabaseManager.findOrCreateGoogleUser(email, name, null);
+                // 1. Fetch or create local MySQL record to obtain correct User_ID
+                User dbUser = DatabaseManager.findOrCreateGoogleUser(name, email, null);
 
                 if (dbUser != null) {
-                    // 2. Initialize UserSession with the local database User
-                    UserSession.initSession(dbUser);
-                    System.out.println("Session started for Google User ID: " + dbUser.getUserId());
+                    // JavaFX UI Thread ပေါ်တွင် Scene ပြောင်းရန် Platform.runLater သုံးသည်
+                    Platform.runLater(() -> {
+                        // 2. Initialize UserSession
+                        UserSession.initSession(dbUser);
+                        System.out.println("Session started for Google User ID: " + dbUser.getUserId());
 
-                    // 3. Navigate to main UI page
-                    sendAuthCodeToFlask(authCode);
+                        // 3. Flask သို့ Auth Code ပို့ပြီး Redirection Logic ခေါ်ယူခြင်း
+                        sendAuthCodeToFlask(authCode);
+                        navigateToNextScene();
+                    });
                 } else {
                     System.err.println("Failed to sync Google user with local database.");
                 }
@@ -164,24 +169,33 @@ public class LoginController {
         });
     }
 
-    /** Flask Backend ကို Auth Code ပို့ */
-    private void sendAuthCodeToFlask(String code) {
-        // TODO: HTTP POST request to your backend: /api/auth/google
-        // Verified ဖြစ်ရင် Dashboard ကို သွား
+    /**
+     * Dashboard (MainLayoutView) သို့ သွားမည်။
+     * MainLayoutController က redirectedFromOverview Flag ပေါ်မူတည်ပြီး Learn သို့မဟုတ် Courses Page ကို အလိုအလျောက် ရွေးဖွင့်ပါမည်။
+     */
+    private void navigateToNextScene() {
         SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
     }
 
+    /** Flask Backend ကို Auth Code ပို့ */
+    private void sendAuthCodeToFlask(String code) {
+        // TODO: HTTP POST request to your backend: /api/auth/google
+    }
+
     // ============================================
-    // OPTIONAL: Forgot Password Handler
+    // OPTIONAL: Forgot Password Handler & Helper
     // ============================================
 
-    /** Forgot Password Link နှိပ်ရင် */
     @FXML
     private void handleForgotPassword() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Reset Password");
-        alert.setHeaderText("Password Reset");
-        alert.setContentText("Please contact admin or check your email for reset instructions.");
+        showAlert(Alert.AlertType.INFORMATION, "Reset Password", "Please contact admin or check your email for reset instructions.");
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
         alert.showAndWait();
     }
 }

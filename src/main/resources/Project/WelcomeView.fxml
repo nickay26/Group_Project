@@ -32,8 +32,7 @@
             <children>
                 <Button fx:id="aboutBtn" onAction="#handleAbout" styleClass="nav-button" text="About" />
                 <Button fx:id="helpBtn" onAction="#handleHelp" styleClass="nav-button" text="Help" />
-                <Button fx:id="loginBtn" onAction="#handleLogin" styleClass="nav-button" text="Login" />
-                <Button fx:id="adminBtn" onAction="#handleAdmin" styleClass="nav-button" text="Admin">
+                <Button fx:id="loginBtn" onAction="#handleLogin" styleClass="nav-button" text="Login">
                     <HBox.margin>
                         <Insets right="70.0" />
                     </HBox.margin>

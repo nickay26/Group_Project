@@ -52,13 +52,28 @@ public class PythonOverviewController implements Initializable {
 
     @FXML
     private void handleStartBasic() {
-        // Python Basic Lesson သို့ သွားမည့် Logic
-        SceneManager.switchScene("LessonView.fxml", "Mimo Platform - Python Basic");
+        checkLoginAndNavigate("PYTHON_BASIC");
     }
 
     @FXML
     private void handleStartIntermediate() {
-        // Python Intermediate Lesson သို့ သွားမည့် Logic
-        SceneManager.switchScene("LessonView.fxml", "Mimo Platform - Python Intermediate");
+        checkLoginAndNavigate("PYTHON_INTERMEDIATE");
+    }
+
+    private void checkLoginAndNavigate(String courseId) {
+        // 1. နှိပ်လိုက်သည့် Course ID ကို Session တွင် သတ်မှတ်မည်
+        UserSession.setActiveCourseId(courseId);
+
+        // 2. Overview မှ လာခြင်း ဖြစ်သောကြောင့် Flag ကို အမြဲ true သတ်မှတ်ပေးမည်
+        UserSession.setRedirectedFromOverview(true);
+
+        // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးပြီး လမ်းကြောင်းခွဲမည်
+        if (UserSession.getInstance() != null && UserSession.getUserId() != -1) {
+            // Login ဝင်ထားပါက Main Layout သို့ တန်းသွားမည် (MainLayout မှတစ်ဆင့် Learn Page သို့ ရောက်မည်)
+            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+        } else {
+            // Login မဝင်ရသေးပါက Login View သို့ ပို့ပေးမည်
+            SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+        }
     }
 }
