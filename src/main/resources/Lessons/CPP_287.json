@@ -1,0 +1,154 @@
+{
+  "lessonId": "CPP_287",
+  "title": "Module Review Quiz: Move Semantics & Rvalue References (CPP_249 to CPP_256)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_287_S1",
+      "type": "CONCEPT",
+      "title": "Move Semantics & Rvalue References Overview",
+      "prompt": "This Module Quiz covers lvalues vs rvalues, rvalue references (&&), move constructors, move assignment operators, std::move, perfect forwarding (std::forward), and Rule of Five in C++ (CPP_249 to CPP_256).",
+      "codeSnippet": "#include <iostream>\n#include <utility>\nusing namespace std;\n\nclass Buffer {\n    int* data;\npublic:\n    Buffer(size_t size) : data(new int[size]) {}\n    ~Buffer() { delete[] data; }\n    // Move Constructor\n    Buffer(Buffer&& other) noexcept : data(other.data) {\n        other.data = nullptr;\n    }\n};\n\nint main() {\n    Buffer b1(100);\n    Buffer b2 = std::move(b1); // Transfer ownership\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_287_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Rvalue Reference Syntax (CPP_249)",
+      "prompt": "Fill in the operator symbol pair used to declare an rvalue reference in C++11.",
+      "codeSnippet": "int x = 10;\nint___ rref = 20; // Binds to temporary rvalue",
+      "options": ["&&", "&", "**", "->"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_287_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lvalue vs Rvalue (CPP_249)",
+      "prompt": "Which statement correctly describes an 'lvalue' in C++?",
+      "options": [
+        "An expression that refers to a persistent memory location with an identifiable address",
+        "A temporary expression that disappears immediately after evaluation",
+        "A constant string literal only",
+        "A pointer variable allocated dynamically on heap"
+      ],
+      "correctAnswer": "An expression that refers to a persistent memory location with an identifiable address"
+    },
+    {
+      "slideId": "CPP_287_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::move Function (CPP_250)",
+      "prompt": "Fill in the utility function name used to cast an lvalue expression into an rvalue reference.",
+      "codeSnippet": "string s1 = \"Hello\";\nstring s2 = std::___(s1);",
+      "options": ["move", "forward", "cast", "transfer"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_287_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::move Behavior (CPP_250)",
+      "prompt": "What does calling 'std::move(obj)' actually perform under the hood?",
+      "options": [
+        "It performs an unconditional static cast of obj to an rvalue reference without moving data itself",
+        "It immediately deletes the source memory heap buffer",
+        "It creates a deep copy of obj and returns it",
+        "It locks the memory location to prevent access"
+      ],
+      "correctAnswer": "It performs an unconditional static cast of obj to an rvalue reference without moving data itself"
+    },
+    {
+      "slideId": "CPP_287_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Constructor Signature (CPP_251)",
+      "prompt": "Fill in the parameter modifier required for a Move Constructor of class 'Widget'.",
+      "codeSnippet": "class Widget {\npublic:\n    Widget(Widget___ other) noexcept;\n};",
+      "options": ["&&", "&", "*", "const &"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_287_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Move Constructor Purpose (CPP_251)",
+      "prompt": "Why are Move Constructors designed to steal resources instead of making deep copies?",
+      "options": [
+        "To eliminate expensive dynamic memory allocations and improve program performance",
+        "To enforce immutability on original variables",
+        "To convert references into static class members",
+        "To make memory allocation compatible with C programs"
+      ],
+      "correctAnswer": "To eliminate expensive dynamic memory allocations and improve program performance"
+    },
+    {
+      "slideId": "CPP_287_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Move Assignment Operator (CPP_252)",
+      "prompt": "Fill in the return type and operator declaration for a move assignment operator.",
+      "codeSnippet": "class Container {\npublic:\n    Container& ___=(Container&& other) noexcept;\n};",
+      "options": ["operator", "move", "assign", "func"],
+      "correctAnswer": "operator"
+    },
+    {
+      "slideId": "CPP_287_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "noexcept on Move Operations (CPP_253)",
+      "prompt": "Why should Move Constructors and Move Assignment Operators be marked as 'noexcept'?",
+      "options": [
+        "To allow STL containers (like std::vector) to use move operations during re-allocations safely",
+        "To prevent compilation errors when compiling with C++03 standards",
+        "To force the compiler to generate inline machine code",
+        "To automatically initialize raw pointers to nullptr"
+      ],
+      "correctAnswer": "To allow STL containers (like std::vector) to use move operations during re-allocations safely"
+    },
+    {
+      "slideId": "CPP_287_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Universal Reference (CPP_254)",
+      "prompt": "Fill in the template type parameter combination that forms a Universal Reference (Forwarding Reference).",
+      "codeSnippet": "template <typename T>\nvoid relay(T___ arg);",
+      "options": ["&&", "&", "*", "const &"],
+      "correctAnswer": "&&"
+    },
+    {
+      "slideId": "CPP_287_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Perfect Forwarding (CPP_254)",
+      "prompt": "Which function template works together with universal references to preserve the value category (lvalue/rvalue) of arguments?",
+      "options": ["std::forward<T>()", "std::move()", "std::cast()", "std::pass()"],
+      "correctAnswer": "std::forward<T>()"
+    },
+    {
+      "slideId": "CPP_287_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Rule of Five (CPP_255)",
+      "prompt": "Fill in the number of special member functions defined in the C++ 'Rule of Five'.",
+      "codeSnippet": "// Destructor, Copy Constructor, Copy Assignment, Move Constructor, Move Assignment\n// Rule of ___",
+      "options": ["5", "3", "0", "6"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "CPP_287_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rule of Zero (CPP_255)",
+      "prompt": "What does the 'Rule of Zero' advocate for custom C++ classes?",
+      "options": [
+        "Design classes using smart pointers and standard RAII types so no custom destructors or copy/move operations are needed",
+        "Set all class member variable values to zero in constructors",
+        "Never define any constructors inside class definitions",
+        "Delete all virtual functions from base classes"
+      ],
+      "correctAnswer": "Design classes using smart pointers and standard RAII types so no custom destructors or copy/move operations are needed"
+    },
+    {
+      "slideId": "CPP_287_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Moved-From State (CPP_256)",
+      "prompt": "What condition must a source object be left in after its contents have been moved?",
+      "options": [
+        "A valid but unspecified state (safe to destroy or re-assign)",
+        "Must be permanently locked and inaccessible",
+        "Must throw a runtime error if read",
+        "Automatically set to nullptr automatically by C++ runtime"
+      ],
+      "correctAnswer": "A valid but unspecified state (safe to destroy or re-assign)"
+    }
+  ]
+}

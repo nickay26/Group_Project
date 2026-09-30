@@ -47,7 +47,7 @@ public class CppOverviewController implements Initializable {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
     }
 
     @FXML
@@ -70,10 +70,10 @@ public class CppOverviewController implements Initializable {
         // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးပြီး လမ်းကြောင်းခွဲမည်
         if (UserSession.getInstance() != null && UserSession.getUserId() != -1) {
             // Login ဝင်ထားပါက Main Layout သို့ တန်းသွားမည် (MainLayout မှတစ်ဆင့် Learn Page သို့ ရောက်မည်)
-            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
         } else {
             // Login မဝင်ရသေးပါက Login View သို့ ပို့ပေးမည်
-            SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+            SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Login");
         }
     }
 }

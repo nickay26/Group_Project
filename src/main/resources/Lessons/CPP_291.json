@@ -1,0 +1,225 @@
+{
+  "lessonId": "CPP_291",
+  "title": "Comprehensive Final Test: C++ Intermediate Level (CPP_284 to CPP_290)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_291_S1",
+      "type": "CONCEPT",
+      "title": "C++ Intermediate Comprehensive Test",
+      "prompt": "This final test evaluates your knowledge across all C++ Intermediate topics, including STL Containers, STL Algorithms & Ranges, Exception Handling, Move Semantics, Smart Pointers, File I/O Streams, and Modern C++ Features (CPP_225 to CPP_280).",
+      "codeSnippet": "#include <iostream>\n#include <vector>\n#include <memory>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    auto data = make_unique<vector<int>>(vector<int>{3, 1, 4, 1, 5});\n    sort(data->begin(), data->end());\n    for (int n : *data) {\n        cout << n << \" \";\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_291_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Container Choice (CPP_225 / CPP_226)",
+      "prompt": "Which STL container guarantees contiguous memory storage and fast O(1) random access by index?",
+      "options": [
+        "std::vector",
+        "std::list",
+        "std::set",
+        "std::deque"
+      ],
+      "correctAnswer": "std::vector"
+    },
+    {
+      "slideId": "CPP_291_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Map Access (CPP_229)",
+      "prompt": "Fill in the operator used to access or insert elements by key in std::map.",
+      "codeSnippet": "std::map<std::string, int> scores;\nscores___\"Alice\"___ = 95;",
+      "options": ["[]", "()", "{}", "<>"],
+      "correctAnswer": "[]"
+    },
+    {
+      "slideId": "CPP_291_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Associative Container Ordering (CPP_228)",
+      "prompt": "What is the primary difference between std::set and std::unordered_set?",
+      "options": [
+        "std::set stores elements in sorted order (O(log N)), while std::unordered_set uses hash tables (average O(1))",
+        "std::set allows duplicate elements, while std::unordered_set does not",
+        "std::set only stores key-value pairs",
+        "std::unordered_set maintains insertion order strictly"
+      ],
+      "correctAnswer": "std::set stores elements in sorted order (O(log N)), while std::unordered_set uses hash tables (average O(1))"
+    },
+    {
+      "slideId": "CPP_291_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Algorithm Header (CPP_233)",
+      "prompt": "Fill in the header file required for std::sort and std::find_if.",
+      "codeSnippet": "#include <___>",
+      "options": ["algorithm", "numeric", "ranges", "iterator"],
+      "correctAnswer": "algorithm"
+    },
+    {
+      "slideId": "CPP_291_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Syntax (CPP_235)",
+      "prompt": "Which lambda capture specification captures all outer local variables by reference?",
+      "options": [
+        "[&]",
+        "[=]",
+        "[this]",
+        "[]"
+      ],
+      "correctAnswer": "[&]"
+    },
+    {
+      "slideId": "CPP_291_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 Ranges Filter (CPP_240)",
+      "prompt": "Fill in the C++20 view adaptor used to extract elements matching a condition.",
+      "codeSnippet": "auto evens = nums | std::views::___([](int x){ return x % 2 == 0; });",
+      "options": ["filter", "transform", "take", "drop"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "CPP_291_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Standard Base (CPP_243)",
+      "prompt": "Which virtual member function must be overridden in a custom exception class derived from std::exception?",
+      "options": [
+        "const char* what() const noexcept",
+        "std::string get_error()",
+        "void print_exception()",
+        "const char* message() noexcept"
+      ],
+      "correctAnswer": "const char* what() const noexcept"
+    },
+    {
+      "slideId": "CPP_291_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Exception Safety Specifier (CPP_245)",
+      "prompt": "Fill in the keyword specifying that a function will not throw any exceptions.",
+      "codeSnippet": "void process() ___ { /* safe code */ }",
+      "options": ["noexcept", "const", "override", "final"],
+      "correctAnswer": "noexcept"
+    },
+    {
+      "slideId": "CPP_291_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Value Categories (CPP_249)",
+      "prompt": "Which symbol combination declares an rvalue reference parameter in C++11?",
+      "options": [
+        "Type&&",
+        "Type&",
+        "Type*",
+        "const Type&"
+      ],
+      "correctAnswer": "Type&&"
+    },
+    {
+      "slideId": "CPP_291_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Resource Transfer (CPP_250)",
+      "prompt": "Fill in the utility function used to convert an lvalue into an rvalue reference to enable moving.",
+      "codeSnippet": "std::vector<int> v2 = std::___(v1);",
+      "options": ["move", "forward", "cast", "copy"],
+      "correctAnswer": "move"
+    },
+    {
+      "slideId": "CPP_291_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rule of Five (CPP_255)",
+      "prompt": "Which functions make up the C++ 'Rule of Five'?",
+      "options": [
+        "Destructor, Copy Constructor, Copy Assignment, Move Constructor, Move Assignment",
+        "Constructor, Destructor, Copy Constructor, Virtual Function, Operator=",
+        "Default Constructor, Parameterized Constructor, Copy Constructor, Move Constructor, Destructor",
+        "Getter, Setter, Constructor, Destructor, Friend Function"
+      ],
+      "correctAnswer": "Destructor, Copy Constructor, Copy Assignment, Move Constructor, Move Assignment"
+    },
+    {
+      "slideId": "CPP_291_S13",
+      "type": "FILL_IN_BLANK",
+      "title": "Smart Pointer Creation (CPP_258)",
+      "prompt": "Fill in the factory function recommended for allocating std::unique_ptr safely.",
+      "codeSnippet": "auto ptr = std::___<int>(100);",
+      "options": ["make_unique", "make_shared", "create_unique", "new_unique"],
+      "correctAnswer": "make_unique"
+    },
+    {
+      "slideId": "CPP_291_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circular Dependency Resolution (CPP_261)",
+      "prompt": "Which smart pointer type is specifically designed to break circular std::shared_ptr dependencies?",
+      "options": [
+        "std::weak_ptr",
+        "std::unique_ptr",
+        "std::auto_ptr",
+        "std::raw_ptr"
+      ],
+      "correctAnswer": "std::weak_ptr"
+    },
+    {
+      "slideId": "CPP_291_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "File Output Stream (CPP_265)",
+      "prompt": "Fill in the stream class name used for creating and writing to files.",
+      "codeSnippet": "std::___ file(\"log.txt\");",
+      "options": ["ofstream", "ifstream", "fstream", "stringstream"],
+      "correctAnswer": "ofstream"
+    },
+    {
+      "slideId": "CPP_291_S16",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stream Formatting (CPP_269)",
+      "prompt": "Which header contains stream manipulators like std::setw and std::setprecision?",
+      "options": [
+        "<iomanip>",
+        "<fstream>",
+        "<iostream>",
+        "<sstream>"
+      ],
+      "correctAnswer": "<iomanip>"
+    },
+    {
+      "slideId": "CPP_291_S17",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-time Constant Evaluation (CPP_274)",
+      "prompt": "Fill in the keyword that requests compile-time evaluation for functions or variables.",
+      "codeSnippet": "___ int get_val() { return 42; }",
+      "options": ["constexpr", "const", "static", "inline"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_291_S18",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Safe Sum Container (CPP_277)",
+      "prompt": "What is std::variant in C++17?",
+      "options": [
+        "A type-safe, type-discriminated union capable of holding one value from specified types",
+        "A container that holds any number of heterogeneous objects dynamically",
+        "A pointer wrapper for managing optional heap allocations",
+        "An algorithm for sorting variant arrays"
+      ],
+      "correctAnswer": "A type-safe, type-discriminated union capable of holding one value from specified types"
+    },
+    {
+      "slideId": "CPP_291_S19",
+      "type": "FILL_IN_BLANK",
+      "title": "Type Traits Inspection (CPP_278)",
+      "prompt": "Fill in the header name required to inspect type characteristics at compile-time.",
+      "codeSnippet": "#include <___>",
+      "options": ["type_traits", "concepts", "utility", "typeinfo"],
+      "correctAnswer": "type_traits"
+    },
+    {
+      "slideId": "CPP_291_S20",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 Concepts (CPP_279)",
+      "prompt": "What is the primary function of C++20 Concepts?",
+      "options": [
+        "To place compile-time constraints on template parameters for better type checking and clearer error messages",
+        "To speed up execution of recursive functions during runtime",
+        "To automatically convert template code to dynamic runtime polymorphism",
+        "To enforce garbage collection on smart pointers"
+      ],
+      "correctAnswer": "To place compile-time constraints on template parameters for better type checking and clearer error messages"
+    }
+  ]
+}

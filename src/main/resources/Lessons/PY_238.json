@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_238",
+  "title": "Advanced Typing: Union, Optional, Any & Literal",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_238_S1",
+      "type": "CONCEPT",
+      "title": "Union, Optional, Any, and Literal Types",
+      "prompt": "Python 3.10 introduced the `|` operator for union types. `Optional[T]` represents `T | None`. `Literal` restricts arguments to specific exact values, while `Any` disables type checking for a variable.",
+      "codeSnippet": "from typing import Literal, Optional\n\ndef connect(host: str, port: int | None = None, mode: Literal[\"r\", \"w\"] = \"r\") -> None:\n    print(f\"Connecting to {host}:{port} in {mode} mode\")"
+    },
+    {
+      "slideId": "PY_238_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Union Syntax Operator (Python 3.10+)",
+      "prompt": "Fill in the bitwise operator used as a shorthand for Union types in Python 3.10+.",
+      "codeSnippet": "def parse(val: int ___ str) -> float:\n    return float(val)",
+      "options": ["|", "or", "&", "+"],
+      "correctAnswer": "|"
+    },
+    {
+      "slideId": "PY_238_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Optional Type Representation",
+      "prompt": "Which expression is identical to `Optional[str]`?",
+      "options": [
+        "str | None",
+        "Union[str, Any]",
+        "Literal[str]",
+        "str | bool"
+      ],
+      "correctAnswer": "str | None"
+    },
+    {
+      "slideId": "PY_238_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Literal Type Hinting Import",
+      "prompt": "Fill in the class name imported from typing to constrain a argument to a fixed set of specific literal values.",
+      "codeSnippet": "from typing import ___\n\nStatus = Literal[\"pending\", \"approved\", \"rejected\"]",
+      "options": ["Literal", "Const", "Exact", "Enum"],
+      "correctAnswer": "Literal"
+    },
+    {
+      "slideId": "PY_238_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Consequences of Any Type",
+      "prompt": "What happens when a parameter is annotated with `typing.Any`?",
+      "options": [
+        "Static type checkers allow any operation and skip type validation for that variable",
+        "It restricts the parameter to primitive types (int, float, str, bool)",
+        "Python automatically converts the passed argument into a string at runtime",
+        "The static type checker treats it as an object that has no methods"
+      ],
+      "correctAnswer": "Static type checkers allow any operation and skip type validation for that variable"
+    },
+    {
+      "slideId": "PY_238_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Optional Type Explicit Representation",
+      "prompt": "Fill in the typing module class name used to signify an argument that can either be of type `int` or `None`.",
+      "codeSnippet": "from typing import ___\n\ndef get_age() -> Optional[int]:\n    return None",
+      "options": ["Optional", "Nullable", "Maybe", "Union"],
+      "correctAnswer": "Optional"
+    },
+    {
+      "slideId": "PY_238_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "NoReturn Type Usage",
+      "prompt": "When should `typing.NoReturn` be used as a function return annotation?",
+      "options": [
+        "When a function never returns normally (e.g., raises an exception or runs an infinite loop)",
+        "When a function returns None explicitly",
+        "When a function has no return statement",
+        "When a function's return type cannot be inferred"
+      ],
+      "correctAnswer": "When a function never returns normally (e.g., raises an exception or runs an infinite loop)"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_240",
+  "title": "Advanced Typing: Protocols & Structural Subtyping",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_240_S1",
+      "type": "CONCEPT",
+      "title": "Protocols and Duck Typing (PEP 544)",
+      "prompt": "`Protocol` provides static duck typing (structural subtyping). Classes do not need to explicitly inherit from a Protocol; as long as they implement the required methods/attributes, static type checkers accept them.",
+      "codeSnippet": "from typing import Protocol\n\nclass Renderable(Protocol):\n    def render(self) -> str:\n        ...\n\nclass HTMLWidget:\n    def render(self) -> str:\n        return \"<div>Widget</div>\"\n\ndef draw(item: Renderable) -> None:\n    print(item.render())\n\ndraw(HTMLWidget())  # Validated by static analyzer without direct inheritance!"
+    },
+    {
+      "slideId": "PY_240_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Protocol Base Class Import",
+      "prompt": "Fill in the base class imported from typing to enable structural subtyping.",
+      "codeSnippet": "from typing import ___\n\nclass Drawable(Protocol):\n    def draw(self) -> None: ...",
+      "options": ["Protocol", "Interface", "Structural", "AbstractProtocol"],
+      "correctAnswer": "Protocol"
+    },
+    {
+      "slideId": "PY_240_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nominal vs Structural Subtyping",
+      "prompt": "What is the key difference between ABCs and Protocols in Python static analysis?",
+      "options": [
+        "ABCs require explicit inheritance (nominal subtyping), while Protocols inspect methods/attributes matching (structural subtyping)",
+        "Protocols enforce checks at runtime while ABCs operate strictly at compile time",
+        "ABCs support multiple inheritance while Protocols do not",
+        "Protocols can only define class attributes, not methods"
+      ],
+      "correctAnswer": "ABCs require explicit inheritance (nominal subtyping), while Protocols inspect methods/attributes matching (structural subtyping)"
+    },
+    {
+      "slideId": "PY_240_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Runtime Checkable Decorator for Protocols",
+      "prompt": "Fill in the decorator applied to Protocols to enable `isinstance()` checks at runtime.",
+      "codeSnippet": "from typing import Protocol, ___\n\n@runtime_checkable\nclass Closable(Protocol):\n    def close(self) -> None: ...",
+      "options": ["runtime_checkable", "enable_isinstance", "runtime_protocol", "checkable"],
+      "correctAnswer": "runtime_checkable"
+    },
+    {
+      "slideId": "PY_240_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Placeholder Body for Protocol Methods",
+      "prompt": "What standard Python expression is conventionally used as the body of method signatures inside a Protocol?",
+      "options": [
+        "... (Ellipsis)",
+        "pass",
+        "raise NotImplementedError",
+        "return None"
+      ],
+      "correctAnswer": "... (Ellipsis)"
+    },
+    {
+      "slideId": "PY_240_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Combining Protocols",
+      "prompt": "Fill in the syntax to create a protocol `ReadWritable` that combines `Readable` and `Writable` protocols.",
+      "codeSnippet": "class ReadWritable(Readable, Writable, ___):\n    pass",
+      "options": ["Protocol", "Interface", "ABC", "Base"],
+      "correctAnswer": "Protocol"
+    },
+    {
+      "slideId": "PY_240_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "@runtime_checkable Behavior Limitation",
+      "prompt": "What is a known limitation of `@runtime_checkable` when performing `isinstance()` checks on Protocols at runtime?",
+      "options": [
+        "It checks only for the existence of required methods/attributes, not their function parameter signatures or return types",
+        "It raises a TypeError if used on classes with custom __init__ constructors",
+        "It cannot be combined with dataclasses",
+        "It disables static analysis in Mypy"
+      ],
+      "correctAnswer": "It checks only for the existence of required methods/attributes, not their function parameter signatures or return types"
+    }
+  ]
+}

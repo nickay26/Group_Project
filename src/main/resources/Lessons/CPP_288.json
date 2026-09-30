@@ -1,0 +1,163 @@
+{
+  "lessonId": "CPP_288",
+  "title": "Module Review Quiz: Smart Pointers & Resource Management (CPP_257 to CPP_264)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_288_S1",
+      "type": "CONCEPT",
+      "title": "Smart Pointers & Resource Management Overview",
+      "prompt": "This Module Quiz covers memory leaks, std::unique_ptr, std::shared_ptr, std::weak_ptr, make_unique, make_shared, custom deleters, and circular reference resolution in C++ (CPP_257 to CPP_264).",
+      "codeSnippet": "#include <iostream>\n#include <memory>\nusing namespace std;\n\nclass Resource {\npublic:\n    Resource() { cout << \"Acquired\\n\"; }\n    ~Resource() { cout << \"Destroyed\\n\"; }\n};\n\nint main() {\n    auto ptr = make_unique<Resource>(); // Automatic memory cleanup\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_288_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Header Inclusion (CPP_257)",
+      "prompt": "Fill in the header file name required to use C++ Smart Pointers.",
+      "codeSnippet": "#include <___>\nusing namespace std;\nstd::unique_ptr<int> ptr;",
+      "options": ["memory", "smart_ptr", "utility", "algorithm"],
+      "correctAnswer": "memory"
+    },
+    {
+      "slideId": "CPP_288_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::unique_ptr Ownership (CPP_258)",
+      "prompt": "Which statement best describes the ownership model of std::unique_ptr?",
+      "options": [
+        "Exclusive single ownership; cannot be copied, only moved",
+        "Shared ownership; can be copied freely across threads",
+        "Non-owning weak reference to heap memory",
+        "Automatic conversion to raw pointers on assignment"
+      ],
+      "correctAnswer": "Exclusive single ownership; cannot be copied, only moved"
+    },
+    {
+      "slideId": "CPP_288_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "std::make_unique Factory (CPP_258)",
+      "prompt": "Fill in the helper function name introduced in C++14 to safely allocate a unique_ptr.",
+      "codeSnippet": "auto ptr = std::___<int>(42);",
+      "options": ["make_unique", "make_shared", "create_unique", "new_unique"],
+      "correctAnswer": "make_unique"
+    },
+    {
+      "slideId": "CPP_288_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Moving std::unique_ptr (CPP_258)",
+      "prompt": "How do you transfer ownership of a std::unique_ptr 'p1' to 'p2'?",
+      "options": [
+        "p2 = std::move(p1);",
+        "p2 = p1;",
+        "p2 = p1.copy();",
+        "p2 = &p1;"
+      ],
+      "correctAnswer": "p2 = std::move(p1);"
+    },
+    {
+      "slideId": "CPP_288_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::shared_ptr Declaration (CPP_259)",
+      "prompt": "Fill in the smart pointer type used when multiple owners need to share a resource.",
+      "codeSnippet": "std::___<int> sPtr = std::make_shared<int>(100);",
+      "options": ["shared_ptr", "unique_ptr", "weak_ptr", "auto_ptr"],
+      "correctAnswer": "shared_ptr"
+    },
+    {
+      "slideId": "CPP_288_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::shared_ptr Reference Counting (CPP_259)",
+      "prompt": "When is the dynamic heap memory owned by a std::shared_ptr actually deallocated?",
+      "options": [
+        "When the internal reference count drops to zero",
+        "Immediately when the first shared_ptr goes out of scope",
+        "When std::move() is called on any instance",
+        "At the end of the main() function strictly"
+      ],
+      "correctAnswer": "When the internal reference count drops to zero"
+    },
+    {
+      "slideId": "CPP_288_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Reference Count Query (CPP_260)",
+      "prompt": "Fill in the member function name used to check the current reference count of a shared_ptr.",
+      "codeSnippet": "long count = ptr.___();",
+      "options": ["use_count", "get_count", "ref_count", "owners"],
+      "correctAnswer": "use_count"
+    },
+    {
+      "slideId": "CPP_288_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circular Reference Issue (CPP_261)",
+      "prompt": "What major memory bug occurs when two std::shared_ptr objects hold shared references to each other?",
+      "options": [
+        "A circular reference memory leak (objects are never destroyed)",
+        "A segmentation fault on compilation",
+        "A double-free heap crash",
+        "Stack overflow error"
+      ],
+      "correctAnswer": "A circular reference memory leak (objects are never destroyed)"
+    },
+    {
+      "slideId": "CPP_288_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "std::weak_ptr Declaration (CPP_261)",
+      "prompt": "Fill in the non-owning smart pointer type used to break circular shared_ptr references.",
+      "codeSnippet": "std::___<Node> weakNode = sharedNode;",
+      "options": ["weak_ptr", "unique_ptr", "raw_ptr", "ref_ptr"],
+      "correctAnswer": "weak_ptr"
+    },
+    {
+      "slideId": "CPP_288_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Accessing std::weak_ptr (CPP_261)",
+      "prompt": "Which method must be called on a std::weak_ptr to safely acquire a std::shared_ptr before reading data?",
+      "options": ["lock()", "get()", "promote()", "access()"],
+      "correctAnswer": "lock()"
+    },
+    {
+      "slideId": "CPP_288_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Raw Pointer Access (CPP_262)",
+      "prompt": "Fill in the member function used to extract the underlying raw pointer from a smart pointer.",
+      "codeSnippet": "int* raw = smartPtr.___();",
+      "options": ["get", "raw", "ptr", "data"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_288_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Custom Deleter (CPP_263)",
+      "prompt": "Why might you pass a Custom Deleter to a std::unique_ptr or std::shared_ptr?",
+      "options": [
+        "To manage non-heap resources like custom C-style file handles or API cleanup functions",
+        "To speed up memory allocation on low-RAM devices",
+        "To bypass access specifiers in C++ classes",
+        "To convert smart pointers into static global variables"
+      ],
+      "correctAnswer": "To manage non-heap resources like custom C-style file handles or API cleanup functions"
+    },
+    {
+      "slideId": "CPP_288_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Resetting Smart Pointer (CPP_264)",
+      "prompt": "Fill in the method used to manually release owned memory and clear a smart pointer to nullptr.",
+      "codeSnippet": "uniquePtr.___(); // Destroys object and sets pointer to nullptr",
+      "options": ["reset", "clear", "release", "destroy"],
+      "correctAnswer": "reset"
+    },
+    {
+      "slideId": "CPP_288_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::make_shared Advantage (CPP_259)",
+      "prompt": "What performance advantage does std::make_shared offer over directly using 'std::shared_ptr<T>(new T())'?",
+      "options": [
+        "Combines object creation and control block into a single contiguous memory allocation",
+        "Prevents derived classes from overriding base methods",
+        "Allows standard copying without updating reference counts",
+        "Bypasses thread-safety locks for faster speed"
+      ],
+      "correctAnswer": "Combines object creation and control block into a single contiguous memory allocation"
+    }
+  ]
+}

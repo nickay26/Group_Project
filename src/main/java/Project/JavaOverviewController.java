@@ -47,7 +47,7 @@ public class JavaOverviewController implements Initializable {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
     }
 
     @FXML
@@ -64,16 +64,16 @@ public class JavaOverviewController implements Initializable {
         // 1. နှိပ်လိုက်သည့် Course ID ကို Session တွင် သတ်မှတ်မည်
         UserSession.setActiveCourseId(courseId);
 
-        // 2. Overview မှ လာခြင်း ဖြစ်သောကြောင့် Flag ကို အမြဲ true သတ်မှတ်ပေးမည်
+        // 2. Overview မှ လာခြင်း ဖြစ်သောကြောင့် Flag ကို true သတ်မှတ်မည်
         UserSession.setRedirectedFromOverview(true);
 
-        // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးပြီး လမ်းကြောင်းခွဲမည်
+        // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးမည်
         if (UserSession.getInstance() != null && UserSession.getUserId() != -1) {
-            // Login ဝင်ထားပါက Main Layout သို့ တန်းသွားမည် (MainLayout မှတစ်ဆင့် Learn Page သို့ ရောက်မည်)
-            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+            // Login ဝင်ထားပြီးပါက Main Dashboard သို့ တန်းသွားမည်
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
         } else {
-            // Login မဝင်ရသေးပါက Login View သို့ ပို့ပေးမည်
-            SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+            // Account မရှိသေး/Login မဝင်ရသေးပါက Register ပါဝင်သော WelcomeView သို့ ပို့ပေးပါမည်
+            SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
         }
     }
 }

@@ -75,16 +75,113 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleLogin() {
-        SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+        SceneManager.switchScene("LoginView.fxml", "Sodex Platform - Login");
     }
 
     @FXML
     private void handleAbout() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About Mimo Platform");
-        alert.setHeaderText("Mimo-style Gamified Coding App");
-        alert.setContentText("Learn Java, C++, and Python through interactive micro-lessons, live execution, and instant AI code reviews!");
-        alert.showAndWait();
+        javafx.stage.Stage dialog = new javafx.stage.Stage();
+        dialog.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+        dialog.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+
+        // Main Dark Container
+        javafx.scene.layout.VBox root = new javafx.scene.layout.VBox(16);
+        root.setPadding(new javafx.geometry.Insets(24));
+        root.setStyle(
+                "-fx-background-color: #0b1329;" +
+                        "-fx-border-color: #1e3a8a;" +
+                        "-fx-border-width: 1.5px;" +
+                        "-fx-border-radius: 16px;" +
+                        "-fx-background-radius: 16px;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.85), 25, 0, 0, 10);"
+        );
+        root.setPrefWidth(620);
+
+        // Header Title
+        Label titleLabel = new Label("🚀 Sodex Platform - About");
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #38bdf8;");
+
+        Label subTitleLabel = new Label("Gamified Interactive Coding & Multi-Track Learning Platform");
+        subTitleLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #94a3b8;");
+
+        javafx.scene.layout.VBox headerBox = new javafx.scene.layout.VBox(4, titleLabel, subTitleLabel);
+
+        // Feature Cards Container
+        javafx.scene.layout.VBox featuresBox = new javafx.scene.layout.VBox(10);
+
+        featuresBox.getChildren().addAll(
+                createFeatureCard(
+                        "🎓 Courses Track",
+                        "Standard login or registration lands directly on the Courses page to let users freely browse and select any available course (Java, C++, Python)."
+                ),
+                createFeatureCard(
+                        "📚 Learn Path",
+                        "If a user selects a course from the Welcome/Overview screen before logging in or registering, they are navigated directly to that course's Learn page (e.g., C++ Basic)."
+                ),
+                createFeatureCard(
+                        "💻 Playground",
+                        "Create new coding projects for your preferred language (C++, Java, Python), write custom scripts, and run/execute code live."
+                ),
+                createFeatureCard(
+                        "🏆 Leaderboard & Leagues",
+                        "Competitions are divided into 3 League Levels based on XP. Top 1-5 performers within a week advance to the next higher level!"
+                ),
+                createFeatureCard(
+                        "🎯 Practice",
+                        "Practice targeted topics divided into 3 sub-categories per course (e.g., Variables, Loops, Classes) to solidify your skills."
+                ),
+                createFeatureCard(
+                        "🔄 Review",
+                        "Easily revisit and review all your saved notes, code snippets, and previous lesson progress in one organized view."
+                )
+        );
+
+        // Close Button
+        Button closeBtn = new Button("Close");
+        closeBtn.setMaxWidth(Double.MAX_VALUE);
+        closeBtn.setStyle(
+                "-fx-background-color: linear-gradient(to right, #2563eb, #3b82f6);" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-font-size: 14px;" +
+                        "-fx-background-radius: 8px;" +
+                        "-fx-padding: 10 0;" +
+                        "-fx-cursor: hand;"
+        );
+        closeBtn.setOnAction(e -> dialog.close());
+
+        root.getChildren().addAll(headerBox, featuresBox, closeBtn);
+
+        javafx.scene.Scene scene = new javafx.scene.Scene(root);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        dialog.setScene(scene);
+        dialog.showAndWait();
+    }
+
+    // Helper method to build custom dark feature cards
+    private javafx.scene.layout.HBox createFeatureCard(String title, String desc) {
+        javafx.scene.layout.HBox card = new javafx.scene.layout.HBox(12);
+        card.setPadding(new javafx.geometry.Insets(10, 14, 10, 14));
+        card.setStyle(
+                "-fx-background-color: #15203b;" +
+                        "-fx-background-radius: 10px;" +
+                        "-fx-border-color: #24345d;" +
+                        "-fx-border-radius: 10px;" +
+                        "-fx-border-width: 1px;"
+        );
+
+        Label titleLbl = new Label(title);
+        titleLbl.setStyle("-fx-font-weight: bold; -fx-text-fill: #38bdf8; -fx-font-size: 13px;");
+        titleLbl.setMinWidth(170);
+
+        Label descLbl = new Label(desc);
+        descLbl.setStyle("-fx-text-fill: #cbd5e1; -fx-font-size: 12px;");
+        descLbl.setWrapText(true);
+
+        card.getChildren().addAll(titleLbl, descLbl);
+        javafx.scene.layout.HBox.setHgrow(descLbl, javafx.scene.layout.Priority.ALWAYS);
+
+        return card;
     }
 
     @FXML
@@ -114,11 +211,18 @@ public class WelcomeController implements Initializable {
 
         if (registeredUser != null) {
             UserSession.initSession(registeredUser);
-            SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+
+            // Overview (Java/CPP) မှ လာခဲ့ခြင်း ဟုတ်/မဟုတ် စစ်ဆေး၍ ရောက်ရှိမည့် View ကို ခွဲခြားခြင်း
+            if (UserSession.isRedirectedFromOverview()) {
+                SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+            } else {
+                SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+            }
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
         }
     }
+
     @FXML
     private void handleGoogleSignUp() {
         System.out.println("Opening browser for Google Registration...");
@@ -135,7 +239,13 @@ public class WelcomeController implements Initializable {
 
                     if (googleUser != null) {
                         UserSession.initSession(googleUser);
-                        SceneManager.switchScene("MainLayoutView.fxml", "Mimo Platform - Dashboard");
+
+                        // Google Sign-Up အောင်မြင်ပြီးနောက် Overview မှ လာလျှင် MainLayout (Learn Screen) သို့ ပို့ပေးခြင်း
+                        if (UserSession.isRedirectedFromOverview()) {
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+                        } else {
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+                        }
                     } else {
                         showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
                     }
@@ -145,7 +255,7 @@ public class WelcomeController implements Initializable {
     }
 
     private void navigateToDetail(String title, String subtitle, String details, String[] lessonTitles, String[] lessonDescriptions) {
-        FXMLLoader loader = SceneManager.switchScene("LanguageDetailView.fxml", "Mimo Platform - " + title + " Overview");
+        FXMLLoader loader = SceneManager.switchScene("LanguageDetailView.fxml", "Sodex Platform - " + title + " Overview");
 
         if (loader != null) {
             LanguageDetailController controller = loader.getController();
@@ -155,17 +265,17 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleJavaCard() {
-        SceneManager.switchScene("JavaOverviewView.fxml", "Mimo Platform - Java Overview");
+        SceneManager.switchScene("JavaOverviewView.fxml", "Sodex Platform - Java Overview");
     }
 
     @FXML
     private void handleCppCard() {
-        SceneManager.switchScene("CppOverviewView.fxml", "Mimo Platform - C++ Overview");
+        SceneManager.switchScene("CppOverviewView.fxml", "Sodex Platform - C++ Overview");
     }
 
     @FXML
     private void handlePythonCard() {
-        SceneManager.switchScene("PythonOverviewView.fxml", "Mimo Platform - Python Overview");
+        SceneManager.switchScene("PythonOverviewView.fxml", "Sodex Platform - Python Overview");
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

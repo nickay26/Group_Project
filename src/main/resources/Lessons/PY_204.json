@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_204",
+  "title": "Functional Programming: Lambda, Map, Filter",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_204_S1",
+      "type": "CONCEPT",
+      "title": "Lambda, Map, and Filter Overview",
+      "prompt": "Functional programming features in Python allow you to process data cleanly. Lambda creates small anonymous functions, map() applies a function to every item in an iterable, and filter() extracts items that satisfy a boolean condition.",
+      "codeSnippet": "# Lambda Function\nsquare = lambda x: x ** 2\n\n# map() example\nnums = [1, 2, 3, 4]\nsquares = list(map(lambda x: x ** 2, nums))  # [1, 4, 9, 16]\n\n# filter() example\nevens = list(filter(lambda x: x % 2 == 0, nums))  # [2, 4]"
+    },
+    {
+      "slideId": "PY_204_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Syntax",
+      "prompt": "Fill in the keyword used to declare an anonymous, single-expression function in Python.",
+      "codeSnippet": "add = ___ x, y: x + y\nprint(add(5, 3))",
+      "options": ["lambda", "def", "func", "anonymous"],
+      "correctAnswer": "lambda"
+    },
+    {
+      "slideId": "PY_204_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Expression Limitation",
+      "prompt": "Which limitation applies strictly to Python lambda expressions?",
+      "options": [
+        "They can only contain a single expression and cannot execute multi-line statements or assignments",
+        "They cannot accept default arguments or variable positional arguments (*args)",
+        "They can only be passed as arguments inside the built-in map() function",
+        "They must always explicitly include a 'return' keyword"
+      ],
+      "correctAnswer": "They can only contain a single expression and cannot execute multi-line statements or assignments"
+    },
+    {
+      "slideId": "PY_204_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Transforming Elements with map()",
+      "prompt": "Fill in the function name used to apply a transformation function to every element of an iterable.",
+      "codeSnippet": "names = [\"alice\", \"bob\"]\nupper_names = list(___(str.upper, names))",
+      "options": ["map", "apply", "transform", "filter"],
+      "correctAnswer": "map"
+    },
+    {
+      "slideId": "PY_204_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Map Return Type",
+      "prompt": "What does calling map(func, iterable) in Python 3 return?",
+      "options": [
+        "A map iterator object that evaluates items lazily on demand",
+        "A standard Python list containing converted items",
+        "A tuple containing transformed values",
+        "A dictionary with index-value pairs"
+      ],
+      "correctAnswer": "A map iterator object that evaluates items lazily on demand"
+    },
+    {
+      "slideId": "PY_204_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Filtering Elements with filter()",
+      "prompt": "Fill in the function name used to select items from an iterable for which a predicate function returns True.",
+      "codeSnippet": "words = [\"apple\", \"cat\", \"banana\"]\nlong_words = list(___(lambda w: len(w) > 3, words))",
+      "options": ["filter", "select", "find", "map"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "PY_204_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "reduce() Function Source",
+      "prompt": "Which standard library module must be imported to use the cumulative reduction function 'reduce()'?",
+      "options": [
+        "functools",
+        "itertools",
+        "collections",
+        "operator"
+      ],
+      "correctAnswer": "functools"
+    }
+  ]
+}

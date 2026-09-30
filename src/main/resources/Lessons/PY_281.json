@@ -1,0 +1,176 @@
+{
+  "lessonId": "PY_281",
+  "title": "Module Assessment: Design Patterns & Architecture (PY_258 to PY_264)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_281_S1",
+      "type": "CONCEPT",
+      "title": "Module 9 Overview",
+      "prompt": "Assessment covering Creational, Structural, and Behavioral Design Patterns, Dependency Injection, and Enterprise Architecture Principles in Python.",
+      "codeSnippet": "class Singleton:\n    _instance = None\n    def __new__(cls):\n        if not cls._instance:\n            cls._instance = super().__new__(cls)\n        return cls._instance"
+    },
+    {
+      "slideId": "PY_281_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Singleton Pattern",
+      "prompt": "What is the primary objective of the Singleton Design Pattern?",
+      "options": [
+        "To ensure a class has only one instance and provides a global point of access to it",
+        "To create a factory for generating family objects",
+        "To convert the interface of a class into another interface",
+        "To separate object construction from its representation"
+      ],
+      "correctAnswer": "To ensure a class has only one instance and provides a global point of access to it"
+    },
+    {
+      "slideId": "PY_281_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Singleton Implementation",
+      "prompt": "Fill in the magic method used to control instance creation in Python for Singleton implementation.",
+      "codeSnippet": "class Singleton:\n    def ___(cls):\n        pass",
+      "options": ["__new__", "__init__", "__call__", "__create__"],
+      "correctAnswer": "__new__"
+    },
+    {
+      "slideId": "PY_281_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Factory Method Pattern",
+      "prompt": "Which design pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate?",
+      "options": [
+        "Factory Method",
+        "Abstract Factory",
+        "Builder",
+        "Prototype"
+      ],
+      "correctAnswer": "Factory Method"
+    },
+    {
+      "slideId": "PY_281_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Adapter Pattern",
+      "prompt": "Which pattern acts as a wrapper to allow incompatible interfaces to work together?",
+      "options": [
+        "Adapter",
+        "Bridge",
+        "Composite",
+        "Decorator"
+      ],
+      "correctAnswer": "Adapter"
+    },
+    {
+      "slideId": "PY_281_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Observer Pattern",
+      "prompt": "Fill in the architectural pattern name where an object maintains a list of dependents and notifies them automatically of state changes.",
+      "codeSnippet": "# Subject-Observer Relationship\nclass Subject:\n    def notify_listeners(self):\n        for ___ in self.listeners:\n            ___ .update()",
+      "options": ["observer", "listener", "client", "subscriber"],
+      "correctAnswer": "observer"
+    },
+    {
+      "slideId": "PY_281_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Strategy Pattern",
+      "prompt": "Which pattern enables selecting an algorithm's behavior at runtime by encapsulating interchangeable algorithms?",
+      "options": [
+        "Strategy",
+        "State",
+        "Command",
+        "Template Method"
+      ],
+      "correctAnswer": "Strategy"
+    },
+    {
+      "slideId": "PY_281_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 7: Decorator Pattern vs Decorators",
+      "prompt": "How does the structural Decorator Pattern relate to Python's language-level `@decorator` feature?",
+      "options": [
+        "Python decorators dynamically add behavior to functions/classes, directly implementing the Decorator Pattern",
+        "They are completely unrelated concepts in software architecture",
+        "Python decorators can only be applied to static methods",
+        "Decorator pattern strictly requires inheritance while Python decorators use memory pools"
+      ],
+      "correctAnswer": "Python decorators dynamically add behavior to functions/classes, directly implementing the Decorator Pattern"
+    },
+    {
+      "slideId": "PY_281_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 8: SOLID Principles - D",
+      "prompt": "Fill in the term: Dependency ___ Principle states high-level modules should not depend on low-level modules; both should depend on abstractions.",
+      "codeSnippet": "# Dependency ___ Principle\nclass Service:\n    def __init__(self, repo: IRepository): pass",
+      "options": ["Inversion", "Injection", "Isolation", "Integration"],
+      "correctAnswer": "Inversion"
+    },
+    {
+      "slideId": "PY_281_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Facade Pattern",
+      "prompt": "What does the Facade pattern provide in complex software systems?",
+      "options": [
+        "A simplified, unified interface to a complex subsystem",
+        "A mechanism to clone objects without coupling to their classes",
+        "A way to pass requests along a chain of handlers",
+        "An interface for stepping through a complex data structure"
+      ],
+      "correctAnswer": "A simplified, unified interface to a complex subsystem"
+    },
+    {
+      "slideId": "PY_281_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Proxy Pattern",
+      "prompt": "Which pattern provides a surrogate or placeholder object to control access to another target object?",
+      "options": [
+        "Proxy",
+        "Flyweight",
+        "Facade",
+        "Bridge"
+      ],
+      "correctAnswer": "Proxy"
+    },
+    {
+      "slideId": "PY_281_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Dependency Injection",
+      "prompt": "Fill in the design pattern practice where dependent services are passed into an object during instantiation rather than hardcoded.",
+      "codeSnippet": "class Car:\n    def __init__(self, engine: Engine):\n        self.engine = engine # Dependency ___",
+      "options": ["Injection", "Inversion", "Inheritance", "Integration"],
+      "correctAnswer": "Injection"
+    },
+    {
+      "slideId": "PY_281_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Command Pattern",
+      "prompt": "Which behavioral pattern encapsulates a request as an object, allowing parameterization and undoable operations?",
+      "options": [
+        "Command",
+        "Memento",
+        "Iterator",
+        "Visitor"
+      ],
+      "correctAnswer": "Command"
+    },
+    {
+      "slideId": "PY_281_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 13: Repository Pattern",
+      "prompt": "In Enterprise Architecture, what is the role of the Repository Pattern?",
+      "options": [
+        "To mediate between the domain and data mapping layers using a collection-like interface",
+        "To manage multi-threaded database connections",
+        "To cache API responses at the network boundary",
+        "To handle user interface routing"
+      ],
+      "correctAnswer": "To mediate between the domain and data mapping layers using a collection-like interface"
+    },
+    {
+      "slideId": "PY_281_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 14: Borg Pattern (Pythonic Singleton Alternative)",
+      "prompt": "Fill in the attribute modified in the Borg pattern to share state across all instances instead of identity.",
+      "codeSnippet": "class Borg:\n    _shared_state = {}\n    def __init__(self):\n        self.____ = self._shared_state",
+      "options": ["__dict__", "__slots__", "__class__", "__state__"],
+      "correctAnswer": "__dict__"
+    }
+  ]
+}

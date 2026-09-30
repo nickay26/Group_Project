@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_213",
+  "title": "Functional Programming: Advanced itertools",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_213_S1",
+      "type": "CONCEPT",
+      "title": "itertools in Functional Pipelines",
+      "prompt": "The 'itertools' module provides powerful iterator building blocks for memory-efficient functional processing, such as chain(), starmap(), dropwhile(), and takewhile().",
+      "codeSnippet": "import itertools\n\n# chain\ncombined = list(itertools.chain([1, 2], [3, 4]))  # [1, 2, 3, 4]\n\n# takewhile\nnums = [1, 3, 5, 2, 4]\nres = list(itertools.takewhile(lambda x: x < 5, nums))  # [1, 3]"
+    },
+    {
+      "slideId": "PY_213_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Combining Iterables with chain",
+      "prompt": "Fill in the itertools function used to combine multiple iterables sequentially into one.",
+      "codeSnippet": "import itertools\nmerged = itertools.___([1, 2], ['a', 'b'])",
+      "options": ["chain", "concat", "combine", "zip_all"],
+      "correctAnswer": "chain"
+    },
+    {
+      "slideId": "PY_213_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "starmap vs map",
+      "prompt": "What is the key difference between itertools.starmap() and built-in map()?",
+      "options": [
+        "starmap unpacks argument tuples from the iterable into the function calls (*args)",
+        "starmap converts all return values into dictionary key-value pairs",
+        "starmap works only on string inputs",
+        "starmap runs in multi-processing mode"
+      ],
+      "correctAnswer": "starmap unpacks argument tuples from the iterable into the function calls (*args)"
+    },
+    {
+      "slideId": "PY_213_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Conditional Dropping with dropwhile",
+      "prompt": "Fill in the function name that drops elements while a predicate is True, then returns the rest.",
+      "codeSnippet": "import itertools\nres = itertools.___(lambda x: x < 3, [1, 2, 4, 1])",
+      "options": ["dropwhile", "filterfalse", "takewhile", "skip"],
+      "correctAnswer": "dropwhile"
+    },
+    {
+      "slideId": "PY_213_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Infinite Iterators in itertools",
+      "prompt": "Which itertools function produces an infinite sequence by repeating a single element continuously?",
+      "options": [
+        "itertools.repeat()",
+        "itertools.cycle()",
+        "itertools.count()",
+        "itertools.accumulate()"
+      ],
+      "correctAnswer": "itertools.repeat()"
+    },
+    {
+      "slideId": "PY_213_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Grouping Data with groupby",
+      "prompt": "Fill in the itertools function used to group consecutive keys and values from an iterable.",
+      "codeSnippet": "import itertools\ngroups = itertools.___(\"AAABBBCC\")",
+      "options": ["groupby", "group", "cluster", "categorize"],
+      "correctAnswer": "groupby"
+    },
+    {
+      "slideId": "PY_213_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Requirement for groupby",
+      "prompt": "What prerequisite must be satisfied on the input data for itertools.groupby() to work as expected?",
+      "options": [
+        "The input data should be pre-sorted by the same key function",
+        "The input data must be a dictionary",
+        "All elements must be unique integers",
+        "The list size must be an even number"
+      ],
+      "correctAnswer": "The input data should be pre-sorted by the same key function"
+    }
+  ]
+}
