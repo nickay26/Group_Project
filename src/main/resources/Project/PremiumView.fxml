@@ -24,7 +24,7 @@
                     <HBox alignment="BASELINE_LEFT" spacing="5">
                         <Label styleClass="plan-price" text="Free" />
                     </HBox>
-                    <Label styleClass="plan-desc" text="For learners taking their first steps with Mimo" wrapText="true" />
+                    <Label styleClass="plan-desc" text="For learners taking their first steps" wrapText="true" />
                     <Button maxWidth="Infinity" onAction="#handleStartLearning" styleClass="basic-btn" text="Start Learning" />
                     <VBox spacing="12" styleClass="feature-list">
                         <Label styleClass="feature-item" text="✓  5 brain free" />
