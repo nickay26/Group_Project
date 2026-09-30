@@ -16,17 +16,22 @@ public class GameController {
     @FXML private Label challengeTitleLabel;
     @FXML private Label progressLabel;
     @FXML private Label timerLabel;
-    @FXML private Label questionTextLabel; // Challenge Problem Description
+    @FXML private Label questionTextLabel;
 
-    @FXML private TextArea codeEditorArea;     // Code ရေးသားရမည့်နေရာ
-    @FXML private TextArea consoleOutputArea;  // Run ရလဒ် ထွက်မည့်နေရာ
+    @FXML private TextArea codeEditorArea;
+    @FXML private TextArea consoleOutputArea;
     @FXML private Button runBtn;
     @FXML private Button submitBtn;
 
-    private int timeRemaining = 300; // မိနစ် ၅ မိနစ် (စက္ကန့် ၃၀၀)
+    private int timeRemaining = 300;
     private Timeline timer;
     private String selectedLanguage = "Python";
     private String currentProblemTask = "";
+
+    // ⭐ Multiplayer Session Variables
+    private String roomId;
+    private String opponentId;
+    private String currentUserId;
 
     public void setCourseData(String lang) {
         if (lang != null && !lang.isEmpty()) {
@@ -37,14 +42,82 @@ public class GameController {
         }
     }
 
+    // ⭐ Room ID နှင့် Opponent ID သတ်မှတ်ပေးသည့် Method
+    public void setGameSession(String roomId, String opponentId) {
+        this.roomId = roomId;
+        this.opponentId = opponentId;
+
+        if (UserSession.getInstance().getCurrentUser() != null) {
+            this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
+        } else {
+            this.currentUserId = "USER_" + System.currentTimeMillis();
+        }
+
+        // Live WebSocket events များ ရယူရန် Listener ချိတ်ဆက်မည်
+        attachGameWebSocketListener();
+    }
+
     @FXML
     public void initialize() {
         if (consoleOutputArea != null) {
             consoleOutputArea.setText("Ready. Click 'Run Code' to execute output.");
         }
+
+        // ⭐ စာရိုက်တိုင်း Progress ကို တွက်ချက်၍ Server ဆီ Real-time Sync လုပ်မည်
+        if (codeEditorArea != null) {
+            codeEditorArea.textProperty().addListener((obs, oldText, newText) -> {
+                if (roomId != null && !roomId.isEmpty()) {
+                    int progress = Math.min(100, newText.trim().length() / 2); // ကုဒ်အရှည်အပေါ် မူတည်၍ Progress % ယူမည်
+                    WebSocketService.getInstance().sendProgressUpdate(roomId, currentUserId, progress);
+                }
+            });
+        }
     }
 
-    // Lobby မှတစ်ဆင့် ပုစ္ဆာ JSON ရောက်ရှိလာပါက Loading လုပ်ပေးမည်
+    // ⭐ WebSocket Event များ နားထောင်မည့် Listener
+    private void attachGameWebSocketListener() {
+        WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
+            @Override
+            public void onInviteReceived(String fromUser, String language) {}
+
+            @Override
+            public void onGameStart(String roomId, String language) {}
+
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {}
+
+            @Override
+            public void onQuickMatchTimeout() {}
+
+            // ⭐ ပြိုင်ဘက် စာရိုက်နေသည့် Progress ရောက်လာပါက UI တွင် ဖော်ပြပေးမည်
+            @Override
+            public void onOpponentProgress(String userId, int progress) {
+                if (!userId.equals(currentUserId)) {
+                    Platform.runLater(() -> {
+                        if (progressLabel != null) {
+                            progressLabel.setText("Opponent (" + userId + ") Progress: " + progress + "%");
+                        }
+                    });
+                }
+            }
+
+            // ⭐ အခြားသူ သို့မဟုတ် မိမိ အနိုင်ရသွားပါက အသိပေးမည်
+            @Override
+            public void onGameOver(String winnerId) {
+                Platform.runLater(() -> {
+                    if (timer != null) timer.stop();
+                    disableControls(true);
+
+                    if (winnerId.equals(currentUserId)) {
+                        consoleOutputArea.setText("🏆 VICTORY! You submitted first and won the match!");
+                    } else {
+                        consoleOutputArea.setText("❌ DEFEAT! Player " + winnerId + " submitted first and won!");
+                    }
+                });
+            }
+        });
+    }
+
     public void loadQuestionFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
             System.err.println("Error: Empty response received from server.");
@@ -52,22 +125,18 @@ public class GameController {
             return;
         }
 
-        // Backend မှ ပြန်လာသော Raw Response ကို Console တွင် စစ်ဆေးရန် Log ထုတ်ကြည့်ခြင်း
         System.out.println("DEBUG - Received Response: " + jsonResponse);
 
         try {
             String cleanJson = jsonResponse.trim();
             JSONObject obj = null;
 
-            // Response သည် Array format ([...]) ဖြစ်နေပါက
             if (cleanJson.startsWith("[")) {
                 org.json.JSONArray array = new org.json.JSONArray(cleanJson);
                 if (array.length() > 0) {
                     obj = array.getJSONObject(0);
                 }
-            }
-            // Response သည် Object format ({...}) ဖြစ်နေပါက
-            else if (cleanJson.startsWith("{")) {
+            } else if (cleanJson.startsWith("{")) {
                 obj = new JSONObject(cleanJson);
                 if (obj.has("questions")) {
                     org.json.JSONArray questionsArr = obj.getJSONArray("questions");
@@ -75,9 +144,7 @@ public class GameController {
                         obj = questionsArr.getJSONObject(0);
                     }
                 }
-            }
-            // JSON မဟုတ်သော Error Text သို့မဟုတ် HTML ပြန်လာပါက
-            else {
+            } else {
                 System.err.println("Error: Server did not return a valid JSON format -> " + cleanJson);
                 handleLoadingFailure();
                 return;
@@ -97,7 +164,7 @@ public class GameController {
             if (challengeTitleLabel != null) challengeTitleLabel.setText(title.toUpperCase());
             if (questionTextLabel != null) questionTextLabel.setText(description);
             if (codeEditorArea != null) codeEditorArea.setText(starterCode);
-            if (progressLabel != null) progressLabel.setText("LIVE MATCH IN PROGRESS");
+            if (progressLabel != null) progressLabel.setText("MATCH IN PROGRESS - OPPONENT: " + (opponentId != null ? opponentId : "WAITING..."));
 
             startTimer();
 
@@ -108,14 +175,11 @@ public class GameController {
         }
     }
 
-    // 1. Code ကို Execution Server တွင် Run ကြည့်ခြင်း[cite: 12]
     @FXML
     private void handleRunCode() {
         if (codeEditorArea == null || consoleOutputArea == null) return;
 
         String code = codeEditorArea.getText();
-
-        // Playground ကဲ့သို့ "Python" / "C++" သန့်သန့်ဖြစ်စေရန် (Basic) စာသားကို ဖယ်ထုတ်ခြင်း
         String cleanLanguage = selectedLanguage;
         if (cleanLanguage != null && cleanLanguage.contains("(")) {
             cleanLanguage = cleanLanguage.substring(0, cleanLanguage.indexOf("(")).trim();
@@ -127,7 +191,6 @@ public class GameController {
             Platform.runLater(() -> {
                 if (response != null && !response.isEmpty()) {
                     try {
-                        // Response JSON ထဲမှ "output" စာသားကို သီးသန့် ထုတ်ပြခြင်း
                         org.json.JSONObject json = new org.json.JSONObject(response);
                         if (json.has("output")) {
                             consoleOutputArea.setText(json.getString("output"));
@@ -135,7 +198,6 @@ public class GameController {
                             consoleOutputArea.setText(response);
                         }
                     } catch (Exception e) {
-                        // Raw string ဖြစ်နေပါက တိုက်ရိုက်ပြမည်
                         consoleOutputArea.setText(response);
                     }
                 } else {
@@ -145,7 +207,6 @@ public class GameController {
         });
     }
 
-    // 2. ရေးထားသော Code ကို AI စစ်ဆေးရေးထံ ပို့ပြီး Match အမှတ်ဆုံးဖြတ်ခြင်း[cite: 12]
     @FXML
     public void handleSubmitCode(ActionEvent event) {
         String code = codeEditorArea.getText();
@@ -153,23 +214,24 @@ public class GameController {
 
         disableControls(true);
 
-        // Submit Solution သို့မဟုတ် Match Result Processing လုပ်သည့် Method ထဲတွင်
+        // ⭐ Submit လုပ်လိုက်ပါက Server သို့ Game Over Signal တန်းပို့မည်
+        if (roomId != null && !roomId.isEmpty()) {
+            WebSocketService.getInstance().sendGameOver(roomId, currentUserId);
+        }
+
         ApiClient.reviewCodeAsync(selectedLanguage, code).thenAccept(response -> {
             Platform.runLater(() -> {
                 if (response != null && !response.isEmpty()) {
                     String formattedReview = response;
 
                     try {
-                        // Backend မှလာသော JSON ကို Parse လုပ်ပြီး "review" field ကိုသာ သီးခြားထုတ်ယူခြင်း
                         org.json.JSONObject json = new org.json.JSONObject(response);
                         if (json.has("review")) {
                             formattedReview = json.getString("review");
                         }
                     } catch (Exception e) {
-                        // JSON parsing မရပါက raw response အတိုင်း ထားမည်
                     }
 
-                    // Console Output တွင် သန့်ရှင်းသော AI Review စာသားကိုသာ ပြသမည်
                     consoleOutputArea.setText("=== MATCH RESULT & AI REVIEW ===\n\n" + formattedReview);
                 } else {
                     consoleOutputArea.setText("=== MATCH RESULT & AI REVIEW ===\n\nFailed to fetch AI Review.");
@@ -193,7 +255,7 @@ public class GameController {
 
             if (timeRemaining <= 0) {
                 timer.stop();
-                handleSubmitCode(null); // အချိန်ပြည့်ပါက အော်တို Submit လုပ်မည်
+                handleSubmitCode(null);
             }
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
