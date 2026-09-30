@@ -26,7 +26,7 @@
                         <!-- HEADER BAR -->
                         <HBox alignment="CENTER_RIGHT">
                             <children>
-                                <Button onAction="#openCreateModal" styleClass="btn-primary" text="➕ Create New Project" />
+                                <Button fx:id="createProjectBtn" onAction="#openCreateModal" styleClass="btn-primary" text="➕ Create New Project" />
                             </children>
                         </HBox>
 

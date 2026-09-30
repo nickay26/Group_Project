@@ -132,6 +132,10 @@ public class PaymentController {
                                 "Method: " + selectedMethod + "\n" +
                                 "Amount: " + amount + " MMK\n" +
                                 "Premium Activated: " + planType);
+                MainLayoutController mainLayout = MainLayoutController.getInstance();
+                if (mainLayout != null) {
+                    mainLayout.loadPage("PlaygroundDashboardView.fxml");
+                }
             } else {
                 showAlert("Error", "Premium activation failed.");
             }
@@ -169,4 +173,5 @@ public class PaymentController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

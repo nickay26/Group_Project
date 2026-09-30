@@ -28,4 +28,27 @@ public class PremiumService {
         }
         return lessonOrder <= 3;
     }
+    // ==========================================
+    // ၄။ Project Create လုပ်ခွင့် ရှိ/မရှိ စစ်ဆေးခြင်း
+    // ==========================================
+    public static boolean canCreateProject(int userId) {
+        if (isPremium(userId)) {
+            return true;
+        }
+        int currentProjectCount = DatabaseManager.getUserProjects(userId).size();
+        return currentProjectCount < 3;
+    }
+
+    // ==========================================
+    // ၅။ Free User အတွက် ကျန်တဲ့ Project အရေအတွက်
+    // ==========================================
+    public static int getRemainingProjectSlots(int userId) {
+        if (isPremium(userId)) {
+            return -1;
+        }
+        int currentProjectCount = DatabaseManager.getUserProjects(userId).size();
+        int remaining = 3 - currentProjectCount;
+        return Math.max(remaining, 0);
+    }
+
 }
