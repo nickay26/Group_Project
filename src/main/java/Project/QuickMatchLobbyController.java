@@ -1,15 +1,9 @@
 package Project;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
-
-import java.util.Random;
 
 public class QuickMatchLobbyController {
 
@@ -19,18 +13,24 @@ public class QuickMatchLobbyController {
     @FXML private Label opponentStatusLabel;
     @FXML private Label countdownLabel;
 
-    private Timeline searchTimeline;
-    private PauseTransition transitionDelay;
-    private String selectedLanguage = "C++ (Basic)";
-    private String currentUserId = "Player_" + (int)(Math.random() * 1000);
+    private String selectedLanguage = "C++";
+    private String currentUserId;
 
-    private final String[] randomNames = {"CodeNinja_99", "DevMaster_X", "JavaGuru", "ByteCoder", "AlgoWizard"};
-    private final String[] randomAvatars = {"🤖", "🦊", "🦁", "👾", "🐯"};
+    // Render Cloud WebSocket Server URL
+    private static final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
 
     public void setSelectedLanguage(String lang) {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
         }
+
+        // User ID ကို UserSession မှ ယူသုံးပါမည်
+        if (UserSession.getInstance().getCurrentUser() != null) {
+            this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
+        } else {
+            this.currentUserId = "GUEST_" + System.currentTimeMillis();
+        }
+
         startMatchmaking();
     }
 
@@ -40,13 +40,12 @@ public class QuickMatchLobbyController {
 
     private void startMatchmaking() {
         if (statusTitleLabel != null) statusTitleLabel.setText("Searching for Online Opponent...");
+        if (opponentNameLabel != null) opponentNameLabel.setText("Waiting for player...");
+        if (opponentStatusLabel != null) opponentStatusLabel.setText("In Queue");
 
-        // Python Flask WebSocket URL
-        String serverWsUrl = "ws://localhost:5000/ws";
-
-        // 📌 Connection အောင်မြင်မှသာ joinQuickMatch(...) ကို ပို့မည်ဖြစ်၍ Error ကျမည်မဟုတ်ပါ
+        // Render WebSocket Server သို့ တိုက်ရိုက် ချိတ်ဆက်မည်
         WebSocketService.getInstance().connect(
-                serverWsUrl,
+                SERVER_URL,
                 currentUserId,
                 new WebSocketService.NotificationListener() {
                     @Override
@@ -55,35 +54,49 @@ public class QuickMatchLobbyController {
                     @Override
                     public void onGameStart(String roomId, String language) {}
 
+                    // ⭐ Quick Match စတင်သည့် မက်သဒ် (Parameter ၄ ခု ပါဝင်ပါသည်)
                     @Override
-                    public void onQuickMatchStart(String roomId, String language, String questionsJson) {
+                    public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
+                        // Real User Match တွေ့သွားပါက နှစ်ဖက်လုံး GameView သို့ ပြိုင်တူ သွားမည်
                         Platform.runLater(() -> {
-                            Random rnd = new Random();
                             if (statusTitleLabel != null) statusTitleLabel.setText("Match Found!");
-                            if (opponentAvatarLabel != null) opponentAvatarLabel.setText(randomAvatars[rnd.nextInt(randomAvatars.length)]);
-                            if (opponentNameLabel != null) opponentNameLabel.setText(randomNames[rnd.nextInt(randomNames.length)]);
-                            if (opponentStatusLabel != null) opponentStatusLabel.setText("Level " + (rnd.nextInt(10) + 5) + " • Ready");
+                            if (opponentNameLabel != null) opponentNameLabel.setText("Opponent: User " + opponentId);
+                            if (opponentStatusLabel != null) opponentStatusLabel.setText("Ready");
                             if (countdownLabel != null) countdownLabel.setText("Starting game...");
 
                             FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
                             if (loader != null) {
                                 GameController gameController = loader.getController();
                                 gameController.setCourseData(selectedLanguage);
+
+                                // ⭐ 1. Session Data (roomId နှင့် opponentId) ကို GameController ထံ လွှဲပေးမည်
+                                gameController.setGameSession(roomId, opponentId);
+
+                                // ⭐ 2. WebSocket မှ ရလာသော မေးခွန်းများကို GameController ထံ ပို့ပေးမည်
                                 gameController.loadQuestionFromJson(questionsJson);
                             }
                         });
                     }
+
+                    @Override
+                    public void onQuickMatchTimeout() {
+                        // စက္ကန့် ၃၀ အတွင်း လူမတွေ့ပါက UI တွင် စာတန်းပြမည်
+                        Platform.runLater(() -> {
+                            if (statusTitleLabel != null) statusTitleLabel.setText("No Player Found");
+                            if (opponentNameLabel != null) opponentNameLabel.setText("Queue Timeout");
+                            if (opponentStatusLabel != null) opponentStatusLabel.setText("Failed");
+                            if (countdownLabel != null) countdownLabel.setText("No active player online. Please try again later!");
+                        });
+                    }
                 },
-                // 📌 Callback Parameter: Connection အဆင်သင့်ဖြစ်မှ Queue ထဲဝင်ရန် Signal ပို့ပေးခြင်း
+                // Connection ပွင့်သည်နှင့် Queue ထဲဝင်ရန် Server သို့ စာပို့မည်
                 () -> WebSocketService.getInstance().joinQuickMatch(currentUserId, selectedLanguage)
         );
     }
 
     @FXML
     private void handleCancel() {
-        if (searchTimeline != null) searchTimeline.stop();
-        if (transitionDelay != null) transitionDelay.stop();
-
+        // Queue ထဲမှ ထွက်ရန် Server သို့ Cancel Signal ပို့မည်
         WebSocketService.getInstance().cancelQuickMatch(currentUserId);
 
         SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");

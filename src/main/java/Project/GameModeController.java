@@ -62,9 +62,21 @@ public class GameModeController {
 
     private void launchGameView(String mode, String language) {
         try {
-            SceneManager.switchScene(mode+".fxml");
+            if ("QUICK".equals(mode)) {
+
+                FXMLLoader loader = SceneManager.switchScene("QUICK.fxml");
+                if (loader != null) {
+                    QuickMatchLobbyController controller = loader.getController();
+                    if (controller != null) {
+                        controller.setSelectedLanguage(language);
+                    }
+                }
+            } else if ("FRIEND".equals(mode)) {
+                SceneManager.switchScene("FRIEND.fxml");
+            }
             System.out.println("Starting " + mode + " Match with language: " + language);
         } catch (Exception e) {
+            System.err.println("Scene Switch Error: " + e.getMessage());
             e.printStackTrace();
         }
     }

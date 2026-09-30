@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_258_Mquiz",
+  "title": "Module Quiz - Multiple Statements",
+  "slides": [
+    {
+      "slideId": "JAVA_258_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Semicolon Rule",
+      "prompt": "In Java, each code statement must end with a semicolon (;)",
+      "options": ["True", "False"],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Lines",
+      "prompt": "Which method prints on separate lines?",
+      "options": ["println()", "print()", "write()", "output()"],
+      "correctAnswer": "println()"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Same Line",
+      "prompt": "Complete the code to print \"Hello World\" on the same line.",
+      "codeSnippet": "System.out.____(\"Hello \");\nSystem.out.print(\"World\");",
+      "options": ["print", "println", "write", "output"],
+      "correctAnswer": "print"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiple Println",
+      "prompt": "Complete the code to print \"A\" and \"B\" on separate lines.",
+      "codeSnippet": "System.out.____(\"A\");\nSystem.out.println(\"B\");",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.print(\"A\");\nSystem.out.print(\"B\");\nSystem.out.println(\"C\");",
+      "options": ["ABC", "A B C", "A\\nB\\nC", "Error"],
+      "correctAnswer": "ABC"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Line1\");\nSystem.out.println(\"Line2\");",
+      "options": ["Line1 Line2 (separate lines)", "Line1Line2", "Line1, Line2", "Error"],
+      "correctAnswer": "Line1 Line2 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Statements",
+      "prompt": "Can you have more than one statement in a Java program?",
+      "options": ["Yes", "No"],
+      "correctAnswer": "Yes"
+    },
+    {
+      "slideId": "JAVA_258_Mquiz_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.print(\"Java\");\nSystem.out.print(\"Rocks\");",
+      "options": ["JavaRocks", "Java Rocks", "Java\\nRocks", "Error"],
+      "correctAnswer": "JavaRocks"
+    }
+  ]
+}

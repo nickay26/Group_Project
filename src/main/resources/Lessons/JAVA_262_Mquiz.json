@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_262_Mquiz",
+  "title": "Module Quiz - Conditional Statements",
+  "slides": [
+    {
+      "slideId": "JAVA_262_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Else If Keyword",
+      "prompt": "Which keyword checks multiple conditions?",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Switch Default",
+      "prompt": "Which keyword is used when no case matches in switch?",
+      "options": ["default", "else", "otherwise", "final"],
+      "correctAnswer": "default"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete Else If",
+      "prompt": "Complete the code to check if x is 80 or higher.",
+      "codeSnippet": "int x = 85;\nif (x >= 90) {\n  System.out.println(\"A\");\n} ____ (x >= 80) {\n  System.out.println(\"B\");\n}",
+      "options": ["else if", "else", "elif", "otherwise"],
+      "correctAnswer": "else if"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete Switch",
+      "prompt": "Complete the switch statement.",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "options": ["break", "continue", "return", "exit"],
+      "correctAnswer": "break"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "If-Else If Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int score = 75;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
+      "options": ["A", "C", "F", "Error"],
+      "correctAnswer": "C"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Ternary Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 10;\nString r = (x > 5) ? \"Big\" : \"Small\";\nSystem.out.println(r);",
+      "options": ["Big", "Small", "10", "5"],
+      "correctAnswer": "Big"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Switch Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int day = 3;\nswitch (day) {\n  case 1: System.out.println(\"Mon\"); break;\n  case 2: System.out.println(\"Tue\"); break;\n  case 3: System.out.println(\"Wed\"); break;\n  default: System.out.println(\"Other\");\n}",
+      "options": ["Mon", "Tue", "Wed", "Other"],
+      "correctAnswer": "Wed"
+    },
+    {
+      "slideId": "JAVA_262_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical AND",
+      "prompt": "What is the output of 5 > 3 && 2 < 4?",
+      "options": ["true", "false", "5", "3"],
+      "correctAnswer": "true"
+    }
+  ]
+}

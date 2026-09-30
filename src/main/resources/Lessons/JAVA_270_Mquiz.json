@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_270_Mquiz",
+  "title": "Module Quiz - Multithreading",
+  "slides": [
+    {
+      "slideId": "JAVA_270_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Class",
+      "prompt": "Which class is extended to create a thread?",
+      "options": ["Thread", "Runnable", "Process", "Task"],
+      "correctAnswer": "Thread"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Start Thread",
+      "prompt": "Complete the code to start a thread.",
+      "codeSnippet": "MyThread t = new MyThread();\nt._____();",
+      "options": ["start", "run", "begin", "execute"],
+      "correctAnswer": "start"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Thread Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class MyThread extends Thread {\n  public void run() { System.out.println(\"Running\"); }\n}\nMyThread t = new MyThread();\nt.start();",
+      "options": ["Running", "MyThread", "t", "Error"],
+      "correctAnswer": "Running"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Runnable Interface",
+      "prompt": "Which interface is implemented to create a thread?",
+      "options": ["Runnable", "Thread", "Process", "Task"],
+      "correctAnswer": "Runnable"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Implement Runnable",
+      "prompt": "Complete the Runnable implementation.",
+      "codeSnippet": "class MyRunnable ________ Runnable {\n  public void run() { }\n}",
+      "options": ["implements", "extends", "inherits", "super"],
+      "correctAnswer": "implements"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Synchronized Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "class Counter {\n  private int count = 0;\n  public synchronized void increment() { count++; }\n  public int getCount() { return count; }\n}\nCounter c = new Counter();\nc.increment();\nc.increment();\nSystem.out.println(c.getCount());",
+      "options": ["2", "1", "0", "Error"],
+      "correctAnswer": "2"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread State",
+      "prompt": "What state is a thread in when it finishes execution?",
+      "options": ["TERMINATED", "NEW", "RUNNABLE", "BLOCKED"],
+      "correctAnswer": "TERMINATED"
+    },
+    {
+      "slideId": "JAVA_270_Mquiz_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Sleep Thread",
+      "prompt": "Complete the code to pause a thread.",
+      "codeSnippet": "Thread.______(1000);",
+      "options": ["sleep", "wait", "pause", "stop"],
+      "correctAnswer": "sleep"
+    }
+  ]
+}

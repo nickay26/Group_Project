@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_267_Mquiz",
+  "title": "Module Quiz - Lambda Expression",
+  "slides": [
+    {
+      "slideId": "JAVA_267_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Symbol",
+      "prompt": "Which symbol is used in a lambda expression?",
+      "options": ["->", "=>", "::", ">>"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Syntax",
+      "prompt": "Complete the lambda expression.",
+      "codeSnippet": "Greeting g = () ____ System.out.println(\"Hello\");",
+      "options": ["->", "=>", "::", ">>"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface Greeting { void sayHello(); }\nGreeting g = () -> System.out.println(\"Hello!\");\ng.sayHello();",
+      "options": ["Hello!", "Greeting", "g", "Error"],
+      "correctAnswer": "Hello!"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Interface",
+      "prompt": "How many abstract methods does a functional interface have?",
+      "options": ["1", "2", "3", "0"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Parameter",
+      "prompt": "Complete the lambda with no parameters.",
+      "codeSnippet": "Greeting g = ____ -> System.out.println(\"Hi\");",
+      "options": ["()", "(x)", "[ ]", "{ }"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda Parameter Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface Greeting { void sayHello(String name); }\nGreeting g = (name) -> System.out.println(\"Hello, \" + name);\ng.sayHello(\"John\");",
+      "options": ["Hello, John", "Hello, name", "John", "Error"],
+      "correctAnswer": "Hello, John"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Benefit",
+      "prompt": "What is the benefit of lambda expressions?",
+      "options": ["Less code", "More code", "Slower code", "More errors"],
+      "correctAnswer": "Less code"
+    },
+    {
+      "slideId": "JAVA_267_Mquiz_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Lambda Return Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "interface MathOp { int operate(int a, int b); }\nMathOp add = (a, b) -> a + b;\nSystem.out.println(add.operate(5, 3));",
+      "options": ["8", "53", "5 + 3", "Error"],
+      "correctAnswer": "8"
+    }
+  ]
+}

@@ -34,6 +34,7 @@ public class MainLayoutController {
     @FXML private Button gamesBtn;
     @FXML private Button profileBtn;
     private ContextMenu profileMenu;
+    @FXML private Button premiumBtn;
 
     private List<Button> navButtons;
 
@@ -223,6 +224,13 @@ public class MainLayoutController {
     private void handleHelp() {
         loadPage("HelpView.fxml");
     }
+
+    @FXML
+    public void handlePremium() {
+        // Premium Page ကို content area ထဲမှာ Load လုပ်
+        loadPage("PremiumView.fxml");
+    }
+
 
     private void handleLogout() {
         // Session clear ပြုလုပ်ခြင်း

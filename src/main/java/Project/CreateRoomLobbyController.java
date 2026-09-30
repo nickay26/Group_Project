@@ -50,8 +50,14 @@ public class CreateRoomLobbyController {
                 handleStartMatch();
             }
 
+            // ⭐ opponentId Parameter ပါဝင်အောင် ပြင်ဆင်ထားပါသည်
             @Override
-            public void onQuickMatchStart(String roomId, String language, String questionsJson) {
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
+
+            }
+
+            @Override
+            public void onQuickMatchTimeout() {
 
             }
         });

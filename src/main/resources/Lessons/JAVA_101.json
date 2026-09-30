@@ -26,29 +26,16 @@
     {
       "slideId": "JAVA_101_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Java Release Year",
-      "prompt": "In which year was Java first released?",
+      "title": "Java code",
+      "prompt": "How do you insert COMMENTS in Java code?",
       "options": [
-        "1995",
-        "1990",
-        "2000",
-        "1985"
+       "/*This is a comment",
+        "#This is a comment",
+        "//This ia a comment"
       ],
-      "correctAnswer": "1995"
+      "correctAnswer":"//This ia a comment"
     },
-    {
-      "slideId": "JAVA_101_S4",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Java Original Name",
-      "prompt": "What was Java's original name?",
-      "options": [
-        "Oak",
-        "Pine",
-        "Maple",
-        "Cedar"
-      ],
-      "correctAnswer": "Oak"
-    },
+
     {
       "slideId": "JAVA_101_S5",
       "type": "MULTIPLE_CHOICE",
