@@ -93,10 +93,8 @@
                             </graphic>
                         </Label>
 
-                        <Button styleClass="premium-button" text="Premium" />
                         <Button fx:id="profileBtn" onAction="#handleProfileClick" styleClass="header-button" text="Profile" />
                         <Button fx:id="premiumBtn" styleClass="premium-button" text="Premium" onAction="#handlePremium" />
-                        <Button styleClass="header-button" text="Profile" />
                     </children>
                 </HBox>
 

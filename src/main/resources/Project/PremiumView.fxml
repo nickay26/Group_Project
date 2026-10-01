@@ -8,6 +8,7 @@
 
 <BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
 
+
     <center>
         <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
 
