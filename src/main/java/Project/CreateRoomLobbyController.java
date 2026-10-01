@@ -23,13 +23,17 @@ public class CreateRoomLobbyController {
 
     // Cloud WebSocket URL နှင့် User ID သတ်မှတ်ခြင်း
     private final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
-    private String currentUserId; // မိမိ User ID (Room Code ကိုပဲ ခေတ္တ ID အဖြစ် သုံးနိုင်ပါသည်)
+    private String currentUserId;
 
     @FXML
     public void initialize() {
         String generatedCode = generateRandomCode();
         roomCodeLabel.setText(generatedCode);
-        this.currentUserId = generatedCode; // Room Code ကို မိမိ User ID အဖြစ် သတ်မှတ်ခြင်း
+
+        // ⭐ ROOM JOIN ပြဿနာဖြေရှင်းရန် -
+        // UI ပေါ်တွင် ပြထားသော Room Code ကိုပဲ WebSocket ID အဖြစ် အမြဲသုံးပါမည်။
+        // သို့မှသာ အခြား Player မှ Room Code ရိုက်ထည့်ပါက Server မှ တိုက်ရိုက် ရှာတွေ့မည် ဖြစ်ပါသည်။
+        this.currentUserId = generatedCode;
 
         // ၁။ Cloud WebSocket Server သို့ စတင် ချိတ်ဆက်ခြင်း
         initWebSocket();
@@ -43,23 +47,28 @@ public class CreateRoomLobbyController {
                 showInviteDialog(fromUser, language);
             }
 
+            // ⭐ Server မှ မေးခွန်း နှင့် ပြိုင်ဘက် အချက်အလက်များပါသော START_GAME Signal ရောက်လာပါက GameView သို့ ကူးမည်
             @Override
-            public void onGameStart(String roomId, String language) {
-                // အခြားသူမှ Accept လုပ်လိုက်ပါက တိုက်ရိုက် Game Start မည်
-                System.out.println("Friend accepted! Starting Game... Room: " + roomId);
-                handleStartMatch();
+            public void onGameStart(String roomId, String language, String opponentId, String questionsJson) {
+                System.out.println("Match Starting... Room: " + roomId + " Opponent: " + opponentId);
+
+                FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
+
+                if (loader != null) {
+                    GameController gameController = loader.getController();
+                    if (gameController != null) {
+                        gameController.setCourseData(language);
+                        gameController.setGameSession(roomId, opponentId);
+                        gameController.loadQuestionFromJson(questionsJson);
+                    }
+                }
             }
 
-            // ⭐ opponentId Parameter ပါဝင်အောင် ပြင်ဆင်ထားပါသည်
             @Override
-            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
-
-            }
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {}
 
             @Override
-            public void onQuickMatchTimeout() {
-
-            }
+            public void onQuickMatchTimeout() {}
         });
     }
 
@@ -81,7 +90,6 @@ public class CreateRoomLobbyController {
     // ၂။ Friend ကို Real-time Invite ပို့မည့် Method
     @FXML
     private void handleInviteFriend(ActionEvent event) {
-        // ဖိတ်ခေါ်ချင်သော သူငယ်ချင်း၏ User ID / Code ကို တောင်းဆိုခြင်း
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Invite Friend");
         dialog.setHeaderText("သူငယ်ချင်းကို ဖိတ်ခေါ်ရန်");
@@ -98,7 +106,9 @@ public class CreateRoomLobbyController {
                 btn.setDisable(true);
                 btn.setStyle("-fx-background-color: #16a34a; -fx-text-fill: #ffffff; -fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 6;");
 
-                startMatchBtn.setDisable(false);
+                if (startMatchBtn != null) {
+                    startMatchBtn.setDisable(false);
+                }
             }
         });
     }
@@ -108,32 +118,20 @@ public class CreateRoomLobbyController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Game Invite");
         alert.setHeaderText(fromUser + " ထံမှ ဖိတ်ခေါ်စာ ရောက်ရှိလာသည်");
-        alert.setContentText("Language: " + language + "\nလက်ခံမှာလား?");
+        alert.setContentText("Language: " + language.toUpperCase() + "\nလက်ခံမှာလား?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            WebSocketService.getInstance().respondInvite(fromUser, "ACCEPT");
+            WebSocketService.getInstance().respondInvite(fromUser, "ACCEPT", language);
         } else {
-            WebSocketService.getInstance().respondInvite(fromUser, "REJECT");
+            WebSocketService.getInstance().respondInvite(fromUser, "REJECT", language);
         }
     }
 
-    // Start Match နှိပ်ပါက AI ထံမှ မေးခွန်းယူပြီး GameView သို့ ပို့ပေးမည်
     @FXML
     private void handleStartMatch() {
-        // 1. AI ထံမှ မေးခွန်း လှမ်းတောင်းမည်
-        String aiJsonResponse = AiQuestionService.fetchAiQuestion(selectedLanguage);
-
-        // 2. GameView စာမျက်နှာ သို့ ပြောင်းမည်
-        FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
-
-        // 3. AI ထံမှ ရရှိလာသော မေးခွန်းကို GameController သို့ ထည့်ပေးမည်
-        if (loader != null) {
-            GameController gameController = loader.getController();
-            if (gameController != null) {
-                gameController.loadQuestionFromJson(aiJsonResponse);
-            }
-        }
+        // Invite လက်ခံပြီးပါက Server ဘက်မှ onGameStart Event ဖြင့် တိုက်ရိုက် GameView သို့ ပို့ပေးမည် ဖြစ်ပါသည်။
+        System.out.println("Waiting for server to dispatch game start session...");
     }
 
     @FXML

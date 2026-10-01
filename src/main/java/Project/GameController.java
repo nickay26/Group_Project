@@ -28,7 +28,7 @@ public class GameController {
     private String selectedLanguage = "Python";
     private String currentProblemTask = "";
 
-    // ⭐ Multiplayer Session Variables
+    // Multiplayer Session Variables
     private String roomId;
     private String opponentId;
     private String currentUserId;
@@ -42,7 +42,7 @@ public class GameController {
         }
     }
 
-    // ⭐ Room ID နှင့် Opponent ID သတ်မှတ်ပေးသည့် Method
+    // Room ID နှင့် Opponent ID သတ်မှတ်ပေးသည့် Method
     public void setGameSession(String roomId, String opponentId) {
         this.roomId = roomId;
         this.opponentId = opponentId;
@@ -63,7 +63,7 @@ public class GameController {
             consoleOutputArea.setText("Ready. Click 'Run Code' to execute output.");
         }
 
-        // ⭐ စာရိုက်တိုင်း Progress ကို တွက်ချက်၍ Server ဆီ Real-time Sync လုပ်မည်
+        // စာရိုက်တိုင်း Progress ကို တွက်ချက်၍ Server ဆီ Real-time Sync လုပ်မည်
         if (codeEditorArea != null) {
             codeEditorArea.textProperty().addListener((obs, oldText, newText) -> {
                 if (roomId != null && !roomId.isEmpty()) {
@@ -80,8 +80,9 @@ public class GameController {
             @Override
             public void onInviteReceived(String fromUser, String language) {}
 
+            // ⭐ WebSocketService ရှိ Interface Signature နှင့် ကိုက်ညီစေရန် Parameter ၄ ခု ပြင်ဆင်ထားပါသည်
             @Override
-            public void onGameStart(String roomId, String language) {}
+            public void onGameStart(String roomId, String language, String opponentId, String questionsJson) {}
 
             @Override
             public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {}
@@ -89,7 +90,7 @@ public class GameController {
             @Override
             public void onQuickMatchTimeout() {}
 
-            // ⭐ ပြိုင်ဘက် စာရိုက်နေသည့် Progress ရောက်လာပါက UI တွင် ဖော်ပြပေးမည်
+            // ပြိုင်ဘက် စာရိုက်နေသည့် Progress ရောက်လာပါက UI တွင် ဖော်ပြပေးမည်
             @Override
             public void onOpponentProgress(String userId, int progress) {
                 if (!userId.equals(currentUserId)) {
@@ -101,7 +102,7 @@ public class GameController {
                 }
             }
 
-            // ⭐ အခြားသူ သို့မဟုတ် မိမိ အနိုင်ရသွားပါက အသိပေးမည်
+            // အခြားသူ သို့မဟုတ် မိမိ အနိုင်ရသွားပါက အသိပေးမည်
             @Override
             public void onGameOver(String winnerId) {
                 Platform.runLater(() -> {
@@ -214,7 +215,7 @@ public class GameController {
 
         disableControls(true);
 
-        // ⭐ Submit လုပ်လိုက်ပါက Server သို့ Game Over Signal တန်းပို့မည်
+        // Submit လုပ်လိုက်ပါက Server သို့ Game Over Signal တန်းပို့မည်
         if (roomId != null && !roomId.isEmpty()) {
             WebSocketService.getInstance().sendGameOver(roomId, currentUserId);
         }

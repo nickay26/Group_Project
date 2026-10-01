@@ -8,8 +8,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.concurrent.CompletableFuture;
-
 public class FriendMatchController {
 
     @FXML private TextField joinCodeInput;
@@ -21,20 +19,15 @@ public class FriendMatchController {
     @FXML
     public void initialize() {
 
-        // ====================================================================
-        // [1] Production Mode (အကောင့်အစစ်ဖြင့် သုံးရန်)
+        // User ID ကို UserSession မှ ယူသုံးပါမည်
         String currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
-
-        // [2] Testing Mode (စက်တစ်လုံးတည်း App ၂ ခုပြိုင်ဖွင့် စမ်းလိုပါက အောက်ပါလိုင်းကို Uncomment လုပ်ပါ)
-        // String currentUserId = "TEST_USER_" + (int)(Math.random() * 1000);
-        // ====================================================================
 
         // WebSocket Server ဆီ ချိတ်ဆက်ခြင်း
         WebSocketService.getInstance().connect(SERVER_URL, currentUserId, new WebSocketService.NotificationListener() {
 
             @Override
             public void onInviteReceived(String fromUser, String language) {
-                // တခြား Player ဆီမှ Invite Noti ရောက်လာပါက Popup ပြပေးမည်
+                // တခြား Player ဆီမှ Invite Noti ရောက်လာပါက Popup ပြပေးမည် (Platform.runLater ကို WebSocketService မှ လုပ်ပြီးဖြစ်သည်)
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Game Challenge");
                 alert.setHeaderText(fromUser + " offers a " + language.toUpperCase() + " match!");
@@ -42,41 +35,56 @@ public class FriendMatchController {
 
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
-                        WebSocketService.getInstance().respondInvite(fromUser, "ACCEPT");
+                        // ⭐ Server ထံ ရွေးချယ်ထားသော language ပါ ရောက်ရှိစေရန် ပို့ပေးမည်
+                        WebSocketService.getInstance().respondInvite(fromUser, "ACCEPT", language);
                     } else {
-                        WebSocketService.getInstance().respondInvite(fromUser, "REJECT");
+                        WebSocketService.getInstance().respondInvite(fromUser, "REJECT", language);
                     }
                 });
             }
 
+            // ⭐ Server ဘက်မှ AI မေးခွန်းနှင့် Session အချက်အလက်များ ရောက်လာပါက GameView သို့ ကူးမည်
             @Override
-            public void onGameStart(String roomId, String language) {
-                // နှစ်ဘက်လုံး Accept လုပ်ပြီးပါက Game View သို့ ကူးမည်
-                loadGameViewAndStart(language);
+            public void onGameStart(String roomId, String language, String opponentId, String questionsJson) {
+                if (statusLabel != null) {
+                    statusLabel.setText("Starting game...");
+                }
+
+                FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
+
+                if (loader != null) {
+                    GameController gameController = loader.getController();
+                    gameController.setCourseData(language);
+
+                    // 1. Game Session (roomId, opponentId) ကို GameController သို့ ပို့ပေးမည်
+                    gameController.setGameSession(roomId, opponentId);
+
+                    // 2. Server မှ ရလာသော AI မေးခွန်းကို တိုက်ရိုက် ထည့်သွင်းမည် (နှစ်ဦးလုံး မေးခွန်း အတူတူ ရပါမည်)
+                    gameController.loadQuestionFromJson(questionsJson);
+                }
             }
 
-            // ⭐ opponentId Parameter ပါဝင်အောင် ပြင်ဆင်ထားပါသည်
             @Override
-            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
-
-            }
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {}
 
             @Override
-            public void onQuickMatchTimeout() {
-
-            }
+            public void onQuickMatchTimeout() {}
         });
     }
 
     // 1. Friend List မှတစ်ဆင့် Invite ပို့ခြင်း
-    public void handleInvitePlayer(String targetUserId) {
+    public void handleInvitePlayer(String targetUserId, String language) {
         String currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
 
-        WebSocketService.getInstance().sendInvite(currentUserId, targetUserId, "java");
+        WebSocketService.getInstance().sendInvite(currentUserId, targetUserId, language != null ? language : "java");
 
         if (statusLabel != null) {
             statusLabel.setText("Invite sent to " + targetUserId + "...");
         }
+    }
+
+    public void handleInvitePlayer(String targetUserId) {
+        handleInvitePlayer(targetUserId, "java");
     }
 
     // 2. Room Code ရိုက်ထည့်၍ Join/Invite ပို့ခြင်း
@@ -98,24 +106,6 @@ public class FriendMatchController {
 
         // Host ၏ Room Code/User ID ထံ Invite Request ပို့မည်
         WebSocketService.getInstance().sendInvite(currentUserId, enteredCode, "java");
-    }
-
-    // 3. AI Question Load လုပ်ပြီး GamePanel (Gameview.fxml) သို့ သွားမည်
-    private void loadGameViewAndStart(String language) {
-        if (statusLabel != null) {
-            statusLabel.setText("Loading question from AI...");
-        }
-
-        CompletableFuture.supplyAsync(() -> AiQuestionService.fetchAiQuestion(language))
-                .thenAccept(aiJsonResponse -> Platform.runLater(() -> {
-                    // FXML File Path Case Sensitivity စစ်ဆေးပါ (GameView.fxml သို့မဟုတ် Gameview.fxml)
-                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
-
-                    if (loader != null) {
-                        GameController gameController = loader.getController();
-                        gameController.loadQuestionFromJson(aiJsonResponse);
-                    }
-                }));
     }
 
     @FXML
