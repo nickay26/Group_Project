@@ -100,7 +100,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Pass by Reference (CPP_107)",
       "prompt": "Fill in the character used in the parameter list to pass a variable by reference.",
-      "codeSnippet": "void modifyValue(int ___x) {\n    x = 100;\n}",
+      "codeSnippet": "void modifyValue(int ___x)  {\n    x = 100;\n}",
       "options": ["&", "*", "%", "#"],
       "correctAnswer": "&"
     },
