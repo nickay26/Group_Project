@@ -8,12 +8,6 @@
 
 <BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
 
-    <!-- ★ Back Button (Top-Left Corner) ★ -->
-    <top>
-        <HBox alignment="CENTER_LEFT" style="-fx-padding: 20 0 0 30;">
-            <Button text="← Back" onAction="#handleBack" styleClass="back-btn"/>
-        </HBox>
-    </top>
 
     <center>
         <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
