@@ -3,8 +3,10 @@ package Project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class SettingsController {
@@ -433,7 +436,27 @@ public class SettingsController {
             }
         });
     }
+    @FXML private StackPane centerContainer;
+    @FXML private ScrollPane settingsScrollPane;
 
+    @FXML
+    private void handleUpgradePlan() {
+        try {
+            // Settings content ကို ဖျောက်
+            settingsScrollPane.setVisible(false);
+            settingsScrollPane.setManaged(false);
+
+            // PremiumView ကို load
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PremiumView.fxml"));
+            Parent premiumView = loader.load();
+            StackPane.setAlignment(premiumView, javafx.geometry.Pos.TOP_LEFT);
+            // Center ထဲ ထည့်
+            centerContainer.getChildren().add(premiumView);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleClose() {
         infoSection.getScene().getWindow().hide();

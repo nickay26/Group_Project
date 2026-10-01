@@ -43,7 +43,8 @@
 
     <!-- CENTER CONTENT -->
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: #FFFFFF;">
+        <StackPane fx:id="centerContainer" style="-fx-background-color: #FFFFFF;">
+        <ScrollPane fx:id="settingsScrollPane" fitToWidth="true" style="-fx-background-color: #FFFFFF;">
             <content>
                 <VBox style="-fx-padding: 30;">
 
@@ -162,7 +163,14 @@
                             <Label style="-fx-font-size: 14px; -fx-font-weight: bold;                                           -fx-text-fill: #1E293B;" text="Your plan includes:" />
                             <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="✓  Standard lessons" />
                             <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Do you have a problem with subscription? Email us at info@sodex.com" wrapText="true" />
-                            <Button style="-fx-background-color: #3B82F6;                                            -fx-text-fill: white;                                            -fx-font-weight: bold;                                            -fx-background-radius: 6px;                                            -fx-padding: 12 40;                                            -fx-cursor: hand;" text="Upgrade Plan" />
+                            <Button onAction="#handleUpgradePlan"
+                                    text="Upgrade Plan"
+                                    style="-fx-background-color: #3B82F6;
+               -fx-text-fill: white;
+               -fx-font-weight: bold;
+               -fx-background-radius: 6px;
+               -fx-padding: 12 40;
+               -fx-cursor: hand;" />
                         </children>
                     </VBox>
 
@@ -189,6 +197,7 @@
                 </VBox>
             </content>
         </ScrollPane>
+        </StackPane>
     </center>
 
 </BorderPane>
