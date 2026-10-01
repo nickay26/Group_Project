@@ -29,4 +29,5 @@ public class PremiumController {
             mainLayout.loadPage("PaymentView.fxml");
         }
     }
+
 }

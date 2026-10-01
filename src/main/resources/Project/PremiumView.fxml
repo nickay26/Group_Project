@@ -8,6 +8,7 @@
 
 <BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
 
+
     <center>
         <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
 
@@ -51,7 +52,6 @@
                         <Label styleClass="feature-item" text="✓  Unlimited create projects" />
                     </VBox>
                 </VBox>
-
                 <!-- Card 3: Intermediate Yearly (Highlighted) -->
                 <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro-2">
                     <Label styleClass="plan-title-pro-2" text="Intermediate" />

@@ -53,7 +53,7 @@
                         <Region HBox.hgrow="ALWAYS" />
 
                         <!-- Edit Profile Button -->
-                        <Button fx:id="editProfileBtn" onAction="#handleEditProfile" styleClass="header-button" text="Edit Profile" />
+                        <!--Button fx:id="editProfileBtn" onAction="#handleEditProfile" styleClass="header-button" text="Go to Profile" /-->
                     </children>
                 </HBox>
 

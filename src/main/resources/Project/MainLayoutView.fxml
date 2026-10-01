@@ -3,15 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
+<BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
 
     <!-- PERMANENT LEFT SIDEBAR MENU -->
     <left>
@@ -55,23 +55,20 @@
                     <children>
                         <!-- CURRENT COURSE DISPLAY -->
                         <HBox alignment="CENTER_LEFT" spacing="8.0">
-                            <Label text="Course:" style="-fx-font-size: 14px; -fx-text-fill: #64748B; -fx-font-weight: bold;" />
-                            <Label fx:id="currentCourseLabel" text="Loading..." style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #64748B; -fx-font-weight: bold;" text="Course:" />
+                            <Label fx:id="currentCourseLabel" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="Loading..." />
                         </HBox>
 
                         <!-- PUSHES STATS & BUTTONS TO THE RIGHT -->
                         <Region HBox.hgrow="ALWAYS" />
+                          <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                              <image>
+                                  <Image url="@../Images/fire.png" />
+                              </image>
+                          </ImageView>
 
                         <!-- HEADER STATS AND BUTTONS -->
-                        <Label fx:id="topStreakLabel" styleClass="header-stat" text=" 0">
-                            <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Images/fire.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Label>
+                        <Label fx:id="topStreakLabel" styleClass="header-stat" text=" 0" />
 
                         <Label fx:id="topBrainLabel" styleClass="header-stat" text=" 0">
                             <graphic>
@@ -92,11 +89,12 @@
                                 </ImageView>
                             </graphic>
                         </Label>
-
-                        <Button styleClass="premium-button" text="Premium" />
+                        <Button fx:id="premiumBtn" onAction="#handlePremium" styleClass="premium-button" text="Premium">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Button>
+      
                         <Button fx:id="profileBtn" onAction="#handleProfileClick" styleClass="header-button" text="Profile" />
-                        <Button fx:id="premiumBtn" styleClass="premium-button" text="Premium" onAction="#handlePremium" />
-                        <Button styleClass="header-button" text="Profile" />
                     </children>
                 </HBox>
 

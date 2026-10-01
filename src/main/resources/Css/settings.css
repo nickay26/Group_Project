@@ -1,0 +1,40 @@
+/* ============================================ */
+/* SETTINGS PAGE                                */
+/* ============================================ */
+
+.settings-tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748B;
+    -fx-font-size: 14px;
+    -fx-padding: 10 15;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+.settings-tab:hover {
+    -fx-text-fill: #1E293B;
+    -fx-background-color: #E2E8F0;
+}
+
+.settings-tab-active {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1E293B;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 15;
+    -fx-cursor: hand;
+    -fx-alignment: BASELINE_LEFT;
+    -fx-border-color: transparent transparent transparent #3B82F6;
+    -fx-border-width: 0 0 0 4px;
+}
+
+/* TextField / TextArea / ComboBox */
+.text-field, .text-area, .combo-box {
+    -fx-font-size: 13px;
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #3B82F6;
+    -fx-border-width: 1.5px;
+}
