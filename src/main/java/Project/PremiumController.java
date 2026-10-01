@@ -29,4 +29,11 @@ public class PremiumController {
             mainLayout.loadPage("PaymentView.fxml");
         }
     }
+    @FXML
+    private void handleBack() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.loadPage("PlaygroundDashboardView.fxml");
+        }
+    }
 }
