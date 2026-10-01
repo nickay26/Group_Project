@@ -1,0 +1,124 @@
+{
+  "lessonId": "CPP_289",
+  "title": "Module Review Quiz: File I/O Stream Manipulation (CPP_265 to CPP_272)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_289_S1",
+      "type": "CONCEPT",
+      "title": "File I/O Stream Manipulation Overview",
+      "prompt": "This Module Quiz covers file stream classes (std::ifstream, std::ofstream, std::fstream), open modes, binary file I/O, stream manipulators (std::setw, std::setprecision), error states, and std::stringstream (CPP_265 to CPP_272).",
+      "codeSnippet": "#include <iostream>\n#include <fstream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    ofstream outFile(\"example.txt\");\n    if (outFile.is_open()) {\n        outFile << fixed << setprecision(2) << 123.456;\n        outFile.close();\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_289_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "File I/O Header (CPP_265)",
+      "prompt": "Fill in the header file name required to work with file input and output streams in C++.",
+      "codeSnippet": "#include <___>\nusing namespace std;\nofstream file(\"data.txt\");",
+      "options": ["fstream", "iostream", "iomanip", "sstream"],
+      "correctAnswer": "fstream"
+    },
+    {
+      "slideId": "CPP_289_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Writing to Files (CPP_265)",
+      "prompt": "Which C++ class is specifically used for creating and writing data to files?",
+      "options": ["std::ofstream", "std::ifstream", "std::fstream", "std::stringstream"],
+      "correctAnswer": "std::ofstream"
+    },
+    {
+      "slideId": "CPP_289_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading from Files (CPP_266)",
+      "prompt": "Fill in the stream class used for reading data from an existing file.",
+      "codeSnippet": "std::___ inFile(\"input.txt\");\nstring line;\nwhile (getline(inFile, line)) { /* process */ }",
+      "options": ["ifstream", "ofstream", "fstream", "cin"],
+      "correctAnswer": "ifstream"
+    },
+    {
+      "slideId": "CPP_289_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Open Modes (CPP_267)",
+      "prompt": "Which open mode flag is used to append new output data to the end of an existing file instead of overwriting it?",
+      "options": ["std::ios::app", "std::ios::trunc", "std::ios::ate", "std::ios::in"],
+      "correctAnswer": "std::ios::app"
+    },
+    {
+      "slideId": "CPP_289_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Checking File Open Status (CPP_267)",
+      "prompt": "Fill in the boolean member function name used to verify if a file stream was successfully opened.",
+      "codeSnippet": "ifstream file(\"test.txt\");\nif (file.___()) {\n    // File ready\n}",
+      "options": ["is_open", "good", "opened", "check"],
+      "correctAnswer": "is_open"
+    },
+    {
+      "slideId": "CPP_289_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Binary File Flag (CPP_268)",
+      "prompt": "Which flag must be combined in the open mode when performing unformatted raw binary file reading/writing?",
+      "options": ["std::ios::binary", "std::ios::raw", "std::ios::bytes", "std::ios::out"],
+      "correctAnswer": "std::ios::binary"
+    },
+    {
+      "slideId": "CPP_289_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Writing Raw Bytes (CPP_268)",
+      "prompt": "Fill in the method name used to write binary block data to a file stream.",
+      "codeSnippet": "char buffer[100];\noutFile.___(buffer, sizeof(buffer));",
+      "options": ["write", "put", "send", "dump"],
+      "correctAnswer": "write"
+    },
+    {
+      "slideId": "CPP_289_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stream Manipulators Header (CPP_269)",
+      "prompt": "Which header file is required to use manipulators like std::setw, std::setprecision, and std::setfill?",
+      "options": ["<iomanip>", "<fstream>", "<sstream>", "<locale>"],
+      "correctAnswer": "<iomanip>"
+    },
+    {
+      "slideId": "CPP_289_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Formatting Field Width (CPP_269)",
+      "prompt": "Fill in the manipulator name used to set the field width for the next output item.",
+      "codeSnippet": "cout << std::___(10) << 42;",
+      "options": ["setw", "width", "setprecision", "pad"],
+      "correctAnswer": "setw"
+    },
+    {
+      "slideId": "CPP_289_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floating-Point Precision (CPP_269)",
+      "prompt": "What does 'cout << fixed << setprecision(2) << 3.14159;' print to standard output?",
+      "options": ["3.14", "3.14159", "3.1", "3.00"],
+      "correctAnswer": "3.14"
+    },
+    {
+      "slideId": "CPP_289_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "String Streams (CPP_270)",
+      "prompt": "Fill in the header file required to convert between strings and other data types using stringstream.",
+      "codeSnippet": "#include <___>\nusing namespace std;\nstringstream ss(\"123 456\");",
+      "options": ["sstream", "fstream", "string", "iomanip"],
+      "correctAnswer": "sstream"
+    },
+    {
+      "slideId": "CPP_289_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stream Position Seeking (CPP_271)",
+      "prompt": "Which function is used to change the read position pointer (get pointer) inside an input file stream?",
+      "options": ["seekg()", "seekp()", "tellg()", "tellp()"],
+      "correctAnswer": "seekg()"
+    },
+    {
+      "slideId": "CPP_289_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Detecting End-Of-File (CPP_272)",
+      "prompt": "Which stream method returns true when a read operation attempts to read beyond the end of a file?",
+      "options": ["eof()", "fail()", "bad()", "clear()"],
+      "correctAnswer": "eof()"
+    }
+  ]
+}

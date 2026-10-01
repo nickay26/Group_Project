@@ -1,0 +1,148 @@
+{
+  "lessonId": "CPP_283",
+  "title": "Module Review Quiz: Template Programming & Generics (CPP_217 to CPP_224)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_283_S1",
+      "type": "CONCEPT",
+      "title": "Template Programming Overview",
+      "prompt": "This Module Quiz covers function templates, class templates, non-type template parameters, template specialization, variadic templates, and type deduction in C++ (CPP_217 to CPP_224).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\ntemplate <typename T>\nT getMax(T a, T b) {\n    return (a > b) ? a : b;\n}\n\nint main() {\n    cout << getMax<int>(10, 20) << endl;\n    cout << getMax<double>(5.5, 2.3) << endl;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_283_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Template Keyword (CPP_217)",
+      "prompt": "Fill in the keyword used to introduce a template definition in C++.",
+      "codeSnippet": "___ <typename T>\nT add(T a, T b) {\n    return a + b;\n}",
+      "options": ["template", "generic", "type", "typename"],
+      "correctAnswer": "template"
+    },
+    {
+      "slideId": "CPP_283_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Parameter Declaration (CPP_217)",
+      "prompt": "Which keyword can be used interchangeably with 'typename' inside template parameter lists?",
+      "options": ["class", "struct", "auto", "type"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "CPP_283_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Template Syntax (CPP_218)",
+      "prompt": "Fill in the missing bracket type used for specifying template parameter types.",
+      "codeSnippet": "template ___typename T>\nvoid printValue(T val) {\n    cout << val;\n}",
+      "options": ["<", "(", "[", "{\""],
+      "correctAnswer": "<"
+    },
+    {
+      "slideId": "CPP_283_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Templates (CPP_219)",
+      "prompt": "How do you instantiate an object of a class template named 'Box' for storing integers?",
+      "options": ["Box<int> myBox;", "Box myBox<int>;", "Box(int) myBox;", "template Box<int> myBox;"],
+      "correctAnswer": "Box<int> myBox;"
+    },
+    {
+      "slideId": "CPP_283_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Template Declaration (CPP_219)",
+      "prompt": "Fill in the placeholder type name for storing data inside the generic Array class.",
+      "codeSnippet": "template <typename T>\nclass Array {\nprivate:\n    ___ elements[10];\n};",
+      "options": ["T", "var", "auto", "void*"],
+      "correctAnswer": "T"
+    },
+    {
+      "slideId": "CPP_283_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-Type Template Parameters (CPP_220)",
+      "prompt": "What is a 'non-type template parameter' in C++?",
+      "options": [
+        "A template parameter that represents a constant value rather than a data type (e.g., int N)",
+        "A template that does not take any arguments",
+        "A template used only with void return types",
+        "A template instantiated at runtime instead of compile-time"
+      ],
+      "correctAnswer": "A template parameter that represents a constant value rather than a data type (e.g., int N)"
+    },
+    {
+      "slideId": "CPP_283_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Non-Type Parameter Example (CPP_220)",
+      "prompt": "Fill in the data type for specifying an array capacity size 'N' as a non-type parameter.",
+      "codeSnippet": "template <typename T, ___ N>\nclass FixedBuffer {\n    T data[N];\n};",
+      "options": ["int", "typename", "class", "auto_type"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_283_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Full Template Specialization (CPP_221)",
+      "prompt": "What is the primary purpose of Template Specialization in C++?",
+      "options": [
+        "To define a custom implementation for a specific data type that differs from the generic template",
+        "To prevent templates from compiling for floating-point numbers",
+        "To speed up execution by removing virtual tables",
+        "To allow templates to accept private variables"
+      ],
+      "correctAnswer": "To define a custom implementation for a specific data type that differs from the generic template"
+    },
+    {
+      "slideId": "CPP_283_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Full Specialization Syntax (CPP_221)",
+      "prompt": "Fill in the empty template brackets required when declaring a full template specialization.",
+      "codeSnippet": "template ___\nclass Printer<bool> {\n    // Specialized implementation for bool\n};",
+      "options": ["<>", "<bool>", "<T>", "<void>"],
+      "correctAnswer": "<>"
+    },
+    {
+      "slideId": "CPP_283_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Template Parameter Deduction (CPP_222)",
+      "prompt": "What occurs during Template Argument Deduction when calling 'add(5, 10)' for 'template <typename T> T add(T a, T b)'?",
+      "options": [
+        "The compiler automatically deduces 'T' as 'int' based on argument types",
+        "A runtime exception is thrown if type is not specified explicitly",
+        "T defaults to void*",
+        "The program prompts the user for type casting"
+      ],
+      "correctAnswer": "The compiler automatically deduces 'T' as 'int' based on argument types"
+    },
+    {
+      "slideId": "CPP_283_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Variadic Templates Parameter Pack (CPP_223)",
+      "prompt": "Fill in the ellipsis symbol used to define a template parameter pack in variadic templates.",
+      "codeSnippet": "template <typename___ Args>\nvoid printAll(Args... args);",
+      "options": ["...", "..", "*", "&"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "CPP_283_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variadic Templates (CPP_223)",
+      "prompt": "What allows a C++ variadic template to accept an arbitrary number of arguments?",
+      "options": ["Parameter Packs (...)", "Void pointers", "Initializer lists only", "Macro expansion"],
+      "correctAnswer": "Parameter Packs (...)"
+    },
+    {
+      "slideId": "CPP_283_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Template Arguments (CPP_224)",
+      "prompt": "Fill in the assignment operator to set 'int' as the default type for template parameter 'T'.",
+      "codeSnippet": "template <typename T ___ int>\nclass Container {\n    T item;\n};",
+      "options": ["=", ":", "->", "=="],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_283_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Compile-time Nature of Templates (CPP_217)",
+      "prompt": "At what stage of program execution does C++ generate specific code for instantiated templates?",
+      "options": ["Compile-time", "Runtime", "Link-time only", "Installation-time"],
+      "correctAnswer": "Compile-time"
+    }
+  ]
+}

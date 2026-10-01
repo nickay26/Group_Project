@@ -1,0 +1,126 @@
+{
+  "lessonId": "CPP_286",
+  "title": "Module Review Quiz: Exception Handling & Error Management (CPP_241 to CPP_248)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_286_S1",
+      "type": "CONCEPT",
+      "title": "Exception Handling Overview",
+      "prompt": "This Module Quiz covers try-catch blocks, throw statements, standard exceptions (std::exception), custom exception classes, exception safety guarantees, and noexcept specifier in C++ (CPP_241 to CPP_248).",
+      "codeSnippet": "#include <iostream>\n#include <stdexcept>\nusing namespace std;\n\ndouble divide(double a, double b) {\n    if (b == 0)\n        throw invalid_argument(\"Division by zero!\");\n    return a / b;\n}\n\nint main() {\n    try {\n        cout << divide(10, 0);\n    } catch (const exception& e) {\n        cout << \"Error: \" << e.what() << endl;\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_286_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Try Block (CPP_241)",
+      "prompt": "Fill in the keyword used to enclose a block of code that might throw an exception.",
+      "codeSnippet": "___ {\n    int result = divide(10, 0);\n} catch (...) {\n    cout << \"An error occurred\";\n}",
+      "options": ["try", "catch", "throw", "test"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "CPP_286_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Throw Statement (CPP_241)",
+      "prompt": "Which keyword is used to signal/raise an exception when an error condition occurs?",
+      "options": ["throw", "raise", "error", "catch"],
+      "correctAnswer": "throw"
+    },
+    {
+      "slideId": "CPP_286_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Catch Block Syntax (CPP_242)",
+      "prompt": "Fill in the keyword used to handle an exception thrown by a try block.",
+      "codeSnippet": "try {\n    throw 404;\n} ___(int errCode) {\n    cout << \"Error code: \" << errCode;\n}",
+      "options": ["catch", "handle", "except", "rescue"],
+      "correctAnswer": "catch"
+    },
+    {
+      "slideId": "CPP_286_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Catch-All Handler (CPP_242)",
+      "prompt": "What syntax is used in a catch block parameter list to intercept any type of exception?",
+      "options": ["catch (...)", "catch (auto e)", "catch (void*)", "catch (all)"],
+      "correctAnswer": "catch (...)"
+    },
+    {
+      "slideId": "CPP_286_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Standard Exception Header (CPP_243)",
+      "prompt": "Fill in the standard header file name required to use base class std::exception and standard exceptions.",
+      "codeSnippet": "#include <___>\nusing namespace std;",
+      "options": ["stdexcept", "exception", "error", "cassert"],
+      "correctAnswer": "stdexcept"
+    },
+    {
+      "slideId": "CPP_286_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::exception Virtual Function (CPP_243)",
+      "prompt": "Which virtual member function of 'std::exception' returns an explanatory C-string describing the error?",
+      "options": ["what()", "get_message()", "description()", "details()"],
+      "correctAnswer": "what()"
+    },
+    {
+      "slideId": "CPP_286_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Exception Class Inheritance (CPP_244)",
+      "prompt": "Fill in the standard exception class commonly derived to create custom runtime exceptions.",
+      "codeSnippet": "class MyException : public std::___ {\npublic:\n    const char* what() const noexcept override {\n        return \"Custom Error\";\n    }\n};",
+      "options": ["runtime_error", "exception", "logic_error", "invalid_argument"],
+      "correctAnswer": "runtime_error"
+    },
+    {
+      "slideId": "CPP_286_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "noexcept Specifier (CPP_245)",
+      "prompt": "What does declaring a function with 'void process() noexcept;' indicate to the compiler?",
+      "options": [
+        "The function guarantees it will not emit/throw any exceptions",
+        "The function throws exceptions automatically on failure",
+        "The function requires a try-catch block inside its body",
+        "The function cannot be called inside a loop"
+      ],
+      "correctAnswer": "The function guarantees it will not emit/throw any exceptions"
+    },
+    {
+      "slideId": "CPP_286_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "noexcept Specifier Syntax (CPP_245)",
+      "prompt": "Fill in the specifier keyword guaranteeing zero exceptions from this cleanup method.",
+      "codeSnippet": "void cleanup() ___ {\n    // Safe cleanup code\n}",
+      "options": ["noexcept", "throw()", "const", "final"],
+      "correctAnswer": "noexcept"
+    },
+    {
+      "slideId": "CPP_286_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rethrowing Exceptions (CPP_246)",
+      "prompt": "How do you rethrow the currently caught exception object from inside a catch block?",
+      "options": ["throw;", "throw e;", "rethrow;", "throw current;"],
+      "correctAnswer": "throw;"
+    },
+    {
+      "slideId": "CPP_286_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "RAII Resource Management (CPP_247)",
+      "prompt": "Fill in the programming idiom (Acronym) where resource lifetime is tied to object lifetime to guarantee exception safety.",
+      "codeSnippet": "// ___ principle prevents resource leaks during exceptions\nstd::unique_ptr<File> file;",
+      "options": ["RAII", "OOP", "STL", "DRY"],
+      "correctAnswer": "RAII"
+    },
+    {
+      "slideId": "CPP_286_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Uncaught Exceptions Behavior (CPP_248)",
+      "prompt": "What happens if an exception is thrown and no matching catch handler is found anywhere up the call stack?",
+      "options": [
+        "std::terminate() is called and the program aborts immediately",
+        "The program ignores the exception and continues execution",
+        "The compiler automatically retries executing the function",
+        "The exception is converted into a compiler warning"
+      ],
+      "correctAnswer": "std::terminate() is called and the program aborts immediately"
+    }
+  ]
+}
