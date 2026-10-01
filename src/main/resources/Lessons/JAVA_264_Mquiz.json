@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_264_Mquiz",
+  "title": "Module Quiz - Arrays",
+  "slides": [
+    {
+      "slideId": "JAVA_264_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Out of Bounds",
+      "prompt": "What happens if you access an index out of bounds?",
+      "options": ["ArrayIndexOutOfBoundsException", "NullPointerException", "Compile Error", "No Error"],
+      "correctAnswer": "ArrayIndexOutOfBoundsException"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Declaration",
+      "prompt": "How do you declare an array of 5 integers?",
+      "options": ["int[] arr = new int[5];", "int arr = new int[5];", "array arr = new array[5];", "int arr[] = 5;"],
+      "correctAnswer": "int[] arr = new int[5];"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Length",
+      "prompt": "Complete the code to get the array length.",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.______);",
+      "options": ["length", "size", "count", "len"],
+      "correctAnswer": "length"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Element",
+      "prompt": "Complete the code to access the last element.",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[arr.length - __]);",
+      "options": ["1", "2", "0", "3"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[1] + arr[2]);",
+      "options": ["25", "20", "15", "30"],
+      "correctAnswer": "25"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Array Loop",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i : arr) {\n  System.out.println(i);\n}",
+      "options": ["1 2 3 (separate lines)", "0 1 2", "1 2", "3 2 1"],
+      "correctAnswer": "1 2 3 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Array Sum Loop",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}\nSystem.out.println(sum);",
+      "options": ["15", "10", "20", "25"],
+      "correctAnswer": "15"
+    },
+    {
+      "slideId": "JAVA_264_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Type",
+      "prompt": "What is an array?",
+      "options": ["A collection of elements of the same type", "A single variable", "A method", "A class"],
+      "correctAnswer": "A collection of elements of the same type"
+    }
+  ]
+}

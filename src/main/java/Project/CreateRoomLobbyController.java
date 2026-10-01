@@ -49,6 +49,17 @@ public class CreateRoomLobbyController {
                 System.out.println("Friend accepted! Starting Game... Room: " + roomId);
                 handleStartMatch();
             }
+
+            // ⭐ opponentId Parameter ပါဝင်အောင် ပြင်ဆင်ထားပါသည်
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
+
+            }
+
+            @Override
+            public void onQuickMatchTimeout() {
+
+            }
         });
     }
 
@@ -127,7 +138,7 @@ public class CreateRoomLobbyController {
 
     @FXML
     private void handleLeaveRoom() {
-        SceneManager.switchScene("/Project/FriendMatchView.fxml", "Play with a Friend");
+        SceneManager.switchScene("/Project/FRIEND.fxml", "Play with a Friend");
     }
 
     private String generateRandomCode() {

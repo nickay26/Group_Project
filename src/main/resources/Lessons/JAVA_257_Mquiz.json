@@ -1,0 +1,74 @@
+{
+  "lessonId": "JAVA_257_Mquiz",
+  "title": "Module Quiz - Getting Started with Java",
+  "slides": [
+    {
+      "slideId": "JAVA_257_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Founder",
+      "prompt": "Which company originally developed Java?",
+      "options": ["Sun Microsystems", "Oracle", "Microsoft", "Google"],
+      "correctAnswer": "Sun Microsystems"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Mascot",
+      "prompt": "What is the name of the Java mascot?",
+      "options": ["Duke", "James", "Duke the Cat", "JavaMan"],
+      "correctAnswer": "Duke"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Statement",
+      "prompt": "Complete the code to print \"Java Rocks\".",
+      "codeSnippet": "System.out.____(\"Java Rocks\");",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Keyword",
+      "prompt": "Complete the class declaration.",
+      "codeSnippet": "public ______ Main {\n  public static void main(String[] args) {\n  }\n}",
+      "options": ["class", "Class", "interface", "struct"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Print Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Welcome to Java!\");",
+      "options": ["Welcome to Java!", "\"Welcome to Java!\"", "WelcomeToJava!", "Error"],
+      "correctAnswer": "Welcome to Java!"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "String Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Java\" + \"Programming\");",
+      "options": ["JavaProgramming", "Java Programming", "Java+Programming", "Error"],
+      "correctAnswer": "JavaProgramming"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Compiler",
+      "prompt": "What is the name of the Java compiler?",
+      "options": ["javac", "java", "jdb", "javadoc"],
+      "correctAnswer": "javac"
+    },
+    {
+      "slideId": "JAVA_257_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Interpreter",
+      "prompt": "What is the name of the Java interpreter?",
+      "options": ["java", "javac", "jdb", "javadoc"],
+      "correctAnswer": "java"
+    }
+  ]
+}

@@ -22,19 +22,25 @@ public class PracticeController {
     @FXML private ToggleButton practiceToggle;
     @FXML private ToggleButton reviewToggle;
     @FXML private ComboBox<String> categoryCombo;
-    @FXML private GridPane cardContainer;   // ← TilePane → GridPane
+    @FXML private GridPane cardContainer;
 
+    // ============================================
+    // CardData — language, type, title
+    // ============================================
     private static class CardData {
-        String language, title;
-        CardData(String lang, String title) {
+        String language;   // Java, C++, Python
+        String type;       // "Variables & Types" (Question ရှာဖို့)
+        String title;      // "Variables & Types" (Card ပြဖို့)
+
+        CardData(String lang, String type, String title) {
             this.language = lang;
+            this.type = type;
             this.title = title;
         }
     }
 
     private final List<CardData> allCards = new ArrayList<>();
 
-    // ကဒ်အရွယ် — ပုံသေ
     private static final double CARD_WIDTH = 280;
     private static final double CARD_HEIGHT = 260;
 
@@ -44,15 +50,16 @@ public class PracticeController {
         categoryCombo.setValue("All");
         categoryCombo.setOnAction(e -> filterCards());
 
-        allCards.add(new CardData("Java",   "Variables & Types"));
-        allCards.add(new CardData("Java",   "Loops"));
-        allCards.add(new CardData("Java",   "Classes & Objects"));
-        allCards.add(new CardData("C++",    "Pointers"));
-        allCards.add(new CardData("C++",    "Arrays"));
-        allCards.add(new CardData("C++",    "Inheritance"));
-        allCards.add(new CardData("Python", "Lists & Dicts"));
-        allCards.add(new CardData("Python", "Functions"));
-        allCards.add(new CardData("Python", "OOP Basics"));
+        // ✅ Language, Type, Title — ၃ ခုစီ
+        allCards.add(new CardData("Java",   "Variables & Types", "Variables & Types"));
+        allCards.add(new CardData("Java",   "Loops", "Loops"));
+        allCards.add(new CardData("Java",   "Classes & Objects", "Classes & Objects"));
+        allCards.add(new CardData("C++",    "Pointers", "Pointers"));
+        allCards.add(new CardData("C++",    "Arrays", "Arrays"));
+        allCards.add(new CardData("C++",    "Inheritance", "Inheritance"));
+        allCards.add(new CardData("Python", "Lists & Dicts", "Lists & Dicts"));
+        allCards.add(new CardData("Python", "Functions", "Functions"));
+        allCards.add(new CardData("Python", "OOP Basics", "OOP Basics"));
 
         practiceToggle.setOnAction(e -> handleModeChange());
         reviewToggle.setOnAction(e -> handleModeChange());
@@ -124,8 +131,8 @@ public class PracticeController {
                 if (is != null) {
                     Image img = new Image(is);
                     iconImage.setImage(img);
-                    iconImage.setFitWidth(120);
-                    iconImage.setFitHeight(120);
+                    iconImage.setFitWidth(100);
+                    iconImage.setFitHeight(100);
                     iconImage.setPreserveRatio(true);
                     iconImage.setSmooth(true);
                 }
@@ -149,39 +156,16 @@ public class PracticeController {
         card.getChildren().addAll(iconImage, title, spacer, startBtn);
         return card;
     }
+
+    // ============================================
+    // OPEN QUESTION — Type နဲ့ ရှာ + Random
+    // ============================================
     private void openQuestion(CardData data) {
-        try {
-            // ✅ JSON ကနေ Question ဆွဲ
-            QuestionData question = JsonUtils.getPracticeByTitle(data.language, data.title);
-
-            if (question == null) {
-                question = new QuestionData(
-                        data.language, data.title,
-                        "Complete the task below.",
-                        "Write code to solve this problem.",
-                        getStarterCode(data.language),
-                        "", "Think step by step.", "",
-                        null, null, "write-code", "console"
-                );
-            }
-
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
-            Parent root = loader.load();
-
-            PracticeQuestionController controller = loader.getController();
-            controller.setQuestion(question);
-
-            Stage stage = (Stage) cardContainer.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Practice - " + data.title);
-            stage.show();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        MainLayoutController layout = MainLayoutController.getInstance();
+        if (layout != null) {
+            layout.loadPracticeQuestion(data.language, data.type);
         }
     }
-
     private String getStarterCode(String language) {
         switch (language) {
             case "Java":

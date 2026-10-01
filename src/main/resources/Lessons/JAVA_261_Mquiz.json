@@ -1,0 +1,76 @@
+{
+  "lessonId": "JAVA_261_Mquiz",
+  "title": "Module Quiz - Operators",
+  "slides": [
+    {
+      "slideId": "JAVA_261_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Division Operator",
+      "prompt": "Which operator is used for division?",
+      "options": ["/", "*", "+", "-"],
+      "correctAnswer": "/"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Equal Operator",
+      "prompt": "Which operator checks if two values are equal?",
+      "options": ["==", "=", "!=", ">="],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete Multiplication",
+      "prompt": "Complete the code to output 20.",
+      "codeSnippet": "System.out.println(5 __ 4);",
+      "options": ["*", "+", "-", "/"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete Division",
+      "prompt": "Complete the code to output 5.",
+      "codeSnippet": "System.out.println(10 __ 2);",
+      "options": ["/", "*", "+", "-"],
+      "correctAnswer": "/"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "Multiplication Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(3 * 4);",
+      "options": ["12", "7", "34", "Error"],
+      "correctAnswer": "12"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Division Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(20 / 4);",
+      "options": ["5", "4", "20", "Error"],
+      "correctAnswer": "5"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Modulus Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(15 % 4);",
+      "options": ["3", "4", "15", "Error"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "JAVA_261_Mquiz_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Comparison Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(10 == 10);",
+      "options": ["true", "false", "10", "Error"],
+      "correctAnswer": "true"
+    }
+  ]
+}

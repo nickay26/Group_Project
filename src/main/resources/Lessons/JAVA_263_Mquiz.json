@@ -1,0 +1,76 @@
+{
+  "lessonId": "JAVA_263_Mquiz",
+  "title": "Module Quiz - Loops",
+  "slides": [
+    {
+      "slideId": "JAVA_263_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Continue Keyword",
+      "prompt": "Which keyword skips the current iteration?",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Loop Condition",
+      "prompt": "Which loop checks the condition first?",
+      "options": ["while", "do-while", "for-each", "do"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete While Loop",
+      "prompt": "Complete the while loop.",
+      "codeSnippet": "int i = 1;\n_____ (i <= 5) {\n  System.out.println(i);\n  i++;\n}",
+      "options": ["while", "for", "do", "if"],
+      "correctAnswer": "while"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Complete Continue",
+      "prompt": "Complete the code to skip 3.",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) _____;\n  System.out.println(i);\n}",
+      "options": ["continue", "break", "skip", "pass"],
+      "correctAnswer": "continue"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "While Loop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int i = 1;\nwhile (i <= 3) {\n  System.out.println(i);\n  i++;\n}",
+      "options": ["1 2 3", "0 1 2", "1 2", "Error"],
+      "correctAnswer": "1 2 3"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Do-While Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int i = 1;\ndo {\n  System.out.println(i);\n  i++;\n} while (i <= 3);",
+      "options": ["1 2 3", "0 1 2", "1 2", "Error"],
+      "correctAnswer": "1 2 3"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Continue Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "for (int i = 1; i <= 5; i++) {\n  if (i == 3) continue;\n  System.out.print(i);\n}",
+      "options": ["1245", "12345", "123", "345"],
+      "correctAnswer": "1245"
+    },
+    {
+      "slideId": "JAVA_263_Mquiz_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Nested Loop",
+      "prompt": "How many times does the inner loop run?",
+      "codeSnippet": "for (int i = 0; i < 3; i++) {\n  for (int j = 0; j < 2; j++) {\n    System.out.println(i + \"\" + j);\n  }\n}",
+      "options": ["6", "3", "2", "5"],
+      "correctAnswer": "6"
+    }
+  ]
+}

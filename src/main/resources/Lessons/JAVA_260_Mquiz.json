@@ -1,0 +1,75 @@
+{
+  "lessonId": "JAVA_260_Mquiz",
+  "title": "Module Quiz - Variables",
+  "slides": [
+    {
+      "slideId": "JAVA_260_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Purpose",
+      "prompt": "What is a variable used for?",
+      "options": ["Storing data", "Printing output", "Creating classes", "Deleting files"],
+      "correctAnswer": "Storing data"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Boolean Data Type",
+      "prompt": "Which data type stores true or false?",
+      "options": ["boolean", "int", "String", "double"],
+      "correctAnswer": "boolean"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare String",
+      "prompt": "Complete the code to declare a String variable.",
+      "codeSnippet": "____ name = \"Alice\";",
+      "options": ["String", "string", "Str", "Text"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Double",
+      "prompt": "Complete the code to declare a double variable.",
+      "codeSnippet": "____ price = 19.99;",
+      "options": ["double", "int", "float", "decimal"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S5",
+      "type": "CODE_OUTPUT",
+      "title": "String Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "String name = \"Alice\";\nSystem.out.println(name);",
+      "options": ["Alice", "name", "null", "Error"],
+      "correctAnswer": "Alice"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Double Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "double price = 19.99;\nSystem.out.println(price);",
+      "options": ["19.99", "price", "0", "Error"],
+      "correctAnswer": "19.99"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S7",
+      "type": "CODE_OUTPUT",
+      "title": "Multiple Variables",
+      "prompt": "What is the output?",
+      "codeSnippet": "int a = 10;\nint b = 20;\nSystem.out.println(a + b);",
+      "options": ["30", "1020", "10 20", "Error"],
+      "correctAnswer": "30"
+    },
+    {
+      "slideId": "JAVA_260_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Naming",
+      "prompt": "Which is a valid variable name?",
+      "options": ["myVar", "1var", "my-var", "my var"],
+      "correctAnswer": "myVar"
+    }
+  ]
+}

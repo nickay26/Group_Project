@@ -1,16 +1,9 @@
 package Project;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
-
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 
 public class QuickMatchLobbyController {
 
@@ -20,79 +13,93 @@ public class QuickMatchLobbyController {
     @FXML private Label opponentStatusLabel;
     @FXML private Label countdownLabel;
 
-    private Timeline searchTimeline;
-    private PauseTransition transitionDelay;
-    private String selectedLanguage = "C++ (Basic)"; // Default Value
+    private String selectedLanguage = "C++";
+    private String currentUserId;
 
-    private final String[] randomNames = {"CodeNinja_99", "DevMaster_X", "JavaGuru", "ByteCoder", "AlgoWizard"};
-    private final String[] randomAvatars = {"🤖", "🦊", "🦁", "👾", "🐯"};
+    // Render Cloud WebSocket Server URL
+    private static final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
 
-    // Language ရောက်ရှိလာမှ Matchmaking စတင်ပါမည်
     public void setSelectedLanguage(String lang) {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
         }
-        // Language Data ရရှိပြီးမှ Matchmaking ကို စတင်ခေါ်ယူပါမည်
+
+        // User ID ကို UserSession မှ ယူသုံးပါမည်
+        if (UserSession.getInstance().getCurrentUser() != null) {
+            this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
+        } else {
+            this.currentUserId = "GUEST_" + System.currentTimeMillis();
+        }
+
         startMatchmaking();
     }
 
     @FXML
     public void initialize() {
-        // initialize() တွင် တိုက်ရိုက်မခေါ်ဘဲ setSelectedLanguage ရောက်လာမှ ခေါ်ပါမည်
     }
 
     private void startMatchmaking() {
-        // ထပ်ခါထပ်ခါ Run ခြင်းမှ ကာကွယ်ရန် Timeline ဟောင်းကို ရပ်ပါမည်
-        if (searchTimeline != null) {
-            searchTimeline.stop();
-        }
+        if (statusTitleLabel != null) statusTitleLabel.setText("Searching for Online Opponent...");
+        if (opponentNameLabel != null) opponentNameLabel.setText("Waiting for player...");
+        if (opponentStatusLabel != null) opponentStatusLabel.setText("In Queue");
 
-        searchTimeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-            Random rnd = new Random();
-            String foundName = randomNames[rnd.nextInt(randomNames.length)];
-            String foundAvatar = randomAvatars[rnd.nextInt(randomAvatars.length)];
+        // Render WebSocket Server သို့ တိုက်ရိုက် ချိတ်ဆက်မည်
+        WebSocketService.getInstance().connect(
+                SERVER_URL,
+                currentUserId,
+                new WebSocketService.NotificationListener() {
+                    @Override
+                    public void onInviteReceived(String fromUser, String language) {}
 
-            statusTitleLabel.setText("Match Found!");
-            opponentAvatarLabel.setText(foundAvatar);
-            opponentNameLabel.setText(foundName);
-            opponentStatusLabel.setText("Level " + (rnd.nextInt(10) + 5) + " • Ready");
-            countdownLabel.setText("Starting game in 2 seconds...");
+                    @Override
+                    public void onGameStart(String roomId, String language) {}
 
-            // 1. ရွေးချယ်ထားသော selectedLanguage ဖြင့် AI မေးခွန်းကို တောင်းယူပါမည်
-            CompletableFuture<String> aiQuestionFuture = CompletableFuture.supplyAsync(() ->
-                    AiQuestionService.fetchAiQuestion(selectedLanguage)
-            );
-
-            // 2. CountDown ပြီးမှ GameView သို့ ပြောင်းပါမည်
-            transitionDelay = new PauseTransition(Duration.seconds(1.5));
-            transitionDelay.setOnFinished(evt -> {
-                aiQuestionFuture.thenAccept(aiJsonResponse ->
+                    // ⭐ Quick Match စတင်သည့် မက်သဒ် (Parameter ၄ ခု ပါဝင်ပါသည်)
+                    @Override
+                    public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
+                        // Real User Match တွေ့သွားပါက နှစ်ဖက်လုံး GameView သို့ ပြိုင်တူ သွားမည်
                         Platform.runLater(() -> {
-                            FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
+                            if (statusTitleLabel != null) statusTitleLabel.setText("Match Found!");
+                            if (opponentNameLabel != null) opponentNameLabel.setText("Opponent: User " + opponentId);
+                            if (opponentStatusLabel != null) opponentStatusLabel.setText("Ready");
+                            if (countdownLabel != null) countdownLabel.setText("Starting game...");
+
+                            FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
                             if (loader != null) {
                                 GameController gameController = loader.getController();
-
-                                // (က) GameController ထံသို့ ရွေးချယ်ထားသော Language ပို့ပေးခြင်း (Header Title ပြောင်းရန်)
                                 gameController.setCourseData(selectedLanguage);
 
-                                // (ခ) ပထမမေးခွန်း JSON ကို ပို့ပေးခြင်း
-                                gameController.loadQuestionFromJson(aiJsonResponse);
-                            }
-                        })
-                );
-            });
-            transitionDelay.play();
-        }));
+                                // ⭐ 1. Session Data (roomId နှင့် opponentId) ကို GameController ထံ လွှဲပေးမည်
+                                gameController.setGameSession(roomId, opponentId);
 
-        searchTimeline.setCycleCount(1);
-        searchTimeline.play();
+                                // ⭐ 2. WebSocket မှ ရလာသော မေးခွန်းများကို GameController ထံ ပို့ပေးမည်
+                                gameController.loadQuestionFromJson(questionsJson);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onQuickMatchTimeout() {
+                        // စက္ကန့် ၃၀ အတွင်း လူမတွေ့ပါက UI တွင် စာတန်းပြမည်
+                        Platform.runLater(() -> {
+                            if (statusTitleLabel != null) statusTitleLabel.setText("No Player Found");
+                            if (opponentNameLabel != null) opponentNameLabel.setText("Queue Timeout");
+                            if (opponentStatusLabel != null) opponentStatusLabel.setText("Failed");
+                            if (countdownLabel != null) countdownLabel.setText("No active player online. Please try again later!");
+                        });
+                    }
+                },
+                // Connection ပွင့်သည်နှင့် Queue ထဲဝင်ရန် Server သို့ စာပို့မည်
+                () -> WebSocketService.getInstance().joinQuickMatch(currentUserId, selectedLanguage)
+        );
     }
 
     @FXML
     private void handleCancel() {
-        if (searchTimeline != null) searchTimeline.stop();
-        if (transitionDelay != null) transitionDelay.stop();
+        // Queue ထဲမှ ထွက်ရန် Server သို့ Cancel Signal ပို့မည်
+        WebSocketService.getInstance().cancelQuickMatch(currentUserId);
 
-        SceneManager.switchScene("/Project/GameModeView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }

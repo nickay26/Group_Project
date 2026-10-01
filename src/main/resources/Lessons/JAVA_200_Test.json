@@ -1,0 +1,174 @@
+{
+  "lessonId": "JAVA_101_TEST",
+  "title": "Basic Level Test",
+  "slides": [
+    {
+      "slideId": "JAVA_101_TEST_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Creator",
+      "prompt": "Who invented Java?",
+      "options": ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup", "Guido van Rossum"],
+      "correctAnswer": "James Gosling"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Release Year",
+      "prompt": "In which year was Java first released?",
+      "options": ["1995", "1990", "2000", "1985"],
+      "correctAnswer": "1995"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java File Extension",
+      "prompt": "What is the file extension for Java source code?",
+      "options": [".java", ".class", ".jar", ".jav"],
+      "correctAnswer": ".java"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Slogan",
+      "prompt": "What is Java's slogan?",
+      "options": ["Write Once, Run Anywhere", "Code Once, Use Everywhere", "Run Once, Write Anywhere", "Write Fast, Run Fast"],
+      "correctAnswer": "Write Once, Run Anywhere"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Java Type",
+      "prompt": "Java is a ___________ programming language.",
+      "options": ["Object-Oriented", "Procedural", "Functional", "Scripting"],
+      "correctAnswer": "Object-Oriented"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Print Hello World",
+      "prompt": "Complete the code to output \"Hello World\".",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello World\");\n  }\n}",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Semicolon",
+      "prompt": "In Java, each code statement must end with a semicolon (;)",
+      "options": ["True", "False"],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S8",
+      "type": "CODE_OUTPUT",
+      "title": "Output Check",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"Hello Java\");",
+      "options": ["Hello Java", "\"Hello Java\"", "HelloJava", "Error"],
+      "correctAnswer": "Hello Java"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Integer Data Type",
+      "prompt": "Which data type is used to store whole numbers?",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Data Type",
+      "prompt": "Which data type is used to store text?",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "String"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Declare Integer",
+      "prompt": "Complete the code to declare an integer variable 'age' with value 25.",
+      "codeSnippet": "____ age = 25;",
+      "options": ["int", "double", "String", "boolean"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S12",
+      "type": "CODE_OUTPUT",
+      "title": "Addition Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(5 + 3);",
+      "options": ["8", "53", "5 3", "Error"],
+      "correctAnswer": "8"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S13",
+      "type": "CODE_OUTPUT",
+      "title": "String Concatenation",
+      "prompt": "What is the output?",
+      "codeSnippet": "System.out.println(\"5\" + 3);",
+      "options": ["53", "8", "5 3", "Error"],
+      "correctAnswer": "53"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Modulus Operator",
+      "prompt": "What is the output of 10 % 3?",
+      "options": ["1", "3", "0", "Error"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "If Keyword",
+      "prompt": "Which keyword is used for a conditional statement?",
+      "options": ["if", "for", "while", "do"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S16",
+      "type": "CODE_OUTPUT",
+      "title": "If-Else Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
+      "options": ["A", "B", "3", "5"],
+      "correctAnswer": "B"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S17",
+      "type": "MULTIPLE_CHOICE",
+      "title": "For Loop",
+      "prompt": "Which loop runs a fixed number of times?",
+      "options": ["for", "while", "do-while", "if"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S18",
+      "type": "CODE_OUTPUT",
+      "title": "For Loop Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "for (int i = 1; i <= 3; i++) {\n  System.out.println(i);\n}",
+      "options": ["1 2 3 (separate lines)", "1 2", "0 1 2", "Error"],
+      "correctAnswer": "1 2 3 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S19",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Index",
+      "prompt": "Array indices start at:",
+      "options": ["0", "1", "-1", "10"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "JAVA_101_TEST_S20",
+      "type": "CODE_OUTPUT",
+      "title": "Array Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[1]);",
+      "options": ["10", "20", "30", "Error"],
+      "correctAnswer": "20"
+    }
+  ]
+}

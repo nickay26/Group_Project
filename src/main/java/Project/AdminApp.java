@@ -15,6 +15,6 @@ public class AdminApp extends Application {
 
         // Launch initial welcome screen
         primaryStage.setMaximized(true);
-        SceneManager.switchScene("AdminDashboard.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("AdminView.fxml", "Mimo Platform - Welcome");
     }
 }

@@ -54,6 +54,17 @@ public class FriendMatchController {
                 // နှစ်ဘက်လုံး Accept လုပ်ပြီးပါက Game View သို့ ကူးမည်
                 loadGameViewAndStart(language);
             }
+
+            // ⭐ opponentId Parameter ပါဝင်အောင် ပြင်ဆင်ထားပါသည်
+            @Override
+            public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {
+
+            }
+
+            @Override
+            public void onQuickMatchTimeout() {
+
+            }
         });
     }
 
@@ -98,7 +109,7 @@ public class FriendMatchController {
         CompletableFuture.supplyAsync(() -> AiQuestionService.fetchAiQuestion(language))
                 .thenAccept(aiJsonResponse -> Platform.runLater(() -> {
                     // FXML File Path Case Sensitivity စစ်ဆေးပါ (GameView.fxml သို့မဟုတ် Gameview.fxml)
-                    FXMLLoader loader = SceneManager.switchScene("/Project/Gameview.fxml", "Mimo Platform - Code Challenge");
+                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
 
                     if (loader != null) {
                         GameController gameController = loader.getController();
@@ -114,6 +125,7 @@ public class FriendMatchController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("/Project/GameModeView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }

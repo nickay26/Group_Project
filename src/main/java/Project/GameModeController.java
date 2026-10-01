@@ -30,37 +30,54 @@ public class GameModeController {
 
     @FXML
     private void handleQuickMatch() {
-        selectedMode = "Quick Match";
-        quickMatchCard.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2.5; -fx-cursor: hand;");
-        friendMatchCard.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #cccccc; -fx-border-radius: 16; -fx-border-width: 1.5; -fx-cursor: hand;");
+        // Quick Match Card ကို Select လုပ်ခြင်း
+        quickMatchCard.getStyleClass().add("selected-card");
+        friendMatchCard.getStyleClass().remove("selected-card");
+        String cleanLanguage = getSelectedLanguageClean();
+        if (cleanLanguage == null) return;
+        launchGameView("QUICK", cleanLanguage);
     }
 
     @FXML
     private void handleFriendMatch() {
-        selectedMode = "Friend Match";
-        friendMatchCard.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2.5; -fx-cursor: hand;");
-        quickMatchCard.setStyle("-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #cccccc; -fx-border-radius: 16; -fx-border-width: 1.5; -fx-cursor: hand;");
+        // Friend Match Card ကို Select လုပ်ခြင်း
+        friendMatchCard.getStyleClass().add("selected-card");
+        quickMatchCard.getStyleClass().remove("selected-card");
+        String cleanLanguage = getSelectedLanguageClean();
+        if (cleanLanguage == null) return;
+        launchGameView("FRIEND", cleanLanguage);
     }
 
-    @FXML
-    private void handleStartGame() {
-        String selectedLang = languageComboBox.getValue().toLowerCase();
-
-        if ("Friend Match".equals(selectedMode)) {
-            // Friend Match ဆိုပါက Create/Join ရွေးသည့် FriendMatchView သို့ သွားမည်
-            SceneManager.switchScene("/Project/FriendMatchView.fxml", "Play with a Friend");
-        } else {
-            // Quick Match ဆိုပါက GameView အစား QuickMatchLobbyView သို့ အရင်သွားမည်
-            FXMLLoader loader = SceneManager.switchScene("/Project/QuickMatchLobbyView.fxml", "Finding Match...");
-            if (loader != null) {
-                QuickMatchLobbyController lobbyController = loader.getController();
-                lobbyController.setSelectedLanguage(selectedLang);
-            }
+    private String getSelectedLanguageClean() {
+        String rawLang = languageComboBox.getValue();
+        if (rawLang == null || rawLang.trim().isEmpty()) {
+            return "C++"; // Default fallback
         }
+
+        if (rawLang.contains("(")) {
+            return rawLang.substring(0, rawLang.indexOf("(")).trim();
+        }
+        return rawLang.trim();
     }
 
-    @FXML
-    private void handleBack() {
-        SceneManager.switchScene("/Project/LearnPage.fxml", "Mimo Platform - Dashboard");
+    private void launchGameView(String mode, String language) {
+        try {
+            if ("QUICK".equals(mode)) {
+
+                FXMLLoader loader = SceneManager.switchScene("QUICK.fxml");
+                if (loader != null) {
+                    QuickMatchLobbyController controller = loader.getController();
+                    if (controller != null) {
+                        controller.setSelectedLanguage(language);
+                    }
+                }
+            } else if ("FRIEND".equals(mode)) {
+                SceneManager.switchScene("FRIEND.fxml");
+            }
+            System.out.println("Starting " + mode + " Match with language: " + language);
+        } catch (Exception e) {
+            System.err.println("Scene Switch Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

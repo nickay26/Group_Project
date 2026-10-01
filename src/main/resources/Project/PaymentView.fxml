@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Project.PaymentController"
+            stylesheets="@../Css/payment.css"
+            style="-fx-background-color: #0F172A;">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+            <VBox alignment="TOP_CENTER" spacing="25" styleClass="payment-container">
+                <padding><Insets top="40" right="80" bottom="40" left="80"/></padding>
+
+                <Label text="Payment Method" styleClass="payment-title"/>
+                <Label text="Choose your preferred payment method and complete the payment." styleClass="payment-subtitle"/>
+
+                <VBox styleClass="plan-summary" spacing="8" alignment="CENTER">
+                    <Label fx:id="selectedPlanLabel" text="Plan: Intermediate Monthly" styleClass="plan-summary-title"/>
+                    <Label fx:id="selectedPriceLabel" text="Amount: 1500 MMK" styleClass="plan-summary-price"/>
+                </VBox>
+
+                <HBox alignment="CENTER" spacing="30">
+                    <VBox fx:id="kpayBox" alignment="CENTER" spacing="10" styleClass="payment-method-box">
+                        <Label text="KPay" styleClass="method-title"/>
+                        <Label text="KBZ Bank" styleClass="method-desc"/>
+                    </VBox>
+
+                    <VBox fx:id="waveBox" alignment="CENTER" spacing="10" styleClass="payment-method-box">
+                        <Label text="WavePay" styleClass="method-title"/>
+                        <Label text="Wave Money" styleClass="method-desc"/>
+                    </VBox>
+                </HBox>
+
+                <VBox alignment="CENTER" spacing="15" styleClass="qr-section">
+                    <Label text="Scan this QR Code to pay" styleClass="qr-title"/>
+                    <ImageView fx:id="qrImageView" fitWidth="220" fitHeight="220"/>
+                    <Label fx:id="phoneLabel" text="Phone: 09-XXXXXXXXX" styleClass="qr-phone"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="15" styleClass="upload-section">
+                    <Label text="Upload Payment Screenshot" styleClass="upload-title"/>
+                    <Label text="Please upload a fresh screenshot taken after this payment." styleClass="upload-note"/>
+                    <Button text="📷 Choose Screenshot" onAction="#handleChooseScreenshot" styleClass="upload-btn"/>
+                    <Label fx:id="screenshotStatusLabel" text="" styleClass="upload-status"/>
+                </VBox>
+
+                <Button text="Verify Payment" onAction="#handleVerifyPayment"
+                        styleClass="verify-btn" maxWidth="300"/>
+
+                <Button text="← Back" onAction="#handleBack" styleClass="back-btn"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
