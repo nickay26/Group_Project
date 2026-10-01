@@ -1,0 +1,146 @@
+{
+  "lessonId": "CPP_282",
+  "title": "Module Review Quiz: Inheritance & Polymorphism (CPP_209 to CPP_216)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_282_S1",
+      "type": "CONCEPT",
+      "title": "Inheritance & Polymorphism Overview",
+      "prompt": "This Module Quiz covers base and derived classes, modes of inheritance, virtual functions, method overriding, abstract classes, pure virtual functions, and vtables (CPP_209 to CPP_216).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nclass Animal {\npublic:\n    virtual void makeSound() { cout << \"Animal sound\\n\"; }\n};\n\nclass Dog : public Animal {\npublic:\n    void makeSound() override { cout << \"Woof!\\n\"; }\n};\n\nint main() {\n    Animal* a = new Dog();\n    a->makeSound(); // Outputs: Woof!\n    delete a;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_282_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Inheritance Syntax (CPP_209)",
+      "prompt": "Fill in the symbol used to declare that a derived class inherits from a base class.",
+      "codeSnippet": "class Dog ___ public Animal {\n    // Dog class members\n};",
+      "options": [":", "->", "::", "extends"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "CPP_282_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protected Access Specifier (CPP_210)",
+      "prompt": "Which statement correctly describes 'protected' members of a base class?",
+      "options": [
+        "Accessible within the base class and its derived classes, but hidden from outside code",
+        "Accessible everywhere in the program without restrictions",
+        "Accessible only inside the base class and hidden from derived classes",
+        "Accessible only by static functions in external files"
+      ],
+      "correctAnswer": "Accessible within the base class and its derived classes, but hidden from outside code"
+    },
+    {
+      "slideId": "CPP_282_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Public Inheritance Access (CPP_210)",
+      "prompt": "Fill in the access keyword so public members of the base class remain public in the derived class.",
+      "codeSnippet": "class Car : ___ Vehicle {\npublic:\n    int doors;\n};",
+      "options": ["public", "protected", "private", "virtual"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_282_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Functions (CPP_211)",
+      "prompt": "Why do we declare a base class member function as 'virtual' in C++?",
+      "options": [
+        "To enable runtime dynamic binding (polymorphism) when called through base pointers",
+        "To make the function execute faster during compile-time",
+        "To prevent derived classes from overriding it",
+        "To allow the function to be called without creating an object instance"
+      ],
+      "correctAnswer": "To enable runtime dynamic binding (polymorphism) when called through base pointers"
+    },
+    {
+      "slideId": "CPP_282_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Virtual Keyword (CPP_211)",
+      "prompt": "Fill in the keyword used to allow dynamic dispatch for a base class method.",
+      "codeSnippet": "class Shape {\npublic:\n    ___ void draw();\n};",
+      "options": ["virtual", "override", "abstract", "dynamic"],
+      "correctAnswer": "virtual"
+    },
+    {
+      "slideId": "CPP_282_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pure Virtual Functions (CPP_212)",
+      "prompt": "What syntax is used to declare a Pure Virtual Function in a base class?",
+      "options": [
+        "virtual void show() = 0;",
+        "virtual void show() = null;",
+        "virtual void show() = pure;",
+        "abstract void show();"
+      ],
+      "correctAnswer": "virtual void show() = 0;"
+    },
+    {
+      "slideId": "CPP_282_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Pure Virtual Assignment (CPP_212)",
+      "prompt": "Fill in the assignment value that turns a virtual function into a pure virtual function.",
+      "codeSnippet": "class Display {\npublic:\n    virtual void render() = ___; \n};",
+      "options": ["0", "nullptr", "false", "default"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_282_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Classes (CPP_213)",
+      "prompt": "Which of the following is true regarding Abstract Classes in C++?",
+      "options": [
+        "You cannot instantiate an object directly from an abstract class",
+        "An abstract class cannot contain constructors",
+        "All member variables in an abstract class must be static",
+        "Abstract classes cannot have derived subclasses"
+      ],
+      "correctAnswer": "You cannot instantiate an object directly from an abstract class"
+    },
+    {
+      "slideId": "CPP_282_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Override Specifier (CPP_214)",
+      "prompt": "Fill in the modern C++ (C++11) specifier used to ensure a derived method correctly overrides a base virtual method.",
+      "codeSnippet": "class Cat : public Animal {\npublic:\n    void makeSound() ___;\n};",
+      "options": ["override", "final", "virtual", "overload"],
+      "correctAnswer": "override"
+    },
+    {
+      "slideId": "CPP_282_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Virtual Destructors (CPP_215)",
+      "prompt": "Why should a base class with virtual functions always have a 'virtual destructor'?",
+      "options": [
+        "To guarantee that derived class destructors are called when deleting via base pointers",
+        "To prevent derived classes from destroying base class memory",
+        "To speed up program termination",
+        "To allow private member cleanup automatically"
+      ],
+      "correctAnswer": "To guarantee that derived class destructors are called when deleting via base pointers"
+    },
+    {
+      "slideId": "CPP_282_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Final Specifier (CPP_214)",
+      "prompt": "Fill in the keyword that prevents further overriding of a virtual function in derived classes.",
+      "codeSnippet": "class Base {\npublic:\n    virtual void print() ___;\n};",
+      "options": ["final", "stop", "sealed", "const"],
+      "correctAnswer": "final"
+    },
+    {
+      "slideId": "CPP_282_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Diamond Problem & Virtual Inheritance (CPP_216)",
+      "prompt": "How does C++ resolve the 'Diamond Problem' in multiple inheritance?",
+      "options": [
+        "By using virtual base classes (virtual inheritance)",
+        "By prohibiting multiple inheritance completely",
+        "By converting all classes into static classes",
+        "By overriding destructor calls in base classes"
+      ],
+      "correctAnswer": "By using virtual base classes (virtual inheritance)"
+    }
+  ]
+}

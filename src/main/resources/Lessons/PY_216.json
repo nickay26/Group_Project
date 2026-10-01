@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_216",
+  "title": "Decorators & Closures: Scoping Rules & Lexical Closures",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_216_S1",
+      "type": "CONCEPT",
+      "title": "Lexical Scoping and Closures",
+      "prompt": "Python follows LEGB (Local, Enclosing, Global, Built-in) scope resolution rules. A lexical closure is created when an inner function retains references to variables from its enclosing scope even after the outer function finishes execution.",
+      "codeSnippet": "def outer_func(msg):\n    def inner_func():\n        print(msg)  # Remembers 'msg' from enclosing scope\n    return inner_func\n\nmy_func = outer_func(\"Hello Closures!\")\nmy_func()  # Outputs: Hello Closures!"
+    },
+    {
+      "slideId": "PY_216_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Inspecting Closure Cell Contents",
+      "prompt": "Fill in the attribute name used to inspect free variables bound inside a closure function object.",
+      "codeSnippet": "print(my_func.___closure___[0].cell_contents)",
+      "options": ["__closure__", "__cell__", "__freevars__", "__scope__"],
+      "correctAnswer": "__closure__"
+    },
+    {
+      "slideId": "PY_216_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LEGB Scope Resolution Order",
+      "prompt": "What is the correct order Python uses to resolve variable names (LEGB Rule)?",
+      "options": [
+        "Local -> Enclosing -> Global -> Built-in",
+        "Local -> Global -> Enclosing -> Built-in",
+        "Enclosing -> Local -> Global -> Built-in",
+        "Global -> Local -> Built-in -> Enclosing"
+      ],
+      "correctAnswer": "Local -> Enclosing -> Global -> Built-in"
+    },
+    {
+      "slideId": "PY_216_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Nonlocal Keyword Usage",
+      "prompt": "Fill in the keyword used inside an inner function to reassign a variable belonging to the outer enclosing scope.",
+      "codeSnippet": "def make_counter():\n    count = 0\n    def counter():\n        ___ count\n        count += 1\n        return count\n    return counter",
+      "options": ["nonlocal", "global", "outer", "parent"],
+      "correctAnswer": "nonlocal"
+    },
+    {
+      "slideId": "PY_216_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Free Variables Tuple Attribute",
+      "prompt": "Which function attribute returns a tuple of free variable names referenced inside a closure?",
+      "options": [
+        "__code__.co_freevars",
+        "__code__.co_varnames",
+        "__closure__.co_names",
+        "__globals__.co_free"
+      ],
+      "correctAnswer": "__code__.co_freevars"
+    },
+    {
+      "slideId": "PY_216_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Freezing State in Loop Closures",
+      "prompt": "Fill in the default argument syntax to freeze loop values inside lambda closures.",
+      "codeSnippet": "funcs = [lambda x=i: x for i in range(3)]\nprint(funcs[0]())  # Outputs 0 instead of 2",
+      "options": ["x=i", "x==i", "x:i", "x<-i"],
+      "correctAnswer": "x=i"
+    },
+    {
+      "slideId": "PY_216_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Closure Lifetime",
+      "prompt": "What happens to the local variable memory of an outer function when a closure is returned?",
+      "options": [
+        "The referenced free variables are preserved in cell objects attached to the closure function",
+        "The outer variables are deleted immediately causing NameError",
+        "The variables are moved into Python's global scope",
+        "The outer function remains active on the execution stack indefinitely"
+      ],
+      "correctAnswer": "The referenced free variables are preserved in cell objects attached to the closure function"
+    }
+  ]
+}

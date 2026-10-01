@@ -1,5 +1,6 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -16,6 +19,11 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static Project.ApiClient.cleanAndFormatAiText;
 
 public class LessonPlayerController {
 
@@ -28,11 +36,18 @@ public class LessonPlayerController {
     private int currentSlideIndex = 0;
     private Lesson currentLesson;
 
-    // Answer Checking State
+    // Answer Checking & Dynamic Blank Filling State
     private String selectedAnswer = null;
     private boolean isAnswerChecked = false;
     private VBox feedbackBox;
-    private VBox optionsBox; // Promoted to class level
+    private VBox optionsBox;
+
+    // References for dynamic blank substitution
+    private String originalCodeSnippet = null;
+    private String originalPrompt = null;
+    private TextArea interactiveCodeEditor = null;
+    private Label staticCodeLabel = null;
+    private Label currentPromptLabel = null;
 
     @FXML
     public void initialize() {
@@ -102,8 +117,11 @@ public class LessonPlayerController {
             return;
         }
 
+        // Reset slide state & references
         selectedAnswer = null;
         isAnswerChecked = false;
+        interactiveCodeEditor = null;
+        staticCodeLabel = null;
 
         double progress = (double) (currentSlideIndex + 1) / slides.length();
         progressBar.setProgress(progress);
@@ -112,18 +130,21 @@ public class LessonPlayerController {
 
         JSONObject slide = slides.getJSONObject(currentSlideIndex);
         String title = slide.optString("title", "");
-        String prompt = slide.optString("prompt", "");
-        String codeSnippet = slide.optString("codeSnippet", null);
+        originalPrompt = slide.optString("prompt", "");
+        originalCodeSnippet = slide.optString("codeSnippet", slide.optString("starterCode", null));
+        String language = slide.optString("language", "cpp");
+
         boolean hasQuestion = slide.has("correctAnswer") && !slide.isNull("correctAnswer");
+        boolean isInteractive = slide.optBoolean("interactive", false) || slide.optBoolean("isInteractive", false);
 
         continueBtn.setText(hasQuestion ? "CHECK" : "CONTINUE");
         continueBtn.setDisable(hasQuestion);
 
-        // Main Card Box (Dark Mode Container)
+        // Main Card Box
         VBox cardBox = new VBox(14);
         cardBox.setAlignment(Pos.TOP_LEFT);
         cardBox.setPadding(new Insets(24));
-        cardBox.setMaxWidth(620);
+        cardBox.setMaxWidth(680);
         cardBox.setStyle(
                 "-fx-background-color: #1E293B; " +
                         "-fx-background-radius: 20px; " +
@@ -132,11 +153,15 @@ public class LessonPlayerController {
                         "-fx-border-width: 1.5px;"
         );
 
-        // Slide Type Badge
-        Label typeBadge = new Label(hasQuestion ? "QUESTION" : "CONCEPT");
+        // Badge
+        String badgeText = isInteractive ? "INTERACTIVE CODE" : (hasQuestion ? "QUESTION" : "CONCEPT");
+        String badgeBg = isInteractive ? "#10B98122;" : (hasQuestion ? "#7C3AED22;" : "#2563EB22;");
+        String badgeFg = isInteractive ? "#34D399;" : (hasQuestion ? "#C084FC;" : "#60A5FA;");
+
+        Label typeBadge = new Label(badgeText);
         typeBadge.setStyle(
-                "-fx-background-color: " + (hasQuestion ? "#7C3AED22;" : "#2563EB22;") +
-                        "-fx-text-fill: " + (hasQuestion ? "#C084FC;" : "#60A5FA;") +
+                "-fx-background-color: " + badgeBg +
+                        "-fx-text-fill: " + badgeFg +
                         "-fx-font-weight: bold; -fx-font-size: 11px; -fx-padding: 4 10 4 10; -fx-background-radius: 8px;"
         );
 
@@ -144,29 +169,43 @@ public class LessonPlayerController {
         titleLabel.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
         titleLabel.setWrapText(true);
 
-        Label promptLabel = new Label(prompt);
-        promptLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #94A3B8; -fx-line-spacing: 3px;");
-        promptLabel.setWrapText(true);
+        currentPromptLabel = new Label(originalPrompt);
+        currentPromptLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #94A3B8; -fx-line-spacing: 3px;");
+        currentPromptLabel.setWrapText(true);
 
-        cardBox.getChildren().addAll(typeBadge, titleLabel, promptLabel);
+        cardBox.getChildren().addAll(typeBadge, titleLabel, currentPromptLabel);
 
-        // Render Code Snippet Box
-        if (codeSnippet != null && !codeSnippet.isEmpty()) {
-            Label codeLabel = new Label(codeSnippet);
-            codeLabel.setWrapText(true);
-            codeLabel.setMinHeight(Region.USE_COMPUTED_SIZE);
-            codeLabel.getStyleClass().add("code-snippet-box");
-            codeLabel.setMaxWidth(Double.MAX_VALUE);
-            cardBox.getChildren().add(codeLabel);
+        // Render Interactive Code Space OR Static Code Box
+        if (originalCodeSnippet != null && !originalCodeSnippet.isEmpty()) {
+            if (isInteractive) {
+                renderInteractiveCodeSpace(cardBox, slide, originalCodeSnippet);
+            } else {
+                staticCodeLabel = new Label(originalCodeSnippet);
+                staticCodeLabel.setWrapText(true);
+                staticCodeLabel.setMinHeight(Region.USE_COMPUTED_SIZE);
+                staticCodeLabel.getStyleClass().add("code-snippet-box");
+                staticCodeLabel.setMaxWidth(Double.MAX_VALUE);
+                cardBox.getChildren().add(staticCodeLabel);
+            }
         }
 
-        // Render Multiple Choice Options
+        // Feature 1: AI Concept Deep-Dive for non-interactive concept slides
+        if (!hasQuestion && !isInteractive) {
+            renderConceptAiExplainer(cardBox, language, originalCodeSnippet != null ? originalCodeSnippet : originalPrompt);
+        }
+
+        // Render Multiple Choice Options (Shuffled)
         if (slide.has("options")) {
-            JSONArray options = slide.getJSONArray("options");
+            JSONArray optionsJson = slide.getJSONArray("options");
+            List<String> optionsList = new ArrayList<>();
+            for (int i = 0; i < optionsJson.length(); i++) {
+                optionsList.add(optionsJson.getString(i));
+            }
+            Collections.shuffle(optionsList);
+
             optionsBox = new VBox(10);
 
-            for (int i = 0; i < options.length(); i++) {
-                String optionText = options.getString(i);
+            for (String optionText : optionsList) {
                 Button optionBtn = new Button(optionText);
                 optionBtn.setMaxWidth(Double.MAX_VALUE);
                 optionBtn.setMinHeight(42);
@@ -179,7 +218,20 @@ public class LessonPlayerController {
                     selectedAnswer = optionText;
                     continueBtn.setDisable(false);
 
-                    // Reset styling on all option buttons
+                    if (originalCodeSnippet != null && originalCodeSnippet.contains("___")) {
+                        String filledCode = originalCodeSnippet.replace("___", optionText);
+                        if (interactiveCodeEditor != null) {
+                            interactiveCodeEditor.setText(filledCode);
+                        }
+                        if (staticCodeLabel != null) {
+                            staticCodeLabel.setText(filledCode);
+                        }
+                    }
+
+                    if (originalPrompt != null && originalPrompt.contains("___") && currentPromptLabel != null) {
+                        currentPromptLabel.setText(originalPrompt.replace("___", optionText));
+                    }
+
                     for (Node node : optionsBox.getChildren()) {
                         if (node instanceof Button) {
                             Button btn = (Button) node;
@@ -189,7 +241,6 @@ public class LessonPlayerController {
                             }
                         }
                     }
-                    // Apply selected class to the clicked button
                     optionBtn.getStyleClass().add("option-button-selected");
                 });
 
@@ -209,7 +260,7 @@ public class LessonPlayerController {
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setMaxWidth(640);
+        scrollPane.setMaxWidth(700);
         scrollPane.setStyle(
                 "-fx-background: transparent; " +
                         "-fx-background-color: transparent; " +
@@ -217,6 +268,222 @@ public class LessonPlayerController {
         );
 
         cardContainer.getChildren().add(scrollPane);
+    }
+
+    /**
+     * AI Feature 1: Concept Deep Dive Button for Standard Explanation Slides
+     */
+    private void renderConceptAiExplainer(VBox cardBox, String language, String codeContent) {
+        Button deepDiveBtn = new Button("✨ Deep Dive with AI");
+        deepDiveBtn.setStyle(
+                "-fx-background-color: #312E81; " +
+                        "-fx-text-fill: #A5B4FC; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-background-radius: 8px; " +
+                        "-fx-padding: 6 12 6 12; " +
+                        "-fx-cursor: hand;"
+        );
+
+        VBox aiOutputBox = new VBox(8);
+        aiOutputBox.setPadding(new Insets(12));
+        aiOutputBox.setStyle("-fx-background-color: #0F172A; -fx-background-radius: 10px; -fx-border-color: #4338CA; -fx-border-radius: 10px;");
+        aiOutputBox.setManaged(false);
+        aiOutputBox.setVisible(false);
+
+        Label aiLabel = new Label();
+        aiLabel.setWrapText(true);
+        aiLabel.setStyle("-fx-text-fill: #E0E7FF; -fx-font-size: 13px; -fx-line-spacing: 2px;");
+        aiOutputBox.getChildren().add(aiLabel);
+
+        deepDiveBtn.setOnAction(e -> {
+            deepDiveBtn.setDisable(true);
+            deepDiveBtn.setText("✨ AI Thinking...");
+            aiOutputBox.setManaged(true);
+            aiOutputBox.setVisible(true);
+            aiLabel.setText("Analyzing code concepts with Gemini AI...");
+
+            ApiClient.reviewCodeAsync(language, codeContent).thenAccept(response -> {
+                Platform.runLater(() -> {
+                    deepDiveBtn.setDisable(false);
+                    deepDiveBtn.setText("✨ Refresh AI Breakdown");
+                    if (response != null && !response.isEmpty()) {
+                        String cleanedResponse = cleanAndFormatAiText(response);
+                        aiLabel.setText(cleanedResponse);
+                    } else {
+                        aiLabel.setText("Unable to fetch AI explanation. Please check your internet connection.");
+                    }
+                });
+            });
+        });
+
+        cardBox.getChildren().addAll(deepDiveBtn, aiOutputBox);
+    }
+
+    /**
+     * AI Feature 2: Interactive Code Playground with "Explain Error with AI"
+     */
+    private void renderInteractiveCodeSpace(VBox parentCard, JSONObject slide, String starterCode) {
+        VBox codeContainer = new VBox(8);
+        codeContainer.setStyle("-fx-background-color: #0F172A; -fx-padding: 12; -fx-background-radius: 12px; -fx-border-color: #334155; -fx-border-radius: 12px;");
+
+        Label editorLabel = new Label("💻 Interactive Code Playground");
+        editorLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px; -fx-font-weight: bold;");
+
+        interactiveCodeEditor = new TextArea(starterCode);
+        interactiveCodeEditor.setPrefRowCount(8);
+        interactiveCodeEditor.setWrapText(true);
+        interactiveCodeEditor.setStyle(
+                "-fx-control-inner-background: #020617; " +
+                        "-fx-font-family: 'Consolas', 'Courier New', monospace; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-text-fill: #E2E8F0; " +
+                        "-fx-highlight-fill: #334155;"
+        );
+
+        HBox actionBar = new HBox(10);
+        actionBar.setAlignment(Pos.CENTER_RIGHT);
+
+        Button runBtn = new Button("▶ Run Code");
+        runBtn.setStyle(
+                "-fx-background-color: #10B981; " +
+                        "-fx-text-fill: #FFFFFF; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-background-radius: 8px; " +
+                        "-fx-padding: 6 16 6 16; " +
+                        "-fx-cursor: hand;"
+        );
+        actionBar.getChildren().add(runBtn);
+
+        Label consoleHeader = new Label("Terminal Output:");
+        consoleHeader.setStyle("-fx-text-fill: #64748B; -fx-font-size: 12px; -fx-font-weight: bold;");
+
+        TextArea consoleOutput = new TextArea();
+        consoleOutput.setEditable(false);
+        consoleOutput.setPrefRowCount(4);
+        consoleOutput.setPromptText("Click 'Run Code' to execute your program...");
+        consoleOutput.setStyle(
+                "-fx-control-inner-background: #020617; " +
+                        "-fx-font-family: 'Consolas', 'Courier New', monospace; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-text-fill: #38BDF8;"
+        );
+
+        // AI Error Explainer Button
+        Button explainErrorBtn = new Button("💡 Explain Error with AI");
+        explainErrorBtn.setStyle(
+                "-fx-background-color: #7C2D12; " +
+                        "-fx-text-fill: #FFEDD5; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-background-radius: 6px; " +
+                        "-fx-padding: 4 10 4 10; " +
+                        "-fx-cursor: hand;"
+        );
+        explainErrorBtn.setManaged(false);
+        explainErrorBtn.setVisible(false);
+
+        explainErrorBtn.setOnAction(e -> {
+            explainErrorBtn.setDisable(true);
+            explainErrorBtn.setText("💡 AI Analyzing Error...");
+            String rawCode = interactiveCodeEditor.getText();
+            String lang = slide.optString("language", "cpp");
+            String fullContext = "Code:\n" + rawCode + "\n\nTerminal Error Output:\n" + consoleOutput.getText();
+
+            ApiClient.reviewPracticeCodeAsync(lang, fullContext, "Explain why this code errored and how to fix it.").thenAccept(aiExplanation -> {
+                Platform.runLater(() -> {
+                    explainErrorBtn.setDisable(false);
+                    explainErrorBtn.setText("💡 Explain Error with AI");
+                    if (aiExplanation != null && !aiExplanation.isEmpty()) {
+                        String cleanedExplanation = cleanAndFormatAiText(aiExplanation);
+                        consoleOutput.setText("=== AI ERROR EXPLANATION ===\n" + cleanedExplanation);
+                        consoleOutput.setStyle("-fx-control-inner-background: #1C1917; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-text-fill: #FDBA74;");
+                    }
+                });
+            });
+        });
+
+        runBtn.setOnAction(e -> {
+            runBtn.setDisable(true);
+            runBtn.setText("Executing...");
+            consoleOutput.setText("Sending request to server...");
+            explainErrorBtn.setManaged(false);
+            explainErrorBtn.setVisible(false);
+
+            String rawCode = interactiveCodeEditor.getText();
+            String lang = slide.optString("language", "cpp");
+            String executableCode = wrapInBoilerplateIfNeeded(rawCode, lang);
+
+            ApiClient.executeCodeAsync(lang, executableCode).thenAccept(responseBody -> {
+                Platform.runLater(() -> {
+                    runBtn.setDisable(false);
+                    runBtn.setText("▶ Run Code");
+
+                    if (responseBody == null || responseBody.isEmpty()) {
+                        consoleOutput.setText("Error: Connection failed.");
+                        consoleOutput.setStyle("-fx-control-inner-background: #450A0A; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-text-fill: #FCA5A5;");
+                        return;
+                    }
+
+                    try {
+                        JSONObject responseJson = new JSONObject(responseBody);
+                        String outputText = responseJson.optString("output",
+                                responseJson.optString("result",
+                                        responseJson.optString("error", responseBody)));
+
+                        if (outputText.trim().isEmpty()) {
+                            outputText = "[Program executed successfully with no output]";
+                        }
+
+                        // Check if response contains compilation or execution error
+                        boolean hasError = outputText.toLowerCase().contains("error") || outputText.toLowerCase().contains("exception");
+                        if (hasError) {
+                            consoleOutput.setStyle("-fx-control-inner-background: #450A0A; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-text-fill: #FCA5A5;");
+                            explainErrorBtn.setManaged(true);
+                            explainErrorBtn.setVisible(true);
+                        } else {
+                            consoleOutput.setStyle("-fx-control-inner-background: #020617; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-text-fill: #38BDF8;");
+                        }
+
+                        consoleOutput.setText(outputText);
+
+                    } catch (Exception parseEx) {
+                        consoleOutput.setText(responseBody);
+                        consoleOutput.setStyle("-fx-control-inner-background: #020617; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-text-fill: #38BDF8;");
+                    }
+                });
+            });
+        });
+
+        HBox consoleTitleBar = new HBox(10, consoleHeader, explainErrorBtn);
+        consoleTitleBar.setAlignment(Pos.CENTER_LEFT);
+
+        codeContainer.getChildren().addAll(editorLabel, interactiveCodeEditor, actionBar, consoleTitleBar, consoleOutput);
+        parentCard.getChildren().add(codeContainer);
+    }
+
+    private String wrapInBoilerplateIfNeeded(String code, String language) {
+        if (code == null) return "";
+        String lowerLang = language.toLowerCase();
+
+        if (lowerLang.contains("cpp") || lowerLang.contains("c++") || lowerLang.contains("c")) {
+            if (!code.contains("main")) {
+                return "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    "
+                        + code.replace("\n", "\n    ")
+                        + "\n    return 0;\n}";
+            }
+        }
+
+        if (lowerLang.contains("java")) {
+            if (!code.contains("class") && !code.contains("main")) {
+                return "public class Main {\n    public static void main(String[] args) {\n        "
+                        + code.replace("\n", "\n        ")
+                        + "\n    }\n}";
+            }
+        }
+
+        return code;
     }
 
     @FXML
@@ -236,7 +503,6 @@ public class LessonPlayerController {
 
             boolean isCorrect = selectedAnswer != null && selectedAnswer.trim().equalsIgnoreCase(correctAnswer.trim());
 
-            // Lock option buttons and highlight correct / incorrect choices
             if (optionsBox != null) {
                 for (Node node : optionsBox.getChildren()) {
                     if (node instanceof Button) {
@@ -246,13 +512,10 @@ public class LessonPlayerController {
                         String btnText = btn.getText().trim();
 
                         if (btnText.equalsIgnoreCase(correctAnswer.trim())) {
-                            // Correct Answer -> Green
                             btn.setStyle("-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-border-color: #059669; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else if (selectedAnswer != null && btnText.equalsIgnoreCase(selectedAnswer.trim()) && !isCorrect) {
-                            // Chosen Incorrect Answer -> Red
                             btn.setStyle("-fx-background-color: #7F1D1D; -fx-text-fill: #FCA5A5; -fx-border-color: #DC2626; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else {
-                            // Other unselected options -> Dimmed
                             btn.setStyle("-fx-background-color: #0F172A; -fx-text-fill: #64748B; -fx-border-color: #1E293B; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 0.5;");
                         }
                     }
@@ -274,6 +537,9 @@ public class LessonPlayerController {
         renderCurrentSlide();
     }
 
+    /**
+     * AI Feature 3: Smart AI Hint Button inside Wrong Answer Feedback Box
+     */
     private void showFeedback(boolean isCorrect, String message, String explanation) {
         feedbackBox.getChildren().clear();
         feedbackBox.setVisible(true);
@@ -297,6 +563,49 @@ public class LessonPlayerController {
             expLabel.setStyle(String.format("-fx-text-fill: %s; -fx-font-size: 13px;", textColor));
             expLabel.setWrapText(true);
             feedbackBox.getChildren().add(expLabel);
+        }
+
+        // If incorrect, add "💡 Ask AI Why My Answer Was Wrong"
+        if (!isCorrect) {
+            Button askAiHintBtn = new Button("💡 Ask AI Why My Answer Was Wrong");
+            askAiHintBtn.setStyle(
+                    "-fx-background-color: #991B1B; " +
+                            "-fx-text-fill: #FEF2F2; " +
+                            "-fx-font-size: 12px; " +
+                            "-fx-font-weight: bold; " +
+                            "-fx-background-radius: 6px; " +
+                            "-fx-cursor: hand;"
+            );
+
+            Label aiHintResult = new Label();
+            aiHintResult.setWrapText(true);
+            aiHintResult.setStyle("-fx-text-fill: #FDE8E8; -fx-font-size: 12px; -fx-padding: 4 0 0 0;");
+
+            JSONObject slide = slides.getJSONObject(currentSlideIndex);
+            String lang = slide.optString("language", "cpp");
+
+            askAiHintBtn.setOnAction(e -> {
+                askAiHintBtn.setDisable(true);
+                askAiHintBtn.setText("💡 AI Thinking...");
+
+                String taskPrompt = "Question Prompt: " + originalPrompt +
+                        " | User Selected Wrong Answer: " + selectedAnswer +
+                        " | Explain gently why this choice is incorrect.";
+
+                ApiClient.reviewPracticeCodeAsync(lang, selectedAnswer, taskPrompt).thenAccept(hint -> {
+                    Platform.runLater(() -> {
+                        askAiHintBtn.setDisable(false);
+                        askAiHintBtn.setText("💡 Ask AI Why My Answer Was Wrong");
+                        if (hint != null && !hint.isEmpty()) {
+                            // Clean formatted output
+                            String cleanedHint = cleanAndFormatAiText(hint);
+                            aiHintResult.setText("AI Feedback:\n" + cleanedHint);
+                        }
+                    });
+                });
+            });
+
+            feedbackBox.getChildren().addAll(askAiHintBtn, aiHintResult);
         }
     }
 

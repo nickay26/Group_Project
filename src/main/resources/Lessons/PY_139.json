@@ -1,0 +1,74 @@
+{
+  "lessonId": "PYTH_139",
+  "title": "Microservices & Docker Containerization (PYTH_131 to PYTH_140) (PYTH_139_S1 to PYTH_139_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_139_S1",
+      "type": "CONCEPT",
+      "title": "Containerizing Python Apps",
+      "prompt": "Docker packages Python applications and dependencies into standardized containers.",
+      "codeSnippet": "# Dockerfile\nFROM python:3.10-slim\nWORKDIR /app\nCOPY . .\nRUN pip install -r requirements.txt\nCMD [\"python\", \"main.py\"]"
+    },
+    {
+      "slideId": "PYTH_139_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Image Instruction",
+      "prompt": "Fill in the Dockerfile keyword specifying the base environment image.",
+      "codeSnippet": "___ python:3.10",
+      "options": ["FROM", "BASE", "IMAGE", "USE"],
+      "correctAnswer": "FROM"
+    },
+    {
+      "slideId": "PYTH_139_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Working Directory",
+      "prompt": "Which instruction sets the working directory inside a Docker container?",
+      "options": ["WORKDIR", "SETDIR", "CD", "FOLDER"],
+      "correctAnswer": "WORKDIR"
+    },
+    {
+      "slideId": "PYTH_139_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Copying Files",
+      "prompt": "Fill in the instruction copying host files into container paths.",
+      "codeSnippet": "___ requirements.txt /app/",
+      "options": ["COPY", "ADD_FILE", "MOVE", "TRANSFER"],
+      "correctAnswer": "COPY"
+    },
+    {
+      "slideId": "PYTH_139_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Container Build Command",
+      "prompt": "Which command builds a Docker image from a local Dockerfile?",
+      "options": ["docker build -t myapp .", "docker make myapp", "docker create myapp", "docker init ."],
+      "correctAnswer": "docker build -t myapp ."
+    },
+    {
+      "slideId": "PYTH_139_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Container Command",
+      "prompt": "Fill in the Dockerfile instruction setting default startup commands.",
+      "codeSnippet": "___ [\"python\", \"app.py\"]",
+      "options": ["CMD", "RUN", "ENTRY", "EXEC"],
+      "correctAnswer": "CMD"
+    },
+    {
+      "slideId": "PYTH_139_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Docker Compose",
+      "prompt": "What tool manages multi-container Docker applications via YAML config?",
+      "options": ["Docker Compose", "Docker Swarm", "Kubernetes", "Containerd"],
+      "correctAnswer": "Docker Compose"
+    },
+    {
+      "slideId": "PYTH_139_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Exposing Container Ports",
+      "prompt": "Fill in the Dockerfile instruction documenting exposed listening ports.",
+      "codeSnippet": "___ 8000",
+      "options": ["EXPOSE", "PORT", "OPEN", "BIND"],
+      "correctAnswer": "EXPOSE"
+    }
+  ]
+}

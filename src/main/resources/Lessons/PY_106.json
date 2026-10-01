@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_106",
+  "title": "Lists & Collections (PYTH_106_S1 to PYTH_106_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_106_S1",
+      "type": "CONCEPT",
+      "title": "Python Lists",
+      "prompt": "Lists are ordered, mutable collections defined with square brackets [].",
+      "codeSnippet": "items = [\"apple\", \"banana\", \"cherry\"]\nitems.append(\"orange\")\nprint(items[0])  # 'apple'"
+    },
+    {
+      "slideId": "PYTH_106_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding List Items",
+      "prompt": "Fill in the method used to add an item to the end of a list.",
+      "codeSnippet": "numbers = [1, 2, 3]\nnumbers.___ (4)",
+      "options": ["append", "add", "push", "insert"],
+      "correctAnswer": "append"
+    },
+    {
+      "slideId": "PYTH_106_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Zero-Based Indexing",
+      "prompt": "What is the index of the first element in a Python list?",
+      "options": ["0", "1", "-1", "first"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "PYTH_106_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "List Length",
+      "prompt": "Fill in the function to get the number of items in a list.",
+      "codeSnippet": "total_items = ___(items)",
+      "options": ["len", "length", "count", "size"],
+      "correctAnswer": "len"
+    },
+    {
+      "slideId": "PYTH_106_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Negative Indexing",
+      "prompt": "What does list_item[-1] retrieve?",
+      "options": [
+        "The last element",
+        "The first element",
+        "The second element",
+        "Causes an IndexError"
+      ],
+      "correctAnswer": "The last element"
+    },
+    {
+      "slideId": "PYTH_106_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Removing List Items",
+      "prompt": "Fill in the method to remove an item by value from a list.",
+      "codeSnippet": "colors = [\"red\", \"green\", \"blue\"]\ncolors.___(\"green\")",
+      "options": ["remove", "pop", "delete", "clear"],
+      "correctAnswer": "remove"
+    },
+    {
+      "slideId": "PYTH_106_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "List Mutability",
+      "prompt": "Are Python lists mutable (can elements be changed after creation)?",
+      "options": [
+        "Yes, elements can be updated or replaced",
+        "No, lists are immutable",
+        "Only if defined with the 'var' keyword",
+        "Only numeric lists are mutable"
+      ],
+      "correctAnswer": "Yes, elements can be updated or replaced"
+    }
+  ]
+}

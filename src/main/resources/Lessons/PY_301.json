@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_301",
+  "title": "Module Review Quiz: Asynchronous Task Queues (Celery & Redis)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_301_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Asynchronous Task Execution",
+      "prompt": "Review background task execution, distributed worker nodes, broker configurations (Redis/RabbitMQ), and Celery task signatures.",
+      "codeSnippet": "from celery import Celery\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef add(x, y):\n    return x + y"
+    },
+    {
+      "slideId": "PYTH_301_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Celery Task Decorator",
+      "prompt": "Fill in the decorator used to turn a regular Python function into a Celery background task.",
+      "codeSnippet": "@app.___\ndef process_data(): pass",
+      "options": ["task", "job", "async_task", "worker"],
+      "correctAnswer": "task"
+    },
+    {
+      "slideId": "PYTH_301_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Asynchronous Task Dispatch",
+      "prompt": "Which method is commonly used on a Celery task to send it to the queue asynchronously?",
+      "options": ["delay()", "run()", "dispatch()", "queue()"],
+      "correctAnswer": "delay()"
+    },
+    {
+      "slideId": "PYTH_301_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Message Broker Parameter",
+      "prompt": "Fill in the Celery parameter name used to specify the message transport URL.",
+      "codeSnippet": "app = Celery('tasks', ___='redis://localhost:6379/0')",
+      "options": ["broker", "backend", "queue", "transport"],
+      "correctAnswer": "broker"
+    },
+    {
+      "slideId": "PYTH_301_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Result Backend Purpose",
+      "prompt": "What is the primary function of specifying a `result_backend` in Celery?",
+      "options": [
+        "To store and retrieve return values/states of background tasks",
+        "To compile task functions to C code",
+        "To authenticate API HTTP clients",
+        "To route incoming HTTP requests"
+      ],
+      "correctAnswer": "To store and retrieve return values/states of background tasks"
+    },
+    {
+      "slideId": "PYTH_301_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Periodic Task Scheduler",
+      "prompt": "Fill in the Celery component name used for scheduling periodic cron-like tasks.",
+      "codeSnippet": "# Run celery scheduler daemon\ncelery -A proj ___",
+      "options": ["beat", "cron", "timer", "schedule"],
+      "correctAnswer": "beat"
+    },
+    {
+      "slideId": "PYTH_301_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Checking Task Result State",
+      "prompt": "Which AsyncResult object property checks if a Celery task has finished execution?",
+      "options": ["ready()", "finished()", "done()", "complete()"],
+      "correctAnswer": "ready()"
+    }
+  ]
+}

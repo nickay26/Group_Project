@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_194",
+  "title": "Distributed Task Processing with Celery & Redis (PYTH_194_S1 to PYTH_194_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_194_S1",
+      "type": "CONCEPT",
+      "title": "Asynchronous Task Queues",
+      "prompt": "Celery offloads long-running tasks to background worker processes using message brokers like Redis or RabbitMQ.",
+      "codeSnippet": "from celery import Celery\n\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef process_file(filename):\n    return len(filename)"
+    },
+    {
+      "slideId": "PYTH_194_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Celery Task Decorator",
+      "prompt": "Fill in the decorator used to turn standard Python functions into asynchronous Celery tasks.",
+      "codeSnippet": "@app.___\ndef generate_report(user_id):",
+      "options": ["task", "job", "worker", "async_task"],
+      "correctAnswer": "task"
+    },
+    {
+      "slideId": "PYTH_194_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Invoking Tasks Asynchronously",
+      "prompt": "Which method is used to send a task to the Celery queue for asynchronous execution by a worker?",
+      "options": [
+        "task.delay(*args, **kwargs)",
+        "task.execute(*args, **kwargs)",
+        "task.run_async(*args, **kwargs)",
+        "task.start(*args, **kwargs)"
+      ],
+      "correctAnswer": "task.delay(*args, **kwargs)"
+    },
+    {
+      "slideId": "PYTH_194_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Retrieving Task Results",
+      "prompt": "Fill in the class imported from Celery to check and retrieve output status from asynchronous tasks.",
+      "codeSnippet": "from celery.result import ___\nres = AsyncResult(task_id)",
+      "options": ["AsyncResult", "TaskResult", "PluginResult", "JobStatus"],
+      "correctAnswer": "AsyncResult"
+    },
+    {
+      "slideId": "PYTH_194_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Celery Workflows (Chains and Groups)",
+      "prompt": "What is the difference between a `chain` and a `group` primitive in Celery workflow composition?",
+      "options": [
+        "A chain executes tasks sequentially passing results forward, while a group executes tasks in parallel",
+        "A chain runs tasks on local threads, while a group runs tasks on remote Kubernetes nodes",
+        "A group executes tasks sequentially, while a chain discards failed task outputs",
+        "A chain requires Redis, while a group requires PostgreSQL"
+      ],
+      "correctAnswer": "A chain executes tasks sequentially passing results forward, while a group executes tasks in parallel"
+    },
+    {
+      "slideId": "PYTH_194_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Celery Beat Periodic Scheduling",
+      "prompt": "Fill in the Celery extension component name used to run periodic scheduled cron-like jobs.",
+      "codeSnippet": "# Run periodic tasks\ncelery -A proj ___ -l info",
+      "options": ["beat", "cron", "scheduler", "timer"],
+      "correctAnswer": "beat"
+    },
+    {
+      "slideId": "PYTH_194_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dead Letter Queues (DLQ)",
+      "prompt": "Why are Dead Letter Queues configured in background task processing systems?",
+      "options": [
+        "To isolate and capture failed tasks that exceeded retry limits for inspection without blocking worker queues",
+        "To speed up the execution speed of successful tasks",
+        "To store temporary cache keys during database backup operations",
+        "To compress historical task logs into zip archives"
+      ],
+      "correctAnswer": "To isolate and capture failed tasks that exceeded retry limits for inspection without blocking worker queues"
+    },
+    {
+      "slideId": "PYTH_194_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Task Auto-Retry Configuration",
+      "prompt": "Fill in the decorator argument used to specify maximum retry attempts upon task failure.",
+      "codeSnippet": "@app.task(autoretry_for=(Exception,), max_retries=___)",
+      "options": ["3", "True", "retry", "limit"],
+      "correctAnswer": "3"
+    }
+  ]
+}

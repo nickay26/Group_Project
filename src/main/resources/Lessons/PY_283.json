@@ -1,0 +1,234 @@
+{
+  "lessonId": "PY_283",
+  "title": "Final Assessment: Python Intermediate Mastery (PY_283)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_283_S1",
+      "type": "CONCEPT",
+      "title": "Final Assessment Overview",
+      "prompt": "This final assessment consists of 20 comprehensive questions covering all 10 modules of Python Intermediate: Advanced OOP, Functional Programming, Decorators, Generators, Context Managers, Type Hinting, AsyncIO, Performance Optimization, Design Patterns, and Concurrency.",
+      "codeSnippet": "# Python Intermediate Comprehensive Assessment\nprint('Starting 20-Question Final Exam...')"
+    },
+    {
+      "slideId": "PY_283_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 1: MRO Resolution",
+      "prompt": "Which algorithm is utilized by CPython to determine Method Resolution Order (MRO) in multiple inheritance?",
+      "options": [
+        "C3 Linearization",
+        "Depth-First Search",
+        "Breadth-First Search",
+        "Dijkstra Algorithm"
+      ],
+      "correctAnswer": "C3 Linearization"
+    },
+    {
+      "slideId": "PY_283_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 1: Instance Slots",
+      "prompt": "Fill in the attribute name used to restrict instance attributes and prevent `__dict__` creation.",
+      "codeSnippet": "class Point:\n    ___ = ('x', 'y')",
+      "options": ["__slots__", "__dict__", "__space__", "__memory__"],
+      "correctAnswer": "__slots__"
+    },
+    {
+      "slideId": "PY_283_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 2: Pure Functions",
+      "prompt": "Which statement correctly defines a Pure Function in functional programming?",
+      "options": [
+        "It always produces the same output for the same input and has no side effects",
+        "It modifies global variables directly for speed optimization",
+        "It relies on current system time to generate results",
+        "It performs non-blocking asynchronous file I/O"
+      ],
+      "correctAnswer": "It always produces the same output for the same input and has no side effects"
+    },
+    {
+      "slideId": "PY_283_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 2: Partial Function Application",
+      "prompt": "Fill in the function name from `functools` used to freeze a portion of a function's arguments.",
+      "codeSnippet": "from functools import ___\n\ndouble = partial(multiply, 2)",
+      "options": ["partial", "curry", "bind", "freeze"],
+      "correctAnswer": "partial"
+    },
+    {
+      "slideId": "PY_283_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 3: Metadata Preservation",
+      "prompt": "Why is `@functools.wraps` applied to wrapper functions inside decorators?",
+      "options": [
+        "To preserve original function metadata like `__name__` and `__doc__`",
+        "To execute the function in a multi-threaded pool",
+        "To automatically type-check function arguments",
+        "To suppress all runtime exceptions"
+      ],
+      "correctAnswer": "To preserve original function metadata like `__name__` and `__doc__`"
+    },
+    {
+      "slideId": "PY_283_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 3: Nonlocal Scope Rebinding",
+      "prompt": "Fill in the keyword used inside a closure to modify variables in the outer non-global scope.",
+      "codeSnippet": "def outer():\n    count = 0\n    def inner():\n        ___ count\n        count += 1",
+      "options": ["nonlocal", "global", "outer", "rebind"],
+      "correctAnswer": "nonlocal"
+    },
+    {
+      "slideId": "PY_283_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 4: Sub-generator Delegation",
+      "prompt": "Which syntax delegates generator iteration directly to a sub-generator or iterable in Python?",
+      "options": [
+        "yield from",
+        "yield delegate",
+        "yield sub",
+        "yield to"
+      ],
+      "correctAnswer": "yield from"
+    },
+    {
+      "slideId": "PY_283_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 4: Generator Pause Keyword",
+      "prompt": "Fill in the keyword used to suspend generator execution and yield a value to the caller.",
+      "codeSnippet": "def number_gen():\n    ___ 42",
+      "options": ["yield", "return", "pause", "send"],
+      "correctAnswer": "yield"
+    },
+    {
+      "slideId": "PY_283_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 5: Exception Suppression",
+      "prompt": "How does a class-based context manager's `__exit__` method suppress an exception raised inside the `with` block?",
+      "options": [
+        "By returning True",
+        "By returning False",
+        "By returning None",
+        "By raising StopIteration"
+      ],
+      "correctAnswer": "By returning True"
+    },
+    {
+      "slideId": "PY_283_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 5: Dynamic Context Management",
+      "prompt": "Fill in the class from `contextlib` used to programmatically manage a variable number of context managers.",
+      "codeSnippet": "from contextlib import ___\n\nwith ExitStack() as stack:\n    files = [stack.enter_context(open(f)) for f in filenames]",
+      "options": ["ExitStack", "ContextChain", "MultiContext", "StackManager"],
+      "correctAnswer": "ExitStack"
+    },
+    {
+      "slideId": "PY_283_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 6: Structural Subtyping Protocol",
+      "prompt": "Which class from `typing` is used to define static interface protocols (duck typing with static checkers)?",
+      "options": [
+        "Protocol",
+        "Interface",
+        "TypedDict",
+        "AbstractClass"
+      ],
+      "correctAnswer": "Protocol"
+    },
+    {
+      "slideId": "PY_283_S13",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 6: Union Operator (Python 3.10+)",
+      "prompt": "Fill in the operator symbol used in modern Python (3.10+) as a shortcut for `Union[int, str]`.",
+      "codeSnippet": "def process(val: int ___ str) -> None:\n    pass",
+      "options": ["|", "&", "or", "/"],
+      "correctAnswer": "|"
+    },
+    {
+      "slideId": "PY_283_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 7: Async Concurrent Execution",
+      "prompt": "Which function from `asyncio` runs multiple awaitable tasks concurrently and returns their ordered results as a list?",
+      "options": [
+        "asyncio.gather()",
+        "asyncio.wait_all()",
+        "asyncio.run_parallel()",
+        "asyncio.collect()"
+      ],
+      "correctAnswer": "asyncio.gather()"
+    },
+    {
+      "slideId": "PY_283_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 7: Main Coroutine Entry Point",
+      "prompt": "Fill in the function used to execute an async coroutine entry point in modern Python (3.7+).",
+      "codeSnippet": "import asyncio\n\nasyncio.___(main())",
+      "options": ["run", "execute", "start", "dispatch"],
+      "correctAnswer": "run"
+    },
+    {
+      "slideId": "PY_283_S16",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 8: Cyclic Reference Tracking",
+      "prompt": "Which standard library module handles the detection and collection of circular memory references?",
+      "options": [
+        "gc",
+        "sys",
+        "tracemalloc",
+        "memoryview"
+      ],
+      "correctAnswer": "gc"
+    },
+    {
+      "slideId": "PY_283_S17",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 8: Zero-Copy Buffering",
+      "prompt": "Fill in the built-in type used for zero-copy slicing of binary memory buffers.",
+      "codeSnippet": "data = bytearray(b'hello')\nmv = ___(data)",
+      "options": ["memoryview", "bytes", "buffer", "array"],
+      "correctAnswer": "memoryview"
+    },
+    {
+      "slideId": "PY_283_S18",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 9: Creational Singleton Pattern",
+      "prompt": "What is the primary intent of the Singleton design pattern?",
+      "options": [
+        "To ensure a class has only one instance and provides a global access point to it",
+        "To separate the construction of a complex object from its representation",
+        "To delegate object creation to child subclasses dynamically",
+        "To attach additional responsibilities to an object dynamically"
+      ],
+      "correctAnswer": "To ensure a class has only one instance and provides a global access point to it"
+    },
+    {
+      "slideId": "PY_283_S19",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 9: SOLID Dependency Principle",
+      "prompt": "Fill in the missing word: Dependency ___ Principle states high-level modules should depend on abstractions.",
+      "codeSnippet": "# SOLID: DIP\n# Dependency ___ Principle",
+      "options": ["Inversion", "Injection", "Isolation", "Integration"],
+      "correctAnswer": "Inversion"
+    },
+    {
+      "slideId": "PY_283_S20",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Module 10: GIL Bypass Strategy",
+      "prompt": "Which execution model bypasses CPython's Global Interpreter Lock (GIL) to achieve true parallel execution for CPU-bound tasks?",
+      "options": [
+        "Multiprocessing",
+        "Multithreading",
+        "AsyncIO Coroutines",
+        "Generator Iteration"
+      ],
+      "correctAnswer": "Multiprocessing"
+    },
+    {
+      "slideId": "PY_283_S21",
+      "type": "FILL_IN_BLANK",
+      "title": "Module 10: Synchronization Mutual Exclusion",
+      "prompt": "Fill in the primitive class name from `threading` used to grant exclusive access to a shared resource.",
+      "codeSnippet": "import threading\n\nmutex = threading.____()",
+      "options": ["Lock", "Semaphore", "Event", "Condition"],
+      "correctAnswer": "Lock"
+    }
+  ]
+}

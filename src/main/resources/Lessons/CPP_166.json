@@ -1,0 +1,116 @@
+{
+  "lessonId": "CPP_166",
+  "title": "Module Review Quiz: Basic Concepts (CPP_101 to CPP_110)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_166_S1",
+      "type": "CONCEPT",
+      "title": "Module 1 Overview",
+      "prompt": "This Module Quiz covers foundational C++ topics from CPP_101 to CPP_110: Basic Syntax, Variables, Operators, Control Flow, Loops, Functions, Arrays, Pointers, and Constants.",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    const int LIMIT = 5;\n    for (int i = 0; i < LIMIT; i++) {\n        cout << \"Basic Concepts Overview\" << endl;\n    }\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_166_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Header Inclusion (CPP_101)",
+      "prompt": "Fill in the standard library required for basic input and output operations.",
+      "codeSnippet": "#include <___>",
+      "options": ["iostream", "stdio.h", "string", "cmath"],
+      "correctAnswer": "iostream"
+    },
+    {
+      "slideId": "CPP_166_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Data Types & Variables (CPP_102)",
+      "prompt": "Which primitive data type is most appropriate for high-precision floating-point numbers?",
+      "options": ["double", "int", "bool", "char"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_166_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Arithmetic Operators (CPP_103)",
+      "prompt": "Fill in the operator used to calculate the remainder of an integer division.",
+      "codeSnippet": "int remainder = 17 ___ 5;",
+      "options": ["%", "/", "*", "#"],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "CPP_166_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Control Flow - Switch Statement (CPP_104)",
+      "prompt": "What happens if you omit the 'break' statement in a switch case?",
+      "options": ["Execution falls through to the next case", "Causes a compilation error", "The program terminates immediately", "The switch restarts"],
+      "correctAnswer": "Execution falls through to the next case"
+    },
+    {
+      "slideId": "CPP_166_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Loops & Iteration (CPP_105)",
+      "prompt": "Fill in the keyword for a loop structure that guarantees executing the block at least once.",
+      "codeSnippet": "___ {\n    cout << \"Running...\";\n} while (false);",
+      "options": ["do", "while", "for", "loop"],
+      "correctAnswer": "do"
+    },
+    {
+      "slideId": "CPP_166_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functions & Scope (CPP_107)",
+      "prompt": "Which return type should be used for a function that does NOT return any value?",
+      "options": ["void", "int", "null", "none"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "CPP_166_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Arrays & Strings (CPP_108)",
+      "prompt": "Fill in the index used to access the very first element of an array in C++.",
+      "codeSnippet": "int firstNumber = scores[___];",
+      "options": ["0", "1", "-1", "first"],
+      "correctAnswer": "0"
+    },
+    {
+      "slideId": "CPP_166_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointers & Memory (CPP_109)",
+      "prompt": "Which symbol is used as the 'address-of' operator to retrieve the memory address of a variable?",
+      "options": ["&", "*", "->", "::"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_166_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Constants (CPP_110)",
+      "prompt": "Fill in the keyword used to declare a variable whose value cannot be modified after initialization.",
+      "codeSnippet": "___ double PI = 3.14159;",
+      "options": ["const", "final", "static", "fixed"],
+      "correctAnswer": "const"
+    },
+    {
+      "slideId": "CPP_166_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Case Sensitivity (CPP_101)",
+      "prompt": "Is C++ a case-sensitive programming language?",
+      "options": ["Yes, uppercase and lowercase matter", "No, it ignores case", "Only for variable names", "Only for keywords"],
+      "correctAnswer": "Yes, uppercase and lowercase matter"
+    },
+    {
+      "slideId": "CPP_166_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass by Reference (CPP_107)",
+      "prompt": "Fill in the character used in the parameter list to pass a variable by reference.",
+      "codeSnippet": "void modifyValue(int ___x)  {\n    x = 100;\n}",
+      "options": ["&", "*", "%", "#"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_166_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dereference Operator (CPP_109)",
+      "prompt": "Which operator is used to dereference a pointer and access the value at its memory address?",
+      "options": ["*", "&", "->", "."],
+      "correctAnswer": "*"
+    }
+  ]
+}

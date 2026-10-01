@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_201",
+  "title": "Advanced OOP: Magic Methods (Dunder Methods)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_201_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Dunder Methods in Python",
+      "prompt": "Magic methods (or dunder methods) are special methods with double underscores like __init__ or __str__. They allow custom classes to emulate built-in types and define custom behaviors for operators.",
+      "codeSnippet": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def __str__(self):\n        return f\"{self.title} ({self.pages} pages)\"\n\nbook = Book(\"Python Guide\", 300)\nprint(book)  # Output: Python Guide (300 pages)"
+    },
+    {
+      "slideId": "PY_201_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "String Representation",
+      "prompt": "Fill in the magic method name used to return an official, unambiguous string representation of an object (often used for debugging).",
+      "codeSnippet": "class Person:\n    def __repr__(self):\n        return f\"Person(name={self.name})\"",
+      "options": ["__repr__", "__str__", "__format__", "__print__"],
+      "correctAnswer": "__repr__"
+    },
+    {
+      "slideId": "PY_201_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Overloading for Addition",
+      "prompt": "Which dunder method must be implemented to customize the behavior of the '+' operator for a class?",
+      "options": [
+        "__add__",
+        "__plus__",
+        "__concat__",
+        "__sum__"
+      ],
+      "correctAnswer": "__add__"
+    },
+    {
+      "slideId": "PY_201_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Length Implementation",
+      "prompt": "Fill in the dunder method used to support the built-in len() function on custom objects.",
+      "codeSnippet": "class CustomList:\n    def ___len___(self):\n        return len(self.items)",
+      "options": ["len", "length", "size", "count"],
+      "correctAnswer": "len"
+    },
+    {
+      "slideId": "PY_201_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Callable Instances",
+      "prompt": "Which dunder method allows an instance of a class to be called like a function (e.g., obj())?",
+      "options": [
+        "__call__",
+        "__invoke__",
+        "__exec__",
+        "__run__"
+      ],
+      "correctAnswer": "__call__"
+    },
+    {
+      "slideId": "PY_201_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Equality Comparison",
+      "prompt": "Fill in the magic method used to evaluate equality using the '==' operator.",
+      "codeSnippet": "def ___eq___(self, other):\n    return self.id == other.id",
+      "options": ["eq", "equal", "equals", "same"],
+      "correctAnswer": "eq"
+    },
+    {
+      "slideId": "PY_201_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Attribute Access Control",
+      "prompt": "Which magic method is invoked automatically when an attribute lookup is NOT found in the instance dictionary?",
+      "options": [
+        "__getattr__",
+        "__getattribute__",
+        "__setattr__",
+        "__dict__"
+      ],
+      "correctAnswer": "__getattr__"
+    }
+  ]
+}

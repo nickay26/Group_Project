@@ -1,0 +1,180 @@
+{
+  "lessonId": "PY_278",
+  "title": "Module Assessment: Type Hinting (PY_237 to PY_243)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_278_S1",
+      "type": "CONCEPT",
+      "title": "Module 6 Overview",
+      "prompt": "Assessment covering Python Type Annotations, the `typing` module, mypy static analysis, Generics, Protocols, and Duck Typing.",
+      "codeSnippet": "def greeting(name: str) -> str:\n    return f'Hello {name}'"
+    },
+    {
+      "slideId": "PY_278_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Runtime Behavior",
+      "prompt": "How do Type Hints affect Python code execution at runtime?",
+      "options": [
+        "They have no effect; they are ignored by the Python runtime interpreter",
+        "They make the execution significantly faster",
+        "They raise a TypeError if a wrong type is passed",
+        "They automatically cast variables to the specified type"
+      ],
+      "correctAnswer": "They have no effect; they are ignored by the Python runtime interpreter"
+    },
+    {
+      "slideId": "PY_278_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Return Type Syntax",
+      "prompt": "Fill in the symbol used to denote the return type of a function.",
+      "codeSnippet": "def add(x: int, y: int) ___ int:\n    return x + y",
+      "options": ["->", "=>", ":", "returns"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "PY_278_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Optional Types",
+      "prompt": "What does `typing.Optional[str]` fundamentally mean?",
+      "options": [
+        "The value can be either a string or None",
+        "The argument is not required and can be omitted",
+        "The string might be empty",
+        "The value is dynamically typed"
+      ],
+      "correctAnswer": "The value can be either a string or None"
+    },
+    {
+      "slideId": "PY_278_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Union Operator (Python 3.10+)",
+      "prompt": "In modern Python (3.10+), what is the concise alternative syntax for `Union[int, float]`?",
+      "options": [
+        "int | float",
+        "int & float",
+        "int or float",
+        "int / float"
+      ],
+      "correctAnswer": "int | float"
+    },
+    {
+      "slideId": "PY_278_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Static Checker",
+      "prompt": "Fill in the name of the most popular static type checker tool used to validate Python type hints.",
+      "codeSnippet": "pip install ___\n___ script.py",
+      "options": ["mypy", "pylint", "flake8", "pytest"],
+      "correctAnswer": "mypy"
+    },
+    {
+      "slideId": "PY_278_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Any Type",
+      "prompt": "When should you use `typing.Any`?",
+      "options": [
+        "When a value can be of any arbitrary type, disabling type checking for it",
+        "As a default return type for all functions",
+        "When declaring a generic class",
+        "To define structural subtyping"
+      ],
+      "correctAnswer": "When a value can be of any arbitrary type, disabling type checking for it"
+    },
+    {
+      "slideId": "PY_278_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 7: Callable Types",
+      "prompt": "How would you type-hint a parameter `cb` that accepts a function taking an `int` and returning a `str`?",
+      "options": [
+        "cb: Callable[[int], str]",
+        "cb: Function[int, str]",
+        "cb: Callable(int) -> str",
+        "cb: def(int) -> str"
+      ],
+      "correctAnswer": "cb: Callable[[int], str]"
+    },
+    {
+      "slideId": "PY_278_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 8: Type Aliases",
+      "prompt": "Fill in the syntax to create a Type Alias for a complex type.",
+      "codeSnippet": "Vector = list[float]\ndef scale(v: ___) -> Vector:\n    pass",
+      "options": ["Vector", "Alias", "Type", "list"],
+      "correctAnswer": "Vector"
+    },
+    {
+      "slideId": "PY_278_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Generics",
+      "prompt": "Which tool from the `typing` module is used to create Generic types that enforce consistency across arguments?",
+      "options": [
+        "TypeVar",
+        "GenericVar",
+        "AnyType",
+        "Template"
+      ],
+      "correctAnswer": "TypeVar"
+    },
+    {
+      "slideId": "PY_278_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Structural Subtyping",
+      "prompt": "Which `typing` class is used to define an interface for Duck Typing (Structural Subtyping) without requiring explicit inheritance?",
+      "options": [
+        "Protocol",
+        "Interface",
+        "Abstract",
+        "DuckType"
+      ],
+      "correctAnswer": "Protocol"
+    },
+    {
+      "slideId": "PY_278_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: No Return",
+      "prompt": "Fill in the type hint used to indicate that a function unconditionally raises an exception or runs forever.",
+      "codeSnippet": "from typing import ___\ndef stop() -> ___:\n    raise SystemExit()",
+      "options": ["NoReturn", "None", "Any", "Exit"],
+      "correctAnswer": "NoReturn"
+    },
+    {
+      "slideId": "PY_278_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Literal Types",
+      "prompt": "What does `typing.Literal['r', 'w']` enforce?",
+      "options": [
+        "The value must be exactly the string 'r' or 'w'",
+        "The value must be a string containing 'r' and 'w'",
+        "The value is read/write enabled",
+        "The value is a regular expression"
+      ],
+      "correctAnswer": "The value must be exactly the string 'r' or 'w'"
+    },
+    {
+      "slideId": "PY_278_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 13: Class Variables",
+      "prompt": "How do you distinguish a class variable from an instance variable when type hinting?",
+      "options": [
+        "Using `typing.ClassVar`",
+        "Using `@classmethod`",
+        "By placing it in `__init__`",
+        "By using uppercase variable names"
+      ],
+      "correctAnswer": "Using `typing.ClassVar`"
+    },
+    {
+      "slideId": "PY_278_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Runtime Inspection",
+      "prompt": "Which function from the `typing` module allows inspection of evaluated type hints at runtime?",
+      "options": [
+        "get_type_hints()",
+        "inspect_types()",
+        "reveal_type()",
+        "check_hints()"
+      ],
+      "correctAnswer": "get_type_hints()"
+    }
+  ]
+}

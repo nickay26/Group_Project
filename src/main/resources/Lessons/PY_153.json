@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_153",
+  "title": "Enterprise Microservices with FastAPI & Pydantic V2 (PYTH_153_S1 to PYTH_153_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_153_S1",
+      "type": "CONCEPT",
+      "title": "FastAPI Service Framework",
+      "prompt": "FastAPI delivers high-performance REST APIs powered by ASGI, OpenAPI, and strict Pydantic models.",
+      "codeSnippet": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get('/')\nasync def root():\n    return {'status': 'healthy'}"
+    },
+    {
+      "slideId": "PYTH_153_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Pydantic Schema Validation",
+      "prompt": "Fill in the base class used to construct data validation schemas in Pydantic.",
+      "codeSnippet": "from pydantic import ___\n\nclass UserSchema(___):\n    id: int",
+      "options": ["BaseModel", "Schema", "DataClass", "Model"],
+      "correctAnswer": "BaseModel"
+    },
+    {
+      "slideId": "PYTH_153_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ASGI Web Servers",
+      "prompt": "Which production-grade ASGI web server is commonly paired with FastAPI to serve concurrent HTTP requests?",
+      "options": ["Uvicorn", "WSGI", "Gunicorn-sync", "Apache mod_wsgi"],
+      "correctAnswer": "Uvicorn"
+    },
+    {
+      "slideId": "PYTH_153_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP Exception Handling",
+      "prompt": "Fill in the FastAPI exception class thrown to return standard HTTP error responses.",
+      "codeSnippet": "raise ___ (status_code=404, detail='Resource missing')",
+      "options": ["HTTPException", "APIError", "StatusError", "ResponseException"],
+      "correctAnswer": "HTTPException"
+    },
+    {
+      "slideId": "PYTH_153_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Automated Interactive API Docs",
+      "prompt": "Which path does FastAPI natively serve for Swagger UI documentation by default?",
+      "options": ["/docs", "/swagger", "/api/v1/spec", "/redoc/ui"],
+      "correctAnswer": "/docs"
+    },
+    {
+      "slideId": "PYTH_153_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Request Body Parsing",
+      "prompt": "Fill in the FastAPI decorator used to handle POST requests.",
+      "codeSnippet": "@app.___ ('/items')\nasync def create_item(item: ItemSchema):",
+      "options": ["post", "create", "put", "add"],
+      "correctAnswer": "post"
+    },
+    {
+      "slideId": "PYTH_153_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Middleware Processing",
+      "prompt": "What purpose does HTTP middleware serve in a FastAPI microservice?",
+      "options": [
+        "Intercepting and processing every request/response globally",
+        "Generating relational database migrations automatically",
+        "Formatting output terminal print colors",
+        "Optimizing Python bytecode compilation"
+      ],
+      "correctAnswer": "Intercepting and processing every request/response globally"
+    },
+    {
+      "slideId": "PYTH_153_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Background Tasks Execution",
+      "prompt": "Fill in the class imported from fastapi to execute tasks after sending an HTTP response.",
+      "codeSnippet": "from fastapi import ___\n\ndef send_email(bg: ___):",
+      "options": ["BackgroundTasks", "AsyncTask", "WorkerQueue", "DeferTask"],
+      "correctAnswer": "BackgroundTasks"
+    }
+  ]
+}

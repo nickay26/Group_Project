@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_112",
+  "title": "List Comprehensions (PYTH_112_S1 to PYTH_112_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_112_S1",
+      "type": "CONCEPT",
+      "title": "List Comprehension Basics",
+      "prompt": "List comprehension provides a concise syntax for creating new lists based on existing iterables.",
+      "codeSnippet": "squares = [x**2 for x in range(5)]\nevens = [x for x in range(10) if x % 2 == 0]"
+    },
+    {
+      "slideId": "PYTH_112_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic List Comprehension",
+      "prompt": "Fill in the missing keyword in the list comprehension expression.",
+      "codeSnippet": "nums = [x * 2 ___ x in range(5)]",
+      "options": ["for", "in", "each", "loop"],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "PYTH_112_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Filtered List Comprehension",
+      "prompt": "What will [x for x in range(5) if x > 2] evaluate to?",
+      "options": ["[3, 4]", "[2, 3, 4]", "[0, 1, 2]", "[3, 4, 5]"],
+      "correctAnswer": "[3, 4]"
+    },
+    {
+      "slideId": "PYTH_112_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Conditional List Comprehension",
+      "prompt": "Fill in the filter keyword in the comprehension.",
+      "codeSnippet": "words = [w.upper() for w in text ___ len(w) > 3]",
+      "options": ["if", "where", "when", "while"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "PYTH_112_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Comprehension vs Map",
+      "prompt": "Why are list comprehensions generally preferred over map() in Python?",
+      "options": [
+        "They are usually more readable and pythonic",
+        "They execute 100x faster",
+        "They consume no memory",
+        "They work without brackets"
+      ],
+      "correctAnswer": "They are usually more readable and pythonic"
+    },
+    {
+      "slideId": "PYTH_112_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Dictionary Comprehension",
+      "prompt": "Fill in the key-value separator syntax inside dictionary comprehension.",
+      "codeSnippet": "squared_map = {x___ x**2 for x in range(3)}",
+      "options": [":", "=", "->", "=>"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "PYTH_112_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested List Comprehension",
+      "prompt": "What does [[0 for _ in range(2)] for _ in range(2)] create?",
+      "options": ["[[0, 0], [0, 0]]", "[0, 0, 0, 0]", "[[0, 0, 0, 0]]", "(0, 0)"],
+      "correctAnswer": "[[0, 0], [0, 0]]"
+    }
+  ]
+}

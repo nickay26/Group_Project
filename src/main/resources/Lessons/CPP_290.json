@@ -1,0 +1,168 @@
+{
+  "lessonId": "CPP_290",
+  "title": "Module Review Quiz: Modern C++ Features & Type Traits (CPP_273 to CPP_280)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_290_S1",
+      "type": "CONCEPT",
+      "title": "Modern C++ Features & Type Traits Overview",
+      "prompt": "This Module Quiz covers modern C++ features (C++11 to C++20) including auto type deduction, constexpr, static_assert, std::optional, std::variant, compile-time type traits (<type_traits>), and C++20 Concepts & Constraints (CPP_273 to CPP_280).",
+      "codeSnippet": "#include <iostream>\n#include <type_traits>\n#include <concepts>\nusing namespace std;\n\ntemplate <typename T>\nconcept Numeric = is_arithmetic_v<T>;\n\ntemplate <Numeric T>\nT add(T a, T b) {\n    return a + b;\n}\n\nint main() {\n    cout << add(10, 20) << endl; // Works for numeric types\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_290_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Type Deduction (CPP_273)",
+      "prompt": "Fill in the keyword introduced in C++11 for automatic type deduction of variables.",
+      "codeSnippet": "___ pi = 3.14159; // Deduced as double",
+      "options": ["auto", "decltype", "var", "let"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_290_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "decltype Specifier (CPP_273)",
+      "prompt": "What is the primary usage of 'decltype' in modern C++?",
+      "options": [
+        "To inspect and yield the declared type of an expression at compile-time",
+        "To convert floating-point numbers to integers dynamically",
+        "To declare a new variable on heap memory",
+        "To clear exception flags from input streams"
+      ],
+      "correctAnswer": "To inspect and yield the declared type of an expression at compile-time"
+    },
+    {
+      "slideId": "CPP_290_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-time Constant (CPP_274)",
+      "prompt": "Fill in the specifier keyword used to evaluate functions or constants at compile-time.",
+      "codeSnippet": "___ int square(int x) {\n    return x * x;\n}",
+      "options": ["constexpr", "const", "static", "inline"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_290_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "static_assert Validation (CPP_275)",
+      "prompt": "When does 'static_assert(condition, message)' perform its evaluation check?",
+      "options": [
+        "At compile-time",
+        "At runtime when function is invoked",
+        "At program shut-down time",
+        "During dynamic memory allocation"
+      ],
+      "correctAnswer": "At compile-time"
+    },
+    {
+      "slideId": "CPP_290_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "std::optional Value Presence (CPP_276)",
+      "prompt": "Fill in the member function name used to check if a std::optional contains a value.",
+      "codeSnippet": "std::optional<int> opt = findVal();\nif (opt.___()) {\n    cout << opt.value();\n}",
+      "options": ["has_value", "is_present", "contains", "exists"],
+      "correctAnswer": "has_value"
+    },
+    {
+      "slideId": "CPP_290_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::variant Storage (CPP_277)",
+      "prompt": "What is 'std::variant' in C++17?",
+      "options": [
+        "A type-safe, type-discriminated union holding one value from a set of types",
+        "A dynamic array that can hold multiple different types at once",
+        "A pointer that points to variable memory locations",
+        "An enum class wrapper for integer values"
+      ],
+      "correctAnswer": "A type-safe, type-discriminated union holding one value from a set of types"
+    },
+    {
+      "slideId": "CPP_290_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Accessing std::variant (CPP_277)",
+      "prompt": "Fill in the template helper function name used to retrieve a specific type value from std::variant.",
+      "codeSnippet": "std::variant<int, string> v = 42;\nint val = std::___<int>(v);",
+      "options": ["get", "fetch", "extract", "value"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "CPP_290_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::any Container (CPP_277)",
+      "prompt": "Which function is used to safely cast and extract a value stored inside a 'std::any' instance?",
+      "options": [
+        "std::any_cast<T>()",
+        "std::get<T>()",
+        "static_cast<T>()",
+        "dynamic_cast<T>()"
+      ],
+      "correctAnswer": "std::any_cast<T>()"
+    },
+    {
+      "slideId": "CPP_290_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Type Traits Header (CPP_278)",
+      "prompt": "Fill in the header file name required to inspect and modify types at compile-time.",
+      "codeSnippet": "#include <___>\nusing namespace std;\nstatic_assert(is_integral<int>::value);",
+      "options": ["type_traits", "utility", "typeinfo", "concepts"],
+      "correctAnswer": "type_traits"
+    },
+    {
+      "slideId": "CPP_290_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Trait Suffix _v (CPP_278)",
+      "prompt": "In C++17 type traits, what does 'std::is_same_v<T, U>' represent?",
+      "options": [
+        "A helper variable template equal to 'std::is_same<T, U>::value'",
+        "A void pointer to the runtime type information",
+        "A virtual class method evaluating dynamic types",
+        "A vector storing type comparison results"
+      ],
+      "correctAnswer": "A helper variable template equal to 'std::is_same<T, U>::value'"
+    },
+    {
+      "slideId": "CPP_290_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Compile-time If (CPP_278)",
+      "prompt": "Fill in the keyword combination introduced in C++17 for compile-time branch selection.",
+      "codeSnippet": "if ___ (std::is_integral_v<T>) {\n    // Int logic\n}",
+      "options": ["constexpr", "const", "static", "compile"],
+      "correctAnswer": "constexpr"
+    },
+    {
+      "slideId": "CPP_290_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 Concepts Purpose (CPP_279)",
+      "prompt": "What is the primary benefit of C++20 Concepts in template programming?",
+      "options": [
+        "They enforce compile-time constraints on template arguments, producing clear error messages",
+        "They allow templates to execute faster during runtime",
+        "They convert template code into non-template binary functions",
+        "They automatically manage dynamic memory deallocation"
+      ],
+      "correctAnswer": "They enforce compile-time constraints on template arguments, producing clear error messages"
+    },
+    {
+      "slideId": "CPP_290_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 Requires Clause (CPP_280)",
+      "prompt": "Fill in the keyword used in C++20 to specify constraints on template parameters.",
+      "codeSnippet": "template <typename T>\n___ std::is_arithmetic_v<T>\nT multiply(T a, T b) { return a * b; }",
+      "options": ["requires", "concept", "where", "enforce"],
+      "correctAnswer": "requires"
+    },
+    {
+      "slideId": "CPP_290_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Defining a Concept (CPP_280)",
+      "prompt": "Which syntax correctly defines a custom C++20 Concept named 'Integral'?",
+      "options": [
+        "template <typename T> concept Integral = std::is_integral_v<T>;",
+        "concept Integral<typename T> { return std::is_integral_v<T>; };",
+        "template <typename T> struct concept Integral = std::is_integral_v<T>;",
+        "using concept Integral = std::is_integral_v<T>;"
+      ],
+      "correctAnswer": "template <typename T> concept Integral = std::is_integral_v<T>;"
+    }
+  ]
+}

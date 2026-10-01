@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_171",
+  "title": "Quantum Computing Essentials with Qiskit (PYTH_171_S1 to PYTH_171_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_171_S1",
+      "type": "CONCEPT",
+      "title": "Quantum Qubits & Circuits",
+      "prompt": "Quantum computing uses superposition and entanglement to solve complex computational problems using quantum gates.",
+      "codeSnippet": "from qiskit import QuantumCircuit\n\nqc = QuantumCircuit(2, 2)\nqc.h(0)\nqc.cx(0, 1)\nqc.measure([0, 1], [0, 1])"
+    },
+    {
+      "slideId": "PYTH_171_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Hadamard Superposition Gate",
+      "prompt": "Fill in the method used in Qiskit to apply a Hadamard gate and place a qubit into superposition.",
+      "codeSnippet": "qc = QuantumCircuit(1)\nqc.___(0)",
+      "options": ["h", "x", "z", "hadamard"],
+      "correctAnswer": "h"
+    },
+    {
+      "slideId": "PYTH_171_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Quantum Entanglement Gate",
+      "prompt": "Which quantum gate pair creates a maximum entanglement (Bell State) when starting from ground state |00⟩?",
+      "options": [
+        "Hadamard gate on qubit 0, followed by CNOT (CX) gate from 0 to 1",
+        "Pauli-X gate on both qubits",
+        "Pauli-Z gate on qubit 0, followed by SWAP gate",
+        "Toffoli gate across three qubits"
+      ],
+      "correctAnswer": "Hadamard gate on qubit 0, followed by CNOT (CX) gate from 0 to 1"
+    },
+    {
+      "slideId": "PYTH_171_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Controlled-NOT Gate",
+      "prompt": "Fill in the Qiskit method name for applying a Controlled-NOT (CNOT) gate between control and target qubits.",
+      "codeSnippet": "qc.___(control_qubit, target_qubit)",
+      "options": ["cx", "cnot", "entangle", "ctrl"],
+      "correctAnswer": "cx"
+    },
+    {
+      "slideId": "PYTH_171_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Qubit Superposition Concept",
+      "prompt": "What allows a qubit in superposition to perform simultaneous calculations unlike a classical bit?",
+      "options": [
+        "Existing in a linear combination of both |0⟩ and |1⟩ states simultaneously until measured",
+        "Operating at clock speeds exceeding 100 GHz",
+        "Storing values as floating-point numbers in GPU RAM",
+        "Eliminating all heating losses using superconductor cables"
+      ],
+      "correctAnswer": "Existing in a linear combination of both |0⟩ and |1⟩ states simultaneously until measured"
+    },
+    {
+      "slideId": "PYTH_171_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Measuring Quantum Circuits",
+      "prompt": "Fill in the method used to collapse quantum states into classical register bits.",
+      "codeSnippet": "qc.___(qubit_list, classical_bit_list)",
+      "options": ["measure", "readout", "collapse", "sample"],
+      "correctAnswer": "measure"
+    },
+    {
+      "slideId": "PYTH_171_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Quantum Simulators vs Hardware",
+      "prompt": "Why do developers execute quantum circuits on local statevector simulators before cloud quantum processing units (QPUs)?",
+      "options": [
+        "To test circuit logic deterministically without noise or queue wait times",
+        "Because simulators support an infinite number of physical qubits",
+        "Because physical QPUs cannot execute Hadamard gates",
+        "Simulators run faster for 1,000+ qubit systems"
+      ],
+      "correctAnswer": "To test circuit logic deterministically without noise or queue wait times"
+    },
+    {
+      "slideId": "PYTH_171_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Pauli-X Gate (Quantum NOT)",
+      "prompt": "Fill in the single-qubit gate method equivalent to a classical bitwise NOT operation.",
+      "codeSnippet": "qc.___(0)",
+      "options": ["x", "not_gate", "invert", "flip"],
+      "correctAnswer": "x"
+    }
+  ]
+}

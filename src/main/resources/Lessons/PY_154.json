@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_154",
+  "title": "Event-Driven Messaging with Kafka & RabbitMQ (PYTH_154_S1 to PYTH_154_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_154_S1",
+      "type": "CONCEPT",
+      "title": "Asynchronous Event Architecture",
+      "prompt": "Event-driven systems decouple services by publishing events to brokers like Kafka or RabbitMQ.",
+      "codeSnippet": "# Distributed Producer Concept\nbroker.publish(topic='user_events', message={'event': 'signup'})"
+    },
+    {
+      "slideId": "PYTH_154_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Kafka Message Publishing",
+      "prompt": "Fill in the core entity responsible for publishing events to Kafka topics.",
+      "codeSnippet": "producer = Kafka___ (bootstrap_servers='localhost:9092')",
+      "options": ["Producer", "Publisher", "Sender", "Writer"],
+      "correctAnswer": "Producer"
+    },
+    {
+      "slideId": "PYTH_154_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Message Broker Protocols",
+      "prompt": "Which messaging protocol does RabbitMQ natively utilize for queue communication?",
+      "options": ["AMQP", "HTTP/2", "gRPC", "MQTT"],
+      "correctAnswer": "AMQP"
+    },
+    {
+      "slideId": "PYTH_154_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Kafka Consumer Groups",
+      "prompt": "Fill in the term representing a logical group of consumers sharing topic partitions.",
+      "codeSnippet": "consumer = KafkaConsumer(group_id='___')",
+      "options": ["analytics_group", "partition_id", "broker_set", "queue_cluster"],
+      "correctAnswer": "analytics_group"
+    },
+    {
+      "slideId": "PYTH_154_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "At-Least-Once Delivery",
+      "prompt": "How is message processing guaranteed without data loss in message queue workers?",
+      "options": [
+        "By sending explicit acknowledgments (ACKs) after message processing succeeds",
+        "By disabling consumer timeouts",
+        "By converting messages to global variables",
+        "By storing all payload bytes in local memory"
+      ],
+      "correctAnswer": "By sending explicit acknowledgments (ACKs) after message processing succeeds"
+    },
+    {
+      "slideId": "PYTH_154_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "RabbitMQ Queue Binding",
+      "prompt": "Fill in the RabbitMQ entity that routes published messages to specific queues.",
+      "codeSnippet": "channel.___ (exchange='events', queue='orders')",
+      "options": ["queue_bind", "link", "attach", "connect"],
+      "correctAnswer": "queue_bind"
+    },
+    {
+      "slideId": "PYTH_154_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dead Letter Queue (DLQ)",
+      "prompt": "What is the function of a Dead Letter Queue in message-driven systems?",
+      "options": [
+        "Holding unprocessable or failed messages for investigation",
+        "Deleting expired user credentials",
+        "Speeding up network packet transfer",
+        "Generating automated SQL database backups"
+      ],
+      "correctAnswer": "Holding unprocessable or failed messages for investigation"
+    },
+    {
+      "slideId": "PYTH_154_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Celery Task Queue Worker",
+      "prompt": "Fill in the Python distributed task queue library often backed by Redis or RabbitMQ.",
+      "codeSnippet": "from ___ import Celery\napp = Celery('tasks', broker='redis://localhost:6379/0')",
+      "options": ["celery", "rq", "huey", "dask"],
+      "correctAnswer": "celery"
+    }
+  ]
+}

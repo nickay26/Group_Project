@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_222",
+  "title": "Comprehensive Test: Decorators & Closures (PY_216 to PY_221)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_222_S1",
+      "type": "CONCEPT",
+      "title": "Decorators & Closures Review",
+      "prompt": "This test evaluates your complete understanding of closures, scoping rules, decorator syntax, metadata preservation with functools.wraps, parametrized decorators, class-based decorators, and practical design patterns.",
+      "codeSnippet": "from functools import wraps\n\ndef prefix(tag):\n    def decorator(func):\n        @wraps(func)\n        def wrapper(*args, **kwargs):\n            return f\"[{tag}] {func(*args, **kwargs)}\"\n        return wrapper\n    return decorator\n\n@prefix(\"INFO\")\ndef get_msg(): return \"System Ready\"\nprint(get_msg())  # Output: [INFO] System Ready"
+    },
+    {
+      "slideId": "PY_222_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Closure State Mutability",
+      "prompt": "What keyword is mandatory to update an integer variable in the outer non-global scope from inside a closure?",
+      "options": [
+        "nonlocal",
+        "global",
+        "mutating",
+        "static"
+      ],
+      "correctAnswer": "nonlocal"
+    },
+    {
+      "slideId": "PY_222_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Functools Wraps Import",
+      "prompt": "Fill in the decorator name applied to wrapper functions to preserve docstrings.",
+      "codeSnippet": "from functools import wraps\n\ndef dec(f):\n    @___(f)\n    def w(): return f()\n    return w",
+      "options": ["wraps", "wrap", "preserve", "metadata"],
+      "correctAnswer": "wraps"
+    },
+    {
+      "slideId": "PY_222_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorator Stacking Order Execution",
+      "prompt": "Given `@A` above `@B` on `def foo(): pass`, which decorator's wrapper executes first when `foo()` is called?",
+      "options": [
+        "Decorator A's wrapper executes first",
+        "Decorator B's wrapper executes first",
+        "Both execute simultaneously",
+        "It depends on the function return type"
+      ],
+      "correctAnswer": "Decorator A's wrapper executes first"
+    },
+    {
+      "slideId": "PY_222_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Decorator Magic Method",
+      "prompt": "Fill in the magic method name required inside a class decorator to make instances callable.",
+      "codeSnippet": "class Tracker:\n    def ___call___(self, *args, **kwargs):\n        return self.func(*args, **kwargs)",
+      "options": ["call", "invoke", "execute", "run"],
+      "correctAnswer": "call"
+    },
+    {
+      "slideId": "PY_222_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parametrized Decorator Layer Count",
+      "prompt": "How many total function definitions are required to build a decorator accepting arguments?",
+      "options": [
+        "3 functions",
+        "2 functions",
+        "1 function",
+        "4 functions"
+      ],
+      "correctAnswer": "3 functions"
+    },
+    {
+      "slideId": "PY_222_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Unwrapped Function Attribute",
+      "prompt": "Fill in the attribute name used to bypass wraps and access the original decorated function.",
+      "codeSnippet": "original_fn = decorated_fn.___wrapped___",
+      "options": ["__wrapped__", "__original__", "__raw__", "__func__"],
+      "correctAnswer": "__wrapped__"
+    }
+  ]
+}

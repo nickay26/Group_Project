@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_117",
+  "title": "Advanced OOP & Special Methods (PYTH_117_S1 to PYTH_117_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_117_S1",
+      "type": "CONCEPT",
+      "title": "Dunder Methods Overview",
+      "prompt": "Special methods (dunder methods) like __str__ and __repr__ define how objects behave with built-in Python functions.",
+      "codeSnippet": "class Book:\n    def __init__(self, title):\n        self.title = title\n    def __str__(self):\n        return f\"Book: {self.title}\""
+    },
+    {
+      "slideId": "PYTH_117_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "String Representation",
+      "prompt": "Fill in the method name used to return a user-friendly string representation of an object.",
+      "codeSnippet": "class User:\n    def __"___"__(self):\n        return self.username",
+      "options": ["str", "repr", "print", "text"],
+      "correctAnswer": "str"
+    },
+    {
+      "slideId": "PYTH_117_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Length Dunder Method",
+      "prompt": "Which special method allows custom objects to work with len()?",
+      "options": ["__len__", "__size__", "__count__", "__length__"],
+      "correctAnswer": "__len__"
+    },
+    {
+      "slideId": "PYTH_117_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Operator Overloading - Addition",
+      "prompt": "Fill in the dunder method used to overload the addition '+' operator.",
+      "codeSnippet": "def ___add___(self, other):\n    return self.val + other.val",
+      "options": ["__add__", "__plus__", "__sum__", "__concat__"],
+      "correctAnswer": "__add__"
+    },
+    {
+      "slideId": "PYTH_117_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation with Private Attributes",
+      "prompt": "How do you define a private attribute in Python by convention?",
+      "options": [
+        "Prefixing with double underscores (__attr)",
+        "Using the private keyword",
+        "Prefixing with @private",
+        "Enclosing in curly braces"
+      ],
+      "correctAnswer": "Prefixing with double underscores (__attr)"
+    },
+    {
+      "slideId": "PYTH_117_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Property Decorator",
+      "prompt": "Fill in the decorator used to define a getter method for an attribute.",
+      "codeSnippet": "___property\ndef price(self):\n    return self._price",
+      "options": ["@", "getter", "attr", "define"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PYTH_117_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Methods Decorator",
+      "prompt": "Which decorator is used to declare a method that receives the class (cls) as its first argument?",
+      "options": ["@classmethod", "@staticmethod", "@property", "@instancemethod"],
+      "correctAnswer": "@classmethod"
+    }
+  ]
+}

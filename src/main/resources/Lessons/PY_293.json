@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_293",
+  "title": "Module Review Quiz: Data Analysis with Pandas & NumPy",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_293_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: NumPy & Pandas",
+      "prompt": "Review numerical computations, vectorization, NumPy arrays, Pandas DataFrames, filtering, and aggregation.",
+      "codeSnippet": "import pandas as pd\nimport numpy as np\ndf = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})"
+    },
+    {
+      "slideId": "PYTH_293_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "NumPy Array Initialization",
+      "prompt": "Fill in the function used to convert a standard Python list into a NumPy array.",
+      "codeSnippet": "arr = np.___([1, 2, 3])",
+      "options": ["array", "asarray", "matrix", "vector"],
+      "correctAnswer": "array"
+    },
+    {
+      "slideId": "PYTH_293_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Index-Based DataFrame Selection",
+      "prompt": "Which accessor is used in Pandas to select rows/columns by integer-location indexing?",
+      "options": ["iloc", "loc", "at", "ix"],
+      "correctAnswer": "iloc"
+    },
+    {
+      "slideId": "PYTH_293_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "CSV File Ingestion",
+      "prompt": "Fill in the Pandas function used to load tabular data from a CSV file into a DataFrame.",
+      "codeSnippet": "df = pd.___(\"data.csv\")",
+      "options": ["read_csv", "load_csv", "import_csv", "parse_csv"],
+      "correctAnswer": "read_csv"
+    },
+    {
+      "slideId": "PYTH_293_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "DataFrame Grouping",
+      "prompt": "Which method splits data into groups according to specified categorical column values?",
+      "options": ["groupby()", "pivot()", "aggregate()", "split()"],
+      "correctAnswer": "groupby()"
+    },
+    {
+      "slideId": "PYTH_293_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Handling Missing Data",
+      "prompt": "Fill in the Pandas method used to remove missing/NaN values from a DataFrame.",
+      "codeSnippet": "clean_df = df.___()",
+      "options": ["dropna", "fillna", "remove_na", "clean"],
+      "correctAnswer": "dropna"
+    },
+    {
+      "slideId": "PYTH_293_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Shape Property",
+      "prompt": "Which attribute of a NumPy array returns a tuple containing its dimensions?",
+      "options": ["shape", "size", "ndim", "length"],
+      "correctAnswer": "shape"
+    }
+  ]
+}

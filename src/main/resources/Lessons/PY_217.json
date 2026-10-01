@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_217",
+  "title": "Decorators & Closures: Basic Function Decorators",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_217_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Function Decorators",
+      "prompt": "A decorator is a callable that accepts a function as an argument and returns a new transformed function. The '@' syntax is syntactic sugar for wrapping and reassigning the function.",
+      "codeSnippet": "def log_decorator(func):\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        return func(*args, **kwargs)\n    return wrapper\n\n@log_decorator\ndef add(a, b):\n    return a + b\n\n# Equivalent to: add = log_decorator(add)"
+    },
+    {
+      "slideId": "PY_217_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Applying Decorators Syntax",
+      "prompt": "Fill in the symbol used before a decorator name above a function definition.",
+      "codeSnippet": "___my_decorator\ndef process():\n    pass",
+      "options": ["@", "#", "$", "&"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PY_217_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Syntactic Sugar Equivalence",
+      "prompt": "Which manual assignment is equivalent to using `@decorator` above `def my_func(): pass`?",
+      "options": [
+        "my_func = decorator(my_func)",
+        "decorator = my_func(decorator)",
+        "my_func = decorator.apply()",
+        "decorator(my_func())"
+      ],
+      "correctAnswer": "my_func = decorator(my_func)"
+    },
+    {
+      "slideId": "PY_217_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Handling Generic Function Arguments",
+      "prompt": "Fill in the missing keyword arguments parameter syntax inside a generic wrapper function.",
+      "codeSnippet": "def wrapper(*args, ___kwargs):\n    return func(*args, **kwargs)",
+      "options": ["**", "*", "...", "&"],
+      "correctAnswer": "**"
+    },
+    {
+      "slideId": "PY_217_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorator Execution Time",
+      "prompt": "When is a decorator function executed in Python?",
+      "options": [
+        "At module import / function definition time",
+        "Only when the decorated function is explicitly called",
+        "During garbage collection cycles",
+        "Only when called inside a try-except block"
+      ],
+      "correctAnswer": "At module import / function definition time"
+    },
+    {
+      "slideId": "PY_217_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Wrapper Return Statement",
+      "prompt": "Fill in the statement used by wrapper functions to deliver the target function's output.",
+      "codeSnippet": "def wrapper(*args, **kwargs):\n    ___ func(*args, **kwargs)",
+      "options": ["return", "yield", "pass", "emit"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "PY_217_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Decorators Stacking Order",
+      "prompt": "Given `@decA` placed above `@decB` on function `foo()`, in what order are decorators applied?",
+      "options": [
+        "foo = decA(decB(foo)) (Bottom to Top)",
+        "foo = decB(decA(foo)) (Top to Bottom)",
+        "foo = decA(foo) + decB(foo) (Parallel)",
+        "foo = decB(foo) only"
+      ],
+      "correctAnswer": "foo = decA(decB(foo)) (Bottom to Top)"
+    }
+  ]
+}

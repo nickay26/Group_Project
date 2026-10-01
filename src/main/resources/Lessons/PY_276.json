@@ -1,0 +1,123 @@
+{
+  "lessonId": "PY_276",
+  "title": "Module Assessment: Generators & Iterators (PY_223 to PY_229)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_276_S1",
+      "type": "CONCEPT",
+      "title": "Module 4 Overview",
+      "prompt": "Assessment covering Iterators, Generators, yield, yield from, send(), and itertools.",
+      "codeSnippet": "def gen():\n    yield 1\n    yield 2"
+    },
+    {
+      "slideId": "PY_276_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Iterator Protocol",
+      "prompt": "Which two methods constitute Python Iterator Protocol?",
+      "options": ["__iter__ and __next__", "__get__ and __next__", "__start__ and __step__", "__aiter__ and __anext__"],
+      "correctAnswer": "__iter__ and __next__"
+    },
+    {
+      "slideId": "PY_276_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Generator Keyword",
+      "prompt": "Fill in keyword that pauses function execution and returns a value to caller.",
+      "codeSnippet": "def my_gen():\n    ___ 100",
+      "options": ["yield", "return", "send", "pause"],
+      "correctAnswer": "yield"
+    },
+    {
+      "slideId": "PY_276_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Stop Iteration",
+      "prompt": "Which exception signal end of iteration when `next()` is called?",
+      "options": ["StopIteration", "IndexError", "KeyError", "GeneratorExit"],
+      "correctAnswer": "StopIteration"
+    },
+    {
+      "slideId": "PY_276_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Sub-generator Delegation",
+      "prompt": "Which syntax delegates generator iteration directly to a sub-generator or iterable?",
+      "options": ["yield from", "yield delegate", "yield to", "yield sub"],
+      "correctAnswer": "yield from"
+    },
+    {
+      "slideId": "PY_276_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Generator Expression Syntax",
+      "prompt": "Fill in correct brackets to build a generator expression.",
+      "codeSnippet": "gen = ___x * 2 for x in range(10)___",
+      "options": ["( and )", "[ and ]", "{ and }", "< and >"],
+      "correctAnswer": "( and )"
+    },
+    {
+      "slideId": "PY_276_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Sending Values",
+      "prompt": "Which method sends values into a running generator pause state?",
+      "options": ["send()", "push()", "next()", "throw()"],
+      "correctAnswer": "send()"
+    },
+    {
+      "slideId": "PY_276_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Infinite Cycle",
+      "prompt": "Fill in function from `itertools` that cycles infinitely over iterable.",
+      "codeSnippet": "from itertools import ___\n\ncycle('ABC')",
+      "options": ["cycle", "repeat", "count", "chain"],
+      "correctAnswer": "cycle"
+    },
+    {
+      "slideId": "PY_276_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Generator Memory Usage",
+      "prompt": "Why are generators memory efficient compared to lists?",
+      "options": ["Lazy evaluation (calculates items on the fly)", "C-level compression", "Auto garbage collection", "Store in disk"],
+      "correctAnswer": "Lazy evaluation (calculates items on the fly)"
+    },
+    {
+      "slideId": "PY_276_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Itertools Chain",
+      "prompt": "What does `itertools.chain(seq1, seq2)` do?",
+      "options": ["Combines multiple iterables sequentially into single iterator", "Multiplies items", "Zips items", "Filters items"],
+      "correctAnswer": "Combines multiple iterables sequentially into single iterator"
+    },
+    {
+      "slideId": "PY_276_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 10: Closing Generator",
+      "prompt": "Fill in method called to stop generator and raise `GeneratorExit` inside it.",
+      "codeSnippet": "g = my_gen()\ng.___()",
+      "options": ["close", "stop", "terminate", "exit"],
+      "correctAnswer": "close"
+    },
+    {
+      "slideId": "PY_276_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 11: Built-in Iter Function",
+      "prompt": "What is the second argument of 2-argument sentinel form of `iter(func, sentinel)`?",
+      "options": ["Value that triggers StopIteration when func() returns it", "Iteration limit", "Default value", "Step size"],
+      "correctAnswer": "Value that triggers StopIteration when func() returns it"
+    },
+    {
+      "slideId": "PY_276_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Itertools Islice",
+      "prompt": "How does `itertools.islice()` differ from standard list slicing `lst[start:stop]`?",
+      "options": ["Works lazily on iterators without creating list in memory", "Supports negative steps only", "Modifies source", "Returns tuple"],
+      "correctAnswer": "Works lazily on iterators without creating list in memory"
+    },
+    {
+      "slideId": "PY_276_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Throw Exception",
+      "prompt": "Fill in method used to raise an exception inside generator.",
+      "codeSnippet": "g.____(ValueError)",
+      "options": ["throw", "raise", "error", "catch"],
+      "correctAnswer": "throw"
+    }
+  ]
+}

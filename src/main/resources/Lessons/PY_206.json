@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_206",
+  "title": "Decorators & Closures",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_206_S1",
+      "type": "CONCEPT",
+      "title": "Closures & Decorators Overview",
+      "prompt": "A closure is a inner function that remembers and has access to variables from its enclosing scope even after the outer function has finished executing. Decorators use closures to wrap another function and extend its behavior without modifying it.",
+      "codeSnippet": "# Closure Example\ndef make_multiplier(x):\n    def multiply(n):\n        return x * n\n    return multiply\n\ndouble = make_multiplier(2)\nprint(double(5))  # Output: 10\n\n# Decorator Example\ndef my_decorator(func):\n    def wrapper():\n        print(\"Before function call\")\n        func()\n        print(\"After function call\")\n    return wrapper\n\n@my_decorator\ndef say_hello():\n    print(\"Hello!\")"
+    },
+    {
+      "slideId": "PY_206_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Decorator Syntactic Sugar",
+      "prompt": "Fill in the symbol used as syntactic sugar to apply a decorator to a function.",
+      "codeSnippet": "___my_decorator\ndef greet():\n    print(\"Hi\")",
+      "options": ["@", "#", "$", "&"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PY_206_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Closure Variable Scope",
+      "prompt": "What keyword is used inside a nested function to modify a variable in the outer non-global scope?",
+      "options": [
+        "nonlocal",
+        "global",
+        "outer",
+        "parent"
+      ],
+      "correctAnswer": "nonlocal"
+    },
+    {
+      "slideId": "PY_206_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Preserving Function Metadata",
+      "prompt": "Fill in the decorator name from 'functools' used inside wrapper functions to preserve original function name and docstrings.",
+      "codeSnippet": "from functools import wraps\n\ndef my_decorator(func):\n    @___(func)\n    def wrapper(*args, **kwargs):\n        return func(*args, **kwargs)\n    return wrapper",
+      "options": ["wraps", "preserve", "keep", "decorator"],
+      "correctAnswer": "wraps"
+    },
+    {
+      "slideId": "PY_206_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorators with Arguments",
+      "prompt": "How do you pass custom arguments to a decorator itself (e.g., @repeat(num_times=3))?",
+      "options": [
+        "Create an additional outer function layer that accepts arguments and returns the actual decorator function",
+        "Pass arguments directly into the wrapper function declaration",
+        "Use the @functools.args decorator modifier",
+        "Pass arguments via global variables only"
+      ],
+      "correctAnswer": "Create an additional outer function layer that accepts arguments and returns the actual decorator function"
+    },
+    {
+      "slideId": "PY_206_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Flexible Wrapper Arguments",
+      "prompt": "Fill in the standard parameter pattern used by wrapper functions to accept any number of positional arguments.",
+      "codeSnippet": "def wrapper(___args, **kwargs):\n    return func(*args, **kwargs)",
+      "options": ["*", "**", "&", "..."],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "PY_206_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Class Decorators",
+      "prompt": "Which dunder method must a class implement so that instances of the class can be used as function decorators?",
+      "options": [
+        "__call__",
+        "__init__",
+        "__exec__",
+        "__run__"
+      ],
+      "correctAnswer": "__call__"
+    }
+  ]
+}

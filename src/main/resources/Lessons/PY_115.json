@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_115",
+  "title": "Modules & Packages (PYTH_115_S1 to PYTH_115_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_115_S1",
+      "type": "CONCEPT",
+      "title": "Modules and Imports",
+      "prompt": "Organize code into reusable modules and import functionality using import statements.",
+      "codeSnippet": "import math\nfrom datetime import datetime\nprint(math.sqrt(16)) # 4.0"
+    },
+    {
+      "slideId": "PYTH_115_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Import Statement",
+      "prompt": "Fill in the keyword to load the built-in random module.",
+      "codeSnippet": "___ random\nnum = random.randint(1, 10)",
+      "options": ["import", "include", "require", "use"],
+      "correctAnswer": "import"
+    },
+    {
+      "slideId": "PYTH_115_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "From Import Syntax",
+      "prompt": "How do you import only the 'pi' constant from the 'math' module?",
+      "options": [
+        "from math import pi",
+        "import pi from math",
+        "using math.pi",
+        "include math(pi)"
+      ],
+      "correctAnswer": "from math import pi"
+    },
+    {
+      "slideId": "PYTH_115_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Module Aliasing",
+      "prompt": "Fill in the keyword used to create a module alias (e.g. import pandas as pd).",
+      "codeSnippet": "import math ___ m",
+      "options": ["as", "alias", "to", "named"],
+      "correctAnswer": "as"
+    },
+    {
+      "slideId": "PYTH_115_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Package Marker File",
+      "prompt": "Which special file historically marks a directory as a Python package?",
+      "options": ["__init__.py", "__main__.py", "setup.py", "package.json"],
+      "correctAnswer": "__init__.py"
+    },
+    {
+      "slideId": "PYTH_115_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Main Module Guard",
+      "prompt": "Fill in the special variable name used to check if a script is executed directly.",
+      "codeSnippet": "if ___name___ == \"__main__\":\n    main()",
+      "options": ["__name__", "name", "_name_", "__main__"],
+      "correctAnswer": "__name__"
+    },
+    {
+      "slideId": "PYTH_115_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Standard Library",
+      "prompt": "Which of the following is part of the Python Standard Library (no pip install required)?",
+      "options": ["json", "requests", "numpy", "django"],
+      "correctAnswer": "json"
+    }
+  ]
+}

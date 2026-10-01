@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_289",
+  "title": "Module Review Quiz: Advanced Type Hinting & Static Analysis",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_289_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Type Annotations & Static Analysis",
+      "prompt": "Review Python typing module features including `Union`, `Optional`, `Callable`, `Generic`, `TypeVar`, and protocols.",
+      "codeSnippet": "from typing import TypeVar, Generic\nT = TypeVar('T')\nclass Stack(Generic[T]): pass"
+    },
+    {
+      "slideId": "PYTH_289_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Optional Type Syntax",
+      "prompt": "Fill in the typing construct equivalent to `Union[str, None]`.",
+      "codeSnippet": "def greet(name: ___[str]):",
+      "options": ["Optional", "Nullable", "Union", "Any"],
+      "correctAnswer": "Optional"
+    },
+    {
+      "slideId": "PYTH_289_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Variable Declaration",
+      "prompt": "Which typing function creates a generic type variable `T`?",
+      "options": ["TypeVar('T')", "Generic('T')", "NewType('T')", "Var('T')"],
+      "correctAnswer": "TypeVar('T')"
+    },
+    {
+      "slideId": "PYTH_289_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Signature Annotation",
+      "prompt": "Fill in the typing symbol used to indicate function return type.",
+      "codeSnippet": "def add(a: int, b: int) ___ int:",
+      "options": ["->", ":", "=>", "return"],
+      "correctAnswer": "->"
+    },
+    {
+      "slideId": "PYTH_289_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Structural Subtyping Protocol",
+      "prompt": "Which class in `typing` allows static type checkers to support duck-typing (structural subtyping)?",
+      "options": ["Protocol", "ABC", "Interface", "Structure"],
+      "correctAnswer": "Protocol"
+    },
+    {
+      "slideId": "PYTH_289_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Callable Annotation",
+      "prompt": "Fill in the type used to annotate a function parameter that accepts another function.",
+      "codeSnippet": "from typing import ___\ndef apply(fn: Callable[[int], str]):",
+      "options": ["Callable", "Function", "Callback", "Handler"],
+      "correctAnswer": "Callable"
+    },
+    {
+      "slideId": "PYTH_289_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static Analysis Tool",
+      "prompt": "Which tool is commonly used in Python ecosystem for static type checking?",
+      "options": ["mypy", "pytest", "pip", "virtualenv"],
+      "correctAnswer": "mypy"
+    }
+  ]
+}

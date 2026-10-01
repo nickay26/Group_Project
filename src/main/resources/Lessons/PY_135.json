@@ -1,0 +1,74 @@
+{
+  "lessonId": "PYTH_135",
+  "title": "Web Scraping with BeautifulSoup (PYTH_131 to PYTH_140) (PYTH_135_S1 to PYTH_135_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_135_S1",
+      "type": "CONCEPT",
+      "title": "HTML Parsing",
+      "prompt": "BeautifulSoup parses HTML documents to extract web data efficiently.",
+      "codeSnippet": "from bs4 import BeautifulSoup\nsoup = BeautifulSoup('<h1>Title</h1>', 'html.parser')\nprint(soup.h1.text)"
+    },
+    {
+      "slideId": "PYTH_135_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "BeautifulSoup Import",
+      "prompt": "Fill in the module from which BeautifulSoup is imported.",
+      "codeSnippet": "from ___ import BeautifulSoup",
+      "options": ["bs4", "bs", "beautifulsoup", "scraper"],
+      "correctAnswer": "bs4"
+    },
+    {
+      "slideId": "PYTH_135_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Finding Single Element",
+      "prompt": "Which method returns the first matching HTML element tag?",
+      "options": ["soup.find()", "soup.find_all()", "soup.get()", "soup.select_one()"],
+      "correctAnswer": "soup.find()"
+    },
+    {
+      "slideId": "PYTH_135_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Finding All Elements",
+      "prompt": "Fill in the method returning a list of all matching HTML tags.",
+      "codeSnippet": "tags = soup.___ ('a')",
+      "options": ["find_all", "find_every", "get_all", "select_all"],
+      "correctAnswer": "find_all"
+    },
+    {
+      "slideId": "PYTH_135_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CSS Selector Support",
+      "prompt": "Which method enables querying HTML using standard CSS selectors?",
+      "options": ["soup.select()", "soup.query()", "soup.css()", "soup.filter()"],
+      "correctAnswer": "soup.select()"
+    },
+    {
+      "slideId": "PYTH_135_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Extracting Attributes",
+      "prompt": "Fill in the dictionary syntax to extract an HTML tag attribute value.",
+      "codeSnippet": "link = tag.___ ['href']",
+      "options": ["['href']", ".href", ".get_attr('href')", "('href')"],
+      "correctAnswer": "['href']"
+    },
+    {
+      "slideId": "PYTH_135_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Extracting Inner Text",
+      "prompt": "Which property retrieves the plain text inside an HTML element tag?",
+      "options": [".text", ".inner_html", ".string_content", ".val"],
+      "correctAnswer": ".text"
+    },
+    {
+      "slideId": "PYTH_135_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Parser Argument",
+      "prompt": "Fill in the default HTML parser passed to BeautifulSoup.",
+      "codeSnippet": "soup = BeautifulSoup(html, '___')",
+      "options": ["html.parser", "lxml", "html5lib", "xml"],
+      "correctAnswer": "html.parser"
+    }
+  ]
+}

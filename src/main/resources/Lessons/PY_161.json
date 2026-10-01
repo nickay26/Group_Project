@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_161",
+  "title": "Observability, Telemetry & OpenTelemetry (PYTH_161_S1 to PYTH_161_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_161_S1",
+      "type": "CONCEPT",
+      "title": "OpenTelemetry Instrumentation",
+      "prompt": "Observability relies on Traces, Metrics, and Logs to monitor microservice health and performance.",
+      "codeSnippet": "from opentelemetry import trace\ntracer = trace.get_tracer(__name__)\n\nwith tracer.start_as_current_span('process_request'):\n    pass"
+    },
+    {
+      "slideId": "PYTH_161_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Tracing Context Spans",
+      "prompt": "Fill in the OpenTelemetry method used to create a trace context block for operational measurement.",
+      "codeSnippet": "with tracer.___('db_query'):\n    execute_sql()",
+      "options": ["start_as_current_span", "create_span", "trace_block", "begin_trace"],
+      "correctAnswer": "start_as_current_span"
+    },
+    {
+      "slideId": "PYTH_161_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Prometheus Metrics Types",
+      "prompt": "Which Prometheus metric type is ideal for measuring memory usage or current active worker threads?",
+      "options": ["Gauge", "Counter", "Histogram", "Summary"],
+      "correctAnswer": "Gauge"
+    },
+    {
+      "slideId": "PYTH_161_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Structured JSON Logging",
+      "prompt": "Fill in the library function or component used to format Python logs as JSON objects for collection.",
+      "codeSnippet": "import structlog\nlogger = structlog.___()",
+      "options": ["get_logger", "create_formatter", "json_logger", "build"],
+      "correctAnswer": "get_logger"
+    },
+    {
+      "slideId": "PYTH_161_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Distributed Trace Propagation",
+      "prompt": "How is distributed context propagated across HTTP network calls between microservices?",
+      "options": [
+        "Via traceparent HTTP headers (W3C Trace Context standard)",
+        "By passing database primary key IDs in JSON bodies",
+        "Through shared file system logs",
+        "By appending URL query strings manually"
+      ],
+      "correctAnswer": "Via traceparent HTTP headers (W3C Trace Context standard)"
+    },
+    {
+      "slideId": "PYTH_161_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Prometheus Histogram Buckets",
+      "prompt": "Fill in the metric type used to measure latency distribution across configurable duration buckets.",
+      "codeSnippet": "latency = ___('http_request_duration_seconds', 'Latency')",
+      "options": ["Histogram", "Counter", "Gauge", "Summary"],
+      "correctAnswer": "Histogram"
+    },
+    {
+      "slideId": "PYTH_161_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Log Aggregation Platforms",
+      "prompt": "Which stack component is commonly used to collect and search application logs centrally?",
+      "options": [
+        "Grafana Loki / ELK Stack",
+        "PostgreSQL / MySQL",
+        "Docker Swarm",
+        "Nginx Gateway"
+      ],
+      "correctAnswer": "Grafana Loki / ELK Stack"
+    },
+    {
+      "slideId": "PYTH_161_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Tracing Span Attributes",
+      "prompt": "Fill in the span method used to attach key-value metadata (e.g., user_id) to an active trace.",
+      "codeSnippet": "span.___('user_id', 42)",
+      "options": ["set_attribute", "add_meta", "attach", "tag"],
+      "correctAnswer": "set_attribute"
+    }
+  ]
+}
