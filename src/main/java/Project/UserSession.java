@@ -82,13 +82,10 @@ public class UserSession {
     // အသစ်ထည့်တဲ့ Method များ (Premium Status)
     // ==========================================
 
-    public static boolean isPremium() {
-        if (currentUser == null) {
-            return false;
-        }
-        return PremiumService.isPremium(currentUser.getUserId());
+    // ⭐ ဒါကို ထည့် (UserSession မှာ updateUser method မရှိသေးရင်)
+    public static void updateUser(User user) {
+        currentUser = user;
     }
-
     // ==========================================
     // အသစ်ထည့်တဲ့ Method (Clean Session)
     // ==========================================

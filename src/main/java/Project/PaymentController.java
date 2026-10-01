@@ -127,6 +127,16 @@ public class PaymentController {
             if (success) {
                 DatabaseManager.savePaymentScreenshot(userId, newFileName, selectedMethod, amount);
 
+                // ⭐ Local user object update
+                User user = UserSession.getCurrentUser();
+                PremiumService.activatePremium(user, planType);
+                UserSession.updateUser(user);
+
+                // ⭐ Header refresh (∞ ပေါ်လာမယ်)
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().updateHeaderStats();
+                }
+
                 showAlert("Success",
                         "Payment Verified!\n" +
                                 "Method: " + selectedMethod + "\n" +
@@ -136,6 +146,7 @@ public class PaymentController {
                 if (mainLayout != null) {
                     mainLayout.loadPage("PlaygroundDashboardView.fxml");
                 }
+
             } else {
                 showAlert("Error", "Premium activation failed.");
             }

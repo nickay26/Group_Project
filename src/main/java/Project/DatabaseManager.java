@@ -343,7 +343,6 @@ public class DatabaseManager {
         return "";
     }
 
-    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
     private static User mapJsonToUser(JSONObject obj) {
         int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
         String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
@@ -354,7 +353,13 @@ public class DatabaseManager {
         int coin = obj.optInt("coin", obj.optInt("Coin", 0));
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+
+        // ⭐ Premium fields ထည့်
+        user.setPremium(obj.optBoolean("is_premium", false));
+        user.setSubscriptionType(obj.optString("subscription_type", "free"));
+
+        return user;
     }
     // ==========================================
 // 4. PREMIUM & PAYMENT
@@ -419,6 +424,26 @@ public class DatabaseManager {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return response.statusCode() == 200 || response.statusCode() == 201;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static boolean updateBrainCount(int userId, int newCount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("brain_count", newCount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
         }

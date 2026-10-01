@@ -68,8 +68,27 @@ public class MainLayoutController {
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
+            // ===== 🔍 DEBUG =====
+            System.out.println("=== HEADER DEBUG ===");
+            System.out.println("User ID: " + currentUser.getUserId());
+            System.out.println("isPremium (local): " + currentUser.isPremium());
+            System.out.println("subscriptionType: " + currentUser.getSubscriptionType());
+            System.out.println("brainCount: " + currentUser.getBrainCount());
+            System.out.println("brainDisplay: " + PremiumService.getBrainDisplay(currentUser));
+            System.out.println("====================");
+            // ====================
+
             topStreakLabel.setText(" " + currentUser.getStreak());
-            topBrainLabel.setText(" " + currentUser.getBrainCount());
+
+            String brainDisplay = PremiumService.getBrainDisplay(currentUser);
+            topBrainLabel.setText(" " + brainDisplay);
+
+            if (PremiumService.isPremium(currentUser)) {
+                topBrainLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-weight: bold;");
+            } else {
+                topBrainLabel.setStyle("-fx-text-fill: white;");
+            }
+
             topCoinLabel.setText(" " + currentUser.getCoin());
         }
     }

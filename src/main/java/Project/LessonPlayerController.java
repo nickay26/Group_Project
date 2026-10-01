@@ -85,6 +85,14 @@ public class LessonPlayerController {
     private void renderCurrentSlide() {
         if (slides == null || currentSlideIndex >= slides.length()) {
             if (currentLesson != null) {
+                User user = UserSession.getCurrentUser();
+
+                // ⭐ 1. Brain ရှိ/မရှိ အရင်စစ်
+                if (!PremiumService.canUseBrain(user)) {
+                    showBrainLimitDialog();
+                    return;  // Lesson မပြီးမြောက်စေရ — LearnPage ကို မသွား
+                }
+
                 int userId = UserSession.getUserId();
                 String courseId = UserSession.getActiveCourseId();
 
@@ -94,6 +102,15 @@ public class LessonPlayerController {
                         currentLesson.getLessonOrder(),
                         currentLesson.getXp()
                 );
+
+                // ⭐ 2. Brain လျှော့ (Premium ဆိုရင် မလျှော့)
+                PremiumService.consumeBrain(user);
+                UserSession.updateUser(user);
+
+                // ⭐ 3. Header ကို refresh (∞/5 update ဖြစ်အောင်)
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().updateHeaderStats();
+                }
             }
 
             if (MainLayoutController.getInstance() != null) {
@@ -102,6 +119,7 @@ public class LessonPlayerController {
             return;
         }
 
+        // ===== ဒီအောက်ပိုင်း မူလအတိုင်း — ဘာမှ မပြင်ရ =====
         selectedAnswer = null;
         isAnswerChecked = false;
 
@@ -179,7 +197,6 @@ public class LessonPlayerController {
                     selectedAnswer = optionText;
                     continueBtn.setDisable(false);
 
-                    // Reset styling on all option buttons
                     for (Node node : optionsBox.getChildren()) {
                         if (node instanceof Button) {
                             Button btn = (Button) node;
@@ -189,7 +206,6 @@ public class LessonPlayerController {
                             }
                         }
                     }
-                    // Apply selected class to the clicked button
                     optionBtn.getStyleClass().add("option-button-selected");
                 });
 
@@ -312,5 +328,35 @@ public class LessonPlayerController {
         Label errorLabel = new Label(message);
         errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 16px; -fx-font-weight: bold;");
         cardContainer.getChildren().add(errorLabel);
+    }
+    private void showBrainLimitDialog() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                javafx.scene.control.Alert.AlertType.WARNING);
+        alert.setTitle("Brain Limit Reached");
+        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
+        alert.setContentText(
+                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
+                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
+        );
+
+        javafx.scene.control.ButtonType upgradeBtn =
+                new javafx.scene.control.ButtonType("Upgrade",
+                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
+        javafx.scene.control.ButtonType cancelBtn =
+                new javafx.scene.control.ButtonType("Cancel",
+                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().handlePremium();
+            } else {
+                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+                }
+            }
+        });
     }
 }
