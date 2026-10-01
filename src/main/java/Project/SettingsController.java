@@ -442,16 +442,34 @@ public class SettingsController {
     @FXML
     private void handleUpgradePlan() {
         try {
-            // Settings content ကို ဖျောက်
             settingsScrollPane.setVisible(false);
             settingsScrollPane.setManaged(false);
 
-            // PremiumView ကို load
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PremiumView.fxml"));
             Parent premiumView = loader.load();
-            StackPane.setAlignment(premiumView, javafx.geometry.Pos.TOP_LEFT);
-            // Center ထဲ ထည့်
-            centerContainer.getChildren().add(premiumView);
+            Label titleLabel = (Label) premiumView.lookup(".main-title");
+            if (titleLabel != null) {
+                titleLabel.setStyle(
+                        "-fx-text-fill: #1E293B; " +     // အမဲရောင်
+                                "-fx-font-size: 42px; " +        // ကြီး
+                                "-fx-font-weight: bold;"
+                );
+            }
+            Label subTitle = (Label) premiumView.lookup(".sub-title");
+            if (subTitle != null) {
+                subTitle.setStyle(
+                        "-fx-text-fill: #64748B; " +
+                                "-fx-font-size: 16px;"
+                );
+            }
+            // ✅ PremiumView ကို ScrollPane အသစ်ထဲ ထည့်
+            ScrollPane premiumScroll = new ScrollPane(premiumView);
+            premiumScroll.setFitToWidth(true);
+            premiumScroll.setFitToHeight(true);
+            premiumScroll.setStyle("-fx-background-color: transparent;");
+
+            StackPane.setAlignment(premiumScroll, Pos.TOP_LEFT);
+            centerContainer.getChildren().add(premiumScroll);
 
         } catch (IOException e) {
             e.printStackTrace();
