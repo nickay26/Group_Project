@@ -44,7 +44,7 @@ public class UserSession {
         return instance;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
@@ -75,6 +75,27 @@ public class UserSession {
         currentUser = null;
         activeCourseId = null;
         isRedirectedFromOverview = false;
+        instance = null;
+    }
+
+    // ==========================================
+    // အသစ်ထည့်တဲ့ Method များ (Premium Status)
+    // ==========================================
+
+    public static boolean isPremium() {
+        if (currentUser == null) {
+            return false;
+        }
+        return PremiumService.isPremium(currentUser.getUserId());
+    }
+
+    // ==========================================
+    // အသစ်ထည့်တဲ့ Method (Clean Session)
+    // ==========================================
+
+    public static void cleanSession() {
+        currentUser = null;
+        activeCourseId = null;
         instance = null;
     }
 }

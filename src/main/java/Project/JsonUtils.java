@@ -109,17 +109,46 @@ public class JsonUtils {
 
 
     // ============================================
-    // ✅ အသစ် — PRACTICE QUESTIONS JSON
+    // PRACTICE QUESTIONS JSON — LANGUAGE FILES
     // ============================================
-    private static final String PRACTICE_PATH = "data/questions.json";
 
-    // LOAD ALL
+    // ✅ Language → File Path
+    private static String getFilePath(String language) {
+        if (language == null) return "data/python.json";
+
+        switch (language.toLowerCase()) {
+            case "java":   return "data/java.json";
+            case "c++":
+            case "cpp":    return "data/cpp.json";
+            case "python":
+            default:       return "data/python.json";
+        }
+    }
+
+    // ✅ LOAD ALL — Language အားလုံး
     public static List<QuestionData> loadPracticeQuestions() {
+        List<QuestionData> all = new ArrayList<>();
+        all.addAll(loadFromFile("data/python.json"));
+        all.addAll(loadFromFile("data/java.json"));
+        all.addAll(loadFromFile("data/cpp.json"));
+        return all;
+    }
+
+    // ✅ LOAD BY LANGUAGE
+    public static List<QuestionData> loadPracticeQuestionsByLanguage(String language) {
+        if (language == null || language.isEmpty()) {
+            return loadPracticeQuestions();
+        }
+        return loadFromFile(getFilePath(language));
+    }
+
+    // ✅ LOAD FROM FILE
+    private static List<QuestionData> loadFromFile(String path) {
         List<QuestionData> questions = new ArrayList<>();
-        File file = new File(PRACTICE_PATH);
+        File file = new File(path);
 
         if (!file.exists()) {
-            System.out.println("questions.json not found. Creating empty file...");
+            System.out.println(path + " not found. Creating empty file...");
             try {
                 file.getParentFile().mkdirs();
                 try (FileWriter w = new FileWriter(file)) {
@@ -176,68 +205,108 @@ public class JsonUtils {
                 ));
             }
 
-            System.out.println("✅ Loaded " + questions.size() + " practice questions");
+            System.out.println("✅ Loaded " + questions.size() + " from " + path);
 
         } catch (Exception e) {
-            System.err.println("❌ Error loading practice questions: " + e.getMessage());
+            System.err.println("❌ Error loading: " + e.getMessage());
             e.printStackTrace();
         }
 
         return questions;
     }
 
-    // SAVE (add new)
+    // ============================================
+    // SAVE (add new) — Language အလိုက် ဖိုင်
+    // ============================================
     public static boolean savePracticeQuestion(QuestionData q) {
-        List<QuestionData> all = loadPracticeQuestions();
+        String path = getFilePath(q.getLanguage());
+        List<QuestionData> all = loadFromFile(path);
         all.add(q);
-        return saveAllPracticeQuestions(all);
+        return saveAllToFile(all, path);
     }
 
-    // UPDATE
+    // ============================================
+    // UPDATE — Language အလိုက် ဖိုင်
+    // ============================================
     public static boolean updatePracticeQuestion(String language, String oldTitle, QuestionData newQ) {
-        List<QuestionData> all = loadPracticeQuestions();
+        String path = getFilePath(language);
+        List<QuestionData> all = loadFromFile(path);
+
         for (int i = 0; i < all.size(); i++) {
             QuestionData q = all.get(i);
             if (q.getLanguage().equalsIgnoreCase(language) && q.getTitle().equals(oldTitle)) {
                 all.set(i, newQ);
-                return saveAllPracticeQuestions(all);
+                return saveAllToFile(all, path);
             }
         }
         return false;
     }
 
-    // DELETE
+    // ============================================
+    // DELETE — Language အလိုက် ဖိုင်
+    // ============================================
     public static boolean deletePracticeQuestion(String language, String title) {
-        List<QuestionData> all = loadPracticeQuestions();
+        String path = getFilePath(language);
+        List<QuestionData> all = loadFromFile(path);
+
         boolean removed = all.removeIf(q ->
                 q.getLanguage().equalsIgnoreCase(language) && q.getTitle().equals(title));
+
         if (removed) {
-            return saveAllPracticeQuestions(all);
+            return saveAllToFile(all, path);
         }
         return false;
     }
 
+    // ============================================
     // GET BY LANGUAGE
+    // ============================================
     public static List<QuestionData> getPracticeByLanguage(String language) {
-        List<QuestionData> result = new ArrayList<>();
-        for (QuestionData q : loadPracticeQuestions()) {
-            if (q.getLanguage().equalsIgnoreCase(language)) result.add(q);
-        }
-        return result;
+        return loadPracticeQuestionsByLanguage(language);
     }
 
-    // GET BY TITLE
+    // ============================================
+    // GET BY TITLE (Language + Title)
+    // ============================================
     public static QuestionData getPracticeByTitle(String language, String title) {
-        for (QuestionData q : loadPracticeQuestions()) {
-            if (q.getLanguage().equalsIgnoreCase(language) && q.getTitle().equals(title)) {
+        for (QuestionData q : loadPracticeQuestionsByLanguage(language)) {
+            if (q.getLanguage().equalsIgnoreCase(language) &&
+                    q.getTitle().equals(title)) {
                 return q;
             }
         }
         return null;
     }
 
-    // SAVE ALL
-    private static boolean saveAllPracticeQuestions(List<QuestionData> questions) {
+    // ============================================
+    // GET BY TYPE (Language + QuestionType)
+    // ============================================
+    public static QuestionData getPracticeByType(String language, String type) {
+        for (QuestionData q : loadPracticeQuestionsByLanguage(language)) {
+            if (q.getLanguage().equalsIgnoreCase(language) &&
+                    q.getQuestionType().equalsIgnoreCase(type)) {
+                return q;
+            }
+        }
+        return null;
+    }
+
+    // List အနေနဲ့ ပြန်ချင်ရင်
+    public static List<QuestionData> getPracticeListByType(String language, String type) {
+        List<QuestionData> result = new ArrayList<>();
+        for (QuestionData q : loadPracticeQuestionsByLanguage(language)) {
+            if (q.getLanguage().equalsIgnoreCase(language) &&
+                    q.getQuestionType().equalsIgnoreCase(type)) {
+                result.add(q);
+            }
+        }
+        return result;
+    }
+
+    // ============================================
+    // SAVE ALL TO FILE
+    // ============================================
+    private static boolean saveAllToFile(List<QuestionData> questions, String path) {
         try {
             org.json.JSONArray array = new org.json.JSONArray();
 
@@ -258,14 +327,14 @@ public class JsonUtils {
                 array.put(obj);
             }
 
-            File file = new File(PRACTICE_PATH);
+            File file = new File(path);
             file.getParentFile().mkdirs();
 
             try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8)) {
                 writer.write(array.toString(2));
             }
 
-            System.out.println("✅ Saved " + questions.size() + " practice questions");
+            System.out.println("✅ Saved " + questions.size() + " to " + path);
             return true;
 
         } catch (Exception e) {
@@ -274,30 +343,30 @@ public class JsonUtils {
             return false;
         }
     }
-    // saveQuestion → savePracticeQuestion
+
+    // ============================================
+    // ALIAS METHODS
+    // ============================================
     public static boolean saveQuestion(QuestionData q) {
         return savePracticeQuestion(q);
     }
 
-    // updateQuestion → updatePracticeQuestion
     public static boolean updateQuestion(String language, String oldTitle, QuestionData newQ) {
         return updatePracticeQuestion(language, oldTitle, newQ);
     }
-    // deleteQuestion → deletePracticeQuestion
+
     public static boolean deleteQuestion(String language, String title) {
         return deletePracticeQuestion(language, title);
     }
 
-    // getByLanguage → getPracticeByLanguage
     public static List<QuestionData> getByLanguage(String language) {
         return getPracticeByLanguage(language);
     }
-    // getByTitle → getPracticeByTitle
+
     public static QuestionData getByTitle(String language, String title) {
         return getPracticeByTitle(language, title);
     }
 
-    // loadAllQuestions → loadPracticeQuestions
     public static List<QuestionData> loadAllQuestions() {
         return loadPracticeQuestions();
     }

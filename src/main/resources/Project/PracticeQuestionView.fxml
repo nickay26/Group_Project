@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="750.0" prefWidth="1300.0"
+        style="-fx-background-color: #0f172a;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Project.PracticeQuestionController">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12.0"
+              style="-fx-padding: 15 25; -fx-background-color: #1e293b;">
+            <children>
+                <Button onAction="#handleBack" text="← Back"
+                        style="-fx-background-color: rgba(255,255,255,0.1);
+                               -fx-text-fill: white; -fx-background-radius: 6px;
+                               -fx-padding: 8 16; -fx-cursor: hand;" />
+                <Label fx:id="titleLabel" text="Practice"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;
+                              -fx-text-fill: #ffffff;" />
+                <Label fx:id="languageBadge" text="Python"
+                       style="-fx-background-color: #38bdf8; -fx-text-fill: #0f172a;
+                              -fx-background-radius: 12px; -fx-padding: 3 12;
+                              -fx-font-size: 11px; -fx-font-weight: bold;" />
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- ✅ Hint Button -->
+                <Button fx:id="hintBtn" onAction="#handleHint" text="💡 Hint"
+                        style="-fx-background-color: rgba(251,191,36,0.2);
+                               -fx-text-fill: #fbbf24; -fx-background-radius: 6px;
+                               -fx-padding: 8 16; -fx-cursor: hand;
+                               -fx-font-weight: bold;" />
+
+                <!-- ✅ Run Button -->
+                <Button fx:id="runBtn" onAction="#handleRun" text="▶ Run"
+                        style="-fx-background-color: #2563eb; -fx-text-fill: white;
+                               -fx-background-radius: 6px; -fx-padding: 8 20;
+                               -fx-cursor: hand; -fx-font-weight: bold;" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <VBox spacing="0" style="-fx-background-color: #0f172a;">
+
+            <!-- TASK HEADER -->
+            <VBox style="-fx-padding: 20 30 10 30;">
+                <children>
+                    <Label fx:id="taskLabel" text="Complete the task below."
+                           wrapText="true"
+                           style="-fx-font-size: 15px; -fx-text-fill: #ffffff;
+                                  -fx-font-weight: bold;" />
+                </children>
+            </VBox>
+
+            <!-- CODE + OUTPUT -->
+            <HBox spacing="15.0" VBox.vgrow="ALWAYS"
+                  style="-fx-padding: 10 30 15 30;">
+
+                <!-- CODE -->
+                <VBox fx:id="codeSection" HBox.hgrow="ALWAYS" spacing="8.0">
+                    <children>
+                        <Label text="💻 CODE"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold;
+                                      -fx-text-fill: #94a3b8;" />
+                        <TextArea fx:id="codeEditor" VBox.vgrow="ALWAYS"
+                                  style="-fx-font-family: 'Consolas', monospace;
+                                         -fx-font-size: 14px;
+                                         -fx-control-inner-background: #1a2332;
+                                         -fx-text-fill: #e2e8f0;
+                                         -fx-border-color: rgba(56,189,248,0.3);
+                                         -fx-border-radius: 8px;
+                                         -fx-padding: 10;" />
+                    </children>
+                </VBox>
+
+                <!-- BLANK -->
+                <VBox fx:id="blankSection" HBox.hgrow="ALWAYS" spacing="8.0"
+                      visible="false" managed="false">
+                    <children>
+                        <Label text="💻 CODE (Fill in the blanks)"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold;
+                                      -fx-text-fill: #94a3b8;" />
+                        <VBox fx:id="blankArea" spacing="8.0" VBox.vgrow="ALWAYS"
+                              style="-fx-padding: 20;
+                                     -fx-background-color: #1a2332;
+                                     -fx-background-radius: 8px;" />
+                        <javafx.scene.layout.FlowPane fx:id="choiceArea" hgap="10.0" vgap="10.0"
+                                                      style="-fx-padding: 12;
+                                         -fx-background-color: rgba(56,189,248,0.08);
+                                         -fx-background-radius: 8px;" />
+                    </children>
+                </VBox>
+
+                <VBox fx:id="outputSection" HBox.hgrow="ALWAYS" spacing="8.0">
+                    <children>
+                        <Label text="▶ OUTPUT"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold;
+                      -fx-text-fill: #94a3b8;" />
+                        <TextArea fx:id="outputConsole" editable="false"
+                                  VBox.vgrow="ALWAYS"
+                                  style="-fx-font-family: 'Consolas', monospace;
+                         -fx-font-size: 13px;
+                         -fx-control-inner-background: #0f172a;
+                         -fx-text-fill: #4ade80;
+                         -fx-background-color: #0f172a;
+                         -fx-border-color: #38bdf8;
+                         -fx-border-width: 1.5;
+                         -fx-border-radius: 8px;
+                         -fx-background-radius: 8px;
+                         -fx-padding: 10;" />
+                    </children>
+                </VBox>
+
+            </HBox>
+
+            <!-- ✅ BOTTOM BAR — Next / Try Again -->
+            <HBox alignment="CENTER_RIGHT" spacing="10.0"
+                  style="-fx-padding: 10 30 20 30;">
+                <children>
+                    <Label fx:id="feedbackLabel" text=""
+                           style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <!-- ✅ Try Again Button (မှားရင် ပြ) -->
+                    <Button fx:id="tryAgainBtn" onAction="#handleTryAgain"
+                            text="🔄 Try Again" visible="false" managed="false"
+                            style="-fx-background-color: #dc2626; -fx-text-fill: white;
+                                   -fx-background-radius: 6px; -fx-padding: 10 20;
+                                   -fx-cursor: hand; -fx-font-weight: bold;" />
+
+                    <!-- ✅ Next Button (မှန်ရင် ပြ) -->
+                    <Button fx:id="nextBtn" onAction="#handleNext"
+                            text="Next →" visible="false" managed="false"
+                            style="-fx-background-color: #10b981; -fx-text-fill: white;
+                                   -fx-background-radius: 6px; -fx-padding: 10 20;
+                                   -fx-cursor: hand; -fx-font-weight: bold;" />
+                </children>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

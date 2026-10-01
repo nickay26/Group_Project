@@ -1,0 +1,221 @@
+/* ========================================== */
+/* ROOT - Dark Gradient Background */
+/* ========================================== */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #050810, #0A1424, #0F1B30);
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ========================================== */
+/* Main Container */
+/* ========================================== */
+.premium-container {
+    -fx-background-color: transparent;
+    -fx-padding: 50 60 60 60;
+}
+
+/* ========================================== */
+/* Title */
+/* ========================================== */
+.main-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.sub-title {
+    -fx-text-fill: #8B9DAF;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-max-width: 600;
+}
+
+/* ========================================== */
+/* Cards Container */
+/* ========================================== */
+.cards-container {
+    -fx-padding: 30 0 20 0;
+}
+
+/* ========================================== */
+/* Basic Card */
+/* ========================================== */
+.plan-card {
+    -fx-background-color: #0F1620;
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-pref-width: 300;
+    -fx-pref-height: 460;
+    -fx-border-color: #1A2B3C;
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 20, 0, 0, 10);
+}
+
+.plan-card:hover {
+    -fx-border-color: #2A3B4C;
+}
+
+/* ========================================== */
+/* Intermediate Monthly Card (Blue Glow) */
+/* ========================================== */
+.plan-card-pro {
+    -fx-background-color: linear-gradient(to bottom, #1A2B4C, #0F1620);
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-pref-width: 300;
+    -fx-pref-height: 460;
+    -fx-border-color: #4A90E2;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.7), 35, 0, 0, 10);
+}
+
+.plan-card-pro:hover {
+    -fx-border-color: #5AA0F2;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.9), 45, 0, 0, 15);
+}
+
+/* ========================================== */
+/* Intermediate Yearly Card (Purple Glow) */
+/* ========================================== */
+.plan-card-pro-2 {
+    -fx-background-color: linear-gradient(to bottom, #2B1A4C, #0F1620);
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-pref-width: 300;
+    -fx-pref-height: 460;
+    -fx-border-color: #A05AE8;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(160, 90, 232, 0.7), 35, 0, 0, 10);
+}
+
+.plan-card-pro-2:hover {
+    -fx-border-color: #B06AF8;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(three-pass-box, rgba(160, 90, 232, 0.9), 45, 0, 0, 15);
+}
+
+/* ========================================== */
+/* Plan Title */
+/* ========================================== */
+.plan-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.plan-title-pro {
+    -fx-text-fill: #4A90E2;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.plan-title-pro-2 {
+    -fx-text-fill: #A05AE8;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ========================================== */
+/* Plan Price */
+/* ========================================== */
+.plan-price {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+.plan-price-pro {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.plan-duration {
+    -fx-text-fill: #8B9DAF;
+    -fx-font-size: 13px;
+}
+
+/* ========================================== */
+/* Plan Description */
+/* ========================================== */
+.plan-desc {
+    -fx-text-fill: #8B9DAF;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+/* ========================================== */
+/* Buttons */
+/* ========================================== */
+.basic-btn {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #0A0E1A;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-padding: 12;
+    -fx-cursor: hand;
+}
+
+.basic-btn:hover {
+    -fx-background-color: #E0E0E0;
+}
+
+.pro-btn {
+    -fx-background-color: #4A90E2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-padding: 12;
+    -fx-cursor: hand;
+}
+
+.pro-btn:hover {
+    -fx-background-color: #5AA0F2;
+}
+
+.pro-btn-2 {
+    -fx-background-color: #A05AE8;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-padding: 12;
+    -fx-cursor: hand;
+}
+
+.pro-btn-2:hover {
+    -fx-background-color: #B06AF8;
+}
+
+/* ========================================== */
+/* Feature List */
+/* ========================================== */
+.feature-list {
+    -fx-padding: 10 0 0 0;
+}
+
+.feature-item {
+    -fx-text-fill: #C5D5E5;
+    -fx-font-size: 12px;
+}
+/* ========================================== */
+/* Back Button */
+/* ========================================== */
+.back-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20 10 20;
+}
+
+.back-btn:hover {
+    -fx-text-fill: #FFFFFF;
+}

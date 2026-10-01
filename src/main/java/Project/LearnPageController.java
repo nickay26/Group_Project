@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.SVGPath;
@@ -27,7 +24,7 @@ public class LearnPageController {
     private static final double NODE_HEIGHT = 150.0;
     private static final double VERTICAL_SPACING = 200.0;
     private static final double AMPLITUDE = 85.0;
-    private static final double CANVAS_WIDTH = 540.0;
+    private static final double CANVAS_WIDTH = 540.0; // Staggered Card များမညှပ်စေရန် Canvas Width ကို ၅၄၀px သို့ တိုးထားပါသည်
 
     private final Set<String> expandedModules = new HashSet<>();
     private List<Lesson> currentLessons = new ArrayList<>();
@@ -42,8 +39,6 @@ public class LearnPageController {
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().updateCourseTitle();
         }
-
-        // PythonAnywhere REST API မှတစ်ဆင့် Lesson များကို ဆွဲယူခြင်း
         currentLessons = DatabaseManager.getLessonsForCourse(courseId);
 
         if (currentLessons == null || currentLessons.isEmpty()) {
@@ -55,7 +50,7 @@ public class LearnPageController {
         }
 
         // မော်ဂျူးအားလုံးကို စတင်ချိန်တွင် Expand ပြုလုပ်ထားရန်
-        if (expandedModules.isEmpty()) {
+        if (expandedModules.isEmpty() && !currentLessons.isEmpty()) {
             for (Lesson lesson : currentLessons) {
                 expandedModules.add(lesson.getModuleName());
             }
@@ -77,11 +72,14 @@ public class LearnPageController {
         int userId = UserSession.getUserId();
         int completedCount = DatabaseManager.getCompletedLessonCount(userId, UserSession.getActiveCourseId());
 
+        // Module ပေါင်း မည်မျှရှိသည်ကို ရေတွက်ရန် counter
+        int moduleIndex = 0;
+
         for (int i = 0; i < currentLessons.size(); i++) {
             Lesson lesson = currentLessons.get(i);
             String moduleName = lesson.getModuleName();
 
-            // 1. Render Module Banner
+            // 1. Render Module Banner (Staggered Left & Right)
             if (!moduleName.equals(currentModule)) {
                 currentModule = moduleName;
                 boolean isExpanded = expandedModules.contains(currentModule);
@@ -94,15 +92,18 @@ public class LearnPageController {
 
                 double progress = totalInMod > 0 ? (double) completedInMod / totalInMod : 0.0;
 
-                HBox banner = createModuleBanner(currentModule, isExpanded, progress);
+                VBox banner = createModuleBanner(currentModule, isExpanded, progress);
 
-                double bannerWidth = 380.0;
-                double bannerX = (CANVAS_WIDTH - bannerWidth) / 2.0;
+                // မဂ္ဂဇင်း/Roadmap ပုံစံ ဘယ်/ညာ တစ်လှည့်စီ ရွှေ့ပေးခြင်း
+                // စုံကိန်း Module ဆိုလျှင် ဘယ်ဘက် -45px၊ မကိန်း ဆိုလျှင် ညာဘက် +45px
+                double bannerXOffset = (moduleIndex % 2 == 0) ? -60.0 : 60.0;
+                double bannerX = ((CANVAS_WIDTH - 360.0) / 2.0) + bannerXOffset;
 
                 banner.setLayoutX(bannerX);
                 banner.setLayoutY(currentY);
                 roadmapPane.getChildren().add(banner);
 
+                moduleIndex++;
                 currentY += 80.0;
                 previousNode = null; // Reset path connection for new module
             }
@@ -140,40 +141,44 @@ public class LearnPageController {
         roadmapPane.setPrefHeight(currentY + 60.0);
     }
 
-    private HBox createModuleBanner(String moduleTitle, boolean isExpanded, double progress) {
+    private VBox createModuleBanner(String moduleTitle, boolean isExpanded, double progress) {
+        // 1. Module Title Label
         Label label = new Label(moduleTitle);
-        label.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #F8FAFC;");
+        label.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #F8FAFC;");
 
+        // 2. Arrow Indicator Icon
+        Label arrowLabel = new Label(isExpanded ? "▲" : "▼");
+        arrowLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #60A5FA;");
+
+        // 3. Top Row (Title + Arrow အား ဘယ်/ညာ ညှိခြင်း)
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS); // စာသားနှင့် မြှားအကြား ခွဲပေးရန်
+        HBox topRow = new HBox(label, spacer, arrowLabel);
+        topRow.setAlignment(Pos.CENTER_LEFT);
+
+        // 4. Progress Bar (အောက်ဘက်တွင် အပြည့်နေရာယူစေခြင်း)
         ProgressBar progressBar = new ProgressBar(progress);
-        progressBar.setPrefWidth(110);
-        progressBar.setPrefHeight(8);
+        progressBar.setMaxWidth(Double.MAX_VALUE); // Left to Right အပြည့်ဆွဲဆန့်မည်
+        progressBar.setPrefHeight(6);
         progressBar.setStyle("-fx-accent: #3B82F6; -fx-control-inner-background: #0F172A;");
 
-        Label arrowLabel = new Label(isExpanded ? "▲" : "▼");
-        arrowLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #60A5FA;");
-
-        HBox banner = new HBox(14, label, progressBar, arrowLabel);
+        // 5. Main VBox Container (Top Row အောက်တွင် Progress Bar ကို ထားခြင်း)
+        VBox banner = new VBox(8, topRow, progressBar);
         banner.setAlignment(Pos.CENTER);
-        banner.setPadding(new Insets(10, 16, 10, 16));
+        banner.setPadding(new Insets(12, 18, 12, 18));
 
         banner.setPrefWidth(380.0);
         banner.setMinWidth(380.0);
         banner.setMaxWidth(380.0);
-        banner.setMaxHeight(50.0);
 
         banner.setStyle(
                 "-fx-background-color: #1E293B; " +
                         "-fx-border-color: #3B82F6; " +
                         "-fx-border-width: 1.5px; " +
-                        "-fx-background-radius: 20px; " +
-                        "-fx-border-radius: 20px; " +
+                        "-fx-background-radius: 16px; " +
+                        "-fx-border-radius: 16px; " +
                         "-fx-cursor: hand;"
         );
-
-        DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.web("#2563EB", 0.35));
-        shadow.setRadius(12);
-        banner.setEffect(shadow);
 
         banner.setOnMouseClicked(e -> {
             if (expandedModules.contains(moduleTitle)) {

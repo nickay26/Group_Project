@@ -1,0 +1,74 @@
+{
+  "lessonId": "JAVA_269_Mquiz",
+  "title": "Module Quiz - Method Reference",
+  "slides": [
+    {
+      "slideId": "JAVA_269_Mquiz_S1",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference Syntax",
+      "prompt": "What is the syntax of a method reference?",
+      "options": ["ClassName::methodName", "ClassName->methodName", "ClassName.methodName", "ClassName=>methodName"],
+      "correctAnswer": "ClassName::methodName"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Method Reference",
+      "prompt": "Complete the method reference.",
+      "codeSnippet": "list.forEach(System.out::______);",
+      "options": ["println", "print", "write", "output"],
+      "correctAnswer": "println"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S3",
+      "type": "CODE_OUTPUT",
+      "title": "Method Reference Output",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<String> list = Arrays.asList(\"Java\", \"Python\");\nlist.forEach(System.out::println);",
+      "options": ["Java and Python (separate lines)", "JavaPython", "Java, Python", "Error"],
+      "correctAnswer": "Java and Python (separate lines)"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ForEach Method",
+      "prompt": "Which method accepts a method reference?",
+      "options": ["forEach()", "forLoop()", "each()", "loop()"],
+      "correctAnswer": "forEach()"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Method Reference Symbol",
+      "prompt": "Complete the method reference syntax.",
+      "codeSnippet": "ClassName____methodName",
+      "options": ["::", "->", ".", "=>"],
+      "correctAnswer": "::"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S6",
+      "type": "CODE_OUTPUT",
+      "title": "Method Reference Integer",
+      "prompt": "What is the output?",
+      "codeSnippet": "List<Integer> list = Arrays.asList(1, 2, 3);\nlist.forEach(System.out::println);",
+      "options": ["1 2 3 (separate lines)", "123", "1, 2, 3", "Error"],
+      "correctAnswer": "1 2 3 (separate lines)"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Method Reference Benefit",
+      "prompt": "What is the benefit of method references?",
+      "options": ["Less code", "More code", "Slower code", "More errors"],
+      "correctAnswer": "Less code"
+    },
+    {
+      "slideId": "JAVA_269_Mquiz_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Println Reference",
+      "prompt": "What does System.out::println do?",
+      "options": ["Prints each element", "Sorts elements", "Deletes elements", "Adds elements"],
+      "correctAnswer": "Prints each element"
+    }
+  ]
+}

@@ -2,9 +2,12 @@ package Project;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -19,12 +22,19 @@ public class MainLayoutController {
     @FXML private StackPane contentArea;
     @FXML private Label currentCourseLabel;
 
+    @FXML private Label topStreakLabel;
+    @FXML private Label topBrainLabel;
+    @FXML private Label topCoinLabel;
+
     @FXML private Button learnBtn;
     @FXML private Button coursesBtn;
     @FXML private Button playgroundBtn;
     @FXML private Button leaderboardBtn;
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
+    @FXML private Button profileBtn;
+    private ContextMenu profileMenu;
+    @FXML private Button premiumBtn;
 
     private List<Button> navButtons;
 
@@ -33,7 +43,8 @@ public class MainLayoutController {
         instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
-        // Active Course Title ကို Update လုပ်မည်
+        // Automatically fetch and display active course title
+        updateHeaderStats();
         updateCourseTitle();
 
         // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
@@ -54,6 +65,15 @@ public class MainLayoutController {
         }
     }
 
+    public void updateHeaderStats() {
+        User currentUser = UserSession.getCurrentUser();
+        if (currentUser != null) {
+            topStreakLabel.setText(" " + currentUser.getStreak());
+            topBrainLabel.setText(" " + currentUser.getBrainCount());
+            topCoinLabel.setText(" " + currentUser.getCoin());
+        }
+    }
+
     public void updateCourseTitle() {
         String activeCourseId = UserSession.getActiveCourseId();
         int userId = UserSession.getUserId();
@@ -71,35 +91,151 @@ public class MainLayoutController {
         }
         setCourseTitle("No Active Course");
     }
+    // ============================================
+// LOAD PRACTICE QUESTION (Sidebar ထဲ)
+// ============================================
+    public void loadPracticeQuestion(String language, String type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
+            Parent view = loader.load();
 
+            // Controller ကို ယူ
+            PracticeQuestionController controller = loader.getController();
+
+            // Question ဆွဲ
+            List<QuestionData> list = JsonUtils.getPracticeListByType(language, type);
+            QuestionData question;
+
+            if (list.isEmpty()) {
+                question = new QuestionData(
+                        language, type,
+                        "Complete the task below.",
+                        "Write code to solve this problem.",
+                        getStarterCode(language),
+                        "", "Think step by step.", "",
+                        null, null, "write-code", "console"
+                );
+            } else {
+                java.util.Random rand = new java.util.Random();
+                question = list.get(rand.nextInt(list.size()));
+            }
+
+            controller.setQuestion(question);
+
+            // ✅ contentArea ထဲ ထည့် (Sidebar မပျောက်)
+            contentArea.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Starter Code Helper
+    private String getStarterCode(String language) {
+        switch (language) {
+            case "Java":
+                return "public class Main {\n" +
+                        "    public static void main(String[] args) {\n" +
+                        "        // Write your code here\n" +
+                        "    }\n" +
+                        "}";
+            case "C++":
+                return "#include <iostream>\nusing namespace std;\n\n" +
+                        "int main() {\n" +
+                        "    // Write your code here\n" +
+                        "    return 0;\n" +
+                        "}";
+            case "Python":
+                return "# Write your Python code here\n";
+            default:
+                return "";
+        }
+    }
     @FXML
     public void handleNavLearn() {
+        setActiveButton(learnBtn);
         loadPage("LearnPage.fxml");
     }
 
     @FXML
     public void handleNavCourses() {
+        setActiveButton(coursesBtn);
         loadPage("CoursePage.fxml");
     }
 
     @FXML
     public void handleNavPlayground() {
+        setActiveButton(playgroundBtn);
         loadPage("PlaygroundDashboardView.fxml");
     }
 
     @FXML
     public void handleLeaderBoard() {
+        setActiveButton(leaderboardBtn);
         loadPage("LeaderboardView.fxml");
     }
 
     @FXML
     public void handleNavPractice() {
+        setActiveButton(practiceBtn);
         loadPage("PracticeView.fxml");
+    }
+    @FXML
+    private void handleGame() {
+        setActiveButton(gamesBtn);
+        loadPage("GameModeView.fxml");
+    }
+    @FXML
+    private void handleProfileClick() {
+        if (profileMenu == null) {
+            profileMenu = new ContextMenu();
+
+            MenuItem editProfileItem = new MenuItem("Edit profile");
+            MenuItem settingsItem = new MenuItem("Settings");
+            MenuItem helpItem = new MenuItem("Help");
+            MenuItem logoutItem = new MenuItem("Log out");
+
+            // Event Handlers
+            editProfileItem.setOnAction(e -> handleEditProfile());
+            settingsItem.setOnAction(e -> handleSettings());
+            helpItem.setOnAction(e -> handleHelp());
+            logoutItem.setOnAction(e -> handleLogout());
+
+            profileMenu.getItems().addAll(editProfileItem, settingsItem, helpItem, logoutItem);
+        }
+
+        // Dropdown Menu ဖွင့်/ပိတ် ပြုလုပ်ခြင်း
+        if (profileMenu.isShowing()) {
+            profileMenu.hide();
+        } else {
+            profileMenu.show(profileBtn, Side.BOTTOM, -30, 8);
+        }
+    }
+
+    private void handleEditProfile() {
+        loadPage("ProfileView.fxml");
+    }
+
+    private void handleSettings() {
+        loadPage("SettingsView.fxml");
+    }
+
+    private void handleHelp() {
+        loadPage("HelpView.fxml");
     }
 
     @FXML
-    public void handleNavGames() {
-        loadPage("GamesView.fxml");
+    public void handlePremium() {
+        // Premium Page ကို content area ထဲမှာ Load လုပ်
+        loadPage("PremiumView.fxml");
+    }
+
+
+    private void handleLogout() {
+        // Session clear ပြုလုပ်ခြင်း
+        UserSession.clearSession();
+        SceneManager.switchScene("WelcomeView.fxml");
     }
 
     public FXMLLoader loadPage(String fxmlFileName) {

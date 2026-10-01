@@ -22,12 +22,49 @@ public class PlaygroundDashboardController {
     @FXML private VBox createModal;
     @FXML private TextField titleInput;
     @FXML private ComboBox<String> languageSelect;
+    @FXML private Button createProjectBtn;
 
     @FXML
     public void initialize() {
         languageSelect.setItems(FXCollections.observableArrayList("C++", "Python", "Java"));
         languageSelect.setValue("C++");
         loadUserProjects();
+        updateCreateButton();
+    }
+    private void updateCreateButton() {
+        int userId = UserSession.getUserId();
+        boolean isPremium = PremiumService.isPremium(userId);
+
+        if (isPremium) {
+            createProjectBtn.setText("➕ Create New Project");
+        } else {
+            int remaining = PremiumService.getRemainingProjectSlots(userId);
+            createProjectBtn.setText("➕ Create New Project (" + remaining + "/3)");
+        }
+    }
+
+    private void showPremiumAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Premium Required");
+        alert.setHeaderText("Project Limit Reached");
+        alert.setContentText(
+                "Free users can only create up to 3 projects.\n\n" +
+                        "Want to create unlimited projects by getting Premium?"
+        );
+
+        ButtonType goPremium = new ButtonType("Go Premium");
+        ButtonType cancel = new ButtonType("Cancel", ButtonType.CANCEL.getButtonData());
+
+        alert.getButtonTypes().setAll(goPremium, cancel);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == goPremium) {
+                MainLayoutController mainLayout = MainLayoutController.getInstance();
+                if (mainLayout != null) {
+                    mainLayout.loadPage("PremiumView.fxml");
+                }
+            }
+        });
     }
 
     public void loadUserProjects() {
@@ -41,21 +78,24 @@ public class PlaygroundDashboardController {
         }
     }
 
-    private HBox createProjectCard(Project project) {
-        HBox card = new HBox();
-        card.setPrefWidth(300.0);
-        card.setPrefHeight(64.0);
-        card.setAlignment(Pos.CENTER_LEFT);
-        card.setPadding(new Insets(12, 16, 12, 16));
-        card.setSpacing(12);
+    private VBox createProjectCard(Project project) {
+        VBox card = new VBox();
+        card.setPrefWidth(220.0);
+        card.setPrefHeight(270.0);
+        card.setAlignment(Pos.CENTER);
+        card.setPadding(new Insets(20, 16, 20, 16));
+        card.setSpacing(14);
 
-        // Apply base CSS card class
-        card.getStyleClass().add("project-card");
+        // Apply base Liquid CSS class
+        card.getStyleClass().add("liquid-project-card");
 
-        // Language Icon ImageView
+        // 1. Language Icon Container
+        StackPane iconContainer = new StackPane();
+        iconContainer.getStyleClass().add("card-icon-container");
+
         ImageView iconView = new ImageView();
-        iconView.setFitWidth(50);
-        iconView.setFitHeight(50);
+        iconView.setFitWidth(70);
+        iconView.setFitHeight(70);
         iconView.setPreserveRatio(true);
 
         String iconPath = getLanguageIconPath(project.getLanguage());
@@ -67,13 +107,32 @@ public class PlaygroundDashboardController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        iconContainer.getChildren().add(iconView);
 
-        // Title Label
+        // 2. Project Title & Language Labels
+        VBox textContainer = new VBox(4);
+        textContainer.setAlignment(Pos.CENTER);
+
         Label titleLabel = new Label(project.getTitle());
         titleLabel.getStyleClass().add("card-title");
 
-        card.getChildren().addAll(iconView, titleLabel);
+        Label langLabel = new Label(project.getLanguage() != null ? project.getLanguage() : "C++");
+        langLabel.getStyleClass().add("card-subtitle");
+
+        textContainer.getChildren().addAll(titleLabel, langLabel);
+
+        // 3. Open Project Action Button
+        Button openBtn = new Button("Open Project ➔");
+        openBtn.setPrefWidth(180);
+        openBtn.setPrefHeight(38);
+        openBtn.getStyleClass().add("btn-card-action");
+        openBtn.setOnAction(e -> openWorkspace(project));
+
+        // Click anywhere on the card to open workspace
         card.setOnMouseClicked(e -> openWorkspace(project));
+
+        // Add elements to VBox
+        card.getChildren().addAll(iconContainer, textContainer, openBtn);
         return card;
     }
 
@@ -89,6 +148,13 @@ public class PlaygroundDashboardController {
 
     @FXML
     public void openCreateModal() {
+        int userId = UserSession.getUserId();
+
+        if (!PremiumService.canCreateProject(userId)) {
+            showPremiumAlert();
+            return;
+        }
+
         titleInput.clear();
         createModal.setVisible(true);
     }
@@ -105,11 +171,24 @@ public class PlaygroundDashboardController {
         if (title.isEmpty()) return;
 
         int currentUserId = UserSession.getUserId();
-        String defaultCode = getBoilerplate(lang);
 
+        if (currentUserId <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "User session expired. Please log in again.");
+            alert.show();
+            return;
+        }
+
+        if (!PremiumService.canCreateProject(currentUserId)) {
+            closeCreateModal();
+            showPremiumAlert();
+            return;
+        }
+
+        String defaultCode = getBoilerplate(lang);
         Project newProject = DatabaseManager.createProject(currentUserId, title, lang, defaultCode);
         if (newProject != null) {
             closeCreateModal();
+            updateCreateButton();
             openWorkspace(newProject);
         }
     }

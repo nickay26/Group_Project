@@ -9,9 +9,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "https://NickayJohn26.pythonanywhere.com";
+    // 1. URL Domain Name ကို စာလုံးသေး ပြောင်းထားပါသည် (PythonAnywhere SSL Redirect Error ကာကွယ်ရန်)
+    private static final String BASE_URL = "https://nickayjohn26.pythonanywhere.com";
+
+    // 2. HttpClient Redirects နှင့် Timeout သတ်မှတ်ချက်
     private static final HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(10))
+            .followRedirects(HttpClient.Redirect.ALWAYS)
+            .connectTimeout(Duration.ofSeconds(15))
             .build();
 
     // ==========================================
@@ -20,7 +24,7 @@ public class ApiClient {
     public static CompletableFuture<String> executeCodeAsync(String language, String code) {
         String jsonPayload = String.format(
                 "{\"language\": \"%s\", \"code\": \"%s\"}",
-                language,
+                escapeJson(language),
                 escapeJson(code)
         );
 
@@ -31,7 +35,11 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Execute Code Error: " + ex.getMessage());
+                    return null;
+                });
     }
 
     // ==========================================
@@ -40,7 +48,7 @@ public class ApiClient {
     public static CompletableFuture<String> reviewCodeAsync(String language, String code) {
         String jsonPayload = String.format(
                 "{\"language\": \"%s\", \"code\": \"%s\"}",
-                language,
+                escapeJson(language),
                 escapeJson(code)
         );
 
@@ -51,20 +59,45 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Review Code Error: " + ex.getMessage());
+                    return null;
+                });
     }
-    // ==========================================
-    // 6. PRACTICE QUESTIONS API
-    // ==========================================
 
-    /**
-     * Practice Question အတွက် Code ကို Gemini နဲ့ Review လုပ်
-     */
+    // ==========================================
+    // 3. DIRECT CODE CHALLENGE GENERATION (အသစ်ထည့်သွင်းထားသည်)
+    // ==========================================
+    public static CompletableFuture<String> generateCodeChallengeAsync(String language, String level) {
+        String jsonPayload = String.format(
+                "{\"language\": \"%s\", \"level\": \"%s\"}",
+                escapeJson(language),
+                escapeJson(level)
+        );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/challenge/generate"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Generate Code Challenge Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 4. PRACTICE QUESTIONS REVIEW API
+    // ==========================================
     public static CompletableFuture<String> reviewPracticeCodeAsync(
             String language, String code, String task) {
         String jsonPayload = String.format(
                 "{\"language\": \"%s\", \"code\": \"%s\", \"task\": \"%s\"}",
-                language,
+                escapeJson(language),
                 escapeJson(code),
                 escapeJson(task)
         );
@@ -76,10 +109,15 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Review Practice Error: " + ex.getMessage());
+                    return null;
+                });
     }
+
     // ==========================================
-    // 7. SAVE PROJECT CODE
+    // 5. SAVE PROJECT CODE
     // ==========================================
     public static CompletableFuture<String> saveProjectCodeAsync(int projectId, String codeContent) {
         String jsonPayload = String.format(
@@ -94,26 +132,24 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Save Project Error: " + ex.getMessage());
+                    return null;
+                });
     }
-    // Utility helper to safely sanitize raw code into valid JSON strings
-    private static String escapeJson(String raw) {
-        if (raw == null) return "";
-        return raw.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t");
-    }
+
+    // ==========================================
+    // 6. SINGLE QUESTION GENERATION
+    // ==========================================
     public static CompletableFuture<String> generateQuestionAsync(
             String language, String topic, int level) {
-        // Type ကို random ရွေး
         String[] types = {"fill-blank", "drag-drop", "write-code"};
         String type = types[(int)(Math.random() * types.length)];
 
         String jsonPayload = String.format(
                 "{\"language\": \"%s\", \"topic\": \"%s\", \"level\": %d, \"type\": \"%s\"}",
-                language, escapeJson(topic), level, type
+                escapeJson(language), escapeJson(topic), level, type
         );
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -123,6 +159,86 @@ public class ApiClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body);
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Generate Question Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 7. BATCH AI QUESTIONS GENERATION
+    // ==========================================
+    public static CompletableFuture<String> fetchAiQuestionsBatchAsync(String language, String level, int count) {
+        String jsonPayload = String.format(
+                "{\"language\": \"%s\", \"level\": \"%s\", \"count\": %d}",
+                escapeJson(language),
+                escapeJson(level),
+                count
+        );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/questions/batch"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Batch Questions API Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 8. MATCHMAKING ROOM CREATION & JOINING
+    // ==========================================
+
+    // Host (Player 1) အတွက်: Room သစ်ဆောက်ပြီး မေးခွန်းတောင်းမည်
+    public static CompletableFuture<String> createMatchRoomAsync(String language, String level) {
+        String jsonPayload = String.format(
+                "{\"language\": \"%s\", \"level\": \"%s\"}",
+                escapeJson(language),
+                escapeJson(level)
+        );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/match/create"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Create Match Room Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // Guest (Player 2) အတွက်: Room Code ရိုက်ထည့်ပြီး မေးခွန်းတူတူ လှမ်းဆွဲမည်
+    public static CompletableFuture<String> joinMatchRoomAsync(String roomCode) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/match/join/" + roomCode.trim()))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Join Match Room Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // JSON String Escaping Helper Function
+    private static String escapeJson(String raw) {
+        if (raw == null) return "";
+        return raw.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 }

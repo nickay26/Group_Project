@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -18,11 +19,11 @@ public class DatabaseManager {
     // 1. USER AUTHENTICATION & SYNC
     // ==========================================
 
-    public static User findOrCreateGoogleUser(String email, String name, String profilePicUrl) {
+    public static User findOrCreateGoogleUser(String name, String email, String profilePicUrl) {
         try {
             JSONObject body = new JSONObject();
-            body.put("email", email);
             body.put("name", name != null ? name : "Google User");
+            body.put("email", email);
             body.put("profile_pic", profilePicUrl);
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -97,14 +98,17 @@ public class DatabaseManager {
         if (userId <= 0) return "CPP_BASIC";
 
         try {
-            List<Course> courses = getCoursesForUser(userId);
-            if (courses != null && !courses.isEmpty()) {
-                return courses.get(0).getCourseId(); // ပထမဆုံး Course ကို Default ယူခြင်း
+            String response = sendGetRequest("/api/user/last-course/" + userId);
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                if (json.has("course_id")) {
+                    return json.getString("course_id");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "CPP_BASIC"; // Connection မရပါက သို့မဟုတ် Dataset မရှိပါက Default ပေးမည့် Course ID
+        return "CPP_BASIC";
     }
 
     // ==========================================
@@ -295,17 +299,104 @@ public class DatabaseManager {
         return false;
     }
 
-    // Helper Mapping Method
-    private static User mapJsonToUser(JSONObject obj) {
-        return new User(
-                obj.getInt("User_ID"),
-                obj.getString("Name"),
-                obj.getString("Email"),
-                obj.optString("Profile", null),
-                obj.optInt("XP", 0),
-                obj.optInt("Streak", 0),
-                obj.optInt("coin", 0),
-                obj.optInt("brain_count", 5)
-        );
+    // ==========================================
+    // HELPER METHODS
+    // ==========================================
+
+    // GET Request များ ခေါ်ယူရာတွင် အသုံးပြုရန် Generic Helper
+    private static String sendGetRequest(String path) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
+        }
+        return "";
     }
+
+    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
+    private static User mapJsonToUser(JSONObject obj) {
+        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
+        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
+        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+        String profile = obj.optString("Profile", obj.optString("profile", null));
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
+        int coin = obj.optInt("coin", obj.optInt("Coin", 0));
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+
+        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+    }
+    // ==========================================
+// 4. PREMIUM & PAYMENT
+// ==========================================
+
+    public static boolean subscribePremium(int userId, int planId, String durationType) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("plan_id", planId);
+            body.put("duration_type", durationType);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/premium/subscribe"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean isPremium(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/premium"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject res = new JSONObject(response.body());
+                return res.optBoolean("is_premium", false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean savePaymentScreenshot(int userId, String fileName,
+                                                String method, int amount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("screenshot_path", fileName);
+            body.put("method", method);
+            body.put("amount", amount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/payment/upload"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
