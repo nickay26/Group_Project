@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_148",
+  "title": "CLI Tool Building with Click & Typer (PYTH_141 to PYTH_150) (PYTH_148_S1 to PYTH_148_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_148_S1",
+      "type": "CONCEPT",
+      "title": "Building Command-Line Interfaces",
+      "prompt": "Typer uses modern Python type hints to build elegant command-line applications effortlessly.",
+      "codeSnippet": "import typer\napp = typer.Typer()\n\n@app.command()\ndef greet(name: str):\n    print(f'Hello {name}')\n\nif __name__ == '__main__':\n    app()"
+    },
+    {
+      "slideId": "PYTH_148_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Typer Command Decorator",
+      "prompt": "Fill in the decorator registering a function as a CLI command.",
+      "codeSnippet": "@app.___\ndef main():",
+      "options": ["command", "cli", "route", "action"],
+      "correctAnswer": "command"
+    },
+    {
+      "slideId": "PYTH_148_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Argparse vs Click/Typer",
+      "prompt": "What is a key benefit of Typer over built-in argparse?",
+      "options": [
+        "Uses standard type annotations for argument parsing and auto-generated help docs",
+        "Runs Python code without an interpreter",
+        "Supports web browser rendering",
+        "Eliminates command-line execution"
+      ],
+      "correctAnswer": "Uses standard type annotations for argument parsing and auto-generated help docs"
+    },
+    {
+      "slideId": "PYTH_148_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Click Command Decorator",
+      "prompt": "Fill in the base decorator for defining commands in Click.",
+      "codeSnippet": "import click\n@click.___\ndef hello():",
+      "options": ["command", "cli", "main", "entrypoint"],
+      "correctAnswer": "command"
+    },
+    {
+      "slideId": "PYTH_148_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Click Option Decorator",
+      "prompt": "Which decorator adds a command-line flag/option with a default value in Click?",
+      "options": ["@click.option()", "@click.argument()", "@click.flag()", "@click.parameter()"],
+      "correctAnswer": "@click.option()"
+    },
+    {
+      "slideId": "PYTH_148_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Terminal Output Styling",
+      "prompt": "Fill in the rich printing function used for colored terminal outputs.",
+      "codeSnippet": "from rich import print as ___",
+      "options": ["rprint", "print", "cprint", "color_print"],
+      "correctAnswer": "rprint"
+    },
+    {
+      "slideId": "PYTH_148_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CLI Argument vs Option",
+      "prompt": "What distinguishes CLI Arguments from CLI Options?",
+      "options": [
+        "Arguments are positional and required by default; Options start with dashes (--option)",
+        "Options are always required; Arguments are optional",
+        "Arguments only accept integers",
+        "Options cannot have default values"
+      ],
+      "correctAnswer": "Arguments are positional and required by default; Options start with dashes (--option)"
+    },
+    {
+      "slideId": "PYTH_148_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Typer App Invocation",
+      "prompt": "Fill in the call execution block for running the Typer app.",
+      "codeSnippet": "if __name__ == '__main__':\n    ___ ()",
+      "options": ["app", "main", "cli", "run"],
+      "correctAnswer": "app"
+    }
+  ]
+}

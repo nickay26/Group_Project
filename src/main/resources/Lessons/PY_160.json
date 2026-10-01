@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_160",
+  "title": "Automated Testing & Pytest Mastery (PYTH_160_S1 to PYTH_160_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_160_S1",
+      "type": "CONCEPT",
+      "title": "Pytest Test Suite",
+      "prompt": "Pytest simplifies writing scalable, readable unit and integration tests using simple assert statements.",
+      "codeSnippet": "import pytest\n\ndef test_addition():\n    assert 1 + 1 == 2"
+    },
+    {
+      "slideId": "PYTH_160_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Reusable Test Setup Fixtures",
+      "prompt": "Fill in the Pytest decorator used to define reusable test setup and teardown components.",
+      "codeSnippet": "@pytest.___ \ndef db_session():",
+      "options": ["fixture", "setup", "context", "before"],
+      "correctAnswer": "fixture"
+    },
+    {
+      "slideId": "PYTH_160_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mocking External Dependencies",
+      "prompt": "Which library or fixture is used to replace slow or external network calls during unit testing?",
+      "options": [
+        "unittest.mock (or monkeypatch fixture)",
+        "asyncio.sleep",
+        "sys.exit",
+        "pydantic.BaseModel"
+      ],
+      "correctAnswer": "unittest.mock (or monkeypatch fixture)"
+    },
+    {
+      "slideId": "PYTH_160_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Parametrization in Tests",
+      "prompt": "Fill in the Pytest mark decorator used to run a single test function with multiple input parameter sets.",
+      "codeSnippet": "@pytest.mark.___('val,expected', [(1, 2), (2, 4)])",
+      "options": ["parametrize", "params", "loop", "repeat"],
+      "correctAnswer": "parametrize"
+    },
+    {
+      "slideId": "PYTH_160_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Testing Expected Exceptions",
+      "prompt": "How do you verify that a Python function raises a specific exception in Pytest?",
+      "options": [
+        "Using 'with pytest.raises(ExceptionClass):'",
+        "Using a standard try-except block without assertions",
+        "By checking if the return value is None",
+        "By printing the stack trace to stdout"
+      ],
+      "correctAnswer": "Using 'with pytest.raises(ExceptionClass):'"
+    },
+    {
+      "slideId": "PYTH_160_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Measuring Code Coverage",
+      "prompt": "Fill in the Pytest plugin flag used to generate test coverage reports.",
+      "codeSnippet": "pytest --___=app",
+      "options": ["cov", "coverage", "check", "report"],
+      "correctAnswer": "cov"
+    },
+    {
+      "slideId": "PYTH_160_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Async Test Execution",
+      "prompt": "Which plugin is required to allow running asynchronous coroutines as test functions natively?",
+      "options": ["pytest-asyncio", "pytest-django", "pytest-mock", "pytest-xdist"],
+      "correctAnswer": "pytest-asyncio"
+    },
+    {
+      "slideId": "PYTH_160_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Parallel Test Execution",
+      "prompt": "Fill in the plugin flag used to run tests concurrently across multiple CPU cores.",
+      "codeSnippet": "pytest -n ___",
+      "options": ["auto", "parallel", "max", "threads"],
+      "correctAnswer": "auto"
+    }
+  ]
+}

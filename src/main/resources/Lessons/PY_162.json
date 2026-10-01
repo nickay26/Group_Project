@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_162",
+  "title": "API Gateways, Load Balancing & Reverse Proxies (PYTH_162_S1 to PYTH_162_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_162_S1",
+      "type": "CONCEPT",
+      "title": "API Gateway Patterns",
+      "prompt": "API Gateways sit between clients and backend microservices, providing routing, rate limiting, and SSL termination.",
+      "codeSnippet": "# Proxy Configuration Concept\nupstream backend_apps {\n    server app1:8000;\n    server app2:8000;\n}"
+    },
+    {
+      "slideId": "PYTH_162_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Reverse Proxy Routing",
+      "prompt": "Fill in the Nginx directive used to pass incoming HTTP requests to a backend Python server.",
+      "codeSnippet": "location /api/ {\n    ___ http://backend_apps;\n}",
+      "options": ["proxy_pass", "forward_to", "route_to", "target"],
+      "correctAnswer": "proxy_pass"
+    },
+    {
+      "slideId": "PYTH_162_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Load Balancing Algorithms",
+      "prompt": "Which load balancing algorithm distributes requests sequentially across all available healthy backend nodes?",
+      "options": ["Round Robin", "IP Hash", "Least Connections", "Random Selection"],
+      "correctAnswer": "Round Robin"
+    },
+    {
+      "slideId": "PYTH_162_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "SSL/TLS Offloading",
+      "prompt": "Fill in the protocol term for terminating HTTPS encrypted traffic at the gateway before routing plain HTTP internally.",
+      "codeSnippet": "ssl_termination = '___ Termination'",
+      "options": ["SSL", "HTTP", "TCP", "UDP"],
+      "correctAnswer": "SSL"
+    },
+    {
+      "slideId": "PYTH_162_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Gateway Rate Limiting",
+      "prompt": "Why is rate limiting best enforced at the API Gateway level instead of individual Python worker nodes?",
+      "options": [
+        "It drops excessive malicious traffic before it reaches expensive Python application compute layers",
+        "It forces clients to clear local browser cookies",
+        "It speeds up database write operations",
+        "It prevents Docker container images from expiring"
+      ],
+      "correctAnswer": "It drops excessive malicious traffic before it reaches expensive Python application compute layers"
+    },
+    {
+      "slideId": "PYTH_162_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP Forwarded Headers",
+      "prompt": "Fill in the HTTP header used by proxies to preserve the client's original IP address.",
+      "codeSnippet": "headers = {'___-For': client_ip}",
+      "options": ["X-Forwarded", "X-Real-IP", "Client-IP", "Proxy-Source"],
+      "correctAnswer": "X-Forwarded"
+    },
+    {
+      "slideId": "PYTH_162_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circuit Breaker at Gateway",
+      "prompt": "What primary protection does an API Gateway circuit breaker offer during downstream microservice outages?",
+      "options": [
+        "It fails fast with an instant fallback error, avoiding cascading timeout queues",
+        "It reboots the physical cloud server host",
+        "It automatically deletes corrupt database rows",
+        "It converts all POST requests into GET requests"
+      ],
+      "correctAnswer": "It fails fast with an instant fallback error, avoiding cascading timeout queues"
+    },
+    {
+      "slideId": "PYTH_162_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Traefik / Nginx API Gateway",
+      "prompt": "Fill in the modern cloud-native reverse proxy popular in Kubernetes environments.",
+      "codeSnippet": "gateway = '___'",
+      "options": ["Traefik", "Flask", "Gunicorn", "Alembic"],
+      "correctAnswer": "Traefik"
+    }
+  ]
+}

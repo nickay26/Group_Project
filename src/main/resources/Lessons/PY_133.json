@@ -1,0 +1,74 @@
+{
+  "lessonId": "PYTH_133",
+  "title": "Data Analysis with Pandas (PYTH_131 to PYTH_140) (PYTH_133_S1 to PYTH_133_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_133_S1",
+      "type": "CONCEPT",
+      "title": "Pandas DataFrames",
+      "prompt": "Pandas introduces DataFrames for tabular data manipulation and analysis.",
+      "codeSnippet": "import pandas as pd\ndf = pd.DataFrame({'Name': ['Alice', 'Bob'], 'Age': [25, 30]})\nprint(df.head())"
+    },
+    {
+      "slideId": "PYTH_133_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Reading CSV Files",
+      "prompt": "Fill in the function used to load data from a CSV file into a DataFrame.",
+      "codeSnippet": "df = pd.___ ('data.csv')",
+      "options": ["read_csv", "load_csv", "open_csv", "get_csv"],
+      "correctAnswer": "read_csv"
+    },
+    {
+      "slideId": "PYTH_133_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "DataFrame Selection",
+      "prompt": "Which property is used for label-based indexing in Pandas?",
+      "options": [".loc", ".iloc", ".idx", ".at_label"],
+      "correctAnswer": ".loc"
+    },
+    {
+      "slideId": "PYTH_133_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Index-based Selection",
+      "prompt": "Fill in the property used for integer position-based selection.",
+      "codeSnippet": "df.___ [0, 1]",
+      "options": ["iloc", "loc", "at", "ix"],
+      "correctAnswer": "iloc"
+    },
+    {
+      "slideId": "PYTH_133_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Handling Missing Data",
+      "prompt": "Which method drops rows that contain missing values?",
+      "options": ["dropna()", "fillna()", "clearna()", "remove_null()"],
+      "correctAnswer": "dropna()"
+    },
+    {
+      "slideId": "PYTH_133_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Groupby Operation",
+      "prompt": "Fill in the method used to split data into groups for aggregation.",
+      "codeSnippet": "df.___ ('category').mean()",
+      "options": ["groupby", "group_by", "aggregate", "split"],
+      "correctAnswer": "groupby"
+    },
+    {
+      "slideId": "PYTH_133_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Descriptive Statistics",
+      "prompt": "Which method generates summary statistics for numerical columns?",
+      "options": ["describe()", "summary()", "info()", "stats()"],
+      "correctAnswer": "describe()"
+    },
+    {
+      "slideId": "PYTH_133_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Filling Null Values",
+      "prompt": "Fill in the method used to replace missing NA values with a specific value.",
+      "codeSnippet": "df.___ (0)",
+      "options": ["fillna", "replace_na", "set_na", "fix_null"],
+      "correctAnswer": "fillna"
+    }
+  ]
+}

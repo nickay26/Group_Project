@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_193",
+  "title": "High-Frequency Trading & Market Data Processing (PYTH_193_S1 to PYTH_193_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_193_S1",
+      "type": "CONCEPT",
+      "title": "Order Book Architecture",
+      "prompt": "Trading engines maintain limit order books using bid/ask price trees and execution queues to match buy and sell orders with sub-millisecond latency.",
+      "codeSnippet": "import heapq\n\n# Priority queue for order book ask prices (min-heap)\nasks = []\nheapq.heappush(asks, (100.50, 10))  # (price, quantity)"
+    },
+    {
+      "slideId": "PYTH_193_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Min-Heap Insertion for Asks",
+      "prompt": "Fill in the standard Python heapq function used to insert a new ask order into a priority queue.",
+      "codeSnippet": "import heapq\nheapq.___(ask_heap, (price, quantity))",
+      "options": ["heappush", "push", "insert", "add"],
+      "correctAnswer": "heappush"
+    },
+    {
+      "slideId": "PYTH_193_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bid-Ask Spread Definition",
+      "prompt": "What does the bid-ask spread represent in a limit order book?",
+      "options": [
+        "The price difference between the lowest available ask price and the highest available bid price",
+        "The total number of orders submitted to an exchange in one second",
+        "The percentage fee charged by the broker on market transactions",
+        "The daily price range between market open and market close"
+      ],
+      "correctAnswer": "The price difference between the lowest available ask price and the highest available bid price"
+    },
+    {
+      "slideId": "PYTH_193_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Zero-Copy Struct Unpacking",
+      "prompt": "Fill in the standard library module used to parse high-frequency binary market data feeds without memory overhead.",
+      "codeSnippet": "import ___\nprice, qty = struct.unpack('!fI', binary_payload)",
+      "options": ["struct", "binary", "ctypes", "bytes"],
+      "correctAnswer": "struct"
+    },
+    {
+      "slideId": "PYTH_193_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FIX Protocol (Financial Information eXchange)",
+      "prompt": "What is the primary purpose of the FIX protocol in algorithmic trading infrastructure?",
+      "options": [
+        "Standardized messaging protocol for electronic trade order submission, execution reports, and market data",
+        "Database query language for historical stock market price charts",
+        "Cryptographic hashing algorithm for blockchain transactions",
+        "Python web framework for financial analytics dashboards"
+      ],
+      "correctAnswer": "Standardized messaging protocol for electronic trade order submission, execution reports, and market data"
+    },
+    {
+      "slideId": "PYTH_193_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Circular Buffer Ring Queues",
+      "prompt": "Fill in the collections class used for fixed-size lock-free memory buffers in streaming tick processors.",
+      "codeSnippet": "from collections import ___\ntick_buffer = deque(maxlen=10000)",
+      "options": ["deque", "Buffer", "RingBuffer", "Queue"],
+      "correctAnswer": "deque"
+    },
+    {
+      "slideId": "PYTH_193_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Slippage in Market Orders",
+      "prompt": "What causes execution 'slippage' when executing large market orders?",
+      "options": [
+        "The order consumes available liquidity across multiple price levels in the order book, executing at progressively worse prices",
+        "The broker cancels the order due to low account balance",
+        "The exchange network connection experiences latency spikes",
+        "The stock trading symbol is changed mid-transaction"
+      ],
+      "correctAnswer": "The order consumes available liquidity across multiple price levels in the order book, executing at progressively worse prices"
+    },
+    {
+      "slideId": "PYTH_193_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Calculating Volume Weighted Average Price (VWAP)",
+      "prompt": "Fill in the expression parameter formula used to compute VWAP in market data aggregations.",
+      "codeSnippet": "vwap = (df['price'] * df['volume']).___\n / df['volume'].sum()",
+      "options": ["sum()", "mean()", "total()", "cumsum()"],
+      "correctAnswer": "sum()"
+    }
+  ]
+}

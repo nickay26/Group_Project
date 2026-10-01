@@ -1,0 +1,78 @@
+{
+  "lessonId": "PYTH_136",
+  "title": "REST API Development with FastAPI (PYTH_131 to PYTH_140) (PYTH_136_S1 to PYTH_136_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_136_S1",
+      "type": "CONCEPT",
+      "title": "FastAPI Basics",
+      "prompt": "FastAPI is a modern web framework for building APIs with Python 3.7+ types.",
+      "codeSnippet": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get('/')\ndef read_root():\n    return {'message': 'Hello World'}"
+    },
+    {
+      "slideId": "PYTH_136_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating App Instance",
+      "prompt": "Fill in the instantiation for the main FastAPI web application.",
+      "codeSnippet": "app = ___ ()",
+      "options": ["FastAPI", "Api", "Application", "Server"],
+      "correctAnswer": "FastAPI"
+    },
+    {
+      "slideId": "PYTH_136_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Route Decorator",
+      "prompt": "Which decorator handles HTTP GET endpoint routes?",
+      "options": ["@app.get()", "@app.route_get()", "@app.fetch()", "@app.request_get()"],
+      "correctAnswer": "@app.get()"
+    },
+    {
+      "slideId": "PYTH_136_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Path Parameters",
+      "prompt": "Fill in the placeholder format used for path parameters in URL routes.",
+      "codeSnippet": "@app.get('/items/___')",
+      "options": ["{item_id}", ":item_id", "<item_id>", "$item_id"],
+      "correctAnswer": "{item_id}"
+    },
+    {
+      "slideId": "PYTH_136_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pydantic Integration",
+      "prompt": "What does FastAPI use Pydantic models for?",
+      "options": [
+        "Data validation and request body parsing",
+        "Database connection pooling",
+        "Rendering HTML templates",
+        "Managing OAuth tokens"
+      ],
+      "correctAnswer": "Data validation and request body parsing"
+    },
+    {
+      "slideId": "PYTH_136_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "ASGI Server",
+      "prompt": "Fill in the ASGI server used to run FastAPI applications.",
+      "codeSnippet": "# Terminal command:\n___ main:app --reload",
+      "options": ["uvicorn", "gunicorn", "flask", "django"],
+      "correctAnswer": "uvicorn"
+    },
+    {
+      "slideId": "PYTH_136_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Automatic Documentation",
+      "prompt": "Which URL path provides the interactive Swagger UI docs automatically in FastAPI?",
+      "options": ["/docs", "/swagger", "/api/docs", "/help"],
+      "correctAnswer": "/docs"
+    },
+    {
+      "slideId": "PYTH_136_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP Status Code Response",
+      "prompt": "Fill in the parameter used to specify explicit HTTP response status codes.",
+      "codeSnippet": "@app.post('/items', ___=201)",
+      "options": ["status_code", "code", "response_code", "status"],
+      "correctAnswer": "status_code"
+    }
+  ]}

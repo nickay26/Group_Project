@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_291",
+  "title": "Module Review Quiz: Web Development with FastAPI & Flask",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_291_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Web Frameworks",
+      "prompt": "Review core web framework concepts in Python including routing, request handlers, dependency injection, and Pydantic validation.",
+      "codeSnippet": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get(\"/\")\ndef root():\n    return {\"message\": \"Hello World\"}"
+    },
+    {
+      "slideId": "PYTH_291_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "FastAPI Route Decorator",
+      "prompt": "Fill in the decorator method used to handle HTTP GET requests in FastAPI.",
+      "codeSnippet": "@app.___(\"/items\")\nasync def get_items(): pass",
+      "options": ["get", "route", "fetch", "request"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "PYTH_291_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Flask Application Instance",
+      "prompt": "Which parameter is typically passed to instantiate a Flask application `app = Flask(...)`?",
+      "options": ["__name__", "__file__", "self", "None"],
+      "correctAnswer": "__name__"
+    },
+    {
+      "slideId": "PYTH_291_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Data Validation Model",
+      "prompt": "Fill in the Pydantic base class used to construct data validation schemas in FastAPI.",
+      "codeSnippet": "class Item(BaseModel):",
+      "options": ["BaseModel", "Schema", "Model", "DataClass"],
+      "correctAnswer": "BaseModel"
+    },
+    {
+      "slideId": "PYTH_291_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ASGI vs WSGI Server",
+      "prompt": "Which server specification is natively required to run asynchronous FastAPI applications?",
+      "options": ["ASGI", "WSGI", "HTTP/1.0", "CGI"],
+      "correctAnswer": "ASGI"
+    },
+    {
+      "slideId": "PYTH_291_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Flask Template Rendering",
+      "prompt": "Fill in the function name used to render HTML templates in Flask.",
+      "codeSnippet": "return ___template(\"index.html\")",
+      "options": ["render", "view", "display", "show"],
+      "correctAnswer": "render"
+    },
+    {
+      "slideId": "PYTH_291_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HTTP Status Code for Not Found",
+      "prompt": "Which standard HTTP status code signifies that a requested resource was not found?",
+      "options": ["404", "200", "500", "403"],
+      "correctAnswer": "404"
+    }
+  ]
+}

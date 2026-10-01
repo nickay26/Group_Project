@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_123",
+  "title": "Regular Expressions (Regex) (PYTH_123_S1 to PYTH_123_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_123_S1",
+      "type": "CONCEPT",
+      "title": "Regex with re module",
+      "prompt": "Regular expressions allow powerful pattern searching and matching inside text strings.",
+      "codeSnippet": "import re\npattern = r\"\\d+\"\nmatch = re.findall(pattern, \"Items: 12, Total: 450\")\nprint(match) # ['12', '450']"
+    },
+    {
+      "slideId": "PYTH_123_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Regex Module Import",
+      "prompt": "Fill in the standard module used for regular expressions in Python.",
+      "codeSnippet": "import ___",
+      "options": ["re", "regex", "patterns", "pyre"],
+      "correctAnswer": "re"
+    },
+    {
+      "slideId": "PYTH_123_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Find All Matches",
+      "prompt": "Which function returns a list of all non-overlapping pattern matches in a string?",
+      "options": ["re.findall()", "re.search()", "re.match()", "re.get_all()"],
+      "correctAnswer": "re.findall()"
+    },
+    {
+      "slideId": "PYTH_123_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Search Method",
+      "prompt": "Fill in the method that scans through a string for the first location where regex matches.",
+      "codeSnippet": "result = re.___(\r\"\\w+\", \"Hello World\")",
+      "options": ["search", "match", "find", "locate"],
+      "correctAnswer": "search"
+    },
+    {
+      "slideId": "PYTH_123_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Digit Pattern Character",
+      "prompt": "Which regex character class represents any single numeric digit?",
+      "options": ["\\d", "\\w", "\\s", "\\D"],
+      "correctAnswer": "\\d"
+    },
+    {
+      "slideId": "PYTH_123_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Raw String Notation",
+      "prompt": "Fill in the string prefix character recommended for regular expression patterns.",
+      "codeSnippet": "pattern = ___\"\\d{3}-\\d{3}\"",
+      "options": ["r", "f", "b", "u"],
+      "correctAnswer": "r"
+    },
+    {
+      "slideId": "PYTH_123_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Regex Sub Function",
+      "prompt": "Which re function is used to substitute/replace matched patterns in a string?",
+      "options": ["re.sub()", "re.replace()", "re.swap()", "re.change()"],
+      "correctAnswer": "re.sub()"
+    }
+  ]
+}

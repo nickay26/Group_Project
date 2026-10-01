@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_292",
+  "title": "Module Review Quiz: Database Integration & ORM (SQLAlchemy)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_292_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Databases & SQLAlchemy",
+      "prompt": "Review relational database connections, SQL queries, object-relational mapping (ORM), and session transaction handling.",
+      "codeSnippet": "from sqlalchemy import create_engine\nengine = create_engine('sqlite:///:memory:')"
+    },
+    {
+      "slideId": "PYTH_292_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating Engine Connection",
+      "prompt": "Fill in the function used to establish a database engine connection in SQLAlchemy.",
+      "codeSnippet": "engine = create_engine(\"sqlite:///app.db\")",
+      "options": ["create_engine", "connect_db", "make_engine", "get_db"],
+      "correctAnswer": "create_engine"
+    },
+    {
+      "slideId": "PYTH_292_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Transaction Commit",
+      "prompt": "Which method persists pending database modifications within an active ORM session?",
+      "options": ["session.commit()", "session.save()", "session.flush()", "session.push()"],
+      "correctAnswer": "session.commit()"
+    },
+    {
+      "slideId": "PYTH_292_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Column Primary Key Constraint",
+      "prompt": "Fill in the keyword argument used to mark a column as the primary key in SQLAlchemy.",
+      "codeSnippet": "id = Column(Integer, ___=True)",
+      "options": ["primary_key", "is_primary", "key", "main_key"],
+      "correctAnswer": "primary_key"
+    },
+    {
+      "slideId": "PYTH_292_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Rolling Back Transactions",
+      "prompt": "Which method reverts uncommitted changes when an exception occurs during a session?",
+      "options": ["session.rollback()", "session.undo()", "session.cancel()", "session.reset()"],
+      "correctAnswer": "session.rollback()"
+    },
+    {
+      "slideId": "PYTH_292_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Querying All Records",
+      "prompt": "Fill in the query method to retrieve all matching database rows.",
+      "codeSnippet": "users = session.query(User).___()",
+      "options": ["all", "get", "fetch", "list"],
+      "correctAnswer": "all"
+    },
+    {
+      "slideId": "PYTH_292_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "SQLAlchemy Model Inheritance",
+      "prompt": "What declarative base class is traditionally used to define SQLAlchemy ORM models?",
+      "options": ["DeclarativeBase", "BaseModel", "SQLModel", "EntityBase"],
+      "correctAnswer": "DeclarativeBase"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_290",
+  "title": "Module Review Quiz: Complete Advanced Foundations",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_290_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Advanced Foundations Assessment",
+      "prompt": "This final module review test synthesizes advanced Python topics: OOP Design, Metaprogramming, Async, Parallelism, and Type Safety.",
+      "codeSnippet": "# Final Comprehensive Sync & Async Evaluation\nimport asyncio\nasync def verify():\n    return \"Advanced Python Certified\"\nprint(asyncio.run(verify()))"
+    },
+    {
+      "slideId": "PYTH_290_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Optimization Slots",
+      "prompt": "Fill in the attribute used in classes to prevent `__dict__` creation and restrict instance attributes.",
+      "codeSnippet": "class Fast:\n    ___ = ('x', 'y')",
+      "options": ["__slots__", "__attrs__", "__fields__", "__members__"],
+      "correctAnswer": "__slots__"
+    },
+    {
+      "slideId": "PYTH_290_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "LRU Caching Decorator",
+      "prompt": "Which `functools` decorator provides automatic memoization caching for functions?",
+      "options": ["@lru_cache", "@memoize", "@cache_func", "@store_results"],
+      "correctAnswer": "@lru_cache"
+    },
+    {
+      "slideId": "PYTH_290_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Context Manager Decorator",
+      "prompt": "Fill in the contextlib decorator used for generator context managers.",
+      "codeSnippet": "@___manager\ndef open_resource():",
+      "options": ["context", "resource", "file", "with"],
+      "correctAnswer": "context"
+    },
+    {
+      "slideId": "PYTH_290_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Abstract Class Instantiation",
+      "prompt": "What error is raised when instantiating a subclass of `ABC` that hasn't overridden all `@abstractmethod` methods?",
+      "options": ["TypeError", "SyntaxError", "AttributeError", "ValueError"],
+      "correctAnswer": "TypeError"
+    },
+    {
+      "slideId": "PYTH_290_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Dataclass Freezing",
+      "prompt": "Fill in the option value to make a dataclass instance read-only/immutable.",
+      "codeSnippet": "@dataclass(frozen=___)",
+      "options": ["True", "False", "None", "1"],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "PYTH_290_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bypassing GIL Execution",
+      "prompt": "Which module allows true parallel execution across multiple CPU cores in CPython?",
+      "options": ["multiprocessing", "threading", "asyncio", "queue"],
+      "correctAnswer": "multiprocessing"
+    }
+  ]
+}

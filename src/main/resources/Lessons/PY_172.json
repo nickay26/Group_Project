@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_172",
+  "title": "Reinforcement Learning & Deep Q-Networks (PYTH_172_S1 to PYTH_172_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_172_S1",
+      "type": "CONCEPT",
+      "title": "Reinforcement Learning Loops",
+      "prompt": "An agent learns optimal policy actions by interacting with an environment, observing states, and receiving rewards.",
+      "codeSnippet": "import gymnasium as gym\n\nenv = gym.make('CartPole-v1')\nstate, info = env.reset()\nnext_state, reward, terminated, truncated, info = env.step(action)"
+    },
+    {
+      "slideId": "PYTH_172_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Gymnasium Environment Step",
+      "prompt": "Fill in the Gymnasium method used to advance the environment state by executing an action.",
+      "codeSnippet": "obs, reward, terminated, truncated, info = env.___(action)",
+      "options": ["step", "next", "update", "act"],
+      "correctAnswer": "step"
+    },
+    {
+      "slideId": "PYTH_172_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exploration vs Exploitation",
+      "prompt": "What is the role of the epsilon ($\u03b5$) parameter in the $\u03b5$-greedy action selection policy?",
+      "options": [
+        "Balancing random exploratory actions with high-reward exploitative actions",
+        "Scaling the learning rate of the neural network optimizer",
+        "Discounting future rewards in Bellman equations",
+        "Setting the batch size of the experience replay buffer"
+      ],
+      "correctAnswer": "Balancing random exploratory actions with high-reward exploitative actions"
+    },
+    {
+      "slideId": "PYTH_172_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Experience Replay Buffer",
+      "prompt": "Fill in the component used in Deep Q-Networks (DQN) to break temporal correlation between training samples.",
+      "codeSnippet": "replay_buffer = ___Buffer(max_size=10000)",
+      "options": ["Replay", "State", "Memory", "Experience"],
+      "correctAnswer": "Replay"
+    },
+    {
+      "slideId": "PYTH_172_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Q-Learning Bellman Equation",
+      "prompt": "What does the discount factor ($\u03b3$) control in the Bellman optimality equation?",
+      "options": [
+        "The relative importance of future rewards compared to immediate rewards",
+        "The speed of neural network backpropagation",
+        "The size of observation vector arrays",
+        "The frequency of environment resets"
+      ],
+      "correctAnswer": "The relative importance of future rewards compared to immediate rewards"
+    },
+    {
+      "slideId": "PYTH_172_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Target Network Synchronization",
+      "prompt": "Fill in the term for updating the target network weights periodically to stabilize DQN training.",
+      "codeSnippet": "target_net.load_state_dict(policy_net.___())",
+      "options": ["state_dict", "weights", "parameters", "get_state"],
+      "correctAnswer": "state_dict"
+    },
+    {
+      "slideId": "PYTH_172_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Policy Gradient vs Q-Learning",
+      "prompt": "Why are Policy Gradient methods (e.g., PPO) preferred over Deep Q-Networks for continuous action spaces?",
+      "options": [
+        "They directly parameterize continuous probability distributions over action outputs",
+        "They do not require GPU hardware acceleration",
+        "They bypass reward functions completely",
+        "They eliminate the need for environment states"
+      ],
+      "correctAnswer": "They directly parameterize continuous probability distributions over action outputs"
+    },
+    {
+      "slideId": "PYTH_172_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Environment Reset Initialization",
+      "prompt": "Fill in the method called at the beginning of an episode to initialize environment state.",
+      "codeSnippet": "state, info = env.___()",
+      "options": ["reset", "start", "init", "begin"],
+      "correctAnswer": "reset"
+    }
+  ]
+}

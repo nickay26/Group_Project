@@ -1,0 +1,74 @@
+{
+  "lessonId": "PYTH_142",
+  "title": "Deep Learning Intro with PyTorch (PYTH_141 to PYTH_150) (PYTH_142_S1 to PYTH_142_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_142_S1",
+      "type": "CONCEPT",
+      "title": "PyTorch Tensors",
+      "prompt": "PyTorch uses tensors, which are multi-dimensional arrays optimized for GPU acceleration.",
+      "codeSnippet": "import torch\nx = torch.tensor([1.0, 2.0, 3.0])\nprint(x)"
+    },
+    {
+      "slideId": "PYTH_142_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Importing PyTorch",
+      "prompt": "Fill in the module name imported to use PyTorch.",
+      "codeSnippet": "import ___",
+      "options": ["torch", "pytorch", "torch_dl", "nn"],
+      "correctAnswer": "torch"
+    },
+    {
+      "slideId": "PYTH_142_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Neural Network Submodule",
+      "prompt": "Which submodule provides layers and building blocks for neural networks?",
+      "options": ["torch.nn", "torch.layers", "torch.models", "torch.net"],
+      "correctAnswer": "torch.nn"
+    },
+    {
+      "slideId": "PYTH_142_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Automatic Differentiation",
+      "prompt": "Fill in the method used to calculate gradients automatically during backpropagation.",
+      "codeSnippet": "loss.___ ()",
+      "options": ["backward", "gradient", "derive", "backprop"],
+      "correctAnswer": "backward"
+    },
+    {
+      "slideId": "PYTH_142_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GPU Acceleration",
+      "prompt": "Which string checks if an NVIDIA CUDA GPU device is available?",
+      "options": ["torch.cuda.is_available()", "torch.gpu.check()", "torch.has_cuda()", "torch.is_gpu()"],
+      "correctAnswer": "torch.cuda.is_available()"
+    },
+    {
+      "slideId": "PYTH_142_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Optimizer Step",
+      "prompt": "Fill in the method used to update weights after gradient computation.",
+      "codeSnippet": "optimizer.___ ()",
+      "options": ["step", "update", "apply", "run"],
+      "correctAnswer": "step"
+    },
+    {
+      "slideId": "PYTH_142_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Linear Layer Definition",
+      "prompt": "Which class represents a fully connected neural network layer?",
+      "options": ["nn.Linear", "nn.Dense", "nn.FullyConnected", "nn.Layer"],
+      "correctAnswer": "nn.Linear"
+    },
+    {
+      "slideId": "PYTH_142_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Zero Gradients",
+      "prompt": "Fill in the method used to reset gradients before each backward pass.",
+      "codeSnippet": "optimizer.___ ()",
+      "options": ["zero_grad", "reset_grad", "clear_grad", "clean"],
+      "correctAnswer": "zero_grad"
+    }
+  ]
+}

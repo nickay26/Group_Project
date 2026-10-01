@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_232",
+  "title": "Generator-based Context Managers (@contextmanager)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_232_S1",
+      "type": "CONCEPT",
+      "title": "Simplifying Context Managers with @contextmanager",
+      "prompt": "The `@contextmanager` decorator from `contextlib` converts a generator function into a context manager. Code before `yield` runs upon entering the context, `yield` provides the target value, and code after `yield` executes upon exit.",
+      "codeSnippet": "from contextlib import contextmanager\n\n@contextmanager\ndef open_file(name):\n    f = open(name, 'w')\n    try:\n        yield f\n    finally:\n        f.close()\n\nwith open_file('sample.txt') as f:\n    f.write('Hello from contextlib!')"
+    },
+    {
+      "slideId": "PY_232_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Decorator Import Name",
+      "prompt": "Fill in the decorator function imported from `contextlib` to create generator-based context managers.",
+      "codeSnippet": "from contextlib import ___\n\n@contextmanager\ndef my_context():\n    yield",
+      "options": ["contextmanager", "managed_context", "context_decorator", "make_context"],
+      "correctAnswer": "contextmanager"
+    },
+    {
+      "slideId": "PY_232_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Role of yield in @contextmanager",
+      "prompt": "What role does the `yield` statement play inside a `@contextmanager` generator function?",
+      "options": [
+        "It separates setup code from teardown code and yields the bound target value",
+        "It converts the function into an infinite loop",
+        "It terminates context execution permanently",
+        "It acts as a return statement for throwing errors"
+      ],
+      "correctAnswer": "It separates setup code from teardown code and yields the bound target value"
+    },
+    {
+      "slideId": "PY_232_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Exception Trapping in Generators",
+      "prompt": "Fill in the block keyword wrapped around `yield` to catch exceptions raised within the `with` body.",
+      "codeSnippet": "@contextmanager\ndef safe_resource():\n    # setup\n    ___:\n        yield\n    finally:\n        # teardown",
+      "options": ["try", "with", "catch", "defer"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "PY_232_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Handling Exceptions inside Generator Contexts",
+      "prompt": "Where is an unhandled exception inside a `with` block re-raised inside a `@contextmanager` generator?",
+      "options": [
+        "Directly at the location of the `yield` statement",
+        "At the beginning of the generator function",
+        "Inside the `@contextmanager` decorator wrapper only",
+        "In the module's global namespace"
+      ],
+      "correctAnswer": "Directly at the location of the `yield` statement"
+    },
+    {
+      "slideId": "PY_232_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Yield Without Target Value",
+      "prompt": "Fill in the yield value used if the context manager does not produce an explicit object for the `as` clause.",
+      "codeSnippet": "@contextmanager\ndef timer():
+      start = time.time()\n    yield ___ # yields None\n    print(time.time() - start)",
+      "options": ["None", "True", "False", "0"],
+      "correctAnswer": "None"
+    },
+    {
+      "slideId": "PY_232_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Yield Limit",
+      "prompt": "How many times MUST a `@contextmanager` generator function yield during a single context execution?",
+      "options": [
+        "Exactly once",
+        "Zero or more times",
+        "At least twice",
+        "As many times as requested by a loop"
+      ],
+      "correctAnswer": "Exactly once"
+    }
+  ]
+}

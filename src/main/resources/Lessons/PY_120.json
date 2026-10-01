@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_120",
+  "title": "Working with JSON & APIs (PYTH_120_S1 to PYTH_120_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_120_S1",
+      "type": "CONCEPT",
+      "title": "JSON Serialization & Deserialization",
+      "prompt": "The json module converts Python dictionaries/lists to JSON strings and vice versa.",
+      "codeSnippet": "import json\ndata = {\"name\": \"Alice\", \"age\": 30}\njson_str = json.dumps(data)\nparsed = json.loads(json_str)"
+    },
+    {
+      "slideId": "PYTH_120_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "JSON Dumps Method",
+      "prompt": "Fill in the method used to serialize a Python object to a JSON string.",
+      "codeSnippet": "json_data = json.___({'status': 'active'})",
+      "options": ["dumps", "dump", "stringify", "to_json"],
+      "correctAnswer": "dumps"
+    },
+    {
+      "slideId": "PYTH_120_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "JSON Loads Method",
+      "prompt": "Which function parses a JSON formatted string into a Python dictionary/list?",
+      "options": ["json.loads()", "json.parse()", "json.load()", "json.decode()"],
+      "correctAnswer": "json.loads()"
+    },
+    {
+      "slideId": "PYTH_120_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Writing JSON to File",
+      "prompt": "Fill in the function used to write a Python object directly to a JSON file stream.",
+      "codeSnippet": "with open('data.json', 'w') as f:\n    json.___(data, f)",
+      "options": ["dump", "dumps", "write", "save"],
+      "correctAnswer": "dump"
+    },
+    {
+      "slideId": "PYTH_120_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Python to JSON Type Mapping",
+      "prompt": "What does Python's None type map to in JSON?",
+      "options": ["null", "none", "undefined", "nil"],
+      "correctAnswer": "null"
+    },
+    {
+      "slideId": "PYTH_120_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pretty Printing JSON",
+      "prompt": "Fill in the parameter used in json.dumps() to indent formatted JSON outputs.",
+      "codeSnippet": "pretty_json = json.dumps(data, ___=4)",
+      "options": ["indent", "spaces", "tab", "format"],
+      "correctAnswer": "indent"
+    },
+    {
+      "slideId": "PYTH_120_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reading JSON from File",
+      "prompt": "Which method reads JSON data directly from an open file object?",
+      "options": ["json.load()", "json.read()", "json.loads()", "json.fetch()"],
+      "correctAnswer": "json.load()"
+    }
+  ]
+}

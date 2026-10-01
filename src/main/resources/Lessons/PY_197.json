@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_197",
+  "title": "Cryptographic Protocols & Zero-Knowledge Proof Primitives (PYTH_197_S1 to PYTH_197_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_197_S1",
+      "type": "CONCEPT",
+      "title": "Elliptic Curve Cryptography (ECC)",
+      "prompt": "Python cryptography libraries support elliptic curve primitives, digital signatures (ECDSA), and Zero-Knowledge Proof (ZKP) arithmetic.",
+      "codeSnippet": "from cryptography.hazmat.primitives.asymmetric import ec\n\nprivate_key = ec.generate_private_key(ec.SECP256R1())\npublic_key = private_key.public_key()"
+    },
+    {
+      "slideId": "PYTH_197_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Generating Elliptic Curve Keys",
+      "prompt": "Fill in the function used to generate a secure private key using SECP256R1 standard curves.",
+      "codeSnippet": "from cryptography.hazmat.primitives.asymmetric import ec\nkey = ec.___(ec.SECP256R1())",
+      "options": ["generate_private_key", "create_key", "build_ec_key", "new_key"],
+      "correctAnswer": "generate_private_key"
+    },
+    {
+      "slideId": "PYTH_197_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Zero-Knowledge Proof Definition",
+      "prompt": "What fundamental property defines a Zero-Knowledge Proof (e.g., zk-SNARKs)?",
+      "options": [
+        "Proving the truth of a statement to a verifier without revealing any underlying private information",
+        "Encrypting data so thoroughly that even the original owner cannot decrypt it",
+        "Transmitting messages across networks without utilizing IP address headers",
+        "Generating random numbers that repeat deterministically every hour"
+      ],
+      "correctAnswer": "Proving the truth of a statement to a verifier without revealing any underlying private information"
+    },
+    {
+      "slideId": "PYTH_197_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Cryptographic Signatures (ECDSA)",
+      "prompt": "Fill in the method invoked on private keys to create digital signature byte strings.",
+      "codeSnippet": "signature = private_key.___(data, ec.ECDSA(hashes.SHA256()))",
+      "options": ["sign", "encrypt", "digest", "seal"],
+      "correctAnswer": "sign"
+    },
+    {
+      "slideId": "PYTH_197_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Diffie-Hellman Key Exchange (ECDH)",
+      "prompt": "How do two communication parties establish a shared secret key over an insecure network using ECDH?",
+      "options": [
+        "By multiplying their own private scalar key with the counterparty's public curve point",
+        "By sending private keys across SSL encrypted channels",
+        "By broadcasting raw seed passwords over UDP sockets",
+        "By relying on a centralized hardware security module server"
+      ],
+      "correctAnswer": "By multiplying their own private scalar key with the counterparty's public curve point"
+    },
+    {
+      "slideId": "PYTH_197_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Key Derivation Functions (HKDF)",
+      "prompt": "Fill in the class used to derive strong symmetric keys from shared curve points.",
+      "codeSnippet": "from cryptography.hazmat.primitives.kdf.hkdf import ___\n\nhkdf = HKDF(algorithm=hashes.SHA256(), length=32, salt=None, info=b'handshake')",
+      "options": ["HKDF", "PBKDF2", "Scrypt", "Bcrypt"],
+      "correctAnswer": "HKDF"
+    },
+    {
+      "slideId": "PYTH_197_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Homomorphic Encryption Concept",
+      "prompt": "What capability distinguishes Homomorphic Encryption from standard symmetric AES encryption?",
+      "options": [
+        "Permitting direct mathematical computations on encrypted ciphertext without decrypting it first",
+        "Providing faster encryption speed than standard symmetric keys",
+        "Operating without requiring public or private keys",
+        "Preventing files from being backed up to cloud servers"
+      ],
+      "correctAnswer": "Permitting direct mathematical computations on encrypted ciphertext without decrypting it first"
+    },
+    {
+      "slideId": "PYTH_197_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Signature Verification",
+      "prompt": "Fill in the public key method used to validate digital signatures.",
+      "codeSnippet": "public_key.___(signature, data, ec.ECDSA(hashes.SHA256()))",
+      "options": ["verify", "validate", "check", "confirm"],
+      "correctAnswer": "verify"
+    }
+  ]
+}

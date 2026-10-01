@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_163",
+  "title": "GraphQL & gRPC High-Efficiency Communication (PYTH_163_S1 to PYTH_163_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_163_S1",
+      "type": "CONCEPT",
+      "title": "gRPC Protobuf Engine",
+      "prompt": "gRPC uses Protocol Buffers and HTTP/2 to enable ultra-low-latency, strongly typed RPC communications.",
+      "codeSnippet": "// Protobuf definition\nservice UserService {\n  rpc GetUser (UserRequest) returns (UserResponse);\n}"
+    },
+    {
+      "slideId": "PYTH_163_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "GraphQL Single Endpoint",
+      "prompt": "Fill in the standard HTTP method used to execute GraphQL query and mutation requests.",
+      "codeSnippet": "@app.___('/graphql')",
+      "options": ["post", "get", "put", "patch"],
+      "correctAnswer": "post"
+    },
+    {
+      "slideId": "PYTH_163_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protocol Buffers Advantage",
+      "prompt": "Why is gRPC Protocol Buffer serialization faster than standard REST JSON over HTTP/1.1?",
+      "options": [
+        "It uses binary serialization and multiplexed HTTP/2 streams",
+        "It compresses data using plain zip files",
+        "It skips data validation steps entirely",
+        "It stores all messages directly in Redis cache"
+      ],
+      "correctAnswer": "It uses binary serialization and multiplexed HTTP/2 streams"
+    },
+    {
+      "slideId": "PYTH_163_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Strawberry GraphQL Schema",
+      "prompt": "Fill in the Python library decorator used to convert classes into GraphQL types.",
+      "codeSnippet": "import strawberry\n\n@strawberry.___ \nclass User:",
+      "options": ["type", "schema", "model", "object"],
+      "correctAnswer": "type"
+    },
+    {
+      "slideId": "PYTH_163_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GraphQL Over-fetching Solution",
+      "prompt": "Which major API issue does GraphQL solve compared to traditional REST endpoints?",
+      "options": [
+        "Over-fetching and under-fetching by allowing clients to request exact fields",
+        "Preventing SQL database deadlocks",
+        "Automating Docker image deployment",
+        "Generating SSL certificates"
+      ],
+      "correctAnswer": "Over-fetching and under-fetching by allowing clients to request exact fields"
+    },
+    {
+      "slideId": "PYTH_163_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Protobuf File Extension",
+      "prompt": "Fill in the file extension used to define gRPC service interfaces and messages.",
+      "codeSnippet": "filename = 'schema.___'",
+      "options": ["proto", "grpc", "json", "yaml"],
+      "correctAnswer": "proto"
+    },
+    {
+      "slideId": "PYTH_163_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "gRPC Streaming Modes",
+      "prompt": "Which streaming mode allows both client and server to stream data messages to each other asynchronously?",
+      "options": [
+        "Bidirectional Streaming",
+        "Server Streaming",
+        "Client Streaming",
+        "Unary RPC"
+      ],
+      "correctAnswer": "Bidirectional Streaming"
+    },
+    {
+      "slideId": "PYTH_163_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "GraphQL Mutations",
+      "prompt": "Fill in the GraphQL operation keyword used for creating or updating server state.",
+      "codeSnippet": "operation = '___'",
+      "options": ["mutation", "query", "subscription", "update"],
+      "correctAnswer": "mutation"
+    }
+  ]
+}

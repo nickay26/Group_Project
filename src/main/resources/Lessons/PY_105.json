@@ -1,0 +1,80 @@
+{
+  "lessonId": "PYTH_105",
+  "title": "Conditional Statements (PYTH_105_S1 to PYTH_105_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_105_S1",
+      "type": "CONCEPT",
+      "title": "Control Flow with If/Elif/Else",
+      "prompt": "Use conditional statements to execute different code blocks depending on boolean conditions.",
+      "codeSnippet": "score = 85\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")"
+    },
+    {
+      "slideId": "PYTH_105_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Elif Keyword",
+      "prompt": "Fill in the keyword for secondary conditional checks in Python.",
+      "codeSnippet": "if x > 10:\n    print(\"High\")\n___ x > 5:\n    print(\"Medium\")",
+      "options": ["elif", "else if", "elseif", "then"],
+      "correctAnswer": "elif"
+    },
+    {
+      "slideId": "PYTH_105_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Indentation in Python",
+      "prompt": "How does Python define code blocks inside conditional statements?",
+      "options": [
+        "Indentation (spaces or tabs)",
+        "Curly braces {}",
+        "Begin and End keywords",
+        "Parentheses ()"
+      ],
+      "correctAnswer": "Indentation (spaces or tabs)"
+    },
+    {
+      "slideId": "PYTH_105_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Fallback Else",
+      "prompt": "Fill in the final catch-all branch keyword.",
+      "codeSnippet": "if num % 2 == 0:\n    print(\"Even\")\n___:\n    print(\"Odd\")",
+      "options": ["else", "default", "otherwise", "elif"],
+      "correctAnswer": "else"
+    },
+    {
+      "slideId": "PYTH_105_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested Conditions",
+      "prompt": "Can an 'if' statement be placed inside another 'if' statement in Python?",
+      "options": [
+        "Yes, this is called nesting",
+        "No, Python forbids nested conditions",
+        "Only inside functions",
+        "Only up to 2 levels"
+      ],
+      "correctAnswer": "Yes, this is called nesting"
+    },
+    {
+      "slideId": "PYTH_105_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "If Statement Syntax",
+      "prompt": "Fill in the missing character that ends an 'if' header line.",
+      "codeSnippet": "if age >= 18___\n    print(\"Adult\")",
+      "options": [":", ";", "{", "->"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "PYTH_105_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Operator",
+      "prompt": "Which syntax represents a conditional expression (ternary operator) in Python?",
+      "options": [
+        "x if condition else y",
+        "condition ? x : y",
+        "if condition then x else y",
+        "select(condition, x, y)"
+      ],
+      "correctAnswer": "x if condition else y"
+    }
+  ]
+}

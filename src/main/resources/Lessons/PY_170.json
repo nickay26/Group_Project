@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_170",
+  "title": "Enterprise Cloud Architecture & Serverless Python (PYTH_170_S1 to PYTH_170_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_170_S1",
+      "type": "CONCEPT",
+      "title": "Serverless Python Execution",
+      "prompt": "Serverless platforms (AWS Lambda, GCP Cloud Functions) execute Python handlers on demand without server management.",
+      "codeSnippet": "def lambda_handler(event, context):\n    return {\n        'statusCode': 200,\n        'body': 'Hello from Serverless'\n    }"
+    },
+    {
+      "slideId": "PYTH_170_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "AWS Lambda Entry Function",
+      "prompt": "Fill in the default function signature parameter representing incoming event payload data.",
+      "codeSnippet": "def lambda_handler( ___ , context):",
+      "options": ["event", "request", "payload", "body"],
+      "correctAnswer": "event"
+    },
+    {
+      "slideId": "PYTH_170_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Mitigating Cold Starts",
+      "prompt": "What technique effectively reduces cold start latency in production serverless Python functions?",
+      "options": [
+        "Using Provisioned Concurrency or optimizing package bundle import sizes",
+        "Increasing database max connection limit",
+        "Running function handlers inside continuous loops",
+        "Converting all code files into HTML"
+      ],
+      "correctAnswer": "Using Provisioned Concurrency or optimizing package bundle import sizes"
+    },
+    {
+      "slideId": "PYTH_170_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Infrastructure as Code (IaC)",
+      "prompt": "Fill in the framework used to declare cloud infrastructure using Python code instead of raw JSON/YAML.",
+      "codeSnippet": "from aws_cdk import ___",
+      "options": ["App", "Serverless", "Deployer", "CloudForm"],
+      "correctAnswer": "App"
+    },
+    {
+      "slideId": "PYTH_170_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cloud Object Storage Integration",
+      "prompt": "Which official AWS SDK library is standard for interacting with S3, DynamoDB, and SQ3 in Python?",
+      "options": ["boto3", "aws-python", "botocore-native", "pyaws"],
+      "correctAnswer": "boto3"
+    },
+    {
+      "slideId": "PYTH_170_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Boto3 Client Initialization",
+      "prompt": "Fill in the boto3 method used to create low-level service clients.",
+      "codeSnippet": "import boto3\ns3 = boto3.___('s3')",
+      "options": ["client", "resource", "service", "connect"],
+      "correctAnswer": "client"
+    },
+    {
+      "slideId": "PYTH_170_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stateless Serverless Scaling",
+      "prompt": "How do serverless platforms handle sudden spikes of incoming HTTP traffic?",
+      "options": [
+        "By automatically spawning isolated execution environment instances in parallel",
+        "By queueing all requests until the single running worker finishes",
+        "By rebooting the entire cloud region",
+        "By temporarily dropping 50% of incoming requests"
+      ],
+      "correctAnswer": "By automatically spawning isolated execution environment instances in parallel"
+    },
+    {
+      "slideId": "PYTH_170_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Layer Shared Dependencies",
+      "prompt": "Fill in the AWS Lambda mechanism used to share common libraries across multiple serverless functions.",
+      "codeSnippet": "resource = 'Lambda ___'",
+      "options": ["Layer", "Module", "Package", "Container"],
+      "correctAnswer": "Layer"
+    }
+  ]
+}

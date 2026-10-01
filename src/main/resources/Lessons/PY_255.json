@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_255",
+  "title": "C-Extensions: CFFI & Cython Integration",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_255_S1",
+      "type": "CONCEPT",
+      "title": "Modern Extension Binding: CFFI & Cython",
+      "prompt": "CFFI (C Foreign Function Interface) allows writing C declarations directly in Python. Cython compiles a superset of Python (with static type annotations) into fast C extensions, bypassing Python dynamic execution overhead.",
+      "codeSnippet": "# Cython example (file: fast_math.pyx)\n# cdef defines static C data types for performance\ndef calculate_sum(int n):\n    cdef int i\n    cdef long total = 0\n    for i in range(n):\n        total += i\n    return total"
+    },
+    {
+      "slideId": "PY_255_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Cython C Variable Declaration Keyword",
+      "prompt": "Fill in the Cython keyword used to declare statically typed C variables inside `.pyx` files.",
+      "codeSnippet": "___ int x = 10\n___ double calculate(double a, double b)",
+      "options": ["cdef", "cimport", "typedef", "static"],
+      "correctAnswer": "cdef"
+    },
+    {
+      "slideId": "PY_255_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cython Source File Extension",
+      "prompt": "What is the standard file extension for Cython source code files intended for compilation?",
+      "options": [
+        ".pyx",
+        ".cy",
+        ".cpython",
+        ".pyd"
+      ],
+      "correctAnswer": ".pyx"
+    },
+    {
+      "slideId": "PY_255_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "CFFI C Declaration Method",
+      "prompt": "Fill in the CFFI method used to parse C function signatures and struct declarations.",
+      "codeSnippet": "from cffi import FFI\nffi = FFI()\nffi.___(\"int printf(const char *format, ...);\")[slot:interactive-widget — CFFI vs Cython vs CTypes interactive execution speed benchmark comparator widget]",
+      "options": ["cdef", "declare", "compile", "parse"],
+      "correctAnswer": "cdef"
+    },
+    {
+      "slideId": "PY_255_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Releasing GIL in Cython",
+      "prompt": "Which Cython block annotation releases the Global Interpreter Lock (GIL) during heavy C computations?",
+      "options": [
+        "with nogil:",
+        "with release_gil:",
+        "without gil:",
+        "async gil:"
+      ],
+      "correctAnswer": "with nogil:"
+    },
+    {
+      "slideId": "PY_255_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Cython C Import Keyword",
+      "prompt": "Fill in the Cython keyword used to import external C definitions or Cython headers (`.pxd`).",
+      "codeSnippet": "___ libc.stdlib cimport malloc, free",
+      "options": ["from", "cimport", "import", "include"],
+      "correctAnswer": "from"
+    },
+    {
+      "slideId": "PY_255_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cython Setup cythonize Helper",
+      "prompt": "Which function from `Cython.Build` is wrapped around `.pyx` targets inside `setup.py` build scripts?",
+      "options": [
+        "cythonize()",
+        "compile_cython()",
+        "build_extension()",
+        "make_c_extension()"
+      ],
+      "correctAnswer": "cythonize()"
+    }
+  ]
+}

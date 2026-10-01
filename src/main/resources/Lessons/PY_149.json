@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_149",
+  "title": "Automated Testing Pipelines & CI/CD (PYTH_141 to PYTH_150) (PYTH_149_S1 to PYTH_149_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_149_S1",
+      "type": "CONCEPT",
+      "title": "CI/CD Workflows for Python",
+      "prompt": "Automated pipelines run test suites, linters, and build tasks on every code commit.",
+      "codeSnippet": "# GitHub Actions YAML step:\n- name: Run Tests\n  run: pytest --cov=src"
+    },
+    {
+      "slideId": "PYTH_149_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Test Coverage Tool",
+      "prompt": "Fill in the Pytest plugin used to generate code coverage metrics.",
+      "codeSnippet": "pytest --___ =src",
+      "options": ["cov", "coverage", "check", "metric"],
+      "correctAnswer": "cov"
+    },
+    {
+      "slideId": "PYTH_149_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Linter & Formatter",
+      "prompt": "Which fast tool serves as an all-in-one Python linter and code formatter?",
+      "options": ["ruff", "pip", "pytest", "sphinx"],
+      "correctAnswer": "ruff"
+    },
+    {
+      "slideId": "PYTH_149_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "GitHub Actions Directory",
+      "prompt": "Fill in the folder path where GitHub Actions workflow YAML files are stored.",
+      "codeSnippet": ".github/___/main.yml",
+      "options": ["workflows", "actions", "pipelines", "jobs"],
+      "correctAnswer": "workflows"
+    },
+    {
+      "slideId": "PYTH_149_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Git Pre-commit Hooks",
+      "prompt": "What is the purpose of pre-commit hooks in Git?",
+      "options": [
+        "To automatically run checks and linters locally before a commit is saved",
+        "To merge code directly into production",
+        "To delete unused branches automatically",
+        "To format commit messages into HTML"
+      ],
+      "correctAnswer": "To automatically run checks and linters locally before a commit is saved"
+    },
+    {
+      "slideId": "PYTH_149_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Black Formatter",
+      "prompt": "Fill in the command used to auto-format Python source files unconditionally.",
+      "codeSnippet": "___ src/",
+      "options": ["black", "format", "clean", "style"],
+      "correctAnswer": "black"
+    },
+    {
+      "slideId": "PYTH_149_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Continuous Integration Definition",
+      "prompt": "What does Continuous Integration (CI) emphasize?",
+      "options": [
+        "Automated merging, testing, and validation of code changes frequently",
+        "Writing code without any automated tests",
+        "Manual server deployment procedures",
+        "Disabling version control systems"
+      ],
+      "correctAnswer": "Automated merging, testing, and validation of code changes frequently"
+    },
+    {
+      "slideId": "PYTH_149_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Tox Automation",
+      "prompt": "Fill in the tool name used to test Python packages across multiple interpreter versions.",
+      "codeSnippet": "# Run tests across Python 3.9, 3.10, 3.11:\n___",
+      "options": ["tox", "nox", "multi-pytest", "virtualenv-test"],
+      "correctAnswer": "tox"
+    }
+  ]
+}

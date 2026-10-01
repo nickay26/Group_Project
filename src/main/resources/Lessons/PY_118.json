@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_118",
+  "title": "Iterators & Generators (PYTH_118_S1 to PYTH_118_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_118_S1",
+      "type": "CONCEPT",
+      "title": "Generators & Yield",
+      "prompt": "Generators yield values one at a time using 'yield', enabling memory-efficient data processing.",
+      "codeSnippet": "def count_up(max_num):\n    n = 1\n    while n <= max_num:\n        yield n\n        n += 1"
+    },
+    {
+      "slideId": "PYTH_118_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Yield Keyword",
+      "prompt": "Fill in the keyword used in a function to make it a generator.",
+      "codeSnippet": "def get_numbers():\n    ___ 1\n    ___ 2",
+      "options": ["yield", "return", "emit", "send"],
+      "correctAnswer": "yield"
+    },
+    {
+      "slideId": "PYTH_118_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Advancing Iterators",
+      "prompt": "Which built-in function retrieves the next item from an iterator?",
+      "options": ["next()", "step()", "get_next()", "advance()"],
+      "correctAnswer": "next()"
+    },
+    {
+      "slideId": "PYTH_118_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Iter Function",
+      "prompt": "Fill in the function used to convert an iterable into an iterator.",
+      "codeSnippet": "my_list = [1, 2, 3]\nmy_iter = ___(my_list)",
+      "options": ["iter", "iterator", "get_iter", "loop"],
+      "correctAnswer": "iter"
+    },
+    {
+      "slideId": "PYTH_118_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Expressions Syntax",
+      "prompt": "What syntax creates a generator expression instead of a list comprehension?",
+      "options": [
+        "Parentheses (x for x in data)",
+        "Square brackets [x for x in data]",
+        "Curly braces {x for x in data}",
+        "Angle brackets <x for x in data>"
+      ],
+      "correctAnswer": "Parentheses (x for x in data)"
+    },
+    {
+      "slideId": "PYTH_118_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "StopIteration Exception",
+      "prompt": "Fill in the exception raised automatically when an iterator has no more items.",
+      "codeSnippet": "except ___:\n    print(\"Iteration completed\")",
+      "options": ["StopIteration", "IndexError", "EndError", "NoMoreItems"],
+      "correctAnswer": "StopIteration"
+    },
+    {
+      "slideId": "PYTH_118_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Memory Efficiency",
+      "prompt": "Why are generators memory efficient compared to returning lists?",
+      "options": [
+        "They generate items on-the-fly instead of storing them all in memory",
+        "They compress data automatically",
+        "They execute on GPU",
+        "They clear garbage collection continuously"
+      ],
+      "correctAnswer": "They generate items on-the-fly instead of storing them all in memory"
+    }
+  ]
+}

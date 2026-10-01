@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_111",
+  "title": "String Formatting & Operations (PYTH_111_S1 to PYTH_111_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_111_S1",
+      "type": "CONCEPT",
+      "title": "f-Strings & String Methods",
+      "prompt": "Python supports modern string formatting via f-strings and utility methods like upper(), lower(), and split().",
+      "codeSnippet": "name = \"Alice\"\nmsg = f\"Hello, {name}\"\nwords = msg.split(\", \")"
+    },
+    {
+      "slideId": "PYTH_111_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "f-String Prefix",
+      "prompt": "Fill in the prefix letter required to create an formatted string literal.",
+      "codeSnippet": "msg = ___\"User: {name}\"",
+      "options": ["f", "r", "b", "s"],
+      "correctAnswer": "f"
+    },
+    {
+      "slideId": "PYTH_111_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Splitting",
+      "prompt": "What does 'a,b,c'.split(',') return?",
+      "options": ["['a', 'b', 'c']", "('a', 'b', 'c')", "{'a', 'b', 'c'}", "'a b c'"],
+      "correctAnswer": "['a', 'b', 'c']"
+    },
+    {
+      "slideId": "PYTH_111_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Uppercase Conversion",
+      "prompt": "Fill in the method that converts all string characters to uppercase.",
+      "codeSnippet": "text = \"hello\".___()",
+      "options": ["upper", "uppercase", "to_upper", "capitalize"],
+      "correctAnswer": "upper"
+    },
+    {
+      "slideId": "PYTH_111_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "String Joining",
+      "prompt": "Which method joins elements of a list into a single string with a delimiter?",
+      "options": ["join()", "concat()", "append()", "merge()"],
+      "correctAnswer": "join()"
+    },
+    {
+      "slideId": "PYTH_111_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Stripping Whitespace",
+      "prompt": "Fill in the method used to remove leading/trailing spaces from a string.",
+      "codeSnippet": "clean_text = \"   data   \".___()",
+      "options": ["strip", "trim", "clean", "remove_spaces"],
+      "correctAnswer": "strip"
+    },
+    {
+      "slideId": "PYTH_111_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Sub-string Search",
+      "prompt": "Which keyword checks if a substring exists within a string?",
+      "options": ["in", "has", "contains", "find"],
+      "correctAnswer": "in"
+    }
+  ]
+}

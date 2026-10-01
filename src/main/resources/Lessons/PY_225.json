@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_225",
+  "title": "Generators & Iterators: Generator Expressions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_225_S1",
+      "type": "CONCEPT",
+      "title": "Generator Expressions vs List Comprehensions",
+      "prompt": "Generator expressions provide a compact syntax for creating generators using parenthesis `()` instead of square brackets `[]`. They yield values one by one without creating the entire sequence in memory.",
+      "codeSnippet": "import sys\n\nlist_comp = [x * 2 for x in range(10000)]\ngen_exp   = (x * 2 for x in range(10000))\n\nprint(sys.getsizeof(list_comp)) # ~85000 bytes\nprint(sys.getsizeof(gen_exp))   # ~200 bytes"
+    },
+    {
+      "slideId": "PY_225_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Generator Expression Enclosure",
+      "prompt": "Fill in the missing closing bracket symbol to define a generator expression.",
+      "codeSnippet": "squares = (x**2 for x in range(10)___",
+      "options": [")", "]", "}", ">"],
+      "correctAnswer": ")"
+    },
+    {
+      "slideId": "PY_225_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Passing Generator Expression to Functions",
+      "prompt": "Which syntax is valid when passing a generator expression as the single argument to a function like `sum()`?",
+      "options": [
+        "sum(x * 2 for x in range(10))",
+        "sum([x * 2 for x in range(10)])",
+        "sum(yield x * 2 for x in range(10))",
+        "sum(*(x * 2 for x in range(10)))"
+      ],
+      "correctAnswer": "sum(x * 2 for x in range(10))"
+    },
+    {
+      "slideId": "PY_225_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Memory Inspection Function",
+      "prompt": "Fill in the sys module function name used to inspect byte size of objects.",
+      "codeSnippet": "import sys\nsize = sys.___(gen_exp)",
+      "options": ["getsizeof", "get_size", "sizeof", "memory_usage"],
+      "correctAnswer": "getsizeof"
+    },
+    {
+      "slideId": "PY_225_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reusability of Generator Expressions",
+      "prompt": "Can a generator expression be iterated over multiple times without recreation?",
+      "options": [
+        "No, once fully consumed, subsequent iterations will produce no items",
+        "Yes, generator expressions auto-rewind upon second iteration",
+        "Yes, but only if passed into a for-loop",
+        "Only if sys.rewind() is called"
+      ],
+      "correctAnswer": "No, once fully consumed, subsequent iterations will produce no items"
+    },
+    {
+      "slideId": "PY_225_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Filtering inside Generator Expression",
+      "prompt": "Fill in the conditional keyword used to filter elements inside a generator expression.",
+      "codeSnippet": "evens = (x for x in range(10) ___ x % 2 == 0)",
+      "options": ["if", "where", "filter", "when"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "PY_225_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "When to Choose List Comprehension Over Generator",
+      "prompt": "When is a list comprehension preferable to a generator expression?",
+      "options": [
+        "When you need to iterate over the dataset multiple times or require random indexing access [i]",
+        "When dealing with infinite data streams",
+        "When memory consumption must be strictly minimized",
+        "When pipeline performance needs lazily computed results"
+      ],
+      "correctAnswer": "When you need to iterate over the dataset multiple times or require random indexing access [i]"
+    }
+  ]
+}

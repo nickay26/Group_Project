@@ -1,85 +1,76 @@
-{
-  "lessonId": "PY_101",
-  "title": "Hello Python",
-  "slides": [
-    {
-      "title": "Welcome to Python",
-      "prompt": "Python is a powerful, beginner-friendly programming language used by companies like Google, Netflix, and NASA.",
-      "codeSnippet": null
-    },
-    {
-      "title": "Talking to the Computer",
-      "prompt": "To make Python display something on the screen, we use a built-in instruction called print().",
-      "codeSnippet": "print()"
-    },
-    {
-      "title": "Quick Check",
-      "prompt": "Which instruction is used to display output in Python?",
-      "options": [
-        "display()",
-        "print()",
-        "show()",
-        "output()"
-      ],
-      "correctAnswer": "print()",
-      "explanation": "print() is the universal Python function for sending output to the console."
-    },
-    {
-      "title": "Adding Text",
-      "prompt": "Inside the parentheses of print(), we place the text we want to display. In programming, text is called a String.",
-      "codeSnippet": "print(\"Hello, World!\")"
-    },
-    {
-      "title": "The Golden Rule of Strings",
-      "prompt": "Strings MUST be surrounded by quotes. You can use double quotes (\"\") or single quotes (''), as long as they match.",
-      "codeSnippet": "print(\"This works\")\nprint('This also works')"
-    },
-    {
-      "title": "Spot the String",
-      "prompt": "Which of the following is a valid Python string?",
-      "options": [
-        "Hello World",
-        "\"Hello World\"",
-        "(Hello World)",
-        "print(Hello)"
-      ],
-      "correctAnswer": "\"Hello World\"",
-      "explanation": "Strings must be wrapped in quotation marks so the computer knows it is reading text, not a command."
-    },
-    {
-      "title": "Syntax Errors",
-      "prompt": "If you forget the quotes, Python will crash and throw a SyntaxError because it thinks you are trying to use a command that doesn't exist.",
-      "codeSnippet": "print(Hello)  # ❌ This will cause an error!"
-    },
-    {
-      "title": "Find the Bug",
-      "prompt": "Which of these lines of code will crash when you run it?",
-      "options": [
-        "print(\"Coding is fun\")",
-        "print('I love Python')",
-        "print(\"12345\")",
-        "print(Welcome to the matrix)"
-      ],
-      "correctAnswer": "print(Welcome to the matrix)",
-      "explanation": "Without quotes, Python tries to read 'Welcome' as a command instead of text."
-    },
-    {
-      "title": "Order Matters",
-      "prompt": "Python reads code strictly from top to bottom, line by line. This is called sequential execution.",
-      "codeSnippet": "print(\"First line\")\nprint(\"Second line\")"
-    },
-    {
-      "title": "Final Challenge",
-      "prompt": "If we run this code, what will be printed last?",
-      "codeSnippet": "print(\"Ready\")\nprint(\"Set\")\nprint(\"Go!\")",
-      "options": [
-        "Ready",
-        "Set",
-        "Go!",
-        "It will crash"
-      ],
-      "correctAnswer": "Go!",
-      "explanation": "Python executes line by line. \"Go!\" is on the final line, so it prints last."
+
+  {
+    "lessonId": "PYTH_101",
+    "title": "Introduction & Print Output (PYTH_101_S1 to PYTH_101_S7)",
+    "isPremium": false,
+    "slides": [
+      {
+        "slideId": "PYTH_101_S1",
+        "type": "CONCEPT",
+        "title": "Python Overview & Output",
+        "prompt": "Learn how Python prints messages to the console using the built-in print() function.",
+        "codeSnippet": "# Python Print Statement\nprint(\"Hello, Python!\")\nprint(42)"
+      },
+      {
+        "slideId": "PYTH_101_S2",
+        "type": "FILL_IN_BLANK",
+        "title": "Print Function",
+        "prompt": "Fill in the missing function to output 'Welcome' to the screen.",
+        "codeSnippet": "___(\"Welcome\")",
+        "options": ["print", "output", "display", "write"],
+        "correctAnswer": "print"
+      },
+      {
+        "slideId": "PYTH_101_S3",
+        "type": "MULTIPLE_CHOICE",
+        "title": "Python Comments",
+        "prompt": "Which symbol is used to write single-line comments in Python?",
+        "options": ["#", "//", "/*", "<!--"],
+        "correctAnswer": "#"
+      },
+      {
+        "slideId": "PYTH_101_S4",
+        "type": "FILL_IN_BLANK",
+        "title": "Printing Multiple Values",
+        "prompt": "Fill in the missing print function call.",
+        "codeSnippet": "___(\"Score:\", 100)",
+        "options": ["print", "log", "show", "put"],
+        "correctAnswer": "print"
+      },
+      {
+        "slideId": "PYTH_101_S5",
+        "type": "MULTIPLE_CHOICE",
+        "title": "Case Sensitivity",
+        "prompt": "Is Python case-sensitive when writing function names like Print() vs print()?",
+        "options": [
+          "Yes, print() is correct and Print() will cause an error",
+          "No, both work identically",
+          "Only in Windows",
+          "Only inside strings"
+        ],
+        "correctAnswer": "Yes, print() is correct and Print() will cause an error"
+      },
+      {
+        "slideId": "PYTH_101_S6",
+        "type": "FILL_IN_BLANK",
+        "title": "String Output",
+        "prompt": "Complete the code to print the string literal 'Python 3'.",
+        "codeSnippet": "print(___Python 3___)",
+        "options": ["\"\"", "''", "()", "[]"],
+        "correctAnswer": "\"\""
+      },
+      {
+        "slideId": "PYTH_101_S7",
+        "type": "MULTIPLE_CHOICE",
+        "title": "Newline Behavior",
+        "prompt": "What does print() do by default after printing its arguments?",
+        "options": [
+          "Appends a newline character (\\n)",
+          "Appends a space",
+          "Appends nothing",
+          "Clears the terminal"
+        ],
+        "correctAnswer": "Appends a newline character (\\n)"
+      }
+    ]
     }
-  ]
-}
