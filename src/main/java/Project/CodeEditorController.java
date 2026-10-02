@@ -158,10 +158,10 @@ public class CodeEditorController {
             case "c++", "cpp" -> "cpp";
             case "python" -> "python";
             case "java" -> "java";
-            case "javascript", "js" -> "javascript";
-            case "sql" -> "sql";
-            case "html" -> "html";
-            case "css" -> "css";
+//            case "javascript", "js" -> "javascript";
+//            case "sql" -> "sql";
+//            case "html" -> "html";
+//            case "css" -> "css";
             default -> "plaintext";
         };
     }

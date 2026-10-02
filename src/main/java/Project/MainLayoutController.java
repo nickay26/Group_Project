@@ -59,6 +59,12 @@ public class MainLayoutController {
         return instance;
     }
 
+    public void updateBrainDisplay(int count) {
+        if (topBrainLabel != null) {
+            topBrainLabel.setText(String.valueOf(count));
+        }
+    }
+
     public void setCourseTitle(String title) {
         if (currentCourseLabel != null) {
             currentCourseLabel.setText(title != null ? title : "No Active Course");

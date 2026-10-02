@@ -20,19 +20,12 @@ public class User {
         this.coin = coin;
         this.brainCount = brainCount;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-    // Add this inside User.java
     public User(int userId, String name, String email) {
-        // Fill in default values for the remaining 5 fields required by your 8-arg constructor
         this(userId, name, email, "", 0, 0, 0, 0);
     }
 
+    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -41,4 +34,12 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
+
+    // --- Setters ---
+    public void setName(String name) { this.name = name; }
+    public void setProfile(String profile) { this.profile = profile; }
+    public void setXp(int xp) { this.xp = xp; }
+    public void setStreak(int streak) { this.streak = streak; }
+    public void setCoin(int coin) { this.coin = coin; }
+    public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
 }
