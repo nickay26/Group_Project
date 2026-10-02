@@ -30,4 +30,13 @@ public class PremiumController {
         }
     }
 
+    // ★ Cross Button Handler ★
+    @FXML
+    private void handleClose() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.handleNavLearn();  // Learn Page ကို ပြန်သွား
+        }
+    }
+
 }

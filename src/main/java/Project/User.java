@@ -31,12 +31,6 @@ public class User {
     }
 
     // Setters
-    public void setName(String name) { this.name = name; }
-    public void setProfile(String profile) { this.profile = profile; }
-    public void setXp(int xp) { this.xp = xp; }
-    public void setStreak(int streak) { this.streak = streak; }
-    public void setCoin(int coin) { this.coin = coin; }
-    public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
     public void setPremium(boolean premium) { this.premium = premium; }
     public void setSubscriptionType(String subscriptionType) {
         this.subscriptionType = subscriptionType;

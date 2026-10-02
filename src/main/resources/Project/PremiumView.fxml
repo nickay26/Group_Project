@@ -1,79 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
 
+    <!-- ★ Top Bar (Cross Button အပေါ်ညာဘက်ထောင့်) ★ -->
+    <top>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 20 30 0 0;">
+            <Button text="✕" onAction="#handleClose" styleClass="close-btn"/>
+        </HBox>
+    </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
+        <!-- ★ ScrollPane ထည့်ပြီး ★ -->
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background: transparent; -fx-background-color: transparent;"
+                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
 
-            <!-- Title -->
-            <Label prefHeight="39.0" prefWidth="238.0" styleClass="main-title" text="Premium" />
-            <Label styleClass="sub-title" text="Choose a plan that fits where you are now, and upgrade anytime as you evolve." />
+                <!-- Title -->
+                <Label prefHeight="39.0" prefWidth="238.0" styleClass="main-title" text="Premium" />
+                <Label styleClass="sub-title" text="Choose a plan that fits where you are now, and upgrade anytime as you evolve." />
 
-            <!-- Card ၃ ခု -->
-            <HBox alignment="CENTER" spacing="30" styleClass="cards-container">
+                <!-- Card ၃ ခု -->
+                <HBox alignment="CENTER" spacing="30" styleClass="cards-container">
 
-                <!-- Card 1: Basic (Free) -->
-                <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card">
-                    <Label styleClass="plan-title" text="Basic" />
-                    <HBox alignment="BASELINE_LEFT" spacing="5">
-                        <Label styleClass="plan-price" text="Free" />
-                    </HBox>
-                    <Label styleClass="plan-desc" text="For learners taking their first steps" wrapText="true" />
-                    <Button maxWidth="Infinity" onAction="#handleStartLearning" styleClass="basic-btn" text="Start Learning" />
-                    <VBox spacing="12" styleClass="feature-list">
-                        <Label styleClass="feature-item" text="✓  5 brain free" />
-                        <Label styleClass="feature-item" text="✓  Basic coding exercises" />
-                        <Label styleClass="feature-item" text="✓  Access via web and mobile" />
-                        <Label styleClass="feature-item" text="✓  Only allowed to create 3 projects"/>
+                    <!-- Card 1: Basic (Free) -->
+                    <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card">
+                        <Label styleClass="plan-title" text="Basic" />
+                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                            <Label styleClass="plan-price" text="Free" />
+                        </HBox>
+                        <Label styleClass="plan-desc" text="For learners taking their first steps" wrapText="true" />
+                        <Button maxWidth="Infinity" onAction="#handleStartLearning" styleClass="basic-btn" text="Start Learning" />
+                        <VBox spacing="12" styleClass="feature-list">
+                            <Label styleClass="feature-item" text="✓  5 brain free" />
+                            <Label styleClass="feature-item" text="✓  Basic coding exercises" />
+                            <Label styleClass="feature-item" text="✓  Access via web and mobile" />
+                            <Label styleClass="feature-item" text="✓  Only allowed to create 3 projects"/>
+                        </VBox>
                     </VBox>
-                </VBox>
 
-                <!-- Card 2: Intermediate Monthly (Highlighted) -->
-                <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro">
-                    <Label styleClass="plan-title-pro" text="Intermediate" />
-                    <HBox alignment="BASELINE_LEFT" spacing="5">
-                        <Label fx:id="monthlyPrice" styleClass="plan-price-pro" text="1500" />
-                        <Label styleClass="plan-duration" text="MMK / month" />
-                    </HBox>
-                    <Label styleClass="plan-desc" text="For learners who want unlimited access to all courses" wrapText="true" />
-                    <Button maxWidth="Infinity" onAction="#handleMonthlyPlan" styleClass="pro-btn" text="Choose Monthly" />
-                    <VBox spacing="12" styleClass="feature-list">
-                        <Label styleClass="feature-item" text="✓  Unlimited lessons" />
-                        <Label styleClass="feature-item" text="✓  All Java, C++, Python courses" />
-                        <Label styleClass="feature-item" text="✓  Certificates of completion" />
-                        <Label styleClass="feature-item" text="✓  Unlimited Brain" />
-                        <Label styleClass="feature-item" text="✓  Unlimited create projects" />
+                    <!-- Card 2: Intermediate Monthly (Highlighted) -->
+                    <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro">
+                        <Label styleClass="plan-title-pro" text="Intermediate" />
+                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                            <Label fx:id="monthlyPrice" styleClass="plan-price-pro" text="1500" />
+                            <Label styleClass="plan-duration" text="MMK / month" />
+                        </HBox>
+                        <Label styleClass="plan-desc" text="For learners who want unlimited access to all courses" wrapText="true" />
+                        <Button maxWidth="Infinity" onAction="#handleMonthlyPlan" styleClass="pro-btn" text="Choose Monthly" />
+                        <VBox spacing="12" styleClass="feature-list">
+                            <Label styleClass="feature-item" text="✓  Unlimited lessons" />
+                            <Label styleClass="feature-item" text="✓  All Java, C++, Python courses" />
+                            <Label styleClass="feature-item" text="✓  Certificates of completion" />
+                            <Label styleClass="feature-item" text="✓  Unlimited Brain" />
+                            <Label styleClass="feature-item" text="✓  Unlimited create projects" />
+                        </VBox>
                     </VBox>
-                </VBox>
-                <!-- Card 3: Intermediate Yearly (Highlighted) -->
-                <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro-2">
-                    <Label styleClass="plan-title-pro-2" text="Intermediate" />
-                    <HBox alignment="BASELINE_LEFT" spacing="5">
-                        <Label fx:id="yearlyPrice" styleClass="plan-price-pro" text="15000" />
-                        <Label styleClass="plan-duration" text="MMK / year" />
-                    </HBox>
-                    <Label styleClass="plan-desc" text="For learners who want the best value for a full year" wrapText="true" />
-                    <Button maxWidth="Infinity" onAction="#handleYearlyPlan" styleClass="pro-btn-2" text="Choose Yearly" />
-                    <VBox spacing="12" styleClass="feature-list">
-                        <Label styleClass="feature-item" text="✓  Unlimited lessons" />
-                        <Label styleClass="feature-item" text="✓  All Java, C++, Python courses" />
-                        <Label styleClass="feature-item" text="✓  Certificates of completion" />
-                        <Label styleClass="feature-item" text="✓  Unlimited Brain" />
-                        <Label styleClass="feature-item" text="✓  Save 17% with yearly plan" />
-                        <Label styleClass="feature-item" text="✓  Unlimited create projects" />
+
+                    <!-- Card 3: Intermediate Yearly (Highlighted) -->
+                    <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro-2">
+                        <Label styleClass="plan-title-pro-2" text="Intermediate" />
+                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                            <Label fx:id="yearlyPrice" styleClass="plan-price-pro" text="15000" />
+                            <Label styleClass="plan-duration" text="MMK / year" />
+                        </HBox>
+                        <Label styleClass="plan-desc" text="For learners who want the best value for a full year" wrapText="true" />
+                        <Button maxWidth="Infinity" onAction="#handleYearlyPlan" styleClass="pro-btn-2" text="Choose Yearly" />
+                        <VBox spacing="12" styleClass="feature-list">
+                            <Label styleClass="feature-item" text="✓  Unlimited lessons" />
+                            <Label styleClass="feature-item" text="✓  All Java, C++, Python courses" />
+                            <Label styleClass="feature-item" text="✓  Certificates of completion" />
+                            <Label styleClass="feature-item" text="✓  Unlimited Brain" />
+                            <Label styleClass="feature-item" text="✓  Save 17% with yearly plan" />
+                            <Label styleClass="feature-item" text="✓  Unlimited create projects" />
+                        </VBox>
                     </VBox>
-                </VBox>
 
-            </HBox>
+                </HBox>
 
-        </VBox>
+            </VBox>
+        </ScrollPane>
     </center>
 
 </BorderPane>
