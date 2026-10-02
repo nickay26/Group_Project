@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_131",
+  "title": "Advanced Python Capstone & Performance Optimization (PYTH_131 to PYTH_140) (PYTH_131_S1 to PYTH_131_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_131_S1",
+      "type": "CONCEPT",
+      "title": "Code Profiling & Benchmarking",
+      "prompt": "Performance profiling helps identify computational bottlenecks using modules like cProfile.",
+      "codeSnippet": "import cProfile\n\ndef heavy_computation():\n    return sum(i ** 2 for i in range(10000))\n\ncProfile.run('heavy_computation()')"
+    },
+    {
+      "slideId": "PYTH_131_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Timeit Module",
+      "prompt": "Fill in the module used to time execution of small Python code snippets.",
+      "codeSnippet": "import ___",
+      "options": ["timeit", "time", "profile", "benchmark"],
+      "correctAnswer": "timeit"
+    },
+    {
+      "slideId": "PYTH_131_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CProfile Tool",
+      "prompt": "What is cProfile used for in Python development?",
+      "options": [
+        "Deterministic profiling of function calls and execution times",
+        "Compiling Python code directly to C",
+        "Automatic refactoring of class structures",
+        "Checking syntax errors"
+      ],
+      "correctAnswer": "Deterministic profiling of function calls and execution times"
+    },
+    {
+      "slideId": "PYTH_131_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "List Comprehension Optimization",
+      "prompt": "Fill in the fastest construct for building lists compared to standard loops.",
+      "codeSnippet": "squares = [x**2 for x in range(10)] # ___ comprehension",
+      "options": ["list", "dict", "set", "tuple"],
+      "correctAnswer": "list"
+    },
+    {
+      "slideId": "PYTH_131_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Optimization with Generator",
+      "prompt": "Which structure avoids allocating memory for the entire dataset upfront?",
+      "options": ["Generator expressions", "List comprehensions", "Dictionary copies", "Deep copies"],
+      "correctAnswer": "Generator expressions"
+    },
+    {
+      "slideId": "PYTH_131_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Caching Optimization",
+      "prompt": "Fill in the decorator from functools that caches function return values.",
+      "codeSnippet": "from functools import lru_cache\n@___ (maxsize=128)",
+      "options": ["lru_cache", "cache", "memoize", "store"],
+      "correctAnswer": "lru_cache"
+    },
+    {
+      "slideId": "PYTH_131_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cython & C Extensions",
+      "prompt": "What is Cython used for?",
+      "options": [
+        "Translating Python code to C for massive speed improvements",
+        "Building web applications",
+        "Parsing HTML pages",
+        "Creating GUI components"
+      ],
+      "correctAnswer": "Translating Python code to C for massive speed improvements"
+    },
+    {
+      "slideId": "PYTH_131_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Slots Memory Management",
+      "prompt": "Fill in the attribute used to eliminate instance __dict__ memory overhead.",
+      "codeSnippet": "class Optimized:\n    ___ = ('name', 'age')",
+      "options": ["__slots__", "__fields__", "__attrs__", "__memory__"],
+      "correctAnswer": "__slots__"
+    }
+  ]
+}

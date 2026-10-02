@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_127",
+  "title": "Asyncio & Concurrent Programming (PYTH_127_S1 to PYTH_127_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_127_S1",
+      "type": "CONCEPT",
+      "title": "Async & Await Basics",
+      "prompt": "Asyncio provides cooperative multitasking using event loops and coroutines.",
+      "codeSnippet": "import asyncio\n\nasync def fetch_data():\n    await asyncio.sleep(1)\n    return \"Data\"\n\nasyncio.run(fetch_data())"
+    },
+    {
+      "slideId": "PYTH_127_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Function Definition",
+      "prompt": "Fill in the keyword used before 'def' to define an asynchronous coroutine.",
+      "codeSnippet": "___ def main():\n    print(\"Async world\")",
+      "options": ["async", "await", "coroutine", "thread"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PYTH_127_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Awaiting Coroutines",
+      "prompt": "Which keyword pauses execution of a coroutine until the awaited task finishes?",
+      "options": ["await", "yield", "pause", "wait"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PYTH_127_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Asyncio Run Method",
+      "prompt": "Fill in the entry point function used to execute the top-level async main function.",
+      "codeSnippet": "asyncio.___(main())",
+      "options": ["run", "execute", "start", "main"],
+      "correctAnswer": "run"
+    },
+    {
+      "slideId": "PYTH_127_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Gathering Concurrent Tasks",
+      "prompt": "Which asyncio function runs multiple awaitable tasks concurrently and returns their results?",
+      "options": ["asyncio.gather()", "asyncio.all()", "asyncio.run_all()", "asyncio.combine()"],
+      "correctAnswer": "asyncio.gather()"
+    },
+    {
+      "slideId": "PYTH_127_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Sleep",
+      "prompt": "Fill in the non-blocking delay function used in asyncio.",
+      "codeSnippet": "await asyncio.___(2)",
+      "options": ["sleep", "wait", "delay", "pause"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "PYTH_127_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GIL Definition",
+      "prompt": "What does GIL stand for in Python's threading model?",
+      "options": [
+        "Global Interpreter Lock",
+        "General Instruction Layer",
+        "Graph Interface Loop",
+        "Global Internal Logic"
+      ],
+      "correctAnswer": "Global Interpreter Lock"
+    }
+  ]
+}

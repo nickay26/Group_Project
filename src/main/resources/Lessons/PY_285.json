@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_285",
+  "title": "Module Review Quiz: Advanced Decorators & Metaprogramming",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_285_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Decorators & Metaprogramming",
+      "prompt": "Review decorators, arguments in decorators, class-based decorators, `@wraps`, and metaclasses.",
+      "codeSnippet": "from functools import wraps\ndef my_dec(f):\n    @wraps(f)\n    def wrapper(*args, **kwargs):\n        return f(*args, **kwargs)\n    return wrapper"
+    },
+    {
+      "slideId": "PYTH_285_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Preserving Metadata",
+      "prompt": "Fill in the decorator from `functools` used to preserve original function name and docstring.",
+      "codeSnippet": "@___(func)\ndef wrapper(*args, **kwargs): pass",
+      "options": ["wraps", "copy_meta", "preserve", "keep"],
+      "correctAnswer": "wraps"
+    },
+    {
+      "slideId": "PYTH_285_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorator Syntax",
+      "prompt": "Which symbol is used to apply a decorator to a Python function?",
+      "options": ["@", "#", "$", "&"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PYTH_285_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Decorator Method",
+      "prompt": "Fill in the magic method required to make a class instance callable as a decorator wrapper.",
+      "codeSnippet": "def ___(self, *args, **kwargs):",
+      "options": ["__call__", "__init__", "__exec__", "__run__"],
+      "correctAnswer": "__call__"
+    },
+    {
+      "slideId": "PYTH_285_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Metaclass Base Type",
+      "prompt": "Which base class must custom metaclasses inherit from in Python?",
+      "options": ["type", "object", "Meta", "BaseClass"],
+      "correctAnswer": "type"
+    },
+    {
+      "slideId": "PYTH_285_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Assigning Metaclass",
+      "prompt": "Fill in the keyword argument used in a class definition header to specify a custom metaclass.",
+      "codeSnippet": "class CustomClass(metaclass=___):",
+      "options": ["MetaType", "type", "Object", "Base"],
+      "correctAnswer": "MetaType"
+    },
+    {
+      "slideId": "PYTH_285_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorator Arguments Structure",
+      "prompt": "How many nested function levels are typically needed for a decorator that accepts arguments?",
+      "options": ["3 levels", "2 levels", "1 level", "4 levels"],
+      "correctAnswer": "3 levels"
+    }
+  ]
+}

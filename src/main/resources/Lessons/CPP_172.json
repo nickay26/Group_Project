@@ -1,0 +1,116 @@
+{
+  "lessonId": "CPP_172" ,
+  "title": "Module Review Quiz: Functions (CPP_152 to CPP_158)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_172_S1",
+      "type": "CONCEPT",
+      "title": "Functions Overview",
+      "prompt": "This Module Quiz covers function declarations, definitions, return types, pass-by-value vs pass-by-reference, default parameters, function overloading, and recursion (CPP_152 to CPP_158).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nvoid greet(string name = \"User\") {\n    cout << \"Hello, \" << name << endl;\n}\n\nint main() {\n    greet();\n    greet(\"Alice\");\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_172_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Declaration (CPP_152)",
+      "prompt": "Fill in the return type used for a function that does NOT return any value.",
+      "codeSnippet": "___ printMessage() {\n    cout << \"Welcome!\";\n}",
+      "options": ["void", "int", "null", "empty"],
+      "correctAnswer": "void"
+    },
+    {
+      "slideId": "CPP_172_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Prototype (CPP_152)",
+      "prompt": "Why do we use a function prototype (declaration) before the main() function in C++?",
+      "options": ["To inform the compiler about the function's name, return type, and parameters before its actual implementation", "To automatically execute the function during compilation", "To make the function run faster", "To turn the function into a global variable"],
+      "correctAnswer": "To inform the compiler about the function's name, return type, and parameters before its actual implementation"
+    },
+    {
+      "slideId": "CPP_172_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Keyword (CPP_153)",
+      "prompt": "Fill in the keyword used to send a result back to the caller from inside a function.",
+      "codeSnippet": "int add(int a, int b) {\n    ___ a + b;\n}",
+      "options": ["return", "send", "give", "output"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "CPP_172_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pass by Value (CPP_154)",
+      "prompt": "What happens when a variable is passed by value to a function?",
+      "options": ["A copy of the argument is passed, so original variable remains unchanged", "The memory address is passed, modifying original variable", "The program creates a pointer variable automatically", "It results in a compile-time error"],
+      "correctAnswer": "A copy of the argument is passed, so original variable remains unchanged"
+    },
+    {
+      "slideId": "CPP_172_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pass by Reference (CPP_154)",
+      "prompt": "Fill in the symbol used in a parameter list to allow a function to modify the original argument variable.",
+      "codeSnippet": "void swapValues(int ___x, int ___y) {\n    int temp = x;\n    x = y;\n    y = temp;\n}",
+      "options": ["&", "*", "%", "$"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_172_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Arguments (CPP_155)",
+      "prompt": "Where must default argument values be specified in function definitions?",
+      "options": ["In the parameter list, typically starting from rightmost parameters", "Inside the body of the function only", "In the main function before calling", "At the very end of the C++ file"],
+      "correctAnswer": "In the parameter list, typically starting from rightmost parameters"
+    },
+    {
+      "slideId": "CPP_172_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Default Parameters (CPP_155)",
+      "prompt": "Fill in the assignment value so 'country' defaults to 'Myanmar' if omitted.",
+      "codeSnippet": "void setCountry(string country ___ \"Myanmar\") {\n    cout << country;\n}",
+      "options": ["=", "==", "->", ":"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "CPP_172_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Function Overloading (CPP_156)",
+      "prompt": "What allows two or more functions to share the exact same name in C++?",
+      "options": ["They must have different parameter types or number of parameters", "They must have different return types only", "They must be placed in different header files", "They must use the inline keyword"],
+      "correctAnswer": "They must have different parameter types or number of parameters"
+    },
+    {
+      "slideId": "CPP_172_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Overloading Parameters (CPP_156)",
+      "prompt": "Fill in the parameter type to successfully overload printData for floating numbers.",
+      "codeSnippet": "void printData(int x);\nvoid printData(___ x); // Overloaded version",
+      "options": ["double", "int", "void", "const"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_172_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Recursion Concept (CPP_157)",
+      "prompt": "What is 'recursion' in C++ programming?",
+      "options": ["A function calling itself directly or indirectly", "A loop that executes indefinitely", "A function that takes another function as parameter", "Converting a function into an inline assembly block"],
+      "correctAnswer": "A function calling itself directly or indirectly"
+    },
+    {
+      "slideId": "CPP_172_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Base Case in Recursion (CPP_157)",
+      "prompt": "Fill in the base condition check to prevent infinite stack calls in recursive factorial calculation.",
+      "codeSnippet": "int factorial(int n) {\n    if (n ___ 1) return 1;\n    return n * factorial(n - 1);\n}",
+      "options": ["<=", ">=", "==", "!="],
+      "correctAnswer": "<="
+    },
+    {
+      "slideId": "CPP_172_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inline Functions (CPP_158)",
+      "prompt": "What is the purpose of using the 'inline' keyword before a short function definition?",
+      "options": ["Suggests the compiler substitute function calls with actual code to reduce call overhead", "Hides the function from other source files", "Forces the function to run asynchronously", "Prevents the function from taking any arguments"],
+      "correctAnswer": "Suggests the compiler substitute function calls with actual code to reduce call overhead"
+    }
+  ]
+}

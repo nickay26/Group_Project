@@ -48,6 +48,13 @@ public class UserSession {
         return currentUser;
     }
 
+    /**
+     * Alias method for getCurrentUser() for codebase convenience.
+     */
+    public static User getUser() {
+        return currentUser;
+    }
+
     public static int getUserId() {
         return currentUser != null ? currentUser.getUserId() : -1;
     }
@@ -76,6 +83,30 @@ public class UserSession {
         activeCourseId = null;
         isRedirectedFromOverview = false;
         instance = null;
+    }
+
+    // ==========================================
+    // BRAIN (ENERGY) & ECONOMY DELEGATE METHODS
+    // ==========================================
+
+    public static int getBrainCount() {
+        return currentUser != null ? currentUser.getBrainCount() : 0;
+    }
+
+    public static void setBrainCount(int count) {
+        if (currentUser != null) {
+            currentUser.setBrainCount(count);
+        }
+    }
+
+    public static int getCoin() {
+        return currentUser != null ? currentUser.getCoin() : 0;
+    }
+
+    public static void setCoin(int coin) {
+        if (currentUser != null) {
+            currentUser.setCoin(coin);
+        }
     }
 
     // ==========================================

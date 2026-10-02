@@ -1,0 +1,133 @@
+{
+  "lessonId": "CPP_173" ,
+  "title": "Module Review Quiz: Pointers & Memory Management (CPP_159 to CPP_165)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_173_S1",
+      "type": "CONCEPT",
+      "title": "Pointers & Memory Management Overview",
+      "prompt": "This Module Quiz covers address-of operator, pointer declaration/dereferencing, pointer arithmetic, dynamic memory allocation (new/delete), dangling pointers, nullptr, and reference variables in C++ (CPP_159 to CPP_165).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int num = 42;\n    int* ptr = &num;\n    cout << \"Value: \" << *ptr << \" at Address: \" << ptr << endl;\n    \n    int* heapNum = new int(100);\n    delete heapNum;\n    heapNum = nullptr;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_173_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Address-Of Operator (CPP_159)",
+      "prompt": "Fill in the operator used to get the memory address of a variable.",
+      "codeSnippet": "int age = 20;\ncout << ___age; // Outputs memory address",
+      "options": ["&", "*", "->", "%"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_173_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer Declaration (CPP_160)",
+      "prompt": "Which symbol is used to declare a pointer variable in C++?",
+      "options": ["*", "&", "#", "->"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_173_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Dereferencing Operator (CPP_160)",
+      "prompt": "Fill in the operator used to access the value stored at a pointer's memory address.",
+      "codeSnippet": "int val = 50;\nint* ptr = &val;\ncout << ___ptr; // Prints 50",
+      "options": ["*", "&", "@", "val"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_173_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Null Pointer (CPP_161)",
+      "prompt": "What is the modern C++ (C++11 and later) literal used to represent a null pointer?",
+      "options": ["nullptr", "NULL", "0", "void"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_173_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Initializing Safe Pointer (CPP_161)",
+      "prompt": "Fill in the keyword to safely initialize a pointer that does not point to any valid memory.",
+      "codeSnippet": "int* ptr = ___;",
+      "options": ["nullptr", "null", "NULL", "0"],
+      "correctAnswer": "nullptr"
+    },
+    {
+      "slideId": "CPP_173_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Memory Allocation (CPP_162)",
+      "prompt": "Which keyword is used to allocate memory dynamically on the heap in C++?",
+      "options": ["new", "malloc", "alloc", "create"],
+      "correctAnswer": "new"
+    },
+    {
+      "slideId": "CPP_173_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Deallocating Memory (CPP_162)",
+      "prompt": "Fill in the keyword used to free dynamically allocated heap memory.",
+      "codeSnippet": "int* ptr = new int(10);\n// Use pointer\n___ ptr;",
+      "options": ["delete", "free", "remove", "clear"],
+      "correctAnswer": "delete"
+    },
+    {
+      "slideId": "CPP_173_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Array Deallocation (CPP_163)",
+      "prompt": "How should dynamically allocated array memory (e.g., int* arr = new int[10];) be properly deallocated?",
+      "options": ["delete[] arr;", "delete arr;", "free(arr);", "delete arr[];"],
+      "correctAnswer": "delete[] arr;"
+    },
+    {
+      "slideId": "CPP_173_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Array Pointer Deallocation (CPP_163)",
+      "prompt": "Fill in the missing delete syntax to free a heap-allocated array.",
+      "codeSnippet": "int* list = new int[5];\ndelete___ list;",
+      "options": ["[]", "()", "*", "&"],
+      "correctAnswer": "[]"
+    },
+    {
+      "slideId": "CPP_173_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dangling Pointer (CPP_164)",
+      "prompt": "What is a 'dangling pointer' in C++?",
+      "options": ["A pointer that still points to a memory location that has been deallocated", "A pointer that has not been initialized yet", "A pointer pointing to a const variable", "A pointer that points to another pointer"],
+      "correctAnswer": "A pointer that still points to a memory location that has been deallocated"
+    },
+    {
+      "slideId": "CPP_173_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Pointer Arithmetic (CPP_165)",
+      "prompt": "Fill in the operator to advance a pointer to the next element position in an array.",
+      "codeSnippet": "int arr[] = {10, 20, 30};\nint* ptr = arr;\nptr___; // Points to 20",
+      "options": ["++", "+=1", "+1", "->"],
+      "correctAnswer": "++"
+    },
+    {
+      "slideId": "CPP_173_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Leak (CPP_162)",
+      "prompt": "What causes a memory leak in C++ programs?",
+      "options": ["Allocating heap memory with 'new' without releasing it using 'delete'", "Using too many global variables", "Dereferencing a null pointer", "Declaring large arrays on the stack"],
+      "correctAnswer": "Allocating heap memory with 'new' without releasing it using 'delete'"
+    },
+    {
+      "slideId": "CPP_173_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Reference Variable (CPP_159)",
+      "prompt": "Fill in the symbol used to create an alias (reference) for an existing variable.",
+      "codeSnippet": "int original = 100;\nint___ ref = original;",
+      "options": ["&", "*", "alias", "@"],
+      "correctAnswer": "&"
+    },
+    {
+      "slideId": "CPP_173_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pointer vs Reference (CPP_159)",
+      "prompt": "Which statement accurately describes a key difference between a reference and a pointer in C++?",
+      "options": ["A reference cannot be null and cannot be reassigned to refer to another variable", "A reference can point to null easily", "A pointer cannot be reassigned after initialization", "Pointers do not occupy memory locations"],
+      "correctAnswer": "A reference cannot be null and cannot be reassigned to refer to another variable"
+    }
+  ]
+}

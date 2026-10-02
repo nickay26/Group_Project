@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_130",
+  "title": "Algorithmic Foundations & Capstone Project (PYTH_130_S1 to PYTH_130_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_130_S1",
+      "type": "CONCEPT",
+      "title": "Big-O Notation & Complexity",
+      "prompt": "Big-O notation measures algorithm time and space efficiency relative to input size.",
+      "codeSnippet": "# O(1) Constant Time\ndef get_first(items):\n    return items[0]\n\n# O(n) Linear Time\ndef search(items, target):\n    return target in items"
+    },
+    {
+      "slideId": "PYTH_130_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "List Index Lookup Complexity",
+      "prompt": "Fill in the time complexity notation for accessing an element by index in a Python list.",
+      "codeSnippet": "# Time complexity: O(___)",
+      "options": ["1", "n", "log n", "n^2"],
+      "correctAnswer": "1"
+    },
+    {
+      "slideId": "PYTH_130_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dictionary Lookup Complexity",
+      "prompt": "What is the average time complexity for searching a key in a Python dictionary?",
+      "options": ["O(1)", "O(n)", "O(n log n)", "O(n^2)"],
+      "correctAnswer": "O(1)"
+    },
+    {
+      "slideId": "PYTH_130_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Sorting Algorithm Complexity",
+      "prompt": "Fill in the average time complexity for Python's Timsort algorithm (list.sort()).",
+      "codeSnippet": "# Average sorting complexity: O(n ___ n)",
+      "options": ["log", "sqrt", "exp", "sum"],
+      "correctAnswer": "log"
+    },
+    {
+      "slideId": "PYTH_130_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack Data Structure - LIFO",
+      "prompt": "Which Python list method removes and returns the last element (LIFO order)?",
+      "options": ["pop()", "remove()", "extract()", "dequeue()"],
+      "correctAnswer": "pop()"
+    },
+    {
+      "slideId": "PYTH_130_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Collections Deque",
+      "prompt": "Fill in the class from 'collections' module optimized for double-ended queues.",
+      "codeSnippet": "from collections import ___\nq = deque([1, 2, 3])",
+      "options": ["deque", "queue", "stack", "list_queue"],
+      "correctAnswer": "deque"
+    },
+    {
+      "slideId": "PYTH_130_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Binary Search Requirement",
+      "prompt": "What prerequisite condition must a list meet before running Binary Search algorithm?",
+      "options": [
+        "The list must be sorted",
+        "The list must contain only unique elements",
+        "The list length must be an even number",
+        "The list must contain integers only"
+      ],
+      "correctAnswer": "The list must be sorted"
+    }
+  ]
+}

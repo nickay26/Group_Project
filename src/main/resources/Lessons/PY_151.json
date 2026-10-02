@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_151",
+  "title": "Advanced Concurrency & AsyncIO Deep Dive (PYTH_151_S1 to PYTH_151_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_151_S1",
+      "type": "CONCEPT",
+      "title": "AsyncIO Event Loop Architecture",
+      "prompt": "AsyncIO runs asynchronous tasks within a single-threaded event loop, optimizing high-concurrency I/O operations.",
+      "codeSnippet": "import asyncio\n\nasync def main():\n    print('Event loop started')\n\nasyncio.run(main())"
+    },
+    {
+      "slideId": "PYTH_151_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Awaiting Coroutines",
+      "prompt": "Fill in the keyword used to pause execution until an asynchronous coroutine returns a result.",
+      "codeSnippet": "result = ___ fetch_data_from_api()",
+      "options": ["await", "async", "yield", "defer"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PYTH_151_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiprocessing vs Threading",
+      "prompt": "Which Python module is best suited for bypassing the Global Interpreter Lock (GIL) on CPU-bound operations?",
+      "options": [
+        "multiprocessing",
+        "threading",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor"
+      ],
+      "correctAnswer": "multiprocessing"
+    },
+    {
+      "slideId": "PYTH_151_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Gathering Concurrent Tasks",
+      "prompt": "Fill in the AsyncIO function used to run multiple concurrent tasks and gather their results.",
+      "codeSnippet": "results = await asyncio.___ (*task_list)",
+      "options": ["gather", "combine", "collect", "group"],
+      "correctAnswer": "gather"
+    },
+    {
+      "slideId": "PYTH_151_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Race Condition Mitigation",
+      "prompt": "Which primitive should be used to prevent race conditions when updating shared state across concurrent coroutines?",
+      "options": [
+        "asyncio.Lock",
+        "asyncio.Semaphore",
+        "asyncio.Event",
+        "asyncio.Queue"
+      ],
+      "correctAnswer": "asyncio.Lock"
+    },
+    {
+      "slideId": "PYTH_151_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Limiting Concurrency with Semaphores",
+      "prompt": "Fill in the class used to limit maximum concurrent operations (e.g., API rate limiting).",
+      "codeSnippet": "limiter = asyncio.___ (10)",
+      "options": ["Semaphore", "Lock", "Barrier", "Condition"],
+      "correctAnswer": "Semaphore"
+    },
+    {
+      "slideId": "PYTH_151_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Execution in Async",
+      "prompt": "How do you execute blocking synchronous I/O code inside an AsyncIO event loop without blocking it?",
+      "options": [
+        "Using asyncio.to_thread() or loop.run_in_executor()",
+        "Directly calling the function without await",
+        "Wrapping the synchronous function in a generator",
+        "By increasing the system CPU priority"
+      ],
+      "correctAnswer": "Using asyncio.to_thread() or loop.run_in_executor()"
+    },
+    {
+      "slideId": "PYTH_151_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Canceling Tasks",
+      "prompt": "Fill in the method used to explicitly stop an active AsyncIO Task.",
+      "codeSnippet": "task.___ ()",
+      "options": ["cancel", "stop", "abort", "terminate"],
+      "correctAnswer": "cancel"
+    }
+  ]
+}

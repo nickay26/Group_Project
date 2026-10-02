@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_121",
+  "title": "Virtual Environments & Package Management (PYTH_121_S1 to PYTH_121_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_121_S1",
+      "type": "CONCEPT",
+      "title": "Virtual Environments with venv",
+      "prompt": "Virtual environments isolate project dependencies to prevent conflicts between libraries.",
+      "codeSnippet": "# Terminal Command\npython -m venv venv\nsource venv/bin/activate  # On Linux/macOS\nvenv\\Scripts\\activate     # On Windows"
+    },
+    {
+      "slideId": "PYTH_121_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating Virtual Environment",
+      "prompt": "Fill in the module name used to create a virtual environment.",
+      "codeSnippet": "python -m ___ myenv",
+      "options": ["venv", "env", "virtualenv", "pipenv"],
+      "correctAnswer": "venv"
+    },
+    {
+      "slideId": "PYTH_121_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Installing Packages",
+      "prompt": "Which package manager CLI tool is standard for installing Python packages from PyPI?",
+      "options": ["pip", "npm", "get-pip", "pyinstall"],
+      "correctAnswer": "pip"
+    },
+    {
+      "slideId": "PYTH_121_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Exporting Dependencies",
+      "prompt": "Fill in the command flag to output installed dependencies to a requirements file.",
+      "codeSnippet": "pip ___ > requirements.txt",
+      "options": ["freeze", "list", "export", "dump"],
+      "correctAnswer": "freeze"
+    },
+    {
+      "slideId": "PYTH_121_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Installing Requirements File",
+      "prompt": "How do you install dependencies listed in a requirements.txt file?",
+      "options": [
+        "pip install -r requirements.txt",
+        "pip load requirements.txt",
+        "pip import requirements.txt",
+        "pip setup requirements.txt"
+      ],
+      "correctAnswer": "pip install -r requirements.txt"
+    },
+    {
+      "slideId": "PYTH_121_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Deactivating Environment",
+      "prompt": "Fill in the shell command used to exit an active virtual environment.",
+      "codeSnippet": "$ ___",
+      "options": ["deactivate", "exit", "stop", "close"],
+      "correctAnswer": "deactivate"
+    },
+    {
+      "slideId": "PYTH_121_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "PyPI Package Registry",
+      "prompt": "What does PyPI stand for in the Python ecosystem?",
+      "options": [
+        "Python Package Index",
+        "Python Public Integration",
+        "Python Program Installer",
+        "Python Project Interface"
+      ],
+      "correctAnswer": "Python Package Index"
+    }
+  ]
+}

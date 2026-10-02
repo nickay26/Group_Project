@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_155",
+  "title": "Async Persistence with SQLAlchemy 2.0 & Alembic (PYTH_155_S1 to PYTH_155_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_155_S1",
+      "type": "CONCEPT",
+      "title": "SQLAlchemy 2.0 Unified Async ORM",
+      "prompt": "SQLAlchemy 2.0 unifies Core and ORM models, providing native asynchronous database interaction.",
+      "codeSnippet": "from sqlalchemy.ext.asyncio import create_async_engine\nengine = create_async_engine('postgresql+asyncpg://user:pass@localhost/db')"
+    },
+    {
+      "slideId": "PYTH_155_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Session Context",
+      "prompt": "Fill in the session class used to issue asynchronous queries in SQLAlchemy 2.0.",
+      "codeSnippet": "async with Async___ (engine) as session:",
+      "options": ["Session", "Connection", "Transaction", "Client"],
+      "correctAnswer": "Session"
+    },
+    {
+      "slideId": "PYTH_155_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Alembic Migrations",
+      "prompt": "Which command-line utility is standard for managing database schema migrations alongside SQLAlchemy?",
+      "options": ["Alembic", "Flyway", "Prisma", "Django-Admin"],
+      "correctAnswer": "Alembic"
+    },
+    {
+      "slideId": "PYTH_155_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Declarative Base Class",
+      "prompt": "Fill in the module function or class used to create a declarative base model.",
+      "codeSnippet": "from sqlalchemy.orm import DeclarativeBase\n\nclass Base( ___ ):\n    pass",
+      "options": ["DeclarativeBase", "BaseModel", "ORMBase", "Entity"],
+      "correctAnswer": "DeclarativeBase"
+    },
+    {
+      "slideId": "PYTH_155_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "N+1 Query Prevention",
+      "prompt": "Which loading strategy resolves N+1 query performance problems when fetching related ORM entities?",
+      "options": [
+        "Eager loading (e.g., selectinload or joinedload)",
+        "Lazy loading on demand",
+        "Client-side Python filtering",
+        "Converting database tables to JSON files"
+      ],
+      "correctAnswer": "Eager loading (e.g., selectinload or joinedload)"
+    },
+    {
+      "slideId": "PYTH_155_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Executing Select Statements",
+      "prompt": "Fill in the construct function used to write queries in 2.0 style.",
+      "codeSnippet": "stmt = ___ (User).where(User.id == 1)",
+      "options": ["select", "query", "find", "get"],
+      "correctAnswer": "select"
+    },
+    {
+      "slideId": "PYTH_155_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Transaction Commit",
+      "prompt": "What happens when an exception occurs inside an explicit session.begin() transaction block?",
+      "options": [
+        "The session automatically issues a rollback to preserve data integrity",
+        "The database retains partial changes",
+        "The database file gets deleted",
+        "The transaction is saved to an external text log"
+      ],
+      "correctAnswer": "The session automatically issues a rollback to preserve data integrity"
+    },
+    {
+      "slideId": "PYTH_155_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Mapped Columns Type Annotations",
+      "prompt": "Fill in the ORM type wrapper function introduced in SQLAlchemy 2.0 for type hinting.",
+      "codeSnippet": "id: ___ [int] = mapped_column(primary_key=True)",
+      "options": ["Mapped", "Field", "Column", "Attribute"],
+      "correctAnswer": "Mapped"
+    }
+  ]
+}

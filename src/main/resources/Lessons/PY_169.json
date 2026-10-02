@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_169",
+  "title": "Advanced Memory Management & Performance Profiling (PYTH_169_S1 to PYTH_169_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_169_S1",
+      "type": "CONCEPT",
+      "title": "Garbage Collection & Memory Profiling",
+      "prompt": "Understanding Python's reference counting and cyclic garbage collector helps diagnose memory leaks.",
+      "codeSnippet": "import sys\nimport gc\n\nprint(sys.getrefcount(object))\ngc.collect()"
+    },
+    {
+      "slideId": "PYTH_169_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Manual Garbage Collection",
+      "prompt": "Fill in the function call used to trigger Python's cyclic garbage collector explicitly.",
+      "codeSnippet": "import gc\n___()",
+      "options": ["gc.collect", "gc.run", "gc.clear", "gc.purge"],
+      "correctAnswer": "gc.collect"
+    },
+    {
+      "slideId": "PYTH_169_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Reduction with __slots__",
+      "prompt": "What primary memory optimization does defining `__slots__` on a custom Python class achieve?",
+      "options": [
+        "It suppresses creation of instance __dict__, saving significant per-object memory overhead",
+        "It forces the object to be stored in CPU L1 cache",
+        "It converts all instance variables to C pointers",
+        "It disables garbage collection for that class"
+      ],
+      "correctAnswer": "It suppresses creation of instance __dict__, saving significant per-object memory overhead"
+    },
+    {
+      "slideId": "PYTH_169_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "CPU Profiling Tool",
+      "prompt": "Fill in the built-in C-extension module used to profile execution time per function call.",
+      "codeSnippet": "import ___",
+      "options": ["cProfile", "timeit", "profile", "sysprofile"],
+      "correctAnswer": "cProfile"
+    },
+    {
+      "slideId": "PYTH_169_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Tracing Memory Allocations (tracemalloc)",
+      "prompt": "Which tool provides detailed line-by-line memory allocation tracking natively in standard Python?",
+      "options": ["tracemalloc", "cProfile", "pdb", "dis"],
+      "correctAnswer": "tracemalloc"
+    },
+    {
+      "slideId": "PYTH_169_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Measuring Object Memory Footprint",
+      "prompt": "Fill in the sys function used to obtain the byte size of a Python object.",
+      "codeSnippet": "import sys\nsize = sys.___(obj)",
+      "options": ["getsizeof", "memory_usage", "byte_size", "length_bytes"],
+      "correctAnswer": "getsizeof"
+    },
+    {
+      "slideId": "PYTH_169_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "PyPy JIT Engine vs CPython",
+      "prompt": "Why can PyPy achieve significant execution speedups over standard CPython for pure Python loops?",
+      "options": [
+        "It uses a Just-In-Time (JIT) compiler to convert Python bytecode to native machine code dynamically",
+        "It completely removes all type assertions at runtime",
+        "It runs Python exclusively on GPU cores",
+        "It automatically compiles Python to Rust source code"
+      ],
+      "correctAnswer": "It uses a Just-In-Time (JIT) compiler to convert Python bytecode to native machine code dynamically"
+    },
+    {
+      "slideId": "PYTH_169_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Disassembling Bytecode",
+      "prompt": "Fill in the built-in module used to inspect CPython bytecode instructions generated from source code.",
+      "codeSnippet": "import ___\n___.dis(my_func)",
+      "options": ["dis", "ast", "bytecode", "inspect"],
+      "correctAnswer": "dis"
+    }
+  ]
+}

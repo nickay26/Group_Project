@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_286",
+  "title": "Module Review Quiz: Iterators, Generators & Context Managers",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_286_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Iteration & Resource Protocols",
+      "prompt": "Review custom iterators, generator functions (`yield`), `contextlib`, and `__enter__`/`__exit__` methods.",
+      "codeSnippet": "class Managed:\n    def __enter__(self):\n        return self\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        pass"
+    },
+    {
+      "slideId": "PYTH_286_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Yield Keyword",
+      "prompt": "Fill in the keyword used in a function to suspend execution and yield a value back to caller.",
+      "codeSnippet": "def my_gen():\n    ___ 42",
+      "options": ["yield", "return", "send", "output"],
+      "correctAnswer": "yield"
+    },
+    {
+      "slideId": "PYTH_286_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Protocol Dunders",
+      "prompt": "Which pair of magic methods defines the Iterator Protocol in Python?",
+      "options": [
+        "__iter__() and __next__()",
+        "__start__() and __get__()",
+        "__enter__() and __exit__()",
+        "__init__() and __iter__()"
+      ],
+      "correctAnswer": "__iter__() and __next__()"
+    },
+    {
+      "slideId": "PYTH_286_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Context Manager Opening",
+      "prompt": "Fill in the magic method executed upon entering a `with` block.",
+      "codeSnippet": "def ___(self): return self",
+      "options": ["__enter__", "__start__", "__open__", "__init__"],
+      "correctAnswer": "__enter__"
+    },
+    {
+      "slideId": "PYTH_286_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Contextlib Decorator",
+      "prompt": "Which decorator from `contextlib` converts a generator into a context manager?",
+      "options": ["@contextmanager", "@with_manager", "@context_builder", "@resource_manager"],
+      "correctAnswer": "@contextmanager"
+    },
+    {
+      "slideId": "PYTH_286_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Delegating Generators",
+      "prompt": "Fill in the syntax used to delegate generator production to a sub-generator.",
+      "codeSnippet": "yield ___ sub_generator()",
+      "options": ["from", "to", "in", "with"],
+      "correctAnswer": "from"
+    },
+    {
+      "slideId": "PYTH_286_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Context Exit Return Value",
+      "prompt": "What does returning `True` from `__exit__` do when an exception occurs inside a `with` block?",
+      "options": [
+        "Suppresses the exception",
+        "Reraises the exception",
+        "Converts it to RuntimeError",
+        "Restarts the with block"
+      ],
+      "correctAnswer": "Suppresses the exception"
+    }
+  ]
+}

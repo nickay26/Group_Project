@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_126",
+  "title": "Context Managers & With Statement (PYTH_126_S1 to PYTH_126_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_126_S1",
+      "type": "CONCEPT",
+      "title": "Custom Context Managers",
+      "prompt": "Context managers handle setup and teardown operations using __enter__ and __exit__ dunder methods.",
+      "codeSnippet": "class DatabaseConnection:\n    def __enter__(self):\n        print(\"Connected\")\n        return self\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        print(\"Disconnected\")"
+    },
+    {
+      "slideId": "PYTH_126_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Enter Method",
+      "prompt": "Fill in the dunder method called when entering a 'with' block.",
+      "codeSnippet": "def ___enter___(self):\n    return self",
+      "options": ["__enter__", "__start__", "__open__", "__init__"],
+      "correctAnswer": "__enter__"
+    },
+    {
+      "slideId": "PYTH_126_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exit Method",
+      "prompt": "Which method is guaranteed to run when exiting a 'with' block, even if an error occurs?",
+      "options": ["__exit__", "__close__", "__stop__", "__finally__"],
+      "correctAnswer": "__exit__"
+    },
+    {
+      "slideId": "PYTH_126_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Contextlib Decorator",
+      "prompt": "Fill in the utility decorator from contextlib used to create context managers via generators.",
+      "codeSnippet": "from contextlib import contextmanager\n\n___contextmanager\ndef managed_resource():\n    yield",
+      "options": ["@", "#", "def", "using"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PYTH_126_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Suppressing Exceptions in Exit",
+      "prompt": "How can __exit__ suppress an exception raised inside the 'with' block?",
+      "options": [
+        "By returning True",
+        "By returning False",
+        "By raising a new exception",
+        "By calling pass"
+      ],
+      "correctAnswer": "By returning True"
+    },
+    {
+      "slideId": "PYTH_126_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Using Context Manager Keyword",
+      "prompt": "Fill in the keyword used to execute a context manager.",
+      "codeSnippet": "___ open('test.txt') as f:\n    data = f.read()",
+      "options": ["with", "using", "try", "resource"],
+      "correctAnswer": "with"
+    },
+    {
+      "slideId": "PYTH_126_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Context Manager Use Cases",
+      "prompt": "Which of the following is a primary use case for context managers?",
+      "options": [
+        "Managing resources like file handles, locks, and DB connections",
+        "Compiling Python code to machine code",
+        "Creating GUI buttons",
+        "Defining REST API routes"
+      ],
+      "correctAnswer": "Managing resources like file handles, locks, and DB connections"
+    }
+  ]
+}

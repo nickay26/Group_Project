@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_128",
+  "title": "Unit Testing with Pytest (PYTH_128_S1 to PYTH_128_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_128_S1",
+      "type": "CONCEPT",
+      "title": "Pytest Framework Overview",
+      "prompt": "Pytest is a testing framework that uses standard Python assert statements to verify code correctness.",
+      "codeSnippet": "def add(a, b):\n    return a + b\n\ndef test_add():\n    assert add(2, 3) == 5"
+    },
+    {
+      "slideId": "PYTH_128_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Assert Statement",
+      "prompt": "Fill in the keyword used to verify test conditions in pytest.",
+      "codeSnippet": "def test_val():\n    ___ 10 > 5",
+      "options": ["assert", "check", "verify", "expect"],
+      "correctAnswer": "assert"
+    },
+    {
+      "slideId": "PYTH_128_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Test Function Naming Convention",
+      "prompt": "What prefix must test functions have for pytest to automatically discover them?",
+      "options": ["test_", "check_", "verify_", "spec_"],
+      "correctAnswer": "test_"
+    },
+    {
+      "slideId": "PYTH_128_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Pytest Fixture Decorator",
+      "prompt": "Fill in the decorator used to set up baseline state/data for tests.",
+      "codeSnippet": "import pytest\n\n@pytest.___ \ndef sample_data():\n    return {\"id\": 1}",
+      "options": ["fixture", "setup", "data", "mock"],
+      "correctAnswer": "fixture"
+    },
+    {
+      "slideId": "PYTH_128_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Testing Exceptions with Pytest",
+      "prompt": "How do you test that a piece of code raises a ZeroDivisionError in pytest?",
+      "options": [
+        "with pytest.raises(ZeroDivisionError):",
+        "pytest.expect_error(ZeroDivisionError)",
+        "assert raises(ZeroDivisionError)",
+        "try: ... except ZeroDivisionError: pass"
+      ],
+      "correctAnswer": "with pytest.raises(ZeroDivisionError):"
+    },
+    {
+      "slideId": "PYTH_128_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Parameterized Tests Decorator",
+      "prompt": "Fill in the decorator used to run a test with multiple set of arguments.",
+      "codeSnippet": "@pytest.mark.___\n(\"a,b,expected\", [(1, 2, 3), (4, 5, 9)])",
+      "options": ["parametrize", "parameters", "multiple", "inputs"],
+      "correctAnswer": "parametrize"
+    },
+    {
+      "slideId": "PYTH_128_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Built-in Unittest Module",
+      "prompt": "Which class does Python's built-in testing framework require test cases to inherit from?",
+      "options": [
+        "unittest.TestCase",
+        "unittest.TestBase",
+        "unittest.Suite",
+        "unittest.Checker"
+      ],
+      "correctAnswer": "unittest.TestCase"
+    }
+  ]
+}

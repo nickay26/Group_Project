@@ -1,0 +1,163 @@
+{
+  "lessonId": "PY_282",
+  "title": "Module Assessment: Concurrency & Multitasking (PY_265 to PY_272)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_282_S1",
+      "type": "CONCEPT",
+      "title": "Module 10 Overview",
+      "prompt": "Assessment covering Multithreading, Multiprocessing, Concurrent Futures, Synchronization Primitives, Race Conditions, and the GIL.",
+      "codeSnippet": "from concurrent.futures import ThreadPoolExecutor\n\nwith ThreadPoolExecutor() as executor:\n    results = executor.map(func, data)"
+    },
+    {
+      "slideId": "PY_282_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Threading vs Multiprocessing",
+      "prompt": "Why is `multiprocessing` preferred over `threading` in Python for CPU-bound tasks?",
+      "options": [
+        "Multiprocessing creates separate Python processes, each with its own GIL and memory space to achieve parallel CPU execution",
+        "Threading uses more RAM than process creation",
+        "Threading cannot run on multi-core processors",
+        "Multiprocessing code runs asynchronously without locks"
+      ],
+      "correctAnswer": "Multiprocessing creates separate Python processes, each with its own GIL and memory space to achieve parallel CPU execution"
+    },
+    {
+      "slideId": "PY_282_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Threading Module Import",
+      "prompt": "Fill in the module used to work with low-level threads in Python.",
+      "codeSnippet": "import ___\n\nt = threading.Thread(target=worker)\nt.start()",
+      "options": ["threading", "threads", "thread", "concurrent"],
+      "correctAnswer": "threading"
+    },
+    {
+      "slideId": "PY_282_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Preventing Race Conditions",
+      "prompt": "Which synchronization primitive ensures that only one thread can access a shared resource or critical section at a time?",
+      "options": [
+        "Lock (Mutex)",
+        "Semaphore",
+        "Event",
+        "Condition"
+      ],
+      "correctAnswer": "Lock (Mutex)"
+    },
+    {
+      "slideId": "PY_282_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 4: Thread Joining",
+      "prompt": "Fill in the thread method called to block execution of the main thread until the target thread finishes execution.",
+      "codeSnippet": "t = threading.Thread(target=job)\nt.start()\nt.____()",
+      "options": ["join", "wait", "finish", "await"],
+      "correctAnswer": "join"
+    },
+    {
+      "slideId": "PY_282_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 5: Daemon Threads",
+      "prompt": "What happens to Daemon Threads when the main program finishes execution and exits?",
+      "options": [
+        "Daemon threads are abruptly terminated immediately",
+        "The main program waits for daemon threads to finish",
+        "Daemon threads are converted to background processes",
+        "They raise an unhandled Exception"
+      ],
+      "correctAnswer": "Daemon threads are abruptly terminated immediately"
+    },
+    {
+      "slideId": "PY_282_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Concurrent Futures Pool",
+      "prompt": "Which high-level module provides `ThreadPoolExecutor` and `ProcessPoolExecutor` for managing worker pools?",
+      "options": [
+        "concurrent.futures",
+        "asyncio.futures",
+        "multiprocessing.pool",
+        "threading.executor"
+      ],
+      "correctAnswer": "concurrent.futures"
+    },
+    {
+      "slideId": "PY_282_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 8: Deadlock Conditions",
+      "prompt": "A situation where two or more threads are permanently blocked waiting for locks held by each other is known as a ___.",
+      "codeSnippet": "# Thread 1 holds LockA, waits for LockB\n# Thread 2 holds LockB, waits for LockA\n# State: ___",
+      "options": ["deadlock", "race_condition", "livelock", "starvation"],
+      "correctAnswer": "deadlock"
+    },
+    {
+      "slideId": "PY_282_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Semaphore Usage",
+      "prompt": "How does a `Semaphore` differ from a standard `Lock`?",
+      "options": [
+        "A Semaphore permits a fixed maximum number of concurrent accesses via an internal counter",
+        "A Semaphore can only be used with multiprocessing",
+        "A Semaphore does not require release calls",
+        "A Semaphore prevents deadlocks automatically"
+      ],
+      "correctAnswer": "A Semaphore permits a fixed maximum number of concurrent accesses via an internal counter"
+    },
+    {
+      "slideId": "PY_282_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Inter-Process Communication",
+      "prompt": "Fill in the thread/process safe queue class used for message passing between concurrent tasks.",
+      "codeSnippet": "from queue import ___\n\nq = Queue()",
+      "options": ["Queue", "ProcessQueue", "FIFOQueue", "MessageQueue"],
+      "correctAnswer": "Queue"
+    },
+    {
+      "slideId": "PY_282_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: RLock (Reentrant Lock)",
+      "prompt": "When should an `RLock` (Reentrant Lock) be used instead of a standard `Lock`?",
+      "options": [
+        "When the same thread needs to acquire the lock multiple times recursively without blocking itself",
+        "When locking across multiple processes",
+        "When speed is more critical than synchronization",
+        "When sharing resources with C extensions"
+      ],
+      "correctAnswer": "When the same thread needs to acquire the lock multiple times recursively without blocking itself"
+    },
+    {
+      "slideId": "PY_282_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 11: Global Interpreter Lock (GIL) Scope",
+      "prompt": "Which type of tasks benefit MOST from Python's standard `threading` module despite the presence of the GIL?",
+      "options": [
+        "I/O-bound tasks (network requests, file operations, database queries)",
+        "CPU-bound mathematical operations",
+        "Data science matrix multiplications",
+        "Image processing algorithms"
+      ],
+      "correctAnswer": "I/O-bound tasks (network requests, file operations, database queries)"
+    },
+    {
+      "slideId": "PY_282_S13",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 12: Multiprocessing Shared Memory",
+      "prompt": "Fill in the class from `multiprocessing` used to allocate shared memory values between processes.",
+      "codeSnippet": "from multiprocessing import Value, ___\n\nshared_array = Array('i', range(10))",
+      "options": ["Array", "SharedMemory", "Manager", "Vector"],
+      "correctAnswer": "Array"
+    },
+    {
+      "slideId": "PY_282_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 13: Future Object State",
+      "prompt": "What method on a `Future` object (from `concurrent.futures`) checks whether execution has completed?",
+      "options": [
+        "done()",
+        "is_finished()",
+        "completed()",
+        "result_ready()"
+      ],
+      "correctAnswer": "done()"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "lessonId": "CPP_281",
+  "title": "Module Review Quiz: Object-Oriented Programming (CPP_201 to CPP_208)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_281_S1",
+      "type": "CONCEPT",
+      "title": "Object-Oriented Programming Overview",
+      "prompt": "This Module Quiz covers OOP fundamentals in C++: Classes, Objects, Access Specifiers, Constructors, Destructors, Encapsulation, Operator Overloading, and Friend functions (CPP_201 to CPP_208).",
+      "codeSnippet": "#include <iostream>\nusing namespace std;\n\nclass Car {\nprivate:\n    string brand;\npublic:\n    Car(string b) : brand(b) {}\n    ~Car() {}\n    void show() { cout << \"Brand: \" << brand << endl; }\n};\n\nint main() {\n    Car myCar(\"Toyota\");\n    myCar.show();\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_281_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration (CPP_201)",
+      "prompt": "Fill in the keyword used to define a custom data type containing data members and functions in C++.",
+      "codeSnippet": "___ Student {\npublic:\n    int id;\n    string name;\n};",
+      "options": ["class", "struct", "object", "type"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "CPP_281_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Access Specifier (CPP_202)",
+      "prompt": "What is the default access specifier for members inside a C++ 'class' if none is specified?",
+      "options": ["private", "public", "protected", "internal"],
+      "correctAnswer": "private"
+    },
+    {
+      "slideId": "CPP_281_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Public Access Specifier (CPP_202)",
+      "prompt": "Fill in the access modifier keyword that allows class members to be accessed from outside the class.",
+      "codeSnippet": "class Rectangle {\n___:\n    double width;\n    double height;\n};",
+      "options": ["public", "private", "protected", "global"],
+      "correctAnswer": "public"
+    },
+    {
+      "slideId": "CPP_281_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructors (CPP_203)",
+      "prompt": "Which statement correctly describes a Constructor in C++?",
+      "options": ["A special member function with the same name as the class that initializes objects and has no return type", "A static function used to delete class objects", "A normal function that returns a void type", "A function that must be called explicitly using dot operator"],
+      "correctAnswer": "A special member function with the same name as the class that initializes objects and has no return type"
+    },
+    {
+      "slideId": "CPP_281_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Destructor Syntax (CPP_204)",
+      "prompt": "Fill in the symbol placed before the class name to declare a Destructor.",
+      "codeSnippet": "class BankAccount {\npublic:\n    ___BankAccount() {\n        // Cleanup code\n    }\n};",
+      "options": ["~", "!", "*", "&"],
+      "correctAnswer": "~"
+    },
+    {
+      "slideId": "CPP_281_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Encapsulation (CPP_205)",
+      "prompt": "How is Encapsulation primarily achieved in Object-Oriented Programming?",
+      "options": ["By hiding private data members behind public getter and setter methods", "By deriving child classes from parent classes", "By overloading function names with different parameters", "By allocating object instances dynamically on heap"],
+      "correctAnswer": "By hiding private data members behind public getter and setter methods"
+    },
+    {
+      "slideId": "CPP_281_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "This Pointer (CPP_206)",
+      "prompt": "Fill in the implicit keyword pointer that holds the memory address of the current calling object.",
+      "codeSnippet": "void setX(int x) {\n    ___->x = x;\n}",
+      "options": ["this", "self", "ptr", "current"],
+      "correctAnswer": "this"
+    },
+    {
+      "slideId": "CPP_181_S9",
+      "slideId": "CPP_281_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Copy Constructor (CPP_203)",
+      "prompt": "Which parameter signature is required for a standard Copy Constructor of class 'Box'?",
+      "options": ["Box(const Box &other)", "Box(Box other)", "Box(Box *other)", "Box(const Box *other)"],
+      "correctAnswer": "Box(const Box &other)"
+    },
+    {
+      "slideId": "CPP_281_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Friend Function (CPP_207)",
+      "prompt": "Fill in the keyword used to grant a non-member function access to private members of a class.",
+      "codeSnippet": "class Complex {\n    ___ void showSecret(Complex c);\n};",
+      "options": ["friend", "public", "virtual", "extern"],
+      "correctAnswer": "friend"
+    },
+    {
+      "slideId": "CPP_281_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Overloading (CPP_208)",
+      "prompt": "Which keyword is used to overload built-in operators (like +, -, ==) for custom classes?",
+      "options": ["operator", "overload", "virtual", "function"],
+      "correctAnswer": "operator"
+    },
+    {
+      "slideId": "CPP_281_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Operator Overloading Syntax (CPP_208)",
+      "prompt": "Fill in the keyword to define an addition operator overload method.",
+      "codeSnippet": "Point ___+(const Point& p) {\n    return Point(x + p.x, y + p.y);\n}",
+      "options": ["operator", "overload", "func", "virtual"],
+      "correctAnswer": "operator"
+    },
+    {
+      "slideId": "CPP_281_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Static Class Members (CPP_206)",
+      "prompt": "How are 'static' data members shared among object instances of a class?",
+      "options": ["Single shared instance exists across all objects of the class", "Each object gets its own separate copy of the static member", "Static members can only be accessed inside constructors", "They are re-created every time a new object is instantiated"],
+      "correctAnswer": "Single shared instance exists across all objects of the class"
+    },
+    {
+      "slideId": "CPP_281_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Member Functions (CPP_205)",
+      "prompt": "What restriction applies to a member function declared as 'void display() const;'?",
+      "options": ["It cannot modify any member variables of the calling object", "It cannot be called by const objects", "It cannot take any arguments", "It can only access static members"],
+      "correctAnswer": "It cannot modify any member variables of the calling object"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{"lessonId": "PYTH_191",
+"title": "Quantum Computing with Qiskit & Python (PYTH_191_S1 to PYTH_191_S8)",
+"isPremium": true,
+"slides": [
+{
+"slideId": "PYTH_191_S1",
+"type": "CONCEPT",
+"title": "Quantum Circuits in Qiskit",
+"prompt": "Qiskit allows building and simulating quantum circuits using qubits, quantum gates, and measurement operations.",
+"codeSnippet": "from qiskit import QuantumCircuit\n\nqc = QuantumCircuit(2, 2)\nqc.h(0)\nqc.cx(0, 1)\nqc.measure([0, 1], [0, 1])"
+},
+{
+"slideId": "PYTH_191_S2",
+"type": "FILL_IN_BLANK",
+"title": "Hadamard Gate Application",
+"prompt": "Fill in the QuantumCircuit method used to put a qubit into a superposition state.",
+"codeSnippet": "qc = QuantumCircuit(1)\nqc.___(0)",
+"options": ["h", "x", "z", "cx"],
+"correctAnswer": "h"
+},
+{
+"slideId": "PYTH_191_S3",
+"type": "MULTIPLE_CHOICE",
+"title": "Entanglement via CNOT Gate",
+"prompt": "Which combination of quantum gates creates a maximally entangled Bell state from two ground-state qubits?",
+"options": [
+"Hadamard gate on qubit 0 followed by CNOT gate targeting qubit 1",
+"Pauli-X gate on both qubits 0 and 1",
+"Two consecutive Hadamard gates on qubit 0",
+"Measurement gate applied to qubit 0 followed by Pauli-Z gate"
+],
+"correctAnswer": "Hadamard gate on qubit 0 followed by CNOT gate targeting qubit 1"
+},
+{
+"slideId": "PYTH_191_S4",
+"type": "FILL_IN_BLANK",
+"title": "Simulating Circuits with Aer",
+"prompt": "Fill in the module method used to execute quantum circuits on local statevector simulators.",
+"codeSnippet": "from qiskit_aer import AerSimulator\n\nsimulator = AerSimulator()\njob = simulator.___(circuit)",
+"options": ["run", "execute", "start", "transpile"],
+"correctAnswer": "run"
+},
+{
+"slideId": "PYTH_191_S5",
+"type": "MULTIPLE_CHOICE",
+"title": "Qubit Measurement & Collapse",
+"prompt": "What happens to a qubit in a superposition state when a measurement operation is performed?",
+"options": [
+"Its wave function collapses into a deterministic classical state (0 or 1)",
+"It permanently splits into two parallel virtual quantum states",
+"It doubles its physical energy level inside the circuit",
+"It reverses its execution direction back to the initial state"
+],
+"correctAnswer": "Its wave function collapses into a deterministic classical state (0 or 1)"
+},
+{
+"slideId": "PYTH_191_S6",
+"type": "FILL_IN_BLANK",
+"title": "Transpilation for Hardware Target",
+"prompt": "Fill in the Qiskit function used to optimize and map generic quantum circuits to specific backend topology.",
+"codeSnippet": "from qiskit import ___\n\ncompiled_circuit = transpile(qc, backend)",
+"options": ["transpile", "compile", "optimize", "map_circuit"],
+"correctAnswer": "transpile"
+},
+{
+"slideId": "PYTH_191_S7",
+"type": "MULTIPLE_CHOICE",
+"title": "Variational Quantum Eigensolver (VQE)",
+"prompt": "What is the hybrid classical-quantum architecture behind VQE algorithms?",
+"options": [
+"A quantum circuit evaluates parameterized states while a classical optimizer tunes parameters iteratively",
+"The quantum processor handles classical SQL queries while the CPU compiles quantum circuits",
+"A classical neural network executes gate operations without quantum hardware",
+"Quantum hardware compiles binary C++ source files into bytecode"
+],
+"correctAnswer": "A quantum circuit evaluates parameterized states while a classical optimizer tunes parameters iteratively"
+},
+{
+"slideId": "PYTH_191_S8",
+"type": "FILL_IN_BLANK",
+"title": "Pauli-X Gate Operation",
+"prompt": "Fill in the single-qubit gate method equivalent to a classical NOT gate flip.",
+"codeSnippet": "qc = QuantumCircuit(1)\nqc.___(0)  # Flips |0> to |1>",
+"options": ["x", "not", "flip", "y"],
+"correctAnswer": "x"
+}
+]
+}

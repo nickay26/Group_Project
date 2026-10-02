@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_298",
+  "title": "Module Review Quiz: Security & Authentication Best Practices",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_298_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Application Security",
+      "prompt": "Review hashing, token authentication (JWT), SQL injection prevention, CORS, and password salting techniques.",
+      "codeSnippet": "import bcrypt\nhashed = bcrypt.hashpw(b\"password\", bcrypt.gensalt())"
+    },
+    {
+      "slideId": "PYTH_298_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Password Hashing Library",
+      "prompt": "Fill in the standard hashing algorithm/library used for secure password storage with automatic salting.",
+      "codeSnippet": "import ___",
+      "options": ["bcrypt", "md5", "sha1", "base64"],
+      "correctAnswer": "bcrypt"
+    },
+    {
+      "slideId": "PYTH_298_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "JWT Token Structure",
+      "prompt": "How many dot-separated sections make up a standard JSON Web Token (JWT)?",
+      "options": ["3 (Header.Payload.Signature)", "2 (Header.Payload)", "4", "1"],
+      "correctAnswer": "3 (Header.Payload.Signature)"
+    },
+    {
+      "slideId": "PYTH_298_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "SQL Injection Defense",
+      "prompt": "Fill in the term for the best practice technique used to prevent SQL Injection in database queries.",
+      "codeSnippet": "cursor.execute(\"SELECT * FROM users WHERE id = %s\", (user_id,)) # ___ queries",
+      "options": ["parameterized", "concatenated", "raw", "escaped"],
+      "correctAnswer": "parameterized"
+    },
+    {
+      "slideId": "PYTH_298_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cross-Origin Resource Sharing",
+      "prompt": "What HTTP header mechanism allows restricted resources on a web page to be requested from another domain?",
+      "options": ["CORS", "CSRF", "XSS", "JWT"],
+      "correctAnswer": "CORS"
+    },
+    {
+      "slideId": "PYTH_298_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Authorization Header",
+      "prompt": "Fill in the HTTP header prefix commonly used to transmit JWT access tokens.",
+      "codeSnippet": "Authorization: ___ <token>",
+      "options": ["Bearer", "Basic", "Token", "Auth"],
+      "correctAnswer": "Bearer"
+    },
+    {
+      "slideId": "PYTH_298_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Storing Secret Keys",
+      "prompt": "Where should sensitive configuration keys and database passwords ideally be stored?",
+      "options": [
+        "Environment variables or secret management tools",
+        "Hardcoded in source code files",
+        "Public GitHub repository commits",
+        "Client-side local storage"
+      ],
+      "correctAnswer": "Environment variables or secret management tools"
+    }
+  ]
+}
