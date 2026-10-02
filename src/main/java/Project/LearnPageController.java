@@ -1,5 +1,6 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -37,6 +38,42 @@ public class LearnPageController {
     public void initialize() {
         String activeCourseId = UserSession.getActiveCourseId();
         loadCoursePath(activeCourseId);
+        // ✅ ဖြေလက်စ lesson ကို scroll လုပ်ဖို့
+        Platform.runLater(this::scrollToActiveLesson);
+    }
+
+    private void scrollToActiveLesson() {
+        if (currentLessons == null || currentLessons.isEmpty()) return;
+
+        int userId = UserSession.getUserId();
+        int completedCount = DatabaseManager.getCompletedLessonCount(
+                userId, UserSession.getActiveCourseId());
+// ✅ ဖြေလက်စ (ACTIVE) lesson ကို ရှာ
+        int targetIndex = -1;
+        for (int i = 0; i < currentLessons.size(); i++) {
+            Lesson lesson = currentLessons.get(i);
+            if (lesson.getLessonOrder() == completedCount + 1) {
+                targetIndex = i;
+                break;
+            }
+        }
+        // ✅ ဘာမှ မဖြေရသေးရင် 1st lesson (index 0)
+        if (targetIndex == -1) {
+            targetIndex = 0;
+        }
+
+        // ✅ Scroll position တွက်
+        double targetY = 40.0 + (targetIndex * VERTICAL_SPACING);
+
+        // ✅ ScrollPane ရဲ့ vvalue ကို set
+        if (roadmapScrollPane != null) {
+            double totalHeight = roadmapPane.getPrefHeight();
+            if (totalHeight > 0) {
+                double scrollValue = targetY / totalHeight;
+                roadmapScrollPane.setVvalue(Math.min(scrollValue, 1.0));
+            }
+        }
+
     }
 
     public void loadCoursePath(String courseId) {
