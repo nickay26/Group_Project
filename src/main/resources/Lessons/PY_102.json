@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_102",
+  "title": "Variables & Basic Data Types (PYTH_102_S1 to PYTH_102_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_102_S1",
+      "type": "CONCEPT",
+      "title": "Variables & Types",
+      "prompt": "Variables store data values. Python supports data types like int, float, str, and bool.",
+      "codeSnippet": "x = 10         # int\nprice = 19.99  # float\nname = \"Alice\" # str\nis_active = True # bool"
+    },
+    {
+      "slideId": "PYTH_102_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Variable Assignment",
+      "prompt": "Fill in the operator used to assign a value to a variable.",
+      "codeSnippet": "age ___ 25",
+      "options": ["=", "==", ":=", "->"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "PYTH_102_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Integer Type",
+      "prompt": "Which Python data type represents whole numbers without decimals?",
+      "options": ["int", "float", "str", "bool"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "PYTH_102_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Boolean Values",
+      "prompt": "Fill in the correct boolean literal for truth in Python.",
+      "codeSnippet": "is_valid = ___",
+      "options": ["True", "true", "TRUE", "1"],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "PYTH_102_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Checking",
+      "prompt": "Which built-in function returns the data type of an object?",
+      "options": ["type()", "typeof()", "gettype()", "class()"],
+      "correctAnswer": "type()"
+    },
+    {
+      "slideId": "PYTH_102_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Float Type",
+      "prompt": "Fill in the variable assignment for a decimal number.",
+      "codeSnippet": "pi = 3.14159",
+      "options": ["3.14159", "3,14159", "'3.14159'", "float(3.14)"],
+      "correctAnswer": "3.14159"
+    },
+    {
+      "slideId": "PYTH_102_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Valid Variable Names",
+      "prompt": "Which of the following is a valid variable name in Python?",
+      "options": ["user_score", "2nd_place", "user-name", "class"],
+      "correctAnswer": "user_score"
+    }
+  ]
+}

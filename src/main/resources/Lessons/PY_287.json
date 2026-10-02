@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_287",
+  "title": "Module Review Quiz: Asynchronous Programming (Asyncio)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_287_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Asyncio & Coroutines",
+      "prompt": "Review async/await keywords, coroutines, event loops, tasks, and concurrency controls using `asyncio`.",
+      "codeSnippet": "import asyncio\nasync def main():\n    print(\"Hello\")\n    await asyncio.sleep(1)\nasyncio.run(main())"
+    },
+    {
+      "slideId": "PYTH_287_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Function Declaration",
+      "prompt": "Fill in the keyword placed before `def` to define a coroutine function.",
+      "codeSnippet": "___ def fetch_data():",
+      "options": ["async", "await", "thread", "concurrent"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PYTH_287_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Awaiting Coroutines",
+      "prompt": "Which keyword suspends execution of a coroutine until the awaited task completes?",
+      "options": ["await", "async", "yield", "pause"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PYTH_287_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Running Event Loop",
+      "prompt": "Fill in the primary high-level function used to start an asyncio event loop with an entry coroutine.",
+      "codeSnippet": "asyncio.___(main())",
+      "options": ["run", "execute", "start", "start_loop"],
+      "correctAnswer": "run"
+    },
+    {
+      "slideId": "PYTH_287_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Concurrent Execution",
+      "prompt": "Which function executes multiple awaitable tasks concurrently and returns their aggregated results?",
+      "options": ["asyncio.gather()", "asyncio.group()", "asyncio.run_all()", "asyncio.combine()"],
+      "correctAnswer": "asyncio.gather()"
+    },
+    {
+      "slideId": "PYTH_287_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Non-blocking Delay",
+      "prompt": "Fill in the non-blocking sleep method in asyncio.",
+      "codeSnippet": "await asyncio.___(1.0)",
+      "options": ["sleep", "wait", "delay", "pause"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "PYTH_287_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Creating Tasks",
+      "prompt": "Which method schedules a coroutine for background execution on the event loop?",
+      "options": ["asyncio.create_task()", "asyncio.start_thread()", "asyncio.run_async()", "asyncio.schedule()"],
+      "correctAnswer": "asyncio.create_task()"
+    }
+  ]
+}

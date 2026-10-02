@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_140",
+  "title": "System Architecture & Scalability Capstone (PYTH_131 to PYTH_140) (PYTH_140_S1 to PYTH_140_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_140_S1",
+      "type": "CONCEPT",
+      "title": "Scalable Python Architecture",
+      "prompt": "Scalable systems leverage stateless app servers, caching layers, and database load balancing.",
+      "codeSnippet": "# Distributed Caching with Redis\nimport redis\nr = redis.Redis(host='localhost', port=6379)\nr.set('session:123', 'active_user')\nprint(r.get('session:123'))"
+    },
+    {
+      "slideId": "PYTH_140_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Stateless Application Design",
+      "prompt": "Fill in the component commonly used to store shared user sessions across app instances.",
+      "codeSnippet": "# Store sessions in centralized memory:\ncache = ___ .Redis()",
+      "options": ["redis", "memcached", "sqlite", "json"],
+      "correctAnswer": "redis"
+    },
+    {
+      "slideId": "PYTH_140_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Horizontal vs Vertical Scaling",
+      "prompt": "What characterizes horizontal scaling in system design?",
+      "options": [
+        "Adding more machine nodes to a pool of resources",
+        "Upgrading CPU RAM on a single server instance",
+        "Decreasing database storage size",
+        "Combining all code modules into a single file"
+      ],
+      "correctAnswer": "Adding more machine nodes to a pool of resources"
+    },
+    {
+      "slideId": "PYTH_140_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Load Balancing",
+      "prompt": "Fill in the tool used to distribute incoming web traffic across multiple application servers.",
+      "codeSnippet": "# Reverse proxy & load balancer:\nserver = '___'",
+      "options": ["Nginx", "Gunicorn", "Redis", "Celery"],
+      "correctAnswer": "Nginx"
+    },
+    {
+      "slideId": "PYTH_140_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Database Read Replicas",
+      "prompt": "Why are read replicas added to database architectures?",
+      "options": [
+        "To offload read queries from the primary database master node",
+        "To encrypt write operations",
+        "To automatically format JSON outputs",
+        "To run scheduled background tasks"
+      ],
+      "correctAnswer": "To offload read queries from the primary database master node"
+    },
+    {
+      "slideId": "PYTH_140_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Rate Limiting Strategy",
+      "prompt": "Fill in the algorithm pattern commonly used for API rate limiting.",
+      "codeSnippet": "algorithm = '___ bucket'",
+      "options": ["leaky", "fixed", "sliding", "token"],
+      "correctAnswer": "token"
+    },
+    {
+      "slideId": "PYTH_140_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Circuit Breaker Pattern",
+      "prompt": "What is the primary function of the Circuit Breaker pattern in microservices?",
+      "options": [
+        "To prevent cascading failures when remote services become unresponsive",
+        "To speed up database index generation",
+        "To minify Python source files",
+        "To compress network packets"
+      ],
+      "correctAnswer": "To prevent cascading failures when remote services become unresponsive"
+    },
+    {
+      "slideId": "PYTH_140_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Event-Driven Architecture",
+      "prompt": "Fill in the messaging system commonly used for high-throughput event streaming.",
+      "codeSnippet": "event_stream = 'Apache ___'",
+      "options": ["Kafka", "RabbitMQ", "ActiveMQ", "ZeroMQ"],
+      "correctAnswer": "Kafka"
+    }
+  ]
+}

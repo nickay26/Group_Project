@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_134",
+  "title": "Data Visualization with Matplotlib & Seaborn (PYTH_131 to PYTH_140) (PYTH_134_S1 to PYTH_134_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_134_S1",
+      "type": "CONCEPT",
+      "title": "Plotting Basics",
+      "prompt": "Matplotlib and Seaborn allow visual rendering of data distributions and trends.",
+      "codeSnippet": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [4, 5, 6])\nplt.show()"
+    },
+    {
+      "slideId": "PYTH_134_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Matplotlib Pyplot Import",
+      "prompt": "Fill in the submodule alias convention for Matplotlib.",
+      "codeSnippet": "import matplotlib.pyplot as ___",
+      "options": ["plt", "plot", "mpl", "py"],
+      "correctAnswer": "plt"
+    },
+    {
+      "slideId": "PYTH_134_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Displaying Plots",
+      "prompt": "Which command renders and displays the active plot window?",
+      "options": ["plt.show()", "plt.render()", "plt.display()", "plt.draw()"],
+      "correctAnswer": "plt.show()"
+    },
+    {
+      "slideId": "PYTH_134_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Scatter Plot",
+      "prompt": "Fill in the method to create a scatter plot.",
+      "codeSnippet": "plt.___ (x, y)",
+      "options": ["scatter", "points", "dots", "scatter_plot"],
+      "correctAnswer": "scatter"
+    },
+    {
+      "slideId": "PYTH_134_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Seaborn Library",
+      "prompt": "What primary advantage does Seaborn offer over raw Matplotlib?",
+      "options": [
+        "High-level interface with attractive statistical default styles",
+        "3D virtual reality rendering",
+        "Faster file writing to disk",
+        "Built-in database querying"
+      ],
+      "correctAnswer": "High-level interface with attractive statistical default styles"
+    },
+    {
+      "slideId": "PYTH_134_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Bar Plot",
+      "prompt": "Fill in the method used to plot bar charts in Matplotlib.",
+      "codeSnippet": "plt.___ (categories, values)",
+      "options": ["bar", "barchart", "column", "bars"],
+      "correctAnswer": "bar"
+    },
+    {
+      "slideId": "PYTH_134_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Histogram Visualization",
+      "prompt": "Which method visualizes the distribution of a single continuous variable?",
+      "options": ["plt.hist()", "plt.dist()", "plt.box()", "plt.density()"],
+      "correctAnswer": "plt.hist()"
+    },
+    {
+      "slideId": "PYTH_134_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Saving Plots",
+      "prompt": "Fill in the method to export a figure to an image file.",
+      "codeSnippet": "plt.___ ('chart.png')",
+      "options": ["savefig", "export", "save", "write_image"],
+      "correctAnswer": "savefig"
+    }
+  ]
+}

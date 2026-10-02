@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_116",
+  "title": "Object-Oriented Programming Basics (PYTH_116_S1 to PYTH_116_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_116_S1",
+      "type": "CONCEPT",
+      "title": "Classes and Objects",
+      "prompt": "OOP uses classes as blueprints to instantiate objects with attributes and methods.",
+      "codeSnippet": "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nmy_car = Car(\"Toyota\")"
+    },
+    {
+      "slideId": "PYTH_116_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Class Declaration",
+      "prompt": "Fill in the keyword used to create a class in Python.",
+      "codeSnippet": "___ Student:\n    pass",
+      "options": ["class", "struct", "object", "type"],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "PYTH_116_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Constructor Method",
+      "prompt": "What is the name of the special initializer method called when a class instance is created?",
+      "options": ["__init__", "__construct__", "__new__", "init()"],
+      "correctAnswer": "__init__"
+    },
+    {
+      "slideId": "PYTH_116_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Self Parameter",
+      "prompt": "Fill in the conventional first parameter name representing the instance inside a class method.",
+      "codeSnippet": "def get_name(___):\n    return self.name",
+      "options": ["self", "this", "me", "instance"],
+      "correctAnswer": "self"
+    },
+    {
+      "slideId": "PYTH_116_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Inheritance Syntax",
+      "prompt": "How does a child class 'Dog' inherit from a parent class 'Animal'?",
+      "options": [
+        "class Dog(Animal):",
+        "class Dog extends Animal:",
+        "class Dog : Animal:",
+        "class Dog inherits Animal:"
+      ],
+      "correctAnswer": "class Dog(Animal):"
+    },
+    {
+      "slideId": "PYTH_116_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Calling Parent Constructor",
+      "prompt": "Fill in the function used to invoke parent class methods.",
+      "codeSnippet": "class Dog(Animal):\n    def __init__(self, name):\n        ___().__init__(name)",
+      "options": ["super", "parent", "base", "Animal"],
+      "correctAnswer": "super"
+    },
+    {
+      "slideId": "PYTH_116_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Instance Attributes",
+      "prompt": "How do you assign an attribute 'age' to an instance inside __init__?",
+      "options": [
+        "self.age = age",
+        "this.age = age",
+        "age = age",
+        "set.age = age"
+      ],
+      "correctAnswer": "self.age = age"
+    }
+  ]
+}

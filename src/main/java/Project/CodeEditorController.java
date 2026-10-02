@@ -1,13 +1,13 @@
 package Project;
 
 import javafx.application.Platform;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,15 +19,152 @@ public class CodeEditorController {
     @FXML private Label instructionsLabel;
     @FXML private Label taskLabel;
     @FXML private Label expectedOutputLabel;
-    @FXML private TextArea codeEditor;
+
+    @FXML private WebView codeWebView;
     @FXML private TextArea outputConsole;
     @FXML private TextArea aiReviewArea;
     @FXML private Button runBtn;
     @FXML private Button reviewBtn;
     @FXML private Button checkBtn;
 
+    private WebEngine webEngine;
+    private boolean isEditorReady = false;
+    private String pendingCode = "";
+    private String pendingLanguage = "java";
+
     private Project currentProject;
     private QuestionData currentQuestion;
+
+    @FXML
+    public void initialize() {
+        if (codeWebView != null) {
+            webEngine = codeWebView.getEngine();
+            setupMonacoEditor();
+        }
+    }
+
+    // Monaco Editor HTML & JS Setup with Custom Navy Theme
+    private void setupMonacoEditor() {
+        String monacoHtml = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    html, body, #container { 
+                        width: 100%; 
+                        height: 100%; 
+                        margin: 0; 
+                        padding: 0; 
+                        overflow: hidden; 
+                        background-color: #0d1322; 
+                    }
+                </style>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+            </head>
+            <body>
+                <div id="container"></div>
+                <script>
+                    var editor;
+                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
+                    require(['vs/editor/editor.main'], function() {
+                        // Custom Navy Theme Definition
+                        monaco.editor.defineTheme('navyTheme', {
+                            base: 'vs-dark',
+                            inherit: true,
+                            rules: [
+                                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
+                                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
+                                { token: 'string', foreground: 'f43f5e' },
+                                { token: 'number', foreground: 'fbbf24' }
+                            ],
+                            colors: {
+                                'editor.background': '#0d1322',
+                                'editor.foreground': '#e2e8f0',
+                                'editor.lineHighlightBackground': '#1e293b',
+                                'editorLineNumber.foreground': '#475569',
+                                'editorLineNumber.activeForeground': '#38bdf8',
+                                'editorCursor.foreground': '#38bdf8'
+                            }
+                        });
+
+                        editor = monaco.editor.create(document.getElementById('container'), {
+                            value: '',
+                            language: 'java',
+                            theme: 'navyTheme',
+                            automaticLayout: true,
+                            fontSize: 14,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false
+                        });
+                    });
+
+                    function getCode() {
+                        return editor ? editor.getValue() : '';
+                    }
+
+                    function setCode(code, language) {
+                        if (editor) {
+                            editor.setValue(code);
+                            if (language) {
+                                monaco.editor.setModelLanguage(editor.getModel(), language);
+                            }
+                        }
+                    }
+                </script>
+            </body>
+            </html>
+            """;
+
+        webEngine.loadContent(monacoHtml);
+
+        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                isEditorReady = true;
+                if (!pendingCode.isEmpty()) {
+                    applyCodeToEditor(pendingCode, pendingLanguage);
+                }
+            }
+        });
+    }
+
+    private void applyCodeToEditor(String code, String language) {
+        String monacoLang = mapToMonacoLanguage(language);
+        String escapedCode = JSONObject.quote(code != null ? code : "");
+        String script = String.format("setCode(%s, '%s');", escapedCode, monacoLang);
+        webEngine.executeScript(script);
+    }
+
+    private String getCode() {
+        if (!isEditorReady) {
+            return pendingCode;
+        }
+        Object result = webEngine.executeScript("getCode()");
+        return result != null ? result.toString() : "";
+    }
+
+    private void setCode(String code, String language) {
+        this.pendingCode = code != null ? code : "";
+        this.pendingLanguage = language;
+
+        if (isEditorReady) {
+            applyCodeToEditor(pendingCode, pendingLanguage);
+        }
+    }
+
+    private String mapToMonacoLanguage(String lang) {
+        if (lang == null) return "plaintext";
+        return switch (lang.trim().toLowerCase()) {
+            case "c++", "cpp" -> "cpp";
+            case "python" -> "python";
+            case "java" -> "java";
+            case "javascript", "js" -> "javascript";
+            case "sql" -> "sql";
+            case "html" -> "html";
+            case "css" -> "css";
+            default -> "plaintext";
+        };
+    }
 
     // ============================================
     // INIT — Question (Mimo Style)
@@ -41,7 +178,9 @@ public class CodeEditorController {
         if (instructionsLabel != null) instructionsLabel.setText(question.getInstructions());
         if (taskLabel != null) taskLabel.setText(question.getTask());
         if (expectedOutputLabel != null) expectedOutputLabel.setText(question.getExpectedOutput());
-        if (codeEditor != null) codeEditor.setText(question.getStarterCode());
+
+        setCode(question.getStarterCode(), question.getLanguage());
+
         if (outputConsole != null) outputConsole.clear();
         if (aiReviewArea != null) aiReviewArea.clear();
     }
@@ -57,8 +196,8 @@ public class CodeEditorController {
         if (languageBadge != null) languageBadge.setText(project.getLanguage());
         if (instructionsLabel != null) instructionsLabel.setText("Free coding playground. Write any code.");
         if (taskLabel != null) taskLabel.setText("No task — just code freely.");
-        if (codeEditor != null) codeEditor.setText(
-                project.getCodeContent() != null ? project.getCodeContent() : "");
+
+        setCode(project.getCodeContent() != null ? project.getCodeContent() : "", project.getLanguage());
     }
 
     // ============================================
@@ -67,7 +206,7 @@ public class CodeEditorController {
     @FXML
     public void handleRunCode() {
         String lang = getLanguage();
-        String code = codeEditor.getText();
+        String code = getCode();
 
         if (lang == null || code.trim().isEmpty()) {
             outputConsole.setText("Error: Editor is empty.");
@@ -94,7 +233,7 @@ public class CodeEditorController {
     }
 
     // ============================================
-    // CHECK — Mimo Style (Expected Output နဲ့ ယှဉ်)
+    // CHECK — Mimo Style
     // ============================================
     @FXML
     public void handleCheckCode() {
@@ -104,7 +243,7 @@ public class CodeEditorController {
         }
 
         String lang = getLanguage();
-        String code = codeEditor.getText();
+        String code = getCode();
 
         if (code.trim().isEmpty()) {
             outputConsole.setText("Error: Editor is empty.");
@@ -112,7 +251,7 @@ public class CodeEditorController {
         }
 
         outputConsole.setText("▶ Running and checking...\n");
-        checkBtn.setDisable(true);
+        if (checkBtn != null) checkBtn.setDisable(true);
 
         ApiClient.executeCodeAsync(lang, code)
                 .thenAccept(responseJson -> Platform.runLater(() -> {
@@ -129,12 +268,12 @@ public class CodeEditorController {
                         outputConsole.appendText("Expected: " + expected + "\n");
                         outputConsole.appendText("Your output: " + actualOutput + "\n");
                     }
-                    checkBtn.setDisable(false);
+                    if (checkBtn != null) checkBtn.setDisable(false);
                 }))
                 .exceptionally(ex -> {
                     Platform.runLater(() -> {
                         outputConsole.setText("Error: " + ex.getMessage());
-                        checkBtn.setDisable(false);
+                        if (checkBtn != null) checkBtn.setDisable(false);
                     });
                     return null;
                 });
@@ -146,7 +285,7 @@ public class CodeEditorController {
     @FXML
     public void handleReviewCode() {
         String lang = getLanguage();
-        String code = codeEditor.getText();
+        String code = getCode();
         String task = currentQuestion != null ? currentQuestion.getTask() : "Free coding";
 
         if (lang == null || code.trim().isEmpty()) {
@@ -214,7 +353,7 @@ public class CodeEditorController {
                 + currentQuestion.getSolutionCode());
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                codeEditor.setText(currentQuestion.getSolutionCode());
+                setCode(currentQuestion.getSolutionCode(), getLanguage());
             }
         });
     }
@@ -224,9 +363,9 @@ public class CodeEditorController {
     // ============================================
     @FXML
     public void handleSaveCode() {
-        if (currentProject == null || codeEditor == null) return;
+        if (currentProject == null) return;
 
-        String updatedCode = codeEditor.getText();
+        String updatedCode = getCode();
         currentProject.setCodeContent(updatedCode);
 
         ApiClient.saveProjectCodeAsync(currentProject.getProjectId(), updatedCode)
@@ -253,10 +392,11 @@ public class CodeEditorController {
     private String getLanguage() {
         if (currentQuestion != null) return currentQuestion.getLanguage().toLowerCase();
         if (currentProject != null) return currentProject.getLanguage().toLowerCase();
-        return null;
+        return "java";
     }
 
     private String extractJsonField(String json, String fieldName) {
+        if (json == null) return "";
         Pattern pattern = Pattern.compile(
                 "\"" + fieldName + "\":\\s*\"(.*?)\"\\s*\\}", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(json);

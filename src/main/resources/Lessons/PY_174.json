@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_174",
+  "title": "Event-Driven Microservices with Kafka & Faust (PYTH_174_S1 to PYTH_174_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_174_S1",
+      "type": "CONCEPT",
+      "title": "Stream Processing with Faust",
+      "prompt": "Faust brings Kafka stream processing concepts to Python, using AsyncIO for high-throughput event processing.",
+      "codeSnippet": "import faust\n\napp = faust.App('order-app', broker='kafka://localhost:9092')\ntopic = app.topic('orders', value_type=Order)"
+    },
+    {
+      "slideId": "PYTH_174_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Defining Faust Stream Agents",
+      "prompt": "Fill in the Faust decorator used to create a stream processing agent that consumes Kafka messages.",
+      "codeSnippet": "@app.___(topic)\nasync def process_orders(orders):",
+      "options": ["agent", "task", "consumer", "stream"],
+      "correctAnswer": "agent"
+    },
+    {
+      "slideId": "PYTH_174_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Kafka Consumer Groups",
+      "prompt": "How do Kafka Consumer Groups enable horizontal scaling across multiple Python instances?",
+      "options": [
+        "By assigning distinct topic partitions exclusively to individual worker instances within the group",
+        "By broadcasting all messages to every consumer simultaneously",
+        "By caching event payloads inside a shared Redis memory cluster",
+        "By executing round-robin load balancing on incoming REST API calls"
+      ],
+      "correctAnswer": "By assigning distinct topic partitions exclusively to individual worker instances within the group"
+    },
+    {
+      "slideId": "PYTH_174_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Event Record Modeling",
+      "prompt": "Fill in the Faust base class used to declare typed message schemas for Kafka topics.",
+      "codeSnippet": "class Order(faust.___):\n    user_id: str\n    amount: float",
+      "options": ["Record", "Model", "Schema", "Struct"],
+      "correctAnswer": "Record"
+    },
+    {
+      "slideId": "PYTH_174_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Eventual Consistency in EDAs",
+      "prompt": "What design strategy guarantees eventual consistency across microservices in an event-driven architecture?",
+      "options": [
+        "Saga Pattern using compensating transactions on failure events",
+        "Two-Phase Commit (2PC) over raw HTTP REST calls",
+        "Direct synchronous database connection sharing",
+        "Periodic manual database backup restorations"
+      ],
+      "correctAnswer": "Saga Pattern using compensating transactions on failure events"
+    },
+    {
+      "slideId": "PYTH_174_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Kafka Topic Partition Keys",
+      "prompt": "Fill in the event parameter used by Kafka to guarantee order of related messages in the same partition.",
+      "codeSnippet": "await topic.send(key=___, value=order_event)",
+      "options": ["user_id", "timestamp", "partition_num", "random_uuid"],
+      "correctAnswer": "user_id"
+    },
+    {
+      "slideId": "PYTH_174_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "At-Least-Once Delivery Guarantees",
+      "prompt": "Why must stream consumers be idempotent when handling event streams with at-least-once semantics?",
+      "options": [
+        "Because network retries can cause duplicate delivery of identical event messages",
+        "To force consumers to compress event streams using gzip",
+        "To speed up disk write operations on Kafka brokers",
+        "To convert incoming JSON payloads into binary Protobuf files"
+      ],
+      "correctAnswer": "Because network retries can cause duplicate delivery of identical event messages"
+    },
+    {
+      "slideId": "PYTH_174_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Faust State Tables",
+      "prompt": "Fill in the persistent state management feature built into Faust for streaming aggregations.",
+      "codeSnippet": "window_counts = app.___('counts', default=int)",
+      "options": ["Table", "Store", "Cache", "State"],
+      "correctAnswer": "Table"
+    }
+  ]
+}

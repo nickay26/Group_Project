@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_137",
+  "title": "ORM Data Mapping with SQLAlchemy (PYTH_131 to PYTH_140) (PYTH_137_S1 to PYTH_137_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_137_S1",
+      "type": "CONCEPT",
+      "title": "SQLAlchemy ORM",
+      "prompt": "Object-Relational Mapping (ORM) maps database tables directly to Python classes.",
+      "codeSnippet": "from sqlalchemy import create_engine, Column, Integer, String\nfrom sqlalchemy.orm import declarative_base\n\nBase = declarative_base()\nclass User(Base):\n    __tablename__ = 'users'\n    id = Column(Integer, primary_key=True)"
+    },
+    {
+      "slideId": "PYTH_137_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Engine Creation",
+      "prompt": "Fill in the function to initialize database connection engines.",
+      "codeSnippet": "engine = ___ ('sqlite:///app.db')",
+      "options": ["create_engine", "connect_engine", "init_db", "make_engine"],
+      "correctAnswer": "create_engine"
+    },
+    {
+      "slideId": "PYTH_137_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Declarative Base",
+      "prompt": "What base class do model classes inherit from in SQLAlchemy ORM?",
+      "options": ["declarative_base()", "ModelBase", "DBObject", "SchemaBase"],
+      "correctAnswer": "declarative_base()"
+    },
+    {
+      "slideId": "PYTH_137_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Table Name Attribute",
+      "prompt": "Fill in the class attribute setting the associated SQL table name.",
+      "codeSnippet": "class User(Base):\n    ___ = 'users'",
+      "options": ["__tablename__", "__table__", "__name__", "tableName"],
+      "correctAnswer": "__tablename__"
+    },
+    {
+      "slideId": "PYTH_137_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ORM Session",
+      "prompt": "Which object manages database persistence transactions for ORM objects?",
+      "options": ["Session", "Cursor", "Transaction", "Connection"],
+      "correctAnswer": "Session"
+    },
+    {
+      "slideId": "PYTH_137_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding Objects to Session",
+      "prompt": "Fill in the method to stage a new instance for insertion.",
+      "codeSnippet": "session.___ (user_obj)",
+      "options": ["add", "insert", "push", "save"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "PYTH_137_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Querying Data",
+      "prompt": "How do you query all records for a model class in SQLAlchemy?",
+      "options": [
+        "session.query(User).all()",
+        "session.get_all(User)",
+        "User.fetch_all()",
+        "session.select(User)"
+      ],
+      "correctAnswer": "session.query(User).all()"
+    },
+    {
+      "slideId": "PYTH_137_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Primary Key Column",
+      "prompt": "Fill in the parameter setting a column as primary key.",
+      "codeSnippet": "id = Column(Integer, ___=True)",
+      "options": ["primary_key", "is_primary", "pk", "key"],
+      "correctAnswer": "primary_key"
+    }
+  ]
+}

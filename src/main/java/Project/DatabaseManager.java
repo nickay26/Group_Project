@@ -298,7 +298,33 @@ public class DatabaseManager {
         }
         return false;
     }
+    // ============================================
+// UPDATE USER PROFILE
+// ============================================
+    public static boolean updateUserProfile(int userId, String name, String profile) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            if (profile != null) {
+                body.put("profile", profile);
+            } else {
+                body.put("profile", JSONObject.NULL);
+            }
 
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     // ==========================================
     // HELPER METHODS
     // ==========================================
@@ -329,6 +355,72 @@ public class DatabaseManager {
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
         return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+    }
+
+    // ==========================================
+// ADD LESSON TO REVIEW TABLE
+// ==========================================
+    public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("course_id", courseId);
+            body.put("lesson_id", lessonId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/reviews"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // ============================================
+// GET LESSONS FROM REVIEW TABLE
+// ============================================
+    public static List<PracticeController.ReviewData> getReviewLessons(int userId) {
+        List<PracticeController.ReviewData> reviewList = new ArrayList<>();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/reviews/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONArray jsonArray = new JSONArray(response.body());
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    String lessonId = obj.optString("lesson_id", "");
+                    String courseId = obj.optString("course_id", "");
+                    String title = obj.optString("Lesson_title", lessonId);
+
+                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
+                    String language = "C++";
+                    if (courseId.toUpperCase().contains("JAVA")) {
+                        language = "Java";
+                    } else if (courseId.toUpperCase().contains("PYTHON")) {
+                        language = "Python";
+                    } else if (courseId.toUpperCase().contains("CPP") || courseId.toUpperCase().contains("C++")) {
+                        language = "C++";
+                    }
+
+                    reviewList.add(new PracticeController.ReviewData(lessonId, courseId, title, language));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reviewList;
     }
     // ==========================================
 // 4. PREMIUM & PAYMENT

@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_104",
+  "title": "Operators & Expressions (PYTH_104_S1 to PYTH_104_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_104_S1",
+      "type": "CONCEPT",
+      "title": "Python Operators",
+      "prompt": "Arithmetic (+, -, *, /, %, //, **) and comparison (==, !=, >, <) operators perform calculations and comparisons.",
+      "codeSnippet": "result = 10 % 3  # Remainder: 1\npower = 2 ** 3   # Exponent: 8\nfloor = 7 // 2   # Floor division: 3"
+    },
+    {
+      "slideId": "PYTH_104_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Modulus Operator",
+      "prompt": "Fill in the operator used to find the remainder of a division.",
+      "codeSnippet": "remainder = 15 ___ 4",
+      "options": ["%", "/", "//", "**"],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "PYTH_104_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exponentiation",
+      "prompt": "Which operator raises a number to the power of another in Python?",
+      "options": ["**", "^", "pow", "//"],
+      "correctAnswer": "**"
+    },
+    {
+      "slideId": "PYTH_104_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Equality Operator",
+      "prompt": "Fill in the comparison operator that checks if two values are equal.",
+      "codeSnippet": "if a ___ b:\n    print(\"Equal\")",
+      "options": ["==", "=", "equals", "is"],
+      "correctAnswer": "=="
+    },
+    {
+      "slideId": "PYTH_104_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floor Division",
+      "prompt": "What is the output of 7 // 2 in Python?",
+      "options": ["3", "3.5", "4", "3.0"],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "PYTH_104_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Not Equal Operator",
+      "prompt": "Fill in the operator that checks if two values are not equal.",
+      "codeSnippet": "if status ___ \"closed\":\n    print(\"Open\")",
+      "options": ["!=", "<>", "not==", "not"],
+      "correctAnswer": "!="
+    },
+    {
+      "slideId": "PYTH_104_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Logical Operators",
+      "prompt": "Which logical operator evaluates to True only when both operands are True?",
+      "options": ["and", "or", "not", "both"],
+      "correctAnswer": "and"
+    }
+  ]
+}

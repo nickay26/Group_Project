@@ -1,5 +1,6 @@
 package Project;
 
+import org.json.JSONObject;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -60,6 +61,7 @@ public class ApiClient {
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
+                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
                 .exceptionally(ex -> {
                     System.err.println("Review Code Error: " + ex.getMessage());
                     return null;
@@ -67,7 +69,7 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 3. DIRECT CODE CHALLENGE GENERATION (အသစ်ထည့်သွင်းထားသည်)
+    // 3. DIRECT CODE CHALLENGE GENERATION
     // ==========================================
     public static CompletableFuture<String> generateCodeChallengeAsync(String language, String level) {
         String jsonPayload = String.format(
@@ -110,6 +112,7 @@ public class ApiClient {
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
+                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
                 .exceptionally(ex -> {
                     System.err.println("Review Practice Error: " + ex.getMessage());
                     return null;
@@ -230,6 +233,45 @@ public class ApiClient {
                     System.err.println("Join Match Room Error: " + ex.getMessage());
                     return null;
                 });
+    }
+
+    // ==========================================
+    // 9. AI TEXT CLEANING HELPER METHOD
+    // ==========================================
+    public static String cleanAndFormatAiText(String rawResponse) {
+        if (rawResponse == null || rawResponse.trim().isEmpty()) {
+            return "";
+        }
+
+        String extractedText = rawResponse;
+
+        // JSON format ဖြစ်ပါက အထဲမှ သက်ဆိုင်ရာ key ကို ဖြုတ်ယူခြင်း
+        try {
+            JSONObject json = new JSONObject(rawResponse);
+            if (json.has("review")) {
+                extractedText = json.getString("review");
+            } else if (json.has("result")) {
+                extractedText = json.getString("result");
+            } else if (json.has("explanation")) {
+                extractedText = json.getString("explanation");
+            } else if (json.has("output")) {
+                extractedText = json.getString("output");
+            }
+        } catch (Exception e) {
+            // JSON မဟုတ်ပါက Raw text အတိုင်း ဆက်သွားမည်
+        }
+
+        // Markdown, Backticks, LaTeX သင်္ကေတများကို ဖယ်ရှားသန့်စင်ခြင်း
+        return extractedText
+                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")  // Bold **text**
+                .replaceAll("###\\s*", "")             // H3
+                .replaceAll("##\\s*", "")              // H2
+                .replaceAll("#\\s*", "")               // H1
+                .replaceAll("```[a-zA-Z]*", "")        // Code block ticks
+                .replaceAll("`", "")                   // Inline backticks
+                .replaceAll("\\$\\$(.*?)\\$\\$", "$1") // LaTeX $$
+                .replaceAll("\\$(.*?)\\$", "$1")       // LaTeX $
+                .trim();
     }
 
     // JSON String Escaping Helper Function

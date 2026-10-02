@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_132",
+  "title": "Data Science Fundamentals with NumPy (PYTH_131 to PYTH_140) (PYTH_132_S1 to PYTH_132_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_132_S1",
+      "type": "CONCEPT",
+      "title": "NumPy Arrays",
+      "prompt": "NumPy provides high-performance multi-dimensional array objects for fast mathematical operations.",
+      "codeSnippet": "import numpy as np\narr = np.array([1, 2, 3, 4])\nprint(arr * 2)"
+    },
+    {
+      "slideId": "PYTH_132_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Importing NumPy",
+      "prompt": "Fill in the standard alias used when importing NumPy.",
+      "codeSnippet": "import numpy as ___",
+      "options": ["np", "num", "numpy", "n"],
+      "correctAnswer": "np"
+    },
+    {
+      "slideId": "PYTH_132_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Dimensions",
+      "prompt": "Which attribute returns the shape dimensions of a NumPy array?",
+      "options": [".shape", ".size", ".dim", ".length"],
+      "correctAnswer": ".shape"
+    },
+    {
+      "slideId": "PYTH_132_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating Zeros Array",
+      "prompt": "Fill in the function to create an array initialized with zeros.",
+      "codeSnippet": "arr = np.___((3, 3))",
+      "options": ["zeros", "empty", "null", "create_zeros"],
+      "correctAnswer": "zeros"
+    },
+    {
+      "slideId": "PYTH_132_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Array Reshaping",
+      "prompt": "Which method changes the shape of an array without changing its data?",
+      "options": [".reshape()", ".resize()", ".convert()", ".regrid()"],
+      "correctAnswer": ".reshape()"
+    },
+    {
+      "slideId": "PYTH_132_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Matrix Multiplication",
+      "prompt": "Fill in the operator used for matrix multiplication in NumPy.",
+      "codeSnippet": "C = A ___ B",
+      "options": ["@", "*", "#", "&"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PYTH_132_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Broadcasting",
+      "prompt": "What does NumPy broadcasting allow?",
+      "options": [
+        "Arithmetic operations on arrays with different shapes",
+        "Streaming data across network sockets",
+        "Printing arrays to multiple output streams",
+        "Parallel processing across multi-cores"
+      ],
+      "correctAnswer": "Arithmetic operations on arrays with different shapes"
+    },
+    {
+      "slideId": "PYTH_132_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Linear Spacing",
+      "prompt": "Fill in the function generating evenly spaced numbers over a specified interval.",
+      "codeSnippet": "arr = np.___ (0, 10, num=5)",
+      "options": ["linspace", "arange", "step", "range"],
+      "correctAnswer": "linspace"
+    }
+  ]
+}

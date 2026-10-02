@@ -196,7 +196,7 @@ public class MainLayoutController {
         if (profileMenu == null) {
             profileMenu = new ContextMenu();
 
-            MenuItem editProfileItem = new MenuItem("Edit profile");
+            MenuItem editProfileItem = new MenuItem("Go to profile");
             MenuItem settingsItem = new MenuItem("Settings");
             MenuItem helpItem = new MenuItem("Help");
             MenuItem logoutItem = new MenuItem("Log out");

@@ -4,196 +4,230 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #FFFFFF; -fx-background-color: #FFFFFF; -fx-padding: 0;" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LeaderboardController">
+<ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #0E1424; -fx-background-color: #0E1424; -fx-padding: 0;" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LeaderboardController">
     <content>
-        <VBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;">
+        <!-- Main Background Layer -->
+        <HBox alignment="CENTER" spacing="30.0" style="-fx-background-color: #0E1424;">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            </padding>
             <children>
-                <HBox alignment="TOP_CENTER" spacing="40.0" style="-fx-background-color: #FFFFFF;">
+                <!-- Left Main Card Container -->
+                <VBox alignment="CENTER" prefHeight="480.0" prefWidth="500.0" spacing="25.0" style="-fx-background-color: #1A233A; -fx-background-radius: 16px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 12, 0, 0, 4);">
                     <padding>
                         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                     </padding>
                     <children>
-                        <!-- White Main Card Container (Left) -->
-                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="520.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 16, 0, 0, 4);">
+                        <!-- Trophy Icon -->
+                        <Label text="🏆">
+                            <font>
+                                <Font size="70.0" />
+                            </font>
+                        </Label>
+
+                        <!-- Main Text -->
+                        <Label text="Complete a lesson or earn XP to&#10;join this week's Leaderboard!" textAlignment="CENTER" textFill="#FFFFFF" wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+
+                        <!-- START LEARNING Button -->
+                        <Button onAction="#handleStartLearning" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 8px; -fx-cursor: hand;" text="START LEARNING">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
                             <padding>
-                                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                                <Insets bottom="12.0" left="32.0" right="32.0" top="12.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                </VBox>
+
+                <!-- Right Side Cards Container -->
+                <VBox prefWidth="340.0" spacing="24.0">
+                    <children>
+                        <!-- Top Card: Venus League -->
+                        <VBox spacing="20.0" style="-fx-background-color: #1A233A; -fx-background-radius: 16px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 12, 0, 0, 4);">
+                            <padding>
+                                <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                             </padding>
                             <children>
-                                <Label text="🏆" textFill="#2D3748">
-                                    <font>
-                                        <Font size="70.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Complete a lesson or earn XP to&#10;join this week's Leaderboard!" textAlignment="CENTER" textFill="#2D3748" wrapText="true">
+                                <Label fx:id="leagueTitleLabel" text="Venus league" textFill="#FFFFFF">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
 
-                                <!-- START LEARNING Button -->
-                                <Button onAction="#handleStartLearning" style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 6px; -fx-cursor: hand;" text="START LEARNING">
-                                    <font>
-                                        <Font name="System Bold" size="13.0" />
-                                    </font>
-                                    <padding>
-                                        <Insets bottom="10.0" left="24.0" right="24.0" top="10.0" />
-                                    </padding>
-                                </Button>
+                                <!-- Badges Row with Enhanced Brightness & Glow Effects -->
+                                <HBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                        <!-- 1. Nebula -->
+                                        <VBox fx:id="nebulaContainer" alignment="CENTER" spacing="8.0">
+                                            <children>
+                                                <ImageView fx:id="nebulaImg" fitHeight="70.0" fitWidth="120.0" opacity="1.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../Images/Nebula.png" />
+                                                    </image>
+                                                    <effect>
+                                                        <DropShadow radius="15.0" spread="0.2">
+                                                            <color>
+                                                                <Color red="0.6" green="0.4" blue="1.0" opacity="0.6" />
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                </ImageView>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- 2. Protostar -->
+                                        <VBox fx:id="protostarContainer" alignment="CENTER" spacing="8.0">
+                                            <children>
+                                                <ImageView fx:id="protostarImg" fitHeight="70.0" fitWidth="81.0" opacity="1.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../Images/Protostar.png" />
+                                                    </image>
+                                                    <effect>
+                                                        <DropShadow radius="15.0" spread="0.2">
+                                                            <color>
+                                                                <Color red="0.3" green="0.6" blue="1.0" opacity="0.6" />
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                </ImageView>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- 3. Supernova -->
+                                        <VBox fx:id="supernovaContainer" alignment="CENTER" spacing="8.0">
+                                            <children>
+                                                <ImageView fx:id="supernovaImg" fitHeight="60.0" fitWidth="60.0" opacity="1.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../Images/Supernova.png" />
+                                                    </image>
+                                                    <effect>
+                                                        <DropShadow radius="15.0" spread="0.2">
+                                                            <color>
+                                                                <Color red="1.0" green="0.8" blue="0.3" opacity="0.6" />
+                                                            </color>
+                                                        </DropShadow>
+                                                    </effect>
+                                                </ImageView>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
 
-                        <!-- Right Side Cards Container -->
-                        <VBox prefWidth="320.0" spacing="20.0">
+                        <!-- Bottom Card: Earn XP -->
+                        <VBox spacing="16.0" style="-fx-background-color: #1A233A; -fx-background-radius: 16px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 12, 0, 0, 4);">
+                            <padding>
+                                <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                            </padding>
                             <children>
-                                <!-- Top Card: Dynamic League Section -->
-                                <VBox spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 12, 0, 0, 4);">
+                                <Label text="Earn XP" textFill="#FFFFFF">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+
+                                <!-- Task 1 -->
+                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #252F4A; -fx-background-radius: 12px;">
                                     <padding>
-                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                        <Insets bottom="12.0" left="16.0" right="16.0" top="12.0" />
                                     </padding>
                                     <children>
-                                        <!-- Dynamic League Title -->
-                                        <Label fx:id="leagueTitleLabel" text="Venus league" textFill="#1A202C">
-                                            <font>
-                                                <Font name="System Bold" size="18.0" />
-                                            </font>
-                                        </Label>
-
-                                        <!-- Badges Row -->
-                                        <HBox alignment="CENTER" spacing="16.0">
+                                        <VBox HBox.hgrow="ALWAYS">
                                             <children>
-                                                <!-- 1. Nebula -->
-                                                <VBox fx:id="nebulaContainer" alignment="CENTER" spacing="6.0">
-                                                    <children>
-                                                        <ImageView fx:id="nebulaImg" fitHeight="72.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@../Images/Nebula.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </children>
-                                                </VBox>
-
-                                                <!-- 2. Protostar -->
-                                                <VBox fx:id="protostarContainer" alignment="CENTER" prefHeight="66.0" prefWidth="58.0" spacing="6.0">
-                                                    <children>
-                                                        <ImageView fx:id="protostarImg" fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@../Images/Protostar.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </children>
-                                                </VBox>
-
-                                                <!-- 3. Supernova -->
-                                                <VBox fx:id="supernovaContainer" alignment="CENTER" spacing="6.0">
-                                                    <children>
-                                                        <ImageView fx:id="supernovaImg" fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@../Images/Supernova.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </children>
-                                                </VBox>
+                                                <Label text="Complete a lesson" textFill="#E2E8F0">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="+10 XP" textFill="#A0AEC0">
+                                                    <font>
+                                                        <Font size="12.0" />
+                                                    </font>
+                                                </Label>
                                             </children>
-                                        </HBox>
+                                        </VBox>
+                                        <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 50%; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-cursor: hand;" text="▶">
+                                            <font>
+                                                <Font size="10.0" />
+                                            </font>
+                                        </Button>
                                     </children>
-                                </VBox>
+                                </HBox>
 
-                                <!-- Bottom Card: Earn XP Section -->
-                                <VBox spacing="12.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 12, 0, 0, 4);">
+                                <!-- Task 2 -->
+                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #252F4A; -fx-background-radius: 12px;">
                                     <padding>
-                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                        <Insets bottom="12.0" left="16.0" right="16.0" top="12.0" />
                                     </padding>
                                     <children>
-                                        <Label text="Earn XP" textFill="#1A202C">
+                                        <VBox HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Achieve your Daily Learning Goal" textFill="#E2E8F0">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="+6 XP" textFill="#A0AEC0">
+                                                    <font>
+                                                        <Font size="12.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 50%; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-cursor: hand;" text="▶">
                                             <font>
-                                                <Font name="System Bold" size="18.0" />
+                                                <Font size="10.0" />
                                             </font>
-                                        </Label>
-
-                                        <!-- Task Box 1 -->
-                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #F0F4F8; -fx-background-radius: 10px;">
-                                            <padding>
-                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                                            </padding>
-                                            <children>
-                                                <VBox HBox.hgrow="ALWAYS">
-                                                    <children>
-                                                        <Label text="Complete a lesson" textFill="#2D3748">
-                                                            <font>
-                                                                <Font name="System Bold" size="13.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label text="+10 XP" textFill="#718096">
-                                                            <font>
-                                                                <Font size="12.0" />
-                                                            </font>
-                                                        </Label>
-                                                    </children>
-                                                </VBox>
-                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
-                                            </children>
-                                        </HBox>
-
-                                        <!-- Task Box 2 -->
-                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #F0F4F8; -fx-background-radius: 10px;">
-                                            <padding>
-                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                                            </padding>
-                                            <children>
-                                                <VBox HBox.hgrow="ALWAYS">
-                                                    <children>
-                                                        <Label text="Achieve your Daily Learning Goal" textFill="#2D3748">
-                                                            <font>
-                                                                <Font name="System Bold" size="13.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label text="+6 XP" textFill="#718096">
-                                                            <font>
-                                                                <Font size="12.0" />
-                                                            </font>
-                                                        </Label>
-                                                    </children>
-                                                </VBox>
-                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
-                                            </children>
-                                        </HBox>
-
-                                        <!-- Task Box 3 -->
-                                        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #EBF8FF; -fx-background-radius: 10px;">
-                                            <padding>
-                                                <Insets bottom="12.0" left="15.0" right="15.0" top="12.0" />
-                                            </padding>
-                                            <children>
-                                                <VBox HBox.hgrow="ALWAYS">
-                                                    <children>
-                                                        <Label text="Solve a Code Coach" textFill="#2D3748">
-                                                            <font>
-                                                                <Font name="System Bold" size="13.0" />
-                                                            </font>
-                                                        </Label>
-                                                        <Label text="+5 XP" textFill="#718096">
-                                                            <font>
-                                                                <Font size="12.0" />
-                                                            </font>
-                                                        </Label>
-                                                    </children>
-                                                </VBox>
-                                                <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 20px; -fx-min-width: 32px; -fx-min-height: 32px;" text="▶" />
-                                            </children>
-                                        </HBox>
+                                        </Button>
                                     </children>
-                                </VBox>
+                                </HBox>
+
+                                <!-- Task 3 -->
+                                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #252F4A; -fx-background-radius: 12px;">
+                                    <padding>
+                                        <Insets bottom="12.0" left="16.0" right="16.0" top="12.0" />
+                                    </padding>
+                                    <children>
+                                        <VBox HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Solve a Code Coach" textFill="#E2E8F0">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="+5 XP" textFill="#A0AEC0">
+                                                    <font>
+                                                        <Font size="12.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <Button style="-fx-background-color: #3182CE; -fx-text-fill: white; -fx-background-radius: 50%; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-cursor: hand;" text="▶">
+                                            <font>
+                                                <Font size="10.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
                     </children>
-                </HBox>
+                </VBox>
             </children>
-        </VBox>
+        </HBox>
     </content>
 </ScrollPane>

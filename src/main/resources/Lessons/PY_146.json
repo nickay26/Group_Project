@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_146",
+  "title": "Security & Cryptography in Python (PYTH_141 to PYTH_150) (PYTH_146_S1 to PYTH_146_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_146_S1",
+      "type": "CONCEPT",
+      "title": "Password Hashing",
+      "prompt": "Always store salted cryptographic hashes instead of plain-text passwords.",
+      "codeSnippet": "import hashlib\npassword = b'secret123'\nhash_object = hashlib.sha256(password)\nprint(hash_object.hexdigest())"
+    },
+    {
+      "slideId": "PYTH_146_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Hashlib Module",
+      "prompt": "Fill in the standard Python library used for secure hash algorithms.",
+      "codeSnippet": "import ___",
+      "options": ["hashlib", "crypto", "secrets", "security"],
+      "correctAnswer": "hashlib"
+    },
+    {
+      "slideId": "PYTH_146_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Secure Random Numbers",
+      "prompt": "Which module should be used for generating cryptographically strong random numbers?",
+      "options": ["secrets", "random", "numpy.random", "math"],
+      "correctAnswer": "secrets"
+    },
+    {
+      "slideId": "PYTH_146_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Bcrypt Hashing",
+      "prompt": "Fill in the function used to generate a secure salted password hash in bcrypt.",
+      "codeSnippet": "hashed = bcrypt.___ (password, bcrypt.gensalt())",
+      "options": ["hashpw", "make_hash", "encrypt", "encode"],
+      "correctAnswer": "hashpw"
+    },
+    {
+      "slideId": "PYTH_146_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Symmetric vs Asymmetric Encryption",
+      "prompt": "Which algorithm is an example of Asymmetric (Public/Private Key) Encryption?",
+      "options": ["RSA", "AES", "DES", "Blowfish"],
+      "correctAnswer": "RSA"
+    },
+    {
+      "slideId": "PYTH_146_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Hex Digest",
+      "prompt": "Fill in the method returning a digest string formatted in hexadecimal.",
+      "codeSnippet": "digest_str = hash_obj.___ ()",
+      "options": ["hexdigest", "hex", "to_hex", "digest_string"],
+      "correctAnswer": "hexdigest"
+    },
+    {
+      "slideId": "PYTH_146_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "JWT Handling",
+      "prompt": "What does JWT stand for in web security authentication?",
+      "options": [
+        "JSON Web Token",
+        "Java Web Transfer",
+        "JavaScript Working Tool",
+        "Joint Web Target"
+      ],
+      "correctAnswer": "JSON Web Token"
+    },
+    {
+      "slideId": "PYTH_146_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Fernet Symmetric Encryption",
+      "prompt": "Fill in the method used to decrypt data using cryptography.fernet.",
+      "codeSnippet": "f = Fernet(key)\nplain_text = f.___ (cipher_text)",
+      "options": ["decrypt", "decode", "unpack", "unhash"],
+      "correctAnswer": "decrypt"
+    }
+  ]
+}

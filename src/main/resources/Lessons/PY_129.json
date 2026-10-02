@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_129",
+  "title": "HTTP Requests & Web Services (PYTH_129_S1 to PYTH_129_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_129_S1",
+      "type": "CONCEPT",
+      "title": "Requests Module Basics",
+      "prompt": "The requests library simplifies sending HTTP GET, POST, and PUT requests to REST APIs.",
+      "codeSnippet": "import requests\nres = requests.get('https://api.example.com/data')\nif res.status_code == 200:\n    print(res.json())"
+    },
+    {
+      "slideId": "PYTH_129_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP GET Request",
+      "prompt": "Fill in the method used to make an HTTP GET request.",
+      "codeSnippet": "response = requests.___('https://api.github.com')",
+      "options": ["get", "fetch", "read", "request"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "PYTH_129_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Parsing Response JSON",
+      "prompt": "Which response object method automatically parses JSON response payload into a Python dict?",
+      "options": ["response.json()", "response.to_json()", "response.content()", "response.data()"],
+      "correctAnswer": "response.json()"
+    },
+    {
+      "slideId": "PYTH_129_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP Status Code Property",
+      "prompt": "Fill in the property name to check HTTP response status code.",
+      "codeSnippet": "if response.___ == 200:\n    print('Success')",
+      "options": ["status_code", "status", "code", "http_status"],
+      "correctAnswer": "status_code"
+    },
+    {
+      "slideId": "PYTH_129_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "HTTP POST Request Data",
+      "prompt": "Which argument sends JSON payload data in a requests.post() call?",
+      "options": ["json=", "data=", "payload=", "body="],
+      "correctAnswer": "json="
+    },
+    {
+      "slideId": "PYTH_129_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Custom Request Headers",
+      "prompt": "Fill in the parameter used to pass authorization tokens or custom headers in requests.",
+      "codeSnippet": "res = requests.get(url, ___={'Authorization': 'Bearer token'})",
+      "options": ["headers", "auth", "meta", "tokens"],
+      "correctAnswer": "headers"
+    },
+    {
+      "slideId": "PYTH_129_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Handling Timeout",
+      "prompt": "How do you set a maximum wait time of 5 seconds for a request?",
+      "options": ["requests.get(url, timeout=5)", "requests.get(url, wait=5)", "requests.get(url, limit=5)", "requests.get(url, time=5)"],
+      "correctAnswer": "requests.get(url, timeout=5)"
+    }
+  ]
+}

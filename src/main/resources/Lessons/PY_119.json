@@ -1,0 +1,80 @@
+{
+  "lessonId": "PYTH_119",
+  "title": "Decorators & Functional Concepts (PYTH_119_S1 to PYTH_119_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_119_S1",
+      "type": "CONCEPT",
+      "title": "Function Decorators",
+      "prompt": "Decorators modify or extend the behavior of functions without changing their source code.",
+      "codeSnippet": "def my_decorator(func):\n    def wrapper():\n        print(\"Before\")\n        func()\n        print(\"After\")\n    return wrapper"
+    },
+    {
+      "slideId": "PYTH_119_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Decorator Syntax Symbol",
+      "prompt": "Fill in the symbol used to apply a decorator above a function definition.",
+      "codeSnippet": "___my_decorator\ndef say_hello():\n    print(\"Hello\")",
+      "options": ["@", "#", "$", "&"],
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PYTH_119_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "First-Class Functions",
+      "prompt": "What does it mean that functions are 'first-class citizens' in Python?",
+      "options": [
+        "They can be passed as arguments, returned, and assigned to variables",
+        "They execute with higher priority",
+        "They can only be defined at class scope",
+        "They are pre-compiled into C code"
+      ],
+      "correctAnswer": "They can be passed as arguments, returned, and assigned to variables"
+    },
+    {
+      "slideId": "PYTH_119_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Functions",
+      "prompt": "Fill in the keyword to create an anonymous single-expression function.",
+      "codeSnippet": "square = ___ x: x ** 2",
+      "options": ["lambda", "def", "anon", "fn"],
+      "correctAnswer": "lambda"
+    },
+    {
+      "slideId": "PYTH_119_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Map Function",
+      "prompt": "What does map(lambda x: x*2, [1, 2, 3]) do?",
+      "options": [
+        "Applies the function to all items in the iterable",
+        "Filters items based on condition",
+        "Reduces list to a single number",
+        "Sorts the list elements"
+      ],
+      "correctAnswer": "Applies the function to all items in the iterable"
+    },
+    {
+      "slideId": "PYTH_119_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Filter Function",
+      "prompt": "Fill in the function used to extract elements that satisfy a condition.",
+      "codeSnippet": "evens = ___(lambda x: x % 2 == 0, numbers)",
+      "options": ["filter", "map", "extract", "find"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "PYTH_119_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functools Wraps",
+      "prompt": "Why is @functools.wraps(func) used inside custom decorators?",
+      "options": [
+        "To preserve original function metadata (like __name__ and __doc__)",
+        "To speed up execution",
+        "To prevent recursion depth limit errors",
+        "To force type checking"
+      ],
+      "correctAnswer": "To preserve original function metadata (like __name__ and __doc__)"
+    }
+  ]
+}

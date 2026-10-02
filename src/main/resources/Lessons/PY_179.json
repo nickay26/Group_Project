@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_179",
+  "title": "High-Frequency Algorithmic Trading Engines (PYTH_179_S1 to PYTH_179_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_179_S1",
+      "type": "CONCEPT",
+      "title": "Order Book Mechanics",
+      "prompt": "Algorithmic trading engines maintain real-time order books (Bids & Asks) and execute automated trades based on low-latency signals.",
+      "codeSnippet": "# Limit Order Book Concept\nbids = [(100.50, 10), (100.45, 25)]  # (price, quantity)\nasks = [(100.55, 15), (100.60, 30)]"
+    },
+    {
+      "slideId": "PYTH_179_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Calculating Bid-Ask Spread",
+      "prompt": "Fill in the mathematical expression term representing the gap between the lowest ask price and highest bid price.",
+      "codeSnippet": "spread = min_ask - ___",
+      "options": ["max_bid", "min_bid", "avg_bid", "last_trade"],
+      "correctAnswer": "max_bid"
+    },
+    {
+      "slideId": "PYTH_179_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Garbage Collection Latency Spikes",
+      "prompt": "Why do high-frequency trading (HFT) systems in Python explicitly manage or disable cyclic garbage collection (`gc.disable()`) during market hours?",
+      "options": [
+        "To eliminate unpredictable multi-millisecond stop-the-world pauses during order matching loops",
+        "To reduce CPU energy consumption during market closing",
+        "To bypass SSL certificate checks on exchange WebSocket feeds",
+        "To force memory allocation directly to persistent NVMe SSD drives"
+      ],
+      "correctAnswer": "To eliminate unpredictable multi-millisecond stop-the-world pauses during order matching loops"
+    },
+    {
+      "slideId": "PYTH_179_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Vectorized Backtesting with NumPy",
+      "prompt": "Fill in the vectorized Pandas method used to calculate logarithmic returns from a series of close prices.",
+      "codeSnippet": "import numpy as np\nreturns = np.log(df['close'] / df['close'].___(1))",
+      "options": ["shift", "lag", "diff", "offset"],
+      "correctAnswer": "shift"
+    },
+    {
+      "slideId": "PYTH_179_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Sharpe Ratio Risk Measurement",
+      "prompt": "What does a strategy's Sharpe Ratio quantify when evaluating quantitative backtest results?",
+      "options": [
+        "Excess risk-adjusted return relative to portfolio volatility",
+        "The maximum percentage drawdown from peak to trough",
+        "The total count of winning trades versus losing trades",
+        "The speed of order execution in microseconds"
+      ],
+      "correctAnswer": "Excess risk-adjusted return relative to portfolio volatility"
+    },
+    {
+      "slideId": "PYTH_179_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Zero-Copy Buffers with PyArrow",
+      "prompt": "Fill in the memory framework used to transfer high-volume tick data without serialization overhead.",
+      "codeSnippet": "import pyarrow as pa\ntable = pa.Table.from_pandas(df)",
+      "options": ["pyarrow", "pickle", "json", "csv"],
+      "correctAnswer": "pyarrow"
+    },
+    {
+      "slideId": "PYTH_179_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Slippage in Strategy Execution",
+      "prompt": "What causes trade execution 'slippage' during backtest simulation comparisons against live trading?",
+      "options": [
+        "Difference between expected order entry price and actual filled price due to market movement and latency",
+        "Errors caused by invalid API secret keys",
+        "Timezone misalignments between exchange servers and local clocks",
+        "Rounding inaccuracies when converting floating-point values"
+      ],
+      "correctAnswer": "Difference between expected order entry price and actual filled price due to market movement and latency"
+    },
+    {
+      "slideId": "PYTH_179_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Fast Financial Calculations with Numba",
+      "prompt": "Fill in the Numba decorator used to compile Python backtesting loops into machine code.",
+      "codeSnippet": "from numba import njit\n\n@___\ndef run_backtest(prices, signals):",
+      "options": ["njit", "compile", "fast", "speedup"],
+      "correctAnswer": "njit"
+    }
+  ]
+}

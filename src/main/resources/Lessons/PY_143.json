@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_143",
+  "title": "Natural Language Processing (NLP) Basics (PYTH_141 to PYTH_150) (PYTH_143_S1 to PYTH_143_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_143_S1",
+      "type": "CONCEPT",
+      "title": "Text Tokenization",
+      "prompt": "Tokenization converts raw string text into discrete tokens or words for algorithmic processing.",
+      "codeSnippet": "text = 'Python is awesome'\ntokens = text.split()\nprint(tokens)"
+    },
+    {
+      "slideId": "PYTH_143_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "String Lowercasing",
+      "prompt": "Fill in the string method commonly used in text normalization.",
+      "codeSnippet": "clean_text = raw_text.___ ()",
+      "options": ["lower", "clean", "normalize", "strip_case"],
+      "correctAnswer": "lower"
+    },
+    {
+      "slideId": "PYTH_143_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stop Words",
+      "prompt": "What are stop words in NLP?",
+      "options": [
+        "Common words (like 'the', 'is') usually filtered out during preprocessing",
+        "Syntax errors in raw text",
+        "Punctuation characters at the end of sentences",
+        "Words that crash tokenizers"
+      ],
+      "correctAnswer": "Common words (like 'the', 'is') usually filtered out during preprocessing"
+    },
+    {
+      "slideId": "PYTH_143_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "TF-IDF Vectorizer",
+      "prompt": "Fill in the Scikit-Learn class used to convert text documents into TF-IDF numerical matrices.",
+      "codeSnippet": "from sklearn.feature_extraction.text import ___Vectorizer",
+      "options": ["Tfidf", "Count", "Word", "Text"],
+      "correctAnswer": "Tfidf"
+    },
+    {
+      "slideId": "PYTH_143_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lemmatization vs Stemming",
+      "prompt": "What is the key advantage of Lemmatization over Stemming?",
+      "options": [
+        "It reduces words to valid dictionary base forms (lemmas)",
+        "It is much faster than stemming",
+        "It deletes all vowels from words",
+        "It works without a dictionary database"
+      ],
+      "correctAnswer": "It reduces words to valid dictionary base forms (lemmas)"
+    },
+    {
+      "slideId": "PYTH_143_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "N-Grams",
+      "prompt": "Fill in the term for contiguous sequences of N items from a given text sample.",
+      "codeSnippet": "# Sequence of 2 words:\nbi___ = ('machine', 'learning')",
+      "options": ["gram", "word", "token", "pair"],
+      "correctAnswer": "gram"
+    },
+    {
+      "slideId": "PYTH_143_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Word Embeddings",
+      "prompt": "Which technique represents words as dense real-valued vectors in a continuous space?",
+      "options": ["Word2Vec", "One-Hot Encoding", "Bag of Words", "ASCII Indexing"],
+      "correctAnswer": "Word2Vec"
+    },
+    {
+      "slideId": "PYTH_143_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "SpaCy Pipeline Import",
+      "prompt": "Fill in the function to load a pre-trained language model in SpaCy.",
+      "codeSnippet": "import spacy\nnlp = spacy.___ ('en_core_web_sm')",
+      "options": ["load", "get", "init", "fetch"],
+      "correctAnswer": "load"
+    }
+  ]
+}
