@@ -1,29 +1,26 @@
 package Project;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainLayoutController {
 
@@ -46,44 +43,33 @@ public class MainLayoutController {
     private ContextMenu profileMenu;
     @FXML private Button premiumBtn;
 
-
     private List<Button> navButtons;
-    private Timeline brainAutoRefreshTimer; // ⭐ Auto Refresh Timer
 
     @FXML
     public void initialize() {
         instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
-        // Fetch User Activity (Streak & XP) and Course Title
+        // Brain Label/Icon ကို နှိပ်ပါက Refill Dialog ပွင့်ရန် Event ထည့်သွင်းခြင်း
+        if (topBrainLabel != null) {
+            topBrainLabel.setOnMouseClicked(e -> showRefillBrainDialog());
+            topBrainLabel.setStyle("-fx-cursor: hand;");
+        }
+
+        // Automatically fetch and display active course title
         updateHeaderStats();
-        fetchAndUpdateUserActivity(); // <--- ⭐ ဒီနေရာတွင် ခေါ်ပေးပါ
         updateCourseTitle();
 
-        startBrainAutoRefresh();
-
+        // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
         if (UserSession.isRedirectedFromOverview()) {
             handleNavLearn();
         } else {
-            handleNavCourses();
+            handleNavCourses(); // Login ဝင်လာပါက Courses Page ကို Default Load လုပ်မည်
         }
     }
 
     public static MainLayoutController getInstance() {
         return instance;
-    }
-
-    public void updateBrainDisplay(int count) {
-        if (topBrainLabel != null) {
-            User currentUser = UserSession.getCurrentUser();
-
-            // Premium ဆိုရင် ∞ ပြပါ
-            if (currentUser != null && PremiumService.isPremium(currentUser)) {
-                topBrainLabel.setText(" ∞");
-            } else {
-                topBrainLabel.setText(" " + count);
-            }
-        }
     }
 
     public void setCourseTitle(String title) {
@@ -95,27 +81,8 @@ public class MainLayoutController {
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
-            // ===== 🔍 DEBUG =====
-            System.out.println("=== HEADER DEBUG ===");
-            System.out.println("User ID: " + currentUser.getUserId());
-            System.out.println("isPremium (local): " + currentUser.isPremium());
-            System.out.println("subscriptionType: " + currentUser.getSubscriptionType());
-            System.out.println("brainCount: " + currentUser.getBrainCount());
-            System.out.println("brainDisplay: " + PremiumService.getBrainDisplay(currentUser));
-            System.out.println("====================");
-            // ====================
-
             topStreakLabel.setText(" " + currentUser.getStreak());
-
-            String brainDisplay = PremiumService.getBrainDisplay(currentUser);
-            topBrainLabel.setText(" " + brainDisplay);
-
-            if (PremiumService.isPremium(currentUser)) {
-                topBrainLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-weight: bold;");
-            } else {
-                topBrainLabel.setStyle("-fx-text-fill: white;");
-            }
-
+            topBrainLabel.setText(" " + currentUser.getBrainCount());
             topCoinLabel.setText(" " + currentUser.getCoin());
         }
     }
@@ -138,79 +105,114 @@ public class MainLayoutController {
         setCourseTitle("No Active Course");
     }
 
-    // Backend မှ Streak နှင့် XP ကို Sync လုပ်ပြီး UI ပေါ်တွင် Update လုပ်ပေးမည့် Method
-    public void fetchAndUpdateUserActivity() {
-        int userId = UserSession.getUserId();
-        if (userId <= 0) return;
-
-        ApiClient.getUserActivityAsync(userId).thenAccept(response -> {
-            if (response != null && !response.isEmpty()) {
-                try {
-                    org.json.JSONObject json = new org.json.JSONObject(response);
-                    if (json.has("streak")) {
-                        int streak = json.getInt("streak");
-                        int xp = json.optInt("xp", 0);
-
-                        // UserSession ထဲသို့ Sync ထည့်ခြင်း
-                        if (UserSession.getCurrentUser() != null) {
-                            UserSession.getCurrentUser().setStreak(streak);
-                            UserSession.getCurrentUser().setXp(xp);
-                        }
-
-                        // UI Thread ပေါ်တွင် Streak Counter ပြင်ပေးခြင်း
-                        Platform.runLater(() -> {
-                            if (topStreakLabel != null) {
-                                topStreakLabel.setText(" " + streak);
-                            }
-                        });
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error parsing activity response: " + e.getMessage());
-                }
-            }
-        });
-    }
-
     // ============================================
-    // ⭐ BRAIN AUTO-REFRESH SYSTEM
+    // BRAIN REFILL DIALOG (POPUP)
     // ============================================
-    private void startBrainAutoRefresh() {
-        // App စတင်သည်နှင့် အရင်ဆုံး တစ်ကြိမ် Fetch လုပ်မည်
-        fetchAndUpdateBrainStatus();
+    @FXML
+    public void showRefillBrainDialog() {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
 
-        // ၁ မိနစ်လျှင် တစ်ကြိမ် နောက်ကွယ်မှ Auto Refresh ပြုလုပ်မည်
-        brainAutoRefreshTimer = new Timeline(
-                new KeyFrame(Duration.minutes(1), e -> fetchAndUpdateBrainStatus())
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        VBox dialogContent = new VBox(16);
+        dialogContent.setAlignment(Pos.CENTER);
+        dialogContent.setPadding(new Insets(24));
+        dialogContent.setStyle(
+                "-fx-background-color: #0F172A; " +
+                        "-fx-border-color: #334155; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 10);"
         );
-        brainAutoRefreshTimer.setCycleCount(Timeline.INDEFINITE);
-        brainAutoRefreshTimer.play();
-    }
 
-    public void fetchAndUpdateBrainStatus() {
-        int userId = UserSession.getUserId();
-        if (userId <= 0) return;
+        Label titleLabel = new Label("GET MORE BRAINS! 🧠");
+        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 20px; -fx-font-weight: bold;");
 
-        // ApiClient မှတဆင့် Async ခေါ်ဆိုခြင်း
-        ApiClient.getUserBrainsAsync(userId).thenAccept(response -> {
-            if (response != null && !response.isEmpty()) {
-                try {
-                    org.json.JSONObject json = new org.json.JSONObject(response);
-                    if (json.has("brain_count")) {
-                        int updatedBrainCount = json.getInt("brain_count");
+        Label descLabel = new Label("Refill your brains to keep learning without waiting!");
+        descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 13px;");
 
-                        // UserSession ထဲတွင် update ပြုလုပ်ခြင်း
-                        if (UserSession.getCurrentUser() != null) {
-                            UserSession.getCurrentUser().setBrainCount(updatedBrainCount);
-                        }
+        // Current User Stats Display Box
+        HBox infoBox = new HBox(20);
+        infoBox.setAlignment(Pos.CENTER);
+        infoBox.setStyle("-fx-background-color: #1E293B; -fx-padding: 12; -fx-background-radius: 12px;");
 
-                        // UI Thread ပေါ်တွင် Display ပြင်ပေးခြင်း
-                        Platform.runLater(() -> updateBrainDisplay(updatedBrainCount));
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error parsing brain response: " + e.getMessage());
-                }
+        Label currentCoinLbl = new Label("Your Coins: 🪙 " + user.getCoin());
+        currentCoinLbl.setStyle("-fx-text-fill: #F59E0B; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+        Label currentBrainLbl = new Label("Brains: 🧠 " + user.getBrainCount() + "/5");
+        currentBrainLbl.setStyle("-fx-text-fill: #EC4899; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+        infoBox.getChildren().addAll(currentCoinLbl, currentBrainLbl);
+
+        int refillCost = 100; // Refill ပြုလုပ်ရန် ကုန်ကျမည့် Coin ပမာဏ
+
+        Button refillBtn = new Button("Refill 5 Brains (🪙 " + refillCost + " Coins)");
+        refillBtn.setStyle(
+                "-fx-background-color: #2563EB; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-padding: 10 20 10 20; " +
+                        "-fx-background-radius: 10px; " +
+                        "-fx-cursor: hand;"
+        );
+
+        Label statusLabel = new Label();
+        statusLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+
+        refillBtn.setOnAction(e -> {
+            if (user.getBrainCount() >= 5) {
+                statusLabel.setText("Your brains are already full!");
+                statusLabel.setStyle("-fx-text-fill: #34D399;");
+                return;
+            }
+
+            if (user.getCoin() < refillCost) {
+                statusLabel.setText("Not enough coins! You need " + refillCost + " coins.");
+                statusLabel.setStyle("-fx-text-fill: #F87171;");
+                return;
+            }
+
+            boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), refillCost, 5);
+
+            if (success) {
+                // User Session Update
+                user.setCoin(user.getCoin() - refillCost);
+                user.setBrainCount(5);
+
+                // Main Navigation Header UI Update
+                updateHeaderStats();
+
+                statusLabel.setText("Successfully refilled brains!");
+                statusLabel.setStyle("-fx-text-fill: #34D399;");
+
+                new Thread(() -> {
+                    try { Thread.sleep(1200); } catch (Exception ignored) {}
+                    Platform.runLater(dialog::close);
+                }).start();
+            } else {
+                statusLabel.setText("Transaction failed! Please try again.");
+                statusLabel.setStyle("-fx-text-fill: #F87171;");
             }
         });
+
+        Button closeBtn = new Button("Close");
+        closeBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #64748B; -fx-cursor: hand;");
+        closeBtn.setOnAction(e -> dialog.close());
+
+        dialogContent.getChildren().addAll(titleLabel, descLabel, infoBox, refillBtn, statusLabel, closeBtn);
+
+        StackPane root = new StackPane(dialogContent);
+        root.setPadding(new Insets(20));
+        root.setStyle("-fx-background-color: rgba(0, 0, 0, 0.65);");
+
+        Scene scene = new Scene(root, 420, 330);
+        scene.setFill(null);
+        dialog.setScene(scene);
+        dialog.showAndWait();
     }
 
     // ============================================
@@ -357,46 +359,138 @@ public class MainLayoutController {
     }
 
     private void handleLogout() {
-        // Timer ကို ရပ်ဆိုင်းခြင်း
-        if (brainAutoRefreshTimer != null) {
-            brainAutoRefreshTimer.stop();
-        }
         // Session clear ပြုလုပ်ခြင်း
         UserSession.clearSession();
         SceneManager.switchScene("WelcomeView.fxml");
     }
 
+    /**
+     * ⭐ Page ပြောင်းလဲသည့်အခါ Emoji + Modern Card UI Loading ပြသပေးမည်
+     */
     public FXMLLoader loadPage(String fxmlFileName) {
-        try {
-            String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
-            URL resource = getClass().getResource(resourcePath);
+        // FXML Name အလိုက် Sidebar Highlight အာမခံချက်ရှိအောင် အရင်ပြောင်းမည်
+        updateSidebarHighlight(fxmlFileName);
 
-            if (resource == null) {
-                resource = getClass().getResource("/" + fxmlFileName);
-            }
-            if (resource == null) {
-                resource = getClass().getResource(fxmlFileName);
-            }
+        // Page အမျိုးအစားပေါ်မူတည်ပြီး Dynamic Emoji နှင့် Text သတ်မှတ်ခြင်း
+        String dynamicEmoji = "🚀";
+        String pageName = "Page";
 
-            if (resource == null) {
-                System.err.println("Could not find FXML file: " + fxmlFileName);
-                return null;
-            }
-
-            FXMLLoader loader = new FXMLLoader(resource);
-            Parent view = loader.load();
-
-            contentArea.getChildren().setAll(view);
-
-            // FXML Name အလိုက် Sidebar Highlight ပြောင်းမည်
-            updateSidebarHighlight(fxmlFileName);
-
-            return loader;
-        } catch (IOException e) {
-            System.err.println("Error loading FXML: " + fxmlFileName);
-            e.printStackTrace();
-            return null;
+        if (fxmlFileName.contains("LearnPage")) {
+            dynamicEmoji = "📚";
+            pageName = "Learn Path";
+        } else if (fxmlFileName.contains("Course")) {
+            dynamicEmoji = "🎓";
+            pageName = "Courses";
+        } else if (fxmlFileName.contains("Playground")) {
+            dynamicEmoji = "💻";
+            pageName = "Playground";
+        } else if (fxmlFileName.contains("Leaderboard")) {
+            dynamicEmoji = "🏆";
+            pageName = "Leaderboard";
+        } else if (fxmlFileName.contains("Practice")) {
+            dynamicEmoji = "🎯";
+            pageName = "Practice";
+        } else if (fxmlFileName.contains("Game")) {
+            dynamicEmoji = "🎮";
+            pageName = "Games";
+        } else if (fxmlFileName.contains("Profile")) {
+            dynamicEmoji = "👤";
+            pageName = "Profile";
+        } else if (fxmlFileName.contains("Settings")) {
+            dynamicEmoji = "⚙️";
+            pageName = "Settings";
+        } else if (fxmlFileName.contains("Help")) {
+            dynamicEmoji = "❓";
+            pageName = "Help & Support";
+        } else if (fxmlFileName.contains("Premium")) {
+            dynamicEmoji = "👑";
+            pageName = "Premium";
         }
+
+        // 1. Loading UI Elements ပြင်ဆင်ခြင်း
+        ProgressIndicator spinner = new ProgressIndicator();
+        spinner.setStyle("-fx-progress-color: #38BDF8;");
+        spinner.setMaxSize(42, 42);
+
+        Label titleLabel = new Label("🤖 " + dynamicEmoji + " Loading " + pageName + "...");
+        titleLabel.setStyle("-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
+
+        Label subText = new Label("Preparing your workspace...");
+        subText.setStyle("-fx-font-size: 12px; -fx-text-fill: #94A3B8; -fx-font-weight: 500;");
+
+        // UI Card Container
+        VBox loadingCard = new VBox(12, spinner, titleLabel, subText);
+        loadingCard.setAlignment(Pos.CENTER);
+        loadingCard.setPadding(new Insets(28, 36, 28, 36));
+        loadingCard.setStyle(
+                "-fx-background-color: #1E293B;" +
+                        "-fx-background-radius: 18px;" +
+                        "-fx-border-color: #334155;" +
+                        "-fx-border-radius: 18px;" +
+                        "-fx-border-width: 1.5px;" +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 18, 0, 0, 6);"
+        );
+
+        // Centered Wrapper Panel
+        StackPane overlayPane = new StackPane(loadingCard);
+        overlayPane.setAlignment(Pos.CENTER);
+        overlayPane.setStyle("-fx-background-color: #0F172A;"); // Dashboard Dark BG
+
+        // Content Area ထဲတွင် Loading Card ကို အရင်ပြသမည်
+        contentArea.getChildren().setAll(overlayPane);
+
+        final FXMLLoader[] loadedLoader = new FXMLLoader[1];
+
+        // 2. Background Thread ဖြင့် FXML ကို Load ပြုလုပ်မည်
+        Task<Parent> loadTask = new Task<>() {
+            @Override
+            protected Parent call() throws Exception {
+                String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
+                URL resource = getClass().getResource(resourcePath);
+
+                if (resource == null) {
+                    resource = getClass().getResource("/" + fxmlFileName);
+                }
+                if (resource == null) {
+                    resource = getClass().getResource(fxmlFileName);
+                }
+
+                if (resource == null) {
+                    throw new IOException("Could not find FXML file: " + fxmlFileName);
+                }
+
+                FXMLLoader loader = new FXMLLoader(resource);
+                Parent view = loader.load();
+                loadedLoader[0] = loader;
+
+                // Loading Card ကို မြင်သာအောင် 300ms ခဏစောင့်မည်
+                Thread.sleep(300);
+
+                return view;
+            }
+        };
+
+        // 3. Load ပြီးပါက Main UI Thread ပေါ်တွင် View အသစ်ကို လဲလှယ်မည်
+        loadTask.setOnSucceeded(e -> {
+            Parent newView = loadTask.getValue();
+            contentArea.getChildren().setAll(newView);
+        });
+
+        loadTask.setOnFailed(e -> {
+            System.err.println("Error loading FXML: " + fxmlFileName);
+            if (loadTask.getException() != null) {
+                loadTask.getException().printStackTrace();
+            }
+            Label errorLabel = new Label("❌ Failed to load page: " + fxmlFileName);
+            errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 14px; -fx-font-weight: bold;");
+            contentArea.getChildren().setAll(errorLabel);
+        });
+
+        Thread thread = new Thread(loadTask);
+        thread.setDaemon(true);
+        thread.start();
+
+        return loadedLoader[0];
     }
 
     private void updateSidebarHighlight(String fxmlFileName) {
@@ -428,145 +522,6 @@ public class MainLayoutController {
         activeButton.getStyleClass().remove("nav-button");
         if (!activeButton.getStyleClass().contains("nav-button-active")) {
             activeButton.getStyleClass().add("nav-button-active");
-        }
-
-    }
-    public static String getBrainDisplay(User user) {
-        if (user == null) return "0";
-
-        // Premium User → ∞
-        if ("PREMIUM".equals(user.getPlanType()) || user.isPremium()) {
-            return "∞";
-        }
-
-        // Free User → Number
-        return String.valueOf(user.getBrainCount());
-    }
-
-    // ============================================
-// ⭐ STATS CLICK ACTIONS (Mimo-Style)
-// ============================================
-
-    @FXML
-    private void handleStreakClick() {
-        User currentUser = UserSession.getCurrentUser();
-        int streak = currentUser != null ? currentUser.getStreak() : 0;
-
-        Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Streak Info");
-
-        DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.getButtonTypes().add(ButtonType.CLOSE);
-
-        VBox content = new VBox(12);
-        content.setAlignment(Pos.CENTER);
-        content.setStyle("-fx-padding: 20; -fx-pref-width: 300px;");
-
-        Label iconLabel = new Label("🔥");
-        iconLabel.setStyle("-fx-font-size: 48px;");
-
-        Label titleLabel = new Label(streak + " Day Streak!");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-
-        Label descLabel = new Label("Complete at least one lesson every day to keep your streak alive!");
-        descLabel.setWrapText(true);
-        descLabel.setStyle("-fx-text-alignment: center; -fx-text-fill: #666;");
-
-        content.getChildren().addAll(iconLabel, titleLabel, descLabel);
-        dialogPane.setContent(content);
-        dialog.showAndWait();
-    }
-
-    @FXML
-    private void handleBrainClick() {
-        User currentUser = UserSession.getCurrentUser();
-
-        // ⭐ Premium ဆိုရင် Refill Popup မပြဘဲ Alert ပဲ ပြမယ်
-        if (currentUser != null && PremiumService.isPremium(currentUser)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Premium Brains");
-            alert.setHeaderText("🧠 Unlimited Brains");
-            alert.setContentText("You are a Premium user. Enjoy unlimited brains — no refill needed!");
-            alert.showAndWait();
-            return;
-        }
-
-        // ===== Free User အတွက် အောက်ပါအတိုင်း ဆက်လုပ်မယ် =====
-        int currentBrains = currentUser != null ? currentUser.getBrainCount() : 0;
-        int coins = currentUser != null ? currentUser.getCoin() : 0;
-        int refillCost = 50;
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Brain Refill");
-
-        DialogPane dialogPane = dialog.getDialogPane();
-        ButtonType refillBtnType = new ButtonType("Refill (" + refillCost + " 🪙)", ButtonBar.ButtonData.OK_DONE);
-        dialogPane.getButtonTypes().addAll(refillBtnType, ButtonType.CANCEL);
-
-        // Coins မလုံလောက် သို့မဟုတ် Brains ပြည့်နေရင် Refill Button ကို Disable လုပ်မယ်
-        Button refillButton = (Button) dialogPane.lookupButton(refillBtnType);
-        if (coins < refillCost || currentBrains >= 5) {
-            refillButton.setDisable(true);
-        }
-
-        VBox content = new VBox(10);
-        content.setAlignment(Pos.CENTER);
-        content.setStyle("-fx-padding: 20; -fx-pref-width: 320px;");
-
-        Label iconLabel = new Label("🧠");
-        iconLabel.setStyle("-fx-font-size: 48px;");
-
-        Label titleLabel = new Label("Brains: " + currentBrains + " / 5");
-        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
-        Label infoLabel = new Label("Brains refill automatically every 30 minutes, or you can restore them instantly using coins.");
-        infoLabel.setWrapText(true);
-        infoLabel.setStyle("-fx-text-alignment: center; -fx-text-fill: #555;");
-
-        content.getChildren().addAll(iconLabel, titleLabel, infoLabel);
-        dialogPane.setContent(content);
-
-        dialog.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == refillBtnType) {
-                int userId = UserSession.getUserId();
-
-                ApiClient.refillBrainsAsync(userId, refillCost).thenAccept(response -> {
-                    Platform.runLater(() -> {
-                        if (currentUser != null) {
-                            currentUser.setCoin(currentUser.getCoin() - refillCost);
-                            currentUser.setBrainCount(5);
-                        }
-                        updateHeaderStats();
-                        fetchAndUpdateBrainStatus();
-                    });
-                });
-            }
-        });
-    }
-
-    @FXML
-    private void handleCoinClick() {
-        User currentUser = UserSession.getCurrentUser();
-        int coins = currentUser != null ? currentUser.getCoin() : 0;
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Coin Balance");
-        alert.setHeaderText("🪙 You have " + coins + " Coins");
-        alert.setContentText("Earn coins by completing practice modules, maintaining streaks, and winning challenges! Use coins to refill brains or unlock premium features.");
-
-        // Add button to navigate directly to the shop/premium view
-        ButtonType shopButton = new ButtonType("Go to Shop", ButtonBar.ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(shopButton, ButtonType.CANCEL);
-
-        alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == shopButton) {
-                handlePremium(); // Navigates to PremiumView.fxml
-            }
-        });
-    }
-    public void loadPageWithWrapper(Parent wrapper) {
-        if (contentArea != null) {
-            contentArea.getChildren().setAll(wrapper);
         }
     }
 }

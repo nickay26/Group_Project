@@ -60,7 +60,7 @@ public class PaymentController {
         } catch (Exception e) {
             System.out.println("KPay QR not found");
         }
-        phoneLabel.setText("Phone: 09-123-456-789 (KPay)");
+        phoneLabel.setText("Phone: 09******855 (KPay)");
     }
 
     private void selectWavePay() {
@@ -74,7 +74,7 @@ public class PaymentController {
         } catch (Exception e) {
             System.out.println("WavePay QR not found");
         }
-        phoneLabel.setText("Phone: 09-987-654-321 (WavePay)");
+        phoneLabel.setText("Phone: 09******855 (WavePay)");
     }
 
     @FXML
