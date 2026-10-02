@@ -412,7 +412,8 @@ public class MainLayoutController {
         spinner.setStyle("-fx-progress-color: #38BDF8;");
         spinner.setMaxSize(42, 42);
 
-        Label titleLabel = new Label("🤖 " + dynamicEmoji + " Loading " + pageName + "...");
+        // 🤖 စက်ရုပ်ပုံစံ ဖျက်လိုက်သည်
+        Label titleLabel = new Label(dynamicEmoji + " Loading " + pageName + "...");
         titleLabel.setStyle("-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
 
         Label subText = new Label("Preparing your workspace...");
