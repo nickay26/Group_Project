@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane styleClass="editor-root" stylesheets="@../Css/code_editor.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CodeEditorController">
     <children>
@@ -37,11 +38,11 @@
                 <!-- SPLIT EDITOR & OUTPUT PANELS -->
                 <SplitPane dividerPositions="0.55" styleClass="split-pane" VBox.vgrow="ALWAYS">
                     <items>
-                        <!-- LEFT PANEL: CODE EDITOR -->
+                        <!-- LEFT PANEL: MONACO CODE EDITOR -->
                         <VBox spacing="6.0">
                             <children>
                                 <Label styleClass="section-header" text="CODE EDITOR" />
-                                <TextArea fx:id="codeEditor" styleClass="dark-editor" VBox.vgrow="ALWAYS" />
+                                <WebView fx:id="codeWebView" VBox.vgrow="ALWAYS" />
                             </children>
                         </VBox>
 

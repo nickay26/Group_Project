@@ -9,10 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -70,13 +67,11 @@ public class CoursesPageController {
         AnchorPane card = new AnchorPane();
         card.setPrefSize(360, 240);
 
-        // Dark blue card container styling with slate borders
         String defaultStyle = "-fx-background-color: #1E293B; -fx-background-radius: 24px; -fx-border-color: #334155; -fx-border-radius: 24px; -fx-border-width: 1.5px;";
         String hoverStyle = "-fx-background-color: #1E293B; -fx-background-radius: 24px; -fx-border-color: #3B82F6; -fx-border-radius: 24px; -fx-border-width: 1.5px;";
 
         card.setStyle(defaultStyle);
 
-        // Hover effect on card border
         card.setOnMouseEntered(e -> card.setStyle(hoverStyle));
         card.setOnMouseExited(e -> card.setStyle(defaultStyle));
 
@@ -111,7 +106,7 @@ public class CoursesPageController {
                 130.0, 240.0,
                 0.0, 110.0
         });
-        ribbon.setStyle("-fx-fill: #2563EB;"); // Electric Blue accent
+        ribbon.setStyle("-fx-fill: #2563EB;");
 
         Label ribbonText = new Label("Start Learning");
         ribbonText.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-size: 13px;");
@@ -121,7 +116,9 @@ public class CoursesPageController {
 
         Group cornerButton = new Group(ribbon, ribbonText);
         cornerButton.setCursor(Cursor.HAND);
-        cornerButton.setOnMouseClicked(e -> launchLessonView(course));
+
+        // Click လုပ်လိုက်ပါက Loading မပြတော့ဘဲ သင်ခန်းစာသို့ တိုက်ရိုက်သွားမည်
+        cornerButton.setOnMouseClicked(e -> launchLessonViewDirectly(course));
 
         StackPane progressRing = createProgressRing(course.getCompletedLessons(), course.getTotalLessons());
         AnchorPane.setBottomAnchor(progressRing, 20.0);
@@ -202,8 +199,16 @@ public class CoursesPageController {
         return container;
     }
 
-    private void launchLessonView(Course course) {
+    // ⭐ Loading Dialog မပါဘဲ Learn Page သို့ တိုက်ရိုက် သွားမည့် Logic
+    private void launchLessonViewDirectly(Course course) {
+        // 1. Session ထဲတွင် Active Course ID သတ်မှတ်ခြင်း
         UserSession.setActiveCourseId(course.getCourseId());
-        MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+
+        // 2. Main Layout Header ပေါ်ရှိ Course Title စာသားကို ချက်ချင်း Update ပြုလုပ်ခြင်း
+        if (MainLayoutController.getInstance() != null) {
+            MainLayoutController.getInstance().updateCourseTitle();
+            // 3. Learn Page FXML သို့ တိုက်ရိုက် Switch ပြုလုပ်မည်
+            MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+        }
     }
 }

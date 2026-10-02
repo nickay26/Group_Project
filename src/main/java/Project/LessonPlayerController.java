@@ -170,7 +170,12 @@ public class LessonPlayerController {
         titleLabel.setWrapText(true);
 
         currentPromptLabel = new Label(originalPrompt);
-        currentPromptLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #94A3B8; -fx-line-spacing: 3px;");
+        currentPromptLabel.setStyle(
+                "-fx-font-size: 16px; " +
+                        "-fx-text-fill: #E2E8F0; " +       // အလွန်ကြည်လင်ပြတ်သားသော Bright Off-White ရောင်
+                        "-fx-font-weight: 500; " +        // Medium Weight စာလုံးအထူ
+                        "-fx-line-spacing: 5px;"           // စာလိုင်းတစ်ခုနှင့်တစ်ခုကြား အကွာအဝေး (Readability တိုးတက်စေရန်)
+        );
         currentPromptLabel.setWrapText(true);
 
         cardBox.getChildren().addAll(typeBadge, titleLabel, currentPromptLabel);
@@ -526,6 +531,35 @@ public class LessonPlayerController {
                 showFeedback(true, "Correct! Great job.", explanation);
             } else {
                 showFeedback(false, "Incorrect! Correct answer: " + correctAnswer, explanation);
+
+                // --- Brain (Energy) Deduct & UI Refresh Logic ---
+                int userId = UserSession.getUserId();
+                ApiClient.deductBrainAsync(userId).thenAccept(response -> {
+                    if (response != null) {
+                        JSONObject json = new JSONObject(response);
+
+                        // Extract updated brain count and play status from backend JSON
+                        int updatedBrains = json.optInt("brain_count", json.optInt("brains", 0));
+                        boolean canPlay = json.optBoolean("can_play", true);
+
+                        Platform.runLater(() -> {
+                            // 1. Update in-memory session
+                            if (UserSession.getCurrentUser() != null) {
+                                UserSession.getCurrentUser().setBrainCount(updatedBrains);
+                            }
+
+                            // 2. Refresh top header UI immediately
+                            if (MainLayoutController.getInstance() != null) {
+                                MainLayoutController.getInstance().updateBrainDisplay(updatedBrains);
+                            }
+
+                            // 3. Show alert if user has no remaining brains
+                            if (!canPlay) {
+                                showOutOfBrainsDialog();
+                            }
+                        });
+                    }
+                });
             }
 
             isAnswerChecked = true;
@@ -621,5 +655,16 @@ public class LessonPlayerController {
         Label errorLabel = new Label(message);
         errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 16px; -fx-font-weight: bold;");
         cardContainer.getChildren().add(errorLabel);
+    }
+
+    private void showOutOfBrainsDialog() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+        alert.setTitle("Out of Brains!");
+        alert.setHeaderText("ဦးနှောက် (Brain) ကုန်သွားပါပြီ");
+        alert.setContentText("မေးခွန်းများ ဆက်လက်ဖြေဆိုရန် ခဏစောင့်ပါ သို့မဟုတ် Shop တွင် Coin ဖြင့် Brain ပြန်ဖြည့်ပါ။");
+        alert.showAndWait();
+
+        // Lesson ထဲမှ ထွက်၍ LearnPage သို့ ပြန်ညွှန်းခြင်း
+        handleClose();
     }
 }

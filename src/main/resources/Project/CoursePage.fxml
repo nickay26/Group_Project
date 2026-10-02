@@ -2,31 +2,54 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CoursesPageController">
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CoursesPageController">
     <children>
-        <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <padding>
-                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-            </padding>
+        <!-- Main Content -->
+        <AnchorPane style="-fx-background-color: #0F172A;">
             <children>
-                <VBox spacing="5.0">
+                <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <padding>
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                    </padding>
                     <children>
-                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Available Courses" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Select a language track to continue learning and building projects." />
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Available Courses" />
+                                <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Select a language track to continue learning and building projects." />
+                            </children>
+                        </VBox>
+
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                            <content>
+                                <FlowPane fx:id="coursesContainer" hgap="20.0" style="-fx-background-color: transparent;" vgap="20.0" />
+                            </content>
+                        </ScrollPane>
                     </children>
                 </VBox>
-
-                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
-                    <content>
-                        <FlowPane fx:id="coursesContainer" hgap="20.0" vgap="20.0" style="-fx-background-color: transparent;" />
-                    </content>
-                </ScrollPane>
             </children>
-        </VBox>
+        </AnchorPane>
+
+        <!-- Loading Overlay Pane ( centered natively by StackPane ) -->
+        <StackPane fx:id="loadingOverlay" visible="false" style="-fx-background-color: rgba(15, 23, 42, 0.85);">
+            <children>
+                <VBox alignment="CENTER" maxWidth="360.0" maxHeight="200.0" spacing="14.0" style="-fx-background-color: #1E293B; -fx-background-radius: 20px; -fx-border-color: #334155; -fx-border-radius: 20px; -fx-border-width: 1.5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 15, 0, 0, 6);">
+                    <padding>
+                        <Insets bottom="28.0" left="24.0" right="24.0" top="28.0" />
+                    </padding>
+                    <children>
+                        <ProgressIndicator prefHeight="45.0" prefWidth="45.0" style="-fx-progress-color: #38BDF8;" />
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="🚀 Preparing Your Workspace..." />
+                        <Label fx:id="loadingSubLabel" style="-fx-font-size: 13px; -fx-text-fill: #38BDF8; -fx-font-weight: 600;" text="Loading lessons..." />
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
     </children>
-</AnchorPane>
+</StackPane>

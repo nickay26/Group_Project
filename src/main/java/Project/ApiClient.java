@@ -283,4 +283,42 @@ public class ApiClient {
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
     }
+
+    // ==========================================
+    // 10. BRAIN & ENERGY SYSTEM (ASYNC)
+    // ==========================================
+
+    public static CompletableFuture<String> deductBrainAsync(int userId) {
+        String jsonPayload = String.format("{\"user_id\": %d}", userId);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Deduct Brain Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    public static CompletableFuture<String> refillBrainsAsync(int userId, int cost) {
+        String jsonPayload = String.format("{\"user_id\": %d, \"cost\": %d}", userId, cost);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Refill Brains Error: " + ex.getMessage());
+                    return null;
+                });
+    }
 }
