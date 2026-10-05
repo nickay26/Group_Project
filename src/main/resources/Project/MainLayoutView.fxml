@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+
 <BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
 
     <!-- PERMANENT LEFT SIDEBAR MENU -->
@@ -62,8 +62,8 @@
                         <!-- PUSHES STATS & BUTTONS TO THE RIGHT -->
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <!-- HEADER STATS AND BUTTONS -->
-                        <Label fx:id="topStreakLabel" styleClass="header-stat" text=" 0">
+                        <!-- CLICKABLE HEADER STATS -->
+                        <Label fx:id="topStreakLabel" onMouseClicked="#handleStreakClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
@@ -73,7 +73,7 @@
                             </graphic>
                         </Label>
 
-                        <Label fx:id="topBrainLabel" styleClass="header-stat" text=" 0">
+                        <Label fx:id="topBrainLabel" onMouseClicked="#handleBrainClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
@@ -83,7 +83,7 @@
                             </graphic>
                         </Label>
 
-                        <Label fx:id="topCoinLabel" styleClass="header-stat" text=" 0">
+                        <Label fx:id="topCoinLabel" onMouseClicked="#handleCoinClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
                                     <image>
