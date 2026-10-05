@@ -15,17 +15,17 @@
   },
   {
     "instructions": "A dict stores key-value pairs. Use curly braces {}.",
-    "task": "Create a dict {'name': 'Mimo'} and print it.",
+    "task": "Create a dict {'name': 'Sodex'} and print it.",
     "blanks": [],
     "starterCode": "# TODO: Create dict and print\n",
     "hint": "Dicts use curly braces {}. Format: {key: value}",
     "language": "Python",
-    "expectedOutput": "{'name': 'Mimo'}",
+    "expectedOutput": "{'name': 'Sodex'}",
     "previewType": "console",
     "title": "Create Dict",
     "choices": [],
     "questionType": "Lists & Dicts",
-    "solutionCode": "my_dict = {'name': 'Mimo'}\nprint(my_dict)"
+    "solutionCode": "my_dict = {'name': 'Sodex'}\nprint(my_dict)"
   },
   {
     "instructions": "Use len() to get the number of items in a list.",
@@ -85,17 +85,17 @@
   },
   {
     "instructions": "Add a new key-value pair by assigning it.",
-    "task": "Create dict {'name': 'Mimo'}. Add 'age': 5 and print the dict.",
+    "task": "Create dict {'name': 'Sodex'}. Add 'age': 5 and print the dict.",
     "blanks": [],
-    "starterCode": "my_dict = {'name': 'Mimo'}\n# TODO: Add age and print\n",
+    "starterCode": "my_dict = {'name': 'Sodex'}\n# TODO: Add age and print\n",
     "hint": "Assign a value to a new key using =",
     "language": "Python",
-    "expectedOutput": "{'name': 'Mimo', 'age': 5}",
+    "expectedOutput": "{'name': 'Sodex', 'age': 5}",
     "previewType": "console",
     "title": "Add to Dict",
     "choices": [],
     "questionType": "Lists & Dicts",
-    "solutionCode": "my_dict = {'name': 'Mimo'}\nmy_dict['age'] = 5\nprint(my_dict)"
+    "solutionCode": "my_dict = {'name': 'Sodex'}\nmy_dict['age'] = 5\nprint(my_dict)"
   },
   {
     "instructions": "Use slicing [start:end] to get a sublist.",
@@ -158,17 +158,17 @@
   },
   {
     "instructions": "Functions can take parameters (inputs).",
-    "task": "Create a function 'greet(name)' that prints 'Hello, ' + name. Call greet('Mimo').",
+    "task": "Create a function 'greet(name)' that prints 'Hello, ' + name. Call greet('Sodex').",
     "blanks": [],
     "starterCode": "# TODO: Define greet(name) and call it\n",
     "hint": "Add a parameter inside the parentheses: def greet(name):",
     "language": "Python",
-    "expectedOutput": "Hello, Mimo",
+    "expectedOutput": "Hello, Sodex",
     "previewType": "console",
     "title": "Function with Parameter",
     "choices": [],
     "questionType": "Functions",
-    "solutionCode": "def greet(name):\n    print('Hello, ' + name)\n\ngreet('Mimo')"
+    "solutionCode": "def greet(name):\n    print('Hello, ' + name)\n\ngreet('Sodex')"
   },
   {
     "instructions": "Use 'return' to send a value back from a function.",
@@ -270,17 +270,17 @@
   },
   {
     "instructions": "Functions can have keyword arguments.",
-    "task": "Create 'info(name, age)' that prints name and age. Call info(age=25, name='Mimo').",
+    "task": "Create 'info(name, age)' that prints name and age. Call info(age=25, name='Sodex').",
     "blanks": [],
     "starterCode": "# TODO: Define info function and call with keyword args\n",
-    "hint": "Call with keyword: info(age=25, name='Mimo')",
+    "hint": "Call with keyword: info(age=25, name='Sodex')",
     "language": "Python",
-    "expectedOutput": "Mimo 25",
+    "expectedOutput": "Sodex 25",
     "previewType": "console",
     "title": "Keyword Arguments",
     "choices": [],
     "questionType": "Functions",
-    "solutionCode": "def info(name, age):\n    print(name, age)\n\ninfo(age=25, name='Mimo')"
+    "solutionCode": "def info(name, age):\n    print(name, age)\n\ninfo(age=25, name='Sodex')"
   },
 
 
@@ -301,17 +301,17 @@
     },
     {
       "instructions": "__init__() is the constructor method. It runs when an object is created.",
-      "task": "Create class 'Person' with __init__ that stores 'name'. Create object with name 'Mimo' and print p.name.",
+      "task": "Create class 'Person' with __init__ that stores 'name'. Create object with name 'Sodex' and print p.name.",
       "blanks": [],
       "starterCode": "# TODO: Define Person class with __init__\n",
       "hint": "def __init__(self, name): self.name = name",
       "language": "Python",
-      "expectedOutput": "Mimo",
+      "expectedOutput": "Sodex",
       "previewType": "console",
       "title": "Constructor",
       "choices": [],
       "questionType": "OOP Basics",
-      "solutionCode": "class Person:\n    def __init__(self, name):\n        self.name = name\n\np = Person('Mimo')\nprint(p.name)"
+      "solutionCode": "class Person:\n    def __init__(self, name):\n        self.name = name\n\np = Person('Sodex')\nprint(p.name)"
     },
     {
       "instructions": "'self' refers to the current instance of the class.",

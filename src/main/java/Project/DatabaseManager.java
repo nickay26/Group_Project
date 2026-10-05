@@ -158,12 +158,16 @@ public class DatabaseManager {
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
         try {
+            String url = BASE_URL + "/api/courses/" + courseId + "/lessons";
+            System.out.println("🔍 GET: " + url);   // ✅ Debug
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/api/courses/" + courseId + "/lessons"))
                     .GET()
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("🔍 Status: " + response.statusCode());   // ✅ Debug
+            System.out.println("🔍 Body: " + response.body());            // ✅ Debug
 
             if (response.statusCode() == 200) {
                 JSONArray arr = new JSONArray(response.body());

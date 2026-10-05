@@ -10,9 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
@@ -38,7 +36,7 @@ public class SettingsController {
     @FXML private TextField usernameField;
     @FXML private TextField emailField;
     @FXML private TextArea bioField;
-    @FXML private ComboBox<Country> countryCombo;   // ✅ Country Type
+    @FXML private ComboBox<Country> countryCombo;
 
     // Avatar Components
     @FXML private StackPane avatarContainer;
@@ -47,6 +45,10 @@ public class SettingsController {
     @FXML private Button changeBtn;
     @FXML private Button deleteBtn;
     @FXML private Button setBtn;
+
+    // Center Container
+    @FXML private BorderPane centerContainer;
+    @FXML private ScrollPane settingsScrollPane;
 
     // Temp
     private String tempAvatarPath = null;
@@ -57,6 +59,7 @@ public class SettingsController {
     // ============================================
     @FXML
     public void initialize() {
+        // ✅ setCenter မလိုတော့ဘူး — FXML မှာ ရှိပြီးသား
         showInfoSection();
 
         // ✅ Avatar Container Clip (အဝိုင်း)
@@ -145,7 +148,6 @@ public class SettingsController {
         countryCombo.setItems(countries);
         countryCombo.setValue(countries.get(0));
 
-        // ✅ Custom CellFactory
         countryCombo.setCellFactory(lv -> new CountryCell());
         countryCombo.setButtonCell(new CountryCell());
         countryCombo.setVisibleRowCount(8);
@@ -158,8 +160,8 @@ public class SettingsController {
     // COUNTRY MODEL
     // ============================================
     public static class Country {
-        private final String code;   // "mm", "us"
-        private final String name;   // "Myanmar"
+        private final String code;
+        private final String name;
 
         public Country(String code, String name) {
             this.code = code;
@@ -210,7 +212,6 @@ public class SettingsController {
                 setGraphic(null);
                 setText(null);
             } else {
-                // ✅ Local PNG load: /flags/mm.png
                 String path = "/flags/" + country.getCode() + ".png";
                 try {
                     InputStream is = getClass().getResourceAsStream(path);
@@ -279,7 +280,6 @@ public class SettingsController {
                 avatarPreview.setVisible(true);
                 avatarInitialLabel.setVisible(false);
 
-                // ✅ Image ပြောင်းတိုင်း Clip ပြန်
                 Circle imgClip = new Circle(50, 50, 50);
                 avatarPreview.setClip(imgClip);
 
@@ -345,6 +345,7 @@ public class SettingsController {
     // ============================================
     @FXML
     private void showInfoSection() {
+        centerContainer.setCenter(settingsScrollPane);   // ✅ Settings content ပြန်
         hideAll();
         infoSection.setVisible(true);
         infoSection.setManaged(true);
@@ -353,6 +354,7 @@ public class SettingsController {
 
     @FXML
     private void showPasswordSection() {
+        centerContainer.setCenter(settingsScrollPane);
         hideAll();
         passwordSection.setVisible(true);
         passwordSection.setManaged(true);
@@ -361,6 +363,7 @@ public class SettingsController {
 
     @FXML
     private void showSubscriptionSection() {
+        centerContainer.setCenter(settingsScrollPane);
         hideAll();
         subscriptionSection.setVisible(true);
         subscriptionSection.setManaged(true);
@@ -369,6 +372,7 @@ public class SettingsController {
 
     @FXML
     private void showDeleteSection() {
+        centerContainer.setCenter(settingsScrollPane);
         hideAll();
         deleteSection.setVisible(true);
         deleteSection.setManaged(true);
@@ -436,22 +440,42 @@ public class SettingsController {
             }
         });
     }
-    @FXML private StackPane centerContainer;
-    @FXML private ScrollPane settingsScrollPane;
 
+    // ============================================
+    // ✅ UPGRADE PLAN — Premium page ကို BorderPane center မှာ load
+    // ============================================
     @FXML
     private void handleUpgradePlan() {
         try {
-            settingsScrollPane.setVisible(false);
-            settingsScrollPane.setManaged(false);
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PremiumView.fxml"));
             Parent premiumView = loader.load();
+
+            Button backBtn = new Button("← Back");
+            backBtn.setStyle(
+                    "-fx-background-color: transparent; " +
+                            "-fx-text-fill: #1E293B; " +
+                            "-fx-font-size: 15px; " +
+                            "-fx-font-weight: bold; " +
+                            "-fx-cursor: hand; " +
+                            "-fx-padding: 8 15;"
+            );
+
+            // ✅ Back နှိပ်ရင် Settings ပြန်
+            backBtn.setOnAction(e -> {
+                centerContainer.setCenter(settingsScrollPane);
+                showSubscriptionSection();
+            });
+
+            HBox backBar = new HBox(backBtn);
+            backBar.setAlignment(Pos.CENTER_LEFT);
+            backBar.setStyle("-fx-padding: 10 20 0 20;");
+
+            // Title/Subtitle style override
             Label titleLabel = (Label) premiumView.lookup(".main-title");
             if (titleLabel != null) {
                 titleLabel.setStyle(
-                        "-fx-text-fill: #1E293B; " +     // အမဲရောင်
-                                "-fx-font-size: 42px; " +        // ကြီး
+                        "-fx-text-fill: #1E293B; " +
+                                "-fx-font-size: 42px; " +
                                 "-fx-font-weight: bold;"
                 );
             }
@@ -462,21 +486,22 @@ public class SettingsController {
                                 "-fx-font-size: 16px;"
                 );
             }
-            // ✅ PremiumView ကို ScrollPane အသစ်ထဲ ထည့်
-            ScrollPane premiumScroll = new ScrollPane(premiumView);
+
+            // ✅ wrapper = backBar + premiumView
+            VBox wrapper = new VBox(backBar, premiumView);
+            VBox.setVgrow(premiumView, Priority.ALWAYS);
+
+            // ✅ wrapper ကို ScrollPane ထဲ
+            ScrollPane premiumScroll = new ScrollPane(wrapper);
             premiumScroll.setFitToWidth(true);
             premiumScroll.setFitToHeight(true);
             premiumScroll.setStyle("-fx-background-color: transparent;");
 
-            StackPane.setAlignment(premiumScroll, Pos.TOP_LEFT);
-            centerContainer.getChildren().add(premiumScroll);
+            // ✅ BorderPane ရဲ့ center ကို အစားထိုး
+            centerContainer.setCenter(premiumScroll);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    @FXML
-    private void handleClose() {
-        infoSection.getScene().getWindow().hide();
     }
 }
