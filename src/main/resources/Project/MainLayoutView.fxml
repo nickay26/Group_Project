@@ -92,6 +92,15 @@
                                 </ImageView>
                             </graphic>
                         </Label>
+                        <Label fx:id="brainLabel" styleClass="header-stat" text=" 0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/brain.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
 
                         <Button fx:id="premiumBtn" onAction="#handlePremium" styleClass="premium-button" text="Premium" />
                         <Button fx:id="profileBtn" onAction="#handleProfileClick" styleClass="header-button" text="Profile" />

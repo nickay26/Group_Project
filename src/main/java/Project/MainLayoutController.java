@@ -34,8 +34,10 @@ public class MainLayoutController {
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
     @FXML private Button profileBtn;
+    @FXML private Label brainLabel;
     private ContextMenu profileMenu;
     @FXML private Button premiumBtn;
+
 
     private List<Button> navButtons;
 
@@ -411,6 +413,23 @@ public class MainLayoutController {
             setActiveButton(gamesBtn);
         }
     }
+    public void updateUserStats() {
+        int userId = UserSession.getUserId();
+        if (userId <= 0) return;
+
+        User user = DatabaseManager.getUserById(userId);
+        if (user == null) return;
+
+        // Brain Count
+        if (brainLabel != null) {
+            int brainCount = user.getBrainCount();
+            if (brainCount >= 999999) {
+                brainLabel.setText(" ∞");
+            } else {
+                brainLabel.setText(" " + brainCount);
+            }
+        }
+    }
 
     private void setActiveButton(Button activeButton) {
         if (navButtons == null || activeButton == null) return;
@@ -426,5 +445,6 @@ public class MainLayoutController {
         if (!activeButton.getStyleClass().contains("nav-button-active")) {
             activeButton.getStyleClass().add("nav-button-active");
         }
+
     }
 }

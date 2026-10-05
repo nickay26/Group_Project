@@ -593,4 +593,27 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    // ==========================================
+// 5. GET USER BY ID (Brain Count အတွက်)
+// ==========================================
+
+    public static User getUserById(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject res = new JSONObject(response.body());
+                return mapJsonToUser(res);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
