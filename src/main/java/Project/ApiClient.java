@@ -1,5 +1,6 @@
 package Project;
 
+import org.json.JSONObject;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -60,6 +61,7 @@ public class ApiClient {
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
+                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
                 .exceptionally(ex -> {
                     System.err.println("Review Code Error: " + ex.getMessage());
                     return null;
@@ -67,7 +69,7 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 3. DIRECT CODE CHALLENGE GENERATION (အသစ်ထည့်သွင်းထားသည်)
+    // 3. DIRECT CODE CHALLENGE GENERATION
     // ==========================================
     public static CompletableFuture<String> generateCodeChallengeAsync(String language, String level) {
         String jsonPayload = String.format(
@@ -110,6 +112,7 @@ public class ApiClient {
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
+                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
                 .exceptionally(ex -> {
                     System.err.println("Review Practice Error: " + ex.getMessage());
                     return null;
@@ -232,6 +235,45 @@ public class ApiClient {
                 });
     }
 
+    // ==========================================
+    // 9. AI TEXT CLEANING HELPER METHOD
+    // ==========================================
+    public static String cleanAndFormatAiText(String rawResponse) {
+        if (rawResponse == null || rawResponse.trim().isEmpty()) {
+            return "";
+        }
+
+        String extractedText = rawResponse;
+
+        // JSON format ဖြစ်ပါက အထဲမှ သက်ဆိုင်ရာ key ကို ဖြုတ်ယူခြင်း
+        try {
+            JSONObject json = new JSONObject(rawResponse);
+            if (json.has("review")) {
+                extractedText = json.getString("review");
+            } else if (json.has("result")) {
+                extractedText = json.getString("result");
+            } else if (json.has("explanation")) {
+                extractedText = json.getString("explanation");
+            } else if (json.has("output")) {
+                extractedText = json.getString("output");
+            }
+        } catch (Exception e) {
+            // JSON မဟုတ်ပါက Raw text အတိုင်း ဆက်သွားမည်
+        }
+
+        // Markdown, Backticks, LaTeX သင်္ကေတများကို ဖယ်ရှားသန့်စင်ခြင်း
+        return extractedText
+                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")  // Bold **text**
+                .replaceAll("###\\s*", "")             // H3
+                .replaceAll("##\\s*", "")              // H2
+                .replaceAll("#\\s*", "")               // H1
+                .replaceAll("```[a-zA-Z]*", "")        // Code block ticks
+                .replaceAll("`", "")                   // Inline backticks
+                .replaceAll("\\$\\$(.*?)\\$\\$", "$1") // LaTeX $$
+                .replaceAll("\\$(.*?)\\$", "$1")       // LaTeX $
+                .trim();
+    }
+
     // JSON String Escaping Helper Function
     private static String escapeJson(String raw) {
         if (raw == null) return "";
@@ -240,5 +282,178 @@ public class ApiClient {
                 .replace("\n", "\\n")
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
+    }
+
+    // ==========================================
+    // 10. BRAIN & ENERGY SYSTEM (ASYNC)
+    // ==========================================
+
+    public static CompletableFuture<String> deductBrainAsync(int userId) {
+        String jsonPayload = String.format("{\"user_id\": %d}", userId);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Deduct Brain Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    public static CompletableFuture<String> refillBrainsAsync(int userId, int cost) {
+        String jsonPayload = String.format("{\"user_id\": %d, \"cost\": %d}", userId, cost);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Refill Brains Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    public static CompletableFuture<String> getUserBrainsAsync(int userId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/" + userId + "/brains"))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Get User Brains Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 11. LESSON PROGRESS & STREAK SYSTEM (ASYNC)
+    // ==========================================
+
+    // 1. Lesson Complete လုပ်ပြီး Streak & XP update ပြုလုပ်ရန်
+    public static CompletableFuture<String> completeLessonAsync(int userId, String courseId, int lessonOrder, int xp) {
+        String jsonPayload = String.format(
+                "{\"user_id\": %d, \"course_id\": \"%s\", \"lesson_order\": %d, \"xp\": %d}",
+                userId, escapeJson(courseId), lessonOrder, xp
+        );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/lessons/complete"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Complete Lesson Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // 2. User ၏ လက်ရှိ Streak နှင့် XP Status ကို backend မှ ဆွဲယူရန်
+    public static CompletableFuture<String> getUserActivityAsync(int userId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/" + userId + "/activity"))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Get User Activity Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 12. LEADERBOARD SYSTEM (ASYNC)
+    // ==========================================
+
+    // 1. Get current season leaderboard for a specific league (defaults to current active season)
+    public static CompletableFuture<String> getLeaderboardAsync(int leagueId) {
+        return getLeaderboardAsync(null, leagueId);
+    }
+
+    public static CompletableFuture<String> getLeaderboardAsync(String seasonId, int leagueId) {
+        String url = BASE_URL + "/api/leaderboard";
+        if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+            url += "/" + seasonId;
+        }
+        url += "?league_id=" + leagueId;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Get Leaderboard Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // 2. Get user league status (defaults to current season if seasonId is null/empty)
+    public static CompletableFuture<String> getUserLeagueStatusAsync(int userId) {
+        return getUserLeagueStatusAsync(userId, null);
+    }
+
+    public static CompletableFuture<String> getUserLeagueStatusAsync(int userId, String seasonId) {
+        String url = BASE_URL + "/api/user/" + userId + "/league-status";
+        if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+            url += "/" + seasonId;
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Get User League Status Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // 3. Add User XP (seasonId is optional, backend automatically auto-enrolls into active week)
+    public static CompletableFuture<String> addUserXpAsync(int userId, int xp) {
+        return addUserXpAsync(userId, null, xp, 1);
+    }
+
+    public static CompletableFuture<String> addUserXpAsync(int userId, String seasonId, int xp, int leagueId) {
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
+        body.put("xp", xp);
+        body.put("league_id", leagueId);
+        if (seasonId != null && !seasonId.trim().isEmpty()) {
+            body.put("season_id", seasonId);
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/user/add-xp"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Add User XP Error: " + ex.getMessage());
+                    return null;
+                });
     }
 }

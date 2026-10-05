@@ -1,0 +1,69 @@
+{"lessonId": "PYTH_103",
+"title": "User Input & Type Conversion (PYTH_103_S1 to PYTH_103_S7)",
+"isPremium": false,
+"slides": [
+{
+"slideId": "PYTH_103_S1",
+"type": "CONCEPT",
+"title": "Input and Typecasting",
+"prompt": "Use input() to read strings from users and cast them to numbers using int() or float().",
+"codeSnippet": "user_input = input(\"Enter age: \")\nage = int(user_input)\nprint(age + 1)"
+},
+{
+"slideId": "PYTH_103_S2",
+"type": "FILL_IN_BLANK",
+"title": "User Input Function",
+"prompt": "Fill in the function to read input from standard input.",
+"codeSnippet": "name = ___(\"Enter your name: \")",
+"options": ["input", "read", "scan", "get_line"],
+"correctAnswer": "input"
+},
+{
+"slideId": "PYTH_103_S3",
+"type": "MULTIPLE_CHOICE",
+"title": "Return Type of input()",
+"prompt": "What data type does the input() function always return?",
+"options": ["str", "int", "float", "bool"],
+"correctAnswer": "str"
+},
+{
+"slideId": "PYTH_103_S4",
+"type": "FILL_IN_BLANK",
+"title": "Casting to Integer",
+"prompt": "Fill in the function to convert string input into an integer.",
+"codeSnippet": "count = ___(input(\"Enter count: \"))",
+"options": ["int", "str", "float", "parse_int"],
+"correctAnswer": "int"
+},
+{
+"slideId": "PYTH_103_S5",
+"type": "MULTIPLE_CHOICE",
+"title": "String Conversion",
+"prompt": "Which function converts a numeric value into a string?",
+"options": ["str()", "string()", "to_str()", "text()"],
+"correctAnswer": "str()"
+},
+{
+"slideId": "PYTH_103_S6",
+"type": "FILL_IN_BLANK",
+"title": "Float Casting",
+"prompt": "Fill in the casting function for floating-point values.",
+"codeSnippet": "price = ___(\"12.50\")",
+"options": ["float", "double", "decimal", "int"],
+"correctAnswer": "float"
+},
+{
+"slideId": "PYTH_103_S7",
+"type": "MULTIPLE_CHOICE",
+"title": "ValueError Exception",
+"prompt": "What happens if you execute int('hello')?",
+"options": [
+"Raises a ValueError",
+"Returns 0",
+"Returns None",
+"Converts string length to int"
+],
+"correctAnswer": "Raises a ValueError"
+}
+]
+}

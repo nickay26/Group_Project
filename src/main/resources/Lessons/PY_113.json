@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_113",
+  "title": "File I/O Handling (PYTH_113_S1 to PYTH_113_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_113_S1",
+      "type": "CONCEPT",
+      "title": "File I/O with context managers",
+      "prompt": "Use the open() function along with the 'with' statement for automatically closing files.",
+      "codeSnippet": "with open(\"data.txt\", \"w\") as f:\n    f.write(\"Hello World\")"
+    },
+    {
+      "slideId": "PYTH_113_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "File Open Function",
+      "prompt": "Fill in the function used to open a file stream.",
+      "codeSnippet": "file = ___(\"config.json\", \"r\")",
+      "options": ["open", "read_file", "file", "load"],
+      "correctAnswer": "open"
+    },
+    {
+      "slideId": "PYTH_113_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "File Append Mode",
+      "prompt": "Which file mode flag appends new content to the end of an existing file?",
+      "options": ["\"a\"", "\"w\"", "\"r\"", "\"x\""],
+      "correctAnswer": "\"a\""
+    },
+    {
+      "slideId": "PYTH_113_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Context Manager Keyword",
+      "prompt": "Fill in the keyword used for proper resource management when opening files.",
+      "codeSnippet": "___ open(\"log.txt\", \"r\") as file:\n    content = file.read()",
+      "options": ["with", "using", "try", "resource"],
+      "correctAnswer": "with"
+    },
+    {
+      "slideId": "PYTH_113_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reading Lines",
+      "prompt": "Which method reads all lines from a file into a list of strings?",
+      "options": ["readlines()", "read()", "readline()", "get_lines()"],
+      "correctAnswer": "readlines()"
+    },
+    {
+      "slideId": "PYTH_113_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Writing to Files",
+      "prompt": "Fill in the file object method used to write a string.",
+      "codeSnippet": "with open(\"out.txt\", \"w\") as f:\n    f.___(\"Sample text\")",
+      "options": ["write", "print", "put", "append"],
+      "correctAnswer": "write"
+    },
+    {
+      "slideId": "PYTH_113_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "FileNotFoundError Handling",
+      "prompt": "What exception is raised when open() attempts to read a non-existent file path?",
+      "options": ["FileNotFoundError", "IOError", "PathError", "NullPointerError"],
+      "correctAnswer": "FileNotFoundError"
+    }
+  ]
+}

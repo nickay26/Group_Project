@@ -245,7 +245,7 @@ public class GameController {
         if (timer != null) timer.stop();
         timeRemaining = 300;
 
-        timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        timer = new Timeline(new KeyFrame(Duration.seconds(30), e -> {
             timeRemaining--;
             int mins = timeRemaining / 60;
             int secs = timeRemaining % 60;

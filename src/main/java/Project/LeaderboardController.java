@@ -1,48 +1,209 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class LeaderboardController {
 
     @FXML private Label leagueTitleLabel;
 
-    @FXML private StackPane nebulaBox;
+    @FXML private VBox nebulaContainer;
     @FXML private ImageView nebulaImg;
-    @FXML private Label nebulaLabel;
-    @FXML private Label nebulaLockIcon;
 
-    @FXML private StackPane protostarBox;
+    @FXML private VBox protostarContainer;
     @FXML private ImageView protostarImg;
-    @FXML private Label protostarLabel;
-    @FXML private Label protostarLockIcon;
 
-    @FXML private StackPane supernovaBox;
+    @FXML private VBox supernovaContainer;
     @FXML private ImageView supernovaImg;
-    @FXML private Label supernovaLabel;
-    @FXML private Label supernovaLockIcon;
+
+    // Leaderboard List Display Containers
+    @FXML private VBox placeholderContainer;
+    @FXML private VBox leaderboardListContainer;
+    @FXML private VBox rankingItemsVBox;
+
+    // "SEASON_1" အစား "current" သို့ ပြောင်းလဲထားပါသည် (Backend မှ Active Week ကို အလိုအလျောက် တွက်ယူရန်)
+    private final String CURRENT_SEASON = "current";
+    private int currentLeagueId = 1;
 
     @FXML
     public void initialize() {
-        // Image များကို resource folder ထဲမှ dynamic သို့ တိုက်ရိုက် load လုပ်ခြင်း
         loadImages();
-
-        // စမ်းသပ်ရန် Level ပြောင်းကြည့်ပါ (0, 1, 5, 10)
-        int currentLevel = 0;
-        updateUserProgress(currentLevel);
+        loadUserProgressFromBackend();
     }
 
     private void loadImages() {
         try {
-            nebulaImg.setImage(new Image(getClass().getResourceAsStream("/Images/Nebula.png")));
-            protostarImg.setImage(new Image(getClass().getResourceAsStream("/Images/Protostar.png")));
-            supernovaImg.setImage(new Image(getClass().getResourceAsStream("/Images/Supernova.png")));
+            if (nebulaImg != null && nebulaImg.getImage() == null) {
+                nebulaImg.setImage(new Image(getClass().getResourceAsStream("/Images/nebula.png")));
+            }
+            if (protostarImg != null && protostarImg.getImage() == null) {
+                protostarImg.setImage(new Image(getClass().getResourceAsStream("/Images/Protostar.png")));
+            }
+            if (supernovaImg != null && supernovaImg.getImage() == null) {
+                supernovaImg.setImage(new Image(getClass().getResourceAsStream("/Images/Supernova.png")));
+            }
         } catch (Exception e) {
-            System.err.println("Images could not be loaded: " + e.getMessage());
+            System.err.println("Images load error: " + e.getMessage());
         }
+    }
+
+    // Backend မှ Dynamic Leaderboard Ranking ရယူ၍ UI တည်ဆောက်ခြင်း
+    private void fetchAndRenderLeaderboard() {
+        int currentUserId = UserSession.getUserId();
+
+        ApiClient.getLeaderboardAsync(currentLeagueId).thenAccept(response -> {
+            if (response == null || response.trim().isEmpty()) {
+                Platform.runLater(() -> showPlaceholderView(true));
+                return;
+            }
+
+            try {
+                String trimmed = response.trim();
+                JSONArray leaderboardArray = null;
+
+                // 1. Response သည် JSON Array [...] ဖြစ်ပါက တိုက်ရိုက်ယူမည်
+                if (trimmed.startsWith("[")) {
+                    leaderboardArray = new JSONArray(trimmed);
+                }
+                // 2. Response သည် JSON Object {...} ဖြစ်ပါက အထဲမှ Array Key ကို ရှာယူမည်
+                else if (trimmed.startsWith("{")) {
+                    JSONObject jsonObj = new JSONObject(trimmed);
+                    if (jsonObj.has("rankings")) {
+                        leaderboardArray = jsonObj.getJSONArray("rankings");
+                    } else if (jsonObj.has("leaderboard")) {
+                        leaderboardArray = jsonObj.getJSONArray("leaderboard");
+                    } else if (jsonObj.has("data")) {
+                        leaderboardArray = jsonObj.getJSONArray("data");
+                    } else {
+                        System.err.println("Backend Response JSON: " + response);
+                    }
+                }
+
+                final JSONArray finalArray = leaderboardArray;
+
+                Platform.runLater(() -> {
+                    if (finalArray == null || finalArray.length() == 0) {
+                        showPlaceholderView(true);
+                        return;
+                    }
+
+                    showPlaceholderView(false);
+                    rankingItemsVBox.getChildren().clear();
+
+                    for (int i = 0; i < finalArray.length(); i++) {
+                        JSONObject player = finalArray.getJSONObject(i);
+                        int rank = i + 1;
+                        int userId = player.optInt("User_ID", player.optInt("user_id", -1));
+                        String name = player.optString("Name", player.optString("name", "User"));
+                        // Backend မှ ရရှိသော weekly_xp Key ကို ဦးစားပေး ရယူပါသည်
+                        int xp = player.optInt("weekly_xp", player.optInt("XP", player.optInt("xp", 0)));
+
+                        boolean isCurrentUser = (userId == currentUserId);
+
+                        HBox row = createRankRowCard(rank, name, xp, isCurrentUser);
+                        rankingItemsVBox.getChildren().add(row);
+                    }
+                });
+            } catch (Exception e) {
+                System.err.println("Error rendering leaderboard: " + e.getMessage());
+                Platform.runLater(() -> showPlaceholderView(true));
+            }
+        });
+    }
+
+    // Rank 1 တိုင်းအတွက် Dynamic Row UI ဖန်တီးပေးသည့် Helper Method
+    private HBox createRankRowCard(int rank, String name, int xp, boolean isCurrentUser) {
+        HBox row = new HBox(15);
+        row.setAlignment(Pos.CENTER_LEFT);
+        row.setPadding(new Insets(10, 16, 10, 16));
+
+        // Highlight User Row
+        if (isCurrentUser) {
+            row.setStyle("-fx-background-color: #2B3A60; -fx-background-radius: 10px; -fx-border-color: #3182CE; -fx-border-radius: 10px; -fx-border-width: 1.5px;");
+        } else {
+            row.setStyle("-fx-background-color: #252F4A; -fx-background-radius: 10px;");
+        }
+
+        // Rank Display (Medals for Top 3)
+        Label rankLabel = new Label();
+        rankLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+        if (rank == 1) {
+            rankLabel.setText("🥇 1");
+            rankLabel.setTextFill(Color.web("#FFD700"));
+        } else if (rank == 2) {
+            rankLabel.setText("🥈 2");
+            rankLabel.setTextFill(Color.web("#C0C0C0"));
+        } else if (rank == 3) {
+            rankLabel.setText("🥉 3");
+            rankLabel.setTextFill(Color.web("#CD7F32"));
+        } else {
+            rankLabel.setText("#" + rank);
+            rankLabel.setTextFill(Color.web("#A0AEC0"));
+        }
+        rankLabel.setPrefWidth(45);
+
+        // Player Name
+        Label nameLabel = new Label(name + (isCurrentUser ? " (You)" : ""));
+        nameLabel.setFont(Font.font("System", isCurrentUser ? FontWeight.BOLD : FontWeight.NORMAL, 14));
+        nameLabel.setTextFill(Color.WHITE);
+        HBox.setHgrow(nameLabel, Priority.ALWAYS);
+
+        // XP Label
+        Label xpLabel = new Label(xp + " XP");
+        xpLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
+        xpLabel.setTextFill(Color.web("#63B3ED"));
+
+        row.getChildren().addAll(rankLabel, nameLabel, xpLabel);
+        return row;
+    }
+
+    private void showPlaceholderView(boolean showPlaceholder) {
+        if (placeholderContainer != null && leaderboardListContainer != null) {
+            placeholderContainer.setVisible(showPlaceholder);
+            placeholderContainer.setManaged(showPlaceholder);
+
+            leaderboardListContainer.setVisible(!showPlaceholder);
+            leaderboardListContainer.setManaged(!showPlaceholder);
+        }
+    }
+
+    private void loadUserProgressFromBackend() {
+        int userId = UserSession.getUserId();
+        String activeCourseId = UserSession.getActiveCourseId();
+
+        if (userId <= 0) {
+            updateUserProgress(0);
+            return;
+        }
+
+        int completedLessons = DatabaseManager.getCompletedLessonCount(userId, activeCourseId);
+        updateUserProgress(completedLessons);
+
+        ApiClient.getUserActivityAsync(userId).thenAccept(response -> {
+            if (response != null && !response.isEmpty()) {
+                try {
+                    JSONObject json = new JSONObject(response);
+                    int userLevel = json.optInt("level", completedLessons);
+
+                    Platform.runLater(() -> updateUserProgress(userLevel));
+                } catch (Exception e) {
+                    System.err.println("Error parsing user level: " + e.getMessage());
+                }
+            }
+        });
     }
 
     public void updateUserProgress(int userLevel) {
@@ -50,39 +211,43 @@ public class LeaderboardController {
         int PROTOSTAR_LEVEL = 5;
         int SUPERNOVA_LEVEL = 10;
 
-        // Dynamic Title Update
-        if (userLevel >= SUPERNOVA_LEVEL) {
-            leagueTitleLabel.setText("Supernova league");
-        } else if (userLevel >= PROTOSTAR_LEVEL) {
-            leagueTitleLabel.setText("Protostar league");
-        } else if (userLevel >= NEBULA_LEVEL) {
-            leagueTitleLabel.setText("Nebula league");
-        } else {
-            leagueTitleLabel.setText("");
+        if (leagueTitleLabel != null) {
+            if (userLevel >= SUPERNOVA_LEVEL) {
+                leagueTitleLabel.setText("Supernova League");
+                currentLeagueId = 3;
+            } else if (userLevel >= PROTOSTAR_LEVEL) {
+                leagueTitleLabel.setText("Protostar League");
+                currentLeagueId = 2;
+            } else if (userLevel >= NEBULA_LEVEL) {
+                leagueTitleLabel.setText("Nebula League");
+                currentLeagueId = 1;
+            } else {
+                leagueTitleLabel.setText("Venus League");
+                currentLeagueId = 1;
+            }
         }
 
-        // Dynamic Lock / Unlock States
-        setCardState(nebulaBox, nebulaImg, nebulaLabel, nebulaLockIcon, userLevel >= NEBULA_LEVEL, "#EBF8FF");
-        setCardState(protostarBox, protostarImg, protostarLabel, protostarLockIcon, userLevel >= PROTOSTAR_LEVEL, "#FAF5FF");
-        setCardState(supernovaBox, supernovaImg, supernovaLabel, supernovaLockIcon, userLevel >= SUPERNOVA_LEVEL, "#FEFCBF");
+        setCardState(nebulaImg, userLevel >= NEBULA_LEVEL);
+        setCardState(protostarImg, userLevel >= PROTOSTAR_LEVEL);
+        setCardState(supernovaImg, userLevel >= SUPERNOVA_LEVEL);
+
+        // တွက်ချက်ရရှိလာသော currentLeagueId (1, 2 သို့မဟုတ် 3) ဖြင့် Backend သို့ XP နှင့် League ID ပို့ပေးမည်
+        ApiClient.addUserXpAsync(UserSession.getUserId(), null, 0, currentLeagueId);
+
+        // ထို့နောက် မှန်ကန်သော League ID ဖြင့် Leaderboard Data ကို ဆွဲယူမည်
+        fetchAndRenderLeaderboard();
     }
 
-    private void setCardState(StackPane cardBox, ImageView img, Label titleLabel, Label lockIcon, boolean isUnlocked, String activeBgColor) {
-        if (isUnlocked) {
-            img.setVisible(true);
-            titleLabel.setVisible(true);
-            lockIcon.setVisible(false);
-            cardBox.setStyle("-fx-background-color: " + activeBgColor + "; -fx-background-radius: 12px;");
-        } else {
-            img.setVisible(false);
-            titleLabel.setVisible(false);
-            lockIcon.setVisible(true);
-            cardBox.setStyle("-fx-background-color: #E2E8F0; -fx-background-radius: 12px;");
+    private void setCardState(ImageView img, boolean isUnlocked) {
+        if (img != null) {
+            img.setOpacity(isUnlocked ? 1.0 : 0.0);
         }
     }
 
     @FXML
     private void handleStartLearning() {
-        // Navigation Code
+        if (MainLayoutController.getInstance() != null) {
+            MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+        }
     }
 }

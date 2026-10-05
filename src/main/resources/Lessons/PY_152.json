@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_152",
+  "title": "High-Performance Data Processing & Polars (PYTH_152_S1 to PYTH_152_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_152_S1",
+      "type": "CONCEPT",
+      "title": "Polars vs Pandas",
+      "prompt": "Polars is a lightning-fast DataFrame library written in Rust utilizing Apache Arrow for zero-copy memory operations.",
+      "codeSnippet": "import polars as pl\ndf = pl.read_csv('large_dataset.csv')"
+    },
+    {
+      "slideId": "PYTH_152_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Lazy Evaluation",
+      "prompt": "Fill in the method used to transform a standard Polars DataFrame into a LazyFrame for query optimization.",
+      "codeSnippet": "lazy_df = df.___ ()",
+      "options": ["lazy", "to_lazy", "defer", "optimize"],
+      "correctAnswer": "lazy"
+    },
+    {
+      "slideId": "PYTH_152_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Optimization",
+      "prompt": "Why is Polars significantly faster and more memory-efficient than traditional Pandas 1.x?",
+      "options": [
+        "It leverages Rust, Apache Arrow memory layout, and parallel query optimization",
+        "It converts all data into Python dictionaries",
+        "It forces all processing onto GPU only",
+        "It ignores type checking"
+      ],
+      "correctAnswer": "It leverages Rust, Apache Arrow memory layout, and parallel query optimization"
+    },
+    {
+      "slideId": "PYTH_152_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Executing Lazy Queries",
+      "prompt": "Fill in the Polars method required to execute a LazyFrame pipeline and materialize the results.",
+      "codeSnippet": "result = lazy_df.filter(pl.col('amount') > 100).___ ()",
+      "options": ["collect", "run", "execute", "fetch"],
+      "correctAnswer": "collect"
+    },
+    {
+      "slideId": "PYTH_152_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Column Expressions",
+      "prompt": "What is the recommended method to select and transform columns in Polars?",
+      "options": [
+        "Using pl.col('column_name') expressions inside .select() or .with_columns()",
+        "Iterating over rows using Python for-loops",
+        "Executing raw SQL strings only",
+        "Converting to Python list first"
+      ],
+      "correctAnswer": "Using pl.col('column_name') expressions inside .select() or .with_columns()"
+    },
+    {
+      "slideId": "PYTH_152_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating New Columns",
+      "prompt": "Fill in the Polars method used to add or modify columns without dropping existing ones.",
+      "codeSnippet": "df = df.___ (new_col=pl.col('value') * 2)",
+      "options": ["with_columns", "add_column", "assign", "mutate"],
+      "correctAnswer": "with_columns"
+    },
+    {
+      "slideId": "PYTH_152_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Apache Arrow Format",
+      "prompt": "What primary advantage does Apache Arrow bring to data processing in Python?",
+      "options": [
+        "Standardized columnar in-memory formatting for zero-copy data sharing between languages",
+        "Automatic conversion of databases to JSON",
+        "Compression of network traffic",
+        "Creation of interactive HTML charts"
+      ],
+      "correctAnswer": "Standardized columnar in-memory formatting for zero-copy data sharing between languages"
+    },
+    {
+      "slideId": "PYTH_152_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Streaming Processing",
+      "prompt": "Fill in the parameter used in .collect() to process datasets larger than memory in chunks.",
+      "codeSnippet": "df = lazy_df.collect( ___ = True )",
+      "options": ["streaming", "chunked", "batch", "lazy"],
+      "correctAnswer": "streaming"
+    }
+  ]
+}

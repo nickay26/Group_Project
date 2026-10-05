@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_284",
+  "title": "Module Review Quiz: Advanced Functional Programming",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_284_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Advanced Functional Programming",
+      "prompt": "This Module Review Quiz tests your knowledge on higher-order functions, partial application, currying, pure functions, and generator expressions.",
+      "codeSnippet": "from functools import partial\ndef mul(a, b): return a * b\ndouble = partial(mul, 2)\nprint(double(10)) # 20"
+    },
+    {
+      "slideId": "PYTH_284_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Partial Application Syntax",
+      "prompt": "Fill in the module required to construct partial functions.",
+      "codeSnippet": "from ___ import partial",
+      "options": ["functools", "itertools", "operator", "sys"],
+      "correctAnswer": "functools"
+    },
+    {
+      "slideId": "PYTH_284_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pure Function Properties",
+      "prompt": "Which condition is essential for a function to be considered pure?",
+      "options": [
+        "It returns the same output for identical inputs with zero side effects",
+        "It must use a lambda expression internally",
+        "It modifies global scope variables directly",
+        "It executes asynchronously"
+      ],
+      "correctAnswer": "It returns the same output for identical inputs with zero side effects"
+    },
+    {
+      "slideId": "PYTH_284_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Immutable Collections",
+      "prompt": "Fill in the function name used to convert a list into an immutable set.",
+      "codeSnippet": "frozen_keys = ___([1, 2, 3])",
+      "options": ["frozenset", "tuple", "set", "immutable"],
+      "correctAnswer": "frozenset"
+    },
+    {
+      "slideId": "PYTH_284_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Operator Module Usage",
+      "prompt": "Which function from the `operator` module corresponds to standard addition (`+`)?",
+      "options": ["operator.add", "operator.plus", "operator.sum", "operator.concat"],
+      "correctAnswer": "operator.add"
+    },
+    {
+      "slideId": "PYTH_284_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Advancing Generators",
+      "prompt": "Fill in the built-in function used to request the next value from a generator.",
+      "codeSnippet": "val = ___(gen_iter)",
+      "options": ["next", "get", "advance", "pop"],
+      "correctAnswer": "next"
+    },
+    {
+      "slideId": "PYTH_284_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Exhaustion",
+      "prompt": "What exception is raised when a generator runs out of elements?",
+      "options": ["StopIteration", "IndexError", "KeyError", "GeneratorExit"],
+      "correctAnswer": "StopIteration"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "lessonId": "PYTH_288",
+  "title": "Module Review Quiz: Multithreading & Multiprocessing",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_288_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Parallelism & Concurrency",
+      "prompt": "Review Global Interpreter Lock (GIL), `threading`, `multiprocessing`, and `concurrent.futures` execution models.",
+      "codeSnippet": "from concurrent.futures import ThreadPoolExecutor\nwith ThreadPoolExecutor() as executor:\n    res = executor.map(pow, [1,2], [2,3])"
+    },
+    {
+      "slideId": "PYTH_288_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Multiprocessing Module Import",
+      "prompt": "Fill in the standard module used for process-based parallelism to bypass GIL.",
+      "codeSnippet": "import ___",
+      "options": ["multiprocessing", "threading", "asyncio", "parallel"],
+      "correctAnswer": "multiprocessing"
+    },
+    {
+      "slideId": "PYTH_288_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GIL Definition",
+      "prompt": "What does GIL stand for in CPython?",
+      "options": [
+        "Global Interpreter Lock",
+        "General Interface Logic",
+        "Global Instance Level",
+        "Generic Internal Lock"
+      ],
+      "correctAnswer": "Global Interpreter Lock"
+    },
+    {
+      "slideId": "PYTH_288_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Thread Synchronization Lock",
+      "prompt": "Fill in the class used to manage mutual exclusion locks in `threading`.",
+      "codeSnippet": "lock = threading.___()",
+      "options": ["Lock", "Mutex", "Semaphore", "Barrier"],
+      "correctAnswer": "Lock"
+    },
+    {
+      "slideId": "PYTH_288_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "I/O Bound vs CPU Bound",
+      "prompt": "Which concurrency strategy is generally best suited for I/O-bound tasks in Python?",
+      "options": [
+        "Multithreading or Asyncio",
+        "Multiprocessing only",
+        "Custom Metaclasses",
+        "Tail Call Recursion"
+      ],
+      "correctAnswer": "Multithreading or Asyncio"
+    },
+    {
+      "slideId": "PYTH_288_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Process Pool Execution",
+      "prompt": "Fill in the executor class from `concurrent.futures` used for CPU-bound task pools.",
+      "codeSnippet": "with ___PoolExecutor() as executor:",
+      "options": ["Process", "Thread", "Task", "CPU"],
+      "correctAnswer": "Process"
+    },
+    {
+      "slideId": "PYTH_288_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Starting a Thread",
+      "prompt": "Which method must be called to begin a created `threading.Thread` instance?",
+      "options": ["start()", "run()", "execute()", "launch()"],
+      "correctAnswer": "start()"
+    }
+  ]
+}

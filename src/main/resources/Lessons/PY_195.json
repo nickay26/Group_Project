@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_195",
+  "title": "Full-Stack Python Web Apps with Reflex / Pynecone (PYTH_195_S1 to PYTH_195_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_195_S1",
+      "type": "CONCEPT",
+      "title": "Pure Python Full-Stack Apps",
+      "prompt": "Frameworks like Reflex build single-page reactive web apps entirely in Python, translating Python state objects and UI components into React/Next.js frontend applications.",
+      "codeSnippet": "import reflex as rx\n\nclass State(rx.State):\n    count: int = 0\n\n    def increment(self):\n        self.count += 1"
+    },
+    {
+      "slideId": "PYTH_195_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "State Class Inheritence",
+      "prompt": "Fill in the base class used to manage reactive application state in Reflex applications.",
+      "codeSnippet": "import reflex as rx\n\nclass AppState(rx.___):\n    value: str = ''",
+      "options": ["State", "BaseState", "Controller", "Store"],
+      "correctAnswer": "State"
+    },
+    {
+      "slideId": "PYTH_195_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reactive Event Handlers",
+      "prompt": "How do UI components trigger backend updates in pure Python full-stack frameworks?",
+      "options": [
+        "By binding UI events (e.g., `on_click`) directly to state class methods executed over WebSocket connections",
+        "By writing raw JavaScript script tags inside Python string templates",
+        "By sending periodic HTTP POST requests via page reloads",
+        "By executing C extension bindings on the client web browser"
+      ],
+      "correctAnswer": "By binding UI events (e.g., `on_click`) directly to state class methods executed over WebSocket connections"
+    },
+    {
+      "slideId": "PYTH_195_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Reflex Button Component",
+      "prompt": "Fill in the Reflex component function used to render an interactive clickable button.",
+      "codeSnippet": "def index():\n    return rx.___( 'Click Me', on_click=State.increment )",
+      "options": ["button", "btn", "action_button", "clickable"],
+      "correctAnswer": "button"
+    },
+    {
+      "slideId": "PYTH_195_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reflex Architecture Compilation",
+      "prompt": "What output is generated when running `reflex build` or `reflex run`?",
+      "options": [
+        "A compiled Next.js React frontend coupled with a FastAIPython backend service",
+        "A static HTML file containing embedded WebAssembly binaries",
+        "A native C++ desktop executable application",
+        "A standalone Android APK application bundle"
+      ],
+      "correctAnswer": "A compiled Next.js React frontend coupled with a FastAIPython backend service"
+    },
+    {
+      "slideId": "PYTH_195_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Binding State Attributes to Inputs",
+      "prompt": "Fill in the component parameter used to create two-way binding with state variables in text input fields.",
+      "codeSnippet": "rx.input(value=State.text_val, on_change=State.___)",
+      "options": ["set_text_val", "update_text", "change_text", "write_text"],
+      "correctAnswer": "set_text_val"
+    },
+    {
+      "slideId": "PYTH_195_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Conditional UI Rendering",
+      "prompt": "Which Reflex primitive allows rendering UI subtrees based on backend state Boolean conditions?",
+      "options": [
+        "rx.cond(condition, true_component, false_component)",
+        "if-else statements directly inside component return lists",
+        "rx.switch_case()",
+        "rx.filter_ui()"
+      ],
+      "correctAnswer": "rx.cond(condition, true_component, false_component)"
+    },
+    {
+      "slideId": "PYTH_195_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "App Instance Initialization",
+      "prompt": "Fill in the Reflex object initialized to add page routes and run the full-stack web application.",
+      "codeSnippet": "app = rx.___()\napp.add_page(index)",
+      "options": ["App", "Server", "WebEngine", "Instance"],
+      "correctAnswer": "App"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_138",
+  "title": "Message Queues & Background Tasks with Celery (PYTH_131 to PYTH_140) (PYTH_138_S1 to PYTH_138_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_138_S1",
+      "type": "CONCEPT",
+      "title": "Asynchronous Task Queues",
+      "prompt": "Celery executes background tasks asynchronously outside the main request cycle.",
+      "codeSnippet": "from celery import Celery\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef send_email(to):\n    print(f'Email sent to {to}')"
+    },
+    {
+      "slideId": "PYTH_138_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Task Decorator",
+      "prompt": "Fill in the decorator used to designate a function as a Celery task.",
+      "codeSnippet": "@app.___\ndef add(x, y):\n    return x + y",
+      "options": ["task", "job", "worker", "async_task"],
+      "correctAnswer": "task"
+    },
+    {
+      "slideId": "PYTH_138_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Message Broker Role",
+      "prompt": "What is the primary role of a message broker like Redis or RabbitMQ in Celery?",
+      "options": [
+        "To send and store task messages between client and worker",
+        "To render web templates",
+        "To encrypt task payloads",
+        "To manage CSS styles"
+      ],
+      "correctAnswer": "To send and store task messages between client and worker"
+    },
+    {
+      "slideId": "PYTH_138_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Delay Execution",
+      "prompt": "Fill in the method used to trigger a task asynchronously.",
+      "codeSnippet": "send_email.___ ('user@example.com')",
+      "options": ["delay", "start", "run_async", "dispatch"],
+      "correctAnswer": "delay"
+    },
+    {
+      "slideId": "PYTH_138_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Celery Beat",
+      "prompt": "What is Celery Beat used for?",
+      "options": [
+        "Periodic task scheduling (Cron jobs)",
+        "Monitoring GPU metrics",
+        "Heartbeat health checks",
+        "Restarting failed servers"
+      ],
+      "correctAnswer": "Periodic task scheduling (Cron jobs)"
+    },
+    {
+      "slideId": "PYTH_138_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Result Backend",
+      "prompt": "Fill in the configuration key specifying where task execution results are stored.",
+      "codeSnippet": "app = Celery('tasks', ___='redis://localhost:6379/1')",
+      "options": ["backend", "result_db", "storage", "store"],
+      "correctAnswer": "backend"
+    },
+    {
+      "slideId": "PYTH_138_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "AsyncResult Object",
+      "prompt": "What object is returned when invoking a task via `.delay()`?",
+      "options": ["AsyncResult", "FutureTask", "TaskPromise", "JobStatus"],
+      "correctAnswer": "AsyncResult"
+    },
+    {
+      "slideId": "PYTH_138_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Task Retry",
+      "prompt": "Fill in the exception method call inside a task to retry execution upon error.",
+      "codeSnippet": "raise self.___ (exc=err)",
+      "options": ["retry", "re-run", "restart", "repeat"],
+      "correctAnswer": "retry"
+    }
+  ]
+}

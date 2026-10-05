@@ -29,17 +29,17 @@
   },
   {
     "instructions": "String stores text. Use double quotes.",
-    "task": "Create String 'name' with value \"Mimo\". Print it.",
+    "task": "Create String 'name' with value \"Sodex\". Print it.",
     "blanks": [],
     "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Declare name and print\n        \n    }\n}",
-    "hint": "Use 'String' type: String name = \"Mimo\";",
+    "hint": "Use 'String' type: String name = \"Sodex\";",
     "language": "Java",
-    "expectedOutput": "Mimo",
+    "expectedOutput": "Sodex",
     "previewType": "console",
     "title": "Declare String",
     "choices": [],
     "questionType": "Variables & Types",
-    "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String name = \"Mimo\";\n        System.out.println(name);\n    }\n}"
+    "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String name = \"Sodex\";\n        System.out.println(name);\n    }\n}"
   },
   {
     "instructions": "boolean stores true or false.",
@@ -299,17 +299,17 @@
   },
   {
     "instructions": "Constructor runs when object is created.",
-    "task": "Create class 'Person' with constructor setting name. Create object with 'Mimo' and print p.name.",
+    "task": "Create class 'Person' with constructor setting name. Create object with 'Sodex' and print p.name.",
     "blanks": [],
     "starterCode": "public class Main {\n    // TODO: Define Person class\n    \n    public static void main(String[] args) {\n        // TODO: Create object and print\n        \n    }\n}",
     "hint": "Person(String name) { this.name = name; }",
     "language": "Java",
-    "expectedOutput": "Mimo",
+    "expectedOutput": "Sodex",
     "previewType": "console",
     "title": "Constructor",
     "choices": [],
     "questionType": "Classes & Objects",
-    "solutionCode": "public class Main {\n    static class Person {\n        String name;\n        Person(String n) { this.name = n; }\n    }\n    public static void main(String[] args) {\n        Person p = new Person(\"Mimo\");\n        System.out.println(p.name);\n    }\n}"
+    "solutionCode": "public class Main {\n    static class Person {\n        String name;\n        Person(String n) { this.name = n; }\n    }\n    public static void main(String[] args) {\n        Person p = new Person(\"Sodex\");\n        System.out.println(p.name);\n    }\n}"
   },
   {
     "instructions": "Fields are variables inside a class.",

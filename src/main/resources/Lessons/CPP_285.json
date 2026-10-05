@@ -1,0 +1,168 @@
+{
+  "lessonId": "CPP_285",
+  "title": "Module Review Quiz: STL Algorithms & Ranges (CPP_233 to CPP_240)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_285_S1",
+      "type": "CONCEPT",
+      "title": "STL Algorithms & Ranges Overview",
+      "prompt": "This Module Quiz covers STL sorting, searching, modifying algorithms, lambda expressions, iterators, and modern C++20 Ranges & Views (CPP_233 to CPP_240).",
+      "codeSnippet": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <ranges>\nusing namespace std;\n\nint main() {\n    vector<int> nums = {5, 2, 8, 1, 3};\n    std::sort(nums.begin(), nums.end());\n    \n    // C++20 Ranges example\n    auto even = nums | std::views::filter([](int n){ return n % 2 == 0; });\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_285_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "std::sort Algorithm (CPP_233)",
+      "prompt": "Fill in the header file required to use algorithms like std::sort and std::find.",
+      "codeSnippet": "#include <___>\nusing namespace std;",
+      "options": ["algorithm", "vector", "numeric", "ranges"],
+      "correctAnswer": "algorithm"
+    },
+    {
+      "slideId": "CPP_285_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Range for Sorting (CPP_233)",
+      "prompt": "Which iterators must be passed to std::sort to sort an entire vector 'v' in ascending order?",
+      "options": [
+        "v.begin(), v.end()",
+        "v.front(), v.back()",
+        "v.first(), v.last()",
+        "v[0], v[v.size()]"
+      ],
+      "correctAnswer": "v.begin(), v.end()"
+    },
+    {
+      "slideId": "CPP_285_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Linear Search with std::find (CPP_234)",
+      "prompt": "Fill in the function name used to locate the first occurrence of a value in a container range.",
+      "codeSnippet": "auto it = std::___(v.begin(), v.end(), 42);",
+      "options": ["find", "search", "locate", "binary_search"],
+      "correctAnswer": "find"
+    },
+    {
+      "slideId": "CPP_285_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Binary Search Requirement (CPP_234)",
+      "prompt": "What precondition must be met before calling 'std::binary_search' on a sequence?",
+      "options": [
+        "The elements in the sequence must be sorted",
+        "The container must be std::vector only",
+        "The container must not contain any duplicate values",
+        "The container size must be an even number"
+      ],
+      "correctAnswer": "The elements in the sequence must be sorted"
+    },
+    {
+      "slideId": "CPP_285_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Lambda Expression Introducer (CPP_235)",
+      "prompt": "Fill in the capture clause bracket pair used to start an anonymous inline Lambda expression in C++.",
+      "codeSnippet": "auto print = ___ (int x) { cout << x; };",
+      "options": ["[]", "()", "{}", "<>"],
+      "correctAnswer": "[]"
+    },
+    {
+      "slideId": "CPP_285_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lambda Capture by Value vs Reference (CPP_235)",
+      "prompt": "What does '[&]' mean in a C++ lambda capture clause?",
+      "options": [
+        "Capture all outer local variables by reference",
+        "Capture all outer local variables by value",
+        "Do not capture any external variables",
+        "Return a reference type from the lambda"
+      ],
+      "correctAnswer": "Capture all outer local variables by reference"
+    },
+    {
+      "slideId": "CPP_285_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Transform Algorithm (CPP_236)",
+      "prompt": "Fill in the algorithm name used to apply a modification function to every element in a range.",
+      "codeSnippet": "std::___(v.begin(), v.end(), v.begin(), [](int x){ return x * 2; });",
+      "options": ["transform", "for_each", "convert", "apply"],
+      "correctAnswer": "transform"
+    },
+    {
+      "slideId": "CPP_285_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::accumulate (CPP_237)",
+      "prompt": "Which header file contains numerical operations like 'std::accumulate'?",
+      "options": [
+        "<numeric>",
+        "<algorithm>",
+        "<cmath>",
+        "<utility>"
+      ],
+      "correctAnswer": "<numeric>"
+    },
+    {
+      "slideId": "CPP_285_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Count If Algorithm (CPP_236)",
+      "prompt": "Fill in the predicate algorithm name used to count elements that satisfy a specific condition.",
+      "codeSnippet": "int evens = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",
+      "options": ["count_if", "count", "find_if", "sum_if"],
+      "correctAnswer": "count_if"
+    },
+    {
+      "slideId": "CPP_285_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Dereferencing (CPP_238)",
+      "prompt": "Which operator is used to access the actual object value that an iterator points to?",
+      "options": [
+        "*",
+        "&",
+        "->",
+        "."
+      ],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "CPP_285_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "C++20 Ranges Header (CPP_239)",
+      "prompt": "Fill in the header name introduced in C++20 for composable algorithms without explicitly passing .begin() and .end().",
+      "codeSnippet": "#include <___>",
+      "options": ["ranges", "algorithm", "views", "concepts"],
+      "correctAnswer": "ranges"
+    },
+    {
+      "slideId": "CPP_285_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "C++20 Pipe Operator in Views (CPP_240)",
+      "prompt": "What does the pipe operator '|' do when using C++20 Ranges and Views?",
+      "options": [
+        "Chains/pipes a range or view into a view adaptor function",
+        "Performs a bitwise OR operation on all elements",
+        "Splits the container into two equal threads",
+        "Removes duplicate values from the range"
+      ],
+      "correctAnswer": "Chains/pipes a range or view into a view adaptor function"
+    },
+    {
+      "slideId": "CPP_285_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Ranges View Adaptor (CPP_240)",
+      "prompt": "Fill in the view name used in C++20 to keep only elements matching a condition.",
+      "codeSnippet": "auto result = nums | std::views::___([](int x){ return x > 10; });",
+      "options": ["filter", "transform", "take", "drop"],
+      "correctAnswer": "filter"
+    },
+    {
+      "slideId": "CPP_285_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Lazy Evaluation in Views (CPP_240)",
+      "prompt": "What is a key benefit of using C++20 Range Views over standard STL algorithms?",
+      "options": [
+        "Views evaluate lazily on-demand without copying the underlying container data",
+        "Views run automatically on parallel GPU threads",
+        "Views increase compilation speed by avoiding templates",
+        "Views can only be used with primitive data types"
+      ],
+      "correctAnswer": "Views evaluate lazily on-demand without copying the underlying container data"
+    }
+  ]
+}

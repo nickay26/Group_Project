@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_150",
+  "title": "Mastering Enterprise Python Capstone (PYTH_141 to PYTH_150) (PYTH_150_S1 to PYTH_150_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_150_S1",
+      "type": "CONCEPT",
+      "title": "Enterprise Python Standards",
+      "prompt": "Enterprise Python combines strict design patterns, high test coverage, telemetry, and automated deployment.",
+      "codeSnippet": "# OpenTelemetry Logging Setup\nimport logging\nlogging.basicConfig(level=logging.INFO)\nlogging.info('Enterprise App Initialized')"
+    },
+    {
+      "slideId": "PYTH_150_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Structured Logging",
+      "prompt": "Fill in the module level function used to output informational log statements.",
+      "codeSnippet": "logging.___ ('Processing complete')",
+      "options": ["info", "log", "write", "print"],
+      "correctAnswer": "info"
+    },
+    {
+      "slideId": "PYTH_150_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "12-Factor App Config",
+      "prompt": "Where should environment configurations (e.g., DB credentials) be stored according to 12-Factor principles?",
+      "options": [
+        "Environment Variables (.env / system environment)",
+        "Hardcoded directly in application source code",
+        "Stored inside public Git commits",
+        "In static text files inside the codebase root"
+      ],
+      "correctAnswer": "Environment Variables (.env / system environment)"
+    },
+    {
+      "slideId": "PYTH_150_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Dependency Injection",
+      "prompt": "Fill in the FastAPI utility parameter used to inject database sessions into route handlers.",
+      "codeSnippet": "def get_db(db: Session = ___ (get_db_session)):",
+      "options": ["Depends", "Inject", "Provide", "Require"],
+      "correctAnswer": "Depends"
+    },
+    {
+      "slideId": "PYTH_150_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Health Check Endpoints",
+      "prompt": "Why do enterprise web APIs implement a `/health` or `/healthz` route?",
+      "options": [
+        "To allow orchestrators (like Kubernetes) to monitor application uptime and readiness",
+        "To measure bandwidth speed",
+        "To download log reports",
+        "To grant admin access"
+      ],
+      "correctAnswer": "To allow orchestrators (like Kubernetes) to monitor application uptime and readiness"
+    },
+    {
+      "slideId": "PYTH_150_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Prometheus Metrics",
+      "prompt": "Fill in the metric type used to measure cumulative counters like total HTTP requests.",
+      "codeSnippet": "request_counter = ___ ('http_requests_total', 'Description')",
+      "options": ["Counter", "Gauge", "Histogram", "Summary"],
+      "correctAnswer": "Counter"
+    },
+    {
+      "slideId": "PYTH_150_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Graceful Shutdown",
+      "prompt": "What happens during a graceful shutdown in enterprise web servers?",
+      "options": [
+        "The server stops accepting new requests but completes all active in-flight requests before exiting",
+        "The server immediately kills all connections without warning",
+        "The database deletes cached transactions",
+        "The process restarts in debug mode"
+      ],
+      "correctAnswer": "The server stops accepting new requests but completes all active in-flight requests before exiting"
+    },
+    {
+      "slideId": "PYTH_150_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Semantic Versioning",
+      "prompt": "Fill in the component representing bug fixes in Semantic Versioning (MAJOR.MINOR.PATCH).",
+      "codeSnippet": "# Version format 1.0.X:\nversion = '___'",
+      "options": ["PATCH", "MINOR", "MAJOR", "BUILD"],
+      "correctAnswer": "PATCH"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_122",
+  "title": "Datetimes & Time Handling (PYTH_122_S1 to PYTH_122_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_122_S1",
+      "type": "CONCEPT",
+      "title": "Datetime Basics",
+      "prompt": "The datetime module provides tools for working with dates, times, and time intervals.",
+      "codeSnippet": "from datetime import datetime, timedelta\nnow = datetime.now()\nfuture = now + timedelta(days=7)"
+    },
+    {
+      "slideId": "PYTH_122_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Current Timestamp",
+      "prompt": "Fill in the method used to get the current local date and time.",
+      "codeSnippet": "now = datetime.___()",
+      "options": ["now", "today", "current", "get_time"],
+      "correctAnswer": "now"
+    },
+    {
+      "slideId": "PYTH_122_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Formatting Datetimes to Strings",
+      "prompt": "Which method formats a datetime object into a custom string?",
+      "options": ["strftime()", "strptime()", "to_string()", "format()"],
+      "correctAnswer": "strftime()"
+    },
+    {
+      "slideId": "PYTH_122_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Parsing Strings to Datetime",
+      "prompt": "Fill in the method used to parse a string into a datetime object using a format pattern.",
+      "codeSnippet": "dt = datetime.___(\"2026-09-09\", \"%Y-%m-%d\")",
+      "options": ["strptime", "strftime", "parse", "from_string"],
+      "correctAnswer": "strptime"
+    },
+    {
+      "slideId": "PYTH_122_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Time Differences",
+      "prompt": "Which class represents the difference between two date or time instances?",
+      "options": ["timedelta", "timegap", "duration", "timeperiod"],
+      "correctAnswer": "timedelta"
+    },
+    {
+      "slideId": "PYTH_122_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Time Sleep Function",
+      "prompt": "Fill in the function in the 'time' module used to pause script execution.",
+      "codeSnippet": "import time\ntime.___(2) # Pause for 2 seconds",
+      "options": ["sleep", "pause", "wait", "delay"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "PYTH_122_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Format Directive Year",
+      "prompt": "Which directive in strftime represents a four-digit year (e.g., 2026)?",
+      "options": ["%Y", "%y", "%YEAR", "%yr"],
+      "correctAnswer": "%Y"
+    }
+  ]
+}

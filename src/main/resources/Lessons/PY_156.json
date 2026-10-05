@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_156",
+  "title": "Distributed Caching & In-Memory Storage with Redis (PYTH_156_S1 to PYTH_156_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_156_S1",
+      "type": "CONCEPT",
+      "title": "In-Memory Caching Architecture",
+      "prompt": "Caching frequently accessed data in-memory reduces database query load and minimizes API latency.",
+      "codeSnippet": "import redis\n\nr = redis.Redis(host='localhost', port=6379, db=0)\nr.set('user:100', 'active')"
+    },
+    {
+      "slideId": "PYTH_156_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Cache Expiration (TTL)",
+      "prompt": "Fill in the Redis method parameter used to set Time-To-Live (TTL) in seconds.",
+      "codeSnippet": "r.set('session_token', 'xyz123', ___=3600)",
+      "options": ["ex", "ttl", "expire", "timeout"],
+      "correctAnswer": "ex"
+    },
+    {
+      "slideId": "PYTH_156_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cache Invalidation Strategies",
+      "prompt": "Which caching pattern updates the cache immediately when database data changes?",
+      "options": [
+        "Write-Through Caching",
+        "Cache-Aside (Lazy Loading)",
+        "Time-Based Eviction",
+        "Random Invalidation"
+      ],
+      "correctAnswer": "Write-Through Caching"
+    },
+    {
+      "slideId": "PYTH_156_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Redis Hash Operations",
+      "prompt": "Fill in the Redis command used to set a field in a hash structure.",
+      "codeSnippet": "r.___('user:1001', 'name', 'Alice')",
+      "options": ["hset", "hmset", "set_hash", "hash_put"],
+      "correctAnswer": "hset"
+    },
+    {
+      "slideId": "PYTH_156_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cache Stampede Prevention",
+      "prompt": "What design technique prevents high-traffic systems from overwhelming the database when a cache key expires?",
+      "options": [
+        "Distributed Locking (e.g., Redlock)",
+        "Deleting all keys on restart",
+        "Increasing database connection pool indefinitely",
+        "Disabling TTL on all keys"
+      ],
+      "correctAnswer": "Distributed Locking (e.g., Redlock)"
+    },
+    {
+      "slideId": "PYTH_156_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pub/Sub Messaging",
+      "prompt": "Fill in the Redis method used to publish messages to a channel.",
+      "codeSnippet": "r.___('notifications', 'New user registered')",
+      "options": ["publish", "broadcast", "send", "notify"],
+      "correctAnswer": "publish"
+    },
+    {
+      "slideId": "PYTH_156_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memcached vs Redis",
+      "prompt": "Which feature is natively supported by Redis but NOT by Memcached?",
+      "options": [
+        "Complex data structures (Hashes, Lists, Sets, Sorted Sets) and persistence",
+        "Key-value memory caching",
+        "Multi-threaded request handling",
+        "TCP connection pooling"
+      ],
+      "correctAnswer": "Complex data structures (Hashes, Lists, Sets, Sorted Sets) and persistence"
+    },
+    {
+      "slideId": "PYTH_156_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Redis Client",
+      "prompt": "Fill in the async Redis library commonly used with AsyncIO and FastAPI.",
+      "codeSnippet": "import redis.___ as aioredis",
+      "options": ["asyncio", "aio", "future", "concurrent"],
+      "correctAnswer": "asyncio"
+    }
+  ]
+}

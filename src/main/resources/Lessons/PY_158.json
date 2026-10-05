@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_158",
+  "title": "Docker Containerization for Python Apps (PYTH_158_S1 to PYTH_158_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_158_S1",
+      "type": "CONCEPT",
+      "title": "Containerization Fundamentals",
+      "prompt": "Docker packages Python code and all system dependencies into isolated, reproducible container images.",
+      "codeSnippet": "# Example Dockerfile\nFROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install -r requirements.txt"
+    },
+    {
+      "slideId": "PYTH_158_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Dockerfile Base Image",
+      "prompt": "Fill in the Dockerfile keyword used to define the parent runtime image.",
+      "codeSnippet": "___ python:3.11-slim",
+      "options": ["FROM", "BASE", "IMAGE", "USE"],
+      "correctAnswer": "FROM"
+    },
+    {
+      "slideId": "PYTH_158_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multi-Stage Docker Builds",
+      "prompt": "Why are multi-stage Docker builds recommended for Python production images?",
+      "options": [
+        "They significantly reduce final image size by discarding build tools and compilers",
+        "They allow running multiple web servers inside one container",
+        "They bypass container permission checks",
+        "They eliminate the need for requirements.txt"
+      ],
+      "correctAnswer": "They significantly reduce final image size by discarding build tools and compilers"
+    },
+    {
+      "slideId": "PYTH_158_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Environment Variables",
+      "prompt": "Fill in the Dockerfile instruction used to set environment variables inside containers.",
+      "codeSnippet": "___ PYTHONUNBUFFERED=1",
+      "options": ["ENV", "SET", "VAR", "ARG"],
+      "correctAnswer": "ENV"
+    },
+    {
+      "slideId": "PYTH_158_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Docker Compose Multi-Container Setup",
+      "prompt": "Which tool simplifies running multi-container applications (e.g., Python API + Postgres + Redis)?",
+      "options": ["Docker Compose", "Docker Swarm", "Kubectl", "VirtualBox"],
+      "correctAnswer": "Docker Compose"
+    },
+    {
+      "slideId": "PYTH_158_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Executing Container Commands",
+      "prompt": "Fill in the Dockerfile instruction that defines the default command executed when the container starts.",
+      "codeSnippet": "___ [\"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\"]",
+      "options": ["CMD", "RUN", "START", "ENTRY"],
+      "correctAnswer": "CMD"
+    },
+    {
+      "slideId": "PYTH_158_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": ".dockerignore Best Practices",
+      "prompt": "Which files should ALWAYS be listed inside a `.dockerignore` file?",
+      "options": [
+        ".git, __pycache__, .env, and local virtual environments (.venv)",
+        "requirements.txt and Dockerfile",
+        "Python source code files (.py)",
+        "Application static configurations"
+      ],
+      "correctAnswer": ".git, __pycache__, .env, and local virtual environments (.venv)"
+    },
+    {
+      "slideId": "PYTH_158_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Exposing Application Ports",
+      "prompt": "Fill in the Dockerfile instruction used to document the network port on which the container listens.",
+      "codeSnippet": "___ 8000",
+      "options": ["EXPOSE", "PORT", "OPEN", "NETWORK"],
+      "correctAnswer": "EXPOSE"
+    }
+  ]
+}

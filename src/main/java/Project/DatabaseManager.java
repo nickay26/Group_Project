@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Connection;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -12,8 +13,12 @@ import org.json.JSONObject;
 
 public class DatabaseManager {
 
-    private static final String BASE_URL = "https://NickayJohn26.pythonanywhere.com";
-    private static final HttpClient client = HttpClient.newHttpClient();
+    // PythonAnywhere SSL Redirect Error ကာကွယ်ရန် URL Domain Name ကို စာလုံးသေး ပြောင်းထားပါသည်
+    private static final String BASE_URL = "https://nickayjohn26.pythonanywhere.com";
+    private static final HttpClient client = HttpClient.newBuilder()
+            .followRedirects(HttpClient.Redirect.ALWAYS)
+            .connectTimeout(Duration.ofSeconds(10))
+            .build();
 
     // ==========================================
     // 1. USER AUTHENTICATION & SYNC
@@ -153,12 +158,16 @@ public class DatabaseManager {
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
         try {
+            String url = BASE_URL + "/api/courses/" + courseId + "/lessons";
+            System.out.println("🔍 GET: " + url);   // ✅ Debug
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/api/courses/" + courseId + "/lessons"))
                     .GET()
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("🔍 Status: " + response.statusCode());   // ✅ Debug
+            System.out.println("🔍 Body: " + response.body());            // ✅ Debug
 
             if (response.statusCode() == 200) {
                 JSONArray arr = new JSONArray(response.body());
@@ -299,6 +308,34 @@ public class DatabaseManager {
         return false;
     }
 
+    // ============================================
+    // UPDATE USER PROFILE
+    // ============================================
+    public static boolean updateUserProfile(int userId, String name, String profile) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            if (profile != null) {
+                body.put("profile", profile);
+            } else {
+                body.put("profile", JSONObject.NULL);
+            }
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     // ==========================================
     // HELPER METHODS
     // ==========================================
@@ -330,9 +367,76 @@ public class DatabaseManager {
 
         return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
+
     // ==========================================
-// 4. PREMIUM & PAYMENT
-// ==========================================
+    // ADD LESSON TO REVIEW TABLE
+    // ==========================================
+    public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("course_id", courseId);
+            body.put("lesson_id", lessonId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/reviews"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // ============================================
+    // GET LESSONS FROM REVIEW TABLE
+    // ============================================
+    public static List<PracticeController.ReviewData> getReviewLessons(int userId) {
+        List<PracticeController.ReviewData> reviewList = new ArrayList<>();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/reviews/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONArray jsonArray = new JSONArray(response.body());
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    String lessonId = obj.optString("lesson_id", "");
+                    String courseId = obj.optString("course_id", "");
+                    String title = obj.optString("Lesson_title", lessonId);
+
+                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
+                    String language = "C++";
+                    if (courseId.toUpperCase().contains("JAVA")) {
+                        language = "Java";
+                    } else if (courseId.toUpperCase().contains("PYTHON")) {
+                        language = "Python";
+                    } else if (courseId.toUpperCase().contains("CPP") || courseId.toUpperCase().contains("C++")) {
+                        language = "C++";
+                    }
+
+                    reviewList.add(new PracticeController.ReviewData(lessonId, courseId, title, language));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reviewList;
+    }
+
+    // ==========================================
+    // 4. PREMIUM & PAYMENT
+    // ==========================================
 
     public static boolean subscribePremium(int userId, int planId, String durationType) {
         try {
@@ -399,4 +503,175 @@ public class DatabaseManager {
         return false;
     }
 
+    // ==========================================
+    // 5. BRAIN & ENERGY SYSTEM
+    // ==========================================
+
+    /**
+     * Retrieves current brain count, coins, and premium status for a user.
+     */
+    public static JSONObject getBrainStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/brains"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Deducts 1 brain upon an incorrect answer.
+     * Premium users are automatically exempted on the backend.
+     */
+    public static JSONObject deductBrain(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Spends user coins to refill brains to max capacity (5).
+     */
+    public static JSONObject refillBrains(int userId, int cost) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("cost", cost);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // ==========================================
+    // 6. LEADERBOARD SYSTEM (SYNCHRONOUS)
+    // ==========================================
+
+    /**
+     * Fetch active season leaderboard
+     */
+    public static JSONArray getLeaderboard() {
+        return getLeaderboard(null, 1);
+    }
+
+    public static JSONArray getLeaderboard(String seasonId) {
+        return getLeaderboard(seasonId, 1);
+    }
+
+    public static JSONArray getLeaderboard(String seasonId, int leagueId) {
+        try {
+            String path = "/api/leaderboard";
+            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+                path += "/" + seasonId;
+            }
+            path += "?league_id=" + leagueId;
+
+            String response = sendGetRequest(path);
+            if (!response.isEmpty()) {
+                // Extracts "rankings" array if backend returns {"season_id": "...", "rankings": [...]}
+                if (response.trim().startsWith("{")) {
+                    JSONObject json = new JSONObject(response);
+                    return json.optJSONArray("rankings");
+                } else if (response.trim().startsWith("[")) {
+                    return new JSONArray(response);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new JSONArray();
+    }
+
+    /**
+     * Fetch User League Status
+     */
+    public static JSONObject getUserLeagueStatus(int userId) {
+        return getUserLeagueStatus(userId, null);
+    }
+
+    public static JSONObject getUserLeagueStatus(int userId, String seasonId) {
+        try {
+            String path = "/api/user/" + userId + "/league-status";
+            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+                path += "/" + seasonId;
+            }
+
+            String response = sendGetRequest(path);
+            if (!response.isEmpty()) {
+                return new JSONObject(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Add XP to User & Auto-Enroll in Active Season
+     */
+    public static boolean addUserXp(int userId, int xp) {
+        return addUserXp(userId, null, xp, 1);
+    }
+
+    public static boolean addUserXp(int userId, String seasonId, int xp) {
+        return addUserXp(userId, seasonId, xp, 1);
+    }
+
+    public static boolean addUserXp(int userId, String seasonId, int xp, int leagueId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("xp", xp);
+            body.put("league_id", leagueId);
+            if (seasonId != null && !seasonId.trim().isEmpty()) {
+                body.put("season_id", seasonId);
+            }
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-xp"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

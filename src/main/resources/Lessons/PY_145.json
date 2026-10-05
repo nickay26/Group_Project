@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_145",
+  "title": "GraphQL API Integration with Python (PYTH_141 to PYTH_150) (PYTH_145_S1 to PYTH_145_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_145_S1",
+      "type": "CONCEPT",
+      "title": "GraphQL Basics",
+      "prompt": "GraphQL lets clients query exact data fields from a single endpoint.",
+      "codeSnippet": "import requests\nquery = '{ user { id name } }'\nres = requests.post(url, json={'query': query})\nprint(res.json())"
+    },
+    {
+      "slideId": "PYTH_145_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "HTTP Method for GraphQL",
+      "prompt": "Fill in the standard HTTP verb used for GraphQL queries.",
+      "codeSnippet": "response = requests.___ (url, json={'query': q})",
+      "options": ["post", "get", "put", "fetch"],
+      "correctAnswer": "post"
+    },
+    {
+      "slideId": "PYTH_145_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GraphQL Schema Definition",
+      "prompt": "What defines the data types and operational queries available in GraphQL?",
+      "options": ["Schema", "Database Table", "API Blueprint", "Manifest"],
+      "correctAnswer": "Schema"
+    },
+    {
+      "slideId": "PYTH_145_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Mutation Operation",
+      "prompt": "Fill in the GraphQL keyword used to insert or modify backend data.",
+      "codeSnippet": "query = '___ { createUser(name: \"Alice\") { id } }'",
+      "options": ["mutation", "update", "post", "write"],
+      "correctAnswer": "mutation"
+    },
+    {
+      "slideId": "PYTH_145_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Strawberry GraphQL Library",
+      "prompt": "Which modern Python library uses type hints to generate GraphQL schemas?",
+      "options": ["Strawberry", "Graphene", "Ariadne", "Flask-GraphQL"],
+      "correctAnswer": "Strawberry"
+    },
+    {
+      "slideId": "PYTH_145_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "GraphQL Query Key",
+      "prompt": "Fill in the JSON payload dictionary key containing the GraphQL query string.",
+      "codeSnippet": "payload = {'___': '{ books { title } }'}",
+      "options": ["query", "body", "data", "request"],
+      "correctAnswer": "query"
+    },
+    {
+      "slideId": "PYTH_145_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Resolvers",
+      "prompt": "What is the function of a GraphQL Resolver?",
+      "options": [
+        "A backend function responsible for fetching data for a specific field",
+        "An HTTP load balancer",
+        "A client-side query generator",
+        "A database backup tool"
+      ],
+      "correctAnswer": "A backend function responsible for fetching data for a specific field"
+    },
+    {
+      "slideId": "PYTH_145_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "GraphQL Variables",
+      "prompt": "Fill in the key used in JSON request payloads for parameter values.",
+      "codeSnippet": "payload = {'query': q, '___': {'id': 1}}",
+      "options": ["variables", "args", "params", "values"],
+      "correctAnswer": "variables"
+    }
+  ]
+}

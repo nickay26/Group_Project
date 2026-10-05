@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_147",
+  "title": "Real-time Communication with WebSockets (PYTH_141 to PYTH_150) (PYTH_147_S1 to PYTH_147_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_147_S1",
+      "type": "CONCEPT",
+      "title": "WebSocket Protocol",
+      "prompt": "WebSockets provide persistent, full-duplex communication channels over a single TCP connection.",
+      "codeSnippet": "import asyncio\nimport websockets\n\nasync def handler(websocket):\n    data = await websocket.recv()\n    await websocket.send(f'Echo: {data}')"
+    },
+    {
+      "slideId": "PYTH_147_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Receiving Messages",
+      "prompt": "Fill in the asynchronous method used to receive incoming WebSocket messages.",
+      "codeSnippet": "data = await websocket.___ ()",
+      "options": ["recv", "receive", "read", "get"],
+      "correctAnswer": "recv"
+    },
+    {
+      "slideId": "PYTH_147_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "WebSocket vs HTTP",
+      "prompt": "What is a primary distinction between WebSockets and standard HTTP?",
+      "options": [
+        "WebSockets allow bi-directional, full-duplex real-time streaming",
+        "WebSockets only support text messages",
+        "HTTP is faster for continuous live chat applications",
+        "WebSockets require a new TCP connection for every message"
+      ],
+      "correctAnswer": "WebSockets allow bi-directional, full-duplex real-time streaming"
+    },
+    {
+      "slideId": "PYTH_147_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Sending Messages",
+      "prompt": "Fill in the async method to push data to a connected client.",
+      "codeSnippet": "await websocket.___ ('Hello Client')",
+      "options": ["send", "push", "write", "emit"],
+      "correctAnswer": "send"
+    },
+    {
+      "slideId": "PYTH_147_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "WebSocket URL Scheme",
+      "prompt": "Which URI scheme specifies a secure WebSocket connection?",
+      "options": ["wss://", "https://", "ws://", "socket://"],
+      "correctAnswer": "wss://"
+    },
+    {
+      "slideId": "PYTH_147_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "FastAPI WebSocket Endpoint",
+      "prompt": "Fill in the decorator used for WebSocket routes in FastAPI.",
+      "codeSnippet": "@app.___ ('/ws')",
+      "options": ["websocket", "ws", "socket", "realtime"],
+      "correctAnswer": "websocket"
+    },
+    {
+      "slideId": "PYTH_147_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Accepting Connections",
+      "prompt": "Which method must be called to complete the initial handshake in FastAPI WebSockets?",
+      "options": [
+        "await websocket.accept()",
+        "websocket.open()",
+        "await websocket.connect()",
+        "websocket.start()"
+      ],
+      "correctAnswer": "await websocket.accept()"
+    },
+    {
+      "slideId": "PYTH_147_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Closing Sockets",
+      "prompt": "Fill in the method used to gracefully terminate a WebSocket connection.",
+      "codeSnippet": "await websocket.___ ()",
+      "options": ["close", "disconnect", "stop", "end"],
+      "correctAnswer": "close"
+    }
+  ]
+}

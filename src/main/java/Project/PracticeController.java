@@ -4,16 +4,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +25,43 @@ public class PracticeController {
     @FXML private ComboBox<String> categoryCombo;
     @FXML private GridPane cardContainer;
 
+    private ToggleGroup modeToggleGroup;
+
     // ============================================
-    // CardData — language, type, title
+    // CardData — Practice Card Model
     // ============================================
     private static class CardData {
         String language;   // Java, C++, Python
-        String type;       // "Variables & Types" (Question ရှာဖို့)
-        String title;      // "Variables & Types" (Card ပြဖို့)
+        String type;       // "Variables & Types"
+        String title;      // "Variables & Types"
 
         CardData(String lang, String type, String title) {
             this.language = lang;
             this.type = type;
             this.title = title;
         }
+    }
+
+    // ============================================
+    // ReviewData — Review Card Model
+    // ============================================
+    public static class ReviewData {
+        private String lessonId;
+        private String courseId;
+        private String title;
+        private String language;
+
+        public ReviewData(String lessonId, String courseId, String title, String language) {
+            this.lessonId = lessonId;
+            this.courseId = courseId;
+            this.title = title;
+            this.language = language;
+        }
+
+        public String getLessonId() { return lessonId; }
+        public String getCourseId() { return courseId; }
+        public String getTitle() { return title; }
+        public String getLanguage() { return language; }
     }
 
     private final List<CardData> allCards = new ArrayList<>();
@@ -48,9 +73,22 @@ public class PracticeController {
     public void initialize() {
         categoryCombo.getItems().addAll("All", "Java", "C++", "Python");
         categoryCombo.setValue("All");
-        categoryCombo.setOnAction(e -> filterCards());
+        categoryCombo.setOnAction(e -> handleModeChange());
 
-        // ✅ Language, Type, Title — ၃ ခုစီ
+        // ToggleGroup သတ်မှတ်ခြင်း
+        modeToggleGroup = new ToggleGroup();
+        practiceToggle.setToggleGroup(modeToggleGroup);
+        reviewToggle.setToggleGroup(modeToggleGroup);
+
+        modeToggleGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            } else {
+                handleModeChange();
+            }
+        });
+
+        // Practice Cards မူလ Data
         allCards.add(new CardData("Java",   "Variables & Types", "Variables & Types"));
         allCards.add(new CardData("Java",   "Loops", "Loops"));
         allCards.add(new CardData("Java",   "Classes & Objects", "Classes & Objects"));
@@ -61,22 +99,21 @@ public class PracticeController {
         allCards.add(new CardData("Python", "Functions", "Functions"));
         allCards.add(new CardData("Python", "OOP Basics", "OOP Basics"));
 
-        practiceToggle.setOnAction(e -> handleModeChange());
-        reviewToggle.setOnAction(e -> handleModeChange());
-
         practiceToggle.setSelected(true);
         renderCards(allCards);
     }
 
     private void handleModeChange() {
+        cardContainer.getChildren().clear();
+        cardContainer.getColumnConstraints().clear();
+        cardContainer.getRowConstraints().clear();
+        cardContainer.setVisible(true);
+        cardContainer.setManaged(true);
+
         if (practiceToggle.isSelected()) {
-            cardContainer.setVisible(true);
-            cardContainer.setManaged(true);
             filterCards();
         } else if (reviewToggle.isSelected()) {
-            cardContainer.getChildren().clear();
-            cardContainer.setVisible(false);
-            cardContainer.setManaged(false);
+            loadReviewCards();
         }
     }
 
@@ -87,17 +124,185 @@ public class PracticeController {
         } else {
             List<CardData> filtered = new ArrayList<>();
             for (CardData c : allCards) {
-                if (c.language.equals(selected)) filtered.add(c);
+                if (c.language != null && c.language.equalsIgnoreCase(selected)) {
+                    filtered.add(c);
+                }
             }
             renderCards(filtered);
         }
     }
 
     // ============================================
-    // RENDER — GridPane မှာ ၃ columns စီ
+    // 📌 LOAD & RENDER REVIEW CARDS
+    // ============================================
+    private void loadReviewCards() {
+        cardContainer.getChildren().clear();
+        cardContainer.getColumnConstraints().clear();
+        cardContainer.getRowConstraints().clear();
+
+        // 📌 Hexagon အကွက်များ ကြားအကွာအဝေး ညီညာစေရန် Grid Alignment ညှိခြင်း
+        cardContainer.setAlignment(Pos.TOP_LEFT);
+        cardContainer.setHgap(35);
+        cardContainer.setVgap(35);
+        cardContainer.setPadding(new Insets(30));
+
+        int userId = UserSession.getUserId();
+        List<ReviewData> reviewList = null;
+        try {
+            reviewList = DatabaseManager.getReviewLessons(userId);
+        } catch (Exception e) {
+            System.err.println("❌ Error loading reviews: " + e.getMessage());
+        }
+
+        String selectedCategory = categoryCombo.getValue();
+
+        List<ReviewData> filteredList = new ArrayList<>();
+        if (reviewList != null) {
+            for (ReviewData rev : reviewList) {
+                if (rev == null) continue;
+
+                boolean matchesCategory = selectedCategory == null
+                        || selectedCategory.equalsIgnoreCase("All")
+                        || (rev.getLanguage() != null && rev.getLanguage().equalsIgnoreCase(selectedCategory));
+
+                if (matchesCategory) {
+                    filteredList.add(rev);
+                }
+            }
+        }
+
+        if (filteredList.isEmpty()) {
+            Label emptyLabel = new Label("No review lessons found.");
+            emptyLabel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+            emptyLabel.setStyle("-fx-text-fill: #a0a0a0; -fx-padding: 20px;");
+            cardContainer.add(emptyLabel, 0, 0);
+            return;
+        }
+
+        // 📌 တစ်ကြောင်းလျှင် ၄ ခုစီ (col == 4) ညီညီညာညာ တန်းစီပေးခြင်း
+        int col = 0;
+        int row = 0;
+        for (ReviewData rev : filteredList) {
+            StackPane hexCard = createPureHexagonCard(rev);
+            cardContainer.add(hexCard, col, row);
+
+            col++;
+            if (col == 4) {
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+    // LearnPage Design အတိုင်း Hexagon SVG Path ပြုလုပ်သည့် Helper
+    private StackPane createPureHexagonCard(ReviewData data) {
+        StackPane stack = new StackPane();
+
+        // 📌 Hexagon Card Dimension သတ်မှတ်ခြင်း
+        stack.setPrefSize(140, 160);
+        stack.setMinSize(140, 160);
+        stack.setMaxSize(140, 160);
+        stack.setStyle("-fx-cursor: hand;");
+
+        // Hexagon SVG Path
+        SVGPath hexPath = new SVGPath();
+        hexPath.setContent("M 70 0 L 140 40 L 140 120 L 70 160 L 0 120 L 0 40 Z");
+        hexPath.setStrokeWidth(3.5);
+
+        Color fillColor = Color.web("#2563EB");
+        Color strokeColor = Color.web("#60A5FA");
+
+        // Glow Effect
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.web("#3B82F6", 0.8));
+        glow.setRadius(20);
+        stack.setEffect(glow);
+
+        hexPath.setFill(fillColor);
+        hexPath.setStroke(strokeColor);
+
+        // Lesson Title အမှန်
+        String lessonTitle = resolveLessonTitle(data.getCourseId(), data.getLessonId());
+
+        VBox content = new VBox(6);
+        content.setAlignment(Pos.CENTER);
+        content.setMaxSize(120, 120);
+
+        Label iconLabel = new Label("🔖");
+        iconLabel.setStyle("-fx-font-size: 26px; -fx-text-fill: #FFFFFF;");
+
+        Label titleLabel = new Label(lessonTitle);
+        titleLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-alignment: center;");
+        titleLabel.setWrapText(true);
+
+        content.getChildren().addAll(iconLabel, titleLabel);
+        stack.getChildren().addAll(hexPath, content);
+
+        // Card နှိပ်လိုက်ပါက LessonPlayer သို့ တိုက်ရိုက် ရောက်ရှိမည်
+        stack.setOnMouseClicked(e -> openReviewLesson(data));
+
+        return stack;
+    }
+
+    // Database ထဲမှ Lesson ID ဖြင့် Title အမှန် ရှာပေးသော Safe Method
+    private String resolveLessonTitle(String courseId, String lessonId) {
+        if (courseId == null || lessonId == null) {
+            return (lessonId != null) ? lessonId : "Lesson";
+        }
+        try {
+            List<Lesson> lessons = DatabaseManager.getLessonsForCourse(courseId);
+            if (lessons != null) {
+                for (Lesson l : lessons) {
+                    if (l != null && l.getLessonId() != null && l.getLessonId().equalsIgnoreCase(lessonId)) {
+                        return l.getTitle() != null ? l.getTitle() : lessonId;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Error resolving lesson title: " + e.getMessage());
+        }
+        return lessonId;
+    }
+
+    private void openReviewLesson(ReviewData data) {
+        List<Lesson> courseLessons = DatabaseManager.getLessonsForCourse(data.getCourseId());
+        Lesson targetLesson = null;
+
+        if (courseLessons != null) {
+            for (Lesson lesson : courseLessons) {
+                if (lesson.getLessonId().equalsIgnoreCase(data.getLessonId())) {
+                    targetLesson = lesson;
+                    break;
+                }
+            }
+        }
+
+        if (targetLesson != null) {
+            FXMLLoader loader = MainLayoutController.getInstance().loadPage("LessonPlayerView.fxml");
+            if (loader != null) {
+                LessonPlayerController controller = loader.getController();
+                if (controller != null) {
+                    controller.startLesson(targetLesson);
+                }
+            }
+        } else {
+            System.err.println("❌ Review Lesson ရှာမတွေ့ပါ: " + data.getLessonId());
+        }
+    }
+
+    // ============================================
+    // RENDER PRACTICE CARDS
     // ============================================
     private void renderCards(List<CardData> cards) {
         cardContainer.getChildren().clear();
+        cardContainer.getColumnConstraints().clear();
+        cardContainer.getRowConstraints().clear();
+
+        // 📌 Practice Mode အတွက် Grid Alignment သီးသန့်သတ်မှတ်ခြင်း
+        cardContainer.setAlignment(Pos.TOP_LEFT);
+        cardContainer.setHgap(20);
+        cardContainer.setVgap(20);
+        cardContainer.setPadding(new Insets(15));
 
         int col = 0;
         int row = 0;
@@ -106,7 +311,7 @@ public class PracticeController {
             cardContainer.add(card, col, row);
 
             col++;
-            if (col == 3) {       // ၃ ခုပြည့်ရင် နောက်တန်း ဆင်း
+            if (col == 3) {
                 col = 0;
                 row++;
             }
@@ -120,14 +325,13 @@ public class PracticeController {
         card.setMaxSize(width, height);
         card.setAlignment(Pos.TOP_LEFT);
         card.getStyleClass().add("glass-card");
-        card.setPadding(new Insets(15, 15, 15, 0));
+        card.setPadding(new Insets(15));
 
-        // Icon
         ImageView iconImage = new ImageView();
-        try {
-            String imagePath = getIconImage(data.language);
-            if (imagePath != null) {
-                java.io.InputStream is = getClass().getResourceAsStream(imagePath);
+        String imagePath = getIconImage(data.language);
+
+        if (imagePath != null) {
+            try (InputStream is = getClass().getResourceAsStream(imagePath)) {
                 if (is != null) {
                     Image img = new Image(is);
                     iconImage.setImage(img);
@@ -136,9 +340,9 @@ public class PracticeController {
                     iconImage.setPreserveRatio(true);
                     iconImage.setSmooth(true);
                 }
+            } catch (Exception e) {
+                System.err.println("❌ Error: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.err.println("❌ Error: " + e.getMessage());
         }
 
         Label title = new Label(data.title);
@@ -153,46 +357,27 @@ public class PracticeController {
         startBtn.getStyleClass().add("card-start-btn");
         startBtn.setMaxWidth(Double.MAX_VALUE);
         startBtn.setOnAction(e -> openQuestion(data));
+
         card.getChildren().addAll(iconImage, title, spacer, startBtn);
         return card;
     }
 
-    // ============================================
-    // OPEN QUESTION — Type နဲ့ ရှာ + Random
-    // ============================================
     private void openQuestion(CardData data) {
         MainLayoutController layout = MainLayoutController.getInstance();
         if (layout != null) {
             layout.loadPracticeQuestion(data.language, data.type);
         }
     }
-    private String getStarterCode(String language) {
-        switch (language) {
-            case "Java":
-                return "public class Main {\n" +
-                        "    public static void main(String[] args) {\n" +
-                        "        // Write your code here\n" +
-                        "    }\n" +
-                        "}";
-            case "C++":
-                return "#include <iostream>\nusing namespace std;\n\n" +
-                        "int main() {\n" +
-                        "    // Write your code here\n" +
-                        "    return 0;\n" +
-                        "}";
-            case "Python":
-                return "# Write your Python code here\n";
-            default:
-                return "";
-        }
-    }
 
     private String getIconImage(String language) {
-        switch (language) {
-            case "Java":   return "/Images/java.png";
-            case "C++":    return "/Images/c++.png";
-            case "Python": return "/Images/python.png";
-            default:       return null;
+        if (language == null) return null;
+        switch (language.toUpperCase()) {
+            case "JAVA": return "/Images/java.png";
+            case "C++":
+            case "CPP_BASIC":
+            case "CPP": return "/Images/c++.png";
+            case "PYTHON": return "/Images/python.png";
+            default: return null;
         }
     }
 }

@@ -1,0 +1,79 @@
+{
+  "lessonId": "PYTH_141",
+  "title": "Machine Learning Fundamentals with Scikit-Learn (PYTH_141 to PYTH_150) (PYTH_141_S1 to PYTH_141_S8)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_141_S1",
+      "type": "CONCEPT",
+      "title": "Introduction to Scikit-Learn",
+      "prompt": "Scikit-Learn provides simple and efficient tools for predictive data analysis and machine learning.",
+      "codeSnippet": "from sklearn.linear_model import LogisticRegression\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)"
+    },
+    {
+      "slideId": "PYTH_141_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Fitting the Model",
+      "prompt": "Fill in the method used to train a machine learning model on training data.",
+      "codeSnippet": "model.___ (X_train, y_train)",
+      "options": ["fit", "train", "learn", "execute"],
+      "correctAnswer": "fit"
+    },
+    {
+      "slideId": "PYTH_141_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Train Test Split",
+      "prompt": "Which function splits arrays or matrices into random train and test subsets?",
+      "options": [
+        "train_test_split()",
+        "split_data()",
+        "partition_data()",
+        "divide_dataset()"
+      ],
+      "correctAnswer": "train_test_split()"
+    },
+    {
+      "slideId": "PYTH_141_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Model Predictions",
+      "prompt": "Fill in the method used to predict target values for new sample data.",
+      "codeSnippet": "predictions = model.___ (X_test)",
+      "options": ["predict", "evaluate", "forecast", "output"],
+      "correctAnswer": "predict"
+    },
+    {
+      "slideId": "PYTH_141_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Supervised vs Unsupervised",
+      "prompt": "Which algorithm is an example of Unsupervised Learning?",
+      "options": ["K-Means Clustering", "Linear Regression", "Logistic Regression", "Decision Tree"],
+      "correctAnswer": "K-Means Clustering"
+    },
+    {
+      "slideId": "PYTH_141_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Standard Scaler",
+      "prompt": "Fill in the method to fit standard scale metrics and transform features in one step.",
+      "codeSnippet": "X_scaled = scaler.___ (X)",
+      "options": ["fit_transform", "scale_all", "fit_predict", "transform_fit"],
+      "correctAnswer": "fit_transform"
+    },
+    {
+      "slideId": "PYTH_141_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Accuracy Metric",
+      "prompt": "Which metric evaluates classification accuracy in Scikit-Learn?",
+      "options": ["accuracy_score()", "score_accuracy()", "check_accuracy()", "eval_score()"],
+      "correctAnswer": "accuracy_score()"
+    },
+    {
+      "slideId": "PYTH_141_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Confusion Matrix",
+      "prompt": "Fill in the evaluation matrix function that shows True/False Positives and Negatives.",
+      "codeSnippet": "cm = ___ (y_true, y_pred)",
+      "options": ["confusion_matrix", "classification_report", "error_matrix", "eval_matrix"],
+      "correctAnswer": "confusion_matrix"
+    }
+  ]
+}

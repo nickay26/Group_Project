@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_114",
+  "title": "Error & Exception Handling (PYTH_114_S1 to PYTH_114_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_114_S1",
+      "type": "CONCEPT",
+      "title": "Exception Handling Blocks",
+      "prompt": "Handle runtime errors gracefully using try, except, else, and finally blocks.",
+      "codeSnippet": "try:\n    res = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")\nfinally:\n    print(\"Execution complete.\")"
+    },
+    {
+      "slideId": "PYTH_114_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Try Keyword",
+      "prompt": "Fill in the keyword to start a code block monitored for exceptions.",
+      "codeSnippet": "___\n    val = int(input())\nexcept ValueError:\n    print(\"Invalid number\")",
+      "options": ["try", "catch", "do", "test"],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "PYTH_114_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Catching Exceptions",
+      "prompt": "Which keyword is used in Python to catch and handle exceptions?",
+      "options": ["except", "catch", "handle", "rescue"],
+      "correctAnswer": "except"
+    },
+    {
+      "slideId": "PYTH_114_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Finally Keyword",
+      "prompt": "Fill in the keyword for code that always runs regardless of errors.",
+      "codeSnippet": "try:\n    db.connect()\n___:\n    db.close()",
+      "options": ["finally", "always", "else", "clean"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "PYTH_114_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Raising Exceptions",
+      "prompt": "Which keyword is used to explicitly throw/raise a custom exception?",
+      "options": ["raise", "throw", "error", "emit"],
+      "correctAnswer": "raise"
+    },
+    {
+      "slideId": "PYTH_114_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Except Alias Syntax",
+      "prompt": "Fill in the keyword used to bind an exception instance to a variable name.",
+      "codeSnippet": "except ZeroDivisionError ___ err:\n    print(err)",
+      "options": ["as", "to", "in", "with"],
+      "correctAnswer": "as"
+    },
+    {
+      "slideId": "PYTH_114_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "The else clause in Try-Except",
+      "prompt": "When does the 'else' block execute in a try-except statement?",
+      "options": [
+        "Only if NO exceptions were raised in the try block",
+        "Only when an exception IS raised",
+        "Always, just like finally",
+        "Never"
+      ],
+      "correctAnswer": "Only if NO exceptions were raised in the try block"
+    }
+  ]
+}

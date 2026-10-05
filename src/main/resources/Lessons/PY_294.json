@@ -1,0 +1,65 @@
+{
+  "lessonId": "PYTH_294",
+  "title": "Module Review Quiz: Data Visualization (Matplotlib & Seaborn)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_294_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: Plotting & Charting",
+      "prompt": "Review plotting fundamentals, figure/axes manipulation, line plots, scatter plots, histograms, and heatmaps.",
+      "codeSnippet": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [4, 5, 6])\nplt.show()"
+    },
+    {
+      "slideId": "PYTH_294_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Displaying Plots",
+      "prompt": "Fill in the Pyplot function used to display constructed figures on screen.",
+      "codeSnippet": "plt.___()",
+      "options": ["show", "render", "draw", "plot"],
+      "correctAnswer": "show"
+    },
+    {
+      "slideId": "PYTH_294_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Seaborn Correlation Matrix Visual",
+      "prompt": "Which Seaborn chart type is best suited for visualizing matrix/correlation data with color gradients?",
+      "options": ["heatmap", "scatterplot", "boxplot", "barplot"],
+      "correctAnswer": "heatmap"
+    },
+    {
+      "slideId": "PYTH_294_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Scatter Plot Function",
+      "prompt": "Fill in the Matplotlib function used to create a point cloud scatter plot.",
+      "codeSnippet": "plt.___(x_data, y_data)",
+      "options": ["scatter", "points", "dots", "chart"],
+      "correctAnswer": "scatter"
+    },
+    {
+      "slideId": "PYTH_294_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Setting Plot Titles",
+      "prompt": "Which function configures the main title of a Matplotlib plot?",
+      "options": ["plt.title()", "plt.set_heading()", "plt.label()", "plt.header()"],
+      "correctAnswer": "plt.title()"
+    },
+    {
+      "slideId": "PYTH_294_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Subplot Grid Layout",
+      "prompt": "Fill in the function used to generate a figure and set of subplots concurrently.",
+      "codeSnippet": "fig, ax = plt.___()",
+      "options": ["subplots", "figure", "grid", "plots"],
+      "correctAnswer": "subplots"
+    },
+    {
+      "slideId": "PYTH_294_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Seaborn Theme Styling",
+      "prompt": "Which Seaborn function sets default visual themes and color palettes globally?",
+      "options": ["sns.set_theme()", "sns.apply_style()", "sns.configure()", "sns.init()"],
+      "correctAnswer": "sns.set_theme()"
+    }
+  ]
+}

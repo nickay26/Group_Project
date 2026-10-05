@@ -1,13 +1,18 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
@@ -24,7 +29,7 @@ public class LearnPageController {
     private static final double NODE_HEIGHT = 150.0;
     private static final double VERTICAL_SPACING = 200.0;
     private static final double AMPLITUDE = 85.0;
-    private static final double CANVAS_WIDTH = 540.0; // Staggered Card များမညှပ်စေရန် Canvas Width ကို ၅၄၀px သို့ တိုးထားပါသည်
+    private static final double CANVAS_WIDTH = 540.0;
 
     private final Set<String> expandedModules = new HashSet<>();
     private List<Lesson> currentLessons = new ArrayList<>();
@@ -33,11 +38,49 @@ public class LearnPageController {
     public void initialize() {
         String activeCourseId = UserSession.getActiveCourseId();
         loadCoursePath(activeCourseId);
+        // ✅ ဖြေလက်စ lesson ကို scroll လုပ်ဖို့
+        Platform.runLater(this::scrollToActiveLesson);
+    }
+
+    private void scrollToActiveLesson() {
+        if (currentLessons == null || currentLessons.isEmpty()) return;
+
+        int userId = UserSession.getUserId();
+        int completedCount = DatabaseManager.getCompletedLessonCount(
+                userId, UserSession.getActiveCourseId());
+// ✅ ဖြေလက်စ (ACTIVE) lesson ကို ရှာ
+        int targetIndex = -1;
+        for (int i = 0; i < currentLessons.size(); i++) {
+            Lesson lesson = currentLessons.get(i);
+            if (lesson.getLessonOrder() == completedCount + 1) {
+                targetIndex = i;
+                break;
+            }
+        }
+        // ✅ ဘာမှ မဖြေရသေးရင် 1st lesson (index 0)
+        if (targetIndex == -1) {
+            targetIndex = 0;
+        }
+
+        // ✅ Scroll position တွက်
+        double targetY = 40.0 + (targetIndex * VERTICAL_SPACING);
+
+        // ✅ ScrollPane ရဲ့ vvalue ကို set
+        if (roadmapScrollPane != null) {
+            double totalHeight = roadmapPane.getPrefHeight();
+            if (totalHeight > 0) {
+                double scrollValue = targetY / totalHeight;
+                roadmapScrollPane.setVvalue(Math.min(scrollValue, 1.0));
+            }
+        }
+
     }
 
     public void loadCoursePath(String courseId) {
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().updateCourseTitle();
+            MainLayoutController.getInstance().updateHeaderStats();
+            MainLayoutController.getInstance().fetchAndUpdateUserActivity();// Refresh live streak and user stats
         }
         currentLessons = DatabaseManager.getLessonsForCourse(courseId);
 
@@ -49,7 +92,6 @@ public class LearnPageController {
             return;
         }
 
-        // မော်ဂျူးအားလုံးကို စတင်ချိန်တွင် Expand ပြုလုပ်ထားရန်
         if (expandedModules.isEmpty() && !currentLessons.isEmpty()) {
             for (Lesson lesson : currentLessons) {
                 expandedModules.add(lesson.getModuleName());
@@ -72,14 +114,12 @@ public class LearnPageController {
         int userId = UserSession.getUserId();
         int completedCount = DatabaseManager.getCompletedLessonCount(userId, UserSession.getActiveCourseId());
 
-        // Module ပေါင်း မည်မျှရှိသည်ကို ရေတွက်ရန် counter
         int moduleIndex = 0;
 
         for (int i = 0; i < currentLessons.size(); i++) {
             Lesson lesson = currentLessons.get(i);
             String moduleName = lesson.getModuleName();
 
-            // 1. Render Module Banner (Staggered Left & Right)
             if (!moduleName.equals(currentModule)) {
                 currentModule = moduleName;
                 boolean isExpanded = expandedModules.contains(currentModule);
@@ -94,8 +134,6 @@ public class LearnPageController {
 
                 VBox banner = createModuleBanner(currentModule, isExpanded, progress);
 
-                // မဂ္ဂဇင်း/Roadmap ပုံစံ ဘယ်/ညာ တစ်လှည့်စီ ရွှေ့ပေးခြင်း
-                // စုံကိန်း Module ဆိုလျှင် ဘယ်ဘက် -45px၊ မကိန်း ဆိုလျှင် ညာဘက် +45px
                 double bannerXOffset = (moduleIndex % 2 == 0) ? -60.0 : 60.0;
                 double bannerX = ((CANVAS_WIDTH - 360.0) / 2.0) + bannerXOffset;
 
@@ -105,14 +143,13 @@ public class LearnPageController {
 
                 moduleIndex++;
                 currentY += 80.0;
-                previousNode = null; // Reset path connection for new module
+                previousNode = null;
             }
 
             if (!expandedModules.contains(moduleName)) {
                 continue;
             }
 
-            // 2. Calculate Winding S-Curve Lessons
             double xOffset = Math.sin(i * 1.1) * AMPLITUDE;
             double layoutX = centerX + xOffset;
             double layoutY = currentY;
@@ -122,7 +159,6 @@ public class LearnPageController {
             node.setLayoutX(layoutX);
             node.setLayoutY(layoutY);
 
-            // Draw connecting path curve between consecutive nodes
             if (previousNode != null) {
                 CubicCurve curve = new CubicCurve();
                 curve.setStroke(Color.web("#3B82F6"));
@@ -142,27 +178,32 @@ public class LearnPageController {
     }
 
     private VBox createModuleBanner(String moduleTitle, boolean isExpanded, double progress) {
-        // 1. Module Title Label
         Label label = new Label(moduleTitle);
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #F8FAFC;");
 
-        // 2. Arrow Indicator Icon
+        // 📌 Progress ရာခိုင်နှုန်း (ဥပမာ- 100% သို့မဟုတ် 50%) ပြသရန် Label
+        int progressPercent = (int) Math.round(progress * 100);
+        Label percentLabel = new Label(progressPercent + "%");
+        percentLabel.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #60A5FA; -fx-padding: 0 8 0 0;");
+
         Label arrowLabel = new Label(isExpanded ? "▲" : "▼");
         arrowLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #60A5FA;");
 
-        // 3. Top Row (Title + Arrow အား ဘယ်/ညာ ညှိခြင်း)
+        HBox rightInfo = new HBox(6, percentLabel, arrowLabel);
+        rightInfo.setAlignment(Pos.CENTER_RIGHT);
+
         Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS); // စာသားနှင့် မြှားအကြား ခွဲပေးရန်
-        HBox topRow = new HBox(label, spacer, arrowLabel);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        HBox topRow = new HBox(label, spacer, rightInfo);
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        // 4. Progress Bar (အောက်ဘက်တွင် အပြည့်နေရာယူစေခြင်း)
+        // 📌 Progress Bar ဖန်တီးခြင်းနှင့် CSS Class ထည့်သွင်းခြင်း
         ProgressBar progressBar = new ProgressBar(progress);
-        progressBar.setMaxWidth(Double.MAX_VALUE); // Left to Right အပြည့်ဆွဲဆန့်မည်
-        progressBar.setPrefHeight(6);
-        progressBar.setStyle("-fx-accent: #3B82F6; -fx-control-inner-background: #0F172A;");
+        progressBar.setMaxWidth(Double.MAX_VALUE);
+        progressBar.setPrefHeight(7);
+        progressBar.getStyleClass().add("custom-progress-bar"); // css class ချိတ်ဆက်ခြင်း
 
-        // 5. Main VBox Container (Top Row အောက်တွင် Progress Bar ကို ထားခြင်း)
         VBox banner = new VBox(8, topRow, progressBar);
         banner.setAlignment(Pos.CENTER);
         banner.setPadding(new Insets(12, 18, 12, 18));
@@ -240,7 +281,7 @@ public class LearnPageController {
                 fillColor = Color.web("#1E293B");
                 strokeColor = Color.web("#475569");
                 icon = "🔒";
-                stack.setDisable(true);
+                stack.setStyle("-fx-cursor: default;");
                 break;
         }
 
@@ -261,9 +302,85 @@ public class LearnPageController {
         content.getChildren().addAll(iconLabel, textLabel);
         stack.getChildren().addAll(hexPath, content);
 
-        stack.setOnMouseClicked(e -> openLessonPage(lesson));
+        // 🟢 LEFT CLICK & RIGHT CLICK HANDLING
+        stack.setOnMouseClicked(event -> {
+            // 👈 LEFT CLICK: Unlocked ဖြစ်လျှင် Lesson ဖွင့်မည်
+            if (event.getButton() == MouseButton.PRIMARY) {
+                if (!status.equals("LOCKED")) {
+                    openLessonPage(lesson);
+                }
+            }
+            // 👉 RIGHT CLICK: Options / Context Menu ပြသမည်
+            else if (event.getButton() == MouseButton.SECONDARY) {
+                showLessonContextMenu(stack, lesson, status, event.getScreenX(), event.getScreenY());
+            }
+        });
 
         return stack;
+    }
+
+    // Right Click Context Menu ပြသရန် Helper Method
+    private void showLessonContextMenu(StackPane node, Lesson lesson, String status, double screenX, double screenY) {
+        ContextMenu contextMenu = new ContextMenu();
+
+        MenuItem startItem = new MenuItem("📖 Start Lesson");
+        if (status.equals("LOCKED")) {
+            startItem.setDisable(true);
+        } else {
+            startItem.setOnAction(e -> openLessonPage(lesson));
+        }
+
+        // 📌 1. Add to Review MenuItem သစ်ထည့်ခြင်း
+        MenuItem addToReviewItem = new MenuItem("📌 Add to Review");
+        addToReviewItem.setOnAction(e -> handleAddToReview(lesson));
+
+        MenuItem infoItem = new MenuItem("ℹ️ View Details & XP");
+        infoItem.setOnAction(e -> showLessonDetails(lesson, status));
+
+        // 📌 2. contextMenu.getItems().addAll ထဲတွင် addToReviewItem ကိုပါ ထည့်သွင်းပေးခြင်း
+        contextMenu.getItems().addAll(startItem, addToReviewItem, infoItem);
+        contextMenu.show(node, screenX, screenY);
+    }
+
+    // 📌 3. Add to Review အလုပ်လုပ်ပေးမည့် Helper Method (Class ထဲတွင် ထည့်ရန်)
+    private void handleAddToReview(Lesson lesson) {
+        int userId = UserSession.getUserId();
+        String courseId = UserSession.getActiveCourseId(); // Active Course ID ကို ယူခြင်း
+
+        if (userId <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please log in to save lessons to review.");
+            alert.show();
+            return;
+        }
+
+        boolean success = DatabaseManager.addLessonToReview(userId, courseId, lesson.getLessonId());
+
+        if (success) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("'" + lesson.getTitle() + "' has been added to your Review list!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to add to Review (or it might already exist in your review list).");
+            alert.showAndWait();
+        }
+    }
+
+    // Details Alert Dialog ပြသရန် Helper Method
+    private void showLessonDetails(Lesson lesson, String status) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Lesson Details");
+        alert.setHeaderText(lesson.getTitle());
+        alert.setContentText(
+                "Module: " + lesson.getModuleName() + "\n" +
+                        "XP Reward: " + lesson.getXp() + " XP\n" +
+                        "Status: " + status
+        );
+        alert.showAndWait();
     }
 
     private void openLessonPage(Lesson lesson) {

@@ -1,0 +1,133 @@
+{
+  "lessonId": "CPP_167",
+  "title": "Module Review Quiz: Variables & Data Types (CPP_111 to CPP_118)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_167_S1",
+      "type": "CONCEPT" ,
+      "title": "Variables & Data Types Overview",
+      "prompt": "This Module Quiz covers data types, variable declarations, initialization, type casting, scopes, and string basics in C++ (CPP_111 to CPP_118).",
+      "codeSnippet": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int age = 25;\n    double score = 98.5;\n    char grade = 'A';\n    bool isPassed = true;\n    string name = \"Alex\";\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_167_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Integer Declaration (CPP_111)",
+      "prompt": "Fill in the correct data type to store whole numbers without decimals.",
+      "codeSnippet": "___ totalItems = 50;",
+      "options": ["int", "double", "char", "bool"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_167_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Floating Point Types (CPP_112)",
+      "prompt": "Which data type is recommended when higher precision floating-point numbers are needed?",
+      "options": ["double", "float", "int", "short"],
+      "correctAnswer": "double"
+    },
+    {
+      "slideId": "CPP_167_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Character Literal (CPP_113)",
+      "prompt": "Fill in the missing character literal enclosed in single quotes.",
+      "codeSnippet": "char userGrade = '___';",
+      "options": ["A", "\"A\"", "65", "A+"],
+      "correctAnswer": "A"
+    },
+    {
+      "slideId": "CPP_167_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Boolean Values (CPP_114)",
+      "prompt": "What are the two valid truth values that a 'bool' variable can hold in C++?",
+      "options": ["true and false", "1 and -1", "YES and NO", "valid and invalid"],
+      "correctAnswer": "true and false"
+    },
+    {
+      "slideId": "CPP_167_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "String Class (CPP_115)",
+      "prompt": "Fill in the missing header file needed to use the std::string data type.",
+      "codeSnippet": "#include <___>",
+      "options": ["string", "cstring", "iostream", "stdio.h"],
+      "correctAnswer": "string"
+    },
+    {
+      "slideId": "CPP_167_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Casting (CPP_116)",
+      "prompt": "What is the result of static_cast<int>(9.8)?",
+      "options": ["9", "10", "9.8", "Compiler Error"],
+      "correctAnswer": "9"
+    },
+    {
+      "slideId": "CPP_167_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Implicit Conversion (CPP_116)",
+      "prompt": "Fill in the variable type that gets automatically converted during double to int assignment.",
+      "codeSnippet": "double pi = 3.14;\n___ truncatedPi = pi;",
+      "options": ["int", "double", "float", "char"],
+      "correctAnswer": "int"
+    },
+    {
+      "slideId": "CPP_167_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Variable Scope (CPP_117)",
+      "prompt": "Where can a local variable declared inside a function be accessed?",
+      "options": ["Only inside that function block", "Anywhere in the entire file", "In all imported header files", "Across external files"],
+      "correctAnswer": "Only inside that function block"
+    },
+    {
+      "slideId": "CPP_167_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Auto Keyword (CPP_118)",
+      "prompt": "Fill in the keyword used for automatic type inference in C++.",
+      "codeSnippet": "___ count = 10; // automatically inferred as int",
+      "options": ["auto", "var", "let", "dynamic"],
+      "correctAnswer": "auto"
+    },
+    {
+      "slideId": "CPP_167_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Size of Data Types (CPP_111)",
+      "prompt": "Which operator is used to check the memory size of a data type in bytes?",
+      "options": ["sizeof", "lengthof", "memsize", "bytesof"],
+      "correctAnswer": "sizeof"
+    },
+    {
+      "slideId": "CPP_167_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Initialization Styles (CPP_111)",
+      "prompt": "Fill in the syntax for uniform/list initialization in C++11.",
+      "codeSnippet": "int val___ 5 };",
+      "options": ["{", "(", "=", "["],
+      "correctAnswer": "{"
+    },
+    {
+      "slideId": "CPP_167_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Const Variable Rules (CPP_118)",
+      "prompt": "What happens if a variable declared with 'const' is not initialized during declaration?",
+      "options": ["Compilation Error", "Defaults to 0", "Contains garbage value", "Runtime Error"],
+      "correctAnswer": "Compilation Error"
+    },
+    {
+      "slideId": "CPP_167_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "String Concatenation (CPP_115)",
+      "prompt": "Fill in the operator used to combine two std::string variables together.",
+      "codeSnippet": "string fullName = firstName ___ \" \" + lastName;",
+      "options": ["+", "&", ".", "->"],
+      "correctAnswer": "+"
+    },
+    {
+      "slideId": "CPP_167_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Unsigned Integers (CPP_111)",
+      "prompt": "What range of values can an 'unsigned int' store?",
+      "options": ["Non-negative integers only (0 and positive)", "Both positive and negative integers", "Decimal numbers only", "Negative integers only"],
+      "correctAnswer": "Non-negative integers only (0 and positive)"
+    }
+  ]
+}

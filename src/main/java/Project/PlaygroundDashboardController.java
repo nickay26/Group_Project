@@ -22,12 +22,49 @@ public class PlaygroundDashboardController {
     @FXML private VBox createModal;
     @FXML private TextField titleInput;
     @FXML private ComboBox<String> languageSelect;
+    @FXML private Button createProjectBtn;
 
     @FXML
     public void initialize() {
         languageSelect.setItems(FXCollections.observableArrayList("C++", "Python", "Java"));
         languageSelect.setValue("C++");
         loadUserProjects();
+        updateCreateButton();
+    }
+    private void updateCreateButton() {
+        int userId = UserSession.getUserId();
+        boolean isPremium = PremiumService.isPremium(userId);
+
+        if (isPremium) {
+            createProjectBtn.setText("➕ Create New Project");
+        } else {
+            int remaining = PremiumService.getRemainingProjectSlots(userId);
+            createProjectBtn.setText("➕ Create New Project (" + remaining + "/3)");
+        }
+    }
+
+    private void showPremiumAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Premium Required");
+        alert.setHeaderText("Project Limit Reached");
+        alert.setContentText(
+                "Free users can only create up to 3 projects.\n\n" +
+                        "Want to create unlimited projects by getting Premium?"
+        );
+
+        ButtonType goPremium = new ButtonType("Go Premium");
+        ButtonType cancel = new ButtonType("Cancel", ButtonType.CANCEL.getButtonData());
+
+        alert.getButtonTypes().setAll(goPremium, cancel);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == goPremium) {
+                MainLayoutController mainLayout = MainLayoutController.getInstance();
+                if (mainLayout != null) {
+                    mainLayout.loadPage("PremiumView.fxml");
+                }
+            }
+        });
     }
 
     public void loadUserProjects() {
@@ -111,6 +148,13 @@ public class PlaygroundDashboardController {
 
     @FXML
     public void openCreateModal() {
+        int userId = UserSession.getUserId();
+
+        if (!PremiumService.canCreateProject(userId)) {
+            showPremiumAlert();
+            return;
+        }
+
         titleInput.clear();
         createModal.setVisible(true);
     }
@@ -128,10 +172,15 @@ public class PlaygroundDashboardController {
 
         int currentUserId = UserSession.getUserId();
 
-        // ❌ User Session မရှိပါက (-1 ဖြစ်နေပါက) Project ဖန်တီးခွင့် မပြုရန် တားဆီးခြင်း
         if (currentUserId <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "User session expired. Please log in again.");
             alert.show();
+            return;
+        }
+
+        if (!PremiumService.canCreateProject(currentUserId)) {
+            closeCreateModal();
+            showPremiumAlert();
             return;
         }
 
@@ -139,6 +188,7 @@ public class PlaygroundDashboardController {
         Project newProject = DatabaseManager.createProject(currentUserId, title, lang, defaultCode);
         if (newProject != null) {
             closeCreateModal();
+            updateCreateButton();
             openWorkspace(newProject);
         }
     }

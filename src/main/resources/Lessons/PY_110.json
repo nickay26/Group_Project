@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_110",
+  "title": "Tuples & Sets (PYTH_110_S1 to PYTH_110_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_110_S1",
+      "type": "CONCEPT",
+      "title": "Tuples and Sets Overview",
+      "prompt": "Tuples () are immutable ordered collections, while Sets {} are unordered collections of unique elements.",
+      "codeSnippet": "point = (10, 20)          # Tuple\nunique_ids = {101, 102}   # Set"
+    },
+    {
+      "slideId": "PYTH_110_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Creating Tuples",
+      "prompt": "Fill in the correct enclosure for defining a tuple.",
+      "codeSnippet": "coords = ___10, 20___",
+      "options": ["()", "[]", "{}", "<>"],
+      "correctAnswer": "()"
+    },
+    {
+      "slideId": "PYTH_110_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Tuple Immutability",
+      "prompt": "What happens if you try to modify an element of a tuple (e.g., my_tuple[0] = 5)?",
+      "options": [
+        "Raises a TypeError",
+        "Updates the tuple successfully",
+        "Converts the tuple to a list",
+        "Silently fails without error"
+      ],
+      "correctAnswer": "Raises a TypeError"
+    },
+    {
+      "slideId": "PYTH_110_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding to Sets",
+      "prompt": "Fill in the method used to add an item to a set.",
+      "codeSnippet": "tags = {\"python\", \"coding\"}\ntags.___(\"java\")",
+      "options": ["add", "append", "push", "insert"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "PYTH_110_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Set Uniqueness",
+      "prompt": "What is the result of set([1, 2, 2, 3]) in Python?",
+      "options": ["{1, 2, 3}", "{1, 2, 2, 3}", "[1, 2, 3]", "(1, 2, 3)"],
+      "correctAnswer": "{1, 2, 3}"
+    },
+    {
+      "slideId": "PYTH_110_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Single Element Tuple",
+      "prompt": "Fill in the trailing punctuation mark required for a single-element tuple.",
+      "codeSnippet": "single_item = (42___)",
+      "options": [",", ";", ":", "."],
+      "correctAnswer": ","
+    },
+    {
+      "slideId": "PYTH_110_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Set Operations",
+      "prompt": "Which set method or operator is used to find elements common to both sets?",
+      "options": ["intersection()", "union()", "difference()", "symmetric_difference()"],
+      "correctAnswer": "intersection()"
+    }
+  ]
+}

@@ -65,3 +65,20 @@
     -fx-font-size: 12px;
     -fx-text-fill: #3B82F6;
 }
+
+/* Module Banner Progress Bar Styling */
+.custom-progress-bar {
+    -fx-indeterminate-bar-length: 60;
+}
+
+.custom-progress-bar .track {
+    -fx-background-color: #0F172A; /* Background Track */
+    -fx-background-radius: 4px;
+    -fx-background-insets: 0;
+}
+
+.custom-progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #2563EB, #60A5FA); /* Bright Blue Gradient Fill */
+    -fx-background-radius: 4px;
+    -fx-background-insets: 0;
+}

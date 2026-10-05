@@ -1,0 +1,80 @@
+{
+  "lessonId": "PYTH_302",
+  "title": "Module Review Quiz: Advanced Caching Strategies & Redis",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_302_S1",
+      "type": "CONCEPT",
+      "title": "Module Overview: In-Memory Caching & Redis",
+      "prompt": "Review key-value data structures, TTL eviction strategies, Cache-Aside patterns, write-through strategies, and Redis integration in Python.",
+      "codeSnippet": "import redis\nr = redis.Redis(host='localhost', port=6379)\nr.set('user:100', 'active', ex=3600)"
+    },
+    {
+      "slideId": "PYTH_302_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Setting Redis Key with Expiration",
+      "prompt": "Fill in the argument used in `redis.set()` to set an expiration time in seconds.",
+      "codeSnippet": "r.set('session', 'data', ___=300)",
+      "options": ["ex", "ttl", "timeout", "expire"],
+      "correctAnswer": "ex"
+    },
+    {
+      "slideId": "PYTH_302_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cache Stampede Prevention",
+      "prompt": "Which pattern or technique is primarily used to prevent multiple processes from recomputing a cache entry at the exact same time when it expires?",
+      "options": [
+        "Mutex locking / Probabilistic early expiration",
+        "Increasing global CPU clock speed",
+        "Disabling key expiration permanently",
+        "Using recursive function calls"
+      ],
+      "correctAnswer": "Mutex locking / Probabilistic early expiration"
+    },
+    {
+      "slideId": "PYTH_302_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Redis Hash Storage",
+      "prompt": "Fill in the Redis command method used to set a field in a hash map.",
+      "codeSnippet": "r.___('user:1000', 'name', 'Alice')",
+      "options": ["hset", "hmset", "set_hash", "map_set"],
+      "correctAnswer": "hset"
+    },
+    {
+      "slideId": "PYTH_302_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cache-Aside Pattern",
+      "prompt": "In the Cache-Aside pattern, who is responsible for fetching missing data from the main database and updating the cache?",
+      "options": [
+        "The application code",
+        "The database engine trigger",
+        "The operating system kernel",
+        "The DNS server"
+      ],
+      "correctAnswer": "The application code"
+    },
+    {
+      "slideId": "PYTH_302_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Incrementing Key Value",
+      "prompt": "Fill in the atomic Redis method used to increment an integer counter.",
+      "codeSnippet": "r.___('page_views')",
+      "options": ["incr", "add", "increment", "plus"],
+      "correctAnswer": "incr"
+    },
+    {
+      "slideId": "PYTH_302_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Redis Publish/Subscribe",
+      "prompt": "Which pair of methods is used in Python Redis for real-time pub/sub messaging?",
+      "options": [
+        "publish() and pubsub()",
+        "send() and receive()",
+        "push() and pop()",
+        "emit() and listen()"
+      ],
+      "correctAnswer": "publish() and pubsub()"
+    }
+  ]
+}

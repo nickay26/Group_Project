@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_108",
+  "title": "Functions & Reusability (PYTH_108_S1 to PYTH_108_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_108_S1",
+      "type": "CONCEPT",
+      "title": "Python Functions",
+      "prompt": "Functions are reusable blocks of code defined using the def keyword.",
+      "codeSnippet": "def add(a, b):\n    return a + b\n\nsum_val = add(5, 3)\nprint(sum_val)  # 8"
+    },
+    {
+      "slideId": "PYTH_108_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Function Definition",
+      "prompt": "Fill in the keyword used to define a custom function in Python.",
+      "codeSnippet": "___ greet(name):\n    print(\"Hello \", name)",
+      "options": ["def", "function", "func", "create"],
+      "correctAnswer": "def"
+    },
+    {
+      "slideId": "PYTH_108_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Return Statement",
+      "prompt": "Which keyword sends a value back from a function to its caller?",
+      "options": ["return", "send", "yield", "output"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "PYTH_108_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Return Keyword",
+      "prompt": "Fill in the missing keyword to return the result.",
+      "codeSnippet": "def multiply(x, y):\n    ___ x * y",
+      "options": ["return", "result", "give", "back"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "PYTH_108_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Default Arguments",
+      "prompt": "How do you specify a default parameter value in a function definition?",
+      "options": [
+        "def func(val=10):",
+        "def func(val: 10):",
+        "def func(val default 10):",
+        "def func(val := 10):"
+      ],
+      "correctAnswer": "def func(val=10):"
+    },
+    {
+      "slideId": "PYTH_108_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Calling Functions",
+      "prompt": "Fill in the function call syntax.",
+      "codeSnippet": "def square(n):\n    return n * n\n\nresult = ___(4)",
+      "options": ["square", "def square", "call square", "run square"],
+      "correctAnswer": "square"
+    },
+    {
+      "slideId": "PYTH_108_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "None Return Value",
+      "prompt": "What does a Python function return by default if it has no return statement?",
+      "options": ["None", "0", "False", "Empty String"],
+      "correctAnswer": "None"
+    }
+  ]
+}

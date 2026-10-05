@@ -205,3 +205,17 @@
     -fx-text-fill: #C5D5E5;
     -fx-font-size: 12px;
 }
+/* ========================================== */
+/* Back Button */
+/* ========================================== */
+.back-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20 10 20;
+}
+
+.back-btn:hover {
+    -fx-text-fill: #FFFFFF;
+}

@@ -1,28 +1,30 @@
 /* ==========================================================================
-   Code Editor Theme (VS Code Style Dark Theme)
+   Code Editor Theme (Deep Navy Matching Theme)
    ========================================================================== */
 
-/* Main Container Background (VS Code Default) */
+/* Main Container Background */
 .editor-root {
-    -fx-background-color: #181818;
+    -fx-background-color: #0b0f19;
 }
 
 /* Header & Typography */
 .title-text {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #CCCCCC;
+    -fx-text-fill: #f1f5f9;
 }
 
 .section-header {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #569CD6; /* VS Code Keyword Blue */
+    -fx-text-fill: #38bdf8; /* Accent Cyan/Blue */
 }
 
 .lang-pill {
-    -fx-background-color: #264F78;
-    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #38bdf8;
+    -fx-border-color: #334155;
+    -fx-border-radius: 12px;
     -fx-background-radius: 12px;
     -fx-padding: 3 10;
     -fx-font-size: 11px;
@@ -31,44 +33,44 @@
 
 /* Toolbar Buttons */
 .btn-secondary {
-    -fx-background-color: #2D2D2D;
-    -fx-border-color: #454545;
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
     -fx-border-radius: 6px;
     -fx-background-radius: 6px;
-    -fx-text-fill: #CCCCCC;
+    -fx-text-fill: #cbd5e1;
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-padding: 7 14;
 }
 
 .btn-secondary:hover {
-    -fx-background-color: #3C3C3C;
+    -fx-background-color: #334155;
 }
 
 .btn-ai {
-    -fx-background-color: #6B21A8;
+    -fx-background-color: #7c3aed;
     -fx-background-radius: 6px;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-padding: 7 16;
 }
 
 .btn-ai:hover {
-    -fx-background-color: #581C87;
+    -fx-background-color: #6d28d9;
 }
 
 .btn-run {
-    -fx-background-color: #0E639C; /* VS Code Primary Blue Button */
+    -fx-background-color: #0284c7;
     -fx-background-radius: 6px;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-padding: 7 16;
 }
 
 .btn-run:hover {
-    -fx-background-color: #1177BB;
+    -fx-background-color: #0369a1;
 }
 
 /* Split Pane Dividers */
@@ -78,30 +80,34 @@
 }
 
 .split-pane > .split-pane-divider {
-    -fx-background-color: #2B2B2B;
+    -fx-background-color: #1e293b;
     -fx-padding: 0 2px;
 }
 
-/* Main Code Editor Style */
+/* Main Code Editor & Text Area Style */
 .dark-editor {
-    -fx-control-inner-background: #1E1E1E; /* VS Code Main Editor Color */
-    -fx-background-color: #1E1E1E;
-    -fx-text-fill: #D4D4D4; /* VS Code Bright Plain Text */
-    -fx-prompt-text-fill: #6A9955; /* Green color for placeholders */
+    -fx-control-inner-background: #0d1322;
+    -fx-background-color: #0d1322;
+    -fx-text-fill: #e2e8f0;
+    -fx-prompt-text-fill: #64748b;
     -fx-font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-    -fx-font-size: 15px; /* Bigger font for clarity */
-    -fx-border-color: #333333;
+    -fx-font-size: 14px;
+    -fx-border-color: #1e293b;
     -fx-border-radius: 6px;
     -fx-background-radius: 6px;
 }
 
+.dark-editor .content {
+    -fx-background-color: #0d1322;
+}
+
 /* Custom Text Colors for Output & AI Area */
 #outputConsole {
-    -fx-text-fill: #4EC9B0; /* Bright Cyan for Terminal Output */
+    -fx-text-fill: #38bdf8; /* Bright Cyan Output */
     -fx-font-size: 14px;
 }
 
 #aiReviewArea {
-    -fx-text-fill: #CE9178; /* Soft Peach for AI Response Text */
+    -fx-text-fill: #f472b6; /* Soft Purple/Pink AI Text */
     -fx-font-size: 14px;
 }

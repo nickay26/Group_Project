@@ -8,6 +8,7 @@
 
 <BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
 
+
     <center>
         <VBox alignment="CENTER" spacing="30" styleClass="premium-container">
 
@@ -24,12 +25,13 @@
                     <HBox alignment="BASELINE_LEFT" spacing="5">
                         <Label styleClass="plan-price" text="Free" />
                     </HBox>
-                    <Label styleClass="plan-desc" text="For learners taking their first steps with Mimo" wrapText="true" />
+                    <Label styleClass="plan-desc" text="For learners taking their first steps" wrapText="true" />
                     <Button maxWidth="Infinity" onAction="#handleStartLearning" styleClass="basic-btn" text="Start Learning" />
                     <VBox spacing="12" styleClass="feature-list">
                         <Label styleClass="feature-item" text="✓  5 brain free" />
                         <Label styleClass="feature-item" text="✓  Basic coding exercises" />
                         <Label styleClass="feature-item" text="✓  Access via web and mobile" />
+                        <Label styleClass="feature-item" text="✓  Only allowed to create 3 projects"/>
                     </VBox>
                 </VBox>
 
@@ -47,9 +49,9 @@
                         <Label styleClass="feature-item" text="✓  All Java, C++, Python courses" />
                         <Label styleClass="feature-item" text="✓  Certificates of completion" />
                         <Label styleClass="feature-item" text="✓  Unlimited Brain" />
+                        <Label styleClass="feature-item" text="✓  Unlimited create projects" />
                     </VBox>
                 </VBox>
-
                 <!-- Card 3: Intermediate Yearly (Highlighted) -->
                 <VBox alignment="TOP_LEFT" spacing="20" styleClass="plan-card-pro-2">
                     <Label styleClass="plan-title-pro-2" text="Intermediate" />
@@ -65,6 +67,7 @@
                         <Label styleClass="feature-item" text="✓  Certificates of completion" />
                         <Label styleClass="feature-item" text="✓  Unlimited Brain" />
                         <Label styleClass="feature-item" text="✓  Save 17% with yearly plan" />
+                        <Label styleClass="feature-item" text="✓  Unlimited create projects" />
                     </VBox>
                 </VBox>
 

@@ -1,0 +1,155 @@
+{
+  "lessonId": "CPP_284",
+  "title": "Module Review Quiz: STL Containers (CPP_225 to CPP_232)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "CPP_284_S1",
+      "type": "CONCEPT",
+      "title": "STL Containers Overview",
+      "prompt": "This Module Quiz covers C++ Standard Template Library sequence containers (std::vector, std::list, std::deque), associative containers (std::set, std::map), unordered containers, and container adaptors (std::stack, std::queue, std::priority_queue) (CPP_225 to CPP_232).",
+      "codeSnippet": "#include <iostream>\n#include <vector>\n#include <map>\nusing namespace std;\n\nint main() {\n    vector<int> numbers = {1, 2, 3};\n    numbers.push_back(4);\n    \n    map<string, int> ages;\n    ages[\"Alice\"] = 25;\n    \n    cout << \"Vector size: \" << numbers.size() << endl;\n    return 0;\n}"
+    },
+    {
+      "slideId": "CPP_284_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Vector Insertion (CPP_225)",
+      "prompt": "Fill in the method name used to add a new element to the end of a std::vector.",
+      "codeSnippet": "vector<int> nums;\nnums.___back(10);",
+      "options": ["push", "add", "append", "insert"],
+      "correctAnswer": "push"
+    },
+    {
+      "slideId": "CPP_284_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::vector Memory Layout (CPP_225)",
+      "prompt": "How are elements stored in memory inside a std::vector?",
+      "options": [
+        "In contiguous memory blocks (array-like access)",
+        "In doubly-linked nodes spread across memory",
+        "In a balanced binary search tree",
+        "In a key-value hash table"
+      ],
+      "correctAnswer": "In contiguous memory blocks (array-like access)"
+    },
+    {
+      "slideId": "CPP_284_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "List Container Header (CPP_226)",
+      "prompt": "Fill in the standard library header name required to use std::list.",
+      "codeSnippet": "#include <___>\nusing namespace std;\nlist<int> myLinkedList;",
+      "options": ["list", "forward_list", "vector", "deque"],
+      "correctAnswer": "list"
+    },
+    {
+      "slideId": "CPP_284_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::list Trait (CPP_226)",
+      "prompt": "What underlying data structure powers std::list in C++?",
+      "options": [
+        "Doubly linked list",
+        "Singly linked list",
+        "Dynamic array",
+        "Red-Black tree"
+      ],
+      "correctAnswer": "Doubly linked list"
+    },
+    {
+      "slideId": "CPP_284_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Deque Both Ends Operations (CPP_227)",
+      "prompt": "Fill in the method used to insert an element at the beginning of a std::deque.",
+      "codeSnippet": "deque<int> dq;\ndq.___front(5);",
+      "options": ["push_", "add_", "insert_", "prepend_"],
+      "correctAnswer": "push_"
+    },
+    {
+      "slideId": "CPP_284_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::set Uniqueness (CPP_228)",
+      "prompt": "Which statement is true regarding elements inside a std::set?",
+      "options": [
+        "All elements are unique and automatically stored in sorted order",
+        "Elements can be duplicated and are unsorted",
+        "Elements are accessed strictly by integer index numbers",
+        "Elements can only be added at the end"
+      ],
+      "correctAnswer": "All elements are unique and automatically stored in sorted order"
+    },
+    {
+      "slideId": "CPP_284_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Map Access Operator (CPP_229)",
+      "prompt": "Fill in the brackets operator used to access or insert values by key in a std::map.",
+      "codeSnippet": "map<string, double> price;\nprice___\"apple\"___ = 1.25;",
+      "options": ["[]", "()", "{}", "<>"],
+      "correctAnswer": "[]"
+    },
+    {
+      "slideId": "CPP_284_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "std::map Storage (CPP_229)",
+      "prompt": "What type of data pairs does std::map store?",
+      "options": [
+        "Key-Value pairs",
+        "Index-Pointer pairs",
+        "Binary values only",
+        "Unordered duplicates"
+      ],
+      "correctAnswer": "Key-Value pairs"
+    },
+    {
+      "slideId": "CPP_284_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Unordered Map Lookup Speed (CPP_230)",
+      "prompt": "Fill in the container name that provides average O(1) constant time lookups using hash tables.",
+      "codeSnippet": "___<string, int> userIDs;",
+      "options": ["unordered_map", "map", "hash_set", "vector_map"],
+      "correctAnswer": "unordered_map"
+    },
+    {
+      "slideId": "CPP_284_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Stack LIFO Behavior (CPP_231)",
+      "prompt": "What data ordering principle does std::stack follow?",
+      "options": [
+        "LIFO (Last In, First Out)",
+        "FIFO (First In, First Out)",
+        "Random Access",
+        "Priority Sorting"
+      ],
+      "correctAnswer": "LIFO (Last In, First Out)"
+    },
+    {
+      "slideId": "CPP_284_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Queue FIFO Removal (CPP_231)",
+      "prompt": "Fill in the method used to remove the oldest element from a std::queue.",
+      "codeSnippet": "queue<int> q;\nq.push(10);\nq.___(); // Removes 10",
+      "options": ["pop", "remove", "dequeue", "extract"],
+      "correctAnswer": "pop"
+    },
+    {
+      "slideId": "CPP_284_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Priority Queue Default Order (CPP_231)",
+      "prompt": "By default, which element is accessible at the top of a std::priority_queue?",
+      "options": [
+        "The largest element (Max-Heap)",
+        "The smallest element (Min-Heap)",
+        "The first inserted element",
+        "A randomly chosen element"
+      ],
+      "correctAnswer": "The largest element (Max-Heap)"
+    },
+    {
+      "slideId": "CPP_284_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Vector Capacity vs Size (CPP_232)",
+      "prompt": "Fill in the method name that returns the total allocated storage space available before re-allocation in a vector.",
+      "codeSnippet": "vector<int> v = {1, 2, 3};\nsize_t totalSpace = v.___();",
+      "options": ["capacity", "size", "max_size", "length"],
+      "correctAnswer": "capacity"
+    }
+  ]
+}

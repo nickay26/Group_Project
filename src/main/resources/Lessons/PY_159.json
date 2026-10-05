@@ -1,0 +1,84 @@
+{
+  "lessonId": "PYTH_159",
+  "title": "Kubernetes Orchestration & Cloud Native Python (PYTH_159_S1 to PYTH_159_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_159_S1",
+      "type": "CONCEPT",
+      "title": "Kubernetes Architecture",
+      "prompt": "Kubernetes automates deployment, scaling, and management of containerized Python applications across clusters.",
+      "codeSnippet": "# Deployment manifest snippet\napiVersion: apps/v1\nkind: Deployment"
+    },
+    {
+      "slideId": "PYTH_159_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Basic Compute Unit",
+      "prompt": "Fill in the smallest deployable computing unit in Kubernetes that wraps one or more containers.",
+      "codeSnippet": "kind: ___",
+      "options": ["Pod", "Node", "Cluster", "Service"],
+      "correctAnswer": "Pod"
+    },
+    {
+      "slideId": "PYTH_159_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Horizontal Pod Autoscaler (HPA)",
+      "prompt": "What metric does the Horizontal Pod Autoscaler typically monitor to scale Python API pods dynamically?",
+      "options": [
+        "CPU utilization and memory usage limits",
+        "Number of git commits pushed",
+        "Database total row counts",
+        "File system disk size"
+      ],
+      "correctAnswer": "CPU utilization and memory usage limits"
+    },
+    {
+      "slideId": "PYTH_159_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Kubernetes ConfigMaps",
+      "prompt": "Fill in the Kubernetes resource used to store non-confidential environment configuration data.",
+      "codeSnippet": "kind: ___",
+      "options": ["ConfigMap", "Secret", "EnvMap", "DataStore"],
+      "correctAnswer": "ConfigMap"
+    },
+    {
+      "slideId": "PYTH_159_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Liveness vs Readiness Probes",
+      "prompt": "What is the purpose of a Readiness Probe in Kubernetes?",
+      "options": [
+        "Determining if a pod is ready to accept user network traffic",
+        "Restarting stuck or dead containers automatically",
+        "Compiling Python code into C extensions",
+        "Scanning source code for security flaws"
+      ],
+      "correctAnswer": "Determining if a pod is ready to accept user network traffic"
+    },
+    {
+      "slideId": "PYTH_159_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Managing Secrets",
+      "prompt": "Fill in the resource type used for sensitive configuration data like API keys and DB passwords.",
+      "codeSnippet": "kind: ___",
+      "options": ["Secret", "PrivateData", "Vault", "KeyMap"],
+      "correctAnswer": "Secret"
+    },
+    {
+      "slideId": "PYTH_159_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ingress Controllers",
+      "prompt": "Which component acts as an entry point to manage HTTP/HTTPS external access to services inside a cluster?",
+      "options": ["Ingress", "Kubelet", "Etcd", "Containerd"],
+      "correctAnswer": "Ingress"
+    },
+    {
+      "slideId": "PYTH_159_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Cluster CLI Tool",
+      "prompt": "Fill in the command-line tool name used to interact with Kubernetes clusters.",
+      "codeSnippet": "___ get pods -n production",
+      "options": ["kubectl", "docker", "helm", "k3s"],
+      "correctAnswer": "kubectl"
+    }
+  ]
+}

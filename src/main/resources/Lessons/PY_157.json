@@ -1,0 +1,89 @@
+{
+  "lessonId": "PYTH_157",
+  "title": "Enterprise Security, OAuth2 & JWT Authentication (PYTH_157_S1 to PYTH_157_S8)",
+  "isPremium": true,
+  "slides": [
+    {
+      "slideId": "PYTH_157_S1",
+      "type": "CONCEPT",
+      "title": "Token-Based Authentication",
+      "prompt": "JSON Web Tokens (JWT) provide stateless authentication across distributed microservice architectures.",
+      "codeSnippet": "import jwt\n\ntoken = jwt.encode({'user_id': 101}, 'secret_key', algorithm='HS256')"
+    },
+    {
+      "slideId": "PYTH_157_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Secure Password Hashing",
+      "prompt": "Fill in the library function used to hash passwords securely using bcrypt or argon2.",
+      "codeSnippet": "from passlib.context import CryptContext\npwd_context = CryptContext(schemes=['___'])",
+      "options": ["bcrypt", "md5", "sha1", "plain"],
+      "correctAnswer": "bcrypt"
+    },
+    {
+      "slideId": "PYTH_157_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Role-Based Access Control (RBAC)",
+      "prompt": "How should administrative route protection be enforced in enterprise APIs?",
+      "options": [
+        "Via role verification claims embedded in authenticated JWT payloads or database checks",
+        "By relying on client-side frontend code to hide buttons",
+        "By using unencrypted HTTP basic auth headers",
+        "By masking database column names"
+      ],
+      "correctAnswer": "Via role verification claims embedded in authenticated JWT payloads or database checks"
+    },
+    {
+      "slideId": "PYTH_157_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Decoding JWT Claims",
+      "prompt": "Fill in the PyJWT method used to verify and decode access tokens.",
+      "codeSnippet": "payload = jwt.___ (token, SECRET_KEY, algorithms=['HS256'])",
+      "options": ["decode", "parse", "unpack", "verify"],
+      "correctAnswer": "decode"
+    },
+    {
+      "slideId": "PYTH_157_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CORS Defense",
+      "prompt": "What is the primary function of Cross-Origin Resource Sharing (CORS) security headers?",
+      "options": [
+        "Restricting which external web domains can make browser requests to your API",
+        "Encrypting database fields on disk",
+        "Preventing SQL injection attacks",
+        "Speeding up API response compression"
+      ],
+      "correctAnswer": "Restricting which external web domains can make browser requests to your API"
+    },
+    {
+      "slideId": "PYTH_157_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Rate Limiting Protection",
+      "prompt": "Fill in the middleware term used to limit excessive client request rates to prevent DDoS attacks.",
+      "codeSnippet": "app.add_middleware(RateLimitMiddleware, max_requests=___)",
+      "options": ["100", "0", "unlimited", "-1"],
+      "correctAnswer": "100"
+    },
+    {
+      "slideId": "PYTH_157_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "SQL Injection Prevention",
+      "prompt": "How do modern Python ORMs like SQLAlchemy protect against SQL injection vulnerabilities?",
+      "options": [
+        "By using parameterized queries and prepared statements automatically",
+        "By escaping string input with regular expressions on the frontend",
+        "By converting raw SQL into JSON objects",
+        "By running database engines in read-only mode"
+      ],
+      "correctAnswer": "By using parameterized queries and prepared statements automatically"
+    },
+    {
+      "slideId": "PYTH_157_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "OAuth2 Bearer Tokens",
+      "prompt": "Fill in the standard HTTP header used to attach JWT authorization tokens.",
+      "codeSnippet": "Headers: {'Authorization': '___ <token>'}",
+      "options": ["Bearer", "Basic", "Token", "Key"],
+      "correctAnswer": "Bearer"
+    }
+  ]
+}

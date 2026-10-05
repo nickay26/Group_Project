@@ -1,0 +1,70 @@
+{
+  "lessonId": "PYTH_109",
+  "title": "Dictionaries & Key-Value Pairs (PYTH_109_S1 to PYTH_109_S7)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PYTH_109_S1",
+      "type": "CONCEPT",
+      "title": "Python Dictionaries Overview",
+      "prompt": "Dictionaries store data values in key:value pairs using curly braces {}.",
+      "codeSnippet": "student = {\"name\": \"Alice\", \"age\": 20, \"grade\": \"A\"}\nprint(student[\"name\"]) # Alice"
+    },
+    {
+      "slideId": "PYTH_109_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Accessing Dictionary Values",
+      "prompt": "Fill in the key used to access the age from the dictionary.",
+      "codeSnippet": "user = {\"name\": \"Bob\", \"age\": 25}\nprint(user[___])",
+      "options": ["\"age\"", "age", "1", "get_age"],
+      "correctAnswer": "\"age\""
+    },
+    {
+      "slideId": "PYTH_109_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dictionary Syntax",
+      "prompt": "Which brackets are used to create a dictionary literal in Python?",
+      "options": ["Curly braces {}", "Square brackets []", "Parentheses ()", "Angle brackets <>"],
+      "correctAnswer": "Curly braces {}"
+    },
+    {
+      "slideId": "PYTH_109_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Adding/Updating Entries",
+      "prompt": "Fill in the operator used to assign a new key-value pair.",
+      "codeSnippet": "scores = {\"math\": 90}\nscores[\"science\"] ___ 95",
+      "options": ["=", "==", ":", "->"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "PYTH_109_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dictionary Keys Uniqueness",
+      "prompt": "Can a Python dictionary contain duplicate keys?",
+      "options": [
+        "No, duplicate keys will overwrite existing values",
+        "Yes, multiple duplicate keys are allowed",
+        "Only if the values are different",
+        "Only for numeric keys"
+      ],
+      "correctAnswer": "No, duplicate keys will overwrite existing values"
+    },
+    {
+      "slideId": "PYTH_109_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Dictionary Methods - get()",
+      "prompt": "Fill in the method used to safely retrieve a key's value without raising a KeyError.",
+      "codeSnippet": "val = user.___(\"email\", \"N/A\")",
+      "options": ["get", "find", "fetch", "lookup"],
+      "correctAnswer": "get"
+    },
+    {
+      "slideId": "PYTH_109_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterating Dictionary Keys",
+      "prompt": "Which dictionary method returns a view object of all keys?",
+      "options": ["keys()", "values()", "items()", "all()"],
+      "correctAnswer": "keys()"
+    }
+  ]
+}
