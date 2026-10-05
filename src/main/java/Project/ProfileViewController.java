@@ -17,6 +17,8 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 
+import java.util.List;
+
 public class ProfileViewController {
 
     @FXML private ImageView avatarImageView;
@@ -37,6 +39,9 @@ public class ProfileViewController {
         loadCoursesProgress();
     }
 
+    // ============================================
+    // LOAD USER DATA
+    // ============================================
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
@@ -62,22 +67,81 @@ public class ProfileViewController {
     }
 
     // ============================================
-    // LOAD COURSES PROGRESS
+    // LOAD COURSES PROGRESS — real progress from API
     // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
-        // ✅ courseId — "CPP", "PYTHON", "SQL" (API format)
-        String[][] courses = {
-                {"C++",    "Introduction to C++",    "C++",  "#3B82F6", "3"},
-                {"PYTHON", "Introduction to Python", "PYTHON",   "#3B82F6", "3"},
-                {"SQL",    "Introduction to SQL",    "SQL",  "#22C55E", "0"}
-        };
+        int userId = UserSession.getUserId();
 
-        for (String[] c : courses) {
-            HBox item = createCourseItem(c[0], c[1], c[2], c[3], Integer.parseInt(c[4]));
+        // ✅ API/Database ကနေ courses + progress ယူ
+        List<Course> courseList = DatabaseManager.getCoursesForUser(userId);
+
+        if (courseList == null || courseList.isEmpty()) {
+            Label empty = new Label("No courses available.");
+            empty.setStyle("-fx-text-fill: #94A3B8; -fx-padding: 20;");
+            coursesProgressContainer.getChildren().add(empty);
+            return;
+        }
+
+        for (Course course : courseList) {
+            int completed = course.getCompletedLessons();
+            int total = course.getTotalLessons();
+
+            // ✅ Total 0 ဖြစ်နေရင် — JSON file count သုံး
+            if (total == 0) {
+                total = getTotalLessonsForCourse(course.getCourseId());
+            }
+
+            int percent = total > 0
+                    ? (int) Math.round(((double) completed / total) * 100)
+                    : 0;
+
+            // ✅ Debug log
+            System.out.println("📊 " + course.getTitle()
+                    + " | Completed: " + completed
+                    + " | Total: " + total
+                    + " | Percent: " + percent + "%");
+
+            HBox item = createCourseItem(
+                    course.getCourseId(),
+                    course.getTitle(),
+                    course.getLanguage(),
+                    getCourseColor(course.getLanguage()),
+                    percent
+            );
             coursesProgressContainer.getChildren().add(item);
         }
+    }
+
+    // ============================================
+    // ✅ TOTAL LESSONS — JSON file count
+    // ============================================
+    private int getTotalLessonsForCourse(String courseId) {
+        if (courseId == null) return 0;
+        String upper = courseId.toUpperCase();
+
+        if (upper.contains("CPP") || upper.contains("C++")) return 14;
+        if (upper.contains("PYTHON") || upper.contains("PY")) return 10;
+        if (upper.contains("SQL")) return 10;
+        if (upper.contains("JAVA")) return 10;
+
+        return 0;
+    }
+
+    // ============================================
+    // ✅ COURSE COLOR
+    // ============================================
+    private String getCourseColor(String language) {
+        if (language == null) return "#64748B";
+        String lang = language.toLowerCase();
+
+        if (lang.contains("cpp") || lang.contains("c++")) return "#3B82F6";
+        if (lang.contains("python") || lang.contains("py")) return "#3B82F6";
+        if (lang.contains("sql")) return "#22C55E";
+        if (lang.contains("java")) return "#F59E0B";
+
+        return "#64748B";
     }
 
     // ============================================
@@ -102,7 +166,7 @@ public class ProfileViewController {
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E293B;");
 
-        Label statusLabel = new Label("In Progress");
+        Label statusLabel = new Label(progressPercent >= 100 ? "Completed" : "In Progress");
         statusLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #64748B;");
 
         VBox textBox = new VBox(4, titleLabel, statusLabel);
@@ -119,32 +183,14 @@ public class ProfileViewController {
         item.setStyle(
                 "-fx-background-color: white; " +
                         "-fx-background-radius: 10px; " +
-                        "-fx-padding: 15; " +
-                        "-fx-cursor: hand;"
+                        "-fx-padding: 15;"
         );
-
-        // ✅ Item နှိပ်ရင် Learn page ကို သွား
-        item.setOnMouseClicked(e -> goToLearnPage(courseId));
 
         return item;
     }
 
     // ============================================
-// ✅ GO TO LEARN PAGE
-// ============================================
-    private void goToLearnPage(String courseId) {
-        // ✅ Active course set
-        UserSession.setActiveCourseId(courseId);
-
-        // ✅ Learn page ကို load
-        MainLayoutController mainLayout = MainLayoutController.getInstance();
-        if (mainLayout != null) {
-            mainLayout.loadPage("LearnPage.fxml");
-        }
-    }
-
-    // ============================================
-    // ✅ CIRCULAR PROGRESS (3% လို)
+    // ✅ CIRCULAR PROGRESS
     // ============================================
     private StackPane createCircularProgress(int percent) {
         double radius = 22;
@@ -182,6 +228,4 @@ public class ProfileViewController {
 
         return stack;
     }
-
-
 }
