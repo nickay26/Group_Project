@@ -3,20 +3,18 @@ package Project;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class ProfileViewController {
@@ -28,7 +26,7 @@ public class ProfileViewController {
     @FXML private Label xpLabel;
     @FXML private Label coinLabel;
     @FXML private Label brainLabel;
-    @FXML private VBox coursesProgressContainer;
+    @FXML private GridPane coursesProgressContainer;
 
     @FXML
     public void initialize() {
@@ -39,9 +37,6 @@ public class ProfileViewController {
         loadCoursesProgress();
     }
 
-    // ============================================
-    // LOAD USER DATA
-    // ============================================
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
@@ -67,40 +62,30 @@ public class ProfileViewController {
     }
 
     // ============================================
-    // LOAD COURSES PROGRESS — real progress from API
+    // LOAD COURSES PROGRESS
     // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
         int userId = UserSession.getUserId();
-
-        // ✅ API/Database ကနေ courses + progress ယူ
         List<Course> courseList = DatabaseManager.getCoursesForUser(userId);
 
         if (courseList == null || courseList.isEmpty()) {
             Label empty = new Label("No courses available.");
             empty.setStyle("-fx-text-fill: #94A3B8; -fx-padding: 20;");
-            coursesProgressContainer.getChildren().add(empty);
+            coursesProgressContainer.add(empty, 0, 0);
             return;
         }
 
+        int col = 0;
+        int row = 0;
+
         for (Course course : courseList) {
-            int completed = course.getCompletedLessons();
-            int total = course.getTotalLessons();
+            int percent = course.getProgressPercent();
 
-            // ✅ Total 0 ဖြစ်နေရင် — JSON file count သုံး
-            if (total == 0) {
-                total = getTotalLessonsForCourse(course.getCourseId());
-            }
-
-            int percent = total > 0
-                    ? (int) Math.round(((double) completed / total) * 100)
-                    : 0;
-
-            // ✅ Debug log
             System.out.println("📊 " + course.getTitle()
-                    + " | Completed: " + completed
-                    + " | Total: " + total
+                    + " | Completed: " + course.getCompletedLessons()
+                    + " | Total: " + course.getTotalLessons()
                     + " | Percent: " + percent + "%");
 
             HBox item = createCourseItem(
@@ -110,28 +95,18 @@ public class ProfileViewController {
                     getCourseColor(course.getLanguage()),
                     percent
             );
-            coursesProgressContainer.getChildren().add(item);
+
+            // ✅ 2 columns — 2 ခု တစ်တန်း
+            coursesProgressContainer.add(item, col, row);
+
+            col++;
+            if (col == 2) {
+                col = 0;
+                row++;
+            }
         }
     }
 
-    // ============================================
-    // ✅ TOTAL LESSONS — JSON file count
-    // ============================================
-    private int getTotalLessonsForCourse(String courseId) {
-        if (courseId == null) return 0;
-        String upper = courseId.toUpperCase();
-
-        if (upper.contains("CPP") || upper.contains("C++")) return 14;
-        if (upper.contains("PYTHON") || upper.contains("PY")) return 10;
-        if (upper.contains("SQL")) return 10;
-        if (upper.contains("JAVA")) return 10;
-
-        return 0;
-    }
-
-    // ============================================
-    // ✅ COURSE COLOR
-    // ============================================
     private String getCourseColor(String language) {
         if (language == null) return "#64748B";
         String lang = language.toLowerCase();
@@ -148,19 +123,52 @@ public class ProfileViewController {
     // CREATE COURSE ITEM
     // ============================================
     private HBox createCourseItem(String courseId, String title, String icon, String color, int progressPercent) {
-        // Icon Circle
-        StackPane iconCircle = new StackPane();
-        iconCircle.setPrefSize(60, 60);
-        iconCircle.setMinSize(60, 60);
-        iconCircle.setMaxSize(60, 60);
-        iconCircle.setStyle(
-                "-fx-background-color: " + color + "; " +
-                        "-fx-background-radius: 30px;"
-        );
+        Node iconNode;
+        boolean isPython = courseId != null && courseId.toUpperCase().contains("PYTHON");
 
-        Label iconLabel = new Label(icon);
-        iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
-        iconCircle.getChildren().add(iconLabel);
+        if (isPython) {
+            // ✅ Python — py.png ပုံ
+            ImageView iv = new ImageView();
+            try {
+                InputStream is = getClass().getResourceAsStream("/Images/py.png");
+                if (is != null) {
+                    Image img = new Image(is, 180, 180, true, true);
+                    iv.setImage(img);
+                    iv.setFitWidth(58);
+                    iv.setFitHeight(58);
+                    iv.setPreserveRatio(true);
+                    iv.setSmooth(true);
+                    iv.setCache(true);
+                }
+            } catch (Exception e) {
+                System.out.println("py.png not found: " + e.getMessage());
+            }
+
+            StackPane iconWrapper = new StackPane(iv);
+            iconWrapper.setPrefSize(60, 60);
+            iconWrapper.setMinSize(60, 60);
+            iconWrapper.setMaxSize(60, 60);
+            iconWrapper.setAlignment(Pos.CENTER);
+
+            iconNode = iconWrapper;
+
+        } else {
+            // ✅ C++, Java, SQL — စာလုံး (အဝိုင်း background)
+            StackPane iconCircle = new StackPane();
+            iconCircle.setPrefSize(60, 60);
+            iconCircle.setMinSize(60, 60);
+            iconCircle.setMaxSize(60, 60);
+            iconCircle.setStyle(
+                    "-fx-background-color: " + color + "; " +
+                            "-fx-background-radius: 30px;"
+            );
+
+            Label iconLabel = new Label(icon);
+            iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+            iconCircle.getChildren().add(iconLabel);
+
+            iconNode = iconCircle;
+        }
 
         // Title + Status
         Label titleLabel = new Label(title);
@@ -172,14 +180,15 @@ public class ProfileViewController {
         VBox textBox = new VBox(4, titleLabel, statusLabel);
         textBox.setAlignment(Pos.CENTER_LEFT);
 
-        // Circular Progress
         StackPane progressCircle = createCircularProgress(progressPercent);
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        HBox item = new HBox(15, iconCircle, textBox, spacer, progressCircle);
+        HBox item = new HBox(15, iconNode, textBox, spacer, progressCircle);
         item.setAlignment(Pos.CENTER_LEFT);
+        item.setPrefWidth(400);              // ✅ width သတ်မှတ် (2 columns)
+        item.setMaxWidth(400);
         item.setStyle(
                 "-fx-background-color: white; " +
                         "-fx-background-radius: 10px; " +
@@ -196,21 +205,19 @@ public class ProfileViewController {
         double radius = 22;
         double strokeWidth = 5;
 
-        // ✅ Background Circle (မီးခိုးရောင်)
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.TRANSPARENT);
         bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc (အပြာ)
-        Arc progressArc = new Arc(0, 0, radius, radius, 90, -percent * 3.6);
+        double arcLength = -percent * 3.6;
+        Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
         progressArc.setStroke(Color.web("#3B82F6"));
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 11px; -fx-font-weight: bold; " +
