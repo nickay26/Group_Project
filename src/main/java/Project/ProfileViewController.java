@@ -71,9 +71,6 @@ public class ProfileViewController {
         }
     }
 
-    // ============================================
-    // LOAD COURSES PROGRESS
-    // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
@@ -98,7 +95,7 @@ public class ProfileViewController {
                     + " | Total: " + course.getTotalLessons()
                     + " | Percent: " + percent + "%");
 
-            HBox item = createCourseItem(
+            StackPane item = createCourseItem(
                     course.getCourseId(),
                     course.getTitle(),
                     course.getLanguage(),
@@ -106,7 +103,6 @@ public class ProfileViewController {
                     percent
             );
 
-            // ✅ 2 columns — 2 ခု တစ်တန်း
             coursesProgressContainer.add(item, col, row);
 
             col++;
@@ -132,106 +128,91 @@ public class ProfileViewController {
     // ============================================
     // CREATE COURSE ITEM
     // ============================================
-    private HBox createCourseItem(String courseId, String title, String icon, String color, int progressPercent) {
-        Node iconNode;
-        boolean isPython = courseId != null && courseId.toUpperCase().contains("PYTHON");
+    private StackPane createCourseItem(String courseId, String title, String language, String color, int progressPercent) {
+        String cardFile = getCardImageName(courseId);
 
-        if (isPython) {
-            // ✅ Python — py.png ပုံ
-            ImageView iv = new ImageView();
-            try {
-                InputStream is = getClass().getResourceAsStream("/Images/py.png");
-                if (is != null) {
-                    Image img = new Image(is, 180, 180, true, true);
-                    iv.setImage(img);
-                    iv.setFitWidth(58);
-                    iv.setFitHeight(58);
-                    iv.setPreserveRatio(true);
-                    iv.setSmooth(true);
-                    iv.setCache(true);
-                }
-            } catch (Exception e) {
-                System.out.println("py.png not found: " + e.getMessage());
+        ImageView cardImage = new ImageView();
+        try {
+            InputStream is = getClass().getResourceAsStream("/Images/" + cardFile);
+            if (is != null) {
+                Image img = new Image(is, 800, 260, true, true);
+                cardImage.setImage(img);
+                cardImage.setFitWidth(400);
+                cardImage.setFitHeight(130);
+                cardImage.setPreserveRatio(false);
+                cardImage.setSmooth(true);
             }
-
-            StackPane iconWrapper = new StackPane(iv);
-            iconWrapper.setPrefSize(60, 60);
-            iconWrapper.setMinSize(60, 60);
-            iconWrapper.setMaxSize(60, 60);
-            iconWrapper.setAlignment(Pos.CENTER);
-
-            iconNode = iconWrapper;
-
-        } else {
-            // ✅ C++, Java, SQL — စာလုံး (အဝိုင်း background)
-            StackPane iconCircle = new StackPane();
-            iconCircle.setPrefSize(60, 60);
-            iconCircle.setMinSize(60, 60);
-            iconCircle.setMaxSize(60, 60);
-            iconCircle.setStyle(
-                    "-fx-background-color: " + color + "; " +
-                            "-fx-background-radius: 30px;"
-            );
-
-            Label iconLabel = new Label(icon);
-            iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
-            iconCircle.getChildren().add(iconLabel);
-
-            iconNode = iconCircle;
+        } catch (Exception e) {
+            System.out.println("Card not found: " + cardFile);
         }
 
-        // Title + Status
-        Label titleLabel = new Label(title);
-        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E293B;");
+        StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
-        Label statusLabel = new Label(progressPercent >= 100 ? "Completed" : "In Progress");
-        statusLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #64748B;");
+        // ✅ Position — အပေါ်ကို ထပ်တိုး
+        StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
+        progressCircle.setTranslateX(-20);
+        progressCircle.setTranslateY(-25);   // ✅ -18 → -25 (အပေါ်တိုး)
+        progressCircle.setMouseTransparent(true);
 
-        VBox textBox = new VBox(4, titleLabel, statusLabel);
-        textBox.setAlignment(Pos.CENTER_LEFT);
+        StackPane cardContainer = new StackPane();
+        cardContainer.setPrefSize(400, 130);
+        cardContainer.setMinSize(400, 130);
+        cardContainer.setMaxSize(400, 130);
+        cardContainer.getChildren().addAll(cardImage, progressCircle);
 
-        StackPane progressCircle = createCircularProgress(progressPercent);
+        return cardContainer;
+    }
 
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
+    private String getCardImageName(String courseId) {
+        if (courseId == null) return "default.png";
+        String upper = courseId.toUpperCase();
 
-        HBox item = new HBox(15, iconNode, textBox, spacer, progressCircle);
-        item.setAlignment(Pos.CENTER_LEFT);
-        item.setPrefWidth(400);              // ✅ width သတ်မှတ် (2 columns)
-        item.setMaxWidth(400);
-        item.setStyle(
-                "-fx-background-color: white; " +
-                        "-fx-background-radius: 10px; " +
-                        "-fx-padding: 15;"
-        );
-
-        return item;
+        if (upper.contains("CPP") || upper.contains("C++")) {
+            return upper.contains("INTERMEDIATE") ? "cpp_intermediate.png" : "cpp_basic.png";
+        }
+        if (upper.contains("JAVA")) {
+            return upper.contains("INTERMEDIATE") ? "java_intermediate.png" : "java_basic.png";
+        }
+        if (upper.contains("PYTHON") || upper.contains("PY")) {
+            return upper.contains("INTERMEDIATE") ? "python_intermediate.png" : "python_basic.png";
+        }
+        if (upper.contains("SQL")) {
+            return "sql_basic.png";
+        }
+        return "default.png";
     }
 
     // ============================================
-    // ✅ CIRCULAR PROGRESS
+    // ✅ CIRCULAR PROGRESS — ဒုတိယပုံလို အရောင်
     // ============================================
-    private StackPane createCircularProgress(int percent) {
+    private StackPane createCircularProgressForCard(int percent, String courseId) {
         double radius = 22;
         double strokeWidth = 5;
 
+        // ✅ အရောင် ၂ မျိုး — အရင့် + ပေါ့
+        String darkerColor = getCardDarkerColor(courseId);
+        String lighterColor = getCardLighterColor(courseId);
+
+        // ✅ Background Circle — အရင့်ရောင်
         Circle bgCircle = new Circle(radius);
-        bgCircle.setFill(Color.TRANSPARENT);
-        bgCircle.setStroke(Color.web("#E2E8F0"));
+        bgCircle.setFill(Color.web(darkerColor, 0.9));      // ✅ 90% opacity (အရင့်)
+        bgCircle.setStroke(Color.web(lighterColor, 1.0));   // ✅ 100% opacity (ပေါ့)
         bgCircle.setStrokeWidth(strokeWidth);
 
+        // ✅ Progress Arc — အဖြူ
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
-        progressArc.setStroke(Color.web("#3B82F6"));
+        progressArc.setStroke(Color.WHITE);
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
+        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
-                "-fx-font-size: 11px; -fx-font-weight: bold; " +
-                        "-fx-text-fill: #3B82F6;"
+                "-fx-font-size: 12px; -fx-font-weight: bold; " +
+                        "-fx-text-fill: white;"
         );
 
         StackPane stack = new StackPane();
@@ -244,5 +225,35 @@ public class ProfileViewController {
         stack.setAlignment(Pos.CENTER);
 
         return stack;
+    }
+
+    // ============================================
+    // ✅ Card ရဲ့ အရင့်ရောင် (background အတွက်)
+    // ============================================
+    private String getCardDarkerColor(String courseId) {
+        if (courseId == null) return "#334155";
+        String upper = courseId.toUpperCase();
+
+        if (upper.contains("CPP") || upper.contains("C++")) return "#1E3A8A";   // C++ အရင့်
+        if (upper.contains("JAVA")) return "#7C2D12";                            // Java အရင့်
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#064E3B"; // Python အရင့်
+        if (upper.contains("SQL")) return "#14532D";
+
+        return "#334155";
+    }
+
+    // ============================================
+    // ✅ Card ရဲ့ ပေါ့တဲ့ အရောင် (stroke အတွက်)
+    // ============================================
+    private String getCardLighterColor(String courseId) {
+        if (courseId == null) return "#64748B";
+        String upper = courseId.toUpperCase();
+
+        if (upper.contains("CPP") || upper.contains("C++")) return "#3B82F6";   // C++ ပေါ့
+        if (upper.contains("JAVA")) return "#EA580C";                            // Java ပေါ့
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#10B981"; // Python ပေါ့
+        if (upper.contains("SQL")) return "#22C55E";
+
+        return "#64748B";
     }
 }
