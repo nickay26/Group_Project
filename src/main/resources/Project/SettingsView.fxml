@@ -15,14 +15,23 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
-<BorderPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.SettingsController">
+<BorderPane prefHeight="700.0" prefWidth="800.0"
+            style="-fx-background-color: #0F172A;"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Project.SettingsController">
+
+    <stylesheets>
+        <URL value="@../Css/settings.css" />
+    </stylesheets>
 
     <!-- TOP BAR -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 20; -fx-background-color: #FFFFFF;">
+        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 20; -fx-background-color: #0F172A;">
             <children>
-                <Label style="-fx-font-size: 22px; -fx-font-weight: bold;                               -fx-text-fill: #1E293B;" text="Edit Profile" />
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Edit Profile" />
                 <Region HBox.hgrow="ALWAYS" />
             </children>
         </HBox>
@@ -30,168 +39,268 @@
 
     <!-- LEFT SIDEBAR -->
     <left>
-        <VBox prefWidth="200.0" spacing="15.0" style="-fx-padding: 20; -fx-background-color: #F8FAFC;">
+        <VBox prefWidth="200.0" spacing="15.0" style="-fx-padding: 20; -fx-background-color: #1E293B;">
             <children>
-                <Button fx:id="infoTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity" onAction="#showInfoSection" styleClass="settings-tab" text="Information" />
-                <Button fx:id="passwordTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity" onAction="#showPasswordSection" styleClass="settings-tab" text="Password" />
-                <Button fx:id="subscriptionTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity" onAction="#showSubscriptionSection" styleClass="settings-tab" text="Manage Subscription" />
-                <Button fx:id="deleteTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity" onAction="#showDeleteSection" styleClass="settings-tab" text="Delete Account" />
+                <Button fx:id="infoTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity"
+                        onAction="#showInfoSection" text="Information"
+                        style="-fx-background-color: #1E293B;
+                           -fx-text-fill: #F8FAFC;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 15;
+                           -fx-alignment: BASELINE_LEFT;
+                           -fx-background-radius: 8px;
+                           -fx-border-color: #334155;
+                           -fx-border-width: 1px;
+                           -fx-border-radius: 8px;
+                           -fx-cursor: hand;" />
+
+                <Button fx:id="passwordTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity"
+                        onAction="#showPasswordSection" text="Password"
+                        style="-fx-background-color: #1E293B;
+                           -fx-text-fill: #F8FAFC;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 15;
+                           -fx-alignment: BASELINE_LEFT;
+                           -fx-background-radius: 8px;
+                           -fx-border-color: #334155;
+                           -fx-border-width: 1px;
+                           -fx-border-radius: 8px;
+                           -fx-cursor: hand;" />
+
+                <Button fx:id="subscriptionTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity"
+                        onAction="#showSubscriptionSection" text="Manage Subscription"
+                        style="-fx-background-color: #1E293B;
+                           -fx-text-fill: #F8FAFC;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 15;
+                           -fx-alignment: BASELINE_LEFT;
+                           -fx-background-radius: 8px;
+                           -fx-border-color: #334155;
+                           -fx-border-width: 1px;
+                           -fx-border-radius: 8px;
+                           -fx-cursor: hand;" />
+
+                <Button fx:id="deleteTabBtn" alignment="BASELINE_LEFT" maxWidth="Infinity"
+                        onAction="#showDeleteSection" text="Delete Account"
+                        style="-fx-background-color: #1E293B;
+                           -fx-text-fill: #F8FAFC;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: bold;
+                           -fx-padding: 10 15;
+                           -fx-alignment: BASELINE_LEFT;
+                           -fx-background-radius: 8px;
+                           -fx-border-color: #334155;
+                           -fx-border-width: 1px;
+                           -fx-border-radius: 8px;
+                           -fx-cursor: hand;" />
             </children>
         </VBox>
     </left>
 
     <!-- CENTER CONTENT -->
     <center>
-        <BorderPane fx:id="centerContainer"  style="-fx-background-color: #FFFFFF;">
-        <center>
-            <ScrollPane fx:id="settingsScrollPane" fitToWidth="true" style="-fx-background-color: #FFFFFF;">
-            <content>
-                <VBox style="-fx-padding: 30;">
+        <BorderPane fx:id="centerContainer" style="-fx-background-color: #0F172A;">
+            <center>
+                <ScrollPane fx:id="settingsScrollPane" fitToWidth="true"
+                            styleClass="dark-scroll-pane"
+                            style="-fx-background-color: #0F172A; -fx-background: #0F172A; -fx-control-inner-background: #0F172A;">
+                    <content>
+                        <VBox style="-fx-padding: 30; -fx-background-color: #0F172A;">
 
-                    <!-- INFORMATION SECTION -->
-                    <VBox fx:id="infoSection" spacing="20.0">
-                        <children>
-                            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;                                           -fx-text-fill: #1E293B;" text="Information" />
-
-                            <!-- ✅ Avatar Row -->
-                            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                            <!-- INFORMATION SECTION -->
+                            <VBox fx:id="infoSection" spacing="20.0">
                                 <children>
+                                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Information" />
 
-                                    <!-- Avatar (Circle Container) -->
-                                    <!-- Avatar (Circle Container) -->
-                                    <StackPane fx:id="avatarContainer" maxHeight="100" maxWidth="100" minHeight="100" minWidth="100" prefHeight="100" prefWidth="100" style="-fx-background-radius: 50px; -fx-background-color: #EC4899; -fx-alignment: center;">
+                                    <!-- Avatar Row -->
+                                    <HBox alignment="CENTER_LEFT" spacing="20.0">
                                         <children>
-                                            <Label fx:id="avatarInitialLabel" text="H" />
-                                            <ImageView fx:id="avatarPreview" fitHeight="100.0" fitWidth="100.0" preserveRatio="false" smooth="true" visible="false" StackPane.alignment="CENTER" />
-                                        </children>
-                                    </StackPane>
 
-                                    <VBox spacing="8.0">
-                                        <children>
-                                            <!-- ✅ Change / Delete / Set Buttons -->
-                                            <HBox spacing="10.0">
+                                            <!-- Avatar (Circle Container) -->
+                                            <StackPane fx:id="avatarContainer" maxHeight="100" maxWidth="100" minHeight="100" minWidth="100" prefHeight="100" prefWidth="100" style="-fx-background-radius: 50px; -fx-background-color: #EC4899; -fx-alignment: center;">
                                                 <children>
-                                                    <Button fx:id="changeBtn" onAction="#handleChangeImage" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: #3B82F6; -fx-text-fill: white;    -fx-font-size: 20px; -fx-background-radius: 10px;  -fx-font-weight: bold; -fx-background-radius: 4px; -fx-padding: 6 16; -fx-cursor: hand;" text="Change" />
-                                                    <Button fx:id="deleteBtn" onAction="#handleDeleteImage" prefHeight="42.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: #3B82F6; -fx-border-radius: 6px; -fx-border-width: 1.5px; -fx-padding: 6 18; -fx-cursor: hand;">
-                                                        <graphic>
-                                                            <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true" smooth="true">
-                                                                <image>
-                                                                    <Image url="@../Images/delete.png" />
-                                                                </image>
-                                                            </ImageView>
-                                                        </graphic>
-                                                    </Button>
-                                                    <Button fx:id="setBtn" managed="false" onAction="#handleSetImage" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: #3B82F6; -fx-text-fill: white;-fx-font-weight: bold;-fx-background-radius: 6px;-fx-font-size: 19; -fx-padding: 6 24;-fx-cursor: hand;" text="Set" visible="false" />
+                                                    <Label fx:id="avatarInitialLabel" text="H" />
+                                                    <ImageView fx:id="avatarPreview" fitHeight="100.0" fitWidth="100.0" preserveRatio="false" smooth="true" visible="false" StackPane.alignment="CENTER" />
                                                 </children>
-                                            </HBox>
-                                            <Label style="-fx-font-size: 12px;-fx-text-fill: #94A3B8;" text="JPG, GIF or PNG. Max size 800K" />
+                                            </StackPane>
+
+                                            <VBox spacing="8.0">
+                                                <children>
+                                                    <HBox spacing="10.0">
+                                                        <children>
+                                                            <Button fx:id="changeBtn" onAction="#handleChangeImage" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 4px; -fx-padding: 6 16; -fx-cursor: hand;" text="Change" />
+                                                            <Button fx:id="deleteBtn" onAction="#handleDeleteImage" prefHeight="42.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: #3B82F6; -fx-border-radius: 6px; -fx-border-width: 1.5px; -fx-padding: 6 18; -fx-cursor: hand;">
+                                                                <graphic>
+                                                                    <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true" smooth="true">
+                                                                        <image>
+                                                                            <Image url="@../Images/delete.png" />
+                                                                        </image>
+                                                                    </ImageView>
+                                                                </graphic>
+                                                            </Button>
+                                                            <Button fx:id="setBtn" managed="false" onAction="#handleSetImage" prefHeight="42.0" prefWidth="119.0" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-font-size: 19; -fx-padding: 6 24; -fx-cursor: hand;" text="Set" visible="false" />
+                                                        </children>
+                                                    </HBox>
+                                                    <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="JPG, GIF or PNG. Max size 800K" />
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+
+                                    <!-- Username -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Username" />
+                                            <TextField fx:id="usernameField" promptText="Username"
+                                                       styleClass="dark-input"
+                                                       style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 16;">
+                                                <font>
+                                                    <Font name="Dubai Regular" size="12.0" />
+                                                </font>
+                                            </TextField>
                                         </children>
                                     </VBox>
-                                </children>
-                            </HBox>
 
-                            <!-- Username -->
-                            <VBox spacing="6.0">
-                                <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1E293B;" text="Username" />
-                                    <TextField fx:id="usernameField" promptText="Username" style="-fx-background-radius: 6px; -fx-border-color: #CBD5E1; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 12;">
-                              <font>
-                                 <Font name="Dubai Regular" size="12.0" />
-                              </font></TextField>
-                                </children>
-                            </VBox>
+                                    <!-- Email -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Email address" />
+                                            <TextField fx:id="emailField" promptText="Email"
+                                                       styleClass="dark-input"
+                                                       style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10;-fx-font-size: 16px;" />
+                                        </children>
+                                    </VBox>
 
-                            <!-- Email -->
-                            <VBox spacing="6.0">
-                                <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Email address" />
-                                    <TextField fx:id="emailField" promptText="Email" style="-fx-background-radius: 6px;-fx-border-color: #CBD5E1;-fx-border-radius: 6px;  -fx-padding: 10;" />
-                                </children>
-                            </VBox>
+                                    <!-- Bio -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Bio" />
+                                            <TextArea fx:id="bioField" prefHeight="80" promptText="Describe yourself..."
+                                                      styleClass="dark-input"
+                                                      style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px;-fx-font-size: 16px;" />
+                                        </children>
+                                    </VBox>
 
-                            <!-- Bio -->
-                            <VBox spacing="6.0">
-                                <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Bio" />
-                                    <TextArea fx:id="bioField" prefHeight="80" promptText="Describe yourself..." style="-fx-background-radius: 6px; -fx-border-color: #CBD5E1;-fx-border-radius: 6px;" />
-                                </children>
-                            </VBox>
+                                    <!-- Country -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Country" />
+                                            <ComboBox fx:id="countryCombo" maxWidth="Infinity"
+                                                      style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 5;" />
+                                        </children>
+                                    </VBox>
 
-                            <!-- Country -->
-                            <VBox spacing="6.0">
-                                <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1E293B;" text="Country" />
-                                    <ComboBox fx:id="countryCombo" maxWidth="Infinity" style="-fx-background-radius: 6px;-fx-border-color: #CBD5E1;-fx-border-radius: 6px;-fx-padding: 5;" />
+                                    <Button onAction="#handleSaveInfo" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" text="Save" />
                                 </children>
                             </VBox>
 
-                            <Button onAction="#handleSaveInfo" style="-fx-background-color: #3B82F6;-fx-text-fill: white; -fx-font-weight: bold;-fx-background-radius: 6px;-fx-padding: 12 40;-fx-cursor: hand;" text="Save" />
-                        </children>
-                    </VBox>
-
-                    <!-- PASSWORD SECTION -->
-                    <VBox fx:id="passwordSection" managed="false" spacing="20.0" visible="false">
-                        <children>
-                            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Password" />
-                            <VBox spacing="6.0">
+                            <!-- PASSWORD SECTION -->
+                            <VBox fx:id="passwordSection" managed="false" spacing="20.0" visible="false">
                                 <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1E293B;" text="Current Password" />
-                                    <PasswordField promptText="" style="-fx-background-radius: 6px;-fx-border-color: #CBD5E1; -fx-border-radius: 6px;-fx-padding: 10;" />
+                                    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Password" />
+
+                                    <!-- Current Password -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Current Password" />
+
+                                            <!-- ✅ StackPane — PasswordField + TextField + Show Button -->
+                                            <StackPane prefWidth="400.0" maxWidth="400.0" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <PasswordField fx:id="currentPasswordField" promptText=""
+                                                                   prefWidth="400.0"
+                                                                   style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 14px;" />
+
+                                                    <TextField fx:id="currentPasswordVisible" promptText=""
+                                                               prefWidth="400.0"
+                                                               visible="false"
+                                                               style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 14px;" />
+
+                                                    <Button fx:id="currentShowBtn" text="Show"
+                                                            onAction="#toggleCurrentPassword"
+                                                            StackPane.alignment="CENTER_RIGHT"
+                                                            style="-fx-background-color: transparent; -fx-text-fill: #60A5FA; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 0 12 0 0;" />
+                                                </children>
+                                            </StackPane>
+                                        </children>
+                                    </VBox>
+
+                                    <!-- New Password -->
+                                    <VBox spacing="6.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="New Password" />
+
+                                            <StackPane prefWidth="400.0" maxWidth="400.0" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <PasswordField fx:id="newPasswordField" promptText=""
+                                                                   prefWidth="400.0"
+                                                                   style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 14px;" />
+
+                                                    <TextField fx:id="newPasswordVisible" promptText=""
+                                                               prefWidth="400.0"
+                                                               visible="false"
+                                                               style="-fx-background-radius: 6px; -fx-background-color: #1E293B; -fx-control-inner-background: #1E293B; -fx-text-fill: #F8FAFC; -fx-prompt-text-fill: #64748B; -fx-border-color: #334155; -fx-border-radius: 6px; -fx-padding: 10; -fx-font-size: 14px;" />
+
+                                                    <Button fx:id="newShowBtn" text="Show"
+                                                            onAction="#toggleNewPassword"
+                                                            StackPane.alignment="CENTER_RIGHT"
+                                                            style="-fx-background-color: transparent; -fx-text-fill: #60A5FA; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 0 12 0 0;" />
+                                                </children>
+                                            </StackPane>
+                                        </children>
+                                    </VBox>
+
+                                    <Button onAction="#handleChangePassword"
+                                            text="Change"
+                                            style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" />
                                 </children>
                             </VBox>
-                            <VBox spacing="6.0">
+
+                            <!-- SUBSCRIPTION SECTION -->
+                            <VBox fx:id="subscriptionSection" managed="false" spacing="20.0" visible="false">
                                 <children>
-                                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="New Password" />
-                                    <PasswordField promptText="" style="-fx-background-radius: 6px;-fx-border-color: #CBD5E1; -fx-border-radius: 6px;-fx-padding: 10;" />
+                                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Manage Subscription" />
+                                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Current Plan" />
+                                            <Label style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-background-radius: 12px; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold;" text="Active" />
+                                        </children>
+                                    </HBox>
+                                    <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Sodex Free" />
+                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Your plan includes:" />
+                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="✓  Standard lessons" />
+                                    <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Do you have a problem with subscription? Email us at info@sodex.com" wrapText="true" />
+                                    <Button onAction="#handleUpgradePlan" text="Upgrade Plan" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" />
                                 </children>
                             </VBox>
-                            <Button onAction="#handleChangePassword" style="-fx-background-color: #3B82F6;-fx-text-fill: white;-fx-font-size: 20px; -fx-font-weight: bold;-fx-background-radius: 6px; -fx-padding: 12 40;-fx-cursor: hand;" text="Change" />
-                        </children>
-                    </VBox>
 
-                    <!-- SUBSCRIPTION SECTION -->
-                    <VBox fx:id="subscriptionSection" managed="false" spacing="20.0" visible="false">
-                        <children>
-                            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Manage Subscription" />
-                            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                            <!-- DELETE SECTION -->
+                            <VBox fx:id="deleteSection" managed="false" spacing="20.0" visible="false">
                                 <children>
-                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Current Plan" />
-                                    <Label style="-fx-background-color: #10B981;-fx-text-fill: white;-fx-background-radius: 12px;-fx-padding: 4 12;-fx-font-size: 12px;-fx-font-weight: bold;" text="Active" />
-                                </children>
-                            </HBox>
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #64748B;" text="Sodex Free" />
-                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Your plan includes:" />
-                            <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="✓  Standard lessons" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Do you have a problem with subscription? Email us at info@sodex.com" wrapText="true" />
-                            <Button onAction="#handleUpgradePlan"  text="Upgrade Plan" style="-fx-background-color: #3B82F6;-fx-text-fill: white;
-              -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 6px;  -fx-padding: 12 40;  -fx-cursor: hand;" />
-                        </children>
-                    </VBox>
-
-                    <!-- DELETE SECTION -->
-                    <VBox fx:id="deleteSection" managed="false" spacing="20.0" visible="false">
-                        <children>
-                            <Label style="-fx-font-size: 32px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Delete Account" />
-                            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;-fx-text-fill: #1E293B;" text="Are you sure you want to continue?" />
-                            <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="If you have a problem, our customer support team will be happy to help. Get in touch" wrapText="true" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #64748B;" text="If you delete your account:" />
-                            <VBox spacing="8.0">
-                                <children>
-                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="•  You will lose all of your course progress" />
-                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="•  You will lose access to all your certificates" />
-                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="•  All the content you have ever created will be deleted" wrapText="true" />
-                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="•  Your connected social accounts will be disconnected" wrapText="true" />
-                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #1E293B;-fx-font-weight: bold;" text="•  Account deletion is permanent. This action cannot be undone" wrapText="true" />
+                                    <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Delete Account" />
+                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Are you sure you want to continue?" />
+                                    <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="If you have a problem, our customer support team will be happy to help. Get in touch" wrapText="true" />
+                                    <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="If you delete your account:" />
+                                    <VBox spacing="8.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="•  You will lose all of your course progress" />
+                                            <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="•  You will lose access to all your certificates" />
+                                            <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="•  All the content you have ever created will be deleted" wrapText="true" />
+                                            <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="•  Your connected social accounts will be disconnected" wrapText="true" />
+                                            <Label style="-fx-font-size: 13px; -fx-text-fill: #F8FAFC; -fx-font-weight: bold;" text="•  Account deletion is permanent. This action cannot be undone" wrapText="true" />
+                                        </children>
+                                    </VBox>
+                                    <Button onAction="#handleDeleteAccount" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" text="Delete Account" />
                                 </children>
                             </VBox>
-                            <Button onAction="#handleDeleteAccount" style="-fx-background-color: #3B82F6;-fx-text-fill: white; -fx-font-size: 20px;-fx-font-weight: bold;-fx-background-radius: 6px;-fx-padding: 12 40;-fx-cursor: hand;" text="Delete Account" />
-                        </children>
-                    </VBox>
 
-                </VBox>
-            </content>
-        </ScrollPane>
-        </center>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
         </BorderPane>
     </center>
 
