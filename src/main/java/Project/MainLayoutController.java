@@ -564,4 +564,9 @@ public class MainLayoutController {
             }
         });
     }
+    public void loadPageWithWrapper(Parent wrapper) {
+        if (contentArea != null) {
+            contentArea.getChildren().setAll(wrapper);
+        }
+    }
 }

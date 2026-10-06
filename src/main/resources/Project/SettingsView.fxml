@@ -113,7 +113,7 @@
                             <!-- INFORMATION SECTION -->
                             <VBox fx:id="infoSection" spacing="20.0">
                                 <children>
-                                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Information" />
+                                    <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Information" />
 
                                     <!-- Avatar Row -->
                                     <HBox alignment="CENTER_LEFT" spacing="20.0">
@@ -200,7 +200,7 @@
                             <!-- PASSWORD SECTION -->
                             <VBox fx:id="passwordSection" managed="false" spacing="20.0" visible="false">
                                 <children>
-                                    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Password" />
+                                    <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Password" />
 
                                     <!-- Current Password -->
                                     <VBox spacing="6.0">
@@ -262,7 +262,7 @@
                             <!-- SUBSCRIPTION SECTION -->
                             <VBox fx:id="subscriptionSection" managed="false" spacing="20.0" visible="false">
                                 <children>
-                                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Manage Subscription" />
+                                    <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Manage Subscription" />
                                     <HBox alignment="CENTER_LEFT" spacing="15.0">
                                         <children>
                                             <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Current Plan" />
