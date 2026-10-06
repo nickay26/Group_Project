@@ -368,8 +368,10 @@ public class DatabaseManager {
         User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
 
         // ⭐ Premium fields ထည့်
-        user.setPremium(obj.optBoolean("is_premium", false));
-        user.setSubscriptionType(obj.optString("subscription_type", "free"));
+        String planType = obj.optString("plan_type", "FREE");   // ★ ဒါ ထည့်ပါ ★
+        user.setPremium("PREMIUM".equals(planType));            // ★ ဒါ ပြင်ပါ ★
+        user.setSubscriptionType(planType);
+        user.setPlanType(planType);                             // ★ ဒါ ထည့်ပါ ★
 
         return user;
     }

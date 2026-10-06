@@ -45,7 +45,17 @@ public class ProfileViewController {
             streakLabel.setText(String.valueOf(currentUser.getStreak()));
             xpLabel.setText(String.valueOf(currentUser.getXp()));
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
-            brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
+
+            // ★★★ ဒီနေရာမှာ Premium Check ထည့်ပါ ★★★
+            String planType = currentUser.getPlanType();
+            boolean isPremium = "PREMIUM".equals(planType);
+
+            if (isPremium) {
+                brainLabel.setText("∞");   // Premium → Unlimited
+            } else {
+                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));  // Free → 5
+            }
+            // ★★★ ဒီအထိပဲ ★★★
 
             if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
                 try {

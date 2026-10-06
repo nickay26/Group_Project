@@ -43,7 +43,6 @@ public class MainLayoutController {
     @FXML private Button practiceBtn;
     @FXML private Button gamesBtn;
     @FXML private Button profileBtn;
-    @FXML private Label brainLabel;
     private ContextMenu profileMenu;
     @FXML private Button premiumBtn;
 
@@ -76,7 +75,14 @@ public class MainLayoutController {
 
     public void updateBrainDisplay(int count) {
         if (topBrainLabel != null) {
-            topBrainLabel.setText(" " + count);
+            User currentUser = UserSession.getCurrentUser();
+
+            // Premium ဆိုရင် ∞ ပြပါ
+            if (currentUser != null && PremiumService.isPremium(currentUser)) {
+                topBrainLabel.setText(" ∞");
+            } else {
+                topBrainLabel.setText(" " + count);
+            }
         }
     }
 
@@ -408,23 +414,6 @@ public class MainLayoutController {
             setActiveButton(gamesBtn);
         }
     }
-    public void updateUserStats() {
-        int userId = UserSession.getUserId();
-        if (userId <= 0) return;
-
-        User user = DatabaseManager.getUserById(userId);
-        if (user == null) return;
-
-        // Brain Count
-        if (brainLabel != null) {
-            int brainCount = user.getBrainCount();
-            if (brainCount >= 999999) {
-                brainLabel.setText(" ∞");
-            } else {
-                brainLabel.setText(" " + brainCount);
-            }
-        }
-    }
 
     private void setActiveButton(Button activeButton) {
         if (navButtons == null || activeButton == null) return;
@@ -441,6 +430,17 @@ public class MainLayoutController {
             activeButton.getStyleClass().add("nav-button-active");
         }
 
+    }
+    public static String getBrainDisplay(User user) {
+        if (user == null) return "0";
+
+        // Premium User → ∞
+        if ("PREMIUM".equals(user.getPlanType()) || user.isPremium()) {
+            return "∞";
+        }
+
+        // Free User → Number
+        return String.valueOf(user.getBrainCount());
     }
 
     // ============================================
@@ -480,6 +480,18 @@ public class MainLayoutController {
     @FXML
     private void handleBrainClick() {
         User currentUser = UserSession.getCurrentUser();
+
+        // ⭐ Premium ဆိုရင် Refill Popup မပြဘဲ Alert ပဲ ပြမယ်
+        if (currentUser != null && PremiumService.isPremium(currentUser)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Premium Brains");
+            alert.setHeaderText("🧠 Unlimited Brains");
+            alert.setContentText("You are a Premium user. Enjoy unlimited brains — no refill needed!");
+            alert.showAndWait();
+            return;
+        }
+
+        // ===== Free User အတွက် အောက်ပါအတိုင်း ဆက်လုပ်မယ် =====
         int currentBrains = currentUser != null ? currentUser.getBrainCount() : 0;
         int coins = currentUser != null ? currentUser.getCoin() : 0;
         int refillCost = 50;
@@ -491,7 +503,7 @@ public class MainLayoutController {
         ButtonType refillBtnType = new ButtonType("Refill (" + refillCost + " 🪙)", ButtonBar.ButtonData.OK_DONE);
         dialogPane.getButtonTypes().addAll(refillBtnType, ButtonType.CANCEL);
 
-        // Disable refill button if user doesn't have enough coins or brains are already full
+        // Coins မလုံလောက် သို့မဟုတ် Brains ပြည့်နေရင် Refill Button ကို Disable လုပ်မယ်
         Button refillButton = (Button) dialogPane.lookupButton(refillBtnType);
         if (coins < refillCost || currentBrains >= 5) {
             refillButton.setDisable(true);
@@ -518,10 +530,8 @@ public class MainLayoutController {
             if (buttonType == refillBtnType) {
                 int userId = UserSession.getUserId();
 
-                // Call API to refill brains
                 ApiClient.refillBrainsAsync(userId, refillCost).thenAccept(response -> {
                     Platform.runLater(() -> {
-                        // Update session and header stats
                         if (currentUser != null) {
                             currentUser.setCoin(currentUser.getCoin() - refillCost);
                             currentUser.setBrainCount(5);

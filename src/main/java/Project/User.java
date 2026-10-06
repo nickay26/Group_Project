@@ -13,6 +13,7 @@ public class User {
     // ⭐ Premium Fields
     private boolean premium = false;
     private String subscriptionType = "free";
+    private String planType = "FREE";
 
     public User(int userId, String name, String email, String profile,
                 int xp, int streak, int coin, int brainCount) {
@@ -35,6 +36,7 @@ public class User {
     public void setSubscriptionType(String subscriptionType) {
         this.subscriptionType = subscriptionType;
     }
+    public void setPlanType(String planType) { this.planType = planType; }
 
     // Getters
     // --- Getters ---
@@ -46,6 +48,7 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
+    public String getPlanType() { return planType; }
 
     // --- Setters ---
     public void setName(String name) { this.name = name; }
