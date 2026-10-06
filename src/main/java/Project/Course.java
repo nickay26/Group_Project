@@ -21,6 +21,7 @@ public class Course {
         this.completedLessons = completedLessons;
     }
 
+
     public String getCourseId() { return courseId; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
@@ -31,5 +32,11 @@ public class Course {
     public double getProgressPercentage() {
         if (totalLessons == 0) return 0.0;
         return (double) completedLessons / totalLessons;
+    }
+
+    // ✅ 0 - 100 (percent)
+    public int getProgressPercent() {
+        if (totalLessons == 0) return 0;
+        return (int) Math.round(((double) completedLessons / totalLessons) * 100);
     }
 }

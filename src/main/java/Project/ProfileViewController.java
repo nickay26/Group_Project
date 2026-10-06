@@ -3,19 +3,19 @@ package Project;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+
+import java.io.InputStream;
+import java.util.List;
 
 public class ProfileViewController {
 
@@ -26,7 +26,7 @@ public class ProfileViewController {
     @FXML private Label xpLabel;
     @FXML private Label coinLabel;
     @FXML private Label brainLabel;
-    @FXML private VBox coursesProgressContainer;
+    @FXML private GridPane coursesProgressContainer;
 
     @FXML
     public void initialize() {
@@ -67,104 +67,157 @@ public class ProfileViewController {
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
-        // ✅ courseId — "CPP", "PYTHON", "SQL" (API format)
-        String[][] courses = {
-                {"C++",    "Introduction to C++",    "C++",  "#3B82F6", "3"},
-                {"PYTHON", "Introduction to Python", "PYTHON",   "#3B82F6", "3"},
-                {"SQL",    "Introduction to SQL",    "SQL",  "#22C55E", "0"}
-        };
+        int userId = UserSession.getUserId();
+        List<Course> courseList = DatabaseManager.getCoursesForUser(userId);
 
-        for (String[] c : courses) {
-            HBox item = createCourseItem(c[0], c[1], c[2], c[3], Integer.parseInt(c[4]));
-            coursesProgressContainer.getChildren().add(item);
+        if (courseList == null || courseList.isEmpty()) {
+            Label empty = new Label("No courses available.");
+            empty.setStyle("-fx-text-fill: #94A3B8; -fx-padding: 20;");
+            coursesProgressContainer.add(empty, 0, 0);
+            return;
         }
+
+        int col = 0;
+        int row = 0;
+
+        for (Course course : courseList) {
+            int percent = course.getProgressPercent();
+
+            System.out.println("📊 " + course.getTitle()
+                    + " | Completed: " + course.getCompletedLessons()
+                    + " | Total: " + course.getTotalLessons()
+                    + " | Percent: " + percent + "%");
+
+            HBox item = createCourseItem(
+                    course.getCourseId(),
+                    course.getTitle(),
+                    course.getLanguage(),
+                    getCourseColor(course.getLanguage()),
+                    percent
+            );
+
+            // ✅ 2 columns — 2 ခု တစ်တန်း
+            coursesProgressContainer.add(item, col, row);
+
+            col++;
+            if (col == 2) {
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+    private String getCourseColor(String language) {
+        if (language == null) return "#64748B";
+        String lang = language.toLowerCase();
+
+        if (lang.contains("cpp") || lang.contains("c++")) return "#3B82F6";
+        if (lang.contains("python") || lang.contains("py")) return "#3B82F6";
+        if (lang.contains("sql")) return "#22C55E";
+        if (lang.contains("java")) return "#F59E0B";
+
+        return "#64748B";
     }
 
     // ============================================
     // CREATE COURSE ITEM
     // ============================================
     private HBox createCourseItem(String courseId, String title, String icon, String color, int progressPercent) {
-        // Icon Circle
-        StackPane iconCircle = new StackPane();
-        iconCircle.setPrefSize(60, 60);
-        iconCircle.setMinSize(60, 60);
-        iconCircle.setMaxSize(60, 60);
-        iconCircle.setStyle(
-                "-fx-background-color: " + color + "; " +
-                        "-fx-background-radius: 30px;"
-        );
+        Node iconNode;
+        boolean isPython = courseId != null && courseId.toUpperCase().contains("PYTHON");
 
-        Label iconLabel = new Label(icon);
-        iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
-        iconCircle.getChildren().add(iconLabel);
+        if (isPython) {
+            // ✅ Python — py.png ပုံ
+            ImageView iv = new ImageView();
+            try {
+                InputStream is = getClass().getResourceAsStream("/Images/py.png");
+                if (is != null) {
+                    Image img = new Image(is, 180, 180, true, true);
+                    iv.setImage(img);
+                    iv.setFitWidth(58);
+                    iv.setFitHeight(58);
+                    iv.setPreserveRatio(true);
+                    iv.setSmooth(true);
+                    iv.setCache(true);
+                }
+            } catch (Exception e) {
+                System.out.println("py.png not found: " + e.getMessage());
+            }
+
+            StackPane iconWrapper = new StackPane(iv);
+            iconWrapper.setPrefSize(60, 60);
+            iconWrapper.setMinSize(60, 60);
+            iconWrapper.setMaxSize(60, 60);
+            iconWrapper.setAlignment(Pos.CENTER);
+
+            iconNode = iconWrapper;
+
+        } else {
+            // ✅ C++, Java, SQL — စာလုံး (အဝိုင်း background)
+            StackPane iconCircle = new StackPane();
+            iconCircle.setPrefSize(60, 60);
+            iconCircle.setMinSize(60, 60);
+            iconCircle.setMaxSize(60, 60);
+            iconCircle.setStyle(
+                    "-fx-background-color: " + color + "; " +
+                            "-fx-background-radius: 30px;"
+            );
+
+            Label iconLabel = new Label(icon);
+            iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+            iconCircle.getChildren().add(iconLabel);
+
+            iconNode = iconCircle;
+        }
 
         // Title + Status
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E293B;");
 
-        Label statusLabel = new Label("In Progress");
+        Label statusLabel = new Label(progressPercent >= 100 ? "Completed" : "In Progress");
         statusLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #64748B;");
 
         VBox textBox = new VBox(4, titleLabel, statusLabel);
         textBox.setAlignment(Pos.CENTER_LEFT);
 
-        // Circular Progress
         StackPane progressCircle = createCircularProgress(progressPercent);
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        HBox item = new HBox(15, iconCircle, textBox, spacer, progressCircle);
+        HBox item = new HBox(15, iconNode, textBox, spacer, progressCircle);
         item.setAlignment(Pos.CENTER_LEFT);
+        item.setPrefWidth(400);              // ✅ width သတ်မှတ် (2 columns)
+        item.setMaxWidth(400);
         item.setStyle(
                 "-fx-background-color: white; " +
                         "-fx-background-radius: 10px; " +
-                        "-fx-padding: 15; " +
-                        "-fx-cursor: hand;"
+                        "-fx-padding: 15;"
         );
-
-        // ✅ Item နှိပ်ရင် Learn page ကို သွား
-        item.setOnMouseClicked(e -> goToLearnPage(courseId));
 
         return item;
     }
 
     // ============================================
-// ✅ GO TO LEARN PAGE
-// ============================================
-    private void goToLearnPage(String courseId) {
-        // ✅ Active course set
-        UserSession.setActiveCourseId(courseId);
-
-        // ✅ Learn page ကို load
-        MainLayoutController mainLayout = MainLayoutController.getInstance();
-        if (mainLayout != null) {
-            mainLayout.loadPage("LearnPage.fxml");
-        }
-    }
-
-    // ============================================
-    // ✅ CIRCULAR PROGRESS (3% လို)
+    // ✅ CIRCULAR PROGRESS
     // ============================================
     private StackPane createCircularProgress(int percent) {
         double radius = 22;
         double strokeWidth = 5;
 
-        // ✅ Background Circle (မီးခိုးရောင်)
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.TRANSPARENT);
         bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc (အပြာ)
-        Arc progressArc = new Arc(0, 0, radius, radius, 90, -percent * 3.6);
+        double arcLength = -percent * 3.6;
+        Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
         progressArc.setStroke(Color.web("#3B82F6"));
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 11px; -fx-font-weight: bold; " +
@@ -182,6 +235,4 @@ public class ProfileViewController {
 
         return stack;
     }
-
-
 }
