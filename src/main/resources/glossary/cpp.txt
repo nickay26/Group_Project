@@ -1,0 +1,442 @@
+ABSTRACT CLASS
+A class that cannot be instantiated.
+
+Example:
+    class Shape {
+    public:
+        virtual void draw() = 0;
+    };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ARRAY
+A fixed-size collection of elements.
+
+Example:
+    int numbers[5] = {1, 2, 3, 4, 5};
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AUTO
+Automatic type deduction.
+
+Example:
+    auto x = 10;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BOOL
+Boolean data type.
+
+Example:
+    bool isActive = true;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BREAK
+Exits the current loop.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE
+Branch in a switch statement.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CATCH
+Handles exceptions.
+
+Example:
+    try {
+        throw runtime_error("Error");
+    } catch (exception& e) {
+        cout << e.what();
+    }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHAR
+Character data type.
+
+Example:
+    char letter = 'A';
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CIN
+Standard input stream.
+
+Example:
+    int x;
+    cin >> x;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLASS
+A blueprint for creating objects.
+
+Example:
+    class Person {
+        string name;
+    public:
+        Person(string n) : name(n) {}
+    };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COMPILER
+A program that translates C++ code to machine code.
+
+Example:
+    g++ main.cpp -o main
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONST
+Constant value.
+
+Example:
+    const int MAX = 100;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONSTRUCTOR
+A special method that runs when an object is created.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTINUE
+Skips the rest of the loop iteration.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COUT
+Standard output stream.
+
+Example:
+    cout << "Hello" << endl;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DESTRUCTOR
+A special method that runs when an object is destroyed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DO-WHILE
+Loop that runs at least once.
+
+Example:
+    int i = 0;
+    do {
+        cout << i;
+        i++;
+    } while (i < 5);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOUBLE
+Double-precision floating point.
+
+Example:
+    double pi = 3.14159;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ELSE
+Fallback branch in conditionals.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENUM
+A user-defined type with named values.
+
+Example:
+    enum Color { RED, GREEN, BLUE };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXCEPTION
+An error that occurs during execution.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXTERN
+Declares a variable defined elsewhere.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FLOAT
+Single-precision floating point.
+
+Example:
+    float price = 9.99f;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FOR
+Loop with initialization, condition, update.
+
+Example:
+    for (int i = 0; i < 5; i++) {
+        cout << i;
+    }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FRIEND
+Grants access to private members.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FUNCTION
+A reusable block of code.
+
+Example:
+    int add(int a, int b) {
+        return a + b;
+    }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GOTO
+Jumps to a label.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HEADER FILE
+A .h file with declarations.
+
+Example:
+    #include <iostream>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IF
+Conditional branch.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INHERITANCE
+A class derives from another.
+
+Example:
+    class Dog : public Animal { };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INLINE
+Suggests the compiler to expand a function.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INT
+Integer data type.
+
+Example:
+    int age = 25;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LONG
+Long integer data type.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NAMESPACE
+A container for identifiers.
+
+Example:
+    using namespace std;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NEW
+Allocates memory dynamically.
+
+Example:
+    int* ptr = new int(5);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OBJECT
+An instance of a class.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPERATOR OVERLOADING
+Redefine operators for user types.
+
+Example:
+    Point operator+(const Point& p);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+POINTER
+A variable that stores a memory address.
+
+Example:
+    int* ptr = &x;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+POLYMORPHISM
+Objects can take multiple forms.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PRIVATE
+Access modifier — class only.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROTECTED
+Access modifier — class + subclasses.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PUBLIC
+Access modifier — everywhere.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REFERENCE
+An alias for another variable.
+
+Example:
+    int& ref = x;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RETURN
+Exits a function and returns a value.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SHORT
+Short integer data type.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SIZEOF
+Returns size in bytes.
+
+Example:
+    cout << sizeof(int);
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STACK
+A region of memory for local variables.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STATIC
+Shared by all instances of a class.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STL
+Standard Template Library.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STRING
+A sequence of characters.
+
+Example:
+    string name = "Hello";
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STRUCT
+A user-defined type.
+
+Example:
+    struct Point { int x, y; };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SWITCH
+Multi-branch conditional.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TEMPLATE
+Generic programming.
+
+Example:
+    template <typename T>
+    T max(T a, T b) { return (a > b) ? a : b; }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THIS
+Pointer to the current object.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THROW
+Throws an exception.
+
+Example:
+    throw runtime_error("Error");
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRY
+Starts an exception handling block.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TYPEDEF
+Creates an alias for a type.
+
+Example:
+    typedef unsigned int uint;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+UNION
+A type that shares memory among members.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+UNSIGNED
+Unsigned integer type.
+
+Example:
+    unsigned int x = 100;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VECTOR
+A dynamic array from the STL.
+
+Example:
+    vector<int> nums = {1, 2, 3};
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VIRTUAL
+Enables polymorphism.
+
+Example:
+    virtual void draw();
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VOID
+A function that returns nothing.
+
+Example:
+    void greet() { cout << "Hello!"; }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHILE
+Loop that runs while a condition is True.
+
+Example:
+    int i = 0;
+    while (i < 5) { cout << i; i++; }
