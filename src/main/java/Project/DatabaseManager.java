@@ -365,7 +365,15 @@ public class DatabaseManager {
         int coin = obj.optInt("coin", obj.optInt("Coin", 0));
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+
+        // ⭐ Premium fields ထည့်
+        String planType = obj.optString("plan_type", "FREE");   // ★ ဒါ ထည့်ပါ ★
+        user.setPremium("PREMIUM".equals(planType));            // ★ ဒါ ပြင်ပါ ★
+        user.setSubscriptionType(planType);
+        user.setPlanType(planType);                             // ★ ဒါ ထည့်ပါ ★
+
+        return user;
     }
 
     // ==========================================
@@ -497,6 +505,26 @@ public class DatabaseManager {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return response.statusCode() == 200 || response.statusCode() == 201;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static boolean updateBrainCount(int userId, int newCount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("brain_count", newCount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -673,5 +701,28 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+
+    // ==========================================
+// 5. GET USER BY ID (Brain Count အတွက်)
+// ==========================================
+
+    public static User getUserById(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject res = new JSONObject(response.body());
+                return mapJsonToUser(res);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,0 +1,73 @@
+/* ============================================
+   ✅ Help ScrollPane
+   ============================================ */
+.help-scroll-pane {
+    -fx-background: #0F172A;
+    -fx-background-color: #0F172A;
+}
+
+.help-scroll-pane > .viewport {
+    -fx-background-color: #0F172A;
+}
+
+.help-scroll-pane > .corner {
+    -fx-background-color: #0F172A;
+}
+
+/* ============================================
+   ✅ Dropdown — MenuButton
+   ============================================ */
+.help-dropdown {
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #F8FAFC;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 30;
+    -fx-background-radius: 10px;
+    -fx-border-color: #334155;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.help-dropdown:hover {
+    -fx-background-color: #334155;
+    -fx-border-color: #3B82F6;
+}
+
+.help-dropdown .label {
+    -fx-text-fill: #F8FAFC;
+}
+
+.help-dropdown .arrow {
+    -fx-background-color: #60A5FA;
+}
+
+/* ============================================
+   ✅ MenuItem — Dropdown List
+   ============================================ */
+.context-menu {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.menu-item {
+    -fx-background-color: #1E293B;
+    -fx-padding: 10 20;
+}
+
+.menu-item .label {
+    -fx-text-fill: #F8FAFC;
+    -fx-font-size: 14px;
+}
+
+.menu-item:focused {
+    -fx-background-color: #3B82F6;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}

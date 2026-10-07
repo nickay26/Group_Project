@@ -201,6 +201,38 @@ public class LessonPlayerController {
 
     private void renderCurrentSlide() {
         if (slides == null || currentSlideIndex >= slides.length()) {
+            if (currentLesson != null) {
+                User user = UserSession.getCurrentUser();
+
+                // ⭐ 1. Brain ရှိ/မရှိ အရင်စစ်
+                if (!PremiumService.canUseBrain(user)) {
+                    showBrainLimitDialog();
+                    return;  // Lesson မပြီးမြောက်စေရ — LearnPage ကို မသွား
+                }
+
+                int userId = UserSession.getUserId();
+                String courseId = UserSession.getActiveCourseId();
+
+                DatabaseManager.completeLessonAndAddXP(
+                        userId,
+                        courseId,
+                        currentLesson.getLessonOrder(),
+                        currentLesson.getXp()
+                );
+
+                // ⭐ 2. Brain လျှော့ (Premium ဆိုရင် မလျှော့)
+                PremiumService.consumeBrain(user);
+                UserSession.updateUser(user);
+
+                // ⭐ 3. Header ကို refresh (∞/5 update ဖြစ်အောင်)
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().updateHeaderStats();
+                }
+            }
+
+            if (MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+            }
             finishLesson();
             return;
         }
@@ -616,8 +648,10 @@ public class LessonPlayerController {
                         if (btnText.equalsIgnoreCase(correctAnswer.trim())) {
                             btn.setStyle("-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-border-color: #059669; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else if (selectedAnswer != null && btnText.equalsIgnoreCase(selectedAnswer.trim()) && !isCorrect) {
+                            // Chosen Incorrect Answer -> Red
                             btn.setStyle("-fx-background-color: #7F1D1D; -fx-text-fill: #FCA5A5; -fx-border-color: #DC2626; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else {
+                            // Other unselected options -> Dimmed
                             btn.setStyle("-fx-background-color: #0F172A; -fx-text-fill: #64748B; -fx-border-color: #1E293B; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 0.5;");
                         }
                     }
@@ -787,6 +821,36 @@ public class LessonPlayerController {
         if (continueBtn != null) {
             continueBtn.setDisable(true);
         }
+    }
+    private void showBrainLimitDialog() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                javafx.scene.control.Alert.AlertType.WARNING);
+        alert.setTitle("Brain Limit Reached");
+        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
+        alert.setContentText(
+                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
+                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
+        );
+
+        javafx.scene.control.ButtonType upgradeBtn =
+                new javafx.scene.control.ButtonType("Upgrade",
+                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
+        javafx.scene.control.ButtonType cancelBtn =
+                new javafx.scene.control.ButtonType("Cancel",
+                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().handlePremium();
+            } else {
+                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+                }
+            }
+        });
     }
 
     private void showOutOfBrainsDialog() {

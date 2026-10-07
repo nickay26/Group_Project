@@ -195,7 +195,6 @@ public class LoginController {
     // LOGIN HANDLERS
     // ============================================
 
-    /** Continue Button နှိပ်ရင် Login လုပ် */
     @FXML
     private void handleLogin() {
         String email = emailField.getText().trim();
@@ -203,17 +202,20 @@ public class LoginController {
 
         // Validation
         if (email.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please enter both your email/username and password.");
+            showAlert(Alert.AlertType.WARNING, "Missing Fields",
+                    "Please enter both your email/username and password.");
             return;
         }
 
         if (!email.contains("@") && !email.matches("^[a-zA-Z0-9_]+$")) {
-            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please enter a valid email address or username.");
+            showAlert(Alert.AlertType.WARNING, "Invalid Input",
+                    "Please enter a valid email address or username.");
             return;
         }
 
         if (password.length() < 6) {
-            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be at least 6 characters long.");
+            showAlert(Alert.AlertType.WARNING, "Weak Password",
+                    "Password must be at least 6 characters long.");
             return;
         }
 
@@ -228,10 +230,22 @@ public class LoginController {
             UserSession.initSession(user);
             System.out.println("Login successful for User ID: " + user.getUserId());
 
-            // Redirection Logic ခေါ်ယူခြင်း
+            // ⭐ PREMIUM CHECK
+            boolean serverPremium = DatabaseManager.isPremium(user.getUserId());
+            System.out.println("Server premium check: " + serverPremium);
+            if (serverPremium) {
+                user.setPremium(true);
+                user.setSubscriptionType("monthly");
+                UserSession.updateUser(user);
+                System.out.println("✅ Local user updated to PREMIUM");
+            } else {
+                System.out.println("❌ Server says NOT premium");
+            }
+
             navigateToNextScene();
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email/username or password. Please try again.");
+            showAlert(Alert.AlertType.ERROR, "Login Failed",
+                    "Invalid email/username or password. Please try again.");
         }
     }
 
@@ -243,17 +257,25 @@ public class LoginController {
         GoogleAuthService.startGoogleLogin(authCode -> {
             GoogleAuthService.fetchUserProfile(authCode, (userIdFromAuth, email, name) -> {
 
-                // 1. Fetch or create local MySQL record to obtain correct User_ID
                 User dbUser = DatabaseManager.findOrCreateGoogleUser(name, email, null);
 
                 if (dbUser != null) {
-                    // JavaFX UI Thread ပေါ်တွင် Scene ပြောင်းရန် Platform.runLater သုံးသည်
                     Platform.runLater(() -> {
-                        // 2. Initialize UserSession
                         UserSession.initSession(dbUser);
                         System.out.println("Session started for Google User ID: " + dbUser.getUserId());
 
-                        // 3. Flask သို့ Auth Code ပို့ပြီး Redirection Logic ခေါ်ယူခြင်း
+                        // ⭐ PREMIUM CHECK (ဒီနေရာမှာ ထည့်)
+                        boolean serverPremium = DatabaseManager.isPremium(dbUser.getUserId());
+                        System.out.println("Server premium check: " + serverPremium);
+                        if (serverPremium) {
+                            dbUser.setPremium(true);
+                            dbUser.setSubscriptionType("monthly");
+                            UserSession.updateUser(dbUser);
+                            System.out.println("✅ Local user updated to PREMIUM");
+                        } else {
+                            System.out.println("❌ Server says NOT premium");
+                        }
+
                         sendAuthCodeToFlask(authCode);
                         navigateToNextScene();
                     });

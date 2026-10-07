@@ -10,7 +10,13 @@ public class User {
     private int coin;
     private int brainCount;
 
-    public User(int userId, String name, String email, String profile, int xp, int streak, int coin, int brainCount) {
+    // ⭐ Premium Fields
+    private boolean premium = false;
+    private String subscriptionType = "free";
+    private String planType = "FREE";
+
+    public User(int userId, String name, String email, String profile,
+                int xp, int streak, int coin, int brainCount) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -33,6 +39,15 @@ public class User {
         this(userId, name, email, "", 0, 0, 0, 0);
     }
 
+    // Setters
+    public void setPremium(boolean premium) { this.premium = premium; }
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+    public void setPlanType(String planType) { this.planType = planType; }
+
+    // Getters
+    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -41,6 +56,7 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
+    public String getPlanType() { return planType; }
 
     public void setXp(int xp) { this.xp = xp; }
     public void setStreak(int streak) { this.streak = streak; }
@@ -54,4 +70,6 @@ public class User {
     public String getProfilePicture() {
         return profile;
     }
+    public boolean isPremium() { return premium; }
+    public String getSubscriptionType() { return subscriptionType; }
 }
