@@ -85,22 +85,29 @@ public class MainLayoutController {
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
-            // Local Session တန်ဖိုးကို UI ထဲသို့ တိုက်ရိုက် ထည့်သွင်းပါမည်
+            // 1. Local Session ထဲက လက်ရှိ Coin တန်ဖိုးကို ချက်ချင်း UI မှာ ပြပါ
+            final int currentLocalCoin = currentUser.getCoin();
+
             Platform.runLater(() -> {
                 if (topStreakLabel != null) topStreakLabel.setText(" " + currentUser.getStreak());
                 if (topBrainLabel != null) topBrainLabel.setText(" " + currentUser.getBrainCount());
-                if (topCoinLabel != null) topCoinLabel.setText(" " + currentUser.getCoin());
+                if (topCoinLabel != null) topCoinLabel.setText(" " + currentLocalCoin);
             });
 
-            // Backend ထံမှ Async ပြန်ယူသည့်အခါ Local Session ထဲသို့ ချက်ချင်း Sync ပြန်လုပ်ပေးပါမည်
+            // 2. Async ဘက်က တန်ဖိုး ပြန်ယူသည့်အခါ Local Coin ထက် နည်းနေပါက 0 မဖြစ်စေရန် Math.max() ဖြင့် ကာကွယ်ပါ
             new Thread(() -> {
                 User updatedUser = DatabaseManager.getUserById(currentUser.getUserId());
                 if (updatedUser != null) {
+                    // Local Coin နဲ့ DB Coin အနက် ကြီးသည့် တန်ဖိုးကိုသာ ယူမည်
+                    int safeCoin = Math.max(currentLocalCoin, updatedUser.getCoin());
+                    updatedUser.setCoin(safeCoin);
+
                     UserSession.setCurrentUser(updatedUser);
+
                     Platform.runLater(() -> {
                         if (topStreakLabel != null) topStreakLabel.setText(" " + updatedUser.getStreak());
                         if (topBrainLabel != null) topBrainLabel.setText(" " + updatedUser.getBrainCount());
-                        if (topCoinLabel != null) topCoinLabel.setText(" " + UserSession.getCurrentUser().getCoin());
+                        if (topCoinLabel != null) topCoinLabel.setText(" " + safeCoin);
                     });
                 }
             }).start();

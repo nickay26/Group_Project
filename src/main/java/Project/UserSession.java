@@ -31,9 +31,15 @@ public class UserSession {
     }
 
     public static void setCurrentUser(User user) {
-        currentUser = user;
-        if (user != null && activeCourseId == null) {
-            activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null) {
+            // အကယ်၍ DB မှ coin က 0 ဖြစ်နေပြီး local session မှာ coin ရှိနေရင် Local Coin ကို ထိန်းထားပေးမည်
+            if (currentUser != null && user.getCoin() < currentUser.getCoin()) {
+                user.setCoin(currentUser.getCoin());
+            }
+            currentUser = user;
+            if (activeCourseId == null) {
+                activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+            }
         }
         if (instance == null) {
             instance = new UserSession(user);
