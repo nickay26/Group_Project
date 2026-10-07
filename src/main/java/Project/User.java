@@ -21,9 +21,9 @@ public class User {
         this.brainCount = brainCount;
     }
 
-    // Constructor with default values
+    // Default Constructor တွင် Brain ကို 5 ပေးထားပါမည်
     public User(int userId, String name, String email) {
-        this(userId, name, email, "", 0, 0, 0, 0);
+        this(userId, name, email, "", 0, 0, 0, 5);
     }
 
     // Getters

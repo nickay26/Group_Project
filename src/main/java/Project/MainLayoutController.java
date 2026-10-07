@@ -1,7 +1,7 @@
 package Project;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,26 +51,27 @@ public class MainLayoutController {
         instance = this;
         navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
 
-        // Brain Label/Icon ကို နှိပ်ပါက Refill Dialog ပွင့်ရန် Event ထည့်သွင်းခြင်း
         if (topBrainLabel != null) {
             topBrainLabel.setOnMouseClicked(e -> showRefillBrainDialog());
             topBrainLabel.setStyle("-fx-cursor: hand;");
         }
 
-        // Automatically fetch and display active course title
         updateHeaderStats();
         updateCourseTitle();
 
-        // ⭐ Overview မှ လာခြင်း မဟုတ်ပါက Course Page ကို Default အဖြစ် Load လုပ်မည်
         if (UserSession.isRedirectedFromOverview()) {
             handleNavLearn();
         } else {
-            handleNavCourses(); // Login ဝင်လာပါက Courses Page ကို Default Load လုပ်မည်
+            handleNavCourses();
         }
     }
 
     public static MainLayoutController getInstance() {
         return instance;
+    }
+
+    public StackPane getContentArea() {
+        return contentArea;
     }
 
     public void setCourseTitle(String title) {
@@ -81,9 +83,25 @@ public class MainLayoutController {
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
-            topStreakLabel.setText(" " + currentUser.getStreak());
-            topBrainLabel.setText(" " + currentUser.getBrainCount());
-            topCoinLabel.setText(" " + currentUser.getCoin());
+            // Local Session တန်ဖိုးကို UI ထဲသို့ တိုက်ရိုက် ထည့်သွင်းပါမည်
+            Platform.runLater(() -> {
+                if (topStreakLabel != null) topStreakLabel.setText(" " + currentUser.getStreak());
+                if (topBrainLabel != null) topBrainLabel.setText(" " + currentUser.getBrainCount());
+                if (topCoinLabel != null) topCoinLabel.setText(" " + currentUser.getCoin());
+            });
+
+            // Backend ထံမှ Async ပြန်ယူသည့်အခါ Local Session ထဲသို့ ချက်ချင်း Sync ပြန်လုပ်ပေးပါမည်
+            new Thread(() -> {
+                User updatedUser = DatabaseManager.getUserById(currentUser.getUserId());
+                if (updatedUser != null) {
+                    UserSession.setCurrentUser(updatedUser);
+                    Platform.runLater(() -> {
+                        if (topStreakLabel != null) topStreakLabel.setText(" " + updatedUser.getStreak());
+                        if (topBrainLabel != null) topBrainLabel.setText(" " + updatedUser.getBrainCount());
+                        if (topCoinLabel != null) topCoinLabel.setText(" " + UserSession.getCurrentUser().getCoin());
+                    });
+                }
+            }).start();
         }
     }
 
@@ -92,22 +110,23 @@ public class MainLayoutController {
         int userId = UserSession.getUserId();
 
         if (activeCourseId != null) {
-            List<Course> courses = DatabaseManager.getCoursesForUser(userId);
-            if (courses != null) {
-                for (Course c : courses) {
-                    if (c.getCourseId().equalsIgnoreCase(activeCourseId)) {
-                        setCourseTitle(c.getTitle());
-                        return;
+            new Thread(() -> {
+                List<Course> courses = DatabaseManager.getCoursesForUser(userId);
+                if (courses != null) {
+                    for (Course c : courses) {
+                        if (c.getCourseId().equalsIgnoreCase(activeCourseId)) {
+                            Platform.runLater(() -> setCourseTitle(c.getTitle()));
+                            return;
+                        }
                     }
                 }
-            }
+                Platform.runLater(() -> setCourseTitle("No Active Course"));
+            }).start();
+        } else {
+            setCourseTitle("No Active Course");
         }
-        setCourseTitle("No Active Course");
     }
 
-    // ============================================
-    // BRAIN REFILL DIALOG (POPUP)
-    // ============================================
     @FXML
     public void showRefillBrainDialog() {
         User user = UserSession.getCurrentUser();
@@ -134,7 +153,6 @@ public class MainLayoutController {
         Label descLabel = new Label("Refill your brains to keep learning without waiting!");
         descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 13px;");
 
-        // Current User Stats Display Box
         HBox infoBox = new HBox(20);
         infoBox.setAlignment(Pos.CENTER);
         infoBox.setStyle("-fx-background-color: #1E293B; -fx-padding: 12; -fx-background-radius: 12px;");
@@ -147,7 +165,7 @@ public class MainLayoutController {
 
         infoBox.getChildren().addAll(currentCoinLbl, currentBrainLbl);
 
-        int refillCost = 100; // Refill ပြုလုပ်ရန် ကုန်ကျမည့် Coin ပမာဏ
+        int refillCost = 100;
 
         Button refillBtn = new Button("Refill 5 Brains (🪙 " + refillCost + " Coins)");
         refillBtn.setStyle(
@@ -176,27 +194,28 @@ public class MainLayoutController {
                 return;
             }
 
-            boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), refillCost, 5);
+            new Thread(() -> {
+                boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), refillCost, 5);
 
-            if (success) {
-                // User Session Update
-                user.setCoin(user.getCoin() - refillCost);
-                user.setBrainCount(5);
+                Platform.runLater(() -> {
+                    if (success) {
+                        user.setCoin(user.getCoin() - refillCost);
+                        user.setBrainCount(5);
+                        updateHeaderStats();
 
-                // Main Navigation Header UI Update
-                updateHeaderStats();
+                        statusLabel.setText("Successfully refilled brains!");
+                        statusLabel.setStyle("-fx-text-fill: #34D399;");
 
-                statusLabel.setText("Successfully refilled brains!");
-                statusLabel.setStyle("-fx-text-fill: #34D399;");
-
-                new Thread(() -> {
-                    try { Thread.sleep(1200); } catch (Exception ignored) {}
-                    Platform.runLater(dialog::close);
-                }).start();
-            } else {
-                statusLabel.setText("Transaction failed! Please try again.");
-                statusLabel.setStyle("-fx-text-fill: #F87171;");
-            }
+                        new Thread(() -> {
+                            try { Thread.sleep(1200); } catch (Exception ignored) {}
+                            Platform.runLater(dialog::close);
+                        }).start();
+                    } else {
+                        statusLabel.setText("Transaction failed! Please try again.");
+                        statusLabel.setStyle("-fx-text-fill: #F87171;");
+                    }
+                });
+            }).start();
         });
 
         Button closeBtn = new Button("Close");
@@ -215,23 +234,16 @@ public class MainLayoutController {
         dialog.showAndWait();
     }
 
-    // ============================================
-    // LOAD PRACTICE QUESTION (Sidebar ထဲ)
-    // ============================================
     public void loadPracticeQuestion(String language, String type) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/Project/PracticeQuestionView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/PracticeQuestionView.fxml"));
             Parent view = loader.load();
 
-            // Controller ကို ယူ
             PracticeQuestionController controller = loader.getController();
-
-            // Question ဆွဲ
             List<QuestionData> list = JsonUtils.getPracticeListByType(language, type);
             QuestionData question;
 
-            if (list.isEmpty()) {
+            if (list == null || list.isEmpty()) {
                 question = new QuestionData(
                         language, type,
                         "Complete the task below.",
@@ -246,8 +258,6 @@ public class MainLayoutController {
             }
 
             controller.setQuestion(question);
-
-            // ✅ contentArea ထဲ ထည့် (Sidebar မပျောက်)
             contentArea.getChildren().setAll(view);
 
         } catch (Exception e) {
@@ -255,21 +265,13 @@ public class MainLayoutController {
         }
     }
 
-    // Starter Code Helper
     private String getStarterCode(String language) {
+        if (language == null) return "";
         switch (language) {
             case "Java":
-                return "public class Main {\n" +
-                        "    public static void main(String[] args) {\n" +
-                        "        // Write your code here\n" +
-                        "    }\n" +
-                        "}";
+                return "public class Main {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}";
             case "C++":
-                return "#include <iostream>\nusing namespace std;\n\n" +
-                        "int main() {\n" +
-                        "    // Write your code here\n" +
-                        "    return 0;\n" +
-                        "}";
+                return "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}";
             case "Python":
                 return "# Write your Python code here\n";
             default:
@@ -323,16 +325,14 @@ public class MainLayoutController {
             MenuItem helpItem = new MenuItem("Help");
             MenuItem logoutItem = new MenuItem("Log out");
 
-            // Event Handlers
-            editProfileItem.setOnAction(e -> handleEditProfile());
-            settingsItem.setOnAction(e -> handleSettings());
-            helpItem.setOnAction(e -> handleHelp());
+            editProfileItem.setOnAction(e -> loadPage("ProfileView.fxml"));
+            settingsItem.setOnAction(e -> loadPage("SettingsView.fxml"));
+            helpItem.setOnAction(e -> loadPage("HelpView.fxml"));
             logoutItem.setOnAction(e -> handleLogout());
 
             profileMenu.getItems().addAll(editProfileItem, settingsItem, helpItem, logoutItem);
         }
 
-        // Dropdown Menu ဖွင့်/ပိတ် ပြုလုပ်ခြင်း
         if (profileMenu.isShowing()) {
             profileMenu.hide();
         } else {
@@ -340,158 +340,42 @@ public class MainLayoutController {
         }
     }
 
-    private void handleEditProfile() {
-        loadPage("ProfileView.fxml");
-    }
-
-    private void handleSettings() {
-        loadPage("SettingsView.fxml");
-    }
-
-    private void handleHelp() {
-        loadPage("HelpView.fxml");
-    }
-
     @FXML
     public void handlePremium() {
-        // Premium Page ကို content area ထဲမှာ Load လုပ်
         loadPage("PremiumView.fxml");
     }
 
     private void handleLogout() {
-        // Session clear ပြုလုပ်ခြင်း
         UserSession.clearSession();
         SceneManager.switchScene("WelcomeView.fxml");
     }
 
-    /**
-     * ⭐ Page ပြောင်းလဲသည့်အခါ Emoji + Modern Card UI Loading ပြသပေးမည်
-     */
     public FXMLLoader loadPage(String fxmlFileName) {
-        // FXML Name အလိုက် Sidebar Highlight အာမခံချက်ရှိအောင် အရင်ပြောင်းမည်
         updateSidebarHighlight(fxmlFileName);
 
-        // Page အမျိုးအစားပေါ်မူတည်ပြီး Dynamic Emoji နှင့် Text သတ်မှတ်ခြင်း
-        String dynamicEmoji = "🚀";
-        String pageName = "Page";
+        try {
+            String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/Project/" + fxmlFileName;
+            URL resource = getClass().getResource(resourcePath);
 
-        if (fxmlFileName.contains("LearnPage")) {
-            dynamicEmoji = "📚";
-            pageName = "Learn Path";
-        } else if (fxmlFileName.contains("Course")) {
-            dynamicEmoji = "🎓";
-            pageName = "Courses";
-        } else if (fxmlFileName.contains("Playground")) {
-            dynamicEmoji = "💻";
-            pageName = "Playground";
-        } else if (fxmlFileName.contains("Leaderboard")) {
-            dynamicEmoji = "🏆";
-            pageName = "Leaderboard";
-        } else if (fxmlFileName.contains("Practice")) {
-            dynamicEmoji = "🎯";
-            pageName = "Practice";
-        } else if (fxmlFileName.contains("Game")) {
-            dynamicEmoji = "🎮";
-            pageName = "Games";
-        } else if (fxmlFileName.contains("Profile")) {
-            dynamicEmoji = "👤";
-            pageName = "Profile";
-        } else if (fxmlFileName.contains("Settings")) {
-            dynamicEmoji = "⚙️";
-            pageName = "Settings";
-        } else if (fxmlFileName.contains("Help")) {
-            dynamicEmoji = "❓";
-            pageName = "Help & Support";
-        } else if (fxmlFileName.contains("Premium")) {
-            dynamicEmoji = "👑";
-            pageName = "Premium";
-        }
+            if (resource == null) resource = getClass().getResource("/fxml/" + fxmlFileName);
+            if (resource == null) resource = getClass().getResource("/" + fxmlFileName);
 
-        // 1. Loading UI Elements ပြင်ဆင်ခြင်း
-        ProgressIndicator spinner = new ProgressIndicator();
-        spinner.setStyle("-fx-progress-color: #38BDF8;");
-        spinner.setMaxSize(42, 42);
-
-        // 🤖 စက်ရုပ်ပုံစံ ဖျက်လိုက်သည်
-        Label titleLabel = new Label(dynamicEmoji + " Loading " + pageName + "...");
-        titleLabel.setStyle("-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
-
-        Label subText = new Label("Preparing your workspace...");
-        subText.setStyle("-fx-font-size: 12px; -fx-text-fill: #94A3B8; -fx-font-weight: 500;");
-
-        // UI Card Container
-        VBox loadingCard = new VBox(12, spinner, titleLabel, subText);
-        loadingCard.setAlignment(Pos.CENTER);
-        loadingCard.setPadding(new Insets(28, 36, 28, 36));
-        loadingCard.setStyle(
-                "-fx-background-color: #1E293B;" +
-                        "-fx-background-radius: 18px;" +
-                        "-fx-border-color: #334155;" +
-                        "-fx-border-radius: 18px;" +
-                        "-fx-border-width: 1.5px;" +
-                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 18, 0, 0, 6);"
-        );
-
-        // Centered Wrapper Panel
-        StackPane overlayPane = new StackPane(loadingCard);
-        overlayPane.setAlignment(Pos.CENTER);
-        overlayPane.setStyle("-fx-background-color: #0F172A;"); // Dashboard Dark BG
-
-        // Content Area ထဲတွင် Loading Card ကို အရင်ပြသမည်
-        contentArea.getChildren().setAll(overlayPane);
-
-        final FXMLLoader[] loadedLoader = new FXMLLoader[1];
-
-        // 2. Background Thread ဖြင့် FXML ကို Load ပြုလုပ်မည်
-        Task<Parent> loadTask = new Task<>() {
-            @Override
-            protected Parent call() throws Exception {
-                String resourcePath = fxmlFileName.startsWith("/") ? fxmlFileName : "/fxml/" + fxmlFileName;
-                URL resource = getClass().getResource(resourcePath);
-
-                if (resource == null) {
-                    resource = getClass().getResource("/" + fxmlFileName);
-                }
-                if (resource == null) {
-                    resource = getClass().getResource(fxmlFileName);
-                }
-
-                if (resource == null) {
-                    throw new IOException("Could not find FXML file: " + fxmlFileName);
-                }
-
-                FXMLLoader loader = new FXMLLoader(resource);
-                Parent view = loader.load();
-                loadedLoader[0] = loader;
-
-                // Loading Card ကို မြင်သာအောင် 300ms ခဏစောင့်မည်
-                Thread.sleep(300);
-
-                return view;
+            if (resource == null) {
+                throw new IOException("Could not find FXML file: " + fxmlFileName);
             }
-        };
 
-        // 3. Load ပြီးပါက Main UI Thread ပေါ်တွင် View အသစ်ကို လဲလှယ်မည်
-        loadTask.setOnSucceeded(e -> {
-            Parent newView = loadTask.getValue();
-            contentArea.getChildren().setAll(newView);
-        });
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent view = loader.load();
+            contentArea.getChildren().setAll(view);
+            return loader;
 
-        loadTask.setOnFailed(e -> {
-            System.err.println("Error loading FXML: " + fxmlFileName);
-            if (loadTask.getException() != null) {
-                loadTask.getException().printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
             Label errorLabel = new Label("❌ Failed to load page: " + fxmlFileName);
             errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 14px; -fx-font-weight: bold;");
             contentArea.getChildren().setAll(errorLabel);
-        });
-
-        Thread thread = new Thread(loadTask);
-        thread.setDaemon(true);
-        thread.start();
-
-        return loadedLoader[0];
+            return null;
+        }
     }
 
     private void updateSidebarHighlight(String fxmlFileName) {

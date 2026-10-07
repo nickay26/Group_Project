@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -16,8 +15,30 @@ public class DatabaseManager {
     private static final HttpClient client = HttpClient.newHttpClient();
 
     // ==========================================
-    // 1. USER AUTHENTICATION & SYNC
+    // 1. USER AUTHENTICATION, FETCH & SYNC
     // ==========================================
+
+    public static User getUserById(int userId) {
+        if (userId <= 0) return null;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject json = new JSONObject(response.body());
+                JSONObject userObj = json.has("user") ? json.getJSONObject("user") : json;
+                return mapJsonToUser(userObj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static User findOrCreateGoogleUser(String name, String email, String profilePicUrl) {
         try {
@@ -93,7 +114,6 @@ public class DatabaseManager {
         return null;
     }
 
-    // User ၏ နောက်ဆုံး Active ဖြစ်ခဲ့သော Course ID ကို API မှတစ်ဆင့် ရယူခြင်း
     public static String getLastActiveCourseId(int userId) {
         if (userId <= 0) return "CPP_BASIC";
 
@@ -183,13 +203,14 @@ public class DatabaseManager {
         return lessons;
     }
 
-    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount) {
+    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount, int coinsAmount) {
         try {
             JSONObject body = new JSONObject();
             body.put("user_id", userId);
             body.put("course_id", courseId);
             body.put("lesson_order", lessonOrder);
             body.put("xp", xpAmount);
+            body.put("coins", coinsAmount);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/api/lessons/complete"))
@@ -197,13 +218,16 @@ public class DatabaseManager {
                     .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                     .build();
 
-            client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (coinsAmount > 0) {
+                addCoinsToUser(userId, coinsAmount);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // ⭐ Lesson ဖြေပြီးပါက Coin တိုးပေးရန် API ခေါ်ယူသည့် Method
     public static boolean addCoinsToUser(int userId, int coinsToAdd) {
         try {
             JSONObject body = new JSONObject();
@@ -224,7 +248,6 @@ public class DatabaseManager {
         }
     }
 
-    // ⭐ Coin ဖြင့် Brain Refill လုပ်ရန် API ခေါ်ယူသည့် Method
     public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
         try {
             JSONObject body = new JSONObject();
@@ -246,7 +269,6 @@ public class DatabaseManager {
         }
     }
 
-    // User ၏ Course တစ်ခုအတွက် ပြီးစီးပြီးသော Lesson အရေအတွက်ကို API မှတစ်ဆင့် ယူခြင်း
     public static int getCompletedLessonCount(int userId, String courseId) {
         List<Course> courses = getCoursesForUser(userId);
         for (Course c : courses) {
@@ -342,9 +364,6 @@ public class DatabaseManager {
         return false;
     }
 
-    // ============================================
-    // UPDATE USER PROFILE
-    // ============================================
     public static boolean updateUserProfile(int userId, String name, String profile) {
         try {
             JSONObject body = new JSONObject();
@@ -366,15 +385,10 @@ public class DatabaseManager {
             return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
-    // ==========================================
-    // HELPER METHODS
-    // ==========================================
-
-    // GET Request များ ခေါ်ယူရာတွင် အသုံးပြုရန် Generic Helper
     private static String sendGetRequest(String path) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
@@ -388,7 +402,6 @@ public class DatabaseManager {
         return "";
     }
 
-    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
     private static User mapJsonToUser(JSONObject obj) {
         int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
         String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
@@ -396,15 +409,19 @@ public class DatabaseManager {
         String profile = obj.optString("Profile", obj.optString("profile", null));
         int xp = obj.optInt("XP", obj.optInt("xp", 0));
         int streak = obj.optInt("Streak", obj.optInt("streak", 0));
-        int coin = obj.optInt("coin", obj.optInt("Coin", 0));
+
+        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
+        int coin = 0;
+        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
+        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
+        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
+        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
+
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
         return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
 
-    // ==========================================
-    // ADD LESSON TO REVIEW TABLE
-    // ==========================================
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
         try {
             JSONObject body = new JSONObject();
@@ -426,9 +443,6 @@ public class DatabaseManager {
         }
     }
 
-    // ============================================
-    // GET LESSONS FROM REVIEW TABLE
-    // ============================================
     public static List<PracticeController.ReviewData> getReviewLessons(int userId) {
         List<PracticeController.ReviewData> reviewList = new ArrayList<>();
         try {
@@ -449,7 +463,6 @@ public class DatabaseManager {
                     String courseId = obj.optString("course_id", "");
                     String title = obj.optString("Lesson_title", lessonId);
 
-                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
                     String language = "C++";
                     if (courseId.toUpperCase().contains("JAVA")) {
                         language = "Java";
@@ -467,10 +480,6 @@ public class DatabaseManager {
         }
         return reviewList;
     }
-
-    // ==========================================
-    // 4. PREMIUM & PAYMENT
-    // ==========================================
 
     public static boolean subscribePremium(int userId, int planId, String durationType) {
         try {
