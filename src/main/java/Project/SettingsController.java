@@ -38,6 +38,11 @@ public class SettingsController {
     @FXML private TextArea bioField;
     @FXML private ComboBox<Country> countryCombo;
 
+    // Password Fields
+    @FXML private PasswordField currentPasswordField;
+    @FXML private PasswordField newPasswordField;
+    @FXML private PasswordField confirmPasswordField;
+
     // Avatar Components
     @FXML private StackPane avatarContainer;
     @FXML private ImageView avatarPreview;
@@ -59,14 +64,13 @@ public class SettingsController {
     // ============================================
     @FXML
     public void initialize() {
-        // ✅ setCenter မလိုတော့ဘူး — FXML မှာ ရှိပြီးသား
         showInfoSection();
 
-        // ✅ Avatar Container Clip (အဝိုင်း)
+        // Avatar Container Clip (Circle)
         Circle containerClip = new Circle(50, 50, 50);
         avatarContainer.setClip(containerClip);
 
-        // ✅ Country Setup
+        // Country Setup
         setupCountryCombo();
 
         // User Data
@@ -75,29 +79,41 @@ public class SettingsController {
             usernameField.setText(user.getName());
             emailField.setText(user.getEmail());
 
-            if (user.getProfile() != null && !user.getProfile().isEmpty()) {
-                try {
-                    Image img = new Image(user.getProfile(), 100, 100, false, true, true);
-                    avatarPreview.setImage(img);
-                    avatarPreview.setVisible(true);
-                    avatarInitialLabel.setVisible(false);
-                } catch (Exception e) {
-                    showInitialAvatar(user.getName());
-                }
-            } else {
-                showInitialAvatar(user.getName());
-            }
+            loadUserProfileImage(user.getProfile(), user.getName());
         }
 
-        // ✅ Default: Change + Delete ပြ၊ Set ဖျောက်
+        // Default button states
         deleteBtn.setVisible(true);
         deleteBtn.setManaged(true);
         setBtn.setVisible(false);
         setBtn.setManaged(false);
     }
 
+    private void loadUserProfileImage(String profilePath, String name) {
+        if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
+            try {
+                String imageUrl;
+                // If it's a local disk path, format as file URI; otherwise convert server filename to full URL
+                if (profilePath.startsWith("file:") || profilePath.contains(":\\")) {
+                    imageUrl = new File(profilePath.replace("file:", "")).toURI().toString();
+                } else {
+                    imageUrl = ApiClient.getProfileImageUrl(profilePath);
+                }
+
+                Image img = new Image(imageUrl, 100, 100, false, true, true);
+                avatarPreview.setImage(img);
+                avatarPreview.setVisible(true);
+                avatarInitialLabel.setVisible(false);
+                return;
+            } catch (Exception e) {
+                System.err.println("Failed to load avatar image: " + e.getMessage());
+            }
+        }
+        showInitialAvatar(name);
+    }
+
     // ============================================
-    // ✅ COUNTRY COMBO — PNG Flag + Name
+    // COUNTRY COMBO
     // ============================================
     private void setupCountryCombo() {
         ObservableList<Country> countries = FXCollections.observableArrayList(
@@ -156,9 +172,6 @@ public class SettingsController {
         countryCombo.setMaxWidth(Double.MAX_VALUE);
     }
 
-    // ============================================
-    // COUNTRY MODEL
-    // ============================================
     public static class Country {
         private final String code;
         private final String name;
@@ -177,9 +190,6 @@ public class SettingsController {
         }
     }
 
-    // ============================================
-    // COUNTRY CELL — PNG ImageView
-    // ============================================
     private static class CountryCell extends ListCell<Country> {
         private final HBox content;
         private final ImageView flagView;
@@ -220,7 +230,6 @@ public class SettingsController {
                         flagView.setImage(img);
                     } else {
                         flagView.setImage(null);
-                        System.out.println("⚠️ Flag not found: " + path);
                     }
                 } catch (Exception e) {
                     flagView.setImage(null);
@@ -256,18 +265,16 @@ public class SettingsController {
     }
 
     // ============================================
-    // ✅ CHANGE
+    // CHANGE IMAGE
     // ============================================
     @FXML
     private void handleChangeImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Profile Picture");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files",
-                        "*.png", "*.jpg", "*.jpeg", "*.gif"));
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
-        File selectedFile = fileChooser.showOpenDialog(
-                changeBtn.getScene().getWindow());
+        File selectedFile = fileChooser.showOpenDialog(changeBtn.getScene().getWindow());
 
         if (selectedFile != null) {
             String croppedPath = AvatarCropDialog.showCropDialog(selectedFile);
@@ -275,7 +282,8 @@ public class SettingsController {
                 tempAvatarPath = croppedPath;
                 hasNewAvatar = true;
 
-                Image img = new Image(croppedPath, 100, 100, false, true, true);
+                String fileUri = new File(croppedPath).toURI().toString();
+                Image img = new Image(fileUri, 100, 100, false, true, true);
                 avatarPreview.setImage(img);
                 avatarPreview.setVisible(true);
                 avatarInitialLabel.setVisible(false);
@@ -292,7 +300,7 @@ public class SettingsController {
     }
 
     // ============================================
-    // ✅ DELETE
+    // DELETE IMAGE
     // ============================================
     @FXML
     private void handleDeleteImage() {
@@ -310,11 +318,11 @@ public class SettingsController {
         setBtn.setManaged(false);
 
         user.setProfile(null);
-        DatabaseManager.updateUserProfile(user.getUserId(), user.getName(), null);
+        DatabaseManager.updateUserProfile(user.getUserId(), null);
     }
 
     // ============================================
-    // ✅ SET
+    // SET IMAGE
     // ============================================
     @FXML
     private void handleSetImage() {
@@ -323,21 +331,50 @@ public class SettingsController {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
 
-        user.setProfile(tempAvatarPath);
-        DatabaseManager.updateUserProfile(user.getUserId(), user.getName(), tempAvatarPath);
+        // Convert file: URI string to a valid Windows File object
+        File imageFile;
+        try {
+            if (tempAvatarPath.startsWith("file:")) {
+                imageFile = new File(new java.net.URI(tempAvatarPath));
+            } else {
+                imageFile = new File(tempAvatarPath);
+            }
+        } catch (Exception e) {
+            imageFile = new File(tempAvatarPath.replace("file:/", "").replace("file:", ""));
+        }
 
-        deleteBtn.setVisible(true);
-        deleteBtn.setManaged(true);
-        setBtn.setVisible(false);
-        setBtn.setManaged(false);
+        if (!imageFile.exists()) {
+            System.err.println("File not found on disk: " + imageFile.getAbsolutePath());
+            return;
+        }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText("✅ Profile picture updated!");
-        alert.showAndWait();
+        // Upload actual image file to PythonAnywhere
+        ApiClient.uploadProfileImageAsync(user.getUserId(), imageFile)
+                .thenAccept(responseJson -> {
+                    javafx.application.Platform.runLater(() -> {
+                        if (responseJson != null) {
+                            try {
+                                org.json.JSONObject json = new org.json.JSONObject(responseJson);
+                                String savedFileName = json.optString("profile_pic", null);
 
-        hasNewAvatar = false;
+                                if (savedFileName != null) {
+                                    // Store server filename (e.g. user_3_a1b2c3d4.png), NOT local path
+                                    user.setProfile(savedFileName);
+
+                                    setBtn.setVisible(false);
+                                    setBtn.setManaged(false);
+                                    deleteBtn.setVisible(true);
+                                    deleteBtn.setManaged(true);
+                                    hasNewAvatar = false;
+
+                                    showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile picture uploaded successfully!");
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                });
     }
 
     // ============================================
@@ -345,7 +382,7 @@ public class SettingsController {
     // ============================================
     @FXML
     private void showInfoSection() {
-        centerContainer.setCenter(settingsScrollPane);   // ✅ Settings content ပြန်
+        centerContainer.setCenter(settingsScrollPane);
         hideAll();
         infoSection.setVisible(true);
         infoSection.setManaged(true);
@@ -401,30 +438,75 @@ public class SettingsController {
         }
     }
 
+    // ============================================
+    // SAVE USER INFO
+    // ============================================
     @FXML
     private void handleSaveInfo() {
         User user = UserSession.getCurrentUser();
-        if (user != null) {
-            String newName = usernameField.getText().trim();
-            if (!newName.isEmpty()) {
-                user.setName(newName);
-                DatabaseManager.updateUserProfile(user.getUserId(), newName, user.getProfile());
-            }
+        if (user == null) return;
+
+        String newName = usernameField.getText().trim();
+        String newEmail = emailField.getText().trim();
+
+        if (newName.isEmpty() || newEmail.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Username and Email cannot be empty.");
+            return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText("✅ Information saved!");
-        alert.showAndWait();
+        boolean success = DatabaseManager.updateUserInfo(user.getUserId(), newName, newEmail);
+        if (success) {
+            user.setName(newName);
+            user.setEmail(newEmail);
+            showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile information updated successfully!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to update information on server.");
+        }
     }
 
+    // ============================================
+    // CHANGE PASSWORD
+    // ============================================
     @FXML
     private void handleChangePassword() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Password");
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
+
+        String currentPw = currentPasswordField != null ? currentPasswordField.getText() : "";
+        String newPw = newPasswordField != null ? newPasswordField.getText() : "";
+        String confirmPw = confirmPasswordField != null ? confirmPasswordField.getText() : "";
+
+        if (currentPw.isEmpty() || newPw.isEmpty() || confirmPw.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all password fields.");
+            return;
+        }
+
+        if (!newPw.equals(confirmPw)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "New password and confirm password do not match.");
+            return;
+        }
+
+        if (newPw.length() < 6) {
+            showAlert(Alert.AlertType.ERROR, "Error", "New password must be at least 6 characters long.");
+            return;
+        }
+
+        boolean success = DatabaseManager.changePassword(user.getUserId(), currentPw, newPw);
+        if (success) {
+            if (currentPasswordField != null) currentPasswordField.clear();
+            if (newPasswordField != null) newPasswordField.clear();
+            if (confirmPasswordField != null) confirmPasswordField.clear();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Password changed successfully!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to change password. Please verify your current password.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText("✅ Password changed!");
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
@@ -441,9 +523,6 @@ public class SettingsController {
         });
     }
 
-    // ============================================
-    // ✅ UPGRADE PLAN — Premium page ကို BorderPane center မှာ load
-    // ============================================
     @FXML
     private void handleUpgradePlan() {
         try {
@@ -460,7 +539,6 @@ public class SettingsController {
                             "-fx-padding: 8 15;"
             );
 
-            // ✅ Back နှိပ်ရင် Settings ပြန်
             backBtn.setOnAction(e -> {
                 centerContainer.setCenter(settingsScrollPane);
                 showSubscriptionSection();
@@ -470,7 +548,6 @@ public class SettingsController {
             backBar.setAlignment(Pos.CENTER_LEFT);
             backBar.setStyle("-fx-padding: 10 20 0 20;");
 
-            // Title/Subtitle style override
             Label titleLabel = (Label) premiumView.lookup(".main-title");
             if (titleLabel != null) {
                 titleLabel.setStyle(
@@ -487,17 +564,14 @@ public class SettingsController {
                 );
             }
 
-            // ✅ wrapper = backBar + premiumView
             VBox wrapper = new VBox(backBar, premiumView);
             VBox.setVgrow(premiumView, Priority.ALWAYS);
 
-            // ✅ wrapper ကို ScrollPane ထဲ
             ScrollPane premiumScroll = new ScrollPane(wrapper);
             premiumScroll.setFitToWidth(true);
             premiumScroll.setFitToHeight(true);
             premiumScroll.setStyle("-fx-background-color: transparent;");
 
-            // ✅ BorderPane ရဲ့ center ကို အစားထိုး
             centerContainer.setCenter(premiumScroll);
 
         } catch (IOException e) {

@@ -1,10 +1,11 @@
 package Project;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Connection;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,9 @@ import org.json.JSONObject;
 
 public class DatabaseManager {
 
-    // PythonAnywhere SSL Redirect Error ကာကွယ်ရန် URL Domain Name ကို စာလုံးသေး ပြောင်းထားပါသည်
     private static final String BASE_URL = "https://nickayjohn26.pythonanywhere.com";
     private static final HttpClient client = HttpClient.newBuilder()
-            .followRedirects(HttpClient.Redirect.ALWAYS)
-            .connectTimeout(Duration.ofSeconds(10))
+            .version(HttpClient.Version.HTTP_1_1)
             .build();
 
     // ==========================================
@@ -98,7 +97,6 @@ public class DatabaseManager {
         return null;
     }
 
-    // User ၏ နောက်ဆုံး Active ဖြစ်ခဲ့သော Course ID ကို API မှတစ်ဆင့် ရယူခြင်း
     public static String getLastActiveCourseId(int userId) {
         if (userId <= 0) return "CPP_BASIC";
 
@@ -114,6 +112,50 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return "CPP_BASIC";
+    }
+
+    // Save profile information (Name, Email)
+    public static boolean updateUserInfo(int userId, String name, String email) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            body.put("email", email);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Change user password
+    public static boolean changePassword(int userId, String oldPassword, String newPassword) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("old_password", oldPassword);
+            body.put("new_password", newPassword);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/change-password"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // ==========================================
@@ -134,8 +176,8 @@ public class DatabaseManager {
                 JSONArray arr = new JSONArray(response.body());
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    String courseId = obj.getString("Course_ID");
-                    String title = obj.getString("Course_Name");
+                    String courseId = obj.optString("Course_ID", obj.optString("course_id", ""));
+                    String title = obj.optString("Course_Name", obj.optString("course_name", obj.optString("title", "Course")));
                     int total = obj.optInt("total_lessons", 0);
                     int completed = obj.optInt("completed_lessons", 0);
 
@@ -143,7 +185,7 @@ public class DatabaseManager {
                             courseId,
                             title,
                             "Master " + title + " with interactive lessons.",
-                            courseId.split("_")[0],
+                            courseId.contains("_") ? courseId.split("_")[0] : courseId,
                             total,
                             completed
                     ));
@@ -158,29 +200,37 @@ public class DatabaseManager {
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
         try {
-            String url = BASE_URL + "/api/courses/" + courseId + "/lessons";
-            System.out.println("🔍 GET: " + url);   // ✅ Debug
+            String encodedCourseId = URLEncoder.encode(courseId, StandardCharsets.UTF_8);
+            String url = BASE_URL + "/api/courses/" + encodedCourseId + "/lessons";
+
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/courses/" + courseId + "/lessons"))
+                    .uri(URI.create(url))
                     .GET()
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("🔍 Status: " + response.statusCode());   // ✅ Debug
-            System.out.println("🔍 Body: " + response.body());            // ✅ Debug
 
             if (response.statusCode() == 200) {
                 JSONArray arr = new JSONArray(response.body());
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
+
+                    String lessonId = obj.optString("Lesson_ID", obj.optString("lesson_id", ""));
+                    String cId = obj.optString("Course_ID", obj.optString("course_id", courseId));
+                    int lessonOrder = obj.has("Lesson_order") ? obj.getInt("Lesson_order") : obj.optInt("lesson_order", i + 1);
+                    String title = obj.optString("Title", obj.optString("title", "Lesson " + lessonOrder));
+                    int xp = obj.has("XP") ? obj.getInt("XP") : obj.optInt("xp", 10);
+                    String lessonType = obj.optString("lesson_type", obj.optString("Lesson_Type", "LESSON"));
+                    String moduleName = obj.optString("Module_Name", obj.optString("module_name", "General"));
+
                     lessons.add(new Lesson(
-                            obj.getString("Lesson_ID"),
-                            obj.getString("Course_ID"),
-                            obj.getInt("Lesson_order"),
-                            obj.getString("Title"),
-                            obj.getInt("XP"),
-                            obj.optString("lesson_type", "LESSON"),
-                            obj.optString("Module_Name", "General"),
+                            lessonId,
+                            cId,
+                            lessonOrder,
+                            title,
+                            xp,
+                            lessonType,
+                            moduleName,
                             false,
                             new ArrayList<>()
                     ));
@@ -212,7 +262,6 @@ public class DatabaseManager {
         }
     }
 
-    // User ၏ Course တစ်ခုအတွက် ပြီးစီးပြီးသော Lesson အရေအတွက်ကို API မှတစ်ဆင့် ယူခြင်း
     public static int getCompletedLessonCount(int userId, String courseId) {
         List<Course> courses = getCoursesForUser(userId);
         for (Course c : courses) {
@@ -242,11 +291,11 @@ public class DatabaseManager {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
                     projects.add(new Project(
-                            obj.getInt("project_id"),
-                            obj.getInt("User_id"),
-                            obj.getString("title"),
-                            obj.getString("Language"),
-                            obj.getString("Code_Content")
+                            obj.has("project_id") ? obj.getInt("project_id") : obj.optInt("Project_ID", 0),
+                            obj.has("User_id") ? obj.getInt("User_id") : obj.optInt("user_id", userId),
+                            obj.optString("title", obj.optString("Title", "Untitled Project")),
+                            obj.optString("Language", obj.optString("language", "C++")),
+                            obj.optString("Code_Content", obj.optString("code_content", ""))
                     ));
                 }
             }
@@ -274,8 +323,9 @@ public class DatabaseManager {
 
             if (response.statusCode() == 201) {
                 JSONObject res = new JSONObject(response.body());
+                int projectId = res.optInt("project_id", res.optInt("Project_ID", 0));
                 return new Project(
-                        res.getInt("project_id"),
+                        projectId,
                         userId,
                         title,
                         language,
@@ -311,26 +361,31 @@ public class DatabaseManager {
     // ============================================
     // UPDATE USER PROFILE
     // ============================================
-    public static boolean updateUserProfile(int userId, String name, String profile) {
+    public static boolean updateUserProfile(int userId, String imagePath) {
         try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("name", name);
-            if (profile != null) {
-                body.put("profile", profile);
-            } else {
-                body.put("profile", JSONObject.NULL);
-            }
+            String url = BASE_URL + "/api/user/update-profile-path";
+
+            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
+            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .uri(URI.create(url))
                     .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .header("Accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
+
+            if (response.statusCode() == 200) {
+                System.out.println("Profile updated successfully: " + response.body());
+                return true;
+            } else {
+                System.err.println("Failed to update profile. Server responded with status: " + response.statusCode());
+                return false;
+            }
         } catch (Exception e) {
+            System.err.println("Error updating profile in DatabaseManager: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -340,7 +395,6 @@ public class DatabaseManager {
     // HELPER METHODS
     // ==========================================
 
-    // GET Request များ ခေါ်ယူရာတွင် အသုံးပြုရန် Generic Helper
     private static String sendGetRequest(String path) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
@@ -354,16 +408,20 @@ public class DatabaseManager {
         return "";
     }
 
-    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
     private static User mapJsonToUser(JSONObject obj) {
         int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
         String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
         String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+
         String profile = obj.optString("Profile", obj.optString("profile", null));
-        int xp = obj.optInt("XP", obj.optInt("xp", 0));
-        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
-        int coin = obj.optInt("coin", obj.optInt("Coin", 0));
-        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+        if ("null".equalsIgnoreCase(profile)) {
+            profile = null;
+        }
+
+        int xp = obj.has("XP") ? obj.getInt("XP") : obj.optInt("xp", 0);
+        int streak = obj.has("Streak") ? obj.getInt("Streak") : obj.optInt("streak", 0);
+        int coin = obj.has("coin") ? obj.getInt("coin") : obj.optInt("Coin", 0);
+        int brainCount = obj.has("brain_count") ? obj.getInt("brain_count") : obj.optInt("Brain_Count", 5);
 
         return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
@@ -411,11 +469,10 @@ public class DatabaseManager {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
 
-                    String lessonId = obj.optString("lesson_id", "");
-                    String courseId = obj.optString("course_id", "");
-                    String title = obj.optString("Lesson_title", lessonId);
+                    String lessonId = obj.optString("lesson_id", obj.optString("Lesson_ID", ""));
+                    String courseId = obj.optString("course_id", obj.optString("Course_ID", ""));
+                    String title = obj.optString("Lesson_title", obj.optString("title", obj.optString("Title", lessonId)));
 
-                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
                     String language = "C++";
                     if (courseId.toUpperCase().contains("JAVA")) {
                         language = "Java";
@@ -479,8 +536,7 @@ public class DatabaseManager {
         return false;
     }
 
-    public static boolean savePaymentScreenshot(int userId, String fileName,
-                                                String method, int amount) {
+    public static boolean savePaymentScreenshot(int userId, String fileName, String method, int amount) {
         try {
             JSONObject body = new JSONObject();
             body.put("user_id", userId);
@@ -507,9 +563,6 @@ public class DatabaseManager {
     // 5. BRAIN & ENERGY SYSTEM
     // ==========================================
 
-    /**
-     * Retrieves current brain count, coins, and premium status for a user.
-     */
     public static JSONObject getBrainStatus(int userId) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
@@ -527,10 +580,6 @@ public class DatabaseManager {
         return null;
     }
 
-    /**
-     * Deducts 1 brain upon an incorrect answer.
-     * Premium users are automatically exempted on the backend.
-     */
     public static JSONObject deductBrain(int userId) {
         try {
             JSONObject body = new JSONObject();
@@ -552,9 +601,6 @@ public class DatabaseManager {
         return null;
     }
 
-    /**
-     * Spends user coins to refill brains to max capacity (5).
-     */
     public static JSONObject refillBrains(int userId, int cost) {
         try {
             JSONObject body = new JSONObject();
@@ -581,9 +627,6 @@ public class DatabaseManager {
     // 6. LEADERBOARD SYSTEM (SYNCHRONOUS)
     // ==========================================
 
-    /**
-     * Fetch active season leaderboard
-     */
     public static JSONArray getLeaderboard() {
         return getLeaderboard(null, 1);
     }
@@ -596,13 +639,12 @@ public class DatabaseManager {
         try {
             String path = "/api/leaderboard";
             if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-                path += "/" + seasonId;
+                path += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
             }
             path += "?league_id=" + leagueId;
 
             String response = sendGetRequest(path);
             if (!response.isEmpty()) {
-                // Extracts "rankings" array if backend returns {"season_id": "...", "rankings": [...]}
                 if (response.trim().startsWith("{")) {
                     JSONObject json = new JSONObject(response);
                     return json.optJSONArray("rankings");
@@ -616,9 +658,6 @@ public class DatabaseManager {
         return new JSONArray();
     }
 
-    /**
-     * Fetch User League Status
-     */
     public static JSONObject getUserLeagueStatus(int userId) {
         return getUserLeagueStatus(userId, null);
     }
@@ -627,7 +666,7 @@ public class DatabaseManager {
         try {
             String path = "/api/user/" + userId + "/league-status";
             if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-                path += "/" + seasonId;
+                path += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
             }
 
             String response = sendGetRequest(path);
@@ -640,9 +679,6 @@ public class DatabaseManager {
         return null;
     }
 
-    /**
-     * Add XP to User & Auto-Enroll in Active Season
-     */
     public static boolean addUserXp(int userId, int xp) {
         return addUserXp(userId, null, xp, 1);
     }

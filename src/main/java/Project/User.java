@@ -37,6 +37,7 @@ public class User {
 
     // --- Setters ---
     public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
     public void setProfile(String profile) { this.profile = profile; }
     public void setXp(int xp) { this.xp = xp; }
     public void setStreak(int streak) { this.streak = streak; }

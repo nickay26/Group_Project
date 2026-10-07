@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
 <VBox alignment="TOP_CENTER" spacing="16" prefWidth="900" prefHeight="700"
       style="-fx-background-color: #ffffff; -fx-padding: 24;"
@@ -42,13 +43,12 @@
     <!-- Workspace: Code Editor & Console Output -->
     <HBox spacing="16" prefWidth="850" VBox.vgrow="ALWAYS">
 
-        <!-- Code Editor -->
+        <!-- Monaco Code Editor -->
         <VBox spacing="8" HBox.hgrow="ALWAYS"
               style="-fx-background-color: #f8fafc; -fx-padding: 14; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
             <Label text="💻 CODE EDITOR" style="-fx-text-fill: #334155; -fx-font-size: 12px; -fx-font-weight: bold;"/>
 
-            <TextArea fx:id="codeEditorArea" promptText="// Write your code here..." VBox.vgrow="ALWAYS"
-                      style="-fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px; -fx-control-inner-background: #1e293b; -fx-text-fill: #f8fafc; -fx-background-radius: 8;"/>
+            <WebView fx:id="codeWebView" VBox.vgrow="ALWAYS" style="-fx-background-radius: 8;" />
         </VBox>
 
         <!-- Console Output -->

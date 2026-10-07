@@ -1,7 +1,9 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,6 +18,11 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.json.JSONObject;
+
+import java.io.File;
 
 public class ProfileViewController {
 
@@ -33,6 +40,12 @@ public class ProfileViewController {
         Circle clip = new Circle(60, 60, 60);
         avatarImageView.setClip(clip);
 
+        // Avatar ကို Hover လုပ်လျှင် Hand Cursor ဖြစ်စေရန်
+        avatarImageView.setCursor(Cursor.HAND);
+
+        // Avatar ပုံကို နှိပ်ပါက ပုံသစ် Upload လုပ်မည့် Event
+        avatarImageView.setOnMouseClicked(event -> handleUploadAvatar());
+
         loadUserData();
         loadCoursesProgress();
     }
@@ -47,9 +60,11 @@ public class ProfileViewController {
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
             brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
 
-            if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
+            // Profile photo URL/Filename မှ ပုံဆွဲတင်ခြင်း
+            if (currentUser.getProfile() != null && !currentUser.getProfile().trim().isEmpty()) {
+                String fullImageUrl = ApiClient.getProfileImageUrl(currentUser.getProfile());
                 try {
-                    Image img = new Image(currentUser.getProfile(), 0, 0, true, true, true);
+                    Image img = new Image(fullImageUrl, true); // background loading
                     avatarImageView.setImage(img);
                 } catch (Exception e) {
                     System.out.println("Could not load avatar: " + e.getMessage());
@@ -62,12 +77,72 @@ public class ProfileViewController {
     }
 
     // ============================================
+    // AVATAR CLICK & UPLOAD LOGIC
+    // ============================================
+    private void handleUploadAvatar() {
+        User currentUser = UserSession.getCurrentUser();
+        if (currentUser == null) return;
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        Stage stage = (Stage) avatarImageView.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            // ၁။ Client UI တွင် Local Image Preview ကို ချက်ချင်းပြသမည်
+            try {
+                Image localImg = new Image(selectedFile.toURI().toString());
+                avatarImageView.setImage(localImg);
+            } catch (Exception e) {
+                System.err.println("Preview Image Error: " + e.getMessage());
+            }
+
+            // ၂။ Server သို့ Async Upload တင်မည်
+            ApiClient.uploadProfileImageAsync(currentUser.getUserId(), selectedFile)
+                    .thenAccept(response -> {
+                        if (response != null) {
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String savedFilename = null;
+
+                                if (json.has("profile_pic")) {
+                                    savedFilename = json.getString("profile_pic");
+                                } else if (json.has("filename")) {
+                                    savedFilename = json.getString("filename");
+                                } else if (json.has("url")) {
+                                    savedFilename = json.getString("url");
+                                }
+
+                                if (savedFilename != null) {
+                                    String finalFilename = savedFilename;
+                                    currentUser.setProfile(finalFilename);
+
+                                    // JavaFX UI Thread ပေါ်တွင် Server URL ဖြင့် အတည်ပြုပြသမည်
+                                    Platform.runLater(() -> {
+                                        String fullUrl = ApiClient.getProfileImageUrl(finalFilename);
+                                        if (fullUrl != null) {
+                                            avatarImageView.setImage(new Image(fullUrl, true));
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.err.println("Parse Upload Response Error: " + e.getMessage());
+                            }
+                        }
+                    });
+        }
+    }
+
+    // ============================================
     // LOAD COURSES PROGRESS
     // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
-        // ✅ courseId — "CPP", "PYTHON", "SQL" (API format)
         String[][] courses = {
                 {"C++",    "Introduction to C++",    "C++",  "#3B82F6", "3"},
                 {"PYTHON", "Introduction to Python", "PYTHON",   "#3B82F6", "3"},
@@ -84,7 +159,6 @@ public class ProfileViewController {
     // CREATE COURSE ITEM
     // ============================================
     private HBox createCourseItem(String courseId, String title, String icon, String color, int progressPercent) {
-        // Icon Circle
         StackPane iconCircle = new StackPane();
         iconCircle.setPrefSize(60, 60);
         iconCircle.setMinSize(60, 60);
@@ -98,7 +172,6 @@ public class ProfileViewController {
         iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
         iconCircle.getChildren().add(iconLabel);
 
-        // Title + Status
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E293B;");
 
@@ -108,7 +181,6 @@ public class ProfileViewController {
         VBox textBox = new VBox(4, titleLabel, statusLabel);
         textBox.setAlignment(Pos.CENTER_LEFT);
 
-        // Circular Progress
         StackPane progressCircle = createCircularProgress(progressPercent);
 
         Region spacer = new Region();
@@ -123,40 +195,29 @@ public class ProfileViewController {
                         "-fx-cursor: hand;"
         );
 
-        // ✅ Item နှိပ်ရင် Learn page ကို သွား
         item.setOnMouseClicked(e -> goToLearnPage(courseId));
 
         return item;
     }
 
-    // ============================================
-// ✅ GO TO LEARN PAGE
-// ============================================
     private void goToLearnPage(String courseId) {
-        // ✅ Active course set
         UserSession.setActiveCourseId(courseId);
 
-        // ✅ Learn page ကို load
         MainLayoutController mainLayout = MainLayoutController.getInstance();
         if (mainLayout != null) {
             mainLayout.loadPage("LearnPage.fxml");
         }
     }
 
-    // ============================================
-    // ✅ CIRCULAR PROGRESS (3% လို)
-    // ============================================
     private StackPane createCircularProgress(int percent) {
         double radius = 22;
         double strokeWidth = 5;
 
-        // ✅ Background Circle (မီးခိုးရောင်)
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.TRANSPARENT);
         bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc (အပြာ)
         Arc progressArc = new Arc(0, 0, radius, radius, 90, -percent * 3.6);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
@@ -164,7 +225,6 @@ public class ProfileViewController {
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 11px; -fx-font-weight: bold; " +
@@ -182,6 +242,4 @@ public class ProfileViewController {
 
         return stack;
     }
-
-
 }
