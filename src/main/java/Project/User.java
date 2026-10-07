@@ -21,11 +21,18 @@ public class User {
         this.brainCount = brainCount;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
     public User(int userId, String name, String email) {
         this(userId, name, email, "", 0, 0, 0, 0);
     }
 
-    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -35,11 +42,16 @@ public class User {
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
 
-    // --- Setters ---
-    public void setName(String name) { this.name = name; }
-    public void setProfile(String profile) { this.profile = profile; }
     public void setXp(int xp) { this.xp = xp; }
     public void setStreak(int streak) { this.streak = streak; }
     public void setCoin(int coin) { this.coin = coin; }
     public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
+
+    public String getUsername() {
+        return name;
+    }
+
+    public String getProfilePicture() {
+        return profile;
+    }
 }
