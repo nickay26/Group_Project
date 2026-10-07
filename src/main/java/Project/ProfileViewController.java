@@ -47,7 +47,7 @@ public class ProfileViewController {
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
 
             // ★★★ ဒီနေရာမှာ Premium Check ထည့်ပါ ★★★
-            String planType = currentUser.getPlanType();
+            String planType = currentUser.getSubscriptionType();
             boolean isPremium = "PREMIUM".equals(planType);
 
             if (isPremium) {

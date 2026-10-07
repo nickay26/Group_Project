@@ -132,7 +132,7 @@ public class PaymentController {
                 if (updatedUser != null) {
                     UserSession.setCurrentUser(updatedUser);
                     System.out.println("✅ UserSession Refreshed!");
-                    System.out.println("   plan_type: " + updatedUser.getPlanType());
+                    System.out.println("   plan_type: " + updatedUser.getSubscriptionType());
                     System.out.println("   isPremium: " + updatedUser.isPremium());
                     System.out.println("   brain_count: " + updatedUser.getBrainCount());
                 }

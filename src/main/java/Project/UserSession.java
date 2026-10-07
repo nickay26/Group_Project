@@ -5,11 +5,13 @@ public class UserSession {
     private static User currentUser;
     private static String activeCourseId;
 
+    // Overview Page မှ နှိပ်ပြီး Login သို့ ရောက်လာခြင်း ရှိ/မရှိ မှတ်ရန် Flag
     private static boolean isRedirectedFromOverview = false;
 
     private UserSession(User user) {
         currentUser = user;
         if (user != null) {
+            // ⭐️ ပြင်ဆင်ရန် အပိုင်း: activeCourseId တွင် တန်ဖိုးမရှိသေးပါကမှ Database မှ ယူမည်
             if (activeCourseId == null) {
                 activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
             }
@@ -17,16 +19,11 @@ public class UserSession {
     }
 
     public static void initSession(User user) {
-        if (currentUser != null && user != null) {
-            // Local Session coin ကို မလျော့သွားစေရန် ထိန်းသိမ်းသည်
-            int safeCoin = Math.max(currentUser.getCoin(), user.getCoin());
-            user.setCoin(safeCoin);
-        }
         currentUser = user;
-
         if (instance == null) {
             instance = new UserSession(user);
         } else {
+            // Instance ရှိပြီးသားဖြစ်ပါကလည်း activeCourseId မရှိမှသာ DB မှယူမည်
             if (activeCourseId == null) {
                 activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
             }
@@ -34,13 +31,7 @@ public class UserSession {
     }
 
     public static void setCurrentUser(User user) {
-        if (currentUser != null && user != null) {
-            // Backend မှ တန်ဖိုးနည်းပြီး ရောက်လာခဲ့ပါက Local coin အမြင့်ဆုံးတန်ဖိုးကိုပဲ ဆက်ထိန်းထားမည်
-            int safeCoin = Math.max(currentUser.getCoin(), user.getCoin());
-            user.setCoin(safeCoin);
-        }
         currentUser = user;
-
         if (user != null && activeCourseId == null) {
             activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
         }
@@ -57,15 +48,15 @@ public class UserSession {
         return currentUser;
     }
 
-    public static int getUserId() {
-        return currentUser != null ? currentUser.getUserId() : -1;
+    /**
+     * Alias method for getCurrentUser() for codebase convenience.
+     */
+    public static User getUser() {
+        return currentUser;
     }
 
-    // ⭐ Coin တိုက်ရိုက် ပေါင်းပေးမည့် မသဒ်
-    public static void addCoins(int amount) {
-        if (currentUser != null) {
-            currentUser.setCoin(currentUser.getCoin() + amount);
-        }
+    public static int getUserId() {
+        return currentUser != null ? currentUser.getUserId() : -1;
     }
 
     public static String getActiveCourseId() {
@@ -94,12 +85,41 @@ public class UserSession {
         instance = null;
     }
 
-    public static boolean isPremium() {
-        if (currentUser == null) {
-            return false;
-        }
-        return PremiumService.isPremium(currentUser.getUserId());
+    // ==========================================
+    // BRAIN (ENERGY) & ECONOMY DELEGATE METHODS
+    // ==========================================
+
+    public static int getBrainCount() {
+        return currentUser != null ? currentUser.getBrainCount() : 0;
     }
+
+    public static void setBrainCount(int count) {
+        if (currentUser != null) {
+            currentUser.setBrainCount(count);
+        }
+    }
+
+    public static int getCoin() {
+        return currentUser != null ? currentUser.getCoin() : 0;
+    }
+
+    public static void setCoin(int coin) {
+        if (currentUser != null) {
+            currentUser.setCoin(coin);
+        }
+    }
+
+    // ==========================================
+    // အသစ်ထည့်တဲ့ Method များ (Premium Status)
+    // ==========================================
+
+    // ⭐️ ဒါကို ထည့် (UserSession မှာ updateUser method မရှိသေးရင်)
+    public static void updateUser(User user) {
+        currentUser = user;
+    }
+    // ==========================================
+    // အသစ်ထည့်တဲ့ Method (Clean Session)
+    // ==========================================
 
     public static void cleanSession() {
         currentUser = null;

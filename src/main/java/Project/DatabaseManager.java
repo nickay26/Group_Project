@@ -20,7 +20,7 @@ public class DatabaseManager {
             .build();
 
     // ==========================================
-    // 1. USER AUTHENTICATION & SYNC
+    // 1. USER AUTHENTICATION, FETCH & SYNC
     // ==========================================
 
     public static User getUserById(int userId) {
@@ -119,7 +119,6 @@ public class DatabaseManager {
         return null;
     }
 
-    // User ၏ နောက်ဆုံး Active ဖြစ်ခဲ့သော Course ID ကို API မှတစ်ဆင့် ရယူခြင်း
     public static String getLastActiveCourseId(int userId) {
         if (userId <= 0) return "CPP_BASIC";
 
@@ -778,6 +777,27 @@ public class DatabaseManager {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateBrainCount(int userId, int newCount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("brain_count", newCount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
         }

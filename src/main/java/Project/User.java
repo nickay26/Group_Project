@@ -10,7 +10,7 @@ public class User {
     private int coin;
     private int brainCount;
 
-    // ⭐ Premium Fields
+    // ⭐️ Premium Fields
     private boolean premium = false;
     private String subscriptionType = "free";
     private String planType = "FREE";
