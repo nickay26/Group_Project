@@ -79,7 +79,9 @@ public class MainLayoutController {
             currentCourseLabel.setText(title != null ? title : "No Active Course");
         }
     }
-
+    public void fetchAndUpdateUserActivity() {
+        updateHeaderStats();
+    }
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
@@ -366,7 +368,38 @@ public class MainLayoutController {
 
             FXMLLoader loader = new FXMLLoader(resource);
             Parent view = loader.load();
-            contentArea.getChildren().setAll(view);
+
+            // 1. Loading UI ဖန်တီးပါ
+            ProgressIndicator spinner = new ProgressIndicator();
+            spinner.setStyle("-fx-progress-color: #38BDF8;");
+            spinner.setMaxSize(40, 40);
+
+            Label titleLabel = new Label("🚀 Loading...");
+            titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;");
+
+            VBox loadingCard = new VBox(12, spinner, titleLabel);
+            loadingCard.setAlignment(Pos.CENTER);
+            loadingCard.setPadding(new Insets(24, 32, 24, 32));
+            loadingCard.setStyle(
+                    "-fx-background-color: #1E293B; " +
+                            "-fx-background-radius: 16px; " +
+                            "-fx-border-color: #334155; " +
+                            "-fx-border-radius: 16px; " +
+                            "-fx-border-width: 1px;"
+            );
+
+            StackPane overlay = new StackPane(loadingCard);
+            overlay.setStyle("-fx-background-color: #0F172A;");
+
+            // 2. Loading Overlay ကို အရင်ပြပါ
+            contentArea.getChildren().setAll(overlay);
+
+            // 3. UI မျက်စိမနောက်ဘဲ Smooth ဖြစ်စေရန် 150ms အကြာတွင် Real View သို့ အစားထိုးပါ
+            PauseTransition delay = new PauseTransition(Duration.millis(150));
+            delay.setOnFinished(e -> contentArea.getChildren().setAll(view));
+            delay.play();
+
+            // 4. Controller ယူသုံးမည့် LessonPlayer များ မပျက်စီးစေရန် Loader ကို Synchronous ပြန်ပေးပါ
             return loader;
 
         } catch (Exception e) {
@@ -407,6 +440,12 @@ public class MainLayoutController {
         activeButton.getStyleClass().remove("nav-button");
         if (!activeButton.getStyleClass().contains("nav-button-active")) {
             activeButton.getStyleClass().add("nav-button-active");
+        }
+    }
+
+    public void loadPageWithWrapper(Parent wrapper) {
+        if (contentArea != null) {
+            contentArea.getChildren().setAll(wrapper);
         }
     }
 }
