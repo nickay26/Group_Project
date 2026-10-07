@@ -9,9 +9,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.shape.Circle?>
 
-<ScrollPane fitToWidth="true" styleClass="profile-scroll-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.ProfileViewController">
+<ScrollPane fitToWidth="true" styleClass="profile-scroll-pane"
+            stylesheets="@../Css/mainlayout.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Project.ProfileViewController">
     <content>
         <VBox spacing="25.0" style="-fx-background-color: #0F172A;">
             <padding>
@@ -19,7 +24,7 @@
             </padding>
             <children>
 
-                <!-- PROFILE HEADER CARD -->
+                <!-- 1. PROFILE HEADER CARD -->
                 <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="profile-card">
                     <padding>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -50,7 +55,7 @@
                     </children>
                 </HBox>
 
-                <!-- STATISTICS -->
+                <!-- 2. STATISTICS -->
                 <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Statistics" />
 
                 <HBox spacing="15.0">
@@ -95,15 +100,14 @@
                     </children>
                 </HBox>
 
-                <!-- COURSES PROGRESS -->
+                <!-- 3. COURSES PROGRESS -->
                 <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
                     <children>
                         <Label text="Courses Progress"
                                style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" />
 
-                        <VBox fx:id="coursesProgressContainer" spacing="12.0">
-                            <!-- Course items code နဲ့ ထည့်မယ် -->
-                        </VBox>
+                        <GridPane fx:id="coursesProgressContainer"
+                                  hgap="15.0" vgap="15.0" />
                     </children>
                 </VBox>
 

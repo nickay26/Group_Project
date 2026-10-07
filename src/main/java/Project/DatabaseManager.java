@@ -23,6 +23,28 @@ public class DatabaseManager {
     // 1. USER AUTHENTICATION & SYNC
     // ==========================================
 
+    public static User getUserById(int userId) {
+        if (userId <= 0) return null;
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONObject json = new JSONObject(response.body());
+                JSONObject userObj = json.has("user") ? json.getJSONObject("user") : json;
+                return mapJsonToUser(userObj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static User findOrCreateGoogleUser(String name, String email, String profilePicUrl) {
         try {
             JSONObject body = new JSONObject();
@@ -97,6 +119,7 @@ public class DatabaseManager {
         return null;
     }
 
+    // User ၏ နောက်ဆုံး Active ဖြစ်ခဲ့သော Course ID ကို API မှတစ်ဆင့် ရယူခြင်း
     public static String getLastActiveCourseId(int userId) {
         if (userId <= 0) return "CPP_BASIC";
 
@@ -242,13 +265,14 @@ public class DatabaseManager {
         return lessons;
     }
 
-    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount) {
+    public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount, int coinsAmount) {
         try {
             JSONObject body = new JSONObject();
             body.put("user_id", userId);
             body.put("course_id", courseId);
             body.put("lesson_order", lessonOrder);
             body.put("xp", xpAmount);
+            body.put("coins", coinsAmount);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/api/lessons/complete"))
@@ -256,9 +280,53 @@ public class DatabaseManager {
                     .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                     .build();
 
-            client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (coinsAmount > 0) {
+                addCoinsToUser(userId, coinsAmount);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("coins", coinsToAdd);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("cost", cost);
+            body.put("max_brain", maxBrain);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/refill-brains"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -408,20 +476,24 @@ public class DatabaseManager {
         return "";
     }
 
+    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
     private static User mapJsonToUser(JSONObject obj) {
         int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
         String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
         String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
 
         String profile = obj.optString("Profile", obj.optString("profile", null));
-        if ("null".equalsIgnoreCase(profile)) {
-            profile = null;
-        }
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
 
-        int xp = obj.has("XP") ? obj.getInt("XP") : obj.optInt("xp", 0);
-        int streak = obj.has("Streak") ? obj.getInt("Streak") : obj.optInt("streak", 0);
-        int coin = obj.has("coin") ? obj.getInt("coin") : obj.optInt("Coin", 0);
-        int brainCount = obj.has("brain_count") ? obj.getInt("brain_count") : obj.optInt("Brain_Count", 5);
+        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
+        int coin = 0;
+        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
+        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
+        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
+        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
+
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
         return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
@@ -473,6 +545,7 @@ public class DatabaseManager {
                     String courseId = obj.optString("course_id", obj.optString("Course_ID", ""));
                     String title = obj.optString("Lesson_title", obj.optString("title", obj.optString("Title", lessonId)));
 
+                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
                     String language = "C++";
                     if (courseId.toUpperCase().contains("JAVA")) {
                         language = "Java";

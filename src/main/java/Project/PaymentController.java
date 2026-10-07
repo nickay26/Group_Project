@@ -60,7 +60,7 @@ public class PaymentController {
         } catch (Exception e) {
             System.out.println("KPay QR not found");
         }
-        phoneLabel.setText("Phone: 09-123-456-789 (KPay)");
+        phoneLabel.setText("Phone: 09******855 (KPay)");
     }
 
     private void selectWavePay() {
@@ -74,7 +74,7 @@ public class PaymentController {
         } catch (Exception e) {
             System.out.println("WavePay QR not found");
         }
-        phoneLabel.setText("Phone: 09-987-654-321 (WavePay)");
+        phoneLabel.setText("Phone: 09******855 (WavePay)");
     }
 
     @FXML
@@ -127,13 +127,26 @@ public class PaymentController {
             if (success) {
                 DatabaseManager.savePaymentScreenshot(userId, newFileName, selectedMethod, amount);
 
+                // ★★★ ဒီ ၅ လိုင်း အသစ်ထည့်ပါ ★★★
+                User updatedUser = DatabaseManager.getUserById(userId);
+                if (updatedUser != null) {
+                    UserSession.setCurrentUser(updatedUser);
+                    System.out.println("✅ UserSession Refreshed!");
+                    System.out.println("   plan_type: " + updatedUser.getPlanType());
+                    System.out.println("   isPremium: " + updatedUser.isPremium());
+                    System.out.println("   brain_count: " + updatedUser.getBrainCount());
+                }
+                // ★★★ ဒီအထိပဲ ★★★
+
                 showAlert("Success",
                         "Payment Verified!\n" +
                                 "Method: " + selectedMethod + "\n" +
                                 "Amount: " + amount + " MMK\n" +
                                 "Premium Activated: " + planType);
+
                 MainLayoutController mainLayout = MainLayoutController.getInstance();
                 if (mainLayout != null) {
+                    mainLayout.updateHeaderStats();
                     mainLayout.loadPage("PlaygroundDashboardView.fxml");
                 }
             } else {

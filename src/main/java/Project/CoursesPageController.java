@@ -120,7 +120,7 @@ public class CoursesPageController {
         // Click လုပ်လိုက်ပါက Loading မပြတော့ဘဲ သင်ခန်းစာသို့ တိုက်ရိုက်သွားမည်
         cornerButton.setOnMouseClicked(e -> launchLessonViewDirectly(course));
 
-        StackPane progressRing = createProgressRing(course.getCompletedLessons(), course.getTotalLessons());
+        StackPane progressRing = createProgressRing(course);
         AnchorPane.setBottomAnchor(progressRing, 20.0);
         AnchorPane.setRightAnchor(progressRing, 25.0);
 
@@ -183,7 +183,7 @@ public class CoursesPageController {
         return badge;
     }
 
-    private StackPane createProgressRing(int completed, int total) {
+    private StackPane createProgressRing(Course course) {
         StackPane container = new StackPane();
 
         Circle ring = new Circle(30);
@@ -191,8 +191,10 @@ public class CoursesPageController {
         ring.setStroke(Color.web("#3B82F6"));
         ring.setStrokeWidth(5);
 
-        int percentage = total > 0 ? (int) (((double) completed / total) * 100) : 0;
-        Label text = new Label(completed > 0 ? percentage + "%" : "Progress");
+        int percentage = course.getProgressPercent();
+        Label text = new Label(course.getCompletedLessons() > 0
+                ? percentage + "%"
+                : "Progress");
         text.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;");
 
         container.getChildren().addAll(ring, text);

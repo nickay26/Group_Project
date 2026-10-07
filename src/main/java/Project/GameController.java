@@ -52,6 +52,7 @@ public class GameController {
         }
     }
 
+    // ⭐ Room ID နှင့် Opponent ID သတ်မှတ်ပေးသည့် Method
     public void setGameSession(String roomId, String opponentId) {
         this.roomId = roomId;
         this.opponentId = opponentId;
@@ -62,6 +63,7 @@ public class GameController {
             this.currentUserId = "USER_" + System.currentTimeMillis();
         }
 
+        // Live WebSocket events များ ရယူရန် Listener ချိတ်ဆက်မည်
         attachGameWebSocketListener();
     }
 
@@ -238,7 +240,7 @@ public class GameController {
             public void onInviteReceived(String fromUser, String language) {}
 
             @Override
-            public void onGameStart(String roomId, String language) {}
+            public void onGameStart(String roomId, String language, String opponentId, String questionsJson) {}
 
             @Override
             public void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson) {}
@@ -246,6 +248,7 @@ public class GameController {
             @Override
             public void onQuickMatchTimeout() {}
 
+            // ⭐ ပြိုင်ဘက် စာရိုက်နေသည့် Progress ရောက်လာပါက UI တွင် ဖော်ပြပေးမည်
             @Override
             public void onOpponentProgress(String userId, int progress) {
                 if (!userId.equals(currentUserId)) {
@@ -257,16 +260,24 @@ public class GameController {
                 }
             }
 
+            // ⭐ အခြားသူ သို့မဟုတ် မိမိ အနိုင်ရသွားပါက အသိပေးမည်
             @Override
             public void onGameOver(String winnerId) {
                 Platform.runLater(() -> {
                     if (timer != null) timer.stop();
                     disableControls(true);
 
-                    if (winnerId.equals(currentUserId)) {
-                        consoleOutputArea.setText("🏆 VICTORY! You submitted first and won the match!");
+                    boolean isWinner = winnerId.equals(currentUserId);
+                    int earnedXp = isWinner ? 50 : 10;
+
+                    if (isWinner) {
+                        if (consoleOutputArea != null) {
+                            consoleOutputArea.setText("🏆 VICTORY!\n\nYou submitted first and won the match!\nEarned: +" + earnedXp + " XP");
+                        }
                     } else {
-                        consoleOutputArea.setText("❌ DEFEAT! Player " + winnerId + " submitted first and won!");
+                        if (consoleOutputArea != null) {
+                            consoleOutputArea.setText("❌ DEFEAT!\n\nPlayer " + winnerId + " submitted first!\nEarned: +" + earnedXp + " XP");
+                        }
                     }
                 });
             }
@@ -279,6 +290,8 @@ public class GameController {
             handleLoadingFailure();
             return;
         }
+
+        System.out.println("DEBUG - Received Response: " + jsonResponse);
 
         try {
             String cleanJson = jsonResponse.trim();

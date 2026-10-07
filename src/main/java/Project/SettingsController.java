@@ -25,7 +25,14 @@ public class SettingsController {
     @FXML private Button passwordTabBtn;
     @FXML private Button subscriptionTabBtn;
     @FXML private Button deleteTabBtn;
+    // ✅ Password Fields
+    @FXML private PasswordField currentPasswordField;
+    @FXML private TextField currentPasswordVisible;
+    @FXML private Button currentShowBtn;
 
+    @FXML private PasswordField newPasswordField;
+    @FXML private TextField newPasswordVisible;
+    @FXML private Button newShowBtn;
     // Sections
     @FXML private VBox infoSection;
     @FXML private VBox passwordSection;
@@ -576,6 +583,43 @@ public class SettingsController {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    // ============================================
+// ✅ SHOW/HIDE — CURRENT PASSWORD
+// ============================================
+    @FXML
+    private void toggleCurrentPassword() {
+        if (currentPasswordVisible.isVisible()) {
+            // Hide → PasswordField
+            currentPasswordVisible.setVisible(false);
+            currentPasswordField.setVisible(true);
+            currentPasswordField.setText(currentPasswordVisible.getText());
+            currentShowBtn.setText("Show");
+        } else {
+            // Show → TextField
+            currentPasswordVisible.setText(currentPasswordField.getText());
+            currentPasswordVisible.setVisible(true);
+            currentPasswordField.setVisible(false);
+            currentShowBtn.setText("Hide");
+        }
+    }
+
+    // ============================================
+// ✅ SHOW/HIDE — NEW PASSWORD
+// ============================================
+    @FXML
+    private void toggleNewPassword() {
+        if (newPasswordVisible.isVisible()) {
+            newPasswordVisible.setVisible(false);
+            newPasswordField.setVisible(true);
+            newPasswordField.setText(newPasswordVisible.getText());
+            newShowBtn.setText("Show");
+        } else {
+            newPasswordVisible.setText(newPasswordField.getText());
+            newPasswordVisible.setVisible(true);
+            newPasswordField.setVisible(false);
+            newShowBtn.setText("Hide");
         }
     }
 }

@@ -1,40 +1,95 @@
-/* ============================================ */
-/* SETTINGS PAGE                                */
-/* ============================================ */
+/* ============================================
+   ✅ ScrollPane — အမဲနက်
+   ============================================ */
+.scroll-pane {
+    -fx-background: #0F172A;
+    -fx-background-color: #0F172A;
+}
 
+.scroll-pane > .viewport {
+    -fx-background-color: #0F172A;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #0F172A;
+}
+
+/* ============================================
+   ✅ Sidebar Button — Dark Theme
+   ============================================ */
 .settings-tab {
-    -fx-background-color: transparent;
-    -fx-text-fill: #64748B;
-    -fx-font-size: 14px;
-    -fx-padding: 10 15;
-    -fx-background-radius: 6px;
-    -fx-cursor: hand;
-    -fx-alignment: BASELINE_LEFT;
-}
-
-.settings-tab:hover {
-    -fx-text-fill: #1E293B;
-    -fx-background-color: #E2E8F0;
-}
-
-.settings-tab-active {
-    -fx-background-color: transparent;
-    -fx-text-fill: #1E293B;
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #F8FAFC;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 10 15;
-    -fx-cursor: hand;
     -fx-alignment: BASELINE_LEFT;
-    -fx-border-color: transparent transparent transparent #3B82F6;
-    -fx-border-width: 0 0 0 4px;
+    -fx-cursor: hand;
+    -fx-background-radius: 8px;
+    -fx-border-color: #334155;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
 }
 
-/* TextField / TextArea / ComboBox */
-.text-field, .text-area, .combo-box {
-    -fx-font-size: 13px;
+.settings-tab:hover {
+    -fx-background-color: #334155;
+    -fx-border-color: #475569;
 }
 
-.text-field:focused, .text-area:focused, .combo-box:focused {
-    -fx-border-color: #3B82F6;
-    -fx-border-width: 1.5px;
+.settings-tab-active {
+    -fx-background-color: #3B82F6 !important;
+    -fx-text-fill: white !important;
+    -fx-border-color: #60A5FA !important;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+/* ============================================
+   ✅ TextField / PasswordField / TextArea
+   ============================================ */
+.text-field, .password-field, .text-area {
+    -fx-background-color: #1E293B;
+    -fx-control-inner-background: #1E293B;
+    -fx-text-fill: #F8FAFC;
+    -fx-prompt-text-fill: #64748B;
+    -fx-border-color: #334155;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+.text-area .content {
+    -fx-background-color: #1E293B;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: #1E293B;
+}
+
+/* ============================================
+   ✅ ComboBox
+   ============================================ */
+.combo-box {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #F8FAFC;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1E293B;
+    -fx-border-color: #334155;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: #F8FAFC;
+    -fx-background-color: #1E293B;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #334155;
 }
