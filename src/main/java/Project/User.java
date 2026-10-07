@@ -27,16 +27,9 @@ public class User {
         this.brainCount = brainCount;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
+    // Default Constructor တွင် Brain ကို 5 ပေးထားပါမည်
     public User(int userId, String name, String email) {
-        this(userId, name, email, "", 0, 0, 0, 0);
+        this(userId, name, email, "", 0, 0, 0, 5);
     }
 
     // Setters
@@ -56,8 +49,10 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
-    public String getPlanType() { return planType; }
 
+    // Setters
+    public void setName(String name) { this.name = name; }
+    public void setProfile(String profile) { this.profile = profile; }
     public void setXp(int xp) { this.xp = xp; }
     public void setStreak(int streak) { this.streak = streak; }
     public void setCoin(int coin) { this.coin = coin; }

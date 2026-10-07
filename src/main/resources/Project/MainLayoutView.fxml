@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
@@ -62,10 +63,10 @@
                         <!-- PUSHES STATS & BUTTONS TO THE RIGHT -->
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <!-- CLICKABLE HEADER STATS -->
-                        <Label fx:id="topStreakLabel" onMouseClicked="#handleStreakClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
+                        <!-- HEADER STATS AND BUTTONS -->
+                        <Label fx:id="topStreakLabel" styleClass="header-stat" text=" 0">
                             <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true">
                                     <image>
                                         <Image url="@../Images/fire.png" />
                                     </image>
@@ -73,9 +74,10 @@
                             </graphic>
                         </Label>
 
-                        <Label fx:id="topBrainLabel" onMouseClicked="#handleBrainClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
+                        <!-- ⭐ Brain Label ပေါ် နှိပ်လိုက်ပါက Refill Popup ပွင့်ရန် onMouseClicked ထည့်သွင်းထားသည် -->
+                        <Label fx:id="topBrainLabel" onMouseClicked="#showRefillBrainDialog" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
                             <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                <ImageView fitHeight="35.0" fitWidth="30.0" preserveRatio="true">
                                     <image>
                                         <Image url="@../Images/brain.png" />
                                     </image>
@@ -83,9 +85,9 @@
                             </graphic>
                         </Label>
 
-                        <Label fx:id="topCoinLabel" onMouseClicked="#handleCoinClick" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
+                        <Label fx:id="topCoinLabel" styleClass="header-stat" text=" 0">
                             <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                <ImageView fitHeight="35.0" fitWidth="35.0" preserveRatio="true">
                                     <image>
                                         <Image url="@../Images/coin.png" />
                                     </image>

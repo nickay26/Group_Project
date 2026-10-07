@@ -17,10 +17,8 @@ import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,13 +36,14 @@ public class LessonPlayerController {
     private int currentSlideIndex = 0;
     private Lesson currentLesson;
 
-    // Answer Checking & Dynamic Blank Filling State
+    private int totalQuestionCount = 0;
+    private int correctAnswerCount = 0;
+
     private String selectedAnswer = null;
     private boolean isAnswerChecked = false;
     private VBox feedbackBox;
     private VBox optionsBox;
 
-    // References for dynamic blank substitution
     private String originalCodeSnippet = null;
     private String originalPrompt = null;
     private TextArea interactiveCodeEditor = null;
@@ -53,7 +52,6 @@ public class LessonPlayerController {
 
     @FXML
     public void initialize() {
-        // Continue Button Hover Effect
         if (continueBtn != null) {
             continueBtn.setOnMouseEntered(e ->
                     continueBtn.setStyle("-fx-background-color: #1D4ED8; -fx-text-fill: #FFFFFF; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 12px; -fx-cursor: hand;")
@@ -63,7 +61,6 @@ public class LessonPlayerController {
             );
         }
 
-        // Close Button Hover Effect
         if (closeBtn != null) {
             closeBtn.setOnMouseEntered(e -> closeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-cursor: hand;"));
             closeBtn.setOnMouseExited(e -> closeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #94A3B8; -fx-cursor: hand;"));
@@ -72,179 +69,61 @@ public class LessonPlayerController {
 
     public void startLesson(Lesson lesson) {
         this.currentLesson = lesson;
-        if (lesson != null) {
-            startLessonById(lesson.getLessonId());
-        } else {
-            renderErrorCard("Error: Provided Lesson object is null.");
-        }
+        startLessonById(lesson.getLessonId());
+    }
+
+    public void startLesson(String lessonId) {
+        startLessonById(lessonId);
     }
 
     private void startLessonById(String lessonId) {
-        if (lessonId == null || lessonId.trim().isEmpty()) {
-            renderErrorCard("Error: Lesson ID is empty.");
+        InputStream is = getClass().getResourceAsStream("/lessons/" + lessonId + ".json");
+        if (is == null) {
+            is = getClass().getResourceAsStream("/Project/lessons/" + lessonId + ".json");
+        }
+
+        if (is == null) {
+            renderErrorCard("Lesson file not found: " + lessonId);
             return;
         }
-
-        System.out.println(">>> startLessonById called with ID: " + lessonId);
-
-        String activeCourse = UserSession.getActiveCourseId();
-        if (activeCourse == null) activeCourse = "CPP";
-
-        // ရှာဖွေမည့် JSON Candidate File Name များ ပြုပြင်ထုတ်ယူခြင်း
-        List<String> candidates = new ArrayList<>();
-
-        // 1. Direct lessonId (e.g. CPP_101 or 101)
-        candidates.add(lessonId);
-
-        // 2. Extract digits only (e.g. 101) -> Try CPP_101, JAVA_101, PYTHON_101
-        String digits = lessonId.replaceAll("[^0-9]", "");
-        if (!digits.isEmpty()) {
-            candidates.add("CPP_" + digits);
-            candidates.add("JAVA_" + digits);
-            candidates.add("PYTHON_" + digits);
-            candidates.add(digits);
-        }
-
-        // 3. activeCourse + lessonId
-        if (!activeCourse.isEmpty()) {
-            String cleanCourse = activeCourse.toUpperCase().replaceAll("[^A-Z]", "");
-            if (cleanCourse.contains("CPP") || cleanCourse.contains("C")) cleanCourse = "CPP";
-            candidates.add(cleanCourse + "_" + lessonId);
-            if (!digits.isEmpty()) {
-                candidates.add(cleanCourse + "_" + digits);
-            }
-        }
-
-        String jsonText = null;
-        String foundLocation = null;
-
-        // Candidate အားလုံးကို Disk နှင့် Classpath ပေါ်တွင် တစ်ခုချင်းစီ လိုက်ရှာခြင်း
-        for (String candidate : candidates) {
-            String cleanName = candidate.endsWith(".json") ? candidate.substring(0, candidate.length() - 5) : candidate;
-
-            // Disk Check 1: src/main/resources/Lessons/<name>.json
-            File devFile = new File("src/main/resources/Lessons/" + cleanName + ".json");
-            if (devFile.exists()) {
-                try {
-                    jsonText = Files.readString(devFile.toPath(), StandardCharsets.UTF_8);
-                    foundLocation = devFile.getAbsolutePath();
-                    break;
-                } catch (Exception ignored) {}
-            }
-
-            // Disk Check 2: Lessons/<name>.json
-            File rootFile = new File("Lessons/" + cleanName + ".json");
-            if (rootFile.exists()) {
-                try {
-                    jsonText = Files.readString(rootFile.toPath(), StandardCharsets.UTF_8);
-                    foundLocation = rootFile.getAbsolutePath();
-                    break;
-                } catch (Exception ignored) {}
-            }
-
-            // Classpath Check 1: /Lessons/<name>.json
-            String resPath = "/Lessons/" + cleanName + ".json";
-            try (InputStream is = getClass().getResourceAsStream(resPath)) {
-                if (is != null) {
-                    jsonText = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-                    foundLocation = "Classpath " + resPath;
-                    break;
-                }
-            } catch (Exception ignored) {}
-
-            // Classpath Check 2: Context ClassLoader
-            try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("Lessons/" + cleanName + ".json")) {
-                if (is != null) {
-                    jsonText = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-                    foundLocation = "Context Classpath Lessons/" + cleanName + ".json";
-                    break;
-                }
-            } catch (Exception ignored) {}
-        }
-
-        // File ရှာမတွေ့ပါက Error ပြသ၍ Continue Button ကို Disable လုပ်မည်
-        if (jsonText == null || jsonText.trim().isEmpty()) {
-            System.err.println("❌ Could not find lesson file for ID: " + lessonId);
-            renderErrorCard("Lesson file not found for ID: " + lessonId + "\nTried candidates: " + candidates);
-            return;
-        }
-
-        System.out.println("✓ Successfully loaded lesson from: " + foundLocation);
 
         try {
-            jsonText = jsonText.trim();
-            if (jsonText.startsWith("[")) {
-                this.slides = new JSONArray(jsonText);
-            } else {
-                JSONObject lessonJson = new JSONObject(jsonText);
-                this.slides = lessonJson.optJSONArray("slides");
-            }
-
-            if (this.slides == null || this.slides.length() == 0) {
-                renderErrorCard("No slides found in lesson file.");
-                return;
-            }
-
-            // Button ပြန်ဖွင့်မည်
-            if (continueBtn != null) {
-                continueBtn.setDisable(false);
-            }
-
+            String jsonText = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            JSONObject lessonJson = new JSONObject(jsonText);
+            this.slides = lessonJson.getJSONArray("slides");
             this.currentSlideIndex = 0;
+
+            this.totalQuestionCount = 0;
+            this.correctAnswerCount = 0;
+
+            for (int i = 0; i < slides.length(); i++) {
+                JSONObject s = slides.getJSONObject(i);
+                if (s.has("correctAnswer") && !s.isNull("correctAnswer")) {
+                    totalQuestionCount++;
+                }
+            }
+
             renderCurrentSlide();
 
         } catch (Exception e) {
             e.printStackTrace();
-            renderErrorCard("JSON Parsing Error: " + e.getMessage());
+            renderErrorCard("Failed to load lesson content.");
         }
     }
 
     private void renderCurrentSlide() {
         if (slides == null || currentSlideIndex >= slides.length()) {
-            if (currentLesson != null) {
-                User user = UserSession.getCurrentUser();
-
-                // ⭐ 1. Brain ရှိ/မရှိ အရင်စစ်
-                if (!PremiumService.canUseBrain(user)) {
-                    showBrainLimitDialog();
-                    return;  // Lesson မပြီးမြောက်စေရ — LearnPage ကို မသွား
-                }
-
-                int userId = UserSession.getUserId();
-                String courseId = UserSession.getActiveCourseId();
-
-                DatabaseManager.completeLessonAndAddXP(
-                        userId,
-                        courseId,
-                        currentLesson.getLessonOrder(),
-                        currentLesson.getXp()
-                );
-
-                // ⭐ 2. Brain လျှော့ (Premium ဆိုရင် မလျှော့)
-                PremiumService.consumeBrain(user);
-                UserSession.updateUser(user);
-
-                // ⭐ 3. Header ကို refresh (∞/5 update ဖြစ်အောင်)
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().updateHeaderStats();
-                }
-            }
-
-            if (MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-            }
-            finishLesson();
+            handleLessonCompletion();
             return;
         }
 
-        // Reset slide state & references
         selectedAnswer = null;
         isAnswerChecked = false;
         interactiveCodeEditor = null;
         staticCodeLabel = null;
 
-        double progress = (double) (currentSlideIndex + 1) / slides.length();
         if (progressBar != null) {
+            double progress = (double) (currentSlideIndex + 1) / slides.length();
             progressBar.setProgress(progress);
         }
 
@@ -264,7 +143,6 @@ public class LessonPlayerController {
             continueBtn.setDisable(hasQuestion);
         }
 
-        // Main Card Box
         VBox cardBox = new VBox(14);
         cardBox.setAlignment(Pos.TOP_LEFT);
         cardBox.setPadding(new Insets(24));
@@ -277,7 +155,6 @@ public class LessonPlayerController {
                         "-fx-border-width: 1.5px;"
         );
 
-        // Badge
         String badgeText = isInteractive ? "INTERACTIVE CODE" : (hasQuestion ? "QUESTION" : "CONCEPT");
         String badgeBg = isInteractive ? "#10B98122;" : (hasQuestion ? "#7C3AED22;" : "#2563EB22;");
         String badgeFg = isInteractive ? "#34D399;" : (hasQuestion ? "#C084FC;" : "#60A5FA;");
@@ -294,17 +171,11 @@ public class LessonPlayerController {
         titleLabel.setWrapText(true);
 
         currentPromptLabel = new Label(originalPrompt);
-        currentPromptLabel.setStyle(
-                "-fx-font-size: 16px; " +
-                        "-fx-text-fill: #E2E8F0; " +
-                        "-fx-font-weight: 500; " +
-                        "-fx-line-spacing: 5px;"
-        );
+        currentPromptLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: #94A3B8; -fx-line-spacing: 3px;");
         currentPromptLabel.setWrapText(true);
 
         cardBox.getChildren().addAll(typeBadge, titleLabel, currentPromptLabel);
 
-        // Render Interactive Code Space OR Static Code Box
         if (originalCodeSnippet != null && !originalCodeSnippet.isEmpty()) {
             if (isInteractive) {
                 renderInteractiveCodeSpace(cardBox, slide, originalCodeSnippet);
@@ -318,12 +189,10 @@ public class LessonPlayerController {
             }
         }
 
-        // Feature 1: AI Concept Deep-Dive for non-interactive concept slides
         if (!hasQuestion && !isInteractive) {
             renderConceptAiExplainer(cardBox, language, originalCodeSnippet != null ? originalCodeSnippet : originalPrompt);
         }
 
-        // Render Multiple Choice Options (Shuffled)
         if (slide.has("options")) {
             JSONArray optionsJson = slide.getJSONArray("options");
             List<String> optionsList = new ArrayList<>();
@@ -345,9 +214,7 @@ public class LessonPlayerController {
                     if (isAnswerChecked) return;
 
                     selectedAnswer = optionText;
-                    if (continueBtn != null) {
-                        continueBtn.setDisable(false);
-                    }
+                    if (continueBtn != null) continueBtn.setDisable(false);
 
                     if (originalCodeSnippet != null && originalCodeSnippet.contains("___")) {
                         String filledCode = originalCodeSnippet.replace("___", optionText);
@@ -380,13 +247,11 @@ public class LessonPlayerController {
             cardBox.getChildren().add(optionsBox);
         }
 
-        // Container for Answer Feedback
         feedbackBox = new VBox(6);
         feedbackBox.setPadding(new Insets(12));
         feedbackBox.setVisible(false);
         cardBox.getChildren().add(feedbackBox);
 
-        // ScrollPane Container
         ScrollPane scrollPane = new ScrollPane(cardBox);
         scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -399,6 +264,57 @@ public class LessonPlayerController {
         );
 
         cardContainer.getChildren().add(scrollPane);
+    }
+
+    private void handleLessonCompletion() {
+        if (continueBtn != null) {
+            continueBtn.setDisable(true);
+            continueBtn.setText("SAVING...");
+        }
+
+        new Thread(() -> {
+            if (currentLesson != null) {
+                int userId = UserSession.getUserId();
+                String courseId = UserSession.getActiveCourseId();
+
+                int earnedXP = currentLesson.getXp();
+                int earnedCoins = 10;
+
+                if (totalQuestionCount > 0) {
+                    double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
+                    if (percentage >= 50.0) {
+                        earnedCoins = 10;
+                    } else {
+                        earnedCoins = 5;
+                    }
+                }
+
+                // Step 1: UserSession ထဲတွင် Coins & XP တိုးပေးပြီး Session အသစ်ကိုပါ ပြန်လည်သိမ်းဆည်းမည်
+                User currentUser = UserSession.getCurrentUser();
+                if (currentUser != null) {
+                    currentUser.setCoin(currentUser.getCoin() + earnedCoins);
+                    currentUser.setXp(currentUser.getXp() + earnedXP);
+                    UserSession.setCurrentUser(currentUser); // CRITICAL FIX: Memory Session ကို ပြန်လည် Save လုပ်သည်
+                }
+
+                // Step 2: Database ဘက်သို့ Data ပို့ပေးမည်
+                DatabaseManager.completeLessonAndAddXP(
+                        userId,
+                        courseId,
+                        currentLesson.getLessonOrder(),
+                        earnedXP,
+                        earnedCoins
+                );
+            }
+
+            // Step 3: Header Stats များကို Refresh လုပ်ပေးမည်
+            Platform.runLater(() -> {
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().updateHeaderStats();
+                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+                }
+            });
+        }).start();
     }
 
     private void renderConceptAiExplainer(VBox cardBox, String language, String codeContent) {
@@ -611,14 +527,8 @@ public class LessonPlayerController {
 
     @FXML
     private void handleContinue() {
-        // 🛑 Guard Check: slides က null သို့မဟုတ် empty ဖြစ်နေပါက အမှားမတက်စေရန်
-        if (slides == null || slides.length() == 0) {
-            System.err.println("Cannot handle continue: slides is null or empty.");
-            return;
-        }
-
-        if (currentSlideIndex >= slides.length()) {
-            finishLesson();
+        if (slides == null || currentSlideIndex >= slides.length()) {
+            handleLessonCompletion();
             return;
         }
 
@@ -637,6 +547,10 @@ public class LessonPlayerController {
 
             boolean isCorrect = selectedAnswer != null && selectedAnswer.trim().equalsIgnoreCase(correctAnswer.trim());
 
+            if (isCorrect) {
+                correctAnswerCount++;
+            }
+
             if (optionsBox != null) {
                 for (Node node : optionsBox.getChildren()) {
                     if (node instanceof Button) {
@@ -648,10 +562,8 @@ public class LessonPlayerController {
                         if (btnText.equalsIgnoreCase(correctAnswer.trim())) {
                             btn.setStyle("-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-border-color: #059669; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else if (selectedAnswer != null && btnText.equalsIgnoreCase(selectedAnswer.trim()) && !isCorrect) {
-                            // Chosen Incorrect Answer -> Red
                             btn.setStyle("-fx-background-color: #7F1D1D; -fx-text-fill: #FCA5A5; -fx-border-color: #DC2626; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 1.0;");
                         } else {
-                            // Other unselected options -> Dimmed
                             btn.setStyle("-fx-background-color: #0F172A; -fx-text-fill: #64748B; -fx-border-color: #1E293B; -fx-border-radius: 12px; -fx-background-radius: 12px; -fx-font-size: 14px; -fx-alignment: CENTER-LEFT; -fx-padding: 10 16 10 16; -fx-opacity: 0.5;");
                         }
                     }
@@ -662,36 +574,10 @@ public class LessonPlayerController {
                 showFeedback(true, "Correct! Great job.", explanation);
             } else {
                 showFeedback(false, "Incorrect! Correct answer: " + correctAnswer, explanation);
-
-                int userId = UserSession.getUserId();
-                ApiClient.deductBrainAsync(userId).thenAccept(response -> {
-                    if (response != null) {
-                        JSONObject json = new JSONObject(response);
-
-                        int updatedBrains = json.optInt("brain_count", json.optInt("brains", 0));
-                        boolean canPlay = json.optBoolean("can_play", true);
-
-                        Platform.runLater(() -> {
-                            if (UserSession.getCurrentUser() != null) {
-                                UserSession.getCurrentUser().setBrainCount(updatedBrains);
-                            }
-
-                            if (MainLayoutController.getInstance() != null) {
-                                MainLayoutController.getInstance().updateBrainDisplay(updatedBrains);
-                            }
-
-                            if (!canPlay) {
-                                showOutOfBrainsDialog();
-                            }
-                        });
-                    }
-                });
             }
 
             isAnswerChecked = true;
-            if (continueBtn != null) {
-                continueBtn.setText("CONTINUE");
-            }
+            if (continueBtn != null) continueBtn.setText("CONTINUE");
             return;
         }
 
@@ -700,6 +586,8 @@ public class LessonPlayerController {
     }
 
     private void showFeedback(boolean isCorrect, String message, String explanation) {
+        if (feedbackBox == null) return;
+
         feedbackBox.getChildren().clear();
         feedbackBox.setVisible(true);
 
@@ -766,43 +654,6 @@ public class LessonPlayerController {
         }
     }
 
-    private void finishLesson() {
-        if (currentLesson != null) {
-            int userId = UserSession.getUserId();
-            String courseId = UserSession.getActiveCourseId();
-            int xpEarned = currentLesson.getXp();
-
-            // 1. Local Database သို့ Progress သိမ်းဆည်းခြင်း
-            DatabaseManager.completeLessonAndAddXP(
-                    userId,
-                    courseId,
-                    currentLesson.getLessonOrder(),
-                    xpEarned
-            );
-
-            // 2. Weekly Leaderboard (Backend) သို့ Weekly XP တိုက်ရိုက် ပေါင်းထည့်ခြင်း
-            ApiClient.addUserXpAsync(userId, xpEarned);
-
-            // 3. Backend API သို့ Async ပို့ပြီး Lesson Complete လုပ်ခြင်းနှင့် Streak တိုးခြင်း
-            ApiClient.completeLessonAsync(
-                    userId,
-                    courseId,
-                    currentLesson.getLessonOrder(),
-                    xpEarned
-            ).thenAccept(response -> {
-                Platform.runLater(() -> {
-                    if (MainLayoutController.getInstance() != null) {
-                        MainLayoutController.getInstance().fetchAndUpdateUserActivity();
-                    }
-                });
-            });
-        }
-
-        if (MainLayoutController.getInstance() != null) {
-            MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-        }
-    }
-
     @FXML
     private void handleClose() {
         if (MainLayoutController.getInstance() != null) {
@@ -811,55 +662,11 @@ public class LessonPlayerController {
     }
 
     private void renderErrorCard(String message) {
-        cardContainer.getChildren().clear();
-        Label errorLabel = new Label(message);
-        errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 15px; -fx-font-weight: bold; -fx-alignment: center;");
-        errorLabel.setWrapText(true);
-        cardContainer.getChildren().add(errorLabel);
-
-        // ဖိုင်မတွေ့ပါက Continue Button ကို Disable လုပ်ထားမည်
-        if (continueBtn != null) {
-            continueBtn.setDisable(true);
+        if (cardContainer != null) {
+            cardContainer.getChildren().clear();
+            Label errorLabel = new Label(message);
+            errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 16px; -fx-font-weight: bold;");
+            cardContainer.getChildren().add(errorLabel);
         }
-    }
-    private void showBrainLimitDialog() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-                javafx.scene.control.Alert.AlertType.WARNING);
-        alert.setTitle("Brain Limit Reached");
-        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
-        alert.setContentText(
-                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
-                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
-        );
-
-        javafx.scene.control.ButtonType upgradeBtn =
-                new javafx.scene.control.ButtonType("Upgrade",
-                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
-        javafx.scene.control.ButtonType cancelBtn =
-                new javafx.scene.control.ButtonType("Cancel",
-                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().handlePremium();
-            } else {
-                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                }
-            }
-        });
-    }
-
-    private void showOutOfBrainsDialog() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
-        alert.setTitle("Out of Brains!");
-        alert.setHeaderText("ဦးနှောက် (Brain) ကုန်သွားပါပြီ");
-        alert.setContentText("မေးခွန်းများ ဆက်လက်ဖြေဆိုရန် ခဏစောင့်ပါ သို့မဟုတ် Shop တွင် Coin ဖြင့် Brain ပြန်ဖြည့်ပါ။");
-        alert.showAndWait();
-
-        handleClose();
     }
 }
