@@ -46,8 +46,6 @@ public class SettingsController {
     @FXML private ComboBox<Country> countryCombo;
 
     // Password Fields
-    @FXML private PasswordField currentPasswordField;
-    @FXML private PasswordField newPasswordField;
     @FXML private PasswordField confirmPasswordField;
 
     // Avatar Components

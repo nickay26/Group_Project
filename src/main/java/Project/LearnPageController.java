@@ -99,7 +99,6 @@ public class LearnPageController {
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().updateCourseTitle();
             MainLayoutController.getInstance().updateHeaderStats();
-            MainLayoutController.getInstance().fetchAndUpdateUserActivity();// Refresh live streak and user stats
         }
         currentLessons = DatabaseManager.getLessonsForCourse(courseId);
 

@@ -6,7 +6,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -180,6 +179,106 @@ public class DatabaseManager {
         }
     }
 
+    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("coins", coinsToAdd);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            boolean success = response.statusCode() == 200 || response.statusCode() == 201;
+
+            // ⭐️ CRITICAL FIX: Instantly update Java Memory so UI reflects new coins
+            if (success && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
+                User user = UserSession.getCurrentUser();
+                user.setCoin(user.getCoin() + coinsToAdd);
+
+                // Update Top Bar UI if loaded
+                javafx.application.Platform.runLater(() -> {
+                    if (MainLayoutController.getInstance() != null) {
+                        MainLayoutController.getInstance().updateHeaderStats();
+                    }
+                });
+            }
+
+            return success;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Fixed: Route matches Flask /api/users/brains/refill
+    public static boolean refillBrainsWithCoins(int userId, int cost) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("cost", cost);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
+        return refillBrainsWithCoins(userId, cost);
+    }
+
+    public static int getCompletedLessonCount(int userId, String courseId) {
+        List<Course> courses = getCoursesForUser(userId);
+        for (Course c : courses) {
+            if (c.getCourseId().equalsIgnoreCase(courseId)) {
+                return c.getCompletedLessons();
+            }
+        }
+        return 0;
+    }
+
+    public static boolean updateUserProfile(int userId, String imagePath) {
+        try {
+            String url = BASE_URL + "/api/user/update-profile-path";
+
+            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
+            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .header("Accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                System.out.println("Profile updated successfully: " + response.body());
+                return true;
+            } else {
+                System.err.println("Failed to update profile. Server responded with status: " + response.statusCode());
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error updating profile in DatabaseManager: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     // ==========================================
     // 2. COURSES & LESSONS
     // ==========================================
@@ -289,56 +388,6 @@ public class DatabaseManager {
         }
     }
 
-    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("coins", coinsToAdd);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("cost", cost);
-            body.put("max_brain", maxBrain);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/refill-brains"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static int getCompletedLessonCount(int userId, String courseId) {
-        List<Course> courses = getCoursesForUser(userId);
-        for (Course c : courses) {
-            if (c.getCourseId().equalsIgnoreCase(courseId)) {
-                return c.getCompletedLessons();
-            }
-        }
-        return 0;
-    }
-
     // ==========================================
     // 3. PLAYGROUND PROJECTS
     // ==========================================
@@ -425,81 +474,10 @@ public class DatabaseManager {
         return false;
     }
 
-    // ============================================
-    // UPDATE USER PROFILE
-    // ============================================
-    public static boolean updateUserProfile(int userId, String imagePath) {
-        try {
-            String url = BASE_URL + "/api/user/update-profile-path";
-
-            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
-            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", "application/json")
-                    .header("Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                System.out.println("Profile updated successfully: " + response.body());
-                return true;
-            } else {
-                System.err.println("Failed to update profile. Server responded with status: " + response.statusCode());
-                return false;
-            }
-        } catch (Exception e) {
-            System.err.println("Error updating profile in DatabaseManager: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     // ==========================================
-    // HELPER METHODS
+    // 4. REVIEWS
     // ==========================================
 
-    private static String sendGetRequest(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            return response.body();
-        }
-        return "";
-    }
-
-    // JSON Key စာလုံးကြီး/သေး နှစ်မျိုးလုံးကို လက်ခံပေးမည့် Flexible Helper Mapping Method
-    private static User mapJsonToUser(JSONObject obj) {
-        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
-        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
-        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
-
-        String profile = obj.optString("Profile", obj.optString("profile", null));
-        int xp = obj.optInt("XP", obj.optInt("xp", 0));
-        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
-
-        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
-        int coin = 0;
-        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
-        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
-        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
-        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
-
-        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
-
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
-    }
-
-    // ==========================================
-    // ADD LESSON TO REVIEW TABLE
-    // ==========================================
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
         try {
             JSONObject body = new JSONObject();
@@ -521,9 +499,6 @@ public class DatabaseManager {
         }
     }
 
-    // ============================================
-    // GET LESSONS FROM REVIEW TABLE
-    // ============================================
     public static List<PracticeController.ReviewData> getReviewLessons(int userId) {
         List<PracticeController.ReviewData> reviewList = new ArrayList<>();
         try {
@@ -544,7 +519,6 @@ public class DatabaseManager {
                     String courseId = obj.optString("course_id", obj.optString("Course_ID", ""));
                     String title = obj.optString("Lesson_title", obj.optString("title", obj.optString("Title", lessonId)));
 
-                    // Course ID အပေါ်မူတည်၍ Language သတ်မှတ်ခြင်း
                     String language = "C++";
                     if (courseId.toUpperCase().contains("JAVA")) {
                         language = "Java";
@@ -564,7 +538,7 @@ public class DatabaseManager {
     }
 
     // ==========================================
-    // 4. PREMIUM & PAYMENT
+    // 5. PREMIUM & PAYMENTS
     // ==========================================
 
     public static boolean subscribePremium(int userId, int planId, String durationType) {
@@ -632,7 +606,7 @@ public class DatabaseManager {
     }
 
     // ==========================================
-    // 5. BRAIN & ENERGY SYSTEM
+    // 6. BRAIN & ENERGY SYSTEM
     // ==========================================
 
     public static JSONObject getBrainStatus(int userId) {
@@ -695,8 +669,28 @@ public class DatabaseManager {
         return null;
     }
 
+    public static boolean updateBrainCount(int userId, int newCount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("brain_count", newCount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // ==========================================
-    // 6. LEADERBOARD SYSTEM (SYNCHRONOUS)
+    // 7. LEADERBOARD SYSTEM
     // ==========================================
 
     public static JSONArray getLeaderboard() {
@@ -783,24 +777,52 @@ public class DatabaseManager {
         return false;
     }
 
-    public static boolean updateBrainCount(int userId, int newCount) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("brain_count", newCount);
+    // ==========================================
+    // HELPER METHODS
+    // ==========================================
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
+    private static String sendGetRequest(String path) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .GET()
+                .build();
 
-            HttpResponse<String> response = client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
-        } catch (Exception e) {
-            e.printStackTrace();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
         }
-        return false;
+        return "";
+    }
+
+    private static User mapJsonToUser(JSONObject obj) {
+        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
+        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
+
+        String email = "";
+        if (obj.has("Email") && !obj.isNull("Email")) {
+            email = obj.getString("Email");
+        } else if (obj.has("email") && !obj.isNull("email")) {
+            email = obj.getString("email");
+        } else if (UserSession.getCurrentUser() != null && UserSession.getCurrentUser().getEmail() != null) {
+            email = UserSession.getCurrentUser().getEmail();
+        }
+
+        String profile = obj.optString("Profile", obj.optString("profile", null));
+        if ("null".equalsIgnoreCase(profile) || (profile != null && profile.trim().isEmpty())) {
+            profile = null;
+        }
+
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
+
+        int coin = 0;
+        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
+        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
+        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
+        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
+
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+
+        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
 }

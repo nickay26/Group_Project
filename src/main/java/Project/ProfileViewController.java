@@ -40,29 +40,33 @@ public class ProfileViewController {
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
-            userNameLabel.setText(currentUser.getName());
-            userEmailLabel.setText(currentUser.getEmail());
+            userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
+            userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
             streakLabel.setText(String.valueOf(currentUser.getStreak()));
             xpLabel.setText(String.valueOf(currentUser.getXp()));
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
 
-            // ★★★ ဒီနေရာမှာ Premium Check ထည့်ပါ ★★★
+            // Premium Check
             String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equals(planType);
+            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
 
             if (isPremium) {
-                brainLabel.setText("∞");   // Premium → Unlimited
+                brainLabel.setText("∞");
             } else {
-                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));  // Free → 5
+                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
             }
-            // ★★★ ဒီအထိပဲ ★★★
 
-            if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
+            // ✅ FIXED: Format server filename into full HTTP URL
+            String profilePath = currentUser.getProfile();
+            if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
                 try {
-                    Image img = new Image(currentUser.getProfile(), 0, 0, true, true, true);
-                    avatarImageView.setImage(img);
+                    String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
+                    if (fullImageUrl != null) {
+                        Image img = new Image(fullImageUrl, true); // Async loading
+                        avatarImageView.setImage(img);
+                    }
                 } catch (Exception e) {
-                    System.out.println("Could not load avatar: " + e.getMessage());
+                    System.err.println("Could not load avatar: " + e.getMessage());
                 }
             }
 

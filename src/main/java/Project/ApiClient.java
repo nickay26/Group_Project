@@ -497,12 +497,11 @@ public class ApiClient {
                     return null;
                 });
     }
+
     // ==========================================
-    // 9. FETCH USER PROFILE DATA
+    // 13. FETCH USER PROFILE DATA
     // ==========================================
     public static CompletableFuture<String> getUserProfileAsync(String userId) {
-        // ⚠️ သင့် PythonAnywhere app.py ရှိ Endpoint Route အတိုင်း ပြင်ပေးပါ
-        // (ဥပမာ- "/api/user/" သို့မဟုတ် "/get_user/" သို့မဟုတ် "/api/users/")
         String url = BASE_URL + "/api/user/" + userId.trim();
 
         HttpRequest request = HttpRequest.newBuilder()

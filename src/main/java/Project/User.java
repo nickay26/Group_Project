@@ -28,8 +28,9 @@ public class User {
     }
 
     // Default Constructor တွင် Brain ကို 5 ပေးထားပါမည်
+    // ✅ FIXED: Pass null instead of "" for profile
     public User(int userId, String name, String email) {
-        this(userId, name, email, "", 0, 0, 0, 5);
+        this(userId, name, email, null, 0, 0, 0, 5);
     }
 
     // Setters
