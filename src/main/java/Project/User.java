@@ -10,7 +10,7 @@ public class User {
     private int coin;
     private int brainCount;
 
-    // ⭐ Premium Fields
+    // ⭐️ Premium Fields
     private boolean premium = false;
     private String subscriptionType = "free";
     private String planType = "FREE";
@@ -27,8 +27,9 @@ public class User {
         this.brainCount = brainCount;
     }
 
+    // Default Constructor တွင် Brain ကို 5 ပေးထားပါမည်
     public User(int userId, String name, String email) {
-        this(userId, name, email, "", 0, 0, 0, 0);
+        this(userId, name, email, "", 0, 0, 0, 5);
     }
 
     // Setters
@@ -48,15 +49,22 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
-    public String getPlanType() { return planType; }
 
-    // --- Setters ---
+    // Setters
     public void setName(String name) { this.name = name; }
     public void setProfile(String profile) { this.profile = profile; }
     public void setXp(int xp) { this.xp = xp; }
     public void setStreak(int streak) { this.streak = streak; }
     public void setCoin(int coin) { this.coin = coin; }
     public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
+
+    public String getUsername() {
+        return name;
+    }
+
+    public String getProfilePicture() {
+        return profile;
+    }
     public boolean isPremium() { return premium; }
     public String getSubscriptionType() { return subscriptionType; }
 }

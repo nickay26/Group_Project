@@ -1,0 +1,148 @@
+PYTHON TUTORIAL
+
+What is Python?
+Python is a high-level, interpreted programming language known for its
+simplicity and readability. It is widely used in web development,
+data science, artificial intelligence, automation, and many other fields.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+How to Use Python
+Python code is written in .py files and executed by an interpreter.
+You can run Python scripts in several ways:
+  • Command line
+  • Integrated Development Environment (IDE)
+  • Interactive Python shell
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Running Python in the Command Line
+After installing Python, you can check the version and run scripts
+from the command line.
+
+  # Check Python version
+  python --version
+
+  # Run a script
+  python script.py
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Writing and Running a Simple Python Script
+You can write Python code in a file and execute it.
+
+  # hello.py
+  print("Hello, Python!")
+
+To run the script, navigate to its directory and type:
+
+  python hello.py
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Using the Interactive Python Shell
+For quick testing, you can use the Python interactive shell.
+Open it by typing "python" in the terminal and execute commands directly.
+
+  >>> print("Python is fun!")
+  Python is fun!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When to Use Python
+Python is versatile and used in many fields.
+
+1. Web Development
+Frameworks like Django and Flask make it easy to build websites.
+Python's simplicity reduces development time.
+
+Example:
+
+  from flask import Flask
+
+  app = Flask(__name__)
+
+  @app.route("/")
+  def home():
+      return "Hello, Python Web!"
+
+  if __name__ == "__main__":
+      app.run()
+
+2. Data Science and Machine Learning
+Python has libraries like NumPy, Pandas, and TensorFlow.
+
+Example:
+
+  import pandas as pd
+
+  data = {"Name": ["Alice", "Bob"], "Age": [25, 30]}
+  df = pd.DataFrame(data)
+  print(df)
+
+3. Automation and Scripting
+Python is great for automating repetitive tasks.
+
+Example:
+
+  import os
+
+  for file in os.listdir("."):
+      if file.endswith(".txt"):
+          print("Found a text file:", file)
+
+4. Game Development
+Libraries like Pygame allow you to create games.
+
+Example:
+
+  import pygame
+
+  pygame.init()
+  screen = pygame.display.set_mode((500, 500))
+  pygame.display.set_caption("My First Game")
+
+5. Cybersecurity and Ethical Hacking
+Python is used for penetration testing, network scanning, and
+vulnerability assessment.
+
+Example:
+
+  import socket
+
+  target = "example.com"
+  ip = socket.gethostbyname(target)
+  print(f"IP address of {target} is {ip}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Examples of Python in Action
+
+1. Basic Math Operations
+
+  a = 10
+  b = 5
+  print(a + b)   # Addition
+  print(a - b)   # Subtraction
+  print(a * b)   # Multiplication
+  print(a / b)   # Division
+
+2. Conditional Statements
+
+  age = 18
+  if age >= 18:
+      print("You are an adult.")
+  else:
+      print("You are a minor.")
+
+3. Loops
+
+  for i in range(5):
+      print("Number:", i)
+
+4. Functions
+
+  def greet(name):
+      return "Hello, " + name
+
+  print(greet("World"))

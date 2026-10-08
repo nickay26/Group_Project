@@ -18,11 +18,14 @@ public class WebSocketService implements WebSocket.Listener {
 
     public interface NotificationListener {
         void onInviteReceived(String fromUser, String language);
-        void onGameStart(String roomId, String language);
+
+        // ⭐ Friend Match စတင်ချိန်တွင် opponentId နှင့် questionsJson ပါဝင်သည်
+        void onGameStart(String roomId, String language, String opponentId, String questionsJson);
+
         void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson);
         void onQuickMatchTimeout();
 
-        // ⭐ Game Sync အတွက် ထပ်တိုး Listener များ (default သုံးထားသဖြင့် အခြား Controller များ မပျက်ပါ)
+        // Game Sync အတွက် ထပ်တိုး Listener များ
         default void onOpponentProgress(String userId, int progress) {}
         default void onGameOver(String winnerId) {}
     }
@@ -98,12 +101,18 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    public void respondInvite(String toUser, String action) {
+    // ⭐ Invite တုံ့ပြန်ရာတွင် Language ပါဝင်သော မက်သဒ်
+    public void respondInvite(String toUser, String action, String language) {
         JSONObject json = new JSONObject();
         json.put("type", "INVITE_RESPONSE");
         json.put("toUser", toUser);
         json.put("action", action);
+        json.put("language", language);
         sendText(json.toString());
+    }
+
+    public void respondInvite(String toUser, String action) {
+        respondInvite(toUser, action, "java");
     }
 
     public void joinQuickMatch(String currentUserId, String language) {
@@ -121,7 +130,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // ⭐ Progress ပို့မည့် Method
+    // Progress ပို့မည့် Method
     public void sendProgressUpdate(String roomId, String userId, int progress) {
         JSONObject json = new JSONObject();
         json.put("type", "GAME_PROGRESS");
@@ -131,7 +140,7 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // ⭐ Game Over / Match ပြီးဆုံးမှု ပို့မည့် Method
+    // Game Over / Match ပြီးဆုံးမှု ပို့မည့် Method
     public void sendGameOver(String roomId, String winnerId) {
         JSONObject json = new JSONObject();
         json.put("type", "GAME_OVER");
@@ -164,11 +173,15 @@ public class WebSocketService implements WebSocket.Listener {
                     } else if ("START_GAME".equals(type)) {
                         String roomId = json.optString("roomId", "");
                         String language = json.optString("language", "java");
-                        notificationListener.onGameStart(roomId, language);
+                        String opponentId = json.optString("opponentId", "Unknown");
+                        Object questionsObj = json.opt("questions");
+                        String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+
+                        notificationListener.onGameStart(roomId, language, opponentId, questionsJson);
 
                     } else if ("QUICK_MATCH_START".equals(type)) {
                         String roomId = json.optString("roomId", "");
-                        String language = json.optString("language", "Python");
+                        String language = json.optString("language", "java");
                         String opponentId = json.optString("opponentId", "Unknown");
                         Object questionsObj = json.opt("questions");
                         String questionsJson = questionsObj != null ? questionsObj.toString() : "";
@@ -179,13 +192,11 @@ public class WebSocketService implements WebSocket.Listener {
                         System.out.println("Executing Client Timeout Listener...");
                         notificationListener.onQuickMatchTimeout();
 
-                        // ⭐ Real-time Progress Parsing
                     } else if ("GAME_PROGRESS".equals(type)) {
                         String userId = json.optString("userId", "");
                         int progress = json.optInt("progress", 0);
                         notificationListener.onOpponentProgress(userId, progress);
 
-                        // ⭐ Real-time Game Over Parsing
                     } else if ("GAME_OVER".equals(type)) {
                         String winnerId = json.optString("winnerId", "");
                         notificationListener.onGameOver(winnerId);

@@ -4,63 +4,81 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class PythonanywhereTester {
 
-    // TODO: Replace with your actual PythonAnywhere username
     private static final String USERNAME = "NickayJohn26";
-    private static final String ENDPOINT = "https://" + USERNAME + ".pythonanywhere.com/execute";
+    private static final String BASE_URL = "https://" + USERNAME + ".pythonanywhere.com";
+    private static final String EXECUTE_ENDPOINT = BASE_URL + "/execute";
+    private static final String REVIEW_ENDPOINT = BASE_URL + "/review";
 
-    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final HttpClient httpClient;
+
+    public PythonanywhereTester() {
+        this.httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1) // HTTP/1.1 စနစ်ဖြင့် သေချာစေရန်
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .connectTimeout(Duration.ofSeconds(15))
+                .build();
+    }
 
     public String executeCode(String language, String code) {
         String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"code\": \"%s\"}",
-                language, escapeJson(code)
+                "{\"language\":\"%s\",\"code\":\"%s\"}",
+                escapeJson(language),
+                escapeJson(code)
         );
 
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(ENDPOINT))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
-                    .build();
-
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.body();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "{\"output\": \"Client Error: " + e.getMessage() + "\"}";
-        }
-    }
-
-    private String escapeJson(String text) {
-        if (text == null) return "";
-        return text.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t");
+        return sendPostRequest(EXECUTE_ENDPOINT, jsonPayload);
     }
 
     public String testAiReview(String code, String language) {
         String jsonPayload = String.format(
-                "{\"code\": \"%s\", \"language\": \"%s\"}",
-                escapeJson(code), language
+                "{\"code\":\"%s\",\"language\":\"%s\"}",
+                escapeJson(code),
+                escapeJson(language)
         );
 
+        return sendPostRequest(REVIEW_ENDPOINT, jsonPayload);
+    }
+
+    private String sendPostRequest(String endpoint, String jsonPayload) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://NickayJohn26.pythonanywhere.com/review"))
+                    .uri(URI.create(endpoint))
                     .header("Content-Type", "application/json")
+                    .timeout(Duration.ofSeconds(20))
                     .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.body();
+
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                return response.body();
+            } else {
+                return String.format("{\"error\": \"HTTP %d\", \"details\": \"%s\"}",
+                        response.statusCode(),
+                        escapeJson(response.body()));
+            }
         } catch (Exception e) {
-            return "Error testing AI: " + e.getMessage();
+            e.printStackTrace();
+            String errorMsg = e.getMessage() != null ? e.getMessage() : e.toString();
+            return "{\"error\": \"Client Exception\", \"message\": \"" + escapeJson(errorMsg) + "\"}";
         }
+    }
+
+    private String escapeJson(String text) {
+        if (text == null) {
+            return "";
+        }
+        return text.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\b", "\\b")
+                .replace("\f", "\\f")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 
     public static void main(String[] args) {

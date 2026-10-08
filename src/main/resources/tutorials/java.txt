@@ -1,0 +1,140 @@
+JAVA TUTORIAL
+
+What is Java?
+Java is a high-level, object-oriented programming language developed
+by Sun Microsystems (now Oracle). It follows the principle
+"Write Once, Run Anywhere" (WORA).
+
+It is widely used in:
+  • Enterprise Software & Backend Systems
+  • Android Mobile Application Development
+  • High-Scale Web Services & Cloud Architecture
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+How to Use Java
+Java code is written in .java files and compiled into bytecode (.class)
+which runs on the Java Virtual Machine (JVM).
+
+Steps:
+  1. Write code in a .java file
+  2. Compile: javac Main.java
+  3. Run: java Main
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your First Java Program
+
+  public class Main {
+      public static void main(String[] args) {
+          System.out.println("Hello, Java!");
+      }
+  }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When to Use Java
+
+1. Enterprise Applications
+Banks, e-commerce, and large-scale backend systems.
+
+Example:
+
+  public class BankAccount {
+      private String owner;
+      private double balance;
+
+      public BankAccount(String owner, double balance) {
+          this.owner = owner;
+          this.balance = balance;
+      }
+
+      public void deposit(double amount) {
+          balance += amount;
+          System.out.println("Deposited: " + amount);
+      }
+
+      public static void main(String[] args) {
+          BankAccount acc = new BankAccount("Alice", 1000);
+          acc.deposit(500);
+      }
+  }
+
+2. Android Development
+Most Android apps are built with Java or Kotlin.
+
+Example:
+
+  public class MainActivity extends AppCompatActivity {
+      @Override
+      protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_main);
+          System.out.println("Activity created!");
+      }
+  }
+
+3. Web Services
+Spring Boot and other frameworks for REST APIs.
+
+Example:
+
+  @RestController
+  public class HelloController {
+      @GetMapping("/hello")
+      public String hello() {
+          return "Hello, Spring!";
+      }
+  }
+
+4. Big Data
+Hadoop, Spark, and other frameworks.
+
+Example:
+
+  public class WordCount {
+      public static void main(String[] args) {
+          String[] words = {"java", "spark", "hadoop", "java"};
+          java.util.Map<String, Integer> count = new java.util.HashMap<>();
+          for (String w : words) {
+              count.put(w, count.getOrDefault(w, 0) + 1);
+          }
+          System.out.println(count);
+      }
+  }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Examples of Java in Action
+
+1. Basic Math Operations
+
+  int a = 10;
+  int b = 5;
+  System.out.println(a + b);   // Addition
+  System.out.println(a - b);   // Subtraction
+  System.out.println(a * b);   // Multiplication
+  System.out.println(a / b);   // Division
+
+2. Conditional Statements
+
+  int age = 18;
+  if (age >= 18) {
+      System.out.println("You are an adult.");
+  } else {
+      System.out.println("You are a minor.");
+  }
+
+3. Loops
+
+  for (int i = 0; i < 5; i++) {
+      System.out.println("Number: " + i);
+  }
+
+4. Methods
+
+  public static String greet(String name) {
+      return "Hello, " + name;
+  }
+
+  System.out.println(greet("World"));
