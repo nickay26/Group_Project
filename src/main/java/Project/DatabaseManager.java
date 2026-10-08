@@ -410,7 +410,6 @@ public class DatabaseManager {
         int xp = obj.optInt("XP", obj.optInt("xp", 0));
         int streak = obj.optInt("Streak", obj.optInt("streak", 0));
 
-        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
         int coin = 0;
         if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
         else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
@@ -419,7 +418,20 @@ public class DatabaseManager {
 
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+
+        // ⭐ Premium fields ထည့်
+        String planType = obj.optString("plan_type",
+                obj.optString("Plan_Type", "FREE"));
+        boolean isPremium = obj.optBoolean("is_premium",
+                obj.optBoolean("Is_Premium", false))
+                || "PREMIUM".equalsIgnoreCase(planType);
+
+        user.setPremium(isPremium);
+        user.setSubscriptionType(planType);
+        user.setPlanType(planType);
+
+        return user;
     }
 
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
@@ -740,27 +752,6 @@ public class DatabaseManager {
     }
 
     // ==========================================
-// 5. GET USER BY ID (Brain Count အတွက်)
-// ==========================================
-
-    public static User getUserById(int userId) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                JSONObject res = new JSONObject(response.body());
-                return mapJsonToUser(res);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     // ============================================
 // ⭐ AI ASK LIMIT TRACKING
