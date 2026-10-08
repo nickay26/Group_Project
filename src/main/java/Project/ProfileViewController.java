@@ -1,10 +1,15 @@
 package Project;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -13,6 +18,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.util.Duration;
 
 import java.io.InputStream;
 import java.util.List;
@@ -27,6 +33,7 @@ public class ProfileViewController {
     @FXML private Label coinLabel;
     @FXML private Label brainLabel;
     @FXML private GridPane coursesProgressContainer;
+    @FXML private Label premiumBadgeLabel;   // ✅ Label
 
     @FXML
     public void initialize() {
@@ -37,25 +44,37 @@ public class ProfileViewController {
         loadCoursesProgress();
     }
 
+    // ============================================
+    // LOAD USER DATA
+    // ============================================
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
+            String planType = currentUser.getSubscriptionType();
+            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType);
+
             userNameLabel.setText(currentUser.getName());
+
+            // ✅ Premium Badge — Label
+            if (isPremium) {
+                premiumBadgeLabel.setVisible(true);
+                premiumBadgeLabel.setManaged(true);
+                startPremiumAnimation();
+            } else {
+                premiumBadgeLabel.setVisible(false);
+                premiumBadgeLabel.setManaged(false);
+            }
+
             userEmailLabel.setText(currentUser.getEmail());
             streakLabel.setText(String.valueOf(currentUser.getStreak()));
             xpLabel.setText(String.valueOf(currentUser.getXp()));
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
 
-            // ★★★ ဒီနေရာမှာ Premium Check ထည့်ပါ ★★★
-            String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equals(planType);
-
             if (isPremium) {
-                brainLabel.setText("∞");   // Premium → Unlimited
+                brainLabel.setText("∞");
             } else {
-                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));  // Free → 5
+                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
             }
-            // ★★★ ဒီအထိပဲ ★★★
 
             if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
                 try {
@@ -71,6 +90,45 @@ public class ProfileViewController {
         }
     }
 
+    // ============================================
+    // ✅ Premium Badge — Animation
+    // ============================================
+    private void startPremiumAnimation() {
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.web("#FBBF24"));
+        glow.setRadius(6);
+        glow.setSpread(0.2);
+        premiumBadgeLabel.setEffect(glow);
+
+        Timeline glowTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(glow.radiusProperty(), 3)),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(glow.radiusProperty(), 10)),
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(glow.radiusProperty(), 3))
+        );
+        glowTimeline.setCycleCount(Animation.INDEFINITE);
+        glowTimeline.play();
+
+        Timeline scaleTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.0),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.0)),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.08),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.08)),
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.0),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.0))
+        );
+        scaleTimeline.setCycleCount(Animation.INDEFINITE);
+        scaleTimeline.play();
+    }
+
+    // ============================================
+    // LOAD COURSES PROGRESS
+    // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
@@ -89,11 +147,6 @@ public class ProfileViewController {
 
         for (Course course : courseList) {
             int percent = course.getProgressPercent();
-
-            System.out.println("📊 " + course.getTitle()
-                    + " | Completed: " + course.getCompletedLessons()
-                    + " | Total: " + course.getTotalLessons()
-                    + " | Percent: " + percent + "%");
 
             StackPane item = createCourseItem(
                     course.getCourseId(),
@@ -148,10 +201,9 @@ public class ProfileViewController {
 
         StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
-        // ✅ Position — အပေါ်ကို ထပ်တိုး
         StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
         progressCircle.setTranslateX(-20);
-        progressCircle.setTranslateY(-25);   // ✅ -18 → -25 (အပေါ်တိုး)
+        progressCircle.setTranslateY(-5);
         progressCircle.setMouseTransparent(true);
 
         StackPane cardContainer = new StackPane();
@@ -182,24 +234,18 @@ public class ProfileViewController {
         return "default.png";
     }
 
-    // ============================================
-    // ✅ CIRCULAR PROGRESS — ဒုတိယပုံလို အရောင်
-    // ============================================
     private StackPane createCircularProgressForCard(int percent, String courseId) {
         double radius = 22;
         double strokeWidth = 5;
 
-        // ✅ အရောင် ၂ မျိုး — အရင့် + ပေါ့
         String darkerColor = getCardDarkerColor(courseId);
         String lighterColor = getCardLighterColor(courseId);
 
-        // ✅ Background Circle — အရင့်ရောင်
         Circle bgCircle = new Circle(radius);
-        bgCircle.setFill(Color.web(darkerColor, 0.9));      // ✅ 90% opacity (အရင့်)
-        bgCircle.setStroke(Color.web(lighterColor, 1.0));   // ✅ 100% opacity (ပေါ့)
+        bgCircle.setFill(Color.web(darkerColor, 0.9));
+        bgCircle.setStroke(Color.web(lighterColor, 1.0));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc — အဖြူ
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
@@ -208,7 +254,6 @@ public class ProfileViewController {
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 12px; -fx-font-weight: bold; " +
@@ -227,31 +272,25 @@ public class ProfileViewController {
         return stack;
     }
 
-    // ============================================
-    // ✅ Card ရဲ့ အရင့်ရောင် (background အတွက်)
-    // ============================================
     private String getCardDarkerColor(String courseId) {
         if (courseId == null) return "#334155";
         String upper = courseId.toUpperCase();
 
-        if (upper.contains("CPP") || upper.contains("C++")) return "#1E3A8A";   // C++ အရင့်
-        if (upper.contains("JAVA")) return "#7C2D12";                            // Java အရင့်
-        if (upper.contains("PYTHON") || upper.contains("PY")) return "#064E3B"; // Python အရင့်
+        if (upper.contains("CPP") || upper.contains("C++")) return "#1E3A8A";
+        if (upper.contains("JAVA")) return "#7C2D12";
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#064E3B";
         if (upper.contains("SQL")) return "#14532D";
 
         return "#334155";
     }
 
-    // ============================================
-    // ✅ Card ရဲ့ ပေါ့တဲ့ အရောင် (stroke အတွက်)
-    // ============================================
     private String getCardLighterColor(String courseId) {
         if (courseId == null) return "#64748B";
         String upper = courseId.toUpperCase();
 
-        if (upper.contains("CPP") || upper.contains("C++")) return "#3B82F6";   // C++ ပေါ့
-        if (upper.contains("JAVA")) return "#EA580C";                            // Java ပေါ့
-        if (upper.contains("PYTHON") || upper.contains("PY")) return "#10B981"; // Python ပေါ့
+        if (upper.contains("CPP") || upper.contains("C++")) return "#3B82F6";
+        if (upper.contains("JAVA")) return "#EA580C";
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#10B981";
         if (upper.contains("SQL")) return "#22C55E";
 
         return "#64748B";
