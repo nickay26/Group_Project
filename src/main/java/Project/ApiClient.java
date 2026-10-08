@@ -456,4 +456,24 @@ public class ApiClient {
                     return null;
                 });
     }
+    // ==========================================
+    // 9. FETCH USER PROFILE DATA
+    // ==========================================
+    public static CompletableFuture<String> getUserProfileAsync(String userId) {
+        // ⚠️ သင့် PythonAnywhere app.py ရှိ Endpoint Route အတိုင်း ပြင်ပေးပါ
+        // (ဥပမာ- "/api/user/" သို့မဟုတ် "/get_user/" သို့မဟုတ် "/api/users/")
+        String url = BASE_URL + "/api/user/" + userId.trim();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Fetch User Profile Error: " + ex.getMessage());
+                    return null;
+                });
+    }
 }

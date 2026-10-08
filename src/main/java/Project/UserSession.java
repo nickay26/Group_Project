@@ -11,7 +11,7 @@ public class UserSession {
     private UserSession(User user) {
         currentUser = user;
         if (user != null) {
-            // ⭐ ပြင်ဆင်ရန် အပိုင်း: activeCourseId တွင် တန်ဖိုးမရှိသေးပါကမှ Database မှ ယူမည်
+            // ⭐️ ပြင်ဆင်ရန် အပိုင်း: activeCourseId တွင် တန်ဖိုးမရှိသေးပါကမှ Database မှ ယူမည်
             if (activeCourseId == null) {
                 activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
             }
@@ -31,9 +31,15 @@ public class UserSession {
     }
 
     public static void setCurrentUser(User user) {
-        currentUser = user;
-        if (user != null && activeCourseId == null) {
-            activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+        if (user != null) {
+            // အကယ်၍ DB မှ coin က 0 ဖြစ်နေပြီး local session မှာ coin ရှိနေရင် Local Coin ကို ထိန်းထားပေးမည်
+            if (currentUser != null && user.getCoin() < currentUser.getCoin()) {
+                user.setCoin(currentUser.getCoin());
+            }
+            currentUser = user;
+            if (activeCourseId == null) {
+                activeCourseId = DatabaseManager.getLastActiveCourseId(user.getUserId());
+            }
         }
         if (instance == null) {
             instance = new UserSession(user);
@@ -113,7 +119,7 @@ public class UserSession {
     // အသစ်ထည့်တဲ့ Method များ (Premium Status)
     // ==========================================
 
-    // ⭐ ဒါကို ထည့် (UserSession မှာ updateUser method မရှိသေးရင်)
+    // ⭐️ ဒါကို ထည့် (UserSession မှာ updateUser method မရှိသေးရင်)
     public static void updateUser(User user) {
         currentUser = user;
     }

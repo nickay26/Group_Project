@@ -36,6 +36,7 @@ public class LearnPageController {
 
     @FXML
     public void initialize() {
+        refreshUserData();
         String activeCourseId = UserSession.getActiveCourseId();
         loadCoursePath(activeCourseId);
         // ✅ ဖြေလက်စ lesson ကို scroll လုပ်ဖို့
@@ -74,6 +75,24 @@ public class LearnPageController {
             }
         }
 
+    }
+
+    private void refreshUserData() {
+        int userId = UserSession.getUserId();
+        if (userId > 0) {
+            new Thread(() -> {
+                User updatedUser = DatabaseManager.getUserById(userId);
+                if (updatedUser != null) {
+                    UserSession.setCurrentUser(updatedUser);
+
+                    Platform.runLater(() -> {
+                        if (MainLayoutController.getInstance() != null) {
+                            MainLayoutController.getInstance().updateHeaderStats();
+                        }
+                    });
+                }
+            }).start();
+        }
     }
 
     public void loadCoursePath(String courseId) {
@@ -181,7 +200,6 @@ public class LearnPageController {
         Label label = new Label(moduleTitle);
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #F8FAFC;");
 
-        // 📌 Progress ရာခိုင်နှုန်း (ဥပမာ- 100% သို့မဟုတ် 50%) ပြသရန် Label
         int progressPercent = (int) Math.round(progress * 100);
         Label percentLabel = new Label(progressPercent + "%");
         percentLabel.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #60A5FA; -fx-padding: 0 8 0 0;");
@@ -198,11 +216,10 @@ public class LearnPageController {
         HBox topRow = new HBox(label, spacer, rightInfo);
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        // 📌 Progress Bar ဖန်တီးခြင်းနှင့် CSS Class ထည့်သွင်းခြင်း
         ProgressBar progressBar = new ProgressBar(progress);
         progressBar.setMaxWidth(Double.MAX_VALUE);
         progressBar.setPrefHeight(7);
-        progressBar.getStyleClass().add("custom-progress-bar"); // css class ချိတ်ဆက်ခြင်း
+        progressBar.getStyleClass().add("custom-progress-bar");
 
         VBox banner = new VBox(8, topRow, progressBar);
         banner.setAlignment(Pos.CENTER);
@@ -302,16 +319,12 @@ public class LearnPageController {
         content.getChildren().addAll(iconLabel, textLabel);
         stack.getChildren().addAll(hexPath, content);
 
-        // 🟢 LEFT CLICK & RIGHT CLICK HANDLING
         stack.setOnMouseClicked(event -> {
-            // 👈 LEFT CLICK: Unlocked ဖြစ်လျှင် Lesson ဖွင့်မည်
             if (event.getButton() == MouseButton.PRIMARY) {
                 if (!status.equals("LOCKED")) {
                     openLessonPage(lesson);
                 }
-            }
-            // 👉 RIGHT CLICK: Options / Context Menu ပြသမည်
-            else if (event.getButton() == MouseButton.SECONDARY) {
+            } else if (event.getButton() == MouseButton.SECONDARY) {
                 showLessonContextMenu(stack, lesson, status, event.getScreenX(), event.getScreenY());
             }
         });
@@ -319,7 +332,6 @@ public class LearnPageController {
         return stack;
     }
 
-    // Right Click Context Menu ပြသရန် Helper Method
     private void showLessonContextMenu(StackPane node, Lesson lesson, String status, double screenX, double screenY) {
         ContextMenu contextMenu = new ContextMenu();
 
@@ -330,22 +342,19 @@ public class LearnPageController {
             startItem.setOnAction(e -> openLessonPage(lesson));
         }
 
-        // 📌 1. Add to Review MenuItem သစ်ထည့်ခြင်း
         MenuItem addToReviewItem = new MenuItem("📌 Add to Review");
         addToReviewItem.setOnAction(e -> handleAddToReview(lesson));
 
         MenuItem infoItem = new MenuItem("ℹ️ View Details & XP");
         infoItem.setOnAction(e -> showLessonDetails(lesson, status));
 
-        // 📌 2. contextMenu.getItems().addAll ထဲတွင် addToReviewItem ကိုပါ ထည့်သွင်းပေးခြင်း
         contextMenu.getItems().addAll(startItem, addToReviewItem, infoItem);
         contextMenu.show(node, screenX, screenY);
     }
 
-    // 📌 3. Add to Review အလုပ်လုပ်ပေးမည့် Helper Method (Class ထဲတွင် ထည့်ရန်)
     private void handleAddToReview(Lesson lesson) {
         int userId = UserSession.getUserId();
-        String courseId = UserSession.getActiveCourseId(); // Active Course ID ကို ယူခြင်း
+        String courseId = UserSession.getActiveCourseId();
 
         if (userId <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please log in to save lessons to review.");
@@ -370,7 +379,6 @@ public class LearnPageController {
         }
     }
 
-    // Details Alert Dialog ပြသရန် Helper Method
     private void showLessonDetails(Lesson lesson, String status) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Lesson Details");
