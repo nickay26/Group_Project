@@ -474,9 +474,63 @@ public class DatabaseManager {
         return false;
     }
 
-    // ==========================================
-    // 4. REVIEWS
-    // ==========================================
+    public static boolean updateUserProfile(int userId, String name, String profile) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            if (profile != null) {
+                body.put("profile", profile);
+            } else {
+                body.put("profile", JSONObject.NULL);
+            }
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static String sendGetRequest(String path) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
+        }
+        return "";
+    }
+
+    private static User mapJsonToUser(JSONObject obj) {
+        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
+        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
+        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+        String profile = obj.optString("Profile", obj.optString("profile", null));
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
+
+        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
+        int coin = 0;
+        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
+        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
+        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
+        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
+
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+
+        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+    }
 
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
         try {
@@ -687,142 +741,5 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
-    }
-
-    // ==========================================
-    // 7. LEADERBOARD SYSTEM
-    // ==========================================
-
-    public static JSONArray getLeaderboard() {
-        return getLeaderboard(null, 1);
-    }
-
-    public static JSONArray getLeaderboard(String seasonId) {
-        return getLeaderboard(seasonId, 1);
-    }
-
-    public static JSONArray getLeaderboard(String seasonId, int leagueId) {
-        try {
-            String path = "/api/leaderboard";
-            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-                path += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
-            }
-            path += "?league_id=" + leagueId;
-
-            String response = sendGetRequest(path);
-            if (!response.isEmpty()) {
-                if (response.trim().startsWith("{")) {
-                    JSONObject json = new JSONObject(response);
-                    return json.optJSONArray("rankings");
-                } else if (response.trim().startsWith("[")) {
-                    return new JSONArray(response);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new JSONArray();
-    }
-
-    public static JSONObject getUserLeagueStatus(int userId) {
-        return getUserLeagueStatus(userId, null);
-    }
-
-    public static JSONObject getUserLeagueStatus(int userId, String seasonId) {
-        try {
-            String path = "/api/user/" + userId + "/league-status";
-            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-                path += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
-            }
-
-            String response = sendGetRequest(path);
-            if (!response.isEmpty()) {
-                return new JSONObject(response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static boolean addUserXp(int userId, int xp) {
-        return addUserXp(userId, null, xp, 1);
-    }
-
-    public static boolean addUserXp(int userId, String seasonId, int xp) {
-        return addUserXp(userId, seasonId, xp, 1);
-    }
-
-    public static boolean addUserXp(int userId, String seasonId, int xp, int leagueId) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("xp", xp);
-            body.put("league_id", leagueId);
-            if (seasonId != null && !seasonId.trim().isEmpty()) {
-                body.put("season_id", seasonId);
-            }
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/add-xp"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // ==========================================
-    // HELPER METHODS
-    // ==========================================
-
-    private static String sendGetRequest(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            return response.body();
-        }
-        return "";
-    }
-
-    private static User mapJsonToUser(JSONObject obj) {
-        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
-        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
-
-        String email = "";
-        if (obj.has("Email") && !obj.isNull("Email")) {
-            email = obj.getString("Email");
-        } else if (obj.has("email") && !obj.isNull("email")) {
-            email = obj.getString("email");
-        } else if (UserSession.getCurrentUser() != null && UserSession.getCurrentUser().getEmail() != null) {
-            email = UserSession.getCurrentUser().getEmail();
-        }
-
-        String profile = obj.optString("Profile", obj.optString("profile", null));
-        if ("null".equalsIgnoreCase(profile) || (profile != null && profile.trim().isEmpty())) {
-            profile = null;
-        }
-
-        int xp = obj.optInt("XP", obj.optInt("xp", 0));
-        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
-
-        int coin = 0;
-        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
-        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
-        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
-        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
-
-        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
-
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
     }
 }

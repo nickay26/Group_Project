@@ -1,0 +1,148 @@
+C++ TUTORIAL
+
+What is C++?
+C++ is a high-performance, general-purpose programming language
+developed by Bjarne Stroustrup. It provides low-level memory control,
+extreme speed, and direct hardware access.
+
+It is widely used in:
+  • Game Engines & 3D Real-time Graphics
+  • Operating Systems & Low-level System Drivers
+  • High-Frequency Financial Trading
+  • Embedded Systems & IoT Devices
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+How to Use C++
+C++ code is written in .cpp files and compiled by a compiler
+(like g++ or clang++) into an executable file.
+
+Steps:
+  1. Write code in a .cpp file
+  2. Compile: g++ main.cpp -o main
+  3. Run: ./main
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your First C++ Program
+
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+      cout << "Hello, C++!" << endl;
+      return 0;
+  }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When to Use C++
+
+1. Game Development
+Unreal Engine and many AAA games are built with C++.
+
+Example:
+
+  #include <iostream>
+  #include <string>
+  using namespace std;
+
+  class Player {
+      string name;
+      int health;
+  public:
+      Player(string n, int h) : name(n), health(h) {}
+      void showStatus() {
+          cout << name << " HP: " << health << endl;
+      }
+  };
+
+  int main() {
+      Player p("Hero", 100);
+      p.showStatus();
+      return 0;
+  }
+
+2. Operating Systems
+Windows, Linux, macOS have core components in C++.
+
+Example:
+
+  #include <iostream>
+  #include <fstream>
+  using namespace std;
+
+  int main() {
+      ofstream file("data.txt");
+      file << "Hello from C++!" << endl;
+      file.close();
+      return 0;
+  }
+
+3. High-Performance Applications
+Financial trading, simulations, and real-time systems.
+
+Example:
+
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+      double price = 150.75;
+      double rate = 0.05;
+      double total = price * (1 + rate);
+      cout << "Total: " << total << endl;
+      return 0;
+  }
+
+4. Embedded Systems
+Microcontrollers, robotics, and IoT devices.
+
+Example:
+
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+      bool sensorOn = true;
+      if (sensorOn) {
+          cout << "Sensor triggered!" << endl;
+      }
+      return 0;
+  }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Examples of C++ in Action
+
+1. Basic Math Operations
+
+  int a = 10;
+  int b = 5;
+  cout << a + b << endl;   // Addition
+  cout << a - b << endl;   // Subtraction
+  cout << a * b << endl;   // Multiplication
+  cout << a / b << endl;   // Division
+
+2. Conditional Statements
+
+  int age = 18;
+  if (age >= 18) {
+      cout << "You are an adult." << endl;
+  } else {
+      cout << "You are a minor." << endl;
+  }
+
+3. Loops
+
+  for (int i = 0; i < 5; i++) {
+      cout << "Number: " << i << endl;
+  }
+
+4. Functions
+
+  string greet(string name) {
+      return "Hello, " + name;
+  }
+
+  cout << greet("World") << endl;

@@ -10,8 +10,23 @@ public class PremiumService {
 
     public static boolean isPremium(User user) {
         if (user == null) return false;
-        return user.isPremium() ||
-                (!"free".equalsIgnoreCase(user.getSubscriptionType()));
+
+        // 1. boolean flag စစ်
+        if (user.isPremium()) return true;
+
+        // 2. Plan Type စစ်
+        String planType = user.getPlanType();
+        if (planType != null && "PREMIUM".equalsIgnoreCase(planType)) return true;
+
+        // 3. Subscription Type စစ် (null-safe)
+        String subType = user.getSubscriptionType();
+        if (subType != null) {
+            if ("monthly".equalsIgnoreCase(subType)) return true;
+            if ("yearly".equalsIgnoreCase(subType)) return true;
+            if ("PREMIUM".equalsIgnoreCase(subType)) return true;
+        }
+
+        return false;
     }
 
     // ⭐ Header မှာ ∞ / 5 ပြဖို့

@@ -1,0 +1,598 @@
+ABSTRACTION
+Hiding complex details and showing only essential features.
+
+Example:
+    from abc import ABC, abstractmethod
+
+    class Shape(ABC):
+        @abstractmethod
+        def area(self):
+            pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ARGUMENT
+A value passed to a function when it is called.
+
+Example:
+    def greet(name):
+        print("Hello, " + name)
+
+    greet("Alice")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ASSERT
+A debugging statement that checks a condition.
+
+Example:
+    assert x > 0, "x must be positive"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ASYNC
+Enables asynchronous programming.
+
+Example:
+    async def fetch():
+        await asyncio.sleep(1)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AWAIT
+Pauses execution until a coroutine completes.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BOOLEAN
+A data type with two values: True or False.
+
+Example:
+    is_active = True
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BREAK
+Exits the current loop.
+
+Example:
+    for i in range(10):
+        if i == 5:
+            break
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BYTES
+An immutable sequence of bytes.
+
+Example:
+    data = b"Hello"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CALLABLE
+An object that can be called like a function.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLASS
+A blueprint for creating objects.
+
+Example:
+    class Person:
+        def __init__(self, name):
+            self.name = name
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COMPREHENSION
+A concise way to build lists, dicts, sets.
+
+Example:
+    squares = [x*x for x in range(5)]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONSTRUCTOR
+A special method that runs when an object is created.
+
+Example:
+    def __init__(self):
+        pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTINUE
+Skips the rest of the loop iteration.
+
+Example:
+    for i in range(5):
+        if i == 2:
+            continue
+        print(i)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COROUTINE
+A function that can pause and resume.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DECORATOR
+A function that modifies another function.
+
+Example:
+    @staticmethod
+    def greet():
+        pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DICTIONARY
+A collection of key-value pairs.
+
+Example:
+    data = {"name": "Alice", "age": 25}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCSTRING
+A string literal for documentation.
+
+Example:
+    def add(a, b):
+        """Returns the sum of a and b."""
+        return a + b
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ELIF
+Else-if branch in conditional statements.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ELSE
+Fallback branch in conditionals.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENUMERATE
+Returns index and value.
+
+Example:
+    for i, v in enumerate(["a", "b"]):
+        print(i, v)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXCEPTION
+An error that occurs during program execution.
+
+Example:
+    try:
+        x = 10 / 0
+    except ZeroDivisionError:
+        print("Error!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FALSE
+Boolean value.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FILTER
+Filters elements by a function.
+
+Example:
+    evens = list(filter(lambda x: x % 2 == 0, range(10)))
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FINALLY
+Runs after try/except regardless of errors.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FLOAT
+A decimal number.
+
+Example:
+    pi = 3.14
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FOR
+Loop over a sequence.
+
+Example:
+    for i in range(5):
+        print(i)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FUNCTION
+A reusable block of code.
+
+Example:
+    def add(a, b):
+        return a + b
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GENERATOR
+A function that yields values lazily.
+
+Example:
+    def count():
+        for i in range(5):
+            yield i
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GLOBAL
+Declares a global variable inside a function.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IF
+Conditional branch.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IMPORT
+Brings a module into the namespace.
+
+Example:
+    import math
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IN
+Membership test.
+
+Example:
+    if x in [1, 2, 3]:
+        print("Found")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INDENTATION
+Spaces at the beginning of a line that define code blocks.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INHERITANCE
+A class derives from another class.
+
+Example:
+    class Dog(Animal):
+        pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INPUT
+Reads input from the user.
+
+Example:
+    name = input("Enter your name: ")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INT
+An integer number.
+
+Example:
+    age = 25
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IS
+Identity comparison.
+
+Example:
+    if x is None:
+        print("None")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ISINSTANCE
+Checks object type.
+
+Example:
+    if isinstance(x, int):
+        print("Integer")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ITERATOR
+An object that yields values one at a time.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+JSON
+A data format for structured data.
+
+Example:
+    import json
+    data = json.loads('{"name": "Alice"}')
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+KWARGS
+Keyword arguments passed as a dictionary.
+
+Example:
+    def greet(**kwargs):
+        print(kwargs)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LAMBDA
+An anonymous function.
+
+Example:
+    square = lambda x: x * x
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LIST
+An ordered, mutable collection.
+
+Example:
+    numbers = [1, 2, 3, 4, 5]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LOOP
+Repeats a block of code.
+
+Example:
+    for i in range(5):
+        print(i)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MAP
+Applies a function to each element.
+
+Example:
+    squares = list(map(lambda x: x*x, range(5)))
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MODULE
+A file containing Python code.
+
+Example:
+    import math
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NONE
+Represents no value.
+
+Example:
+    x = None
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NONLOCAL
+Declares a variable in the enclosing scope.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OBJECT
+An instance of a class.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPERATOR
+A symbol that performs an operation.
+
+Example:
+    + - * / % ** //
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASS
+A no-op statement.
+
+Example:
+    def empty():
+        pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PIP
+The package installer for Python.
+
+Example:
+    pip install numpy
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PRINT
+Outputs text to the console.
+
+Example:
+    print("Hello, World!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROPERTY
+A method that behaves like an attribute.
+
+Example:
+    @property
+    def name(self):
+        return self._name
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RANGE
+Generates a sequence of numbers.
+
+Example:
+    for i in range(1, 10, 2):
+        print(i)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RECURSION
+A function that calls itself.
+
+Example:
+    def fact(n):
+        if n == 1:
+            return 1
+        return n * fact(n - 1)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RETURN
+Exits a function and returns a value.
+
+Example:
+    def square(x):
+        return x * x
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SELF
+The instance reference in a class.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SET
+An unordered collection of unique elements.
+
+Example:
+    nums = {1, 2, 3}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SLICE
+Extracts a sub-sequence.
+
+Example:
+    nums = [1, 2, 3, 4, 5]
+    print(nums[1:4])   # [2, 3, 4]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STATICMETHOD
+A method that doesn't access the instance.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STRING
+A sequence of characters.
+
+Example:
+    name = "Hello"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SUPER
+Refers to the parent class.
+
+Example:
+    super().__init__()
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THREADING
+Runs tasks in parallel threads.
+
+Example:
+    import threading
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRUE
+Boolean value.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRY
+Starts an exception handling block.
+
+Example:
+    try:
+        x = 10 / 0
+    except:
+        pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TUPLE
+An ordered, immutable collection.
+
+Example:
+    coords = (10, 20)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TYPE
+Returns the type of an object.
+
+Example:
+    print(type(5))   # <class 'int'>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VARIABLE
+A name that refers to a value.
+
+Example:
+    x = 10
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VIRTUAL ENV
+An isolated Python environment.
+
+Example:
+    python -m venv myenv
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHILE
+Loop that runs while a condition is True.
+
+Example:
+    i = 0
+    while i < 5:
+        print(i)
+        i += 1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WITH
+Context manager for resource handling.
+
+Example:
+    with open("file.txt") as f:
+        print(f.read())
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YIELD
+Pauses a generator function.
+
+Example:
+    def count():
+        for i in range(5):
+            yield i
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ZIP
+Combines two iterables.
+
+Example:
+    names = ["Alice", "Bob"]
+    ages = [25, 30]
+    for n, a in zip(names, ages):
+        print(n, a)

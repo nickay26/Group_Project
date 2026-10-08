@@ -50,6 +50,7 @@ public class User {
     public int getStreak() { return streak; }
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
+    public String getPlanType() { return planType; }
 
     // Setters
     public void setName(String name) { this.name = name; }
