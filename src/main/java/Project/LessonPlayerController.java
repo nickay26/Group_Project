@@ -5,11 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -50,6 +46,8 @@ public class LessonPlayerController {
     private TextArea interactiveCodeEditor = null;
     private Label staticCodeLabel = null;
     private Label currentPromptLabel = null;
+    // ⭐ AI Daily Limit for Free Users
+    private static final int FREE_DAILY_AI_LIMIT = 5;
 
     @FXML
     public void initialize() {
@@ -425,11 +423,15 @@ public class LessonPlayerController {
         aiOutputBox.getChildren().add(aiLabel);
 
         deepDiveBtn.setOnAction(e -> {
+            // ⭐ Premium/Free Limit စစ်
+            if (!canAskAI()) {
+                showAILimitDialog();
+                return;
+            }
+            recordAIAsk();
+
             deepDiveBtn.setDisable(true);
             deepDiveBtn.setText("✨ AI Thinking...");
-            aiOutputBox.setManaged(true);
-            aiOutputBox.setVisible(true);
-            aiLabel.setText("Analyzing code concepts with Gemini AI...");
 
             ApiClient.reviewCodeAsync(language, codeContent).thenAccept(response -> {
                 Platform.runLater(() -> {
@@ -509,8 +511,16 @@ public class LessonPlayerController {
         explainErrorBtn.setVisible(false);
 
         explainErrorBtn.setOnAction(e -> {
+            // ⭐ Premium/Free Limit စစ်
+            if (!canAskAI()) {
+                showAILimitDialog();
+                return;
+            }
+            recordAIAsk();
+
             explainErrorBtn.setDisable(true);
             explainErrorBtn.setText("💡 AI Analyzing Error...");
+
             String rawCode = interactiveCodeEditor.getText();
             String lang = slide.optString("language", "cpp");
             String fullContext = "Code:\n" + rawCode + "\n\nTerminal Error Output:\n" + consoleOutput.getText();
@@ -743,6 +753,13 @@ public class LessonPlayerController {
             String lang = slide.optString("language", "cpp");
 
             askAiHintBtn.setOnAction(e -> {
+                // ⭐ Premium/Free Limit စစ်
+                if (!canAskAI()) {
+                    showAILimitDialog();
+                    return;
+                }
+                recordAIAsk();
+
                 askAiHintBtn.setDisable(true);
                 askAiHintBtn.setText("💡 AI Thinking...");
 
@@ -849,6 +866,71 @@ public class LessonPlayerController {
                 if (MainLayoutController.getInstance() != null) {
                     MainLayoutController.getInstance().loadPage("LearnPage.fxml");
                 }
+            }
+        });
+    }
+    // ============================================
+// ⭐ AI ASK LIMIT HELPERS
+// ============================================
+
+    /**
+     * AI မေးလို့ရသေးလား စစ်ဆေးခြင်း
+     * Premium → true (Unlimited)
+     * Free → todayCount < 5 ဆိုရင် true
+     */
+    private boolean canAskAI() {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return false;
+
+        // Premium User → Limit မရှိ
+        if (PremiumService.isPremium(user)) return true;
+
+        // Free User → Daily limit စစ်
+        int todayCount = DatabaseManager.getTodayAIAskCount(user.getUserId());
+        return todayCount < FREE_DAILY_AI_LIMIT;
+    }
+
+    /**
+     * AI မေးပြီးတဲ့အခါ Count တိုးခြင်း
+     * Premium ဆိုရင် မှတ်စရာ မလို
+     */
+    private void recordAIAsk() {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
+        if (PremiumService.isPremium(user)) return;
+
+        DatabaseManager.incrementAIAskCount(user.getUserId());
+    }
+
+    /**
+     * Daily Limit ပြည့်သွားရင် Upgrade Prompt ပြခြင်း
+     */
+    private void showAILimitDialog() {
+        User user = UserSession.getCurrentUser();
+        int todayCount = user != null ? DatabaseManager.getTodayAIAskCount(user.getUserId()) : 0;
+        int remaining = Math.max(0, FREE_DAILY_AI_LIMIT - todayCount);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Daily AI Limit");
+        alert.setHeaderText("🚀 You've reached today's AI limit!");
+
+        if (remaining <= 0) {
+            alert.setContentText(
+                    "Free users can ask AI " + FREE_DAILY_AI_LIMIT + " times per day.\n\n" +
+                            "Upgrade to Premium for UNLIMITED AI questions, " +
+                            "unlimited brains, and more!"
+            );
+        } else {
+            alert.setContentText("You have " + remaining + " AI questions left today.");
+        }
+
+        ButtonType upgradeBtn = new ButtonType("Upgrade to Premium", ButtonBar.ButtonData.OK_DONE);
+        ButtonType laterBtn = new ButtonType("Maybe Later", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(upgradeBtn, laterBtn);
+
+        alert.showAndWait().ifPresent(bt -> {
+            if (bt == upgradeBtn && MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().handlePremium();
             }
         });
     }

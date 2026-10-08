@@ -725,4 +725,45 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    // ============================================
+// ⭐ AI ASK LIMIT TRACKING
+// ============================================
+
+    /**
+     * ဒီနေ့ AI မေးပြီးသား အရေအတွက် ယူခြင်း
+     */
+    public static int getTodayAIAskCount(int userId) {
+        try {
+            String response = sendGetRequest("/api/users/" + userId + "/ai-ask-count");
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                return json.optInt("ask_count", 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * AI မေးတဲ့အခါ Count တိုးခြင်း
+     */
+    public static void incrementAIAskCount(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/ai-ask"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
