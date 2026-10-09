@@ -121,7 +121,8 @@ public class PaymentController {
                     StandardCopyOption.REPLACE_EXISTING);
 
             int userId = UserSession.getUserId();
-            int planId = planType.equals("MONTHLY") ? 1 : 2;
+            int planId = planType.equalsIgnoreCase("MONTHLY") ? 2 : 3;
+
             boolean success = PremiumService.subscribePremium(userId, planId, planType);
 
             if (success) {

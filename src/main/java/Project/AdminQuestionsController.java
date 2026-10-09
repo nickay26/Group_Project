@@ -9,12 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ManageQuestionsController {
+public class AdminQuestionsController {
 
     // Dropdown / Selection Controls
     @FXML private ComboBox<String> categoryCombo;
@@ -90,13 +89,14 @@ public class ManageQuestionsController {
         return category.toUpperCase() + "_";
     }
 
+    // ✅ FIXED: External File Path သို့ ရေးသားခြင်းဖြစ်၍ .jar သို့မဟုတ် IDE နှစ်ခုလုံးတွင် Error မတက်ပါ
     private File getLessonsDirectory() {
         File folder = new File("src/main/resources/Lessons");
         if (!folder.exists() || !folder.isDirectory()) {
-            folder = new File("target/classes/Lessons");
+            folder = new File(System.getProperty("user.home") + "/Sodex/Lessons");
         }
-        if (!folder.exists() || !folder.isDirectory()) {
-            folder = new File("Lessons");
+        if (!folder.exists()) {
+            folder.mkdirs();
         }
         return folder;
     }
@@ -124,7 +124,7 @@ public class ManageQuestionsController {
                         try {
                             lessonNumbers.add(Integer.parseInt(lessonNoStr));
                         } catch (NumberFormatException e) {
-                            // Number မဟုတ်ပါကလည်း လစ်လျူရှုမည်
+                            // ignore non-integer files
                         }
                     }
                 }
@@ -132,7 +132,7 @@ public class ManageQuestionsController {
         }
 
         if (!lessonNumbers.isEmpty()) {
-            Collections.sort(lessonNumbers); // နံပါတ်စဉ်အလိုက် စီပေးမည် (101, 102, ... 158)
+            Collections.sort(lessonNumbers);
             List<String> lessonStrings = new ArrayList<>();
             for (Integer num : lessonNumbers) {
                 lessonStrings.add(String.valueOf(num));
@@ -145,6 +145,7 @@ public class ManageQuestionsController {
         }
     }
 
+    // ✅ FIXED: MULTIPLE_CHOICE မေးခွန်းများတွင်လည်း Code Snippet Area ကို ဖွင့်ပေးထားပါသည်
     @FXML
     private void handleTypeChange() {
         String type = typeCombo.getValue();
@@ -158,13 +159,6 @@ public class ManageQuestionsController {
                 break;
 
             case "MULTIPLE_CHOICE":
-                if (codeSnippetArea != null) {
-                    codeSnippetArea.setDisable(true);
-                    codeSnippetArea.clear();
-                }
-                setOptionFieldsDisable(false);
-                break;
-
             case "FILL_IN_BLANK":
                 if (codeSnippetArea != null) codeSnippetArea.setDisable(false);
                 setOptionFieldsDisable(false);
@@ -230,17 +224,16 @@ public class ManageQuestionsController {
             String prefix = getPrefixForCategory(category);
             String type = (typeCombo != null && typeCombo.getValue() != null) ? typeCombo.getValue() : "MULTIPLE_CHOICE";
 
-            // Edit ပြုလုပ်ခြင်း သို့မဟုတ် အသစ်ထည့်ခြင်း ခွဲခြားစစ်ဆေးခြင်း
             String slideId;
             if (selectedSlideForEdit != null) {
-                slideId = selectedSlideForEdit.getSlideId(); // ID အဟောင်းအတိုင်းပြန်သုံးမည်
+                slideId = selectedSlideForEdit.getSlideId();
             } else {
                 slideId = prefix + lessonNo + "_S" + (slideObservableList.size() + 1);
             }
 
             String title = slideTitleInput != null ? slideTitleInput.getText() : "";
             String prompt = promptArea != null ? promptArea.getText() : "";
-            String codeSnippet = (type.equals("MULTIPLE_CHOICE") || codeSnippetArea == null) ? null : codeSnippetArea.getText();
+            String codeSnippet = (codeSnippetArea != null) ? codeSnippetArea.getText() : null;
 
             List<String> options = null;
             String correctAnswer = null;
@@ -258,13 +251,11 @@ public class ManageQuestionsController {
             Slide newSlide = new Slide(slideId, type, title, prompt, codeSnippet, options, correctAnswer);
 
             if (selectedSlideForEdit != null) {
-                // Edit Mode: မူလ Index တွင် အစားထိုးမည်
                 int index = slideObservableList.indexOf(selectedSlideForEdit);
                 if (index >= 0) {
                     slideObservableList.set(index, newSlide);
                 }
             } else {
-                // Add Mode: အသစ်ထည့်မည်
                 slideObservableList.add(newSlide);
             }
 
@@ -280,6 +271,51 @@ public class ManageQuestionsController {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Save လုပ်ရာတွင် အမှားအယွင်း ဖြစ်ပေါ်ခဲ့သည်: " + e.getMessage());
         }
+    }
+
+    @FXML
+    private void handleDeleteLessonFile() {
+        if (categoryCombo == null || lessonCombo == null) return;
+
+        String category = categoryCombo.getValue();
+        String lessonNo = lessonCombo.getValue();
+
+        if (category == null || lessonNo == null || lessonNo.trim().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "ကျေးဇူးပြု၍ ဖျက်လိုသော Lesson ကို ရွေးချယ်ပါ!");
+            return;
+        }
+
+        String prefix = getPrefixForCategory(category);
+        String fileName = prefix + lessonNo.trim() + ".json";
+        File folder = getLessonsDirectory();
+        File targetFile = new File(folder, fileName);
+
+        if (!targetFile.exists()) {
+            showAlert(Alert.AlertType.ERROR, "File Not Found", "Lesson file မရှိပါ: " + fileName);
+            return;
+        }
+
+        // Confirmation Dialog
+        Alert confirmAlert = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "ဒီ Lesson File တစ်ခုလုံး (" + fileName + ") ကို ဖျက်ရန် သေချာပါသလား?\nဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။",
+                ButtonType.YES,
+                ButtonType.NO
+        );
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                if (targetFile.delete()) {
+                    slideObservableList.clear();
+                    clearInputs();
+                    loadLessonList(); // Dropdown list ကို Refresh လုပ်ပါမည်
+
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Lesson File (" + fileName + ") ကို အောင်မြင်စွာ ဖျက်ပြီးပါပြီ!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "File ဖျက်ရာတွင် အမှားအယွင်း ဖြစ်ပေါ်ခဲ့ပါသည်။");
+                }
+            }
+        });
     }
 
     @FXML
@@ -356,9 +392,15 @@ public class ManageQuestionsController {
         }
     }
 
+    // ✅ ADDED: FXML မှ "New Slide" သို့မဟုတ် "Clear Selection" Button ဖြင့် ချိတ်ဆက်နိုင်သော မက်သဒ်
+    @FXML
+    private void handleNewSlide() {
+        clearInputs();
+    }
+
     @FXML
     private void clearInputs() {
-        selectedSlideForEdit = null; // Edit State ကို ပြန်ဖျက်ပေးမည်
+        selectedSlideForEdit = null;
         if (slideTable != null) slideTable.getSelectionModel().clearSelection();
         if (slideTitleInput != null) slideTitleInput.clear();
         if (promptArea != null) promptArea.clear();

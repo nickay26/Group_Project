@@ -18,6 +18,24 @@ public class DatabaseManager {
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
+    public static JSONObject getAdminAnalytics() {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/admin/analytics"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // ==========================================
     // 1. USER AUTHENTICATION, FETCH & SYNC
     // ==========================================
@@ -133,6 +151,31 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return "CPP_BASIC";
+    }
+
+    public static boolean updateUserInfoByAdmin(int userId, String name, String email, String role, String planType, int xp, int coin) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            body.put("email", email);
+            body.put("role", role);
+            body.put("plan_type", planType);
+            body.put("xp", xp);
+            body.put("coin", coin);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/admin/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // Save profile information (Name, Email)
@@ -520,7 +563,6 @@ public class DatabaseManager {
         int xp = obj.optInt("XP", obj.optInt("xp", 0));
         int streak = obj.optInt("Streak", obj.optInt("streak", 0));
 
-        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
         int coin = 0;
         if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
         else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
@@ -528,8 +570,13 @@ public class DatabaseManager {
         else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
 
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+        String planType = obj.optString("plan_type", obj.optString("Plan_Type", "FREE"));
+        String role = obj.optString("role", obj.optString("Role", "USER"));
 
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        user.setPlanType(planType);
+        user.setRole(role);
+        return user;
     }
 
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
@@ -657,6 +704,39 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static int getTodayAIAskCount(int userId) {
+        try {
+            String response = sendGetRequest("/api/users/" + userId + "/ai-ask-count");
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                return json.optInt("ask_count", 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * AI မေးတဲ့အခါ Count တိုးခြင်း
+     */
+    public static void incrementAIAskCount(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/ai-ask"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // ==========================================

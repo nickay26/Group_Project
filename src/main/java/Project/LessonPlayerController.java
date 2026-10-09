@@ -45,6 +45,7 @@ public class LessonPlayerController {
     private TextArea interactiveCodeEditor = null;
     private Label staticCodeLabel = null;
     private Label currentPromptLabel = null;
+
     // ⭐ AI Daily Limit for Free Users
     private static final int FREE_DAILY_AI_LIMIT = 5;
 
@@ -75,6 +76,13 @@ public class LessonPlayerController {
     }
 
     private void startLessonById(String lessonId) {
+        // 🧠 Check if user is out of energy before starting
+        User user = UserSession.getCurrentUser();
+        if (user != null && !user.isPremium() && user.getBrainCount() <= 0) {
+            showOutOfBrainsDialog();
+            return;
+        }
+
         InputStream is = getClass().getResourceAsStream("/lessons/" + lessonId + ".json");
         if (is == null) {
             is = getClass().getResourceAsStream("/Project/lessons/" + lessonId + ".json");
@@ -287,15 +295,13 @@ public class LessonPlayerController {
                     }
                 }
 
-                // Step 1: UserSession ထဲတွင် Coins & XP တိုးပေးပြီး Session အသစ်ကိုပါ ပြန်လည်သိမ်းဆည်းမည်
                 User currentUser = UserSession.getCurrentUser();
                 if (currentUser != null) {
                     currentUser.setCoin(currentUser.getCoin() + earnedCoins);
                     currentUser.setXp(currentUser.getXp() + earnedXP);
-                    UserSession.setCurrentUser(currentUser); // CRITICAL FIX: Memory Session ကို ပြန်လည် Save လုပ်သည်
+                    UserSession.setCurrentUser(currentUser);
                 }
 
-                // Step 2: Database ဘက်သို့ Data ပို့ပေးမည်
                 DatabaseManager.completeLessonAndAddXP(
                         userId,
                         courseId,
@@ -305,7 +311,6 @@ public class LessonPlayerController {
                 );
             }
 
-            // Step 3: Header Stats များကို Refresh လုပ်ပေးမည်
             Platform.runLater(() -> {
                 if (MainLayoutController.getInstance() != null) {
                     MainLayoutController.getInstance().updateHeaderStats();
@@ -339,7 +344,6 @@ public class LessonPlayerController {
         aiOutputBox.getChildren().add(aiLabel);
 
         deepDiveBtn.setOnAction(e -> {
-            // ⭐ Premium/Free Limit စစ်
             if (!canAskAI()) {
                 showAILimitDialog();
                 return;
@@ -427,7 +431,6 @@ public class LessonPlayerController {
         explainErrorBtn.setVisible(false);
 
         explainErrorBtn.setOnAction(e -> {
-            // ⭐ Premium/Free Limit စစ်
             if (!canAskAI()) {
                 showAILimitDialog();
                 return;
@@ -559,6 +562,16 @@ public class LessonPlayerController {
 
             if (isCorrect) {
                 correctAnswerCount++;
+            } else {
+                // 🧠 DEDUCT BRAIN ON WRONG ANSWER
+                User user = UserSession.getCurrentUser();
+                if (user != null && !user.isPremium()) {
+                    UserSession.deductOneBrain(); // Decrements RAM & calls ApiClient.deductBrainAsync
+
+                    if (MainLayoutController.getInstance() != null) {
+                        MainLayoutController.getInstance().updateHeaderStats();
+                    }
+                }
             }
 
             if (optionsBox != null) {
@@ -584,6 +597,15 @@ public class LessonPlayerController {
                 showFeedback(true, "Correct! Great job.", explanation);
             } else {
                 showFeedback(false, "Incorrect! Correct answer: " + correctAnswer, explanation);
+
+                // 🧠 Check if user ran out of brains
+                User user = UserSession.getCurrentUser();
+                if (user != null && !user.isPremium() && user.getBrainCount() <= 0) {
+                    isAnswerChecked = true;
+                    if (continueBtn != null) continueBtn.setText("CONTINUE");
+                    showOutOfBrainsDialog();
+                    return;
+                }
             }
 
             isAnswerChecked = true;
@@ -641,7 +663,6 @@ public class LessonPlayerController {
             String lang = slide.optString("language", "cpp");
 
             askAiHintBtn.setOnAction(e -> {
-                // ⭐ Premium/Free Limit စစ်
                 if (!canAskAI()) {
                     showAILimitDialog();
                     return;
@@ -686,61 +707,17 @@ public class LessonPlayerController {
             cardContainer.getChildren().add(errorLabel);
         }
     }
-    private void showBrainLimitDialog() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-                javafx.scene.control.Alert.AlertType.WARNING);
-        alert.setTitle("Brain Limit Reached");
-        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
-        alert.setContentText(
-                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
-                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
-        );
 
-        javafx.scene.control.ButtonType upgradeBtn =
-                new javafx.scene.control.ButtonType("Upgrade",
-                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
-        javafx.scene.control.ButtonType cancelBtn =
-                new javafx.scene.control.ButtonType("Cancel",
-                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().handlePremium();
-            } else {
-                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                }
-            }
-        });
-    }
-    // ============================================
-// ⭐ AI ASK LIMIT HELPERS
-// ============================================
-
-    /**
-     * AI မေးလို့ရသေးလား စစ်ဆေးခြင်း
-     * Premium → true (Unlimited)
-     * Free → todayCount < 5 ဆိုရင် true
-     */
     private boolean canAskAI() {
         User user = UserSession.getCurrentUser();
         if (user == null) return false;
 
-        // Premium User → Limit မရှိ
         if (PremiumService.isPremium(user)) return true;
 
-        // Free User → Daily limit စစ်
         int todayCount = DatabaseManager.getTodayAIAskCount(user.getUserId());
         return todayCount < FREE_DAILY_AI_LIMIT;
     }
 
-    /**
-     * AI မေးပြီးတဲ့အခါ Count တိုးခြင်း
-     * Premium ဆိုရင် မှတ်စရာ မလို
-     */
     private void recordAIAsk() {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
@@ -749,9 +726,6 @@ public class LessonPlayerController {
         DatabaseManager.incrementAIAskCount(user.getUserId());
     }
 
-    /**
-     * Daily Limit ပြည့်သွားရင် Upgrade Prompt ပြခြင်း
-     */
     private void showAILimitDialog() {
         User user = UserSession.getCurrentUser();
         int todayCount = user != null ? DatabaseManager.getTodayAIAskCount(user.getUserId()) : 0;
@@ -782,13 +756,46 @@ public class LessonPlayerController {
         });
     }
 
+    // 🧠 Refill Dialog on Out of Brains
     private void showOutOfBrainsDialog() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
-        alert.setTitle("Out of Brains!");
-        alert.setHeaderText("ဦးနှောက် (Brain) ကုန်သွားပါပြီ");
-        alert.setContentText("မေးခွန်းများ ဆက်လက်ဖြေဆိုရန် ခဏစောင့်ပါ သို့မဟုတ် Shop တွင် Coin ဖြင့် Brain ပြန်ဖြည့်ပါ။");
-        alert.showAndWait();
+        User user = UserSession.getCurrentUser();
+        if (user == null) {
+            handleClose();
+            return;
+        }
 
-        handleClose();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Out of Energy!");
+        alert.setHeaderText("🧠 You have 0 Brains left!");
+        alert.setContentText("Would you like to refill 5 Brains for 100 Coins?");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                if (user.getCoin() >= 100) {
+                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100);
+                    if (success) {
+                        user.setBrainCount(5);
+                        user.setCoin(user.getCoin() - 100);
+
+                        if (MainLayoutController.getInstance() != null) {
+                            MainLayoutController.getInstance().updateHeaderStats();
+                        }
+
+                        Alert info = new Alert(Alert.AlertType.INFORMATION, "⚡ Brains refilled to 5!");
+                        info.showAndWait();
+                    } else {
+                        Alert err = new Alert(Alert.AlertType.ERROR, "Failed to refill brains on server.");
+                        err.showAndWait();
+                        handleClose();
+                    }
+                } else {
+                    Alert err = new Alert(Alert.AlertType.ERROR, "❌ Insufficient coins! You need 100 coins.");
+                    err.showAndWait();
+                    handleClose();
+                }
+            } else {
+                handleClose();
+            }
+        });
     }
 }

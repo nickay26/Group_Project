@@ -68,15 +68,6 @@ public class AdminController {
         setActiveButton(btnUserAnalytics);
     }
 
-    @FXML
-    private void showSettingsView() {
-        hideAllViews();
-        if (settingsView != null) settingsView.setVisible(true);
-        if (pageTitle != null) pageTitle.setText("Settings");
-        if (pageSubTitle != null) pageSubTitle.setText("Configure application preferences and system settings");
-        setActiveButton(btnSettings);
-    }
-
     // ============================================
     // ✅ ဒါ အဓိက — managePracticeView ထည့်ထား
     // ============================================

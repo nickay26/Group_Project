@@ -138,8 +138,6 @@ public class UserSession {
         if (currentUser != null && !currentUser.isPremium()) {
             int newCount = Math.max(0, currentUser.getBrainCount() - 1);
             currentUser.setBrainCount(newCount);
-
-            // Async update server-side
             ApiClient.deductBrainAsync(currentUser.getUserId());
         }
     }
