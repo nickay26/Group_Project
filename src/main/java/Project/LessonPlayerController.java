@@ -559,6 +559,16 @@ public class LessonPlayerController {
 
             if (isCorrect) {
                 correctAnswerCount++;
+            } else {
+                // 🧠 DEDUCT BRAIN ON WRONG ANSWER
+                User user = UserSession.getCurrentUser();
+                if (user != null && !user.isPremium()) {
+                    UserSession.deductOneBrain(); // Decrements RAM & calls ApiClient.deductBrainAsync
+
+                    if (MainLayoutController.getInstance() != null) {
+                        MainLayoutController.getInstance().updateHeaderStats();
+                    }
+                }
             }
 
             if (optionsBox != null) {
@@ -584,6 +594,15 @@ public class LessonPlayerController {
                 showFeedback(true, "Correct! Great job.", explanation);
             } else {
                 showFeedback(false, "Incorrect! Correct answer: " + correctAnswer, explanation);
+
+                // 🧠 Check if user ran out of brains
+                User user = UserSession.getCurrentUser();
+                if (user != null && !user.isPremium() && user.getBrainCount() <= 0) {
+                    isAnswerChecked = true;
+                    if (continueBtn != null) continueBtn.setText("CONTINUE");
+                    showOutOfBrainsDialog();
+                    return;
+                }
             }
 
             isAnswerChecked = true;

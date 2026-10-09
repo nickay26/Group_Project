@@ -24,7 +24,7 @@
       "type": "MULTIPLE_CHOICE",
       "title": "Multi-Line Comment Closing",
       "prompt": "How do you close a multi-line comment in C++?",
-      "options": ["*/", "//", "-->", "*/"],
+      "options": ["*/", "//", "-->", "/"],
       "correctAnswer": "*/"
     },
     {

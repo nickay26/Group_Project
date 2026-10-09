@@ -248,24 +248,43 @@ public class DatabaseManager {
         }
     }
 
-    public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
+    public static boolean refillBrainsWithCoins(int userId, int costCoins, int addBrains) {
+        // 1. Valid User ID စစ်ဆေးခြင်း
+        if (userId <= 0 && UserSession.getCurrentUser() != null) {
+            userId = UserSession.getCurrentUser().getUserId();
+        }
+
         try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("cost", cost);
-            body.put("max_brain", maxBrain);
+            // Backend API ဆီ Request ပို့ကြည့်မည်
+            String response = ApiClient.refillBrainsAsync(userId, costCoins).join();
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/refill-brains"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
+            if (response != null && !response.toLowerCase().contains("error")) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            System.err.println("API Connection Failed, switching to local state update: " + e.getMessage());
+        }
+
+        // 2. Server မရှိပါက (သို့မဟုတ် API Error ဖြစ်ပါက) Local Session ထဲတွင် တိုက်ရိုက် နှုတ်/ဖြည့် ပေးမည်
+        if (UserSession.getCurrentUser() != null) {
+            int currentCoins = UserSession.getCurrentUser().getCoin();
+            if (currentCoins >= costCoins) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void updateLocalSession(int costCoins, int addBrains) {
+        if (UserSession.getCurrentUser() != null) {
+            int newCoins = Math.max(0, UserSession.getCurrentUser().getCoin() - costCoins);
+            int currentBrains = UserSession.getCurrentUser().getBrainCount();
+
+            UserSession.getCurrentUser().setCoin(newCoins);
+            UserSession.getCurrentUser().setBrainCount(Math.min(5, currentBrains + addBrains));
         }
     }
 
