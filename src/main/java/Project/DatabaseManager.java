@@ -340,8 +340,8 @@ public class DatabaseManager {
                 JSONArray arr = new JSONArray(response.body());
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    String courseId = obj.optString("Course_ID", obj.optString("course_id", ""));
-                    String title = obj.optString("Course_Name", obj.optString("course_name", obj.optString("title", "Course")));
+                    String courseId = obj.getString("Course_ID");
+                    String title = obj.getString("Course_Name");
                     int total = obj.optInt("total_lessons", 0);
                     int completed = obj.optInt("completed_lessons", 0);
 
@@ -349,7 +349,7 @@ public class DatabaseManager {
                             courseId,
                             title,
                             "Master " + title + " with interactive lessons.",
-                            courseId.contains("_") ? courseId.split("_")[0] : courseId,
+                            courseId.split("_")[0],
                             total,
                             completed
                     ));
@@ -429,6 +429,76 @@ public class DatabaseManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("coins", coinsToAdd);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean refillBrainsWithCoins(int userId, int costCoins, int addBrains) {
+        // 1. Valid User ID စစ်ဆေးခြင်း
+        if (userId <= 0 && UserSession.getCurrentUser() != null) {
+            userId = UserSession.getCurrentUser().getUserId();
+        }
+
+        try {
+            // Backend API ဆီ Request ပို့ကြည့်မည်
+            String response = ApiClient.refillBrainsAsync(userId, costCoins).join();
+
+            if (response != null && !response.toLowerCase().contains("error")) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("API Connection Failed, switching to local state update: " + e.getMessage());
+        }
+
+        // 2. Server မရှိပါက (သို့မဟုတ် API Error ဖြစ်ပါက) Local Session ထဲတွင် တိုက်ရိုက် နှုတ်/ဖြည့် ပေးမည်
+        if (UserSession.getCurrentUser() != null) {
+            int currentCoins = UserSession.getCurrentUser().getCoin();
+            if (currentCoins >= costCoins) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void updateLocalSession(int costCoins, int addBrains) {
+        if (UserSession.getCurrentUser() != null) {
+            int newCoins = Math.max(0, UserSession.getCurrentUser().getCoin() - costCoins);
+            int currentBrains = UserSession.getCurrentUser().getBrainCount();
+
+            UserSession.getCurrentUser().setCoin(newCoins);
+            UserSession.getCurrentUser().setBrainCount(Math.min(5, currentBrains + addBrains));
+        }
+    }
+
+    public static int getCompletedLessonCount(int userId, String courseId) {
+        List<Course> courses = getCoursesForUser(userId);
+        for (Course c : courses) {
+            if (c.getCourseId().equalsIgnoreCase(courseId)) {
+                return c.getCompletedLessons();
+            }
+        }
+        return 0;
     }
 
     // ==========================================
@@ -740,9 +810,12 @@ public class DatabaseManager {
     }
 
     // ==========================================
-    // 6. BRAIN & ENERGY SYSTEM
+    // 5. BRAIN & ENERGY SYSTEM
     // ==========================================
 
+    /**
+     * Retrieves current brain count, coins, and premium status for a user.
+     */
     public static JSONObject getBrainStatus(int userId) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
@@ -760,6 +833,10 @@ public class DatabaseManager {
         return null;
     }
 
+    /**
+     * Deducts 1 brain upon an incorrect answer.
+     * Premium users are automatically exempted on the backend.
+     */
     public static JSONObject deductBrain(int userId) {
         try {
             JSONObject body = new JSONObject();
@@ -781,6 +858,9 @@ public class DatabaseManager {
         return null;
     }
 
+    /**
+     * Spends user coins to refill brains to max capacity (5).
+     */
     public static JSONObject refillBrains(int userId, int cost) {
         try {
             JSONObject body = new JSONObject();

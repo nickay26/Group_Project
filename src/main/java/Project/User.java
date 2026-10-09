@@ -10,7 +10,7 @@ public class User {
     private int coin;
     private int brainCount;
 
-    // Premium & Role Fields
+    // ⭐️ Premium Fields
     private boolean premium = false;
     private String subscriptionType = "free";
     private String planType = "FREE";
@@ -28,6 +28,14 @@ public class User {
         this.brainCount = brainCount;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
     public User(int userId, String name, String email) {
         this(userId, name, email, null, 0, 0, 0, 5);
     }
@@ -38,6 +46,7 @@ public class User {
 
     public boolean isAdmin() {
         return role != null && role.equalsIgnoreCase("ADMIN");
+        this(userId, name, email, "", 0, 0, 0, 0);
     }
 
     public boolean isPremium() {
@@ -53,6 +62,8 @@ public class User {
     public void setSubscriptionType(String subscriptionType) { this.subscriptionType = subscriptionType; }
     public void setPlanType(String planType) { this.planType = planType; }
 
+    // Getters
+    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }

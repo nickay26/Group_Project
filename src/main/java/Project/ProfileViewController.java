@@ -1,10 +1,15 @@
 package Project;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -13,6 +18,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.util.Duration;
 
 import java.io.InputStream;
 import java.util.List;
@@ -27,6 +33,7 @@ public class ProfileViewController {
     @FXML private Label coinLabel;
     @FXML private Label brainLabel;
     @FXML private GridPane coursesProgressContainer;
+    @FXML private Label premiumBadgeLabel;   // ✅ Label
 
     @FXML
     public void initialize() {
@@ -37,11 +44,30 @@ public class ProfileViewController {
         loadCoursesProgress();
     }
 
+    // ============================================
+    // LOAD USER DATA
+    // ============================================
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
             userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
             userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
+            String planType = currentUser.getSubscriptionType();
+            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType);
+
+            userNameLabel.setText(currentUser.getName());
+
+            // ✅ Premium Badge — Label
+            if (isPremium) {
+                premiumBadgeLabel.setVisible(true);
+                premiumBadgeLabel.setManaged(true);
+                startPremiumAnimation();
+            } else {
+                premiumBadgeLabel.setVisible(false);
+                premiumBadgeLabel.setManaged(false);
+            }
+
+            userEmailLabel.setText(currentUser.getEmail());
             streakLabel.setText(String.valueOf(currentUser.getStreak()));
             xpLabel.setText(String.valueOf(currentUser.getXp()));
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
@@ -55,6 +81,7 @@ public class ProfileViewController {
             } else {
                 brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
             }
+            // ★★★ ဒီအထိပဲ ★★★
 
             // ✅ FIXED: Format server filename into full HTTP URL
             String profilePath = currentUser.getProfile();
@@ -75,6 +102,45 @@ public class ProfileViewController {
         }
     }
 
+    // ============================================
+    // ✅ Premium Badge — Animation
+    // ============================================
+    private void startPremiumAnimation() {
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.web("#FBBF24"));
+        glow.setRadius(6);
+        glow.setSpread(0.2);
+        premiumBadgeLabel.setEffect(glow);
+
+        Timeline glowTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(glow.radiusProperty(), 3)),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(glow.radiusProperty(), 10)),
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(glow.radiusProperty(), 3))
+        );
+        glowTimeline.setCycleCount(Animation.INDEFINITE);
+        glowTimeline.play();
+
+        Timeline scaleTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.0),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.0)),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.08),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.08)),
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(premiumBadgeLabel.scaleXProperty(), 1.0),
+                        new KeyValue(premiumBadgeLabel.scaleYProperty(), 1.0))
+        );
+        scaleTimeline.setCycleCount(Animation.INDEFINITE);
+        scaleTimeline.play();
+    }
+
+    // ============================================
+    // LOAD COURSES PROGRESS
+    // ============================================
     private void loadCoursesProgress() {
         coursesProgressContainer.getChildren().clear();
 
@@ -93,11 +159,6 @@ public class ProfileViewController {
 
         for (Course course : courseList) {
             int percent = course.getProgressPercent();
-
-            System.out.println("📊 " + course.getTitle()
-                    + " | Completed: " + course.getCompletedLessons()
-                    + " | Total: " + course.getTotalLessons()
-                    + " | Percent: " + percent + "%");
 
             StackPane item = createCourseItem(
                     course.getCourseId(),
@@ -155,7 +216,7 @@ public class ProfileViewController {
         // ✅ Position — အပေါ်ကို ထပ်တိုး
         StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
         progressCircle.setTranslateX(-20);
-        progressCircle.setTranslateY(-25);   // ✅ -18 → -25 (အပေါ်တိုး)
+        progressCircle.setTranslateY(-5);
         progressCircle.setMouseTransparent(true);
 
         StackPane cardContainer = new StackPane();
@@ -199,8 +260,8 @@ public class ProfileViewController {
 
         // ✅ Background Circle — အရင့်ရောင်
         Circle bgCircle = new Circle(radius);
-        bgCircle.setFill(Color.web(darkerColor, 0.9));      // ✅ 90% opacity (အရင့်)
-        bgCircle.setStroke(Color.web(lighterColor, 1.0));   // ✅ 100% opacity (ပေါ့)
+        bgCircle.setFill(Color.web(darkerColor, 0.9));
+        bgCircle.setStroke(Color.web(lighterColor, 1.0));
         bgCircle.setStrokeWidth(strokeWidth);
 
         // ✅ Progress Arc — အဖြူ
@@ -238,9 +299,9 @@ public class ProfileViewController {
         if (courseId == null) return "#334155";
         String upper = courseId.toUpperCase();
 
-        if (upper.contains("CPP") || upper.contains("C++")) return "#1E3A8A";   // C++ အရင့်
-        if (upper.contains("JAVA")) return "#7C2D12";                            // Java အရင့်
-        if (upper.contains("PYTHON") || upper.contains("PY")) return "#064E3B"; // Python အရင့်
+        if (upper.contains("CPP") || upper.contains("C++")) return "#1E3A8A";
+        if (upper.contains("JAVA")) return "#7C2D12";
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#064E3B";
         if (upper.contains("SQL")) return "#14532D";
 
         return "#334155";
@@ -253,9 +314,9 @@ public class ProfileViewController {
         if (courseId == null) return "#64748B";
         String upper = courseId.toUpperCase();
 
-        if (upper.contains("CPP") || upper.contains("C++")) return "#3B82F6";   // C++ ပေါ့
-        if (upper.contains("JAVA")) return "#EA580C";                            // Java ပေါ့
-        if (upper.contains("PYTHON") || upper.contains("PY")) return "#10B981"; // Python ပေါ့
+        if (upper.contains("CPP") || upper.contains("C++")) return "#3B82F6";
+        if (upper.contains("JAVA")) return "#EA580C";
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "#10B981";
         if (upper.contains("SQL")) return "#22C55E";
 
         return "#64748B";

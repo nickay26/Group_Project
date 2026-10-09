@@ -5,18 +5,14 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<ScrollPane fitToWidth="true" styleClass="profile-scroll-pane"
-            stylesheets="@../Css/mainlayout.css"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Project.ProfileViewController">
+<ScrollPane fitToWidth="true" styleClass="profile-scroll-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.ProfileViewController">
     <content>
         <VBox spacing="25.0" style="-fx-background-color: #0F172A;">
             <padding>
@@ -30,14 +26,9 @@
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </padding>
                     <children>
-                        <StackPane prefWidth="120.0" prefHeight="120.0"
-                                   minWidth="120.0" minHeight="120.0"
-                                   maxWidth="120.0" maxHeight="120.0">
+                        <StackPane maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0">
                             <children>
-                                <ImageView fx:id="avatarImageView"
-                                           fitHeight="120.0" fitWidth="120.0"
-                                           preserveRatio="false"
-                                           smooth="true" />
+                                <ImageView fx:id="avatarImageView" fitHeight="120.0" fitWidth="120.0" preserveRatio="false" smooth="true" />
                             </children>
                             <clip>
                                 <Circle centerX="60.0" centerY="60.0" radius="60.0" />
@@ -46,7 +37,32 @@
 
                         <VBox alignment="CENTER_LEFT" spacing="6.0">
                             <children>
-                                <Label fx:id="userNameLabel" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="User Name" />
+                                <!-- ✅ Username + Premium Badge -->
+                                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label fx:id="userNameLabel"
+                                               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;"
+                                               text="User Name" />
+
+                                        <!-- ✅ Premium Badge — Label တိုက်ရိုက် -->
+                                        <Label fx:id="premiumBadgeLabel"
+                                               text="PRO"
+                                               visible="false" managed="false"
+                                               translateY="-3"
+                                               maxHeight="16.0"
+                                               maxWidth="36.0"
+                                               minHeight="16.0"
+                                               minWidth="36.0"
+                                               style="-fx-text-fill: #1E293B;
+                                                      -fx-font-size: 9px;
+                                                      -fx-font-weight: bold;
+                                                      -fx-padding: 0;
+                                                      -fx-alignment: center;
+                                                      -fx-background-color: linear-gradient(to right, #F59E0B, #FBBF24);
+                                                      -fx-background-radius: 4px;
+                                                      -fx-effect: dropshadow(three-pass-box, rgba(245,158,11,0.6), 6, 0, 0, 0);" />
+                                    </children>
+                                </HBox>
                                 <Label fx:id="userEmailLabel" style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="user@email.com" />
                             </children>
                         </VBox>
@@ -73,7 +89,7 @@
                         <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="⚡" />
-                                <Label fx:id="xpLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
+                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" fx:id="xpLabel" />
                                 <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Total XP" />
                             </children>
                         </VBox>
@@ -103,11 +119,9 @@
                 <!-- 3. COURSES PROGRESS -->
                 <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
                     <children>
-                        <Label text="Courses Progress"
-                               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" />
+                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Courses Progress" />
 
-                        <GridPane fx:id="coursesProgressContainer"
-                                  hgap="15.0" vgap="15.0" />
+                        <GridPane fx:id="coursesProgressContainer" hgap="15.0" vgap="15.0" />
                     </children>
                 </VBox>
 
