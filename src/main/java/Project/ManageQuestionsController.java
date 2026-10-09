@@ -9,7 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ManageQuestionsController {
@@ -80,6 +82,25 @@ public class ManageQuestionsController {
         loadLessonList();
     }
 
+    // Language အလိုက် Correct File Prefix ယူရန် (PYTHON -> PY_, CPP -> CPP_, JAVA -> JAVA_)
+    private String getPrefixForCategory(String category) {
+        if (category == null) return "CPP_";
+        if (category.equalsIgnoreCase("PYTHON")) return "PY_";
+        if (category.equalsIgnoreCase("JAVA")) return "JAVA_";
+        return category.toUpperCase() + "_";
+    }
+
+    private File getLessonsDirectory() {
+        File folder = new File("src/main/resources/Lessons");
+        if (!folder.exists() || !folder.isDirectory()) {
+            folder = new File("target/classes/Lessons");
+        }
+        if (!folder.exists() || !folder.isDirectory()) {
+            folder = new File("Lessons");
+        }
+        return folder;
+    }
+
     private void loadLessonList() {
         if (categoryCombo == null || lessonCombo == null) return;
 
@@ -89,26 +110,38 @@ public class ManageQuestionsController {
             categoryCombo.setValue(selectedCategory);
         }
 
-        File folder = new File("src/main/resources/Lessons");
-        List<String> lessonNumbers = new ArrayList<>();
+        String prefix = getPrefixForCategory(selectedCategory);
+        File folder = getLessonsDirectory();
+        List<Integer> lessonNumbers = new ArrayList<>();
 
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
-                String prefix = selectedCategory.toUpperCase() + "_";
                 for (File file : files) {
-                    if (file.getName().startsWith(prefix) && file.getName().endsWith(".json")) {
-                        String lessonNo = file.getName().replace(prefix, "").replace(".json", "");
-                        lessonNumbers.add(lessonNo);
+                    String name = file.getName();
+                    if (name.startsWith(prefix) && name.endsWith(".json")) {
+                        String lessonNoStr = name.replace(prefix, "").replace(".json", "");
+                        try {
+                            lessonNumbers.add(Integer.parseInt(lessonNoStr));
+                        } catch (NumberFormatException e) {
+                            // Number မဟုတ်ပါကလည်း လစ်လျူရှုမည်
+                        }
                     }
                 }
             }
         }
 
         if (!lessonNumbers.isEmpty()) {
-            lessonCombo.setItems(FXCollections.observableArrayList(lessonNumbers));
+            Collections.sort(lessonNumbers); // နံပါတ်စဉ်အလိုက် စီပေးမည် (101, 102, ... 158)
+            List<String> lessonStrings = new ArrayList<>();
+            for (Integer num : lessonNumbers) {
+                lessonStrings.add(String.valueOf(num));
+            }
+            lessonCombo.setItems(FXCollections.observableArrayList(lessonStrings));
+            lessonCombo.setValue(lessonStrings.get(0));
         } else {
             lessonCombo.setItems(FXCollections.observableArrayList("101", "102", "103", "104", "105"));
+            lessonCombo.setValue("101");
         }
     }
 
@@ -155,8 +188,10 @@ public class ManageQuestionsController {
 
         if (category == null || lessonNo == null || lessonNo.trim().isEmpty()) return;
 
-        String fileName = category.toUpperCase() + "_" + lessonNo.trim() + ".json";
-        File file = new File("src/main/resources/Lessons/" + fileName);
+        String prefix = getPrefixForCategory(category);
+        String fileName = prefix + lessonNo.trim() + ".json";
+        File folder = getLessonsDirectory();
+        File file = new File(folder, fileName);
 
         if (file.exists()) {
             try (Reader reader = new FileReader(file)) {
@@ -192,6 +227,7 @@ public class ManageQuestionsController {
             }
 
             lessonNo = lessonNo.trim();
+            String prefix = getPrefixForCategory(category);
             String type = (typeCombo != null && typeCombo.getValue() != null) ? typeCombo.getValue() : "MULTIPLE_CHOICE";
 
             // Edit ပြုလုပ်ခြင်း သို့မဟုတ် အသစ်ထည့်ခြင်း ခွဲခြားစစ်ဆေးခြင်း
@@ -199,7 +235,7 @@ public class ManageQuestionsController {
             if (selectedSlideForEdit != null) {
                 slideId = selectedSlideForEdit.getSlideId(); // ID အဟောင်းအတိုင်းပြန်သုံးမည်
             } else {
-                slideId = category.toUpperCase() + "_" + lessonNo + "_S" + (slideObservableList.size() + 1);
+                slideId = prefix + lessonNo + "_S" + (slideObservableList.size() + 1);
             }
 
             String title = slideTitleInput != null ? slideTitleInput.getText() : "";
@@ -277,15 +313,16 @@ public class ManageQuestionsController {
     }
 
     private void saveToJsonFile(String category, String lessonNo) {
-        String fileName = category.toUpperCase() + "_" + lessonNo + ".json";
-        File folder = new File("src/main/resources/Lessons");
+        String prefix = getPrefixForCategory(category);
+        String fileName = prefix + lessonNo + ".json";
+        File folder = getLessonsDirectory();
         if (!folder.exists()) folder.mkdirs();
 
         File file = new File(folder, fileName);
 
         if (currentLesson == null) {
             currentLesson = new Lesson();
-            currentLesson.setLessonId(category.toUpperCase() + "_" + lessonNo);
+            currentLesson.setLessonId(prefix + lessonNo);
             currentLesson.setTitle(category + " Lesson " + lessonNo);
         }
 

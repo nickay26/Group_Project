@@ -87,10 +87,21 @@ public class MainLayoutController {
         if (currentUser != null) {
             // 1. Local Session ထဲက လက်ရှိ Coin တန်ဖိုးကို ချက်ချင်း UI မှာ ပြပါ
             final int currentLocalCoin = currentUser.getCoin();
-
             Platform.runLater(() -> {
                 if (topStreakLabel != null) topStreakLabel.setText(" " + currentUser.getStreak());
-                if (topBrainLabel != null) topBrainLabel.setText(" " + currentUser.getBrainCount());
+
+                // ⭐ Brain Display — Premium ဆိုရင် ∞
+                if (topBrainLabel != null) {
+                    String brainDisplay = PremiumService.getBrainDisplay(currentUser);
+                    topBrainLabel.setText(" " + brainDisplay);
+
+                    if (PremiumService.isPremium(currentUser)) {
+                        topBrainLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-cursor: hand;");
+                    } else {
+                        topBrainLabel.setStyle("-fx-text-fill: white; -fx-cursor: hand;");
+                    }
+                }
+
                 if (topCoinLabel != null) topCoinLabel.setText(" " + currentLocalCoin);
             });
 
@@ -106,7 +117,19 @@ public class MainLayoutController {
 
                     Platform.runLater(() -> {
                         if (topStreakLabel != null) topStreakLabel.setText(" " + updatedUser.getStreak());
-                        if (topBrainLabel != null) topBrainLabel.setText(" " + updatedUser.getBrainCount());
+
+                        // ⭐ Brain Display — Premium ဆိုရင် ∞
+                        if (topBrainLabel != null) {
+                            String brainDisplay = PremiumService.getBrainDisplay(updatedUser);
+                            topBrainLabel.setText(" " + brainDisplay);
+
+                            if (PremiumService.isPremium(updatedUser)) {
+                                topBrainLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-cursor: hand;");
+                            } else {
+                                topBrainLabel.setStyle("-fx-text-fill: white; -fx-cursor: hand;");
+                            }
+                        }
+
                         if (topCoinLabel != null) topCoinLabel.setText(" " + safeCoin);
                     });
                 }
@@ -140,6 +163,19 @@ public class MainLayoutController {
     public void showRefillBrainDialog() {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
+
+        // ⭐ Premium User ဆိုရင် Refill Popup မပြဘဲ Alert ပဲ ပြ
+        if (PremiumService.isPremium(user)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Premium Brains");
+            alert.setHeaderText("🧠 Unlimited Brains");
+            alert.setContentText(
+                    "You are a Premium user. Enjoy unlimited brains — no refill needed!\n\n" +
+                            "Your brain count is ∞ (infinity)."
+            );
+            alert.showAndWait();
+            return;
+        }
 
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);

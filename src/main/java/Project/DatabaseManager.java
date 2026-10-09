@@ -410,7 +410,6 @@ public class DatabaseManager {
         int xp = obj.optInt("XP", obj.optInt("xp", 0));
         int streak = obj.optInt("Streak", obj.optInt("streak", 0));
 
-        // Coin Key စစ်ဆေးမှုများကို စုံလင်အောင် ပြင်ဆင်ထားသည်
         int coin = 0;
         if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
         else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
@@ -419,7 +418,20 @@ public class DatabaseManager {
 
         int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
 
-        return new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+
+        // ⭐ Premium fields ထည့်
+        String planType = obj.optString("plan_type",
+                obj.optString("Plan_Type", "FREE"));
+        boolean isPremium = obj.optBoolean("is_premium",
+                obj.optBoolean("Is_Premium", false))
+                || "PREMIUM".equalsIgnoreCase(planType);
+
+        user.setPremium(isPremium);
+        user.setSubscriptionType(planType);
+        user.setPlanType(planType);
+
+        return user;
     }
 
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
@@ -566,4 +578,219 @@ public class DatabaseManager {
         }
         return false;
     }
+
+    // ==========================================
+    // 5. BRAIN & ENERGY SYSTEM
+    // ==========================================
+
+    /**
+     * Retrieves current brain count, coins, and premium status for a user.
+     */
+    public static JSONObject getBrainStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/brains"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Deducts 1 brain upon an incorrect answer.
+     * Premium users are automatically exempted on the backend.
+     */
+    public static JSONObject deductBrain(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Spends user coins to refill brains to max capacity (5).
+     */
+    public static JSONObject refillBrains(int userId, int cost) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("cost", cost);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // ==========================================
+    // 6. LEADERBOARD SYSTEM (SYNCHRONOUS)
+    // ==========================================
+
+    /**
+     * Fetch active season leaderboard
+     */
+    public static JSONArray getLeaderboard() {
+        return getLeaderboard(null, 1);
+    }
+
+    public static JSONArray getLeaderboard(String seasonId) {
+        return getLeaderboard(seasonId, 1);
+    }
+
+    public static JSONArray getLeaderboard(String seasonId, int leagueId) {
+        try {
+            String path = "/api/leaderboard";
+            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+                path += "/" + seasonId;
+            }
+            path += "?league_id=" + leagueId;
+
+            String response = sendGetRequest(path);
+            if (!response.isEmpty()) {
+                // Extracts "rankings" array if backend returns {"season_id": "...", "rankings": [...]}
+                if (response.trim().startsWith("{")) {
+                    JSONObject json = new JSONObject(response);
+                    return json.optJSONArray("rankings");
+                } else if (response.trim().startsWith("[")) {
+                    return new JSONArray(response);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new JSONArray();
+    }
+
+    /**
+     * Fetch User League Status
+     */
+    public static JSONObject getUserLeagueStatus(int userId) {
+        return getUserLeagueStatus(userId, null);
+    }
+
+    public static JSONObject getUserLeagueStatus(int userId, String seasonId) {
+        try {
+            String path = "/api/user/" + userId + "/league-status";
+            if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
+                path += "/" + seasonId;
+            }
+
+            String response = sendGetRequest(path);
+            if (!response.isEmpty()) {
+                return new JSONObject(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Add XP to User & Auto-Enroll in Active Season
+     */
+    public static boolean addUserXp(int userId, int xp) {
+        return addUserXp(userId, null, xp, 1);
+    }
+
+    public static boolean addUserXp(int userId, String seasonId, int xp) {
+        return addUserXp(userId, seasonId, xp, 1);
+    }
+
+    public static boolean addUserXp(int userId, String seasonId, int xp, int leagueId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("xp", xp);
+            body.put("league_id", leagueId);
+            if (seasonId != null && !seasonId.trim().isEmpty()) {
+                body.put("season_id", seasonId);
+            }
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-xp"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200 || response.statusCode() == 201;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // ==========================================
+
+    // ============================================
+// ⭐ AI ASK LIMIT TRACKING
+// ============================================
+
+    /**
+     * ဒီနေ့ AI မေးပြီးသား အရေအတွက် ယူခြင်း
+     */
+    public static int getTodayAIAskCount(int userId) {
+        try {
+            String response = sendGetRequest("/api/users/" + userId + "/ai-ask-count");
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                return json.optInt("ask_count", 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * AI မေးတဲ့အခါ Count တိုးခြင်း
+     */
+    public static void incrementAIAskCount(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/ai-ask"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
