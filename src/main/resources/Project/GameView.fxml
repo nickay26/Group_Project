@@ -5,70 +5,111 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<VBox alignment="TOP_CENTER" spacing="16" prefWidth="900" prefHeight="700"
-      style="-fx-background-color: #ffffff; -fx-padding: 24;"
-      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Project.GameController">
+<StackPane prefWidth="900" prefHeight="700"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="Project.GameController">
 
-    <!-- Header Section -->
-    <HBox alignment="CENTER_LEFT" spacing="15">
-        <Button text="✕" onAction="#handleBack"
-                style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 50%; -fx-border-color: #000000; -fx-border-radius: 50%; -fx-border-width: 1.5; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;"/>
+    <!-- Main Game Workspace VBox -->
+    <VBox alignment="TOP_CENTER" spacing="14"
+          style="-fx-background-color: #ffffff; -fx-padding: 20;">
 
-        <Label fx:id="challengeTitleLabel" text="LIVE CODING ARENA"
-               style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 8 16; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 1.5;"/>
+        <!-- Header Section -->
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <Button text="✕" onAction="#handleBack"
+                    style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 50%; -fx-border-color: #000000; -fx-border-radius: 50%; -fx-border-width: 1.5; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;"/>
 
-        <HBox HBox.hgrow="ALWAYS"/>
+            <Label fx:id="challengeTitleLabel" text="SOLOLEARN 1v1 CODE ARENA"
+                   style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 8 16; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 1.5;"/>
 
-        <HBox alignment="CENTER" spacing="6"
-              style="-fx-background-color: #ffffff; -fx-padding: 6 18; -fx-background-radius: 20; -fx-border-color: #dc2626; -fx-border-radius: 20; -fx-border-width: 1.5;">
-            <Label fx:id="timerLabel" text="Time Left: 05:00"
-                   style="-fx-text-fill: #dc2626; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+
+            <!-- Score & Timer Display -->
+            <HBox alignment="CENTER" spacing="12">
+                <Label fx:id="scoreLabel" text="Score: 0"
+                       style="-fx-background-color: #f1f5f9; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 6 14; -fx-background-radius: 16; -fx-border-color: #cbd5e1; -fx-border-radius: 16;"/>
+
+                <HBox alignment="CENTER" spacing="6"
+                      style="-fx-background-color: #ffffff; -fx-padding: 6 18; -fx-background-radius: 20; -fx-border-color: #dc2626; -fx-border-radius: 20; -fx-border-width: 1.5;">
+                    <Label fx:id="timerLabel" text="Time: 15s"
+                           style="-fx-text-fill: #dc2626; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                </HBox>
+            </HBox>
         </HBox>
-    </HBox>
 
-    <!-- Problem Statement Box -->
-    <VBox alignment="CENTER_LEFT" spacing="8" prefWidth="850"
-          style="-fx-background-color: #ffffff; -fx-padding: 18; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
+        <!-- Problem & Status Banner -->
+        <VBox alignment="CENTER_LEFT" spacing="6" prefWidth="850"
+              style="-fx-background-color: #ffffff; -fx-padding: 14 18; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
 
-        <Label fx:id="progressLabel" text="LIVE MATCH IN PROGRESS"
-               style="-fx-text-fill: #16a34a; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1.5px;"/>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="questionNumberLabel" text="QUESTION 1 / 5"
+                       style="-fx-text-fill: #2563eb; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <Label fx:id="progressLabel" text="MATCH IN PROGRESS"
+                       style="-fx-text-fill: #16a34a; -fx-font-size: 11px; -fx-font-weight: bold; -fx-letter-spacing: 1.2px;"/>
+            </HBox>
 
-        <Label fx:id="questionTextLabel" text="Loading Problem Description..." wrapText="true"
-               style="-fx-text-fill: #000000; -fx-font-size: 15px; -fx-font-weight: bold; -fx-line-spacing: 4px;"/>
+            <Label fx:id="questionTextLabel" text="What will be the output of the following code snippet?" wrapText="true"
+                   style="-fx-text-fill: #000000; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Workspace: Code Snippet Viewer & Options Container -->
+        <HBox spacing="16" prefWidth="850" VBox.vgrow="ALWAYS">
+
+            <!-- Code Snippet Viewer -->
+            <VBox spacing="8" HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 12; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
+                <Label text="💻 CODE SNIPPET" style="-fx-text-fill: #334155; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+                <TextArea fx:id="codeSnippetArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"
+                          style="-fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px; -fx-control-inner-background: #1e293b; -fx-text-fill: #38edf8; -fx-background-radius: 8;"/>
+            </VBox>
+
+            <!-- Options (4 Buttons) -->
+            <VBox spacing="10" prefWidth="400" alignment="CENTER"
+                  style="-fx-background-color: #f8fafc; -fx-padding: 14; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
+
+                <Label text="🎯 SELECT THE CORRECT ANSWER" style="-fx-text-fill: #334155; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+                <Button fx:id="option1Btn" text="Option 1" onAction="#handleOptionClick" prefHeight="48" maxWidth="Infinity"
+                        style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;"/>
+
+                <Button fx:id="option2Btn" text="Option 2" onAction="#handleOptionClick" prefHeight="48" maxWidth="Infinity"
+                        style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;"/>
+
+                <Button fx:id="option3Btn" text="Option 3" onAction="#handleOptionClick" prefHeight="48" maxWidth="Infinity"
+                        style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;"/>
+
+                <Button fx:id="option4Btn" text="Option 4" onAction="#handleOptionClick" prefHeight="48" maxWidth="Infinity"
+                        style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;"/>
+
+                <Label fx:id="feedbackLabel" text="" wrapText="true" alignment="CENTER"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 6 0 0 0;"/>
+            </VBox>
+
+        </HBox>
     </VBox>
 
-    <!-- Workspace: Code Editor & Console Output -->
-    <HBox spacing="16" prefWidth="850" VBox.vgrow="ALWAYS">
+    <!-- ⭐ Centered Result Dialog Overlay (Victory / Defeat Dialog) -->
+    <VBox fx:id="resultOverlay" visible="false" alignment="CENTER"
+          style="-fx-background-color: rgba(15, 23, 42, 0.75);">
 
-        <!-- Code Editor -->
-        <VBox spacing="8" HBox.hgrow="ALWAYS"
-              style="-fx-background-color: #f8fafc; -fx-padding: 14; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
-            <Label text="💻 CODE EDITOR" style="-fx-text-fill: #334155; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+        <VBox alignment="CENTER" spacing="14" prefWidth="380" maxWidth="380"
+              style="-fx-background-color: #ffffff; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2; -fx-padding: 28; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 12, 0, 0, 0);">
 
-            <TextArea fx:id="codeEditorArea" promptText="// Write your code here..." VBox.vgrow="ALWAYS"
-                      style="-fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px; -fx-control-inner-background: #1e293b; -fx-text-fill: #f8fafc; -fx-background-radius: 8;"/>
+            <Label fx:id="resultTitleLabel" text="🏆 VICTORY!"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #16a34a;" />
+
+            <Label fx:id="resultDescLabel" text="You won the match!"
+                   style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;" wrapText="true" textAlignment="CENTER" />
+
+            <Label fx:id="xpLabel" text="Earned: +50 XP"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d97706;" />
+
+            <Button text="Continue to Menu" onAction="#handleBack" prefHeight="40" prefWidth="180"
+                    style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" />
         </VBox>
+    </VBox>
 
-        <!-- Console Output -->
-        <VBox spacing="8" prefWidth="340"
-              style="-fx-background-color: #f8fafc; -fx-padding: 14; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1.5;">
-            <Label text="🖥️ CONSOLE OUTPUT / REVIEW" style="-fx-text-fill: #334155; -fx-font-size: 12px; -fx-font-weight: bold;"/>
-
-            <TextArea fx:id="consoleOutputArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"
-                      style="-fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 12px; -fx-control-inner-background: #0f172a; -fx-text-fill: #38edf8; -fx-background-radius: 8;"/>
-        </VBox>
-
-    </HBox>
-
-    <!-- Footer Action Buttons -->
-    <HBox alignment="CENTER_RIGHT" spacing="14" prefWidth="850">
-        <Button fx:id="runBtn" text="▶ Run Code" onAction="#handleRunCode" prefHeight="42" prefWidth="150"
-                style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;"/>
-
-        <Button fx:id="submitBtn" text="🚀 Submit Solution" onAction="#handleSubmitCode" prefHeight="42" prefWidth="180"
-                style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"/>
-    </HBox>
-
-</VBox>
+</StackPane>
