@@ -130,14 +130,12 @@ public class LeaderboardController {
         row.setAlignment(Pos.CENTER_LEFT);
         row.setPadding(new Insets(10, 16, 10, 16));
 
-        // Highlight User Row
         if (isCurrentUser) {
             row.setStyle("-fx-background-color: #2B3A60; -fx-background-radius: 10px; -fx-border-color: #3182CE; -fx-border-radius: 10px; -fx-border-width: 1.5px;");
         } else {
             row.setStyle("-fx-background-color: #252F4A; -fx-background-radius: 10px;");
         }
 
-        // Rank Display (Medals for Top 3)
         Label rankLabel = new Label();
         rankLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
         if (rank == 1) {
@@ -155,18 +153,19 @@ public class LeaderboardController {
         }
         rankLabel.setPrefWidth(45);
 
-        // Player Name
         Label nameLabel = new Label(name + (isCurrentUser ? " (You)" : ""));
         nameLabel.setFont(Font.font("System", isCurrentUser ? FontWeight.BOLD : FontWeight.NORMAL, 14));
         nameLabel.setTextFill(Color.WHITE);
-        HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
-        // XP Label
+        // Spacer to push XP label to the right edge
+        javafx.scene.layout.Region spacer = new javafx.scene.layout.Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
         Label xpLabel = new Label(xp + " XP");
         xpLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
         xpLabel.setTextFill(Color.web("#63B3ED"));
 
-        row.getChildren().addAll(rankLabel, nameLabel, xpLabel);
+        row.getChildren().addAll(rankLabel, nameLabel, spacer, xpLabel);
         return row;
     }
 
@@ -189,20 +188,21 @@ public class LeaderboardController {
             return;
         }
 
-        int completedLessons = DatabaseManager.getCompletedLessonCount(userId, activeCourseId);
-        updateUserProgress(completedLessons);
-
+        // Single API call to prevent duplicate network calls and race conditions
         ApiClient.getUserActivityAsync(userId).thenAccept(response -> {
+            int userLevel = DatabaseManager.getCompletedLessonCount(userId, activeCourseId);
+
             if (response != null && !response.isEmpty()) {
                 try {
                     JSONObject json = new JSONObject(response);
-                    int userLevel = json.optInt("level", completedLessons);
-
-                    Platform.runLater(() -> updateUserProgress(userLevel));
+                    userLevel = json.optInt("level", userLevel);
                 } catch (Exception e) {
                     System.err.println("Error parsing user level: " + e.getMessage());
                 }
             }
+
+            final int finalLevel = userLevel;
+            Platform.runLater(() -> updateUserProgress(finalLevel));
         });
     }
 
@@ -211,30 +211,24 @@ public class LeaderboardController {
         int PROTOSTAR_LEVEL = 5;
         int SUPERNOVA_LEVEL = 10;
 
-        if (leagueTitleLabel != null) {
-            if (userLevel >= SUPERNOVA_LEVEL) {
-                leagueTitleLabel.setText("Supernova League");
-                currentLeagueId = 3;
-            } else if (userLevel >= PROTOSTAR_LEVEL) {
-                leagueTitleLabel.setText("Protostar League");
-                currentLeagueId = 2;
-            } else if (userLevel >= NEBULA_LEVEL) {
-                leagueTitleLabel.setText("Nebula League");
-                currentLeagueId = 1;
-            } else {
-                leagueTitleLabel.setText("Venus League");
-                currentLeagueId = 1;
-            }
+        // Calculate League ID unconditionally before updating UI
+        if (userLevel >= SUPERNOVA_LEVEL) {
+            currentLeagueId = 3;
+            if (leagueTitleLabel != null) leagueTitleLabel.setText("Supernova League");
+        } else if (userLevel >= PROTOSTAR_LEVEL) {
+            currentLeagueId = 2;
+            if (leagueTitleLabel != null) leagueTitleLabel.setText("Protostar League");
+        } else {
+            currentLeagueId = 1;
+            if (leagueTitleLabel != null) leagueTitleLabel.setText("Nebula League");
         }
 
         setCardState(nebulaImg, userLevel >= NEBULA_LEVEL);
         setCardState(protostarImg, userLevel >= PROTOSTAR_LEVEL);
         setCardState(supernovaImg, userLevel >= SUPERNOVA_LEVEL);
 
-        // တွက်ချက်ရရှိလာသော currentLeagueId (1, 2 သို့မဟုတ် 3) ဖြင့် Backend သို့ XP နှင့် League ID ပို့ပေးမည်
+        // Send updated league and fetch correct leaderboard
         ApiClient.addUserXpAsync(UserSession.getUserId(), null, 0, currentLeagueId);
-
-        // ထို့နောက် မှန်ကန်သော League ID ဖြင့် Leaderboard Data ကို ဆွဲယူမည်
         fetchAndRenderLeaderboard();
     }
 

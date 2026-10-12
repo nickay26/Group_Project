@@ -123,7 +123,7 @@ public class QuickMatchLobbyController {
                                     GameController gameController = loader.getController();
                                     gameController.setCourseData(selectedLanguage);
                                     gameController.setGameSession(roomId, opponentId);
-                                    gameController.loadQuestionsFromJson(questionsJson);
+                                    //gameController.loadQuestionsFromJson(questionsJson);
                                 }
                             });
 

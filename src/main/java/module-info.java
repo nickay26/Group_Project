@@ -11,6 +11,7 @@ module com.example.group_project {
     requires org.json;
     requires javafx.swing;
     requires javafx.web;
+    requires jdk.jsobject;
 
     // Gson နှင့် JavaFX FXML နှစ်ခုစလုံးကို Open လုပ်ပေးရန် ပြင်ဆင်ထားပါသည်
     opens Project to javafx.fxml, com.google.gson;

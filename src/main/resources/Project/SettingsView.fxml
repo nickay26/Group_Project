@@ -269,11 +269,11 @@
                                             <Label style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-background-radius: 12px; -fx-padding: 4 12; -fx-font-size: 12px; -fx-font-weight: bold;" text="Active" />
                                         </children>
                                     </HBox>
-                                    <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Sodex Free" />
-                                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Your plan includes:" />
+                                    <Label fx:id="currentPlanNameLabel" style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Sodex Free" />
+                                    <Label fx:id="planFeaturesLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Your plan includes:" />
                                     <Label style="-fx-font-size: 13px; -fx-text-fill: #94A3B8;" text="✓  Standard lessons" />
                                     <Label style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="Do you have a problem with subscription? Email us at info@sodex.com" wrapText="true" />
-                                    <Button onAction="#handleUpgradePlan" text="Upgrade Plan" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" />
+                                    <Button fx:id="upgradePlanBtn" onAction="#handleUpgradePlan" text="Upgrade Plan" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 12 40; -fx-cursor: hand;" />
                                 </children>
                             </VBox>
 

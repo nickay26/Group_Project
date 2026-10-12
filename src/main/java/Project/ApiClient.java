@@ -1,38 +1,110 @@
 package Project;
 
 import org.json.JSONObject;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiClient {
 
-    // 1. URL Domain Name ကို စာလုံးသေး ပြောင်းထားပါသည် (PythonAnywhere SSL Redirect Error ကာကွယ်ရန်)
     private static final String BASE_URL = "https://nickayjohn26.pythonanywhere.com";
 
-    // 2. HttpClient Redirects နှင့် Timeout သတ်မှတ်ချက်
     private static final HttpClient client = HttpClient.newBuilder()
             .followRedirects(HttpClient.Redirect.ALWAYS)
             .connectTimeout(Duration.ofSeconds(15))
             .build();
 
     // ==========================================
+    // PROFILE IMAGE HELPERS & APIS
+    // ==========================================
+
+    public static String getProfileImageUrl(String profilePath) {
+        if (profilePath == null || profilePath.trim().isEmpty()) {
+            return null;
+        }
+        String trimmed = profilePath.trim();
+
+        if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+            return trimmed;
+        }
+
+        if (trimmed.startsWith("file:") || trimmed.contains("/") || trimmed.contains("\\")) {
+            java.io.File f = new java.io.File(trimmed.replace("file:", ""));
+            trimmed = f.getName();
+        }
+
+        return BASE_URL + "/uploads/profiles/" + trimmed;
+    }
+
+    private static byte[] createMultipartBody(int userId, File file, String boundary) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        String lineFeed = "\r\n";
+
+        baos.write(("--" + boundary + lineFeed).getBytes(StandardCharsets.UTF_8));
+        baos.write(("Content-Disposition: form-data; name=\"user_id\"" + lineFeed + lineFeed).getBytes(StandardCharsets.UTF_8));
+        baos.write((userId + lineFeed).getBytes(StandardCharsets.UTF_8));
+
+        String mimeType = Files.probeContentType(file.toPath());
+        if (mimeType == null) {
+            mimeType = "image/png";
+        }
+
+        baos.write(("--" + boundary + lineFeed).getBytes(StandardCharsets.UTF_8));
+        baos.write(("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"" + lineFeed).getBytes(StandardCharsets.UTF_8));
+        baos.write(("Content-Type: " + mimeType + lineFeed + lineFeed).getBytes(StandardCharsets.UTF_8));
+        baos.write(Files.readAllBytes(file.toPath()));
+        baos.write(lineFeed.getBytes(StandardCharsets.UTF_8));
+
+        baos.write(("--" + boundary + "--" + lineFeed).getBytes(StandardCharsets.UTF_8));
+
+        return baos.toByteArray();
+    }
+
+    public static CompletableFuture<String> uploadProfileImageAsync(int userId, File imageFile) {
+        try {
+            String boundary = "----JavaHttpClientBoundary" + System.currentTimeMillis();
+            byte[] multipartBody = createMultipartBody(userId, imageFile, boundary);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/upload-profile"))
+                    .header("Content-Type", "multipart/form-data; boundary=" + boundary)
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(multipartBody))
+                    .build();
+
+            return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenApply(HttpResponse::body)
+                    .exceptionally(ex -> {
+                        System.err.println("Upload Profile Error: " + ex.getMessage());
+                        return null;
+                    });
+        } catch (Exception e) {
+            CompletableFuture<String> failed = new CompletableFuture<>();
+            failed.completeExceptionally(e);
+            return failed;
+        }
+    }
+
+    // ==========================================
     // 1. EXECUTE PLAYGROUND CODE (ASYNC)
     // ==========================================
     public static CompletableFuture<String> executeCodeAsync(String language, String code) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"code\": \"%s\"}",
-                escapeJson(language),
-                escapeJson(code)
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("code", code);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/execute"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -47,21 +119,19 @@ public class ApiClient {
     // 2. GEMINI AI CODE REVIEW (ASYNC)
     // ==========================================
     public static CompletableFuture<String> reviewCodeAsync(String language, String code) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"code\": \"%s\"}",
-                escapeJson(language),
-                escapeJson(code)
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("code", code);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/review"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
+                .thenApply(ApiClient::cleanAndFormatAiText)
                 .exceptionally(ex -> {
                     System.err.println("Review Code Error: " + ex.getMessage());
                     return null;
@@ -72,16 +142,14 @@ public class ApiClient {
     // 3. DIRECT CODE CHALLENGE GENERATION
     // ==========================================
     public static CompletableFuture<String> generateCodeChallengeAsync(String language, String level) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"level\": \"%s\"}",
-                escapeJson(language),
-                escapeJson(level)
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("level", level);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/challenge/generate"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -95,24 +163,21 @@ public class ApiClient {
     // ==========================================
     // 4. PRACTICE QUESTIONS REVIEW API
     // ==========================================
-    public static CompletableFuture<String> reviewPracticeCodeAsync(
-            String language, String code, String task) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"code\": \"%s\", \"task\": \"%s\"}",
-                escapeJson(language),
-                escapeJson(code),
-                escapeJson(task)
-        );
+    public static CompletableFuture<String> reviewPracticeCodeAsync(String language, String code, String task) {
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("code", code);
+        body.put("task", task);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/questions/review"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenApply(ApiClient::cleanAndFormatAiText) // <--- AI Text မပြန်မီ အလိုအလျောက် Clean လုပ်ပေးသည်
+                .thenApply(ApiClient::cleanAndFormatAiText)
                 .exceptionally(ex -> {
                     System.err.println("Review Practice Error: " + ex.getMessage());
                     return null;
@@ -123,15 +188,13 @@ public class ApiClient {
     // 5. SAVE PROJECT CODE
     // ==========================================
     public static CompletableFuture<String> saveProjectCodeAsync(int projectId, String codeContent) {
-        String jsonPayload = String.format(
-                "{\"code_content\": \"%s\"}",
-                escapeJson(codeContent)
-        );
+        JSONObject body = new JSONObject();
+        body.put("code_content", codeContent);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
                 .header("Content-Type", "application/json")
-                .PUT(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .PUT(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -145,20 +208,20 @@ public class ApiClient {
     // ==========================================
     // 6. SINGLE QUESTION GENERATION
     // ==========================================
-    public static CompletableFuture<String> generateQuestionAsync(
-            String language, String topic, int level) {
+    public static CompletableFuture<String> generateQuestionAsync(String language, String topic, int level) {
         String[] types = {"fill-blank", "drag-drop", "write-code"};
         String type = types[(int)(Math.random() * types.length)];
 
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"topic\": \"%s\", \"level\": %d, \"type\": \"%s\"}",
-                escapeJson(language), escapeJson(topic), level, type
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("topic", topic);
+        body.put("level", level);
+        body.put("type", type);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/questions/generate"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -173,17 +236,15 @@ public class ApiClient {
     // 7. BATCH AI QUESTIONS GENERATION
     // ==========================================
     public static CompletableFuture<String> fetchAiQuestionsBatchAsync(String language, String level, int count) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"level\": \"%s\", \"count\": %d}",
-                escapeJson(language),
-                escapeJson(level),
-                count
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("level", level);
+        body.put("count", count);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/questions/batch"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -197,19 +258,15 @@ public class ApiClient {
     // ==========================================
     // 8. MATCHMAKING ROOM CREATION & JOINING
     // ==========================================
-
-    // Host (Player 1) အတွက်: Room သစ်ဆောက်ပြီး မေးခွန်းတောင်းမည်
     public static CompletableFuture<String> createMatchRoomAsync(String language, String level) {
-        String jsonPayload = String.format(
-                "{\"language\": \"%s\", \"level\": \"%s\"}",
-                escapeJson(language),
-                escapeJson(level)
-        );
+        JSONObject body = new JSONObject();
+        body.put("language", language);
+        body.put("level", level);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/match/create"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -220,10 +277,10 @@ public class ApiClient {
                 });
     }
 
-    // Guest (Player 2) အတွက်: Room Code ရိုက်ထည့်ပြီး မေးခွန်းတူတူ လှမ်းဆွဲမည်
     public static CompletableFuture<String> joinMatchRoomAsync(String roomCode) {
+        String cleanRoom = URLEncoder.encode(roomCode.trim(), StandardCharsets.UTF_8);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/api/match/join/" + roomCode.trim()))
+                .uri(URI.create(BASE_URL + "/api/match/join/" + cleanRoom))
                 .GET()
                 .build();
 
@@ -245,7 +302,6 @@ public class ApiClient {
 
         String extractedText = rawResponse;
 
-        // JSON format ဖြစ်ပါက အထဲမှ သက်ဆိုင်ရာ key ကို ဖြုတ်ယူခြင်း
         try {
             JSONObject json = new JSONObject(rawResponse);
             if (json.has("review")) {
@@ -258,43 +314,32 @@ public class ApiClient {
                 extractedText = json.getString("output");
             }
         } catch (Exception e) {
-            // JSON မဟုတ်ပါက Raw text အတိုင်း ဆက်သွားမည်
+            // Raw text fallback
         }
 
-        // Markdown, Backticks, LaTeX သင်္ကေတများကို ဖယ်ရှားသန့်စင်ခြင်း
         return extractedText
-                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")  // Bold **text**
-                .replaceAll("###\\s*", "")             // H3
-                .replaceAll("##\\s*", "")              // H2
-                .replaceAll("#\\s*", "")               // H1
-                .replaceAll("```[a-zA-Z]*", "")        // Code block ticks
-                .replaceAll("`", "")                   // Inline backticks
-                .replaceAll("\\$\\$(.*?)\\$\\$", "$1") // LaTeX $$
-                .replaceAll("\\$(.*?)\\$", "$1")       // LaTeX $
+                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")
+                .replaceAll("###\\s*", "")
+                .replaceAll("##\\s*", "")
+                .replaceAll("#\\s*", "")
+                .replaceAll("```[a-zA-Z]*", "")
+                .replaceAll("`", "")
+                .replaceAll("\\$\\$(.*?)\\$\\$", "$1")
+                .replaceAll("\\$(.*?)\\$", "$1")
                 .trim();
-    }
-
-    // JSON String Escaping Helper Function
-    private static String escapeJson(String raw) {
-        if (raw == null) return "";
-        return raw.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t");
     }
 
     // ==========================================
     // 10. BRAIN & ENERGY SYSTEM (ASYNC)
     // ==========================================
-
     public static CompletableFuture<String> deductBrainAsync(int userId) {
-        String jsonPayload = String.format("{\"user_id\": %d}", userId);
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -306,12 +351,14 @@ public class ApiClient {
     }
 
     public static CompletableFuture<String> refillBrainsAsync(int userId, int cost) {
-        String jsonPayload = String.format("{\"user_id\": %d, \"cost\": %d}", userId, cost);
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
+        body.put("cost", cost);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -339,18 +386,17 @@ public class ApiClient {
     // ==========================================
     // 11. LESSON PROGRESS & STREAK SYSTEM (ASYNC)
     // ==========================================
-
-    // 1. Lesson Complete လုပ်ပြီး Streak & XP update ပြုလုပ်ရန်
     public static CompletableFuture<String> completeLessonAsync(int userId, String courseId, int lessonOrder, int xp) {
-        String jsonPayload = String.format(
-                "{\"user_id\": %d, \"course_id\": \"%s\", \"lesson_order\": %d, \"xp\": %d}",
-                userId, escapeJson(courseId), lessonOrder, xp
-        );
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
+        body.put("course_id", courseId);
+        body.put("lesson_order", lessonOrder);
+        body.put("xp", xp);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/lessons/complete"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -361,7 +407,6 @@ public class ApiClient {
                 });
     }
 
-    // 2. User ၏ လက်ရှိ Streak နှင့် XP Status ကို backend မှ ဆွဲယူရန်
     public static CompletableFuture<String> getUserActivityAsync(int userId) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/api/users/" + userId + "/activity"))
@@ -379,8 +424,6 @@ public class ApiClient {
     // ==========================================
     // 12. LEADERBOARD SYSTEM (ASYNC)
     // ==========================================
-
-    // 1. Get current season leaderboard for a specific league (defaults to current active season)
     public static CompletableFuture<String> getLeaderboardAsync(int leagueId) {
         return getLeaderboardAsync(null, leagueId);
     }
@@ -388,7 +431,7 @@ public class ApiClient {
     public static CompletableFuture<String> getLeaderboardAsync(String seasonId, int leagueId) {
         String url = BASE_URL + "/api/leaderboard";
         if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-            url += "/" + seasonId;
+            url += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
         }
         url += "?league_id=" + leagueId;
 
@@ -405,7 +448,6 @@ public class ApiClient {
                 });
     }
 
-    // 2. Get user league status (defaults to current season if seasonId is null/empty)
     public static CompletableFuture<String> getUserLeagueStatusAsync(int userId) {
         return getUserLeagueStatusAsync(userId, null);
     }
@@ -413,7 +455,7 @@ public class ApiClient {
     public static CompletableFuture<String> getUserLeagueStatusAsync(int userId, String seasonId) {
         String url = BASE_URL + "/api/user/" + userId + "/league-status";
         if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
-            url += "/" + seasonId;
+            url += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
         }
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -429,7 +471,6 @@ public class ApiClient {
                 });
     }
 
-    // 3. Add User XP (seasonId is optional, backend automatically auto-enrolls into active week)
     public static CompletableFuture<String> addUserXpAsync(int userId, int xp) {
         return addUserXpAsync(userId, null, xp, 1);
     }
@@ -456,12 +497,11 @@ public class ApiClient {
                     return null;
                 });
     }
+
     // ==========================================
-    // 9. FETCH USER PROFILE DATA
+    // 13. FETCH USER PROFILE DATA
     // ==========================================
     public static CompletableFuture<String> getUserProfileAsync(String userId) {
-        // ⚠️ သင့် PythonAnywhere app.py ရှိ Endpoint Route အတိုင်း ပြင်ပေးပါ
-        // (ဥပမာ- "/api/user/" သို့မဟုတ် "/get_user/" သို့မဟုတ် "/api/users/")
         String url = BASE_URL + "/api/user/" + userId.trim();
 
         HttpRequest request = HttpRequest.newBuilder()

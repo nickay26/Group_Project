@@ -50,8 +50,10 @@ public class ProfileViewController {
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
+            userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
+            userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
             String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType);
+            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
 
             userNameLabel.setText(currentUser.getName());
 
@@ -75,13 +77,19 @@ public class ProfileViewController {
             } else {
                 brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
             }
+            // ★★★ ဒီအထိပဲ ★★★
 
-            if (currentUser.getProfile() != null && !currentUser.getProfile().isEmpty()) {
+            // ✅ FIXED: Format server filename into full HTTP URL
+            String profilePath = currentUser.getProfile();
+            if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
                 try {
-                    Image img = new Image(currentUser.getProfile(), 0, 0, true, true, true);
-                    avatarImageView.setImage(img);
+                    String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
+                    if (fullImageUrl != null) {
+                        Image img = new Image(fullImageUrl, true); // Async loading
+                        avatarImageView.setImage(img);
+                    }
                 } catch (Exception e) {
-                    System.out.println("Could not load avatar: " + e.getMessage());
+                    System.err.println("Could not load avatar: " + e.getMessage());
                 }
             }
 
@@ -201,6 +209,7 @@ public class ProfileViewController {
 
         StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
+        // ✅ Position — အပေါ်ကို ထပ်တိုး
         StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
         progressCircle.setTranslateX(-20);
         progressCircle.setTranslateY(-5);
@@ -234,18 +243,24 @@ public class ProfileViewController {
         return "default.png";
     }
 
+    // ============================================
+    // ✅ CIRCULAR PROGRESS — ဒုတိယပုံလို အရောင်
+    // ============================================
     private StackPane createCircularProgressForCard(int percent, String courseId) {
         double radius = 22;
         double strokeWidth = 5;
 
+        // ✅ အရောင် ၂ မျိုး — အရင့် + ပေါ့
         String darkerColor = getCardDarkerColor(courseId);
         String lighterColor = getCardLighterColor(courseId);
 
+        // ✅ Background Circle — အရင့်ရောင်
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.web(darkerColor, 0.9));
         bgCircle.setStroke(Color.web(lighterColor, 1.0));
         bgCircle.setStrokeWidth(strokeWidth);
 
+        // ✅ Progress Arc — အဖြူ
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
@@ -254,6 +269,7 @@ public class ProfileViewController {
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
+        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 12px; -fx-font-weight: bold; " +
@@ -272,6 +288,9 @@ public class ProfileViewController {
         return stack;
     }
 
+    // ============================================
+    // ✅ Card ရဲ့ အရင့်ရောင် (background အတွက်)
+    // ============================================
     private String getCardDarkerColor(String courseId) {
         if (courseId == null) return "#334155";
         String upper = courseId.toUpperCase();
@@ -284,6 +303,9 @@ public class ProfileViewController {
         return "#334155";
     }
 
+    // ============================================
+    // ✅ Card ရဲ့ ပေါ့တဲ့ အရောင် (stroke အတွက်)
+    // ============================================
     private String getCardLighterColor(String courseId) {
         if (courseId == null) return "#64748B";
         String upper = courseId.toUpperCase();

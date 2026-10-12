@@ -132,4 +132,13 @@ public class UserSession {
         activeCourseId = null;
         instance = null;
     }
+
+    // ✅ Add to UserSession.java
+    public static void deductOneBrain() {
+        if (currentUser != null && !currentUser.isPremium()) {
+            int newCount = Math.max(0, currentUser.getBrainCount() - 1);
+            currentUser.setBrainCount(newCount);
+            ApiClient.deductBrainAsync(currentUser.getUserId());
+        }
+    }
 }

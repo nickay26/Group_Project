@@ -4,12 +4,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,14 +29,18 @@ public class GameController {
     @FXML private Label questionTextLabel;
     @FXML private Label feedbackLabel;
 
-    @FXML private TextArea codeSnippetArea;
+    @FXML private WebView codeWebView; // ⭐ Monaco Editor WebView integration[cite: 10, 12]
+    private WebEngine webEngine;
+    private boolean isEditorReady = false;
+    private String pendingSnippet = "";
+    private String pendingLanguage = "python";
 
     @FXML private Button option1Btn;
     @FXML private Button option2Btn;
     @FXML private Button option3Btn;
     @FXML private Button option4Btn;
 
-    // ⭐ Result Overlay Dialog Components
+    // ⭐ Result Overlay Dialog Components[cite: 11]
     @FXML private VBox resultOverlay;
     @FXML private Label resultTitleLabel;
     @FXML private Label resultDescLabel;
@@ -44,7 +50,7 @@ public class GameController {
     private int currentQuestionIndex = 0;
     private int userScore = 0;
 
-    private int timeRemaining = 15; // 15 Seconds per Sololearn Question
+    private int timeRemaining = 15;
     private Timeline timer;
     private String selectedLanguage = "Java (Basic)";
 
@@ -57,9 +63,10 @@ public class GameController {
     public void setCourseData(String lang) {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
+            this.pendingLanguage = lang;
         }
         if (challengeTitleLabel != null) {
-            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " 1v1 CODE CHALLENGE");
+            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " 1v1 CODE ARENA");
         }
     }
 
@@ -81,7 +88,6 @@ public class GameController {
         if (feedbackLabel != null) feedbackLabel.setText("");
         if (resultOverlay != null) resultOverlay.setVisible(false);
 
-        // User ID မရှိသေးပါက Auto Set ပြုလုပ်မည်
         if (this.currentUserId == null) {
             if (UserSession.getInstance().getCurrentUser() != null) {
                 this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
@@ -90,9 +96,117 @@ public class GameController {
             }
         }
 
+        if (codeWebView != null) {
+            webEngine = codeWebView.getEngine();
+            setupMonacoEditor();
+        }
+
         attachGameWebSocketListener();
     }
 
+    // ============================================
+    // MONACO EDITOR SETUP
+    // ============================================
+    private void setupMonacoEditor() {
+        String monacoHtml = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    html, body, #container { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #1e293b; }
+                </style>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+            </head>
+            <body>
+                <div id="container"></div>
+                <script>
+                    var editor;
+                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
+                    require(['vs/editor/editor.main'], function() {
+                        monaco.editor.defineTheme('navyTheme', {
+                            base: 'vs-dark',
+                            inherit: true,
+                            rules: [
+                                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
+                                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
+                                { token: 'string', foreground: 'f43f5e' },
+                                { token: 'number', foreground: 'fbbf24' }
+                            ],
+                            colors: {
+                                'editor.background': '#1e293b',
+                                'editor.foreground': '#e2e8f0',
+                                'editor.lineHighlightBackground': '#334155',
+                                'editorLineNumber.foreground': '#475569',
+                                'editorLineNumber.activeForeground': '#38bdf8',
+                                'editorCursor.foreground': '#38bdf8'
+                            }
+                        });
+
+                        editor = monaco.editor.create(document.getElementById('container'), {
+                            value: '',
+                            language: 'java',
+                            theme: 'navyTheme',
+                            automaticLayout: true,
+                            fontSize: 13,
+                            readOnly: true,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false
+                        });
+                    });
+
+                    function setCode(code, language) {
+                        if (editor) {
+                            editor.setValue(code || '');
+                            if (language) {
+                                monaco.editor.setModelLanguage(editor.getModel(), language);
+                            }
+                        }
+                    }
+                </script>
+            </body>
+            </html>
+            """;
+
+        webEngine.loadContent(monacoHtml);
+
+        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                isEditorReady = true;
+                if (!pendingSnippet.isEmpty()) {
+                    applyCodeToEditor(pendingSnippet, pendingLanguage);
+                }
+            }
+        });
+    }
+
+    private void applyCodeToEditor(String code, String language) {
+        String monacoLang = mapToMonacoLanguage(language);
+        String escapedCode = JSONObject.quote(code != null ? code : "");
+        String script = String.format("setCode(%s, '%s');", escapedCode, monacoLang);
+        webEngine.executeScript(script);
+    }
+
+    private String mapToMonacoLanguage(String lang) {
+        if (lang == null) return "plaintext";
+        String l = lang.trim().toLowerCase();
+        if (l.contains("cpp") || l.contains("c++")) return "cpp";
+        if (l.contains("python")) return "python";
+        if (l.contains("java")) return "java";
+        return "plaintext";
+    }
+
+    private void updateMonacoSnippet(String code, String language) {
+        this.pendingSnippet = code != null ? code : "";
+        this.pendingLanguage = language;
+        if (isEditorReady) {
+            applyCodeToEditor(pendingSnippet, pendingLanguage);
+        }
+    }
+
+    // ============================================
+    // WEBSOCKET & GAME LISTENERS[cite: 11]
+    // ============================================
     private void attachGameWebSocketListener() {
         WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
             @Override
@@ -136,7 +250,6 @@ public class GameController {
                 }
             }
 
-            // ⭐ Basic/Intermediate အလိုက် XP ခွဲခြားတွက်ချက်မည့် Game Over Handler
             @Override
             public void onGameOver(String winnerId) {
                 Platform.runLater(() -> {
@@ -144,41 +257,23 @@ public class GameController {
                     disableOptionButtons(true);
 
                     boolean isWinner = currentUserId.equals(winnerId);
-
-                    // Mode ခွဲခြားခြင်း
                     boolean isIntermediate = selectedLanguage.toLowerCase().contains("intermediate");
 
-                    int earnedXp;
-                    if (isWinner) {
-                        // နိုင်ပါက: Basic = 50 XP, Intermediate = 80 XP
-                        earnedXp = isIntermediate ? 80 : 50;
-                    } else {
-                        // ရှုံးပါက: ဖြေဆိုထားသော Score အပေါ်မူတည်၍ XP ပေးခြင်း
-                        // Maximum score 1000 ဟုယူဆပြီး 0 မှ 5 Bonus ထည့်ပေးမည်
-                        int scoreBonus = Math.min(5, Math.max(0, (userScore / 200)));
-
-                        // Basic = 5 မှ 10 XP, Intermediate = 15 မှ 20 XP
-                        int baseLoserXp = isIntermediate ? 15 : 5;
-                        earnedXp = baseLoserXp + scoreBonus;
-                    }
-
+                    int earnedXp = isWinner ? (isIntermediate ? 80 : 50) : (isIntermediate ? 15 : 5);
                     showGameResultDialog(isWinner, earnedXp);
                 });
             }
         });
     }
 
-    // ⭐ နိုင်သူ/ရှုံးသူ အလိုက် အလယ်ခေါင်တွင် Result Card ပြသပေးမည့် ဖန်ရှင်
     public void showGameResultDialog(boolean isWinner, int earnedXp) {
         Platform.runLater(() -> {
             if (isWinner) {
-                // 🏆 နိုင်သည့်သူ ဘက်တွင် ပေါ်မည်
                 resultTitleLabel.setText("🏆 VICTORY!");
                 resultTitleLabel.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #16a34a;");
                 resultDescLabel.setText("You won the match!");
                 xpLabel.setText("Earned: +" + earnedXp + " XP");
             } else {
-                // 💔 ရှုံးသည့်သူ ဘက်တွင် ပေါ်မည်
                 resultTitleLabel.setText("💔 DEFEAT!");
                 resultTitleLabel.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #dc2626;");
                 resultDescLabel.setText("Opponent won the match.");
@@ -191,7 +286,6 @@ public class GameController {
         });
     }
 
-    // ⭐ WebSocket မှ မေးခွန်း ၅ ခုပါဝင်သော JSON အား Parse လုပ်ခြင်း
     public void loadQuestionsFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
             handleLoadingFailure();
@@ -249,13 +343,11 @@ public class GameController {
             displayCurrentQuestion();
 
         } catch (Exception e) {
-            System.err.println("JSON Parsing Error: " + e.getMessage());
             e.printStackTrace();
             handleLoadingFailure();
         }
     }
 
-    // ⭐ မေးခွန်း ၁ ခုစီအား UI ပေါ်တွင် ပြသပေးခြင်း
     private void displayCurrentQuestion() {
         if (currentQuestionIndex >= questionList.size()) {
             finishMatch();
@@ -266,10 +358,12 @@ public class GameController {
 
         if (questionNumberLabel != null) questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
         if (questionTextLabel != null) questionTextLabel.setText(q.getDescription());
-        if (codeSnippetArea != null) codeSnippetArea.setText(q.getCodeSnippet());
+
+        // Update Monaco Editor Snippet
+        updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
+
         if (feedbackLabel != null) feedbackLabel.setText("");
 
-        // Reset and Set Options
         List<String> opts = q.getOptions();
         resetOptionButtonStyles();
 
@@ -284,7 +378,6 @@ public class GameController {
         startQuestionTimer(q.getTimeLimit() > 0 ? q.getTimeLimit() : 15);
     }
 
-    // ⭐ Option Button နှိပ်လိုက်ချိန် အဖြေစစ်ခြင်း
     @FXML
     private void handleOptionClick(ActionEvent event) {
         if (timer != null) timer.stop();
@@ -331,7 +424,6 @@ public class GameController {
         pause.play();
     }
 
-    // ⭐ မေးခွန်း ၁ ခုစီအတွက် တိုင်မာ
     private void startQuestionTimer(int seconds) {
         if (timer != null) timer.stop();
         timeRemaining = seconds;
