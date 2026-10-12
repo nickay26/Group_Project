@@ -40,17 +40,11 @@ public class User {
         return role != null && role.equalsIgnoreCase("ADMIN");
     }
 
-    public boolean isPremium() {
-        if (isAdmin()) return true; // Admin gets all perks
-        if (planType == null) return false;
-
-        String plan = planType.toUpperCase();
-        return plan.contains("PREMIUM") || plan.equals("MONTHLY") || plan.equals("YEARLY");
-    }
-
-    // Setters & Getters
+    // Setters
     public void setPremium(boolean premium) { this.premium = premium; }
-    public void setSubscriptionType(String subscriptionType) { this.subscriptionType = subscriptionType; }
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
     public void setPlanType(String planType) { this.planType = planType; }
 
     // Getters
@@ -73,7 +67,13 @@ public class User {
     public void setCoin(int coin) { this.coin = coin; }
     public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
 
-    public String getUsername() { return name; }
-    public String getProfilePicture() { return profile; }
+    public String getUsername() {
+        return name;
+    }
+
+    public String getProfilePicture() {
+        return profile;
+    }
+    public boolean isPremium() { return premium; }
     public String getSubscriptionType() { return subscriptionType; }
 }

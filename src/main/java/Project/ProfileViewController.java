@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -19,10 +20,13 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
-
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.geometry.Insets;
 import java.io.InputStream;
 import java.util.List;
-
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 public class ProfileViewController {
 
     @FXML private ImageView avatarImageView;
@@ -34,7 +38,7 @@ public class ProfileViewController {
     @FXML private Label brainLabel;
     @FXML private GridPane coursesProgressContainer;
     @FXML private Label premiumBadgeLabel;   // ✅ Label
-
+    @FXML private GridPane certificatesContainer;
     @FXML
     public void initialize() {
         Circle clip = new Circle(60, 60, 60);
@@ -42,6 +46,7 @@ public class ProfileViewController {
 
         loadUserData();
         loadCoursesProgress();
+        loadCertificates();
     }
 
     // ============================================
@@ -133,7 +138,248 @@ public class ProfileViewController {
         scaleTimeline.setCycleCount(Animation.INDEFINITE);
         scaleTimeline.play();
     }
+    // ============================================
+// ✅ LOAD CERTIFICATES
+// ============================================
+    private void loadCertificates() {
+        certificatesContainer.getChildren().clear();
 
+        int userId = UserSession.getUserId();
+
+        // ✅ Database ကနေ certificate list ယူ
+        // (သင့် DatabaseManager မှာ method ရှိရင် ခေါ်)
+        List<Course> certificateList = DatabaseManager.getCompletedCourses(userId);
+
+        // ✅ Certificate မရှိရင် — Empty State
+        if (certificateList == null || certificateList.isEmpty()) {
+            VBox emptyBox = new VBox(10);
+            emptyBox.setAlignment(Pos.CENTER);
+            emptyBox.setPrefWidth(830);
+            emptyBox.setPrefHeight(150);
+            emptyBox.setStyle(
+                    "-fx-background-color: #1E293B; " +
+                            "-fx-background-radius: 12px; " +
+                            "-fx-border-color: #334155; " +
+                            "-fx-border-width: 1.5px; " +
+                            "-fx-border-radius: 12px; " +
+                            "-fx-border-style: dashed;"
+            );
+
+            Label icon = new Label("🏆");
+            icon.setStyle("-fx-font-size: 40px;");
+
+            Label msg = new Label("No certificates yet");
+            msg.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 16px; -fx-font-weight: bold;");
+
+            Label sub = new Label("Complete a course to earn your certificate!");
+            sub.setStyle("-fx-text-fill: #64748B; -fx-font-size: 13px;");
+
+            emptyBox.getChildren().addAll(icon, msg, sub);
+            certificatesContainer.add(emptyBox, 0, 0);
+            return;
+        }
+
+        // ✅ Certificate ရှိရင် — Card တွေ
+        int col = 0;
+        int row = 0;
+
+        for (Course course : certificateList) {
+            StackPane certCard = createCertificateCard(course);
+            certificatesContainer.add(certCard, col, row);
+
+            col++;
+            if (col == 2) {
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+    // ============================================
+// ✅ CREATE CERTIFICATE CARD
+// ============================================
+    private StackPane createCertificateCard(Course course) {
+        // ✅ Card Container
+        VBox card = new VBox(0);
+        card.setPrefSize(400, 200);
+        card.setMinSize(400, 200);
+        card.setMaxSize(400, 200);
+        card.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E3A8A); " +
+                        "-fx-background-radius: 12px; " +
+                        "-fx-border-color: #3B82F6; " +
+                        "-fx-border-width: 1.5px; " +
+                        "-fx-border-radius: 12px; " +
+                        "-fx-padding: 20;"
+        );
+
+        // ✅ Top Row — Icon + Title
+        HBox topRow = new HBox(15);
+        topRow.setAlignment(Pos.CENTER_LEFT);
+
+        // ✅ Icon
+        ImageView iconView = new ImageView();
+        try {
+            String iconFile = getCardIconName(course.getCourseId());
+            InputStream is = getClass().getResourceAsStream("/Images/" + iconFile);
+            if (is != null) {
+                Image icon = new Image(is, 60, 60, true, true);
+                iconView.setImage(icon);
+                iconView.setFitWidth(60);
+                iconView.setFitHeight(60);
+                iconView.setPreserveRatio(true);
+            }
+        } catch (Exception e) {
+            System.out.println("Icon not found");
+        }
+
+        // ✅ Title + Subtitle
+        VBox titleBox = new VBox(2);
+        Label titleLabel = new Label(course.getTitle());
+        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 18px; -fx-font-weight: bold;");
+
+        Label subTitle = new Label("Certificate of Completion");
+        subTitle.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 11px;");
+
+        titleBox.getChildren().addAll(titleLabel, subTitle);
+
+        topRow.getChildren().addAll(iconView, titleBox);
+
+        // ✅ Description
+        Label descLabel = new Label(course.getDescription());
+        descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(340);
+
+        // ✅ View Certificate Button
+        Button viewBtn = new Button("📜  View Certificate  →");
+        viewBtn.setStyle(
+                "-fx-background-color: #1E40AF; " +
+                        "-fx-text-fill: #F8FAFC; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-color: #3B82F6; " +
+                        "-fx-border-width: 1.5px; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-padding: 10 25; " +
+                        "-fx-cursor: hand;"
+        );
+        viewBtn.setMaxWidth(Double.MAX_VALUE);
+
+        // ✅ Button Hover
+        viewBtn.setOnMouseEntered(e -> viewBtn.setStyle(
+                "-fx-background-color: #2563EB; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-color: #60A5FA; " +
+                        "-fx-border-width: 1.5px; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-padding: 10 25; " +
+                        "-fx-cursor: hand;"
+        ));
+        viewBtn.setOnMouseExited(e -> viewBtn.setStyle(
+                "-fx-background-color: #1E40AF; " +
+                        "-fx-text-fill: #F8FAFC; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-color: #3B82F6; " +
+                        "-fx-border-width: 1.5px; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-padding: 10 25; " +
+                        "-fx-cursor: hand;"
+        ));
+
+        // ✅ Button နှိပ် → Certificate
+        viewBtn.setOnAction(e -> showCertificate(course));
+
+        // ✅ Card ထဲ ထည့်
+        VBox.setMargin(topRow, new Insets(0, 0, 10, 0));
+        VBox.setMargin(descLabel, new Insets(0, 0, 15, 0));
+
+        card.getChildren().addAll(topRow, descLabel, viewBtn);
+
+        StackPane wrapper = new StackPane(card);
+        wrapper.setPrefSize(400, 200);
+        wrapper.setMinSize(400, 200);
+        wrapper.setMaxSize(400, 200);
+
+        return wrapper;
+    }
+
+    // ============================================
+// ✅ Card Icon — Course အလိုက်
+// ============================================
+    private String getCardIconName(String courseId) {
+        if (courseId == null) return "default.png";
+        String upper = courseId.toUpperCase();
+
+        if (upper.contains("CPP") || upper.contains("C++")) return "c++.png";
+        if (upper.contains("JAVA")) return "java.png";
+        if (upper.contains("PYTHON") || upper.contains("PY")) return "py.png";
+        if (upper.contains("SQL")) return "sql.png";
+
+        return "default.png";
+    }
+
+    // ============================================
+// ✅ SHOW CERTIFICATE — Popup
+// ============================================
+    private void showCertificate(Course course) {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Certificate");
+        dialog.setHeaderText(null);
+
+        VBox certBox = new VBox(15);
+        certBox.setAlignment(Pos.CENTER);
+        certBox.setPadding(new Insets(40));
+        certBox.setPrefWidth(500);
+        certBox.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B); " +
+                        "-fx-border-color: #F59E0B; " +
+                        "-fx-border-width: 3px; " +
+                        "-fx-background-radius: 15px; " +
+                        "-fx-border-radius: 15px;"
+        );
+
+        Label certHeader = new Label("COURSE CERTIFICATE");
+        certHeader.setStyle("-fx-text-fill: #FBBF24; -fx-font-size: 12px; -fx-font-weight: bold;");
+
+        Label thisIsToCertify = new Label("This is to certify that");
+        thisIsToCertify.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
+
+        Label nameLabel = new Label(user.getName());
+        nameLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 28px; -fx-font-weight: bold;");
+
+        Label hasCompleted = new Label("has successfully completed the course");
+        hasCompleted.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
+
+        Label courseLabel = new Label(course.getTitle());
+        courseLabel.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 20px; -fx-font-weight: bold;");
+
+        Label sealLabel = new Label("🏆");
+        sealLabel.setStyle("-fx-font-size: 60px;");
+
+        Label dateLabel = new Label("Issued: " + java.time.LocalDate.now());
+        dateLabel.setStyle("-fx-text-fill: #64748B; -fx-font-size: 11px;");
+
+        certBox.getChildren().addAll(
+                certHeader, thisIsToCertify, nameLabel,
+                hasCompleted, courseLabel, sealLabel, dateLabel
+        );
+
+        dialog.getDialogPane().setContent(certBox);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.getDialogPane().setStyle("-fx-background-color: #0F172A;");
+
+        dialog.showAndWait();
+    }
     // ============================================
     // LOAD COURSES PROGRESS
     // ============================================

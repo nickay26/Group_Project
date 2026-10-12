@@ -707,7 +707,45 @@ public class LessonPlayerController {
             cardContainer.getChildren().add(errorLabel);
         }
     }
+    private void showBrainLimitDialog() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                javafx.scene.control.Alert.AlertType.WARNING);
+        alert.setTitle("Brain Limit Reached");
+        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
+        alert.setContentText(
+                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
+                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
+        );
 
+        javafx.scene.control.ButtonType upgradeBtn =
+                new javafx.scene.control.ButtonType("Upgrade",
+                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
+        javafx.scene.control.ButtonType cancelBtn =
+                new javafx.scene.control.ButtonType("Cancel",
+                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().handlePremium();
+            } else {
+                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+                }
+            }
+        });
+    }
+    // ============================================
+// ⭐ AI ASK LIMIT HELPERS
+// ============================================
+
+    /**
+     * AI မေးလို့ရသေးလား စစ်ဆေးခြင်း
+     * Premium → true (Unlimited)
+     * Free → todayCount < 5 ဆိုရင် true
+     */
     private boolean canAskAI() {
         User user = UserSession.getCurrentUser();
         if (user == null) return false;
@@ -772,7 +810,7 @@ public class LessonPlayerController {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 if (user.getCoin() >= 100) {
-                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100, 5);
+                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100,5);
                     if (success) {
                         user.setBrainCount(5);
                         user.setCoin(user.getCoin() - 100);

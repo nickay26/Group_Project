@@ -266,7 +266,17 @@ public class DatabaseManager {
         }
         return 0;
     }
+    public static List<Course> getCompletedCourses(int userId) {
+        List<Course> completed = new ArrayList<>();
+        List<Course> allCourses = getCoursesForUser(userId);
 
+        for (Course c : allCourses) {
+            if (c.getProgressPercent() >= 100) {
+                completed.add(c);
+            }
+        }
+        return completed;
+    }
     public static boolean updateUserProfile(int userId, String imagePath) {
         try {
             String url = BASE_URL + "/api/user/update-profile-path";

@@ -103,7 +103,7 @@ public class CreateRoomLobbyController {
                         if (gameController != null) {
                             gameController.setCourseData(language);
                             gameController.setGameSession(roomId, opponentId);
-                           // gameController.loadQuestionsFromJson(questionsJson);
+                            gameController.loadQuestionsFromJson(questionsJson);
                         }
                     }
                 });
