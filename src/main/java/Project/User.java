@@ -28,14 +28,6 @@ public class User {
         this.brainCount = brainCount;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
     public User(int userId, String name, String email) {
         this(userId, name, email, null, 0, 0, 0, 5);
     }
@@ -46,7 +38,6 @@ public class User {
 
     public boolean isAdmin() {
         return role != null && role.equalsIgnoreCase("ADMIN");
-        this(userId, name, email, "", 0, 0, 0, 0);
     }
 
     public boolean isPremium() {

@@ -9,12 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import netscape.javascript.JSObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,24 +29,18 @@ public class GameController {
     @FXML private Label questionTextLabel;
     @FXML private Label feedbackLabel;
 
-    @FXML private TextArea codeSnippetArea;
+    @FXML private WebView codeWebView; // ⭐ Monaco Editor WebView integration[cite: 10, 12]
+    private WebEngine webEngine;
+    private boolean isEditorReady = false;
+    private String pendingSnippet = "";
+    private String pendingLanguage = "python";
 
-    @FXML private WebView codeWebView; // ⭐ Replaced TextArea with Monaco WebView
-    @FXML private TextArea consoleOutputArea;
-    @FXML private Button runBtn;
-    @FXML private Button submitBtn;
     @FXML private Button option1Btn;
     @FXML private Button option2Btn;
     @FXML private Button option3Btn;
     @FXML private Button option4Btn;
 
-    private WebEngine webEngine;
-    private boolean isEditorReady = false;
-    private String pendingCode = "";
-    private String pendingLanguage = "python";
-
-    private int timeRemaining = 300;
-    // ⭐ Result Overlay Dialog Components
+    // ⭐ Result Overlay Dialog Components[cite: 11]
     @FXML private VBox resultOverlay;
     @FXML private Label resultTitleLabel;
     @FXML private Label resultDescLabel;
@@ -58,7 +50,7 @@ public class GameController {
     private int currentQuestionIndex = 0;
     private int userScore = 0;
 
-    private int timeRemaining = 15; // 15 Seconds per Sololearn Question
+    private int timeRemaining = 15;
     private Timeline timer;
     private String selectedLanguage = "Java (Basic)";
 
@@ -74,7 +66,7 @@ public class GameController {
             this.pendingLanguage = lang;
         }
         if (challengeTitleLabel != null) {
-            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " 1v1 CODE CHALLENGE");
+            challengeTitleLabel.setText(selectedLanguage.toUpperCase() + " 1v1 CODE ARENA");
         }
     }
 
@@ -96,14 +88,24 @@ public class GameController {
         if (feedbackLabel != null) feedbackLabel.setText("");
         if (resultOverlay != null) resultOverlay.setVisible(false);
 
+        if (this.currentUserId == null) {
+            if (UserSession.getInstance().getCurrentUser() != null) {
+                this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
+            } else {
+                this.currentUserId = "USER_" + System.currentTimeMillis();
+            }
+        }
+
         if (codeWebView != null) {
             webEngine = codeWebView.getEngine();
             setupMonacoEditor();
         }
+
+        attachGameWebSocketListener();
     }
 
     // ============================================
-    // MONACO EDITOR SETUP (Playground Style)
+    // MONACO EDITOR SETUP
     // ============================================
     private void setupMonacoEditor() {
         String monacoHtml = """
@@ -112,14 +114,7 @@ public class GameController {
             <head>
                 <meta charset="UTF-8">
                 <style>
-                    html, body, #container { 
-                        width: 100%; 
-                        height: 100%; 
-                        margin: 0; 
-                        padding: 0; 
-                        overflow: hidden; 
-                        background-color: #0d1322; 
-                    }
+                    html, body, #container { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #1e293b; }
                 </style>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
             </head>
@@ -139,9 +134,9 @@ public class GameController {
                                 { token: 'number', foreground: 'fbbf24' }
                             ],
                             colors: {
-                                'editor.background': '#0d1322',
+                                'editor.background': '#1e293b',
                                 'editor.foreground': '#e2e8f0',
-                                'editor.lineHighlightBackground': '#1e293b',
+                                'editor.lineHighlightBackground': '#334155',
                                 'editorLineNumber.foreground': '#475569',
                                 'editorLineNumber.activeForeground': '#38bdf8',
                                 'editorCursor.foreground': '#38bdf8'
@@ -150,38 +145,22 @@ public class GameController {
 
                         editor = monaco.editor.create(document.getElementById('container'), {
                             value: '',
-                            language: 'python',
+                            language: 'java',
                             theme: 'navyTheme',
                             automaticLayout: true,
-                            fontSize: 14,
+                            fontSize: 13,
+                            readOnly: true,
                             minimap: { enabled: false },
                             scrollBeyondLastLine: false
                         });
-
-                        // ⭐ Real-time WebSocket Progress Listener on typing
-                        editor.onDidChangeModelContent(function() {
-                            if (window.javaBridge) {
-                                window.javaBridge.onCodeChange(editor.getValue());
-                            }
-                        });
                     });
-
-                    function getCode() {
-                        return editor ? editor.getValue() : '';
-                    }
 
                     function setCode(code, language) {
                         if (editor) {
-                            editor.setValue(code);
+                            editor.setValue(code || '');
                             if (language) {
                                 monaco.editor.setModelLanguage(editor.getModel(), language);
                             }
-                        }
-                    }
-
-                    function setReadOnly(readOnly) {
-                        if (editor) {
-                            editor.updateOptions({ readOnly: readOnly });
                         }
                     }
                 </script>
@@ -194,41 +173,11 @@ public class GameController {
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 isEditorReady = true;
-
-                // Bind JavaBridge to receive JavaScript content change events
-                try {
-                    JSObject window = (JSObject) webEngine.executeScript("window");
-                    window.setMember("javaBridge", new JavaBridge());
-                } catch (Exception e) {
-                    System.err.println("Failed to bind JavaBridge: " + e.getMessage());
-                }
-
-                if (!pendingCode.isEmpty()) {
-                    applyCodeToEditor(pendingCode, pendingLanguage);
+                if (!pendingSnippet.isEmpty()) {
+                    applyCodeToEditor(pendingSnippet, pendingLanguage);
                 }
             }
         });
-    }
-
-    // ⭐ Java Bridge Class for WebEngine -> WebSocket updates
-    public class JavaBridge {
-        public void onCodeChange(String newText) {
-            Platform.runLater(() -> {
-                if (roomId != null && !roomId.isEmpty()) {
-                    int progress = Math.min(100, newText.trim().length() / 2);
-                    WebSocketService.getInstance().sendProgressUpdate(roomId, currentUserId, progress);
-                }
-            });
-        // User ID မရှိသေးပါက Auto Set ပြုလုပ်မည်
-        if (this.currentUserId == null) {
-            if (UserSession.getInstance().getCurrentUser() != null) {
-                this.currentUserId = String.valueOf(UserSession.getInstance().getCurrentUser().getUserId());
-            } else {
-                this.currentUserId = "USER_" + System.currentTimeMillis();
-            }
-        }
-
-        attachGameWebSocketListener();
     }
 
     private void applyCodeToEditor(String code, String language) {
@@ -238,33 +187,25 @@ public class GameController {
         webEngine.executeScript(script);
     }
 
-    private String getCode() {
-        if (!isEditorReady) return pendingCode;
-        Object result = webEngine.executeScript("getCode()");
-        return result != null ? result.toString() : "";
+    private String mapToMonacoLanguage(String lang) {
+        if (lang == null) return "plaintext";
+        String l = lang.trim().toLowerCase();
+        if (l.contains("cpp") || l.contains("c++")) return "cpp";
+        if (l.contains("python")) return "python";
+        if (l.contains("java")) return "java";
+        return "plaintext";
     }
 
-    private void setCode(String code, String language) {
-        this.pendingCode = code != null ? code : "";
+    private void updateMonacoSnippet(String code, String language) {
+        this.pendingSnippet = code != null ? code : "";
         this.pendingLanguage = language;
-
         if (isEditorReady) {
-            applyCodeToEditor(pendingCode, pendingLanguage);
+            applyCodeToEditor(pendingSnippet, pendingLanguage);
         }
     }
 
-    private String mapToMonacoLanguage(String lang) {
-        if (lang == null) return "plaintext";
-        return switch (lang.trim().toLowerCase()) {
-            case "c++", "cpp" -> "cpp";
-            case "python" -> "python";
-            case "java" -> "java";
-            default -> "plaintext";
-        };
-    }
-
     // ============================================
-    // WEBSOCKET & GAME LISTENERS
+    // WEBSOCKET & GAME LISTENERS[cite: 11]
     // ============================================
     private void attachGameWebSocketListener() {
         WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
@@ -309,7 +250,6 @@ public class GameController {
                 }
             }
 
-            // ⭐ P2P/Server ဘက်မှ GameOver ဖြစ်ကြောင်း လာပါက နိုင်/ရှုံး အလိုက် XP တွက်ချက်ပြသမည်
             @Override
             public void onGameOver(String winnerId) {
                 Platform.runLater(() -> {
@@ -317,41 +257,23 @@ public class GameController {
                     disableOptionButtons(true);
 
                     boolean isWinner = currentUserId.equals(winnerId);
-
-                    // Mode ခွဲခြားခြင်း
                     boolean isIntermediate = selectedLanguage.toLowerCase().contains("intermediate");
 
-                    int earnedXp;
-                    if (isWinner) {
-                        // နိုင်ပါက: Basic = 50 XP, Intermediate = 80 XP
-                        earnedXp = isIntermediate ? 80 : 50;
-                    } else {
-                        // ရှုံးပါက: ဖြေဆိုထားသော Score အပေါ်မူတည်၍ XP ပေးခြင်း
-                        // Maximum score 1000 ဟုယူဆပြီး 0 မှ 5 Bonus ထည့်ပေးမည်
-                        int scoreBonus = Math.min(5, Math.max(0, (userScore / 200)));
-
-                        // Basic = 5 မှ 10 XP, Intermediate = 15 မှ 20 XP
-                        int baseLoserXp = isIntermediate ? 15 : 5;
-                        earnedXp = baseLoserXp + scoreBonus;
-                    }
-
+                    int earnedXp = isWinner ? (isIntermediate ? 80 : 50) : (isIntermediate ? 15 : 5);
                     showGameResultDialog(isWinner, earnedXp);
                 });
             }
         });
     }
 
-    // ⭐ နိုင်သူ/ရှုံးသူ အလိုက် အလယ်ခေါင်တွင် Result Card ပြသပေးမည့် ဖန်ရှင်
     public void showGameResultDialog(boolean isWinner, int earnedXp) {
         Platform.runLater(() -> {
             if (isWinner) {
-                // 🏆 နိုင်သည့်သူ ဘက်တွင် ပေါ်မည်
                 resultTitleLabel.setText("🏆 VICTORY!");
                 resultTitleLabel.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #16a34a;");
                 resultDescLabel.setText("You won the match!");
                 xpLabel.setText("Earned: +" + earnedXp + " XP");
             } else {
-                // 💔 ရှုံးသည့်သူ ဘက်တွင် ပေါ်မည်
                 resultTitleLabel.setText("💔 DEFEAT!");
                 resultTitleLabel.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #dc2626;");
                 resultDescLabel.setText("Opponent won the match.");
@@ -364,14 +286,11 @@ public class GameController {
         });
     }
 
-    // ⭐ WebSocket မှ မေးခွန်း ၅ ခုပါဝင်သော JSON အား Parse လုပ်ခြင်း
     public void loadQuestionsFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
             handleLoadingFailure();
             return;
         }
-
-        System.out.println("DEBUG - Received Response: " + jsonResponse);
 
         try {
             questionList.clear();
@@ -390,9 +309,6 @@ public class GameController {
                         array = (JSONArray) qObj;
                     }
                 }
-            } else {
-                handleLoadingFailure();
-                return;
             }
 
             if (array == null || array.length() == 0) {
@@ -409,13 +325,6 @@ public class GameController {
                     options.add(optArr.getString(j));
                 }
 
-            if (challengeTitleLabel != null) challengeTitleLabel.setText(title.toUpperCase());
-            if (questionTextLabel != null) questionTextLabel.setText(description);
-
-            // Set code in Monaco
-            setCode(starterCode, selectedLanguage);
-
-            if (progressLabel != null) progressLabel.setText("MATCH IN PROGRESS - OPPONENT: " + (opponentId != null ? opponentId : "WAITING..."));
                 GameQuestion question = new GameQuestion(
                         q.optString("type", "mcq"),
                         q.optString("title", "Code Challenge"),
@@ -434,13 +343,11 @@ public class GameController {
             displayCurrentQuestion();
 
         } catch (Exception e) {
-            System.err.println("JSON Parsing Error: " + e.getMessage());
             e.printStackTrace();
             handleLoadingFailure();
         }
     }
 
-    // ⭐ မေးခွန်း ၁ ခုစီအား UI ပေါ်တွင် ပြသပေးခြင်း
     private void displayCurrentQuestion() {
         if (currentQuestionIndex >= questionList.size()) {
             finishMatch();
@@ -451,10 +358,12 @@ public class GameController {
 
         if (questionNumberLabel != null) questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
         if (questionTextLabel != null) questionTextLabel.setText(q.getDescription());
-        if (codeSnippetArea != null) codeSnippetArea.setText(q.getCodeSnippet());
+
+        // Update Monaco Editor Snippet
+        updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
+
         if (feedbackLabel != null) feedbackLabel.setText("");
 
-        // Reset and Set Options
         List<String> opts = q.getOptions();
         resetOptionButtonStyles();
 
@@ -469,10 +378,7 @@ public class GameController {
         startQuestionTimer(q.getTimeLimit() > 0 ? q.getTimeLimit() : 15);
     }
 
-    // ⭐ Option Button နှိပ်လိုက်ချိန် အဖြေစစ်ခြင်း
     @FXML
-    private void handleRunCode() {
-        if (consoleOutputArea == null) return;
     private void handleOptionClick(ActionEvent event) {
         if (timer != null) timer.stop();
         disableOptionButtons(true);
@@ -480,11 +386,6 @@ public class GameController {
         Button selectedBtn = (Button) event.getSource();
         int selectedIndex = 0;
 
-        String code = getCode();
-        String cleanLanguage = selectedLanguage;
-        if (cleanLanguage != null && cleanLanguage.contains("(")) {
-            cleanLanguage = cleanLanguage.substring(0, cleanLanguage.indexOf("(")).trim();
-        }
         if (selectedBtn == option1Btn) selectedIndex = 0;
         else if (selectedBtn == option2Btn) selectedIndex = 1;
         else if (selectedBtn == option3Btn) selectedIndex = 2;
@@ -492,41 +393,6 @@ public class GameController {
 
         GameQuestion currentQ = questionList.get(currentQuestionIndex);
 
-        ApiClient.executeCodeAsync(cleanLanguage, code).thenAccept(response -> {
-            Platform.runLater(() -> {
-                if (response != null && !response.isEmpty()) {
-                    try {
-                        org.json.JSONObject json = new org.json.JSONObject(response);
-                        if (json.has("output")) {
-                            consoleOutputArea.setText(json.getString("output"));
-                        } else {
-                            consoleOutputArea.setText(response);
-                        }
-                    } catch (Exception e) {
-                        consoleOutputArea.setText(response);
-                    }
-                } else {
-                    consoleOutputArea.setText("Error: Could not reach execution server.");
-                }
-            });
-        });
-    }
-
-    @FXML
-    public void handleSubmitCode(ActionEvent event) {
-        String code = getCode();
-        if (consoleOutputArea != null) consoleOutputArea.setText("Submitting code for AI Evaluation...");
-
-        disableControls(true);
-
-        if (roomId != null && !roomId.isEmpty()) {
-            WebSocketService.getInstance().sendGameOver(roomId, currentUserId);
-        }
-
-        ApiClient.reviewCodeAsync(selectedLanguage, code).thenAccept(response -> {
-            Platform.runLater(() -> {
-                if (response != null && !response.isEmpty()) {
-                    String formattedReview = response;
         if (selectedIndex == currentQ.getCorrectAnswer()) {
             int speedBonus = timeRemaining * 10;
             int qScore = 100 + speedBonus;
@@ -558,7 +424,6 @@ public class GameController {
         pause.play();
     }
 
-    // ⭐ မေးခွန်း ၁ ခုစီအတွက် တိုင်မာ
     private void startQuestionTimer(int seconds) {
         if (timer != null) timer.stop();
         timeRemaining = seconds;
@@ -646,19 +511,6 @@ public class GameController {
     }
 
     private void handleLoadingFailure() {
-        if (questionTextLabel != null) questionTextLabel.setText("Failed to load coding challenge.");
-        disableControls(true);
-    }
-
-    private void disableControls(boolean disable) {
-        if (codeWebView != null) {
-            codeWebView.setDisable(disable);
-            if (isEditorReady) {
-                webEngine.executeScript(String.format("setReadOnly(%b);", disable));
-            }
-        }
-        if (runBtn != null) runBtn.setDisable(disable);
-        if (submitBtn != null) submitBtn.setDisable(disable);
         if (questionTextLabel != null) questionTextLabel.setText("Failed to load questions from server.");
         disableOptionButtons(true);
     }
@@ -667,6 +519,8 @@ public class GameController {
     public void handleBack(ActionEvent event) {
         if (timer != null) timer.stop();
         SceneManager.switchScene("MainLayoutView.fxml");
-        MainLayoutController.getInstance().loadPage("GameModeView.fxml");
+        if (MainLayoutController.getInstance() != null) {
+            MainLayoutController.getInstance().loadPage("GameModeView.fxml");
+        }
     }
 }

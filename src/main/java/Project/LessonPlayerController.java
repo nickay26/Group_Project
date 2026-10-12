@@ -772,7 +772,7 @@ public class LessonPlayerController {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 if (user.getCoin() >= 100) {
-                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100);
+                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100, 5);
                     if (success) {
                         user.setBrainCount(5);
                         user.setCoin(user.getCoin() - 100);

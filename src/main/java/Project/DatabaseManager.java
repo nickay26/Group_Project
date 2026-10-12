@@ -257,31 +257,6 @@ public class DatabaseManager {
         }
     }
 
-    // Fixed: Route matches Flask /api/users/brains/refill
-    public static boolean refillBrainsWithCoins(int userId, int cost) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("cost", cost);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean refillBrainsWithCoins(int userId, int cost, int maxBrain) {
-        return refillBrainsWithCoins(userId, cost);
-    }
-
     public static int getCompletedLessonCount(int userId, String courseId) {
         List<Course> courses = getCoursesForUser(userId);
         for (Course c : courses) {
@@ -431,26 +406,6 @@ public class DatabaseManager {
         }
     }
 
-    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("coins", coinsToAdd);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200 || response.statusCode() == 201;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public static boolean refillBrainsWithCoins(int userId, int costCoins, int addBrains) {
         // 1. Valid User ID စစ်ဆေးခြင်း
         if (userId <= 0 && UserSession.getCurrentUser() != null) {
@@ -489,16 +444,6 @@ public class DatabaseManager {
             UserSession.getCurrentUser().setCoin(newCoins);
             UserSession.getCurrentUser().setBrainCount(Math.min(5, currentBrains + addBrains));
         }
-    }
-
-    public static int getCompletedLessonCount(int userId, String courseId) {
-        List<Course> courses = getCoursesForUser(userId);
-        for (Course c : courses) {
-            if (c.getCourseId().equalsIgnoreCase(courseId)) {
-                return c.getCompletedLessons();
-            }
-        }
-        return 0;
     }
 
     // ==========================================

@@ -53,7 +53,7 @@ public class ProfileViewController {
             userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
             userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
             String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType);
+            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
 
             userNameLabel.setText(currentUser.getName());
 
@@ -71,10 +71,6 @@ public class ProfileViewController {
             streakLabel.setText(String.valueOf(currentUser.getStreak()));
             xpLabel.setText(String.valueOf(currentUser.getXp()));
             coinLabel.setText(String.valueOf(currentUser.getCoin()));
-
-            // Premium Check
-            String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
 
             if (isPremium) {
                 brainLabel.setText("∞");
