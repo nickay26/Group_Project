@@ -8,10 +8,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,8 +19,10 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -56,11 +56,9 @@ public class ProfileViewController {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser == null) return;
 
-        // ✅ SERVER က premium ဟုတ်/မဟုတ် စစ်
         boolean serverPremium = DatabaseManager.isPremium(currentUser.getUserId());
         System.out.println("Server premium: " + serverPremium);
 
-        // ✅ Local User object — update
         if (serverPremium && !currentUser.isPremium()) {
             currentUser.setPremium(true);
             currentUser.setPlanType("PREMIUM");
@@ -76,7 +74,6 @@ public class ProfileViewController {
         userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
         userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
 
-        // ✅ Premium Badge
         if (isPremium) {
             premiumBadgeLabel.setVisible(true);
             premiumBadgeLabel.setManaged(true);
@@ -98,7 +95,6 @@ public class ProfileViewController {
             brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
         }
 
-        // ✅ Avatar — format path
         String profilePath = currentUser.getProfile();
         if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
             try {
@@ -332,52 +328,228 @@ public class ProfileViewController {
         if (user == null) return;
 
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Certificate");
+        dialog.setTitle("Certificate of Achievement");
         dialog.setHeaderText(null);
 
-        VBox certBox = new VBox(15);
-        certBox.setAlignment(Pos.CENTER);
-        certBox.setPadding(new Insets(40));
-        certBox.setPrefWidth(500);
-        certBox.setStyle(
-                "-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B); " +
-                        "-fx-border-color: #F59E0B; " +
-                        "-fx-border-width: 3px; " +
-                        "-fx-background-radius: 15px; " +
-                        "-fx-border-radius: 15px;"
+        // ✅ Certificate Container — StackPane (ပုံ + စာ)
+        StackPane certStack = new StackPane();
+        certStack.setPrefSize(720, 500);
+        certStack.setMinSize(720, 500);
+        certStack.setMaxSize(720, 500);
+
+        // ✅ Certificate Template ပုံ — 2x size နဲ့ load → ရှင်းလင်း
+        try {
+            InputStream is = getClass().getResourceAsStream("/Images/certificate_template.png");
+            if (is != null) {
+                Image certImg = new Image(is, 1440, 1000, true, true);
+                ImageView certBg = new ImageView(certImg);
+                certBg.setFitWidth(720);
+                certBg.setFitHeight(500);
+                certBg.setPreserveRatio(false);
+                certBg.setSmooth(true);
+                certBg.setCache(true);
+                certStack.getChildren().add(certBg);
+            }
+        } catch (Exception e) {
+            System.out.println("Certificate template not found");
+        }
+
+        // ✅ Overlay Content — စာ အားလုံး
+        VBox overlay = new VBox(8);
+        overlay.setAlignment(Pos.CENTER);
+        overlay.setPadding(new Insets(140, 60, 40, 60));
+        overlay.setMaxWidth(720);
+        overlay.setMaxHeight(500);
+
+        // ✅ "This is to certify that"
+        Label certifyText = new Label("This is to certify that");
+        certifyText.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif;"
         );
 
-        Label certHeader = new Label("COURSE CERTIFICATE");
-        certHeader.setStyle("-fx-text-fill: #FBBF24; -fx-font-size: 12px; -fx-font-weight: bold;");
-
-        Label thisIsToCertify = new Label("This is to certify that");
-        thisIsToCertify.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
-
+        // ✅ User Name — ကြီး
         Label nameLabel = new Label(user.getName());
-        nameLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 28px; -fx-font-weight: bold;");
-
-        Label hasCompleted = new Label("has successfully completed the course");
-        hasCompleted.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
-
-        Label courseLabel = new Label(course.getTitle());
-        courseLabel.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 20px; -fx-font-weight: bold;");
-
-        Label sealLabel = new Label("🏆");
-        sealLabel.setStyle("-fx-font-size: 60px;");
-
-        Label dateLabel = new Label("Issued: " + java.time.LocalDate.now());
-        dateLabel.setStyle("-fx-text-fill: #64748B; -fx-font-size: 11px;");
-
-        certBox.getChildren().addAll(
-                certHeader, thisIsToCertify, nameLabel,
-                hasCompleted, courseLabel, sealLabel, dateLabel
+        nameLabel.setStyle(
+                "-fx-text-fill: #0F172A; " +
+                        "-fx-font-size: 28px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-padding: 5 0 5 0;"
         );
 
-        dialog.getDialogPane().setContent(certBox);
+        // ✅ "has successfully completed the course"
+        Label completedText = new Label("has successfully completed the course");
+        completedText.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Course Name
+        Label courseLabel = new Label(course.getTitle());
+        courseLabel.setStyle(
+                "-fx-text-fill: #1E40AF; " +
+                        "-fx-font-size: 20px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-padding: 3 0 3 0;"
+        );
+
+        // ✅ Description — Mimo/Sololearn လို
+        Label descLabel = new Label(
+                "in recognition of successfully mastering the course curriculum, " +
+                        "demonstrating proficiency in problem-solving, and completing all lessons and quizzes."
+        );
+        descLabel.setStyle(
+                "-fx-text-fill: #64748B; " +
+                        "-fx-font-size: 10px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-text-alignment: center;"
+        );
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(480);
+        descLabel.setAlignment(Pos.CENTER);
+
+        // ✅ Date — "Issued on"
+        Label dateLabel = new Label("Issued on " + java.time.LocalDate.now());
+        dateLabel.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 10px; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Certificate ID
+        String certId = "CERT-" + java.time.Year.now() + "-" +
+                course.getCourseId().toUpperCase() + "-" +
+                String.format("%04d", user.getUserId());
+
+        Label certIdLabel = new Label("Certificate ID: " + certId);
+        certIdLabel.setStyle(
+                "-fx-text-fill: #94A3B8; " +
+                        "-fx-font-size: 8px; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Verified Badge
+        Label verifiedLabel = new Label("✔ Verified");
+        verifiedLabel.setStyle(
+                "-fx-text-fill: #10B981; " +
+                        "-fx-font-size: 9px; " +
+                        "-fx-font-weight: bold;"
+        );
+
+        // ✅ Overlay ထဲ ထည့် — အစီအစဉ်
+        overlay.getChildren().addAll(
+                certifyText,
+                nameLabel,
+                completedText,
+                courseLabel,
+                descLabel,
+                new Label(" "),
+                dateLabel,
+                certIdLabel,
+                verifiedLabel
+        );
+
+        // ✅ StackPane ထဲ — ပုံပေါ်မှာ စာ
+        certStack.getChildren().add(overlay);
+        StackPane.setAlignment(overlay, Pos.CENTER);
+
+        // ✅ Download Image Button
+        Button downloadBtn = new Button("📥 Download Image");
+        downloadBtn.setStyle(
+                "-fx-background-color: #10B981; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 6px; " +
+                        "-fx-padding: 10 25; " +
+                        "-fx-cursor: hand;"
+        );
+
+        downloadBtn.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Certificate");
+            fileChooser.setInitialFileName("Certificate_" +
+                    course.getTitle().replaceAll("\\s+", "_") + ".png");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("PNG Image", "*.png")
+            );
+
+            File file = fileChooser.showSaveDialog(dialog.getOwner());
+            if (file != null) {
+                try {
+                    javafx.scene.SnapshotParameters params = new javafx.scene.SnapshotParameters();
+                    params.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                    javafx.scene.image.WritableImage snapshot = certStack.snapshot(params, null);
+
+                    javax.imageio.ImageIO.write(
+                            javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, null),
+                            "png", file
+                    );
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("✅ Certificate saved successfully!");
+                    alert.showAndWait();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("❌ Failed to save: " + ex.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        });
+
+        // ✅ Button Bar — Download ပဲ
+        HBox buttonBar = new HBox(15);
+        buttonBar.setAlignment(Pos.CENTER_RIGHT);
+        buttonBar.setPadding(new Insets(15, 25, 15, 25));
+        buttonBar.setStyle("-fx-background-color: #0F172A;");
+        buttonBar.getChildren().add(downloadBtn);
+
+        // ✅ Dialog Content — ပုံ + စာ + Button
+        VBox dialogContent = new VBox(0);
+        dialogContent.getChildren().addAll(certStack, buttonBar);
+        dialogContent.setStyle("-fx-background-color: #0F172A;");
+
+        dialog.getDialogPane().setContent(dialogContent);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
         dialog.getDialogPane().setStyle("-fx-background-color: #0F172A;");
 
+        // ✅ "Close" button ဖျောက် (X cross — ဒီအတိုင်း ရှိနေမယ်)
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setVisible(false);
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setManaged(false);
+
         dialog.showAndWait();
+    }
+
+    // ============================================
+    // ✅ Skills — Course အလိုက်
+    // ============================================
+    private String getSkillsForCourse(String courseId) {
+        if (courseId == null) return "Programming Fundamentals";
+        String upper = courseId.toUpperCase();
+
+        if (upper.contains("CPP") || upper.contains("C++")) {
+            return "Syntax · Pointers · OOP · Memory Management";
+        }
+        if (upper.contains("JAVA")) {
+            return "OOP · Collections · Exception Handling · Multithreading";
+        }
+        if (upper.contains("PYTHON") || upper.contains("PY")) {
+            return "Syntax · Data Structures · Functions · Modules";
+        }
+        return "Programming Fundamentals";
     }
 
     // ============================================
@@ -500,14 +672,14 @@ public class ProfileViewController {
 
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.web(darkerColor, 0.9));
-        bgCircle.setStroke(Color.web(lighterColor, 1.0));
+        bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
-        progressArc.setStroke(Color.WHITE);
+        progressArc.setStroke(Color.web(lighterColor));
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
@@ -522,8 +694,7 @@ public class ProfileViewController {
         stack.setMinSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
         stack.setMaxSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
 
-        Group group = new Group(bgCircle, progressArc);
-        stack.getChildren().addAll(group, percentLabel);
+        stack.getChildren().addAll(bgCircle, progressArc, percentLabel);
         stack.setAlignment(Pos.CENTER);
 
         return stack;
@@ -551,5 +722,13 @@ public class ProfileViewController {
         if (upper.contains("SQL")) return "#22C55E";
 
         return "#64748B";
+    }
+
+    @FXML
+    private void handleClose() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.handleClosePage();
+        }
     }
 }

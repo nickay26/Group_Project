@@ -50,6 +50,9 @@ public class MainLayoutController {
     private Timeline premiumCheckTimer;
 
 
+    // ✅ နောက်ဆုံး ဖွင့်ခဲ့တဲ့ Page — Close နှိပ်ရင် ဒီ page ပြန်
+    private String currentPage = "LearnPage.fxml";
+
     @FXML
     public void initialize() {
         instance = this;
@@ -87,18 +90,18 @@ public class MainLayoutController {
             currentCourseLabel.setText(title != null ? title : "No Active Course");
         }
     }
+
     public void fetchAndUpdateUserActivity() {
         updateHeaderStats();
     }
+
     public void updateHeaderStats() {
         User currentUser = UserSession.getCurrentUser();
         if (currentUser != null) {
-            // 1. Local Session ထဲက လက်ရှိ Coin တန်ဖိုးကို ချက်ချင်း UI မှာ ပြပါ
             final int currentLocalCoin = currentUser.getCoin();
             Platform.runLater(() -> {
                 if (topStreakLabel != null) topStreakLabel.setText(" " + currentUser.getStreak());
 
-                // ⭐ Brain Display — Premium ဆိုရင် ∞
                 if (topBrainLabel != null) {
                     String brainDisplay = PremiumService.getBrainDisplay(currentUser);
                     topBrainLabel.setText(" " + brainDisplay);
@@ -113,11 +116,9 @@ public class MainLayoutController {
                 if (topCoinLabel != null) topCoinLabel.setText(" " + currentLocalCoin);
             });
 
-            // 2. Async ဘက်က တန်ဖိုး ပြန်ယူသည့်အခါ Local Coin ထက် နည်းနေပါက 0 မဖြစ်စေရန် Math.max() ဖြင့် ကာကွယ်ပါ
             new Thread(() -> {
                 User updatedUser = DatabaseManager.getUserById(currentUser.getUserId());
                 if (updatedUser != null) {
-                    // Local Coin နဲ့ DB Coin အနက် ကြီးသည့် တန်ဖိုးကိုသာ ယူမည်
                     int safeCoin = Math.max(currentLocalCoin, updatedUser.getCoin());
                     updatedUser.setCoin(safeCoin);
 
@@ -126,7 +127,6 @@ public class MainLayoutController {
                     Platform.runLater(() -> {
                         if (topStreakLabel != null) topStreakLabel.setText(" " + updatedUser.getStreak());
 
-                        // ⭐ Brain Display — Premium ဆိုရင် ∞
                         if (topBrainLabel != null) {
                             String brainDisplay = PremiumService.getBrainDisplay(updatedUser);
                             topBrainLabel.setText(" " + brainDisplay);
@@ -172,7 +172,6 @@ public class MainLayoutController {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
 
-        // ⭐ Premium User ဆိုရင် Refill Popup မပြဘဲ Alert ပဲ ပြ
         if (PremiumService.isPremium(user)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Premium Brains");
@@ -409,6 +408,21 @@ public class MainLayoutController {
     }
 
     public FXMLLoader loadPage(String fxmlFileName) {
+        // ✅ Profile / Settings / Help / Tutorials / Glossary / Overview / Premium / Payment — currentPage အဖြစ် မသိမ်း
+        boolean isOverlayPage = fxmlFileName.contains("Profile")
+                || fxmlFileName.contains("Settings")
+                || fxmlFileName.contains("Help")
+                || fxmlFileName.contains("Tutorials")
+                || fxmlFileName.contains("Glossary")
+                || fxmlFileName.contains("Overview")
+                || fxmlFileName.contains("Premium")
+                || fxmlFileName.contains("Payment");
+
+        if (!isOverlayPage) {
+            currentPage = fxmlFileName;
+            System.out.println("✅ currentPage: " + currentPage);
+        }
+
         updateSidebarHighlight(fxmlFileName);
 
         try {
@@ -425,7 +439,6 @@ public class MainLayoutController {
             FXMLLoader loader = new FXMLLoader(resource);
             Parent view = loader.load();
 
-            // 1. Loading UI ဖန်တီးပါ
             ProgressIndicator spinner = new ProgressIndicator();
             spinner.setStyle("-fx-progress-color: #38BDF8;");
             spinner.setMaxSize(40, 40);
@@ -447,15 +460,15 @@ public class MainLayoutController {
             StackPane overlay = new StackPane(loadingCard);
             overlay.setStyle("-fx-background-color: #0F172A;");
 
-            // 2. Loading Overlay ကို အရင်ပြပါ
             contentArea.getChildren().setAll(overlay);
 
-            // 3. UI မျက်စိမနောက်ဘဲ Smooth ဖြစ်စေရန် 150ms အကြာတွင် Real View သို့ အစားထိုးပါ
             PauseTransition delay = new PauseTransition(Duration.millis(150));
-            delay.setOnFinished(e -> contentArea.getChildren().setAll(view));
+            delay.setOnFinished(e -> {
+                StackPane.setAlignment(view, Pos.TOP_LEFT);
+                contentArea.getChildren().setAll(view);
+            });
             delay.play();
 
-            // 4. Controller ယူသုံးမည့် LessonPlayer များ မပျက်စီးစေရန် Loader ကို Synchronous ပြန်ပေးပါ
             return loader;
 
         } catch (Exception e) {
@@ -464,6 +477,19 @@ public class MainLayoutController {
             errorLabel.setStyle("-fx-text-fill: #EF4444; -fx-font-size: 14px; -fx-font-weight: bold;");
             contentArea.getChildren().setAll(errorLabel);
             return null;
+        }
+    }
+
+    // ============================================
+    // ✅ Close Button — currentPage ပြန်
+    // ============================================
+    @FXML
+    public void handleClosePage() {
+        if (currentPage != null && !currentPage.isEmpty()) {
+            System.out.println("✅ Closing — returning to: " + currentPage);
+            loadPage(currentPage);
+        } else {
+            handleNavLearn();
         }
     }
 

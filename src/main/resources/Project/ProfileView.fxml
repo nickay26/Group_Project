@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -12,131 +14,152 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<ScrollPane fitToWidth="true" styleClass="profile-scroll-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.ProfileViewController">
-    <content>
-        <VBox spacing="25.0" style="-fx-background-color: #0F172A;">
-            <padding>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-            </padding>
-            <children>
+<BorderPane style="-fx-background-color: #0F172A;"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Project.ProfileViewController">
 
-                <!-- 1. PROFILE HEADER CARD -->
-                <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="profile-card">
+    <!-- ✅ Top — Close Button -->
+    <top>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 15;">
+            <children>
+                <Button text="✕"
+                        onAction="#handleClose"
+                        style="-fx-background-color: transparent;
+                               -fx-text-fill: #94A3B8;
+                               -fx-font-size: 20px;
+                               -fx-font-weight: bold;
+                               -fx-cursor: hand;
+                               -fx-padding: 0 10;" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- ✅ Center — Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="profile-scroll-pane"
+                    stylesheets="@../Css/mainlayout.css">
+            <content>
+                <VBox spacing="25.0" style="-fx-background-color: #0F172A;">
                     <padding>
-                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
                     </padding>
                     <children>
-                        <StackPane maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0">
-                            <children>
-                                <ImageView fx:id="avatarImageView" fitHeight="120.0" fitWidth="120.0" preserveRatio="false" smooth="true" />
-                            </children>
-                            <clip>
-                                <Circle centerX="60.0" centerY="60.0" radius="60.0" />
-                            </clip>
-                        </StackPane>
 
-                        <VBox alignment="CENTER_LEFT" spacing="6.0">
+                        <!-- 1. PROFILE HEADER CARD -->
+                        <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="profile-card">
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                            </padding>
                             <children>
-                                <!-- ✅ Username + Premium Badge -->
-                                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                <StackPane maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0">
                                     <children>
-                                        <Label fx:id="userNameLabel"
-                                               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;"
-                                               text="User Name" />
-
-                                        <!-- ✅ Premium Badge — Label တိုက်ရိုက် -->
-                                        <Label fx:id="premiumBadgeLabel"
-                                               text="PRO"
-                                               visible="false" managed="false"
-                                               translateY="-3"
-                                               maxHeight="16.0"
-                                               maxWidth="36.0"
-                                               minHeight="16.0"
-                                               minWidth="36.0"
-                                               style="-fx-text-fill: #1E293B;
-                                                      -fx-font-size: 9px;
-                                                      -fx-font-weight: bold;
-                                                      -fx-padding: 0;
-                                                      -fx-alignment: center;
-                                                      -fx-background-color: linear-gradient(to right, #F59E0B, #FBBF24);
-                                                      -fx-background-radius: 4px;
-                                                      -fx-effect: dropshadow(three-pass-box, rgba(245,158,11,0.6), 6, 0, 0, 0);" />
+                                        <ImageView fx:id="avatarImageView" fitHeight="120.0" fitWidth="120.0" preserveRatio="false" smooth="true" />
                                     </children>
-                                </HBox>
-                                <Label fx:id="userEmailLabel" style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="user@email.com" />
+                                    <clip>
+                                        <Circle centerX="60.0" centerY="60.0" radius="60.0" />
+                                    </clip>
+                                </StackPane>
+
+                                <VBox alignment="CENTER_LEFT" spacing="6.0">
+                                    <children>
+                                        <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label fx:id="userNameLabel"
+                                                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;"
+                                                       text="User Name" />
+
+                                                <Label fx:id="premiumBadgeLabel"
+                                                       text="PRO"
+                                                       visible="false" managed="false"
+                                                       translateY="-3"
+                                                       maxHeight="16.0"
+                                                       maxWidth="36.0"
+                                                       minHeight="16.0"
+                                                       minWidth="36.0"
+                                                       style="-fx-text-fill: #1E293B;
+                                                              -fx-font-size: 9px;
+                                                              -fx-font-weight: bold;
+                                                              -fx-padding: 0;
+                                                              -fx-alignment: center;
+                                                              -fx-background-color: linear-gradient(to right, #F59E0B, #FBBF24);
+                                                              -fx-background-radius: 4px;
+                                                              -fx-effect: dropshadow(three-pass-box, rgba(245,158,11,0.6), 6, 0, 0, 0);" />
+                                            </children>
+                                        </HBox>
+                                        <Label fx:id="userEmailLabel" style="-fx-font-size: 14px; -fx-text-fill: #94A3B8;" text="user@email.com" />
+                                    </children>
+                                </VBox>
+
+                                <Region HBox.hgrow="ALWAYS" />
                             </children>
-                        </VBox>
+                        </HBox>
 
-                        <Region HBox.hgrow="ALWAYS" />
-                    </children>
-                </HBox>
+                        <!-- 2. STATISTICS -->
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Statistics" />
 
-                <!-- 2. STATISTICS -->
-                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Statistics" />
-
-                <HBox spacing="15.0">
-                    <children>
-                        <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <HBox spacing="15.0">
                             <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
-                                    <image><Image url="@../Images/fire.png" /></image>
-                                </ImageView>
-                                <Label fx:id="streakLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Day Streak" />
-                            </children>
-                        </VBox>
+                                <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                            <image><Image url="@../Images/fire.png" /></image>
+                                        </ImageView>
+                                        <Label fx:id="streakLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
+                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Day Streak" />
+                                    </children>
+                                </VBox>
 
-                        <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="⚡" />
+                                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" fx:id="xpLabel" />
+                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Total XP" />
+                                    </children>
+                                </VBox>
+
+                                <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                            <image><Image url="@../Images/coin.png" /></image>
+                                        </ImageView>
+                                        <Label fx:id="coinLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
+                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Coins" />
+                                    </children>
+                                </VBox>
+
+                                <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                            <image><Image url="@../Images/brain.png" /></image>
+                                        </ImageView>
+                                        <Label fx:id="brainLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="5" />
+                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Hearts / Brains" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- 3. COURSES PROGRESS -->
+                        <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
                             <children>
-                                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="⚡" />
-                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" fx:id="xpLabel" />
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Total XP" />
+                                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Courses Progress" />
+                                <GridPane fx:id="coursesProgressContainer" hgap="15.0" vgap="15.0" />
                             </children>
                         </VBox>
 
-                        <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <!-- 4. CERTIFICATES -->
+                        <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
                             <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
-                                    <image><Image url="@../Images/coin.png" /></image>
-                                </ImageView>
-                                <Label fx:id="coinLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Coins" />
+                                <Label text="Certificates"
+                                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" />
+                                <GridPane fx:id="certificatesContainer" hgap="15.0" vgap="15.0" />
                             </children>
                         </VBox>
 
-                        <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
-                            <children>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
-                                    <image><Image url="@../Images/brain.png" /></image>
-                                </ImageView>
-                                <Label fx:id="brainLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="5" />
-                                <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Hearts / Brains" />
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-
-                <!-- 3. COURSES PROGRESS -->
-                <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
-                    <children>
-                        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Courses Progress" />
-
-                        <GridPane fx:id="coursesProgressContainer" hgap="15.0" vgap="15.0" />
                     </children>
                 </VBox>
-
-                <!-- ✅ 4. CERTIFICATES SECTION -->
-                <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
-                    <children>
-                        <Label text="Certificates"
-                               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" />
-
-                        <GridPane fx:id="certificatesContainer"
-                                  hgap="15.0" vgap="15.0" />
-                    </children>
-                </VBox>
-
-            </children>
-        </VBox>
-    </content>
-</ScrollPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

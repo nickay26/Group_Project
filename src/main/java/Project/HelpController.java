@@ -143,4 +143,11 @@ public class HelpController {
     private void showGlossary() {
         MainLayoutController.getInstance().loadPage("GlossaryView.fxml");
     }
+    @FXML
+    private void handleClose() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.handleClosePage();
+        }
+    }
 }
