@@ -5,10 +5,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -20,13 +22,10 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.geometry.Insets;
+
 import java.io.InputStream;
 import java.util.List;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+
 public class ProfileViewController {
 
     @FXML private ImageView avatarImageView;
@@ -37,8 +36,9 @@ public class ProfileViewController {
     @FXML private Label coinLabel;
     @FXML private Label brainLabel;
     @FXML private GridPane coursesProgressContainer;
-    @FXML private Label premiumBadgeLabel;   // ✅ Label
+    @FXML private Label premiumBadgeLabel;
     @FXML private GridPane certificatesContainer;
+
     @FXML
     public void initialize() {
         Circle clip = new Circle(60, 60, 60);
@@ -54,53 +54,66 @@ public class ProfileViewController {
     // ============================================
     private void loadUserData() {
         User currentUser = UserSession.getCurrentUser();
-        if (currentUser != null) {
-            userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
-            userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
-            String planType = currentUser.getSubscriptionType();
-            boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
+        if (currentUser == null) return;
 
-            userNameLabel.setText(currentUser.getName());
+        // ✅ SERVER က premium ဟုတ်/မဟုတ် စစ်
+        boolean serverPremium = DatabaseManager.isPremium(currentUser.getUserId());
+        System.out.println("Server premium: " + serverPremium);
 
-            // ✅ Premium Badge — Label
-            if (isPremium) {
-                premiumBadgeLabel.setVisible(true);
-                premiumBadgeLabel.setManaged(true);
-                startPremiumAnimation();
-            } else {
-                premiumBadgeLabel.setVisible(false);
-                premiumBadgeLabel.setManaged(false);
-            }
-
-            userEmailLabel.setText(currentUser.getEmail());
-            streakLabel.setText(String.valueOf(currentUser.getStreak()));
-            xpLabel.setText(String.valueOf(currentUser.getXp()));
-            coinLabel.setText(String.valueOf(currentUser.getCoin()));
-
-            if (isPremium) {
-                brainLabel.setText("∞");
-            } else {
-                brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
-            }
-            // ★★★ ဒီအထိပဲ ★★★
-
-            // ✅ FIXED: Format server filename into full HTTP URL
-            String profilePath = currentUser.getProfile();
-            if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
-                try {
-                    String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
-                    if (fullImageUrl != null) {
-                        Image img = new Image(fullImageUrl, true); // Async loading
-                        avatarImageView.setImage(img);
-                    }
-                } catch (Exception e) {
-                    System.err.println("Could not load avatar: " + e.getMessage());
-                }
-            }
-
-            Circle clip = new Circle(60, 60, 60);
-            avatarImageView.setClip(clip);
+        // ✅ Local User object — update
+        if (serverPremium && !currentUser.isPremium()) {
+            currentUser.setPremium(true);
+            currentUser.setPlanType("PREMIUM");
+            System.out.println("✅ Local user updated: premium=true, planType=PREMIUM");
         }
+
+        String planType = currentUser.getSubscriptionType();
+        boolean isPremium = "PREMIUM".equalsIgnoreCase(planType) || currentUser.isPremium();
+
+        System.out.println("Final planType: " + planType);
+        System.out.println("Final isPremium: " + isPremium);
+
+        userNameLabel.setText(currentUser.getName() != null ? currentUser.getName() : "User");
+        userEmailLabel.setText(currentUser.getEmail() != null ? currentUser.getEmail() : "");
+
+        // ✅ Premium Badge
+        if (isPremium) {
+            premiumBadgeLabel.setVisible(true);
+            premiumBadgeLabel.setManaged(true);
+            startPremiumAnimation();
+            System.out.println("✅ PRO badge SHOWN");
+        } else {
+            premiumBadgeLabel.setVisible(false);
+            premiumBadgeLabel.setManaged(false);
+            System.out.println("❌ PRO badge HIDDEN");
+        }
+
+        streakLabel.setText(String.valueOf(currentUser.getStreak()));
+        xpLabel.setText(String.valueOf(currentUser.getXp()));
+        coinLabel.setText(String.valueOf(currentUser.getCoin()));
+
+        if (isPremium) {
+            brainLabel.setText("∞");
+        } else {
+            brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
+        }
+
+        // ✅ Avatar — format path
+        String profilePath = currentUser.getProfile();
+        if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
+            try {
+                String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
+                if (fullImageUrl != null) {
+                    Image img = new Image(fullImageUrl, true);
+                    avatarImageView.setImage(img);
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load avatar: " + e.getMessage());
+            }
+        }
+
+        Circle clip = new Circle(60, 60, 60);
+        avatarImageView.setClip(clip);
     }
 
     // ============================================
@@ -138,19 +151,16 @@ public class ProfileViewController {
         scaleTimeline.setCycleCount(Animation.INDEFINITE);
         scaleTimeline.play();
     }
+
     // ============================================
-// ✅ LOAD CERTIFICATES
-// ============================================
+    // ✅ LOAD CERTIFICATES
+    // ============================================
     private void loadCertificates() {
         certificatesContainer.getChildren().clear();
 
         int userId = UserSession.getUserId();
-
-        // ✅ Database ကနေ certificate list ယူ
-        // (သင့် DatabaseManager မှာ method ရှိရင် ခေါ်)
         List<Course> certificateList = DatabaseManager.getCompletedCourses(userId);
 
-        // ✅ Certificate မရှိရင် — Empty State
         if (certificateList == null || certificateList.isEmpty()) {
             VBox emptyBox = new VBox(10);
             emptyBox.setAlignment(Pos.CENTER);
@@ -179,7 +189,6 @@ public class ProfileViewController {
             return;
         }
 
-        // ✅ Certificate ရှိရင် — Card တွေ
         int col = 0;
         int row = 0;
 
@@ -196,10 +205,9 @@ public class ProfileViewController {
     }
 
     // ============================================
-// ✅ CREATE CERTIFICATE CARD
-// ============================================
+    // ✅ CREATE CERTIFICATE CARD
+    // ============================================
     private StackPane createCertificateCard(Course course) {
-        // ✅ Card Container
         VBox card = new VBox(0);
         card.setPrefSize(400, 200);
         card.setMinSize(400, 200);
@@ -213,11 +221,9 @@ public class ProfileViewController {
                         "-fx-padding: 20;"
         );
 
-        // ✅ Top Row — Icon + Title
         HBox topRow = new HBox(15);
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        // ✅ Icon
         ImageView iconView = new ImageView();
         try {
             String iconFile = getCardIconName(course.getCourseId());
@@ -233,7 +239,6 @@ public class ProfileViewController {
             System.out.println("Icon not found");
         }
 
-        // ✅ Title + Subtitle
         VBox titleBox = new VBox(2);
         Label titleLabel = new Label(course.getTitle());
         titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 18px; -fx-font-weight: bold;");
@@ -242,16 +247,13 @@ public class ProfileViewController {
         subTitle.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 11px;");
 
         titleBox.getChildren().addAll(titleLabel, subTitle);
-
         topRow.getChildren().addAll(iconView, titleBox);
 
-        // ✅ Description
         Label descLabel = new Label(course.getDescription());
         descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
         descLabel.setWrapText(true);
         descLabel.setMaxWidth(340);
 
-        // ✅ View Certificate Button
         Button viewBtn = new Button("📜  View Certificate  →");
         viewBtn.setStyle(
                 "-fx-background-color: #1E40AF; " +
@@ -267,7 +269,6 @@ public class ProfileViewController {
         );
         viewBtn.setMaxWidth(Double.MAX_VALUE);
 
-        // ✅ Button Hover
         viewBtn.setOnMouseEntered(e -> viewBtn.setStyle(
                 "-fx-background-color: #2563EB; " +
                         "-fx-text-fill: white; " +
@@ -293,10 +294,8 @@ public class ProfileViewController {
                         "-fx-cursor: hand;"
         ));
 
-        // ✅ Button နှိပ် → Certificate
         viewBtn.setOnAction(e -> showCertificate(course));
 
-        // ✅ Card ထဲ ထည့်
         VBox.setMargin(topRow, new Insets(0, 0, 10, 0));
         VBox.setMargin(descLabel, new Insets(0, 0, 15, 0));
 
@@ -311,8 +310,8 @@ public class ProfileViewController {
     }
 
     // ============================================
-// ✅ Card Icon — Course အလိုက်
-// ============================================
+    // ✅ Card Icon
+    // ============================================
     private String getCardIconName(String courseId) {
         if (courseId == null) return "default.png";
         String upper = courseId.toUpperCase();
@@ -326,8 +325,8 @@ public class ProfileViewController {
     }
 
     // ============================================
-// ✅ SHOW CERTIFICATE — Popup
-// ============================================
+    // ✅ SHOW CERTIFICATE — Popup
+    // ============================================
     private void showCertificate(Course course) {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
@@ -380,6 +379,7 @@ public class ProfileViewController {
 
         dialog.showAndWait();
     }
+
     // ============================================
     // LOAD COURSES PROGRESS
     // ============================================
@@ -455,7 +455,6 @@ public class ProfileViewController {
 
         StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
-        // ✅ Position — အပေါ်ကို ထပ်တိုး
         StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
         progressCircle.setTranslateX(-20);
         progressCircle.setTranslateY(-5);
@@ -490,23 +489,20 @@ public class ProfileViewController {
     }
 
     // ============================================
-    // ✅ CIRCULAR PROGRESS — ဒုတိယပုံလို အရောင်
+    // ✅ CIRCULAR PROGRESS
     // ============================================
     private StackPane createCircularProgressForCard(int percent, String courseId) {
         double radius = 22;
         double strokeWidth = 5;
 
-        // ✅ အရောင် ၂ မျိုး — အရင့် + ပေါ့
         String darkerColor = getCardDarkerColor(courseId);
         String lighterColor = getCardLighterColor(courseId);
 
-        // ✅ Background Circle — အရင့်ရောင်
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.web(darkerColor, 0.9));
         bgCircle.setStroke(Color.web(lighterColor, 1.0));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc — အဖြူ
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
@@ -515,7 +511,6 @@ public class ProfileViewController {
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ Percentage Label
         Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
                 "-fx-font-size: 12px; -fx-font-weight: bold; " +
@@ -534,9 +529,6 @@ public class ProfileViewController {
         return stack;
     }
 
-    // ============================================
-    // ✅ Card ရဲ့ အရင့်ရောင် (background အတွက်)
-    // ============================================
     private String getCardDarkerColor(String courseId) {
         if (courseId == null) return "#334155";
         String upper = courseId.toUpperCase();
@@ -549,9 +541,6 @@ public class ProfileViewController {
         return "#334155";
     }
 
-    // ============================================
-    // ✅ Card ရဲ့ ပေါ့တဲ့ အရောင် (stroke အတွက်)
-    // ============================================
     private String getCardLighterColor(String courseId) {
         if (courseId == null) return "#64748B";
         String upper = courseId.toUpperCase();
