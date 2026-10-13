@@ -500,14 +500,14 @@ public class ProfileViewController {
 
         Circle bgCircle = new Circle(radius);
         bgCircle.setFill(Color.web(darkerColor, 0.9));
-        bgCircle.setStroke(Color.web(lighterColor, 1.0));
+        bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
         double arcLength = -percent * 3.6;
         Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
-        progressArc.setStroke(Color.WHITE);
+        progressArc.setStroke(Color.web(lighterColor));   // အပြာ
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
@@ -522,8 +522,7 @@ public class ProfileViewController {
         stack.setMinSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
         stack.setMaxSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
 
-        Group group = new Group(bgCircle, progressArc);
-        stack.getChildren().addAll(group, percentLabel);
+        stack.getChildren().addAll(bgCircle, progressArc, percentLabel);
         stack.setAlignment(Pos.CENTER);
 
         return stack;
