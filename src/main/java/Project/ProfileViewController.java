@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -332,53 +333,171 @@ public class ProfileViewController {
         if (user == null) return;
 
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Certificate");
+        dialog.setTitle("Certificate of Achievement");
         dialog.setHeaderText(null);
 
-        VBox certBox = new VBox(15);
-        certBox.setAlignment(Pos.CENTER);
-        certBox.setPadding(new Insets(40));
-        certBox.setPrefWidth(500);
-        certBox.setStyle(
-                "-fx-background-color: linear-gradient(to bottom right, #0F172A, #1E293B); " +
-                        "-fx-border-color: #F59E0B; " +
-                        "-fx-border-width: 3px; " +
-                        "-fx-background-radius: 15px; " +
-                        "-fx-border-radius: 15px;"
+        // ✅ Certificate Container — StackPane (ပုံ + စာ)
+        StackPane certStack = new StackPane();
+        certStack.setPrefSize(720, 500);
+        certStack.setMinSize(720, 500);
+        certStack.setMaxSize(720, 500);
+
+        // ✅ Certificate Template ပုံ — 2x size နဲ့ load → ရှင်းလင်း
+        try {
+            InputStream is = getClass().getResourceAsStream("/Images/certificate_template.png");
+            if (is != null) {
+                // ✅ 2x size — smooth
+                Image certImg = new Image(is, 1440, 1000, true, true);
+                ImageView certBg = new ImageView(certImg);
+                certBg.setFitWidth(720);
+                certBg.setFitHeight(500);
+                certBg.setPreserveRatio(false);
+                certBg.setSmooth(true);
+                certBg.setCache(true);
+                certStack.getChildren().add(certBg);
+            }
+        } catch (Exception e) {
+            System.out.println("Certificate template not found");
+        }
+
+        // ✅ Overlay Content — စာ အားလုံး
+        VBox overlay = new VBox(8);
+        overlay.setAlignment(Pos.CENTER);
+        overlay.setPadding(new Insets(140, 60, 40, 60));   // ✅ စာ အောက်ကို ချ
+        overlay.setMaxWidth(720);
+        overlay.setMaxHeight(500);
+
+       /* // ✅ Issued By — Sodex Platform
+        Label issuedBy = new Label("SODEX PLATFORM");
+        issuedBy.setStyle(
+                "-fx-text-fill: #94A3B8; " +
+                        "-fx-font-size: 9px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-letter-spacing: 2px;"
+        );*/
+
+        // ✅ "This is to certify that"
+        Label certifyText = new Label("This is to certify that");
+        certifyText.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif;"
         );
 
-        Label certHeader = new Label("COURSE CERTIFICATE");
-        certHeader.setStyle("-fx-text-fill: #FBBF24; -fx-font-size: 12px; -fx-font-weight: bold;");
-
-        Label thisIsToCertify = new Label("This is to certify that");
-        thisIsToCertify.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
-
+        // ✅ User Name — ကြီး
         Label nameLabel = new Label(user.getName());
-        nameLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 28px; -fx-font-weight: bold;");
-
-        Label hasCompleted = new Label("has successfully completed the course");
-        hasCompleted.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 12px;");
-
-        Label courseLabel = new Label(course.getTitle());
-        courseLabel.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 20px; -fx-font-weight: bold;");
-
-        Label sealLabel = new Label("🏆");
-        sealLabel.setStyle("-fx-font-size: 60px;");
-
-        Label dateLabel = new Label("Issued: " + java.time.LocalDate.now());
-        dateLabel.setStyle("-fx-text-fill: #64748B; -fx-font-size: 11px;");
-
-        certBox.getChildren().addAll(
-                certHeader, thisIsToCertify, nameLabel,
-                hasCompleted, courseLabel, sealLabel, dateLabel
+        nameLabel.setStyle(
+                "-fx-text-fill: #0F172A; " +
+                        "-fx-font-size: 28px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-padding: 5 0 5 0;"
         );
 
-        dialog.getDialogPane().setContent(certBox);
+        // ✅ "has successfully completed the course"
+        Label completedText = new Label("has successfully completed the course");
+        completedText.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 12px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Course Name
+        Label courseLabel = new Label(course.getTitle());
+        courseLabel.setStyle(
+                "-fx-text-fill: #1E40AF; " +
+                        "-fx-font-size: 20px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-padding: 3 0 3 0;"
+        );
+
+        // ✅ Description — Mimo/Sololearn လို
+        Label descLabel = new Label(
+                "in recognition of successfully mastering the course curriculum, " +
+                        "demonstrating proficiency in problem-solving, and completing all lessons and quizzes."
+        );
+        descLabel.setStyle(
+                "-fx-text-fill: #64748B; " +
+                        "-fx-font-size: 10px; " +
+                        "-fx-font-style: italic; " +
+                        "-fx-font-family: 'Georgia', serif; " +
+                        "-fx-text-alignment: center;"
+        );
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(480);
+        descLabel.setAlignment(Pos.CENTER);
+
+
+
+        // ✅ Date — "Issued on"
+        Label dateLabel = new Label("Issued on " + java.time.LocalDate.now());
+        dateLabel.setStyle(
+                "-fx-text-fill: #475569; " +
+                        "-fx-font-size: 10px; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Certificate ID
+        String certId = "CERT-" + java.time.Year.now() + "-" +
+                course.getCourseId().toUpperCase() + "-" +
+                String.format("%04d", user.getUserId());
+
+        Label certIdLabel = new Label("Certificate ID: " + certId);
+        certIdLabel.setStyle(
+                "-fx-text-fill: #94A3B8; " +
+                        "-fx-font-size: 8px; " +
+                        "-fx-font-family: 'Georgia', serif;"
+        );
+
+        // ✅ Verified Badge
+        Label verifiedLabel = new Label("✔ Verified");
+        verifiedLabel.setStyle(
+                "-fx-text-fill: #10B981; " +
+                        "-fx-font-size: 9px; " +
+                        "-fx-font-weight: bold;"
+        );
+
+        // ✅ Overlay ထဲ ထည့် — အစီအစဉ်
+        overlay.getChildren().addAll(
+              //  issuedBy,           // SODEX PLATFORM
+                certifyText,        // This is to certify that
+                nameLabel,          // Kary
+                completedText,      // has successfully completed
+                courseLabel,        // C++ Basic
+                descLabel,          // Description
+                //skillsLabel,        // Skills
+                new Label(" "),
+                dateLabel,          // Issued on
+                certIdLabel,        // Certificate ID
+                verifiedLabel       // ✔ Verified
+        );
+
+        // ✅ StackPane ထဲ — ပုံပေါ်မှာ စာ
+        certStack.getChildren().add(overlay);
+        StackPane.setAlignment(overlay, Pos.CENTER);
+
+        // ✅ Dialog
+        dialog.getDialogPane().setContent(certStack);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
         dialog.getDialogPane().setStyle("-fx-background-color: #0F172A;");
 
+        // ✅ Close Button Style
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE)
+                .setStyle(
+                        "-fx-background-color: #1E40AF; " +
+                                "-fx-text-fill: white; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-background-radius: 6px; " +
+                                "-fx-padding: 6 20; " +
+                                "-fx-cursor: hand;"
+                );
+
         dialog.showAndWait();
     }
+
 
     // ============================================
     // LOAD COURSES PROGRESS
