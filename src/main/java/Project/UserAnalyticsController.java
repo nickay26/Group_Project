@@ -30,16 +30,19 @@ public class UserAnalyticsController {
         setupTableColumns();
         loadAnalyticsData();
 
-        // Center-align numeric columns
+        // Center-align numeric columns[cite: 15]
         xpCol.setStyle("-fx-alignment: CENTER;");
         streakCol.setStyle("-fx-alignment: CENTER;");
         coinCol.setStyle("-fx-alignment: CENTER;");
         planCol.setStyle("-fx-alignment: CENTER;");
         lastLoginCol.setStyle("-fx-alignment: CENTER;");
 
-// Proportional column resizing
+        // Proportional column resizing[cite: 15]
         idCol.setMaxWidth(60);
         planCol.setMaxWidth(90);
+
+        // 🚀 Table Row များကို Mouse ကလစ်ဖြင့် နှိပ်၍ Dialog ခေါ်ရန် ချိတ်ဆက်ခြင်း
+        setupRowClickListener();
     }
 
     private void setupTableColumns() {
@@ -51,6 +54,39 @@ public class UserAnalyticsController {
         coinCol.setCellValueFactory(new PropertyValueFactory<>("coin"));
         planCol.setCellValueFactory(new PropertyValueFactory<>("planType"));
         lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLoginDate"));
+    }
+
+    /**
+     * TableView တွင် Row ကို နှစ်ချက်ကလစ်နှိပ်လျှင် Dialog ပွင့်လာစေရန်
+     */
+    private void setupRowClickListener() {
+        if (userTableView == null) return;
+
+        userTableView.setRowFactory(tv -> {
+            TableRow<UserRow> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    UserRow selectedUser = row.getItem();
+                    if (selectedUser != null) {
+                        // UserRow ကို JSONObject အဖြစ် ပြောင်းလဲပြီး DialogUtils သို့ ပို့ပေးခြင်း
+                        JSONObject userJson = new JSONObject();
+                        userJson.put("User_ID", selectedUser.getUserId());
+                        userJson.put("Name", selectedUser.getName());
+                        userJson.put("Email", selectedUser.getEmail());
+                        userJson.put("XP", selectedUser.getXp());
+                        userJson.put("Streak", selectedUser.getStreak());
+                        userJson.put("coin", selectedUser.getCoin());
+                        userJson.put("plan_type", selectedUser.getPlanType());
+                        userJson.put("role", selectedUser.getRole());
+                        userJson.put("last_login_date", selectedUser.getLastLoginDate());
+
+                        // အစောက ဖန်တီးထားသော DialogUtils ကို လှမ်းခေါ်ခြင်း
+                        DialogUtils.showUserDialog(userJson);
+                    }
+                }
+            });
+            return row;
+        });
     }
 
     private void loadAnalyticsData() {
@@ -96,7 +132,7 @@ public class UserAnalyticsController {
         }).start();
     }
 
-    // Table Row Model
+    // Table Row Model[cite: 15]
     public static class UserRow {
         private final int userId;
         private final String name;

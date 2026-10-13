@@ -66,6 +66,9 @@ public class CodeEditorController {
                 <div id="container"></div>
                 <script>
                     var editor;
+                    var pendingCode = '';
+                    var pendingLang = 'java';
+
                     require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
                     require(['vs/editor/editor.main'], function() {
                         // Custom Navy Theme Definition
@@ -89,8 +92,8 @@ public class CodeEditorController {
                         });
 
                         editor = monaco.editor.create(document.getElementById('container'), {
-                            value: '',
-                            language: 'java',
+                            value: pendingCode,
+                            language: pendingLang,
                             theme: 'navyTheme',
                             automaticLayout: true,
                             fontSize: 14,
@@ -105,10 +108,13 @@ public class CodeEditorController {
 
                     function setCode(code, language) {
                         if (editor) {
-                            editor.setValue(code);
+                            editor.setValue(code || '');
                             if (language) {
                                 monaco.editor.setModelLanguage(editor.getModel(), language);
                             }
+                        } else {
+                            pendingCode = code || '';
+                            pendingLang = language || 'java';
                         }
                     }
                 </script>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="dashboardView" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.AdminController">
+<VBox fx:id="dashboardView" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.AdminDashboardController">
     <children>
         <!-- STATS CARDS OVERVIEW -->
         <HBox spacing="20.0">
@@ -15,7 +15,7 @@
                 <VBox styleClass="glass-panel" HBox.hgrow="ALWAYS">
                     <children>
                         <Label styleClass="card-title" text="Daily Active Users" />
-                        <Label fx:id="totalActiveUsersLabel" styleClass="card-value" text="1,248" />
+                        <Label fx:id="totalActiveUsersLabel" styleClass="card-value" text=" " />
                         <Label styleClass="card-growth" text="+12.5% from yesterday" />
                     </children>
                 </VBox>
@@ -42,7 +42,7 @@
                 <Label styleClass="section-title" text="User Daily Activity (Weekly Overview)" />
                 <LineChart fx:id="userActivityChart" createSymbols="true" legendVisible="false" VBox.vgrow="ALWAYS">
                     <xAxis>
-                        <CategoryAxis label="Days" />
+                        <CategoryAxis label="Days" tickLabelRotation="0" />
                     </xAxis>
                     <yAxis>
                         <NumberAxis label="Active Users" />

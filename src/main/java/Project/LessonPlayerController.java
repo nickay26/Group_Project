@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -707,45 +708,7 @@ public class LessonPlayerController {
             cardContainer.getChildren().add(errorLabel);
         }
     }
-    private void showBrainLimitDialog() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-                javafx.scene.control.Alert.AlertType.WARNING);
-        alert.setTitle("Brain Limit Reached");
-        alert.setHeaderText("🧠 Brain ကုန်သွားပါပြီ!");
-        alert.setContentText(
-                "Free plan မှာ Brain " + PremiumService.MAX_FREE_BRAINS + " ခုသာ ရပါတယ်။\n" +
-                        "Premium ဝယ်ပြီး Unlimited Brain ရယူပါ။"
-        );
 
-        javafx.scene.control.ButtonType upgradeBtn =
-                new javafx.scene.control.ButtonType("Upgrade",
-                        javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
-        javafx.scene.control.ButtonType cancelBtn =
-                new javafx.scene.control.ButtonType("Cancel",
-                        javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(upgradeBtn, cancelBtn);
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == upgradeBtn && MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().handlePremium();
-            } else {
-                // Cancel နှိပ်ရင် LearnPage ကို ပြန်သွား
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                }
-            }
-        });
-    }
-    // ============================================
-// ⭐ AI ASK LIMIT HELPERS
-// ============================================
-
-    /**
-     * AI မေးလို့ရသေးလား စစ်ဆေးခြင်း
-     * Premium → true (Unlimited)
-     * Free → todayCount < 5 ဆိုရင် true
-     */
     private boolean canAskAI() {
         User user = UserSession.getCurrentUser();
         if (user == null) return false;
@@ -769,29 +732,11 @@ public class LessonPlayerController {
         int todayCount = user != null ? DatabaseManager.getTodayAIAskCount(user.getUserId()) : 0;
         int remaining = Math.max(0, FREE_DAILY_AI_LIMIT - todayCount);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Daily AI Limit");
-        alert.setHeaderText("🚀 You've reached today's AI limit!");
+        String message = remaining <= 0
+                ? "Free users can ask AI " + FREE_DAILY_AI_LIMIT + " times per day.\n\nUpgrade to Premium for UNLIMITED AI questions, unlimited brains, and more!"
+                : "You have " + remaining + " AI questions left today.";
 
-        if (remaining <= 0) {
-            alert.setContentText(
-                    "Free users can ask AI " + FREE_DAILY_AI_LIMIT + " times per day.\n\n" +
-                            "Upgrade to Premium for UNLIMITED AI questions, " +
-                            "unlimited brains, and more!"
-            );
-        } else {
-            alert.setContentText("You have " + remaining + " AI questions left today.");
-        }
-
-        ButtonType upgradeBtn = new ButtonType("Upgrade to Premium", ButtonBar.ButtonData.OK_DONE);
-        ButtonType laterBtn = new ButtonType("Maybe Later", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(upgradeBtn, laterBtn);
-
-        alert.showAndWait().ifPresent(bt -> {
-            if (bt == upgradeBtn && MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().handlePremium();
-            }
-        });
+        DialogUtils.showMessageDialog("Daily AI Limit", "🚀 You've reached today's AI limit!\n\n" + message, false);
     }
 
     // 🧠 Refill Dialog on Out of Brains
@@ -802,15 +747,28 @@ public class LessonPlayerController {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Out of Energy!");
-        alert.setHeaderText("🧠 You have 0 Brains left!");
-        alert.setContentText("Would you like to refill 5 Brains for 100 Coins?");
+        // Dark-themed confirmation dialog implementation
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Out of Energy!");
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.getDialogPane().setStyle("-fx-background-color: #1E293B; -fx-text-fill: white;");
 
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
+        VBox content = new VBox(12);
+        content.setPadding(new Insets(20));
+        Label msg = new Label("🧠 You have 0 Brains left!\n\nWould you like to refill 5 Brains for 100 Coins?");
+        msg.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 14px;");
+        msg.setWrapText(true);
+        content.getChildren().add(msg);
+        dialog.getDialogPane().setContent(content);
+
+        ButtonType refillBtn = new ButtonType("Refill (100 Coins)", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().setAll(refillBtn, cancelBtn);
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == refillBtn) {
                 if (user.getCoin() >= 100) {
-                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100,5);
+                    boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100, 5);
                     if (success) {
                         user.setBrainCount(5);
                         user.setCoin(user.getCoin() - 100);
@@ -818,17 +776,13 @@ public class LessonPlayerController {
                         if (MainLayoutController.getInstance() != null) {
                             MainLayoutController.getInstance().updateHeaderStats();
                         }
-
-                        Alert info = new Alert(Alert.AlertType.INFORMATION, "⚡ Brains refilled to 5!");
-                        info.showAndWait();
+                        DialogUtils.showMessageDialog("Success", "⚡ Brains refilled to 5!", false);
                     } else {
-                        Alert err = new Alert(Alert.AlertType.ERROR, "Failed to refill brains on server.");
-                        err.showAndWait();
+                        DialogUtils.showMessageDialog("Error", "Failed to refill brains on server.", true);
                         handleClose();
                     }
                 } else {
-                    Alert err = new Alert(Alert.AlertType.ERROR, " Insufficient coins! You need 100 coins.");
-                    err.showAndWait();
+                    DialogUtils.showMessageDialog("Error", "❌ Insufficient coins! You need 100 coins.", true);
                     handleClose();
                 }
             } else {

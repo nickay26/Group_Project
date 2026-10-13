@@ -8,6 +8,8 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -522,6 +524,21 @@ public class DatabaseManager {
         return null;
     }
 
+    public static boolean deleteProject(int projectId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean updateProjectCode(int projectId, String codeContent) {
         try {
             JSONObject body = new JSONObject();
@@ -894,5 +911,43 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static CompletableFuture<User> getUserByIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getUserById(userId));
+    }
+
+    public static CompletableFuture<String> getLastActiveCourseIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getLastActiveCourseId(userId));
+    }
+
+    // ==========================================
+    // CERTIFICATE SYSTEM
+    // ==========================================
+    public static String checkAndIssueCertificate(int userId, String courseId) {
+        try {
+            String response = ApiClient.checkAndIssueCertificateAsync(userId, courseId).join();
+            if (response != null && !response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                if (json.optBoolean("earned", false)) {
+                    return json.optString("certificate_id", null);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONArray getUserCertificates(int userId) {
+        try {
+            String response = ApiClient.getUserCertificatesAsync(userId).join();
+            if (response != null && !response.isEmpty()) {
+                return new JSONArray(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new JSONArray();
     }
 }

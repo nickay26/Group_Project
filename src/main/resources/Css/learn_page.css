@@ -1,10 +1,10 @@
 /* ScrollPane & Root Background */
 .learn-root {
     -fx-background-image: url("../Images/background.png");
-        -fx-background-size: cover;
-        -fx-background-position: center center;
-        -fx-background-repeat: no-repeat;
-        -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .learn-scroll-pane {

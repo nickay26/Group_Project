@@ -81,12 +81,11 @@ public class PlaygroundDashboardController {
     private VBox createProjectCard(Project project) {
         VBox card = new VBox();
         card.setPrefWidth(220.0);
-        card.setPrefHeight(270.0);
+        card.setPrefHeight(290.0); // အရွယ်အစားကို အနည်းငယ် တိုးပေးနိုင်သည်
         card.setAlignment(Pos.CENTER);
         card.setPadding(new Insets(20, 16, 20, 16));
-        card.setSpacing(14);
+        card.setSpacing(10);
 
-        // Apply base Liquid CSS class
         card.getStyleClass().add("liquid-project-card");
 
         // 1. Language Icon Container
@@ -94,8 +93,8 @@ public class PlaygroundDashboardController {
         iconContainer.getStyleClass().add("card-icon-container");
 
         ImageView iconView = new ImageView();
-        iconView.setFitWidth(70);
-        iconView.setFitHeight(70);
+        iconView.setFitWidth(60);
+        iconView.setFitHeight(60);
         iconView.setPreserveRatio(true);
 
         String iconPath = getLanguageIconPath(project.getLanguage());
@@ -124,15 +123,34 @@ public class PlaygroundDashboardController {
         // 3. Open Project Action Button
         Button openBtn = new Button("Open Project ➔");
         openBtn.setPrefWidth(180);
-        openBtn.setPrefHeight(38);
+        openBtn.setPrefHeight(34);
         openBtn.getStyleClass().add("btn-card-action");
         openBtn.setOnAction(e -> openWorkspace(project));
 
-        // Click anywhere on the card to open workspace
-        card.setOnMouseClicked(e -> openWorkspace(project));
+        // 4. 🗑 Delete Project Button
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.setPrefWidth(180);
+        deleteBtn.setPrefHeight(28);
+        deleteBtn.setStyle("-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px;");
+        deleteBtn.setOnAction(e -> {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Delete Project");
+            confirm.setHeaderText("Are you sure you want to delete '" + project.getTitle() + "'?");
+            confirm.setContentText("This action cannot be undone.");
+
+            confirm.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    boolean success = DatabaseManager.deleteProject(project.getProjectId());
+                    if (success) {
+                        loadUserProjects(); // ဖျက်ပြီးပါက ကဒ်များကို အသစ်ပြန်လည် Load လုပ်မည်
+                        updateCreateButton(); // ပရောဂျက် အရေအတွက် ကိုတာ စစ်ဆေးမှုကိုပါ Update လုပ်မည်
+                    }
+                }
+            });
+        });
 
         // Add elements to VBox
-        card.getChildren().addAll(iconContainer, textContainer, openBtn);
+        card.getChildren().addAll(iconContainer, textContainer, openBtn, deleteBtn);
         return card;
     }
 
