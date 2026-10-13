@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_270_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Fold Expression with Comma Operator",
       "prompt": "Fill in the fold operator used to execute a function call on every argument in a pack.",
       "codeSnippet": "template <typename... Args>\nvoid printAllArgs(Args... args) {\n    ((std::cout << args << \" \"), ___);\n}",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_270_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Logical AND Fold Expression",
       "prompt": "Fill in the logical operator used to verify all boolean conditions in a parameter pack are true.",
       "codeSnippet": "template <typename... Args>\nbool allTrue(Args... args) {\n    return (... ___ args);\n}",

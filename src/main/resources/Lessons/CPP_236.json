@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_236_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Basic Sorting",
       "prompt": "Fill in the function used to sort a range into ascending order.",
       "codeSnippet": "std::___(v.begin(), v.end());",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_236_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Partitioning Range",
       "prompt": "Fill in the algorithm that reorders elements such that elements matching the predicate come first.",
       "codeSnippet": "auto bound = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_233_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Advancing Iterators",
       "prompt": "Fill in the function used to safely advance an iterator by n positions.",
       "codeSnippet": "auto it = vec.begin();\nstd::___(it, 3); // Moves iterator forward by 3 steps",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_233_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Calculating Distance",
       "prompt": "Fill in the function that calculates the number of elements between two iterators.",
       "codeSnippet": "auto count = std::___(vec.begin(), vec.end());",

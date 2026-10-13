@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_253_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Forwarding Reference Syntax Context",
       "prompt": "Fill in the auto keyword modifier that creates a universal reference in generic lambda bindings.",
       "codeSnippet": "auto lambda = [](auto___ param) {\n    // Universal reference in generic lambda\n};",

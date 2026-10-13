@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_289_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "File I/O Header (CPP_265)",
       "prompt": "Fill in the header file name required to work with file input and output streams in C++.",
       "codeSnippet": "#include <___>\nusing namespace std;\nofstream file(\"data.txt\");",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_289_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Reading from Files (CPP_266)",
       "prompt": "Fill in the stream class used for reading data from an existing file.",
       "codeSnippet": "std::___ inFile(\"input.txt\");\nstring line;\nwhile (getline(inFile, line)) { /* process */ }",

@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_264_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++20 Semaphore Type",
       "prompt": "Fill in the C++20 synchronization primitive used to manage access to a finite pool of resources.",
       "codeSnippet": "#include <semaphore>\nstd::counting____<5> sem(5); // Allows up to 5 concurrent accesses",

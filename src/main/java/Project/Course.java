@@ -37,6 +37,7 @@ public class Course {
     // ✅ 0 - 100 (percent)
     public int getProgressPercent() {
         if (totalLessons == 0) return 0;
-        return (int) Math.round(((double) completedLessons / totalLessons) * 100);
+        double calculated = ((double) completedLessons / totalLessons) * 100;
+        return (int) Math.round(Math.min(100.0, calculated));
     }
 }

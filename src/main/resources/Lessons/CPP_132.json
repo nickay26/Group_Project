@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_132_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "while Keyword Syntax",
       "prompt": "Fill in the loop keyword.",
       "codeSnippet": "___ (x > 0) {\n    x--;\n}",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_132_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Loop Counter Decrement",
       "prompt": "Fill in the decrement statement to avoid an infinite loop.",
       "codeSnippet": "int i = 5;\nwhile (i > 0) {\n    // ...\n    ___;\n}",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_132_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Iteration Output Trace",
       "prompt": "How many times does this loop execute?",
       "codeSnippet": "int n = 3;\nwhile (n > 0) {\n    n--;\n}",

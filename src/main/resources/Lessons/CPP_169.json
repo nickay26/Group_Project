@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_169_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Basic If Statement (CPP_127)",
       "prompt": "Fill in the keyword used to execute a code block only if a specified condition is true.",
       "codeSnippet": "___ (age >= 18) {\n    cout << \"Adult\";\n}",
@@ -31,6 +32,7 @@
       "slideId": "CPP_169_S4",
       "type": "FILL_IN_BLANK",
       "title": "Else-If Ladder (CPP_129)",
+      "interactive": true,
       "prompt": "Fill in the missing keywords to test a second condition if the first condition is false.",
       "codeSnippet": "if (temp > 30) {\n    cout << \"Hot\";\n} ___ (temp > 20) {\n    cout << \"Warm\";\n}",
       "options": ["else if", "elif", "else if", "or if"],

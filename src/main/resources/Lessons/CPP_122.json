@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_122_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Bitwise OR Operator",
       "prompt": "Fill in the symbol for bitwise OR.",
       "codeSnippet": "int flags = 4 ___ 2;",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_122_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Bitwise XOR Symbol",
       "prompt": "Fill in the symbol for bitwise XOR.",
       "codeSnippet": "int toggled = mask ___ value;",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_122_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Bitwise NOT Symbol",
       "prompt": "Fill in the unary bitwise complement operator.",
       "codeSnippet": "int inverted = ___mask;",

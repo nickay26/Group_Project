@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_288_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Header Inclusion (CPP_257)",
       "prompt": "Fill in the header file name required to use C++ Smart Pointers.",
       "codeSnippet": "#include <___>\nusing namespace std;\nstd::unique_ptr<int> ptr;",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_288_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::make_unique Factory (CPP_258)",
       "prompt": "Fill in the helper function name introduced in C++14 to safely allocate a unique_ptr.",
       "codeSnippet": "auto ptr = std::___<int>(42);",

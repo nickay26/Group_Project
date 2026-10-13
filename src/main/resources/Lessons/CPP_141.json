@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_141_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::find Function",
       "prompt": "Fill in algorithm name to locate a specific value in a range.",
       "codeSnippet": "auto it = std::___(vec.begin(), vec.end(), target);",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_141_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::accumulate Header",
       "prompt": "Which header defines std::accumulate?",
       "codeSnippet": "#include <___>",

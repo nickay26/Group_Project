@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_221_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Ellipsis Syntax",
       "prompt": "Fill in the operator symbol used to declare a template parameter pack.",
       "codeSnippet": "template <typename___ Types>\nvoid print(Types... args);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_221_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pack Expansion Operator Location",
       "prompt": "To expand a parameter pack inside a function call expression, place the ellipsis ___ the pack name.",
       "codeSnippet": "process(args___);",

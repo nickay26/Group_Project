@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_259_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::lock_guard Usage",
       "prompt": "Fill in the class template used for simple scope-bound lock acquisition.",
       "codeSnippet": "std::mutex m;\n{\n    std::___<std::mutex> guard(m);\n    // Critical section\n}",

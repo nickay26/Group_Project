@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_243_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Creating shared_ptr",
       "prompt": "Fill in the preferred function used to construct a std::shared_ptr efficiently.",
       "codeSnippet": "auto s = std::___<int>(42);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_243_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking Use Count",
       "prompt": "Fill in the member function that returns the current number of shared_ptr instances managing the resource.",
       "codeSnippet": "long count = ptr.___();",
@@ -57,6 +59,7 @@
     {
       "slideId": "CPP_243_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking Pointer Validity",
       "prompt": "Fill in the boolean check idiom to determine if a shared_ptr holds a valid object.",
       "codeSnippet": "if (___ptr) { /* Object exists and pointer is not null */ }",

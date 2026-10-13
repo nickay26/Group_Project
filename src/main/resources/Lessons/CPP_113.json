@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_113_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Float Literal Suffix",
       "prompt": "Fill in the suffix required for a float literal.",
       "codeSnippet": "float price = 12.99___;",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_113_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Long Double Keyword",
       "prompt": "Fill in the data type for maximum floating point precision.",
       "codeSnippet": "long ___ exactVal = 1.23456789012345L;",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_113_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Scientific Notation",
       "prompt": "Fill in the exponent letter for scientific notation.",
       "codeSnippet": "double force = 1.2___3; // 1.2 x 10^3",

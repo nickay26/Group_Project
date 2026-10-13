@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_235_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Transforming Elements",
       "prompt": "Fill in the function used to apply an operation to a range and store the results in a destination.",
       "codeSnippet": "std::___(src.begin(), src.end(), dst.begin(), [](int x){ return x * 2; });",
@@ -101,6 +102,7 @@
     {
       "slideId": "CPP_235_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Unique Algorithm",
       "prompt": "Fill in the algorithm function that removes consecutive duplicate elements from a range.",
       "codeSnippet": "auto newEnd = std::___(v.begin(), v.end());",

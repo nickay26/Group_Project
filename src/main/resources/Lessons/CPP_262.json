@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_262_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Atomic Header",
       "prompt": "Fill in the header file required for atomic operations and types.",
       "codeSnippet": "#include <___>\nstd::atomic<bool> flag(false);",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_262_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Atomic Store Operation",
       "prompt": "Fill in the explicit method used to store a value into an atomic variable.",
       "codeSnippet": "std::atomic<int> a;\na.___ (100, std::memory_order_relaxed);",

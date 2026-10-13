@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_109_S2",
       "type": "FILL_IN_BLANK",
+
       "title": "Add and Assign",
       "prompt": "Fill in the compound operator to add 10 to total.",
       "codeSnippet": "total ___ 10;",
@@ -22,6 +23,7 @@
     {
       "slideId": "CPP_109_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Shorthand Equivalence",
       "prompt": "What is 'x -= 3;' equivalent to?",
       "options": ["x = x - 3;", "x = 3 - x;", "x - 3 = x;", "x == 3;"],
@@ -39,6 +41,7 @@
     {
       "slideId": "CPP_109_S5",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Divide and Assign Result",
       "prompt": "If int x = 20; x /= 4; what is the new value of x?",
       "options": ["5", "80", "16", "4"],

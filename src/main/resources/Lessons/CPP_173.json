@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_173_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Address-Of Operator (CPP_159)",
       "prompt": "Fill in the operator used to get the memory address of a variable.",
       "codeSnippet": "int age = 20;\ncout << ___age; // Outputs memory address",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_173_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Initializing Safe Pointer (CPP_161)",
       "prompt": "Fill in the keyword to safely initialize a pointer that does not point to any valid memory.",
       "codeSnippet": "int* ptr = ___;",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_166_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Header Inclusion (CPP_101)",
       "prompt": "Fill in the standard library required for basic input and output operations.",
       "codeSnippet": "#include <___>",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_166_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Arithmetic Operators (CPP_103)",
       "prompt": "Fill in the operator used to calculate the remainder of an integer division.",
       "codeSnippet": "int remainder = 17 ___ 5;",
@@ -47,6 +49,7 @@
     {
       "slideId": "CPP_166_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Loops & Iteration (CPP_105)",
       "prompt": "Fill in the keyword for a loop structure that guarantees executing the block at least once.",
       "codeSnippet": "___ {\n    cout << \"Running...\";\n} while (false);",

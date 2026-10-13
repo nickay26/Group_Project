@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_148_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Array Fill Method",
       "prompt": "Fill in method name that sets all elements to a value.",
       "codeSnippet": "std::array<int, 5> arr;\narr.___(0);",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_148_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++17 std::to_array Deduction",
       "prompt": "Fill in helper function creating std::array from raw initializer.",
       "codeSnippet": "auto arr = std::___({1, 2, 3});",

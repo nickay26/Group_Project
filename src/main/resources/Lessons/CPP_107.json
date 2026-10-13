@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_107_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Addition Operator",
       "prompt": "Fill in the correct operator to add two numbers.",
       "codeSnippet": "int total = 15 ___ 25;",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_107_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Modulus Calculation",
       "prompt": "Fill in the operator that computes remainder of division.",
       "codeSnippet": "int remainder = 7 ___ 2;",

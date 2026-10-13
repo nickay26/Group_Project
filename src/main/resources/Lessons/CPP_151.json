@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_151_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "span Header Include",
       "prompt": "Fill in standard C++20 header.",
       "codeSnippet": "#include <___>",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_151_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "First N Elements Subspan",
       "prompt": "Fill in method taking first N elements of span.",
       "codeSnippet": "auto head = s.___ (3);",
@@ -81,6 +83,7 @@
     {
       "slideId": "CPP_151_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::as_bytes Helper",
       "prompt": "Fill in C++20 function casting span elements into raw read-only byte view.",
       "codeSnippet": "auto byteSpan = std::___(s);",

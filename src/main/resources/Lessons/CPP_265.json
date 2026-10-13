@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_265_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Template Function Overloading",
       "prompt": "Fill in the non-template function call syntax to explicitly prefer calling a standard overload over a template function when names match.",
       "codeSnippet": "void print(int x) { std::cout << \"Int: \" << x; }\ntemplate <typename T> void print(T x) { std::cout << \"Generic: \" << x; }\n\n// To explicitly call the template version with int argument:\nprint<___>(5);",

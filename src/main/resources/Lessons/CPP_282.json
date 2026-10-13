@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_282_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Inheritance Syntax (CPP_209)",
       "prompt": "Fill in the symbol used to declare that a derived class inherits from a base class.",
       "codeSnippet": "class Dog ___ public Animal {\n    // Dog class members\n};",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_282_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Public Inheritance Access (CPP_210)",
       "prompt": "Fill in the access keyword so public members of the base class remain public in the derived class.",
       "codeSnippet": "class Car : ___ Vehicle {\npublic:\n    int doors;\n};",

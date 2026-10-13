@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_159_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Null Pointer Constant",
       "prompt": "Fill in the C++11 keyword used to represent a null pointer safely.",
       "codeSnippet": "int* ptr = ___;",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_159_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Changing Pointer Value",
       "prompt": "Fill in the operator to update the value of the target variable directly.",
       "codeSnippet": "int val = 10;\nint* p = &val;\n___p = 50;",

@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_155_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Inline Variables in C++17",
       "prompt": "Fill in the C++17 keyword that permits global constants in headers without violating ODR.",
       "codeSnippet": "___ constexpr int MAX_BUFFER = 1024;",

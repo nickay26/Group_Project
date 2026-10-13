@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_171_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Array Size Initialization (CPP_145)",
       "prompt": "Fill in the missing array size in brackets for declaring 3 integer elements.",
       "codeSnippet": "double prices[___] = {10.5, 20.0, 15.75};",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_171_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "2D Array Access (CPP_146)",
       "prompt": "Fill in the brackets to access row 0, column 1 of a 2D matrix.",
       "codeSnippet": "int matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};\nint val = matrix[0][___];",

@@ -22,6 +22,7 @@
     {
       "slideId": "CPP_115_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Numeric Value of true",
       "prompt": "What numeric integer value corresponds to 'true' in C++?",
       "options": ["1", "0", "-1", "Any negative number"],
