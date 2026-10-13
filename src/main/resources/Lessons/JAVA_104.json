@@ -14,6 +14,7 @@
       "slideId": "JAVA_104_S2",
       "type": "MULTIPLE_CHOICE",
       "title": "Entry Point",
+      "Interactive": "true",
       "prompt": "What is the entry point of a Java program?",
       "options": ["main()", "start()", "init()", "run()"],
       "correctAnswer": "main()"
@@ -46,6 +47,7 @@
       "slideId": "JAVA_104_S6",
       "type": "FILL_IN_BLANK",
       "title": "Main Method Parameter",
+      "Interactive": "true",
       "prompt": "Complete the main method declaration.",
       "codeSnippet": "public static void main(String[] ____) {\n}",
       "options": ["args", "main", "String", "void"],

@@ -598,9 +598,24 @@ public class DatabaseManager {
         String planType = obj.optString("plan_type", obj.optString("Plan_Type", "FREE"));
         String role = obj.optString("role", obj.optString("Role", "USER"));
 
+        // ⭐ Subscription Type နဲ့ Expiry Date ထည့်
+        String subscriptionType = obj.optString("subscription_type",
+                obj.optString("Subscription_Type", "free"));
+        String premiumExpiry = obj.optString("premium_expiry",
+                obj.optString("Premium_Expiry", null));
+
         User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
         user.setPlanType(planType);
         user.setRole(role);
+        user.setSubscriptionType(subscriptionType);
+        user.setPremiumExpiry(premiumExpiry);
+
+        // ⭐ isPremium Flag ကို Plan Type အလိုက် သတ်မှတ်
+        boolean isPremium = "PREMIUM".equalsIgnoreCase(planType)
+                || "monthly".equalsIgnoreCase(subscriptionType)
+                || "yearly".equalsIgnoreCase(subscriptionType);
+        user.setPremium(isPremium);
+
         return user;
     }
 
@@ -856,5 +871,28 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+    // ============================================
+// ⭐ PREMIUM EXPIRY CHECK
+// ============================================
+
+    /**
+     * Premium သက်တမ်း ကုန်ဆုံးပြီလား စစ်ဆေးခြင်း
+     */
+    public static JSONObject checkPremiumStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/check-premium"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

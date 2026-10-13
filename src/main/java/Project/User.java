@@ -9,6 +9,7 @@ public class User {
     private int streak;
     private int coin;
     private int brainCount;
+    private String premiumExpiry;  // ⭐ ဒါ ထည့်
 
     // ⭐️ Premium Fields
     private boolean premium = false;
@@ -58,6 +59,10 @@ public class User {
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
     public String getPlanType() { return planType; }
+    public String getPremiumExpiry() { return premiumExpiry; }
+    public void setPremiumExpiry(String premiumExpiry) {
+        this.premiumExpiry = premiumExpiry;
+    }
 
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }

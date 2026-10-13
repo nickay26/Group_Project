@@ -15,6 +15,7 @@
       "slideId": "JAVA_108_S2",
       "type": "FILL_IN_BLANK",
       "title": "Print Hello",
+      "Interactive": "true",
       "prompt": "Complete the code to print \"Hello\".",
       "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello\");\n  }\n}",
       "options": ["println", "print", "write", "output"],
@@ -69,6 +70,7 @@
       "slideId": "JAVA_108_S8",
       "type": "MULTIPLE_CHOICE",
       "title": "Println Method",
+      "Interactive": "true",
       "prompt": "Which method prints text and adds a new line?",
       "options": ["println()", "print()", "write()", "output()"],
       "correctAnswer": "println()"
