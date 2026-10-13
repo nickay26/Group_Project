@@ -605,4 +605,11 @@ public class SettingsController {
             newShowBtn.setText("Hide");
         }
     }
+    @FXML
+    private void handleClose() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.handleClosePage();
+        }
+    }
 }

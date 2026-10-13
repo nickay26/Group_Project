@@ -33,6 +33,13 @@
             <children>
                 <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Edit Profile" />
                 <Region HBox.hgrow="ALWAYS" />
+                <Button text="✕" onAction="#handleClose"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #94A3B8;
+                           -fx-font-size: 20px;
+                           -fx-font-weight: bold;
+                           -fx-cursor: hand;
+                           -fx-padding: 0 10;" />
             </children>
         </HBox>
     </top>

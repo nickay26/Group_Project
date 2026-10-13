@@ -827,7 +827,7 @@ public class LessonPlayerController {
                         handleClose();
                     }
                 } else {
-                    Alert err = new Alert(Alert.AlertType.ERROR, "❌ Insufficient coins! You need 100 coins.");
+                    Alert err = new Alert(Alert.AlertType.ERROR, " Insufficient coins! You need 100 coins.");
                     err.showAndWait();
                     handleClose();
                 }

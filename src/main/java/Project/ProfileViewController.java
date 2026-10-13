@@ -552,4 +552,11 @@ public class ProfileViewController {
 
         return "#64748B";
     }
+    @FXML
+    private void handleClose() {
+        MainLayoutController mainLayout = MainLayoutController.getInstance();
+        if (mainLayout != null) {
+            mainLayout.handleClosePage();   // ✅ currentPage ပြန်
+        }
+    }
 }
