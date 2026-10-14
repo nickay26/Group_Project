@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_253",
+  "title": "Code Profiling: cProfile, line_profiler & timeit",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_253_S1",
+      "type": "CONCEPT",
+      "title": "Performance Profiling Tools",
+      "prompt": "Python provides `timeit` for micro-benchmarking code snippets, `cProfile` for deterministic macro-level function call profiling, and `line_profiler` for line-by-line execution time analysis.",
+      "codeSnippet": "import timeit\nimport cProfile\n\n# Micro-benchmark execution time\nexecution_time = timeit.timeit('[x**2 for x in range(1000)]', number=10000)\n\n# Function call profile\ndef heavy_computation():
+
+      return sum(i * i for i in range(100000))\n\ncProfile.run('heavy_computation()')"
+    },
+    {
+      "slideId": "PY_253_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "timeit Import Function",
+      "prompt": "Fill in the function name in `timeit` used to run a statement repeatedly for benchmarking.",
+      "codeSnippet": "import timeit\n\ntime_taken = timeit.___(stmt='\"-\".join(str(n) for n in range(100))', number=10000)",
+      "options": ["timeit", "benchmark", "measure", "profile"],
+      "correctAnswer": "timeit"
+    },
+    {
+      "slideId": "PY_253_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Built-in Profiler Module",
+      "prompt": "Which standard library C-extension module is recommended for deterministic profiling with minimal overhead?",
+      "options": [
+        "cProfile",
+        "profile",
+        "line_profiler",
+        "pyprofile"
+      ],
+      "correctAnswer": "cProfile"
+    },
+    {
+      "slideId": "PY_253_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "cProfile Execution Method",
+      "prompt": "Fill in the function used to profile a statement string directly in `cProfile`.",
+      "codeSnippet": "import cProfile\n\ncProfile.___('my_func()')",
+      "options": ["run", "exec", "profile", "start"],
+      "correctAnswer": "run"
+    },
+    {
+      "slideId": "PY_253_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Line-by-Line Profiling Decorator",
+      "prompt": "Which decorator is used by `line_profiler` to target specific functions for line-by-line breakdown?",
+      "options": [
+        "@profile",
+        "@line_profile",
+        "@benchmark",
+        "@cprofile"
+      ],
+      "correctAnswer": "@profile"
+    },
+    {
+      "slideId": "PY_253_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "timeit Executions Count Argument",
+      "prompt": "Fill in the parameter name used in `timeit.timeit()` to specify how many times the statement runs.",
+      "codeSnippet": "timeit.timeit(stmt='pass', ___=1000000)",
+      "options": ["number", "count", "repeats", "iterations"],
+      "correctAnswer": "number"
+    },
+    {
+      "slideId": "PY_253_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Sorting cProfile Statistics",
+      "prompt": "Which class from the standard library is used to parse, format, and sort `cProfile` binary output files?",
+      "options": [
+        "pstats.Stats",
+        "cProfile.Printer",
+        "profile.Reporter",
+        "sys.ProfilerStats"
+      ],
+      "correctAnswer": "pstats.Stats"
+    }
+  ]
+}

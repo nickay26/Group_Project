@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_270",
+  "title": "Concurrent Execution with concurrent.futures",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_270_S1",
+      "type": "CONCEPT",
+      "title": "High-Level Concurrency with `concurrent.futures`",
+      "prompt": "The `concurrent.futures` module provides a clean high-level interface for asynchronously executing calls using pools of threads or processes (`ThreadPoolExecutor` and `ProcessPoolExecutor`), returning `Future` objects.",
+      "codeSnippet": "from concurrent.futures import ThreadPoolExecutor, as_completed\nimport time\n\ndef task(n):\n    time.sleep(0.1)\n    return n * 2\n\nwith ThreadPoolExecutor(max_workers=3) as executor:\n    futures = [executor.submit(task, i) for i in range(5)]\n    for future in as_completed(futures):\n        print(future.result())"
+    },
+    {
+      "slideId": "PY_270_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Submitting Tasks to Executor",
+      "prompt": "Fill in the method used to schedule a callable execution on an executor instance.",
+      "codeSnippet": "with ThreadPoolExecutor() as executor:\n    future = executor.___(work_fn, arg1)",
+      "options": ["submit", "dispatch", "run", "add"],
+      "correctAnswer": "submit"
+    },
+    {
+      "slideId": "PY_270_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Choosing Between Executors",
+      "prompt": "When should you prefer `ThreadPoolExecutor` over `ProcessPoolExecutor`?",
+      "options": [
+        "When tasks are primary I/O-bound (network requests, disk operations)",
+        "When tasks require heavy compute operations on 16 CPU cores",
+        "When complete process memory isolation is strictly required",
+        "When bypassing the CPython GIL is mandatory"
+      ],
+      "correctAnswer": "When tasks are primary I/O-bound (network requests, disk operations)"
+    },
+    {
+      "slideId": "PY_270_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Retrieving Future Result",
+      "prompt": "Fill in the method invoked on a `Future` object to obtain its return value upon completion.",
+      "codeSnippet": "future = executor.submit(compute)\nval = future.___()",
+      "options": ["result", "get", "value", "fetch"],
+      "correctAnswer": "result"
+    },
+    {
+      "slideId": "PY_270_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Purpose of as_completed()",
+      "prompt": "What is the primary benefit of iterating over futures using `concurrent.futures.as_completed()`?",
+      "options": [
+        "Yields futures immediately as they finish execution, regardless of submission order",
+        "Forces all tasks to execute sequentially in array index order",
+        "Automatically retries failed futures up to 3 times",
+        "Cancels remaining queued tasks if one fails with an exception"
+      ],
+      "correctAnswer": "Yields futures immediately as they finish execution, regardless of submission order"
+    },
+    {
+      "slideId": "PY_270_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Executor Context Management",
+      "prompt": "Fill in the block keyword used to cleanly shut down executors automatically.",
+      "codeSnippet": "___ ThreadPoolExecutor(max_workers=2) as executor:\n    executor.map(fetch, urls)",
+      "options": ["with", "using", "async", "managed"],
+      "correctAnswer": "with"
+    },
+    {
+      "slideId": "PY_270_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Canceling Futures",
+      "prompt": "Under what condition will calling `future.cancel()` return `True`?",
+      "options": [
+        "If the task is currently sitting in the work queue and has not yet started running",
+        "Even if the task has already finished executing completely",
+        "Only if the task is currently running in an active thread",
+        "Future objects cannot be cancelled once submitted"
+      ],
+      "correctAnswer": "If the task is currently sitting in the work queue and has not yet started running"
+    }
+  ]
+}

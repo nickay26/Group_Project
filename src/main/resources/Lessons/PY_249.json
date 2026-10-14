@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_249",
+  "title": "Concurrent Programming: concurrent.futures Executors",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_249_S1",
+      "type": "CONCEPT",
+      "title": "High-Level Concurrency with concurrent.futures",
+      "prompt": "The `concurrent.futures` module offers a unified high-level interface for asynchronous execution using worker pools (`ThreadPoolExecutor` for I/O tasks and `ProcessPoolExecutor` for CPU tasks).",
+      "codeSnippet": "from concurrent.futures import ThreadPoolExecutor\n\ndef fetch(url):\n    return f\"Data from {url}\"\n\nurls = [\"url1\", \"url2\", \"url3\"]\nwith ThreadPoolExecutor(max_workers=3) as executor:\n    results = list(executor.map(fetch, urls))\nprint(results)"
+    },
+    {
+      "slideId": "PY_249_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Submit Method on Executor",
+      "prompt": "Fill in the executor method used to schedule a callable and return a `Future` object immediately.",
+      "codeSnippet": "with ThreadPoolExecutor() as ex:\n    future = ex.___(fn, arg1)",
+      "options": ["submit", "run", "schedule", "dispatch"],
+      "correctAnswer": "submit"
+    },
+    {
+      "slideId": "PY_249_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Executor Map Method Behavior",
+      "prompt": "How does `executor.map(func, iterables)` differ from `submit()`?",
+      "options": [
+        "It applies the function across an iterable concurrently and yields results in the original order",
+        "It runs functions sequentially without thread pooling",
+        "It returns futures in order of completion rather than input order",
+        "It requires a custom callback function"
+      ],
+      "correctAnswer": "It applies the function across an iterable concurrently and yields results in the original order"
+    },
+    {
+      "slideId": "PY_249_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "as_completed Iterator Import",
+      "prompt": "Fill in the helper function imported from `concurrent.futures` that yields futures as they complete.",
+      "codeSnippet": "from concurrent.futures import ___\n\nfor future in as_completed(futures):\n    print(future.result())",
+      "options": ["as_completed", "when_done", "completed_futures", "iter_results"],
+      "correctAnswer": "as_completed"
+    },
+    {
+      "slideId": "PY_249_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Context Manager Exit Behavior for Executors",
+      "prompt": "What occurs automatically when exiting a `with ThreadPoolExecutor()` context block?",
+      "options": [
+        "It implicitly invokes `executor.shutdown(wait=True)`, waiting for pending futures to finish",
+        "It instantly cancels all running and pending threads",
+        "It raises a RuntimeError if futures remain unfinished",
+        "It detaches threads into background OS daemons"
+      ],
+      "correctAnswer": "It implicitly invokes `executor.shutdown(wait=True)`, waiting for pending futures to finish"
+    },
+    {
+      "slideId": "PY_249_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Max Workers Parameter Name",
+      "prompt": "Fill in the keyword argument name used to cap the number of worker threads/processes in an Executor.",
+      "codeSnippet": "executor = ProcessPoolExecutor(___=4)",
+      "options": ["max_workers", "workers", "num_pools", "pool_size"],
+      "correctAnswer": "max_workers"
+    },
+    {
+      "slideId": "PY_249_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Future.result() Timeout Parameter",
+      "prompt": "What error is raised if `future.result(timeout=2)` exceeds the designated wait time?",
+      "options": [
+        "concurrent.futures.TimeoutError",
+        "asyncio.CancelledError",
+        "RuntimeError",
+        "SystemError"
+      ],
+      "correctAnswer": "concurrent.futures.TimeoutError"
+    }
+  ]
+}

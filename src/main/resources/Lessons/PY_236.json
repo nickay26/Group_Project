@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_236",
+  "title": "Comprehensive Test: Context Managers & Resource Management (PY_230 to PY_235)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_236_S1",
+      "type": "CONCEPT",
+      "title": "Resource Management Mastery Review",
+      "prompt": "This comprehensive test evaluates your understanding of class-based and generator-based context managers, `contextlib` utilities, asynchronous context management, exception handling, and resource lifecycle control in Python.",
+      "codeSnippet": "from contextlib import contextmanager, ExitStack\n\n@contextmanager\ndef custom_resource():\n    print('Initialize')\n    try:\n        yield 'Resource Active'\n    finally:\n        print('Cleaned up')"
+    },
+    {
+      "slideId": "PY_236_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Suppression Return Value",
+      "prompt": "To swallow an exception inside `__exit__()`, what value must be returned by the method?",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "1"
+      ],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "PY_236_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Generator Context Decorator",
+      "prompt": "Fill in the decorator name used to wrap generator functions into context managers.",
+      "codeSnippet": "from contextlib import ___\n\n@contextmanager\ndef managed(): yield",
+      "options": ["contextmanager", "context", "manage", "with_context"],
+      "correctAnswer": "contextmanager"
+    },
+    {
+      "slideId": "PY_236_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Async Context Protocol Methods",
+      "prompt": "Which set of magic methods defines the protocol for asynchronous context managers?",
+      "options": [
+        "`__aenter__` and `__aexit__`",
+        "`__enter__` and `__exit__`",
+        "`__async_start__` and `__async_stop__`",
+        "`__open_async__` and `__close_async__`"
+      ],
+      "correctAnswer": "`__aenter__` and `__aexit__`"
+    },
+    {
+      "slideId": "PY_236_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Swallowing Exceptions Utility",
+      "prompt": "Fill in the helper function from `contextlib` used to ignore specified exception types.",
+      "codeSnippet": "from contextlib import ___\n\nwith suppress(KeyError):\n    d = {}\n    val = d['missing']",
+      "options": ["suppress", "ignore", "catch", "pass_error"],
+      "correctAnswer": "suppress"
+    },
+    {
+      "slideId": "PY_236_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Dynamic Management Tool",
+      "prompt": "Which tool from `contextlib` is designed to handle a variable or dynamic number of context managers cleanly?",
+      "options": [
+        "ExitStack",
+        "ContextPool",
+        "MultiContext",
+        "ContextGroup"
+      ],
+      "correctAnswer": "ExitStack"
+    },
+    {
+      "slideId": "PY_236_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "__exit__ Exception Type Parameter",
+      "prompt": "Fill in the first parameter name after `self` in `__exit__(self, ___, exc_val, exc_tb)`.",
+      "codeSnippet": "def __exit__(self, ___, exc_val, exc_tb):\n    return False",
+      "options": ["exc_type", "exception", "err", "error_type"],
+      "correctAnswer": "exc_type"
+    }
+  ]
+}

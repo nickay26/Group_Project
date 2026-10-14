@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_271",
+  "title": "Asyncio Core Concepts (Event Loop, Coroutines, Tasks)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_271_S1",
+      "type": "CONCEPT",
+      "title": "Asynchronous Programming with `asyncio`",
+      "prompt": "Asyncio uses single-threaded single-process cooperative multitasking via an event loop. Functions declared with `async def` are coroutines, yielding control back to the event loop using `await`.",
+      "codeSnippet": "import asyncio\n\nasync def fetch_data():\n    print(\"Start fetching\")\n    await asyncio.sleep(1)  # Non-blocking pause\n    print(\"Data fetched\")\n    return {\"data\": 1}\n\nasync def main():\n    result = await fetch_data()\n    print(result)\n\nasyncio.run(main())"
+    },
+    {
+      "slideId": "PY_271_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Defining Coroutine Functions",
+      "prompt": "Fill in the keyword prefix used to declare an asynchronous coroutine function.",
+      "codeSnippet": "___ def fetch_api():\n    await asyncio.sleep(0.5)",
+      "options": ["async", "await", "def", "coroutine"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_271_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Running the Main Async Entry Point",
+      "prompt": "What is the modern (Python 3.7+) recommended way to run the top-level async main function?",
+      "options": [
+        "asyncio.run(main())",
+        "asyncio.get_event_loop().run_until_complete(main())",
+        "main().start()",
+        "asyncio.execute(main)"
+      ],
+      "correctAnswer": "asyncio.run(main())"
+    },
+    {
+      "slideId": "PY_271_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Awaiting Coroutine Execution",
+      "prompt": "Fill in the keyword used to pause coroutine execution until an awaitable completes.",
+      "codeSnippet": "async def process():\n    ___ asyncio.sleep(1)",
+      "options": ["await", "async", "yield", "wait"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PY_271_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Creating Background Tasks",
+      "prompt": "How do you schedule a coroutine to run concurrently on the event loop as an `asyncio.Task`?",
+      "options": [
+        "asyncio.create_task(coroutine())",
+        "asyncio.start_thread(coroutine())",
+        "asyncio.schedule(coroutine())",
+        "await coroutine()"
+      ],
+      "correctAnswer": "asyncio.create_task(coroutine())"
+    },
+    {
+      "slideId": "PY_271_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Concurrent Task Execution helper",
+      "prompt": "Fill in the `asyncio` function used to run multiple awaitables concurrently and gather their results.",
+      "codeSnippet": "async def main():\n    results = await asyncio.___(\n        fetch(1), fetch(2)\n    )",
+      "options": ["gather", "all", "group", "collect"],
+      "correctAnswer": "gather"
+    },
+    {
+      "slideId": "PY_271_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Non-blocking Sleep",
+      "prompt": "Why MUST you use `await asyncio.sleep()` instead of `time.sleep()` inside an asyncio coroutine?",
+      "options": [
+        "`time.sleep()` blocks the entire event loop thread, stopping all other concurrent tasks",
+        "`time.sleep()` raises a CoroutineTypeError inside async functions",
+        "`asyncio.sleep()` uses multiple CPU cores for sleeping",
+        "`time.sleep()` causes immediate garbage collection of the loop"
+      ],
+      "correctAnswer": "`time.sleep()` blocks the entire event loop thread, stopping all other concurrent tasks"
+    }
+  ]
+}
