@@ -35,6 +35,7 @@
     {
       "slideId": "PY_219_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Optional Argument Pattern",
       "prompt": "Fill in the parameter default used to allow a decorator to be called with or without parentheses.",
       "codeSnippet": "def smart_dec(_func=___, *, rate=1):\n    if _func is None:\n        return lambda f: smart_dec(f, rate=rate)",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_219_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Keyword-Only Decorator Arguments",
       "prompt": "Fill in the separator symbol used in the factory declaration to enforce keyword-only arguments.",
       "codeSnippet": "def delay(___, seconds=1):\n    def decorator(func):\n        pass",

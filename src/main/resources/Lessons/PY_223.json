@@ -13,6 +13,7 @@
     {
       "slideId": "PY_223_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Built-in Iterator Creator",
       "prompt": "Fill in the built-in function name used to obtain an iterator from an iterable object.",
       "codeSnippet": "my_list = [1, 2, 3]\nit = ___(my_list)",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_223_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Fetching Next Element",
       "prompt": "Fill in the built-in function used to advance an iterator and retrieve its next value.",
       "codeSnippet": "value = ___(it)",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_223_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dunder Iter Method",
       "prompt": "Fill in the magic method name required to make an object iterable.",
       "codeSnippet": "def ___iter___(self):\n    return self",

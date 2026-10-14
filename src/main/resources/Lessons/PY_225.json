@@ -13,6 +13,7 @@
     {
       "slideId": "PY_225_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Generator Expression Enclosure",
       "prompt": "Fill in the missing closing bracket symbol to define a generator expression.",
       "codeSnippet": "squares = (x**2 for x in range(10)___",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_225_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Inspection Function",
       "prompt": "Fill in the sys module function name used to inspect byte size of objects.",
       "codeSnippet": "import sys\nsize = sys.___(gen_exp)",

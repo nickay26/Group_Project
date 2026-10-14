@@ -35,6 +35,7 @@
     {
       "slideId": "PYTH_138_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Delay Execution",
       "prompt": "Fill in the method used to trigger a task asynchronously.",
       "codeSnippet": "send_email.___ ('user@example.com')",
@@ -57,6 +58,7 @@
     {
       "slideId": "PYTH_138_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Result Backend",
       "prompt": "Fill in the configuration key specifying where task execution results are stored.",
       "codeSnippet": "app = Celery('tasks', ___='redis://localhost:6379/1')",

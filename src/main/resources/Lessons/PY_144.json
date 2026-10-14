@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_144_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "QApplication Instance",
       "prompt": "Fill in the required application class that manages GUI control flow.",
       "codeSnippet": "app = ___ ([])",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_144_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "QPushButton Widget",
       "prompt": "Fill in the UI widget class used to render clickable buttons.",
       "codeSnippet": "btn = ___ ('Click Me')",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_144_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Connecting Signals",
       "prompt": "Fill in the method to link a button click signal to a Python function.",
       "codeSnippet": "button.clicked.___ (my_callback)",

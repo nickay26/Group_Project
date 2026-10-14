@@ -13,6 +13,7 @@
     {
       "slideId": "PY_269_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Adding Items to Multiprocessing Queue",
       "prompt": "Fill in the method used to push an item into a `multiprocessing.Queue`.",
       "codeSnippet": "q = Queue()\nq.___(\"Data object\")",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_269_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Retrieving Items from Queue",
       "prompt": "Fill in the blocking method used to pop an item from a `Queue`.",
       "codeSnippet": "q = Queue()\nitem = q.___()",
