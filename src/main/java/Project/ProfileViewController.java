@@ -90,7 +90,6 @@ public class ProfileViewController {
             } else {
                 brainLabel.setText(String.valueOf(currentUser.getBrainCount()));
             }
-            // ★★★ ဒီအထိပဲ ★★★
 
             // ✅ FIXED: Format server filename into full HTTP URL
             String profilePath = currentUser.getProfile();

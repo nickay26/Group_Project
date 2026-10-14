@@ -10,6 +10,8 @@ import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,6 +47,7 @@ public class MainLayoutController {
     @FXML private Button profileBtn;
     private ContextMenu profileMenu;
     @FXML private Button premiumBtn;
+    @FXML private ImageView profileImageView;
 
     private List<Button> navButtons;
     private Timeline premiumCheckTimer;
@@ -64,6 +67,9 @@ public class MainLayoutController {
             topBrainLabel.setStyle("-fx-cursor: hand;");
         }
 
+        // 🌟 Load User Profile Image
+        loadUserProfileImage();
+
         // ⭐ Premium Expiry စစ်ဆေးခြင်း
         checkAndUpdatePremiumStatus();
         startPremiumCheckTimer();
@@ -77,6 +83,23 @@ public class MainLayoutController {
             handleNavCourses();
         }
     }
+
+    private void loadUserProfileImage() {
+        User currentUser = UserSession.getCurrentUser();
+        String profilePath = currentUser.getProfile();
+        if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
+            try {
+                String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
+                if (fullImageUrl != null) {
+                    Image img = new Image(fullImageUrl, true); // Async loading
+                    profileImageView.setImage(img);
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load avatar: " + e.getMessage());
+            }
+        }
+    }
+
     public static MainLayoutController getInstance() {
         return instance;
     }
@@ -388,7 +411,20 @@ public class MainLayoutController {
         if (profileMenu.isShowing()) {
             profileMenu.hide();
         } else {
-            profileMenu.show(profileBtn, Side.BOTTOM, -30, 8);
+            profileMenu.show(profileImageView, Side.BOTTOM, -30, 8);
+
+            // 🌟 ContextMenu (Popup) ထဲသို့ CSS ကို သီးသန့်ချိတ်ဆက်ပေးခြင်း
+            Platform.runLater(() -> {
+                if (profileMenu.getSkin() != null && profileMenu.getSkin().getNode() != null) {
+                    Scene popupScene = profileMenu.getSkin().getNode().getScene();
+                    if (popupScene != null) {
+                        String cssUrl = getClass().getResource("/Css/mainlayout.css").toExternalForm();
+                        if (cssUrl != null && !popupScene.getStylesheets().contains(cssUrl)) {
+                            popupScene.getStylesheets().add(cssUrl);
+                        }
+                    }
+                }
+            });
         }
     }
 

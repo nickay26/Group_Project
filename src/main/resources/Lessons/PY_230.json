@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_230",
+  "title": "Context Managers Basics & the with statement",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_230_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Context Managers & the `with` statement",
+      "prompt": "Context managers simplify resource management by ensuring setup and cleanup code execution around a block of statements. The `with` statement handles resource acquisition and release automatically, even if exceptions occur.",
+      "codeSnippet": "# Resource handling without `with` vs with `with`\n# Manual approach\nf = open('example.txt', 'w')\ntry:\n    f.write('Hello World')\nfinally:\n    f.close()\n\n# Modern Pythonic approach\nwith open('example.txt', 'w') as f:\n    f.write('Hello World')"
+    },
+    {
+      "slideId": "PY_230_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "The `with` Keyword Syntax",
+      "prompt": "Fill in the keyword used to wrap execution of a block with methods defined by a context manager.",
+      "codeSnippet": "___ open('file.txt', 'r') as file:\n    content = file.read()",
+      "options": ["with", "using", "use", "managed"],
+      "correctAnswer": "with"
+    },
+    {
+      "slideId": "PY_230_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary Benefit of Context Managers",
+      "prompt": "What is the primary advantage of using a context manager when working with external resources like files or database connections?",
+      "options": [
+        "Guaranteed cleanup/closure of resources regardless of errors",
+        "Faster execution time due to C-level optimizations",
+        "Automatic conversion of byte streams to strings",
+        "Multithreaded execution of file writes"
+      ],
+      "correctAnswer": "Guaranteed cleanup/closure of resources regardless of errors"
+    },
+    {
+      "slideId": "PY_230_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Target Variable Binding",
+      "prompt": "Fill in the keyword used to assign the return value of a context manager to a variable.",
+      "codeSnippet": "with open('data.json') ___ target_file:\n    data = target_file.read()",
+      "options": ["as", "to", "into", "target"],
+      "correctAnswer": "as"
+    },
+    {
+      "slideId": "PY_230_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Multiple Context Managers",
+      "prompt": "How can you manage multiple resources simultaneously using the `with` statement in modern Python?",
+      "options": [
+        "By separating multiple context manager calls with commas inside a single `with` statement or using parentheses",
+        "By nesting `with` statements inside separate functions only",
+        "By joining context managers using the `and` logical operator",
+        "Context managers can only handle one resource at a time"
+      ],
+      "correctAnswer": "By separating multiple context manager calls with commas inside a single `with` statement or using parentheses"
+    },
+    {
+      "slideId": "PY_230_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Resource Cleanup Execution",
+      "prompt": "Fill in the block keyword that context managers implicitly emulate to handle cleanup upon exception.",
+      "codeSnippet": "# Context managers ensure teardown happens like a try/... block\ntry:\n    # code block\n___:\n    # cleanup logic",
+      "options": ["finally", "except", "else", "catch"],
+      "correctAnswer": "finally"
+    },
+    {
+      "slideId": "PY_230_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Context Manager Reusability",
+      "prompt": "What happens if a built-in file context manager object is reused across multiple `with` statements?",
+      "options": [
+        "It raises a ValueError or I/O error because closed file streams cannot be re-opened directly",
+        "It automatically resets the file cursor back to index 0",
+        "It appends new data to the existing file pointer",
+        "It creates a duplicate copy of the file on disk"
+      ],
+      "correctAnswer": "It raises a ValueError or I/O error because closed file streams cannot be re-opened directly"
+    }
+  ]
+}

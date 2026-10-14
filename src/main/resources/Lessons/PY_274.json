@@ -1,0 +1,164 @@
+{
+  "lessonId": "PY_274",
+  "title": "Module Assessment: Functional Programming (PY_209 to PY_215)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_274_S1",
+      "type": "CONCEPT",
+      "title": "Module 2 Overview",
+      "prompt": "Assessment covering Lambdas, Map/Filter/Reduce, Partial Functions, Currying, and Pure Functions.",
+      "codeSnippet": "from functools import reduce, partial\nprint('Functional Quiz Starting')"
+    },
+    {
+      "slideId": "PY_274_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Pure Functions",
+      "prompt": "Which of the following describes a Pure Function?",
+      "options": [
+        "Produces same output for same input with no side effects",
+        "Modifies global state",
+        "Uses random variables",
+        "Performs file I/O operations"
+      ],
+      "correctAnswer": "Produces same output for same input with no side effects"
+    },
+    {
+      "slideId": "PY_274_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Lambda Syntax",
+      "prompt": "Fill in the keyword to define an anonymous inline function.",
+      "codeSnippet": "square = ___ x: x ** 2",
+      "options": ["lambda", "def", "func", "inline"],
+      "correctAnswer": "lambda"
+    },
+    {
+      "slideId": "PY_274_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Map Function",
+      "prompt": "What type of object does `map()` return in Python 3?",
+      "options": ["An iterator", "A list", "A tuple", "A dictionary"],
+      "correctAnswer": "An iterator"
+    },
+    {
+      "slideId": "PY_274_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Reduce Function Source",
+      "prompt": "Which standard library module contains `reduce()`?",
+      "options": ["functools", "itertools", "operator", "math"],
+      "correctAnswer": "functools"
+    },
+    {
+      "slideId": "PY_274_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Partial Application",
+      "prompt": "Fill in the function name used to freeze a portion of a function's arguments.",
+      "codeSnippet": "from functools import ___\n\ndouble = partial(multiply, 2)",
+      "options": ["partial", "curry", "freeze", "bind"],
+      "correctAnswer": "partial"
+    },
+    {
+      "slideId": "PY_274_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Filter Behavior",
+      "prompt": "What elements does `filter(predicate, iterable)` retain?",
+      "options": [
+        "Elements where predicate returns True",
+        "Elements where predicate returns False",
+        "All elements",
+        "Non-zero elements only"
+      ],
+      "correctAnswer": "Elements where predicate returns True"
+    },
+    {
+      "slideId": "PY_274_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Operator Module",
+      "prompt": "Fill in the function from `operator` module equivalent to `lambda x, y: x + y`.",
+      "codeSnippet": "import operator\n\nreduce(operator.___, [1, 2, 3])",
+      "options": ["add", "plus", "sum", "concat"],
+      "correctAnswer": "add"
+    },
+    {
+      "slideId": "PY_274_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Immutability",
+      "prompt": "Which Python built-in type is immutable and preferred in functional programming for sequences?",
+      "options": ["tuple", "list", "dict", "set"],
+      "correctAnswer": "tuple"
+    },
+    {
+      "slideId": "PY_274_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: First-Class Functions",
+      "prompt": "What does 'first-class functions' mean in Python?",
+      "options": [
+        "Functions can be passed as arguments, returned, and assigned to variables",
+        "Functions execute faster than classes",
+        "Functions are executed before main script",
+        "Functions must have type hints"
+      ],
+      "correctAnswer": "Functions can be passed as arguments, returned, and assigned to variables"
+    },
+    {
+      "slideId": "PY_274_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 10: List Comprehension Filter",
+      "prompt": "Fill in the keyword to convert `filter(lambda x: x > 0, nums)` into comprehension.",
+      "codeSnippet": "[x for x in nums ___ x > 0]",
+      "options": ["if", "where", "filter", "when"],
+      "correctAnswer": "if"
+    },
+    {
+      "slideId": "PY_274_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 11: Higher-Order Function Definition",
+      "prompt": "What defines a Higher-Order Function?",
+      "options": [
+        "A function that takes another function as argument or returns a function",
+        "A function with more than 5 arguments",
+        "A function declared inside a class",
+        "A recursive function"
+      ],
+      "correctAnswer": "A function that takes another function as argument or returns a function"
+    },
+    {
+      "slideId": "PY_274_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Functools LRU Cache",
+      "prompt": "Which decorator memoizes function results for performance optimization?",
+      "options": ["@lru_cache", "@memoize", "@cache_result", "@fast_func"],
+      "correctAnswer": "@lru_cache"
+    },
+    {
+      "slideId": "PY_274_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Single Dispatch",
+      "prompt": "Fill in the decorator from `functools` used for generic function dispatch based on first argument type.",
+      "codeSnippet": "from functools import ___\n\n@singledispatch\ndef process(arg): pass",
+      "options": ["singledispatch", "dispatch", "overload", "multidispatch"],
+      "correctAnswer": "singledispatch"
+    },
+    {
+      "slideId": "PY_274_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Recursion Limit",
+      "prompt": "Which module allows checking and modifying Python's maximum recursion depth?",
+      "options": ["sys", "os", "gc", "functools"],
+      "correctAnswer": "sys"
+    },
+    {
+      "slideId": "PY_274_S16",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 15: Map vs Starmap",
+      "prompt": "What is the key difference between `itertools.starmap` and `map`?",
+      "options": [
+        "starmap unpacks tuple arguments from single iterable automatically",
+        "starmap runs asynchronously",
+        "starmap returns a list instead of iterator",
+        "starmap supports only string inputs"
+      ],
+      "correctAnswer": "starmap unpacks tuple arguments from single iterable automatically"
+    }
+  ]
+}

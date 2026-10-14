@@ -164,4 +164,57 @@ public class DialogUtils {
 
         dialog.showAndWait();
     }
+
+    /**
+     * Reusable Dark-themed Confirmation Dialog
+     */
+    public static boolean showConfirmationDialog(String title, String message) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+        dialog.getDialogPane().setStyle(
+                "-fx-background-color: #1E293B; " +
+                        "-fx-text-fill: white;"
+        );
+
+        VBox content = new VBox(12);
+        content.setPadding(new Insets(20, 25, 20, 25));
+        content.setMaxWidth(400);
+
+        Label msgLabel = new Label(message);
+        msgLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 14px; -fx-font-weight: bold;");
+        msgLabel.setWrapText(true);
+        content.getChildren().add(msgLabel);
+
+        dialog.getDialogPane().setContent(content);
+
+        ButtonType confirmButtonType = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+        javafx.scene.Node confirmButton = dialog.getDialogPane().lookupButton(confirmButtonType);
+        if (confirmButton != null) {
+            confirmButton.setStyle(
+                    "-fx-background-color: #DC2626; " +
+                            "-fx-text-fill: white; " +
+                            "-fx-font-weight: bold; " +
+                            "-fx-cursor: hand; " +
+                            "-fx-background-radius: 6;"
+            );
+        }
+
+        javafx.scene.Node cancelButton = dialog.getDialogPane().lookupButton(cancelButtonType);
+        if (cancelButton != null) {
+            cancelButton.setStyle(
+                    "-fx-background-color: #475569; " +
+                            "-fx-text-fill: white; " +
+                            "-fx-font-weight: bold; " +
+                            "-fx-cursor: hand; " +
+                            "-fx-background-radius: 6;"
+            );
+        }
+
+        return dialog.showAndWait().filter(response -> response == confirmButtonType).isPresent();
+    }
 }

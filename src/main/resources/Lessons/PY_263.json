@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_263",
+  "title": "Domain-Driven Design (DDD) & Microservices",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_263_S1",
+      "type": "CONCEPT",
+      "title": "DDD & Microservices Fundamentals",
+      "prompt": "Domain-Driven Design (DDD) aligns software structures with complex domain models. Core building blocks include Entities (identifiable objects), Value Objects (immutable descriptors), Aggregates (clusters of objects enforcing consistency), and Bounded Contexts (explicit domain boundaries).",
+      "codeSnippet": "from dataclasses import dataclass\n\n# Value Object (Immutable, no identity)\n@dataclass(frozen=True)\nclass Money:\n    amount: float\n    currency: str\n\n# Entity (Has identity)\nclass Account:\n    def __init__(self, account_id: str, balance: Money):\n        self.account_id = account_id\n        self.balance = balance"
+    },
+    {
+      "slideId": "PY_263_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Value Object Immutability Decorator",
+      "prompt": "Fill in the `dataclass` option used to enforce immutability for Value Objects.",
+      "codeSnippet": "from dataclasses import dataclass\n\n@dataclass(___=True)\nclass Address:\n    street: str\n    city: str",
+      "options": ["frozen", "immutable", "static", "read_only"],
+      "correctAnswer": "frozen"
+    },
+    {
+      "slideId": "PY_263_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Entity vs Value Object Key Difference",
+      "prompt": "What is the defining distinction between an Entity and a Value Object in DDD?",
+      "options": [
+        "An Entity has an explicit identity that persists across state changes, while a Value Object is defined solely by its attributes",
+        "An Entity is immutable, while a Value Object can be mutated freely",
+        "An Entity cannot be stored in a database, while a Value Object can",
+        "An Entity contains only primitive strings, while a Value Object contains complex methods"
+      ],
+      "correctAnswer": "An Entity has an explicit identity that persists across state changes, while a Value Object is defined solely by its attributes"
+    },
+    {
+      "slideId": "PY_263_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Aggregate Root Access Control",
+      "prompt": "Fill in the term for the root entity that controls external access and enforces consistency rules for an Aggregate cluster.",
+      "codeSnippet": "# External objects can only hold reference to the Aggregate ___\nclass OrderAggregateRoot:\n    pass",
+      "options": ["Root", "Factory", "Proxy", "Context"],
+      "correctAnswer": "Root"
+    },
+    {
+      "slideId": "PY_263_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded Context Purpose",
+      "prompt": "What is the purpose of defining a 'Bounded Context' in DDD microservice architectures?",
+      "options": [
+        "To set explicit boundaries within which a domain model and its Ubiquitous Language apply strictly",
+        "To enforce memory usage limits on microservice Docker containers",
+        "To restrict API endpoints to specific IP ranges",
+        "To define thread pool limits for async background workers"
+      ],
+      "correctAnswer": "To set explicit boundaries within which a domain model and its Ubiquitous Language apply strictly"
+    },
+    {
+      "slideId": "PY_263_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Domain Event Representation",
+      "prompt": "Fill in the object concept used to notify other parts of a system when something significant happens in the domain.",
+      "codeSnippet": "@dataclass(frozen=True)\nclass OrderPlaced___:\n    order_id: str\n    timestamp: str",
+      "options": ["Event", "Command", "Query", "State"],
+      "correctAnswer": "Event"
+    },
+    {
+      "slideId": "PY_263_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CQRS Pattern Separation",
+      "prompt": "What does the CQRS (Command Query Responsibility Segregation) architectural pattern separate?",
+      "options": [
+        "It separates read operations (Queries) from write operations (Commands)",
+        "It separates Python frontend code from C-extension backend code",
+        "It separates thread locks from process signals",
+        "It separates database connection pooling from garbage collection"
+      ],
+      "correctAnswer": "It separates read operations (Queries) from write operations (Commands)"
+    }
+  ]
+}

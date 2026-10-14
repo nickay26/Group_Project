@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_202",
+  "title": "Advanced OOP: @property Decorator & Encapsulation",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_202_S1",
+      "type": "CONCEPT",
+      "title": "Encapsulation with @property Decorator",
+      "prompt": "The @property decorator allows you to define getter, setter, and deleter methods for a class attribute, giving you control over attribute access and validation while maintaining a clean syntax.",
+      "codeSnippet": "class Employee:\n    def __init__(self, salary):\n        self._salary = salary\n\n    @property\n    def salary(self):\n        return self._salary\n\n    @salary.setter\n    def salary(self, value):\n        if value < 0:\n            raise ValueError(\"Salary cannot be negative!\")\n        self._salary = value\n\nemp = Employee(5000)\nemp.salary = 6000  # Uses setter\nprint(emp.salary)  # Uses getter (6000)"
+    },
+    {
+      "slideId": "PY_202_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Property Getter Declaration",
+      "prompt": "Fill in the decorator name used to define a getter method for a property.",
+      "codeSnippet": "class Celsius:\n    def __init__(self, temp=0):\n        self._temp = temp\n\n    @___\n    def temp(self):\n        return self._temp",
+      "options": ["property", "getter", "attribute", "field"],
+      "correctAnswer": "property"
+    },
+    {
+      "slideId": "PY_202_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Protected Attribute Naming Convention",
+      "prompt": "What is the standard Python naming convention to signal that an attribute is intended for internal/protected use?",
+      "options": [
+        "A single leading underscore (e.g., _salary)",
+        "A double leading underscore (e.g., __salary)",
+        "All uppercase letters (e.g., SALARY)",
+        "A trailing underscore (e.g., salary_)"
+      ],
+      "correctAnswer": "A single leading underscore (e.g., _salary)"
+    },
+    {
+      "slideId": "PY_202_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Property Setter Syntax",
+      "prompt": "Fill in the decorator name used to define a setter method for a property named 'age'.",
+      "codeSnippet": "class Student:\n    @property\n    def age(self):\n        return self._age\n\n    @age.___\n    def age(self, value):\n        self._age = value",
+      "options": ["setter", "set", "write", "change"],
+      "correctAnswer": "setter"
+    },
+    {
+      "slideId": "PY_202_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Name Mangling in Python",
+      "prompt": "What happens when you name an attribute with double leading underscores (e.g., __password) inside a class?",
+      "options": [
+        "Python triggers name mangling by rewriting the attribute name as _ClassName__password to prevent subclass collisions",
+        "Python turns the attribute into a read-only constant",
+        "Python throws an AttributeError if accessed outside the class file",
+        "Python automatically encrypts the attribute's value in RAM"
+      ],
+      "correctAnswer": "Python triggers name mangling by rewriting the attribute name as _ClassName__password to prevent subclass collisions"
+    },
+    {
+      "slideId": "PY_202_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Property Deleter Decorator",
+      "prompt": "Fill in the decorator used to handle attribute deletion via the 'del' statement.",
+      "codeSnippet": "class Account:\n    @property\n    def balance(self):\n        return self._balance\n\n    @balance.___\n    def balance(self):\n        del self._balance",
+      "options": ["deleter", "delete", "remove", "clear"],
+      "correctAnswer": "deleter"
+    },
+    {
+      "slideId": "PY_202_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Read-Only Properties",
+      "prompt": "How do you create a read-only property in a Python class?",
+      "options": [
+        "Define a method with the @property decorator but do NOT define a corresponding .setter method",
+        "Set the attribute value using const inside __init__",
+        "Mark the class with @readonly decorator",
+        "Use double trailing underscores on the property method name"
+      ],
+      "correctAnswer": "Define a method with the @property decorator but do NOT define a corresponding .setter method"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        html, body, #container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0d1322;
+        }
+    </style>
+    <!-- Load Monaco Editor via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+<div id="container"></div>
+
+<script>
+    let editor;
+    let pendingCode = '';
+    let pendingLang = 'java';
+
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
+
+    require(['vs/editor/editor.main'], function() {
+        monaco.editor.defineTheme('navyTheme', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [
+                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
+                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
+                { token: 'string', foreground: 'f43f5e' },
+                { token: 'number', foreground: 'fbbf24' }
+            ],
+            colors: {
+                'editor.background': '#0d1322',
+                'editor.foreground': '#e2e8f0',
+                'editor.lineHighlightBackground': '#1e293b',
+                'editorLineNumber.foreground': '#475569',
+                'editorLineNumber.activeForeground': '#38bdf8',
+                'editorCursor.foreground': '#38bdf8'
+            }
+        });
+
+        editor = monaco.editor.create(document.getElementById('container'), {
+            value: pendingCode,
+            language: pendingLang,
+            theme: 'navyTheme',
+            automaticLayout: true,
+            fontSize: 14,
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false
+        });
+    });
+
+    // --- Aliases for CodeEditorController & MonacoEditorController ---
+    function getEditorContent() {
+        return editor ? editor.getValue() : "";
+    }
+    function getCode() {
+        return getEditorContent();
+    }
+
+    function setEditorContent(code, language) {
+        if (editor) {
+            editor.setValue(code || '');
+            if (language) {
+                monaco.editor.setModelLanguage(editor.getModel(), language);
+            }
+        } else {
+            pendingCode = code || '';
+            pendingLang = language || 'java';
+        }
+    }
+    function setCode(code, language) {
+        setEditorContent(code, language);
+    }
+</script>
+</body>
+</html>

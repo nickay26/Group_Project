@@ -408,9 +408,25 @@ public class DatabaseManager {
                     .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (coinsAmount > 0) {
+            // ⭐ CRITICAL FIX: Server တွင် Streak အပ်ဒိတ်ဖြစ်သွားသည်နှင့်
+            // Local UserSession ကိုပါ Server မှ User Profile အသစ်ဖြင့် ချက်ချင်း Sync လုပ်ပေးခြင်း
+            if (response.statusCode() == 200 || response.statusCode() == 201) {
+                User updatedUser = getUserById(userId);
+                if (updatedUser != null && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
+                    UserSession.setCurrentUser(updatedUser);
+
+                    // UI Header တွင် Streak နှင့် အခြား Stats များကို ချက်ချင်း ပြောင်းလဲပြသရန်
+                    javafx.application.Platform.runLater(() -> {
+                        if (MainLayoutController.getInstance() != null) {
+                            MainLayoutController.getInstance().updateHeaderStats();
+                        }
+                    });
+                }
+            }
+
+            if (coinsAmount > 0 && response.statusCode() != 200 && response.statusCode() != 201) {
                 addCoinsToUser(userId, coinsAmount);
             }
         } catch (Exception e) {

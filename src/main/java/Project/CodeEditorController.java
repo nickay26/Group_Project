@@ -44,85 +44,24 @@ public class CodeEditorController {
     }
 
     // Monaco Editor HTML & JS Setup with Custom Navy Theme
+    // Monaco Editor HTML & JS Setup loading from shared resource file
     private void setupMonacoEditor() {
-        String monacoHtml = """
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <style>
-                    html, body, #container { 
-                        width: 100%; 
-                        height: 100%; 
-                        margin: 0; 
-                        padding: 0; 
-                        overflow: hidden; 
-                        background-color: #0d1322; 
-                    }
-                </style>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-            </head>
-            <body>
-                <div id="container"></div>
-                <script>
-                    var editor;
-                    var pendingCode = '';
-                    var pendingLang = 'java';
+        if (webEngine == null) return;
 
-                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
-                    require(['vs/editor/editor.main'], function() {
-                        // Custom Navy Theme Definition
-                        monaco.editor.defineTheme('navyTheme', {
-                            base: 'vs-dark',
-                            inherit: true,
-                            rules: [
-                                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
-                                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
-                                { token: 'string', foreground: 'f43f5e' },
-                                { token: 'number', foreground: 'fbbf24' }
-                            ],
-                            colors: {
-                                'editor.background': '#0d1322',
-                                'editor.foreground': '#e2e8f0',
-                                'editor.lineHighlightBackground': '#1e293b',
-                                'editorLineNumber.foreground': '#475569',
-                                'editorLineNumber.activeForeground': '#38bdf8',
-                                'editorCursor.foreground': '#38bdf8'
-                            }
-                        });
+        webEngine.setJavaScriptEnabled(true);
 
-                        editor = monaco.editor.create(document.getElementById('container'), {
-                            value: pendingCode,
-                            language: pendingLang,
-                            theme: 'navyTheme',
-                            automaticLayout: true,
-                            fontSize: 14,
-                            minimap: { enabled: false },
-                            scrollBeyondLastLine: false
-                        });
-                    });
+        java.net.URL htmlUrl = getClass().getResource("/Monaco/monaco_editor.html");
+        if (htmlUrl == null) {
+            htmlUrl = getClass().getResource("/monaco_editor.html");
+        }
 
-                    function getCode() {
-                        return editor ? editor.getValue() : '';
-                    }
-
-                    function setCode(code, language) {
-                        if (editor) {
-                            editor.setValue(code || '');
-                            if (language) {
-                                monaco.editor.setModelLanguage(editor.getModel(), language);
-                            }
-                        } else {
-                            pendingCode = code || '';
-                            pendingLang = language || 'java';
-                        }
-                    }
-                </script>
-            </body>
-            </html>
-            """;
-
-        webEngine.loadContent(monacoHtml);
+        if (htmlUrl != null) {
+            webEngine.load(htmlUrl.toExternalForm());
+        } else {
+            if (outputConsole != null) {
+                outputConsole.setText("Error: monaco_editor.html not found in resources!");
+            }
+        }
 
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {

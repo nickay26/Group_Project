@@ -23,21 +23,22 @@
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-text-fill: #94A3B8;
-    -fx-font-size: 14px;
+    -fx-font-size: 14px; /* မူလ ပုံမှန်အရွယ်အစား */
     -fx-cursor: hand;
 }
 
 .nav-button:hover {
     -fx-background-color: #334155;
     -fx-text-fill: #F8FAFC;
+    -fx-font-size: 15px; /* 🌟 Mouse တင်လိုက်ရင် စာသားကို အနည်းငယ် ပိုကြီးလာစေရန် */
 }
 
 .nav-button-active {
-    -fx-background-color: #2563EB;
-    -fx-border-color: #2563EB;
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #2563EB; /* တောက်ပထင်ရှားသော Blue */
+    -fx-border-color: #38BDF8;     -fx-border-width: 0 0 0 3px; /* ဘယ်ဘက်ခြမ်းမှာ Mimo လို Accent Line လေး ပေါ်စေရန် */
+    -fx-border-radius: 0 8px 8px 0;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-text-fill: #FFFFFF;        /* အဖြူရောင်စစ်စစ် */
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-cursor: hand;

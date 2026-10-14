@@ -41,15 +41,7 @@ public class User {
         return role != null && role.equalsIgnoreCase("ADMIN");
     }
 
-    // Setters
-    public void setPremium(boolean premium) { this.premium = premium; }
-    public void setSubscriptionType(String subscriptionType) {
-        this.subscriptionType = subscriptionType;
-    }
-    public void setPlanType(String planType) { this.planType = planType; }
-
     // Getters
-    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -64,6 +56,12 @@ public class User {
         this.premiumExpiry = premiumExpiry;
     }
 
+    // Setters
+    public void setPremium(boolean premium) { this.premium = premium; }
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+    public void setPlanType(String planType) { this.planType = planType; }
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }
     public void setProfile(String profile) { this.profile = profile; }
@@ -75,7 +73,6 @@ public class User {
     public String getUsername() {
         return name;
     }
-
     public String getProfilePicture() {
         return profile;
     }

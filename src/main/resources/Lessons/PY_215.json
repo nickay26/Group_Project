@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_215",
+  "title": "Comprehensive Test: Functional Programming (PY_204 to PY_214)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_215_S1",
+      "type": "CONCEPT",
+      "title": "Functional Programming Review",
+      "prompt": "This comprehensive test evaluates your mastery across all functional programming concepts in Python, including lambda functions, map/filter/reduce, comprehensions, higher-order functions, pure functions, functools, itertools, and pattern matching.",
+      "codeSnippet": "from functools import reduce\n\nnums = [1, 2, 3, 4, 5]\nres = reduce(lambda acc, x: acc + x, filter(lambda x: x % 2 != 0, nums))\nprint(res)  # 1 + 3 + 5 = 9"
+    },
+    {
+      "slideId": "PY_215_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Functional Pipeline Evaluation",
+      "prompt": "What is the value of list(map(lambda x: x * 2, filter(lambda x: x > 2, [1, 2, 3, 4])))?",
+      "options": [
+        "[6, 8]",
+        "[2, 4, 6, 8]",
+        "[4, 6, 8]",
+        "[3, 4]"
+      ],
+      "correctAnswer": "[6, 8]"
+    },
+    {
+      "slideId": "PY_215_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Functools Reduce Function",
+      "prompt": "Fill in the function name imported from functools used to perform cumulative folding on an iterable.",
+      "codeSnippet": "from functools import ___\nproduct = reduce(lambda x, y: x * y, [1, 2, 3, 4])",
+      "options": ["reduce", "fold", "accumulate", "aggregate"],
+      "correctAnswer": "reduce"
+    },
+    {
+      "slideId": "PY_215_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pure Function Identification",
+      "prompt": "Which function is considered a pure function?",
+      "options": [
+        "def calc(a, b): return (a + b) * 2",
+        "def log_data(msg): print(msg)",
+        "def append_item(lst, item): lst.append(item); return lst",
+        "def get_time(): return time.time()"
+      ],
+      "correctAnswer": "def calc(a, b): return (a + b) * 2"
+    },
+    {
+      "slideId": "PY_215_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Memoization Decorator",
+      "prompt": "Fill in the decorator from functools used for caching function returns.",
+      "codeSnippet": "from functools import ___\n\n@lru_cache(maxsize=None)\ndef compute(n): return n * 2",
+      "options": ["lru_cache", "memoize", "cache_val", "store"],
+      "correctAnswer": "lru_cache"
+    },
+    {
+      "slideId": "PY_215_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "List Comprehension Output",
+      "prompt": "What is the output of [x for x in range(5) if x % 2 == 1]?",
+      "options": [
+        "[1, 3]",
+        "[0, 2, 4]",
+        "[1, 2, 3, 4, 5]",
+        "[1, 3, 5]"
+      ],
+      "correctAnswer": "[1, 3]"
+    },
+    {
+      "slideId": "PY_215_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Pattern Matching Keyword",
+      "prompt": "Fill in the keyword used alongside match to define conditional branches.",
+      "codeSnippet": "match val:\n    ___ 1: print(\"One\")",
+      "options": ["case", "when", "of", "branch"],
+      "correctAnswer": "case"
+    }
+  ]
+}

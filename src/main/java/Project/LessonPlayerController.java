@@ -276,32 +276,24 @@ public class LessonPlayerController {
     private void handleLessonCompletion() {
         if (continueBtn != null) {
             continueBtn.setDisable(true);
-            continueBtn.setText("SAVING...");
         }
 
         new Thread(() -> {
+            int earnedXP = currentLesson != null ? currentLesson.getXp() : 10;
+            int earnedCoins = 10;
+
+            if (totalQuestionCount > 0) {
+                double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
+                if (percentage >= 50.0) {
+                    earnedCoins = 10;
+                } else {
+                    earnedCoins = 5;
+                }
+            }
+
             if (currentLesson != null) {
                 int userId = UserSession.getUserId();
                 String courseId = UserSession.getActiveCourseId();
-
-                int earnedXP = currentLesson.getXp();
-                int earnedCoins = 10;
-
-                if (totalQuestionCount > 0) {
-                    double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
-                    if (percentage >= 50.0) {
-                        earnedCoins = 10;
-                    } else {
-                        earnedCoins = 5;
-                    }
-                }
-
-                User currentUser = UserSession.getCurrentUser();
-                if (currentUser != null) {
-                    currentUser.setCoin(currentUser.getCoin() + earnedCoins);
-                    currentUser.setXp(currentUser.getXp() + earnedXP);
-                    UserSession.setCurrentUser(currentUser);
-                }
 
                 DatabaseManager.completeLessonAndAddXP(
                         userId,
@@ -312,13 +304,87 @@ public class LessonPlayerController {
                 );
             }
 
+            final int finalXp = earnedXP;
+            final int finalCoins = earnedCoins;
+
             Platform.runLater(() -> {
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().updateHeaderStats();
-                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                }
+                showRewardAnimationDialog(finalXp, finalCoins);
             });
         }).start();
+    }
+
+    private void showRewardAnimationDialog(int xp, int coins) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Lesson Completed! 🎉");
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+        // Dark theme styling to match your app
+        dialog.getDialogPane().setStyle(
+                "-fx-background-color: #1E293B; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-color: #334155; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-border-width: 1.5px;"
+        );
+
+        VBox content = new VBox(16);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(30, 40, 30, 40));
+
+        Label titleLabel = new Label("🏆 Awesome Job!");
+        titleLabel.setStyle("-fx-text-fill: #38BDF8; -fx-font-size: 24px; -fx-font-weight: bold;");
+
+        Label descLabel = new Label("You have successfully completed the lesson.");
+        descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 14px;");
+
+        // Rewards Box (XP & Coins)
+        HBox rewardsBox = new HBox(20);
+        rewardsBox.setAlignment(Pos.CENTER);
+        rewardsBox.setPadding(new Insets(10, 0, 10, 0));
+
+        VBox xpBox = createRewardBadge("⚡ +" + xp + " XP", "#F59E0B");
+        VBox coinBox = createRewardBadge("🪙 +" + coins + " Coins", "#10B981");
+
+        rewardsBox.getChildren().addAll(xpBox, coinBox);
+        content.getChildren().addAll(titleLabel, descLabel, rewardsBox);
+
+        dialog.getDialogPane().setContent(content);
+
+        ButtonType collectBtnType = new ButtonType("CONTINUE", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().setAll(collectBtnType);
+
+        // Apply Pop-up Scale Animation when dialog shows
+        dialog.setOnShown(e -> {
+            javafx.animation.ScaleTransition st = new javafx.animation.ScaleTransition(javafx.util.Duration.millis(350), dialog.getDialogPane());
+            st.setFromX(0.5);
+            st.setFromY(0.5);
+            st.setToX(1.0);
+            st.setToY(1.0);
+            st.play();
+        });
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().updateHeaderStats();
+                MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+            }
+        });
+    }
+
+    private VBox createRewardBadge(String text, String colorHex) {
+        VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(12, 20, 12, 20));
+        box.setStyle(
+                "-fx-background-color: " + colorHex + "22; " +
+                        "-fx-border-color: " + colorHex + "; " +
+                        "-fx-border-radius: 12px; " +
+                        "-fx-background-radius: 12px;"
+        );
+        Label label = new Label(text);
+        label.setStyle("-fx-text-fill: " + colorHex + "; -fx-font-size: 16px; -fx-font-weight: bold;");
+        box.getChildren().add(label);
+        return box;
     }
 
     private void renderConceptAiExplainer(VBox cardBox, String language, String codeContent) {
