@@ -13,6 +13,7 @@
     {
       "slideId": "PY_216_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Inspecting Closure Cell Contents",
       "prompt": "Fill in the attribute name used to inspect free variables bound inside a closure function object.",
       "codeSnippet": "print(my_func.___closure___[0].cell_contents)",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_216_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Freezing State in Loop Closures",
       "prompt": "Fill in the default argument syntax to freeze loop values inside lambda closures.",
       "codeSnippet": "funcs = [lambda x=i: x for i in range(3)]\nprint(funcs[0]())  # Outputs 0 instead of 2",

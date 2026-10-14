@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_292_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Column Primary Key Constraint",
       "prompt": "Fill in the keyword argument used to mark a column as the primary key in SQLAlchemy.",
       "codeSnippet": "id = Column(Integer, ___=True)",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_292_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Querying All Records",
       "prompt": "Fill in the query method to retrieve all matching database rows.",
       "codeSnippet": "users = session.query(User).___()",

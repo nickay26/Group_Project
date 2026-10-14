@@ -39,6 +39,7 @@
     {
       "slideId": "PY_277_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 3: Enter Return Value",
       "prompt": "In `with MyContext() as obj:`, the `obj` receives the return value of which magic method?",
       "codeSnippet": "def __enter__(self):\n    return ___",

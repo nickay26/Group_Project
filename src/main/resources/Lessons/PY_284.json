@@ -35,6 +35,7 @@
     {
       "slideId": "PYTH_284_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Immutable Collections",
       "prompt": "Fill in the function name used to convert a list into an immutable set.",
       "codeSnippet": "frozen_keys = ___([1, 2, 3])",

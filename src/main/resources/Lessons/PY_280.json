@@ -26,6 +26,7 @@
     {
       "slideId": "PY_280_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 2: Checking Reference Count",
       "prompt": "Fill in the module and function used to check an object's current reference count.",
       "codeSnippet": "import sys\ncount = sys._____(my_object)",

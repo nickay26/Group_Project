@@ -26,6 +26,7 @@
     {
       "slideId": "PY_229_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Generator Expression Brackets",
       "prompt": "Fill in the syntax wrapper symbol used for generator expressions.",
       "codeSnippet": "gen = ___x * 2 for x in [1, 2, 3])",

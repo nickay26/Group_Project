@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_302_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Setting Redis Key with Expiration",
       "prompt": "Fill in the argument used in `redis.set()` to set an expiration time in seconds.",
       "codeSnippet": "r.set('session', 'data', ___=300)",
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_302_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Redis Hash Storage",
       "prompt": "Fill in the Redis command method used to set a field in a hash map.",
       "codeSnippet": "r.___('user:1000', 'name', 'Alice')",
@@ -57,6 +59,7 @@
     {
       "slideId": "PYTH_302_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Incrementing Key Value",
       "prompt": "Fill in the atomic Redis method used to increment an integer counter.",
       "codeSnippet": "r.___('page_views')",

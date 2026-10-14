@@ -13,6 +13,7 @@
     {
       "slideId": "PY_255_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Cython C Variable Declaration Keyword",
       "prompt": "Fill in the Cython keyword used to declare statically typed C variables inside `.pyx` files.",
       "codeSnippet": "___ int x = 10\n___ double calculate(double a, double b)",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_255_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Cython C Import Keyword",
       "prompt": "Fill in the Cython keyword used to import external C definitions or Cython headers (`.pxd`).",
       "codeSnippet": "___ libc.stdlib cimport malloc, free",

@@ -26,6 +26,7 @@
     {
       "slideId": "PY_257_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Optimization Attribute",
       "prompt": "Fill in the class attribute used to prevent `__dict__` creation and optimize memory consumption.",
       "codeSnippet": "class Node:\n    ___ = ('data', 'next')",
@@ -70,6 +71,7 @@
     {
       "slideId": "PY_257_S7",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Profiler Module Import",
       "prompt": "Fill in the standard module used to trace Python memory allocation snapshots.",
       "codeSnippet": "import ___\n\ntracemalloc.start()",

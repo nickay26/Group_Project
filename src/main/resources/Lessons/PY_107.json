@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_107_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "While Loop",
       "prompt": "Fill in the keyword for conditional loops.",
       "codeSnippet": "___ active:\n    process()",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_107_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Loop Control - Continue",
       "prompt": "Fill in the keyword that skips the rest of the current iteration and moves to the next.",
       "codeSnippet": "for x in numbers:\n    if x == 0:\n        ___\n    print(x)",

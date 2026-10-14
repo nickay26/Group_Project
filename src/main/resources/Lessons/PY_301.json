@@ -22,6 +22,7 @@
     {
       "slideId": "PYTH_301_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Asynchronous Task Dispatch",
       "prompt": "Which method is commonly used on a Celery task to send it to the queue asynchronously?",
       "options": ["delay()", "run()", "dispatch()", "queue()"],

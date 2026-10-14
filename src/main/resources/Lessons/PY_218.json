@@ -13,6 +13,7 @@
     {
       "slideId": "PY_218_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Importing wraps Decorator",
       "prompt": "Fill in the module name used to import the 'wraps' decorator utility.",
       "codeSnippet": "from ___ import wraps",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_218_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Decorating Wrapper Function",
       "prompt": "Fill in the target argument passed to `@wraps()` decorator inside the wrapper definition.",
       "codeSnippet": "def decorator(func):\n    @wraps(___)\n    def wrapper():\n        return func()\n    return wrapper",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_218_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Docstring Attribute Name",
       "prompt": "Fill in the special dunder attribute used to access a function's documentation string.",
       "codeSnippet": "print(greet.___doc___)",

@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_295_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Finding Multiple Elements",
       "prompt": "Fill in the BeautifulSoup method that returns a list of all matching HTML tags.",
       "codeSnippet": "links = soup.___\t(\"a\")",

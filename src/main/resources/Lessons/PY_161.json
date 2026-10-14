@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_161_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Structured JSON Logging",
       "prompt": "Fill in the library function or component used to format Python logs as JSON objects for collection.",
       "codeSnippet": "import structlog\nlogger = structlog.___()",
@@ -52,6 +53,7 @@
     {
       "slideId": "PYTH_161_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Prometheus Histogram Buckets",
       "prompt": "Fill in the metric type used to measure latency distribution across configurable duration buckets.",
       "codeSnippet": "latency = ___('http_request_duration_seconds', 'Latency')",
@@ -74,6 +76,7 @@
     {
       "slideId": "PYTH_161_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Tracing Span Attributes",
       "prompt": "Fill in the span method used to attach key-value metadata (e.g., user_id) to an active trace.",
       "codeSnippet": "span.___('user_id', 42)",

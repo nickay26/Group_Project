@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_135_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Finding All Elements",
       "prompt": "Fill in the method returning a list of all matching HTML tags.",
       "codeSnippet": "tags = soup.___ ('a')",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_135_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Extracting Attributes",
       "prompt": "Fill in the dictionary syntax to extract an HTML tag attribute value.",
       "codeSnippet": "link = tag.___ ['href']",
