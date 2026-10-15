@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_118_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Local Scope Braces",
       "prompt": "Fill in the block delimiter enclosing local variables.",
       "codeSnippet": "if (true) ___ int x = 5; ___",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_118_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Static Local Variable",
       "prompt": "Fill in the keyword to preserve a local variable's value between function calls.",
       "codeSnippet": "___ int callCount = 0;",

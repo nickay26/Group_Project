@@ -79,6 +79,7 @@
     {
       "slideId": "CPP_255_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Compiler Flag Disabling Copy Elision",
       "prompt": "Fill in the GCC/Clang compiler flag used to explicitly turn off copy elision for educational testing.",
       "codeSnippet": "g++ -fno-elide-___ main.cpp -o main",

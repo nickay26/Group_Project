@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_148_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Typer Command Decorator",
       "prompt": "Fill in the decorator registering a function as a CLI command.",
       "codeSnippet": "@app.___\ndef main():",
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_148_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Click Command Decorator",
       "prompt": "Fill in the base decorator for defining commands in Click.",
       "codeSnippet": "import click\n@click.___\ndef hello():",
@@ -52,6 +54,7 @@
     {
       "slideId": "PYTH_148_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Terminal Output Styling",
       "prompt": "Fill in the rich printing function used for colored terminal outputs.",
       "codeSnippet": "from rich import print as ___",

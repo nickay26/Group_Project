@@ -13,6 +13,7 @@
     {
       "slideId": "PY_214_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pattern Matching Wildcard",
       "prompt": "Fill in the wildcard pattern symbol used as a default case matching anything.",
       "codeSnippet": "match point:\n    case (0, 0): print(\"Origin\")\n    case ___: print(\"Elsewhere\")",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_214_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pattern Matching Sequence Unpacking",
       "prompt": "Fill in the rest parameter operator used inside case patterns to match variable-length sequences.",
       "codeSnippet": "match items:\n    case [first, ___rest]:\n        print(first, rest)",

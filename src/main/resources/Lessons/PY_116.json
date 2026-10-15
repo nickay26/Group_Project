@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_116_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Class Declaration",
       "prompt": "Fill in the keyword used to create a class in Python.",
       "codeSnippet": "___ Student:\n    pass",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_116_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Self Parameter",
       "prompt": "Fill in the conventional first parameter name representing the instance inside a class method.",
       "codeSnippet": "def get_name(___):\n    return self.name",

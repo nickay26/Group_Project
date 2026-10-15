@@ -64,6 +64,7 @@
     {
       "slideId": "CPP_145_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Nested Traversal Loops",
       "prompt": "Fill in inner loop limit for columns.",
       "codeSnippet": "for (int r = 0; r < R; r++) {\n    for (int c = 0; c < ___; c++) {\n        process(m[r][c]);\n    }\n}",
@@ -81,6 +82,7 @@
     {
       "slideId": "CPP_145_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Matrix Flattening Formula",
       "prompt": "To convert 2D index (r, c) into 1D array index with C columns, calculate: r * ___ + c.",
       "codeSnippet": "int index1D = r * ___ + c;",

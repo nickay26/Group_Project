@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_247_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Placement New Syntax",
       "prompt": "Fill in the placement new syntax to construct object T inside raw memory address 'buf'.",
       "codeSnippet": "T* obj = new (___) T(args);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_247_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Explicit Destructor Invocation",
       "prompt": "Fill in the syntax to explicitly invoke the destructor for pointer variable 'pObj'.",
       "codeSnippet": "pObj->___T();",

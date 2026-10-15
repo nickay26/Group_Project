@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_208_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Forward Declaration Syntax",
       "prompt": "Fill in keyword to forward declare implementation class in header.",
       "codeSnippet": "class Window {\n    ___ Impl;\n    Impl* pImpl;\n};",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_208_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Nested Class Scope Resolution",
       "prompt": "Fill in operator to access public nested class outside enclosing class scope.",
       "codeSnippet": "Outer___Inner obj;",
@@ -101,6 +103,7 @@
     {
       "slideId": "CPP_208_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Impl Instantiation in Constructor",
       "prompt": "Fill in function allocating Impl object inside .cpp file constructor.",
       "codeSnippet": "Widget::Widget() : pImpl(std::___<Impl>()) {}",

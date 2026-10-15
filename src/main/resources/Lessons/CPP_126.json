@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_126_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parentheses Priority",
       "prompt": "Which symbols can be used to explicitly override operator precedence?",
       "codeSnippet": "int res = ___2 + 3___ * 4; // Forces addition first",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_126_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Logical Operator Hierarchy",
       "prompt": "In expression 'a || b && c', which logical operator evaluates first?",
       "codeSnippet": "bool res = a || b && c; // ___ evaluates before ||",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_126_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Subtraction Associativity",
       "prompt": "Evaluate 20 - 10 - 5 following Left-to-Right associativity.",
       "codeSnippet": "int res = 20 - 10 - 5; // Evaluates to ___",

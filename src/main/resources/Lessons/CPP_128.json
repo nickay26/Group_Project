@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_128_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "else-if Keyword Syntax",
       "prompt": "Fill in the missing keywords for testing a second condition.",
       "codeSnippet": "if (x > 10) {\n    // ...\n} ___ (x > 5) {\n    // ...\n}",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_128_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Chained Logic Evaluation",
       "prompt": "What is output if x = 15?",
       "codeSnippet": "if (x > 20) std::cout << \"High\";\nelse if (x > 10) std::cout << \"Mid\";\nelse std::cout << \"Low\";",

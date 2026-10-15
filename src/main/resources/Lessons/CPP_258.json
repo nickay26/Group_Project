@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_258_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Locking a Mutex",
       "prompt": "Fill in the method used to acquire ownership of a mutex, blocking if another thread holds it.",
       "codeSnippet": "std::mutex m;\nm.___(); // Acquire lock",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_258_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Releasing Mutex Lock",
       "prompt": "Fill in the method used to release ownership of a mutex.",
       "codeSnippet": "std::mutex m;\nm.lock();\n// protected work\nm.___();",
@@ -57,6 +59,7 @@
     {
       "slideId": "CPP_258_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Recursive Mutex Usage",
       "prompt": "Fill in the mutex class that allows the same thread to acquire multiple levels of ownership on the same mutex.",
       "codeSnippet": "std::___ mtx;\n// Can lock multiple times from the same thread",

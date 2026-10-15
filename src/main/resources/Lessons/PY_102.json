@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_102_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Variable Assignment",
       "prompt": "Fill in the operator used to assign a value to a variable.",
       "codeSnippet": "age ___ 25",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_102_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Boolean Values",
       "prompt": "Fill in the correct boolean literal for truth in Python.",
       "codeSnippet": "is_valid = ___",

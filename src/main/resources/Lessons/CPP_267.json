@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_267_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Non-Type Parameter Declaration",
       "prompt": "Fill in the integer parameter type in the template parameter list.",
       "codeSnippet": "template <typename T, ___ Size>\nclass FixedBuffer {\n    T buffer[Size];\n};",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_267_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Default Non-Type Template Parameter",
       "prompt": "Fill in the default value assignment for the non-type template argument.",
       "codeSnippet": "template <typename T, std::size_t N = ___>\nclass Matrix {\n    T grid[N][N];\n};",

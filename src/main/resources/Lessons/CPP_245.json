@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_245_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "decltype for Lambda Deleter",
       "prompt": "Fill in the specifier used to pass a lambda type as a custom deleter template argument to std::unique_ptr.",
       "codeSnippet": "auto deleter = [](int* p){ delete p; };\nstd::unique_ptr<int, ___ (deleter)> ptr(new int(5), deleter);",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_245_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Functor Class Deleter",
       "prompt": "Fill in the operator signature required in a struct to make it a valid functor deleter.",
       "codeSnippet": "struct TextureDeleter {\n    void operator___(Texture* t) const { destroyTexture(t); }\n};",

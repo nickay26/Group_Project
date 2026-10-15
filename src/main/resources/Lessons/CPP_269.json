@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_269_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parameter Pack Token",
       "prompt": "Fill in the three-dot token used to define a template parameter pack.",
       "codeSnippet": "template <typename___ Types>\nvoid process(Types... args);",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_269_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pack Expansion Pattern Expression",
       "prompt": "Fill in the expansion token to double each argument passed to a function.",
       "codeSnippet": "template <typename... Args>\nvoid printDoubled(Args... args) {\n    printAll((args * 2)___);\n}",

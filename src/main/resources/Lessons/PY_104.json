@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_104_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Modulus Operator",
       "prompt": "Fill in the operator used to find the remainder of a division.",
       "codeSnippet": "remainder = 15 ___ 4",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_104_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Equality Operator",
       "prompt": "Fill in the comparison operator that checks if two values are equal.",
       "codeSnippet": "if a ___ b:\n    print(\"Equal\")",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_104_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Not Equal Operator",
       "prompt": "Fill in the operator that checks if two values are not equal.",
       "codeSnippet": "if status ___ \"closed\":\n    print(\"Open\")",

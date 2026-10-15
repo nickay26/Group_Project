@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_167_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Integer Declaration (CPP_111)",
       "prompt": "Fill in the correct data type to store whole numbers without decimals.",
       "codeSnippet": "___ totalItems = 50;",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_167_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "String Class (CPP_115)",
       "prompt": "Fill in the missing header file needed to use the std::string data type.",
       "codeSnippet": "#include <___>",

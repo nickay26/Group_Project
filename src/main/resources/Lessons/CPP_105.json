@@ -14,6 +14,7 @@
       "slideId": "CPP_105_S2",
       "type": "FILL_IN_BLANK",
       "title": "Insertion Operator",
+      "interactive": true,
       "prompt": "Fill in the insertion operator symbol used with cout.",
       "codeSnippet": "std::cout ___ \"Score: \";",
       "options": ["<<", ">>", "<=", "=>"],
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_105_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Chaining Outputs",
       "prompt": "Fill in the missing operator to chain text and variable.",
       "codeSnippet": "std::cout << \"Age: \" ___ age;",

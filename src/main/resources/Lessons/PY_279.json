@@ -26,6 +26,7 @@
     {
       "slideId": "PY_279_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 2: Async Function Declaration",
       "prompt": "Fill in the keyword used to define a coroutine function.",
       "codeSnippet": "___ def fetch_data():\n    return 'data'",

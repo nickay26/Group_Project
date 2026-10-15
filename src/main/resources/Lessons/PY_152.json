@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_152_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Lazy Evaluation",
       "prompt": "Fill in the method used to transform a standard Polars DataFrame into a LazyFrame for query optimization.",
       "codeSnippet": "lazy_df = df.___ ()",
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_152_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Executing Lazy Queries",
       "prompt": "Fill in the Polars method required to execute a LazyFrame pipeline and materialize the results.",
       "codeSnippet": "result = lazy_df.filter(pl.col('amount') > 100).___ ()",
@@ -57,6 +59,7 @@
     {
       "slideId": "PYTH_152_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Creating New Columns",
       "prompt": "Fill in the Polars method used to add or modify columns without dropping existing ones.",
       "codeSnippet": "df = df.___ (new_col=pl.col('value') * 2)",

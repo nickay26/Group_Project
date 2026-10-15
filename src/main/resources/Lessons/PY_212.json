@@ -13,6 +13,7 @@
     {
       "slideId": "PY_212_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Partial Function Import",
       "prompt": "Fill in the correct function name imported from functools to freeze function arguments.",
       "codeSnippet": "from functools import ___\n\ndouble = partial(multiply, 2)",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_212_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "LRU Cache Clear",
       "prompt": "Fill in the method name used to clear all cached results from an @lru_cache decorated function.",
       "codeSnippet": "fib.___()",

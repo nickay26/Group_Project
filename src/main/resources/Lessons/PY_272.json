@@ -70,6 +70,7 @@
     {
       "slideId": "PY_272_S7",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Gathering Async Tasks",
       "prompt": "Fill in the function used in `asyncio` to await multiple concurrent coroutines.",
       "codeSnippet": "results = await asyncio.___(task1(), task2())",

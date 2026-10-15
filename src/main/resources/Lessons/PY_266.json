@@ -13,6 +13,7 @@
     {
       "slideId": "PY_266_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Starting Thread Execution",
       "prompt": "Fill in the method used to begin execution of a thread object.",
       "codeSnippet": "t = threading.Thread(target=my_function)\nt.___()",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_266_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Waiting for Thread Completion",
       "prompt": "Fill in the method call used to wait for thread termination.",
       "codeSnippet": "t1 = threading.Thread(target=worker)\nt1.start()\nt1.___()",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_266_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Daemon Flag Configuration",
       "prompt": "Fill in the parameter used to mark a thread as a background daemon.",
       "codeSnippet": "t = threading.Thread(target=worker, ___=True)\nt.start()",

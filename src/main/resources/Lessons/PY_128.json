@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_128_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Assert Statement",
       "prompt": "Fill in the keyword used to verify test conditions in pytest.",
       "codeSnippet": "def test_val():\n    ___ 10 > 5",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_128_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pytest Fixture Decorator",
       "prompt": "Fill in the decorator used to set up baseline state/data for tests.",
       "codeSnippet": "import pytest\n\n@pytest.___ \ndef sample_data():\n    return {\"id\": 1}",
@@ -52,6 +54,7 @@
     {
       "slideId": "PYTH_128_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parameterized Tests Decorator",
       "prompt": "Fill in the decorator used to run a test with multiple set of arguments.",
       "codeSnippet": "@pytest.mark.___\n(\"a,b,expected\", [(1, 2, 3), (4, 5, 9)])",

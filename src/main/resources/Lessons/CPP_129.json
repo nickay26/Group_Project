@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_129_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Nested if Placement",
       "prompt": "Fill in the inner if block condition.",
       "codeSnippet": "if (age >= 18) {\n    ___ (hasID) {\n        std::cout << \"Allowed\";\n    }\n}",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_129_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Refactoring Nested code",
       "prompt": "Replace nested checks with logical operator to flatten code.",
       "codeSnippet": "if (x > 0 ___ y > 0) {\n    std::cout << \"Quadrant 1\";\n}",

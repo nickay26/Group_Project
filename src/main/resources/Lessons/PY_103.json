@@ -12,6 +12,7 @@
 {
 "slideId": "PYTH_103_S2",
 "type": "FILL_IN_BLANK",
+  "interactive": true,
 "title": "User Input Function",
 "prompt": "Fill in the function to read input from standard input.",
 "codeSnippet": "name = ___(\"Enter your name: \")",
@@ -38,6 +39,7 @@
 {
 "slideId": "PYTH_103_S5",
 "type": "MULTIPLE_CHOICE",
+  "interactive": true,
 "title": "String Conversion",
 "prompt": "Which function converts a numeric value into a string?",
 "options": ["str()", "string()", "to_str()", "text()"],

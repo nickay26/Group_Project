@@ -13,6 +13,7 @@
     {
       "slideId": "PY_273_S2",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Question 1: Subscript Access",
       "prompt": "Which magic method allows indexing via `obj[key]`?",
       "options": ["__getitem__", "__get__", "__index__", "__key__"],
@@ -37,6 +38,7 @@
     {
       "slideId": "PY_273_S5",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 4: String Representation",
       "prompt": "Fill in the method returning an official developer-focused string representation.",
       "codeSnippet": "class A:\n    def __repr__(self):\n        return ___",
@@ -62,6 +64,7 @@
     {
       "slideId": "PY_273_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 7: Memory Slots",
       "prompt": "Fill in the attribute used to prevent `__dict__` creation for memory optimization.",
       "codeSnippet": "class Point:\n    ___ = ('x', 'y')",

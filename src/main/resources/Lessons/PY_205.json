@@ -13,6 +13,7 @@
     {
       "slideId": "PY_205_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "List Comprehension Syntax",
       "prompt": "Fill in the correct brackets used to construct a list comprehension.",
       "codeSnippet": "evens = ___x for x in range(10) if x % 2 == 0___",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_205_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dictionary Comprehension Syntax",
       "prompt": "Fill in the syntax pattern used to map key-value pairs inside a dictionary comprehension.",
       "codeSnippet": "scores = {\"Alice\": 90, \"Bob\": 75}\npassed = {k___ v for k, v in scores.items() if v >= 80}",

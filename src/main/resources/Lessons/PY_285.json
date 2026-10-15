@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_285_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Class Decorator Method",
       "prompt": "Fill in the magic method required to make a class instance callable as a decorator wrapper.",
       "codeSnippet": "def ___(self, *args, **kwargs):",

@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_156_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Accumulator Parameter in Tail Call",
       "prompt": "Fill in the default value for the accumulator in tail recursive multiplication.",
       "codeSnippet": "int product(int n, int acc = ___) {\n    if (n == 1) return acc;\n    return product(n - 1, acc * n);\n}",
@@ -74,6 +75,7 @@
     {
       "slideId": "CPP_156_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Fibonacci Recursive Base Case",
       "prompt": "Fill in the condition for early return in Fibonacci recursion.",
       "codeSnippet": "int fib(int n) {\n    if (n ___ 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}",

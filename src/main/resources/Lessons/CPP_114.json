@@ -22,6 +22,7 @@
     {
       "slideId": "CPP_114_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "ASCII Code for 'A'",
       "prompt": "What is the ASCII integer code for uppercase 'A'?",
       "options": ["65", "97", "48", "1"],
@@ -39,6 +40,7 @@
     {
       "slideId": "CPP_114_S5",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Char Memory Size",
       "prompt": "What is the memory size of a standard 'char' in C++?",
       "options": ["1 byte (8 bits)", "2 bytes", "4 bytes", "Depends on CPU"],

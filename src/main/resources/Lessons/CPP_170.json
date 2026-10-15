@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_170_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Do-While Termination (CPP_138)",
       "prompt": "Fill in the keyword that concludes a do-while loop structure.",
       "codeSnippet": "do {\n    cout << \"Processing...\";\n} ___ (status == true);",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_170_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "For Loop Keyword (CPP_139)",
       "prompt": "Fill in the keyword used to declare a counter-controlled iteration loop.",
       "codeSnippet": "___ (int i = 0; i < 10; i++) {\n    cout << i;\n}",

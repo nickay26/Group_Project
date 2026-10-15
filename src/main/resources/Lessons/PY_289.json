@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_289_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Function Signature Annotation",
       "prompt": "Fill in the typing symbol used to indicate function return type.",
       "codeSnippet": "def add(a: int, b: int) ___ int:",

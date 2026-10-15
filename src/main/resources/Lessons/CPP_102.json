@@ -7,20 +7,21 @@
       "slideId": "CPP_102_S1",
       "type": "CONCEPT",
       "title": "Single-line vs Multi-line Comments",
-      "prompt": "Comments are ignored by the compiler and are used to explain code.",
-      "codeSnippet": "// Single-line comment\n/* Multi-line\n   comment */"
+      "prompt": "Comments are ignored by the compiler and are used to explain code. Try running this code to see how comments are skipped.",
+      "codeSnippet": "#include <iostream>\nint main() {\n    // This is a single-line comment\n    std::cout << \"Hello, Comments!\" << std::endl;\n    /* \n      This is a multi-line comment\n      Explaining block execution\n    */\n    return 0;\n}"
     },
     {
       "slideId": "CPP_102_S2",
       "type": "FILL_IN_BLANK",
       "title": "Single-Line Comment",
-      "prompt": "Fill in the syntax for a single-line comment.",
-      "codeSnippet": "___ This is a comment",
+      "prompt": "Fill in the syntax for a single-line comment to make the text non-executable.",
+      "codeSnippet": "___ This is a comment\nstd::cout << \"Running code\";",
       "options": ["//", "/*", "#", "<!--"],
       "correctAnswer": "//"
     },
     {
       "slideId": "CPP_102_S3",
+      "interactive": true,
       "type": "MULTIPLE_CHOICE",
       "title": "Multi-Line Comment Closing",
       "prompt": "How do you close a multi-line comment in C++?",
@@ -32,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Multi-Line Comment Start",
       "prompt": "Fill in the opening symbol for a multi-line comment.",
-      "codeSnippet": "___ Multi line comment here */",
+      "codeSnippet": "___ Multi line comment here */\nint x = 10;",
       "options": ["/*", "//", "<!--", "~~"],
       "correctAnswer": "/*"
     },
@@ -40,16 +41,17 @@
       "slideId": "CPP_102_S5",
       "type": "MULTIPLE_CHOICE",
       "title": "Comment Execution",
-      "prompt": "Does the C++ compiler execute comment lines?",
+      "prompt": "Does the C++ compiler execute comment lines during compilation and run phase?",
       "options": ["No, they are completely ignored", "Yes, as slow code", "Only multi-line comments", "Only if in main()"],
       "correctAnswer": "No, they are completely ignored"
     },
     {
       "slideId": "CPP_102_S6",
       "type": "FILL_IN_BLANK",
+
       "title": "Code Indentation",
-      "prompt": "Code blocks inside functions are enclosed within ___ braces.",
-      "codeSnippet": "int main() ___\n    return 0;\n}",
+      "prompt": "Code blocks inside functions are enclosed within opening and closing braces.",
+      "codeSnippet": "int main() ___ \n    std::cout << \"Indentation\";\n}",
       "options": ["{", "(", "[", "<"],
       "correctAnswer": "{"
     },
@@ -57,16 +59,17 @@
       "slideId": "CPP_102_S7",
       "type": "MULTIPLE_CHOICE",
       "title": "Whitespace Handling",
-      "prompt": "How does C++ handle extra whitespace and newlines?",
+      "prompt": "How does the C++ compiler handle extra whitespace, tabs, and newlines in source code?",
       "options": ["Ignores most extra whitespace", "Causes compile error", "Replaces with spaces", "Treats as variables"],
       "correctAnswer": "Ignores most extra whitespace"
     },
     {
       "slideId": "CPP_102_S8",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Inline Commenting",
-      "prompt": "Fill in the missing comment symbol next to statement.",
-      "codeSnippet": "int age = 20; ___ Set user age",
+      "prompt": "Fill in the missing comment symbol next to the executable statement.",
+      "codeSnippet": "int age = 20; ___ Set user age variable",
       "options": ["//", "#", "--", "%"],
       "correctAnswer": "//"
     },
@@ -74,7 +77,7 @@
       "slideId": "CPP_102_S9",
       "type": "MULTIPLE_CHOICE",
       "title": "Good Comment Practice",
-      "prompt": "Why are comments important in programming?",
+      "prompt": "Why are comments important in professional software development?",
       "options": ["Improves code readability and maintainability", "Makes code run faster", "Reduces file size", "Required for memory allocation"],
       "correctAnswer": "Improves code readability and maintainability"
     },
@@ -82,8 +85,8 @@
       "slideId": "CPP_102_S10",
       "type": "FILL_IN_BLANK",
       "title": "Closing Brace",
-      "prompt": "Fill in the matching closing symbol for function body.",
-      "codeSnippet": "int main() {\n    return 0;\n___",
+      "prompt": "Fill in the matching closing symbol to complete the main function block.",
+      "codeSnippet": "int main() {\n    std::cout << \"End\";\n    return 0;\n___",
       "options": ["}", ")", "]", ">"],
       "correctAnswer": "}"
     }

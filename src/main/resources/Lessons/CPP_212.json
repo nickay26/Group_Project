@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_212_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pure Virtual Function Syntax",
       "prompt": "Fill in the syntax initializer to declare a pure virtual function.",
       "codeSnippet": "virtual void render() = ___;",
@@ -101,6 +102,7 @@
     {
       "slideId": "CPP_212_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Interface Pure Virtual Assignment",
       "prompt": "Fill in the syntax to declare pure virtual getter.",
       "codeSnippet": "virtual int getId() const = ___;",

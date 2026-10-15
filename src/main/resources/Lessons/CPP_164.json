@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_164_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Reference Count Method",
       "prompt": "Fill in method name used to query current shared ownership count.",
       "codeSnippet": "long count = ptr.___();",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_164_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Unique Check Method",
       "prompt": "Fill in method checking if reference count is exactly 1 (deprecated in C++20, check use_count() == 1).",
       "codeSnippet": "bool isOnlyOwner = (ptr.___() == 1);",

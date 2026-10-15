@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_139_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Caching Container Size",
       "prompt": "Fill in the variable to store vector size outside the comparison.",
       "codeSnippet": "const size_t len = vec.size();\nfor (size_t i = 0; i < ___; i++) {\n    // ...\n}",
@@ -73,6 +74,7 @@
     {
       "slideId": "CPP_139_S9",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Compiler Optimization Flags",
       "prompt": "Which GCC/Clang flag enables aggressive loop optimizations (like auto-vectorization)?",
       "options": ["-O3", "-O0", "-g", "-Wall"],

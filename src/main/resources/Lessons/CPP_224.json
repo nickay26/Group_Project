@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_224_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Compile-Time If Branching Syntax",
       "prompt": "Fill in the C++17 keyword for compile-time conditional branching.",
       "codeSnippet": "if ___ (std::is_integral_v<T>) {\n    // Compiled only if T is integral\n}",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_224_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Consteval Keyword C++20",
       "prompt": "C++20 introduced ___ for immediate functions that MUST execute at compile time.",
       "codeSnippet": "___ int getSquare(int x) { return x * x; }",

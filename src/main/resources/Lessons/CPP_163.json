@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_163_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Accessing Raw Pointer",
       "prompt": "Fill in method name used to observe raw pointer without transferring ownership.",
       "codeSnippet": "int* raw = ptr.___();",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_163_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Resetting unique_ptr",
       "prompt": "Fill in method to destroy existing managed object and take optional new pointer.",
       "codeSnippet": "ptr.___(); // Destroys object and sets ptr to nullptr",

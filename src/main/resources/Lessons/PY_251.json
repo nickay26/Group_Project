@@ -13,6 +13,7 @@
     {
       "slideId": "PY_251_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Reference Counting Function",
       "prompt": "Fill in the function from the `sys` module used to inspect the reference count of an object.",
       "codeSnippet": "import sys\ncount = sys.___(obj)",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_251_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Manual Garbage Collection Call",
       "prompt": "Fill in the method used to manually trigger a garbage collection sweep.",
       "codeSnippet": "import gc\n\nunreachable_objects = gc.___()",

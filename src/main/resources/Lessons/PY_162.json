@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_162_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "SSL/TLS Offloading",
       "prompt": "Fill in the protocol term for terminating HTTPS encrypted traffic at the gateway before routing plain HTTP internally.",
       "codeSnippet": "ssl_termination = '___ Termination'",
@@ -52,6 +53,7 @@
     {
       "slideId": "PYTH_162_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "HTTP Forwarded Headers",
       "prompt": "Fill in the HTTP header used by proxies to preserve the client's original IP address.",
       "codeSnippet": "headers = {'___-For': client_ip}",

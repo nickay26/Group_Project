@@ -13,6 +13,7 @@
     {
       "slideId": "PY_245_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Coroutine Definition Keyword",
       "prompt": "Fill in the keyword used to define an asynchronous coroutine function.",
       "codeSnippet": "___ def fetch_data():\n    return {\"status\": 200}",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_245_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Non-blocking Sleep Method",
       "prompt": "Fill in the asynchronous non-blocking equivalent of `time.sleep()` in `asyncio`.",
       "codeSnippet": "await asyncio.___(2)",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_256_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Lvalue Ref-Qualifier Syntax",
       "prompt": "Fill in the qualifier token applied after member method parameter list to restrict execution to lvalue objects.",
       "codeSnippet": "class Builder {\npublic:\n    void build() ___ { // Executes only on lvalue instances\n    }\n};",

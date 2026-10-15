@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_160_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Incrementing Pointer",
       "prompt": "Fill in the operator to advance a pointer to the next array element.",
       "codeSnippet": "int* p = arr;\np___; // Moves to arr[1]",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_160_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Static Cast for Void Pointer",
       "prompt": "Fill in the type cast operator used to safely cast a void pointer back to int pointer.",
       "codeSnippet": "void* vptr = &x;\nint* iptr = ___<int*>(vptr);",

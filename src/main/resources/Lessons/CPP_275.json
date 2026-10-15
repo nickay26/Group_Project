@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_275_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "constexpr Variable Declaration",
       "prompt": "Fill in the keyword to mandate compile-time calculation of array size.",
       "codeSnippet": "___ int size = 10 + 20;\nint arr[size];",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_275_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Testing Compile-Time Execution Context",
       "prompt": "Fill in the standard C++20 function used to detect if execution is currently happening in a constant evaluation context.",
       "codeSnippet": "if (std::___()) {\n    // Compile-time path\n} else {\n    // Runtime path\n}",
@@ -101,6 +103,7 @@
     {
       "slideId": "CPP_275_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "constexpr Allocation (C++20)",
       "prompt": "Fill in the header file enabling std::vector usage inside constexpr contexts in C++20.",
       "codeSnippet": "#include <___>\nconstexpr int getSum() {\n    std::vector<int> v = {1, 2, 3};\n    return v[0] + v[1] + v[2];\n}",

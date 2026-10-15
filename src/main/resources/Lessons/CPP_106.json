@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_106_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Extraction Operator",
       "prompt": "Fill in the extraction operator used with cin.",
       "codeSnippet": "std::cin ___ userAge;",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_106_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Multiple Input Chaining",
       "prompt": "Fill in the missing operator to accept two inputs in sequence.",
       "codeSnippet": "std::cin >> x ___ y;",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_106_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Prompting User Input",
       "prompt": "Fill in the correct stream object to print a prompt before cin.",
       "codeSnippet": "___ << \"Enter number: \";\nstd::cin >> num;",

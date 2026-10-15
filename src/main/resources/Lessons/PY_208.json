@@ -13,6 +13,7 @@
     {
       "slideId": "PY_208_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Context Manager Setup Method",
       "prompt": "Fill in the magic method name executed when entering a 'with' block to acquire resources.",
       "codeSnippet": "class Database:\n    def ___enter___(self):\n        self.connect()\n        return self",

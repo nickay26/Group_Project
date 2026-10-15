@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_251_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Move Constructor Signature",
       "prompt": "Fill in the parameter signature for the move constructor of class Vector.",
       "codeSnippet": "class Vector {\npublic:\n    Vector(Vector___ other) noexcept;\n};",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_251_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Move Assignment Operator Signature",
       "prompt": "Fill in the operator signature for class MyArray move assignment.",
       "codeSnippet": "MyArray& operator=(MyArray___ other) noexcept {\n    if (this != &other) { /* move logic */ }\n    return *this;\n}",

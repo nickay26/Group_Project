@@ -13,6 +13,7 @@
     {
       "slideId": "PY_237_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Function Return Type Hint Syntax",
       "prompt": "Fill in the operator symbol used to specify the return type of a function.",
       "codeSnippet": "def get_username(user_id: int) ___ str:\n    return \"User\" + str(user_id)",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_237_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "List Type Hint Syntax",
       "prompt": "Fill in the generic list type annotation for a list containing float numbers in Python 3.9+.",
       "codeSnippet": "numbers: ___[float] = [1.0, 2.5, 3.14]",

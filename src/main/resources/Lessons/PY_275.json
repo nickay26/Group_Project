@@ -48,6 +48,7 @@
     {
       "slideId": "PY_275_S5",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Question 4: Inspection of Free Variables",
       "prompt": "Which attribute of a function object stores cell objects containing free variables of a closure?",
       "options": ["__closure__", "__code__", "__freevars__", "__dict__"],

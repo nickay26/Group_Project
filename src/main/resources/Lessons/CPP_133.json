@@ -47,6 +47,7 @@
     {
       "slideId": "CPP_133_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Condition Keyword Position",
       "prompt": "Fill in the condition keyword placed after the do block.",
       "codeSnippet": "do {\n    std::cout << \"Menu\";\n} ___ (choice != 0);",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_133_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Trace Output count",
       "prompt": "What is the final value of x after this loop?",
       "codeSnippet": "int x = 5;\ndo {\n    x++;\n} while (x < 3);",

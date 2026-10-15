@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_143_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Scope Minimization for Loop Counter",
       "prompt": "Where should a loop counter variable be declared to limit scope leakage?",
       "codeSnippet": "for (___ i = 0; i < N; i++) {\n    // i scope ends at loop brace\n}",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_134_S6_REV",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Descriptive Loop Counters",
       "prompt": "Instead of nested i, j, k, use descriptive names like row and ___.",
       "codeSnippet": "for (int row = 0; row < R; row++) {\n    for (int ___ = 0; col < C; col++) {}\n}",

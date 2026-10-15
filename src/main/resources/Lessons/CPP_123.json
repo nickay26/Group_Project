@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_123_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Left Shift Symbol",
       "prompt": "Fill in the bitwise left shift operator.",
       "codeSnippet": "int val = 4 ___ 2; // Shifts bits 2 places left",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_123_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Left Shift by N",
       "prompt": "Shifting left by N positions multiplies the number by 2 to the power of ___.",
       "codeSnippet": "int res = x << N; // x * (2^___)",
@@ -81,6 +83,7 @@
     {
       "slideId": "CPP_123_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Right Shift Evaluation",
       "prompt": "What is the result of 20 >> 2?",
       "codeSnippet": "int res = 20 >> 2; // Evaluates to ___",

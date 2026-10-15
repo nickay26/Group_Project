@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_252_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Header for std::move",
       "prompt": "Fill in the standard header required to use std::move.",
       "codeSnippet": "#include <___>\nstd::string b = std::move(a);",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_252_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Moving Primitives",
       "prompt": "Fill in what happens when applying std::move to built-in primitive types like int or double.",
       "codeSnippet": "int x = 10;\nint y = std::move(x); // Simply ___ the value (no memory steal benefit)",

@@ -48,6 +48,7 @@
     {
       "slideId": "PY_282_S5",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 4: Thread Joining",
       "prompt": "Fill in the thread method called to block execution of the main thread until the target thread finishes execution.",
       "codeSnippet": "t = threading.Thread(target=job)\nt.start()\nt.____()",
@@ -105,6 +106,7 @@
     {
       "slideId": "PY_282_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 9: Inter-Process Communication",
       "prompt": "Fill in the thread/process safe queue class used for message passing between concurrent tasks.",
       "codeSnippet": "from queue import ___\n\nq = Queue()",

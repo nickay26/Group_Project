@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_121_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Short-Circuit AND Condition",
       "prompt": "In (A && B), if A is false, B is ___.",
       "codeSnippet": "bool res = false && ++x; // ++x is ___",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_121_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Null Pointer Safety Check",
       "prompt": "Short-circuit guards against division by zero. Complete the condition.",
       "codeSnippet": "if (denom != 0 ___ num / denom > 2)",
@@ -56,6 +58,7 @@
     {
       "slideId": "CPP_121_S7",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "OR Short-Circuit Test",
       "prompt": "If int x = 10; if (true || ++x > 5); what is x after evaluation?",
       "options": ["10", "11", "0", "5"],

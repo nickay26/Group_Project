@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_260_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Condition Variable Any Type",
       "prompt": "Fill in the variant class that works with any lock type beyond std::unique_lock<std::mutex>.",
       "codeSnippet": "std::___ cv_any; // Works with custom lock types",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_260_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Timed Waiting on CV",
       "prompt": "Fill in the method used to wait on a condition variable until a specific time point.",
       "codeSnippet": "cv.___until(lock, timeout_time, [] { return ready; });",

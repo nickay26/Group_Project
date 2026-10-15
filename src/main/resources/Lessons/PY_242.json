@@ -13,6 +13,7 @@
     {
       "slideId": "PY_242_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Type Stub Extension",
       "prompt": "Fill in the standard file extension used for Python type stub files.",
       "codeSnippet": "math_utils.___",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_242_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "PEP 561 Marker File Name",
       "prompt": "Fill in the empty marker file name required in a package directory to advertise that it includes inline type annotations.",
       "codeSnippet": "py.____",

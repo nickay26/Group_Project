@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_144_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Array Declaration Syntax",
       "prompt": "Fill in the brackets symbol used to declare array size.",
       "codeSnippet": "int numbers___10___;",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_144_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Automatic Size Deduction",
       "prompt": "Leave brackets empty to let compiler deduce size from initializer list.",
       "codeSnippet": "double prices[___] = {1.99, 2.99, 3.99};",

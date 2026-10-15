@@ -22,6 +22,7 @@
     {
       "slideId": "CPP_119_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Inequality Operator",
       "prompt": "Which operator checks if two values are NOT equal?",
       "options": ["!=", "<>", "==", "not="],
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_119_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Less Than or Equal To",
       "prompt": "Fill in the operator for less than or equal to.",
       "codeSnippet": "bool isValid = (age ___ 18);",
@@ -81,6 +83,7 @@
     {
       "slideId": "CPP_119_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Greater Than Comparison",
       "prompt": "Fill in the operator checking if balance exceeds total.",
       "codeSnippet": "bool canAfford = (balance ___ total);",

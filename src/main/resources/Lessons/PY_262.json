@@ -35,6 +35,7 @@
     {
       "slideId": "PY_262_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Repository Pattern Abstraction",
       "prompt": "Fill in the pattern name that isolates domain entities from data persistence logic.",
       "codeSnippet": "class AbstractOrder___(ABC):\n    @abstractmethod\n    def save(self, order): pass",

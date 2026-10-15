@@ -64,6 +64,7 @@
     {
       "slideId": "CPP_150_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "string_view Literal Suffix",
       "prompt": "Fill in namespace literal suffix for string_view (e.g. \"text\"sv).",
       "codeSnippet": "using namespace std::string_view_literals;\nauto sv = \"hello\"___;",

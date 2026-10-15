@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_127_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Async Function Definition",
       "prompt": "Fill in the keyword used before 'def' to define an asynchronous coroutine.",
       "codeSnippet": "___ def main():\n    print(\"Async world\")",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_127_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Asyncio Run Method",
       "prompt": "Fill in the entry point function used to execute the top-level async main function.",
       "codeSnippet": "asyncio.___(main())",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_127_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Async Sleep",
       "prompt": "Fill in the non-blocking delay function used in asyncio.",
       "codeSnippet": "await asyncio.___(2)",

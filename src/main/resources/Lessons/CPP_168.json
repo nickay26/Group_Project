@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_168_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Modulus Operator (CPP_119)",
       "prompt": "Fill in the operator used to get the remainder of an integer division.",
       "codeSnippet": "int remainder = 25 ___ 4; // remainder is 1",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_168_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Not Equal Operator (CPP_121)",
       "prompt": "Fill in the correct operator to test if two variables are NOT equal.",
       "codeSnippet": "if (a ___ b) {\n    cout << \"a and b are different\";\n}",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_168_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Logical OR Operator (CPP_122)",
       "prompt": "Fill in the logical operator that yields true if AT LEAST ONE condition is true.",
       "codeSnippet": "if (isWeekend ___ isHoliday) {\n    cout << \"Time to relax!\";\n}",
