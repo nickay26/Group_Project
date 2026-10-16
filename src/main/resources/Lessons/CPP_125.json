@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_125_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Member Access Dot Operator",
       "prompt": "Fill in the operator used to access struct or class members from an object instance.",
       "codeSnippet": "Person p;\np___name = \"Alice\";",
@@ -39,6 +40,7 @@
     {
       "slideId": "CPP_125_S5",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Pointer Member Access Operator",
       "prompt": "Which operator accesses struct/class members through a pointer to an object?",
       "options": ["-> (arrow operator)", ". (dot operator)", ":: (scope resolution)", "* (asterisk)"],
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_125_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Comma Operator Evaluation",
       "prompt": "What is the value of 'val' in: int val = (1, 2, 3);?",
       "codeSnippet": "int val = (1, 2, 3); // val becomes ___",

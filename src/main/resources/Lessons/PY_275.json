@@ -1,0 +1,142 @@
+{
+  "lessonId": "PY_275",
+  "title": "Module Assessment: Decorators & Closures (PY_216 to PY_222)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_275_S1",
+      "type": "CONCEPT",
+      "title": "Module 3 Overview",
+      "prompt": "Assessment covering Closures, Free Variables, Decorator Wrappers, Parameterized Decorators, and functools.wraps.",
+      "codeSnippet": "from functools import wraps\n\ndef my_dec(f):\n    @wraps(f)\n    def wrapper(*args, **kwargs):\n        return f(*args, **kwargs)\n    return wrapper"
+    },
+    {
+      "slideId": "PY_275_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Closure Definition",
+      "prompt": "What is required to form a closure in Python?",
+      "options": [
+        "A nested function referencing free variables from an enclosing scope",
+        "A global variable imported inside a function",
+        "A class inheriting from object",
+        "A lambda inside a loop"
+      ],
+      "correctAnswer": "A nested function referencing free variables from an enclosing scope"
+    },
+    {
+      "slideId": "PY_275_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 2: Nonlocal Keyword",
+      "prompt": "Fill in the keyword used inside a closure to rebind variables in the outer non-global scope.",
+      "codeSnippet": "def outer():\n    x = 0\n    def inner():\n        ___ x\n        x += 1",
+      "options": ["nonlocal", "global", "outer", "rebind"],
+      "correctAnswer": "nonlocal"
+    },
+    {
+      "slideId": "PY_275_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Preserving Metadata",
+      "prompt": "Why is `@functools.wraps` applied to a decorator wrapper function?",
+      "options": [
+        "To preserve original name, docstring, and annotations",
+        "To make wrapper run faster",
+        "To bypass argument checks",
+        "To enable multi-threading"
+      ],
+      "correctAnswer": "To preserve original name, docstring, and annotations"
+    },
+    {
+      "slideId": "PY_275_S5",
+      "type": "MULTIPLE_CHOICE",
+      "interactive": true,
+      "title": "Question 4: Inspection of Free Variables",
+      "prompt": "Which attribute of a function object stores cell objects containing free variables of a closure?",
+      "options": ["__closure__", "__code__", "__freevars__", "__dict__"],
+      "correctAnswer": "__closure__"
+    },
+    {
+      "slideId": "PY_275_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 6: Decorator Syntax Equivalent",
+      "prompt": "Fill in the assignment equivalent to `@my_decorator` above `def func(): pass`.",
+      "codeSnippet": "func = ___(func)",
+      "options": ["my_decorator", "decorator", "wrapper", "wraps"],
+      "correctAnswer": "my_decorator"
+    },
+    {
+      "slideId": "PY_275_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Parameterized Decorator Layers",
+      "prompt": "How many nested functions/layers are required to build a decorator that accepts arguments `@dec(arg)`?",
+      "options": ["3 layers", "2 layers", "1 layer", "4 layers"],
+      "correctAnswer": "3 layers"
+    },
+    {
+      "slideId": "PY_275_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Flexible Arguments",
+      "prompt": "Fill in positional argument collector inside decorator wrappers to accept any function signature.",
+      "codeSnippet": "def wrapper(*___, **kwargs):\n    return func(*args, **kwargs)",
+      "options": ["args", "params", "inputs", "vars"],
+      "correctAnswer": "args"
+    },
+    {
+      "slideId": "PY_275_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Class Decorator Target",
+      "prompt": "What does a Class Decorators `@decorator` take as its target argument when placed above `class MyClass:`?",
+      "options": ["The class object itself", "An instance of class", "The metaclass", "Class dictionary"],
+      "correctAnswer": "The class object itself"
+    },
+    {
+      "slideId": "PY_275_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Stateful Decorator Class",
+      "prompt": "To create a decorator using a Class instead of a function, which magic method must the class implement?",
+      "options": ["__call__", "__init__", "__enter__", "__invoke__"],
+      "correctAnswer": "__call__"
+    },
+    {
+      "slideId": "PY_275_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 10: Code Object Inspection",
+      "prompt": "Fill in attribute storing names of free variables inside `func.__code__`.",
+      "codeSnippet": "free_vars = func.__code__.co____",
+      "options": ["freevars", "cellvars", "names", "varnames"],
+      "correctAnswer": "freevars"
+    },
+    {
+      "slideId": "PY_275_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 11: Stacking Order",
+      "prompt": "In what order are stacked decorators `@dec1` then `@dec2` applied to `def f():`?",
+      "options": ["f = dec1(dec2(f))", "f = dec2(dec1(f))", "Parallel execution", "Random order"],
+      "correctAnswer": "f = dec1(dec2(f))"
+    },
+    {
+      "slideId": "PY_275_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Built-in Method Decorators",
+      "prompt": "Which decorator defines a method that does not receive self or cls as first argument?",
+      "options": ["@staticmethod", "@classmethod", "@property", "@abstractmethod"],
+      "correctAnswer": "@staticmethod"
+    },
+    {
+      "slideId": "PY_275_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Wraps Import Source",
+      "prompt": "Fill in the module source for importing `wraps`.",
+      "codeSnippet": "from ___ import wraps",
+      "options": ["functools", "itertools", "sys", "decorators"],
+      "correctAnswer": "functools"
+    },
+    {
+      "slideId": "PY_275_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Unwrapping Decorator",
+      "prompt": "Which attribute added by `@wraps` allows access to original unwrapped function?",
+      "options": ["__wrapped__", "__original__", "__func__", "__raw__"],
+      "correctAnswer": "__wrapped__"
+    }
+  ]
+}

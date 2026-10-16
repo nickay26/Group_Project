@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_104_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Floating Point Type",
       "prompt": "Fill in the data type for high-precision decimal numbers.",
       "codeSnippet": "___ pi = 3.14159;",
@@ -80,6 +81,7 @@
     },
     {
       "slideId": "CPP_104_S10",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "String Literal Quotes",
       "prompt": "Fill in the correct delimiter for string literals.",

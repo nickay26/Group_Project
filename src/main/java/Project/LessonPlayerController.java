@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -275,32 +276,24 @@ public class LessonPlayerController {
     private void handleLessonCompletion() {
         if (continueBtn != null) {
             continueBtn.setDisable(true);
-            continueBtn.setText("SAVING...");
         }
 
         new Thread(() -> {
+            int earnedXP = currentLesson != null ? currentLesson.getXp() : 10;
+            int earnedCoins = 10;
+
+            if (totalQuestionCount > 0) {
+                double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
+                if (percentage >= 50.0) {
+                    earnedCoins = 10;
+                } else {
+                    earnedCoins = 5;
+                }
+            }
+
             if (currentLesson != null) {
                 int userId = UserSession.getUserId();
                 String courseId = UserSession.getActiveCourseId();
-
-                int earnedXP = currentLesson.getXp();
-                int earnedCoins = 10;
-
-                if (totalQuestionCount > 0) {
-                    double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
-                    if (percentage >= 50.0) {
-                        earnedCoins = 10;
-                    } else {
-                        earnedCoins = 5;
-                    }
-                }
-
-                User currentUser = UserSession.getCurrentUser();
-                if (currentUser != null) {
-                    currentUser.setCoin(currentUser.getCoin() + earnedCoins);
-                    currentUser.setXp(currentUser.getXp() + earnedXP);
-                    UserSession.setCurrentUser(currentUser);
-                }
 
                 DatabaseManager.completeLessonAndAddXP(
                         userId,
@@ -311,13 +304,87 @@ public class LessonPlayerController {
                 );
             }
 
+            final int finalXp = earnedXP;
+            final int finalCoins = earnedCoins;
+
             Platform.runLater(() -> {
-                if (MainLayoutController.getInstance() != null) {
-                    MainLayoutController.getInstance().updateHeaderStats();
-                    MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                }
+                showRewardAnimationDialog(finalXp, finalCoins);
             });
         }).start();
+    }
+
+    private void showRewardAnimationDialog(int xp, int coins) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Lesson Completed! 🎉");
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+        // Dark theme styling to match your app
+        dialog.getDialogPane().setStyle(
+                "-fx-background-color: #1E293B; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-color: #334155; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-border-width: 1.5px;"
+        );
+
+        VBox content = new VBox(16);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(30, 40, 30, 40));
+
+        Label titleLabel = new Label("🏆 Awesome Job!");
+        titleLabel.setStyle("-fx-text-fill: #38BDF8; -fx-font-size: 24px; -fx-font-weight: bold;");
+
+        Label descLabel = new Label("You have successfully completed the lesson.");
+        descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 14px;");
+
+        // Rewards Box (XP & Coins)
+        HBox rewardsBox = new HBox(20);
+        rewardsBox.setAlignment(Pos.CENTER);
+        rewardsBox.setPadding(new Insets(10, 0, 10, 0));
+
+        VBox xpBox = createRewardBadge("⚡ +" + xp + " XP", "#F59E0B");
+        VBox coinBox = createRewardBadge("🪙 +" + coins + " Coins", "#10B981");
+
+        rewardsBox.getChildren().addAll(xpBox, coinBox);
+        content.getChildren().addAll(titleLabel, descLabel, rewardsBox);
+
+        dialog.getDialogPane().setContent(content);
+
+        ButtonType collectBtnType = new ButtonType("CONTINUE", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().setAll(collectBtnType);
+
+        // Apply Pop-up Scale Animation when dialog shows
+        dialog.setOnShown(e -> {
+            javafx.animation.ScaleTransition st = new javafx.animation.ScaleTransition(javafx.util.Duration.millis(350), dialog.getDialogPane());
+            st.setFromX(0.5);
+            st.setFromY(0.5);
+            st.setToX(1.0);
+            st.setToY(1.0);
+            st.play();
+        });
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (MainLayoutController.getInstance() != null) {
+                MainLayoutController.getInstance().updateHeaderStats();
+                MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+            }
+        });
+    }
+
+    private VBox createRewardBadge(String text, String colorHex) {
+        VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(12, 20, 12, 20));
+        box.setStyle(
+                "-fx-background-color: " + colorHex + "22; " +
+                        "-fx-border-color: " + colorHex + "; " +
+                        "-fx-border-radius: 12px; " +
+                        "-fx-background-radius: 12px;"
+        );
+        Label label = new Label(text);
+        label.setStyle("-fx-text-fill: " + colorHex + "; -fx-font-size: 16px; -fx-font-weight: bold;");
+        box.getChildren().add(label);
+        return box;
     }
 
     private void renderConceptAiExplainer(VBox cardBox, String language, String codeContent) {
@@ -731,29 +798,11 @@ public class LessonPlayerController {
         int todayCount = user != null ? DatabaseManager.getTodayAIAskCount(user.getUserId()) : 0;
         int remaining = Math.max(0, FREE_DAILY_AI_LIMIT - todayCount);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Daily AI Limit");
-        alert.setHeaderText("🚀 You've reached today's AI limit!");
+        String message = remaining <= 0
+                ? "Free users can ask AI " + FREE_DAILY_AI_LIMIT + " times per day.\n\nUpgrade to Premium for UNLIMITED AI questions, unlimited brains, and more!"
+                : "You have " + remaining + " AI questions left today.";
 
-        if (remaining <= 0) {
-            alert.setContentText(
-                    "Free users can ask AI " + FREE_DAILY_AI_LIMIT + " times per day.\n\n" +
-                            "Upgrade to Premium for UNLIMITED AI questions, " +
-                            "unlimited brains, and more!"
-            );
-        } else {
-            alert.setContentText("You have " + remaining + " AI questions left today.");
-        }
-
-        ButtonType upgradeBtn = new ButtonType("Upgrade to Premium", ButtonBar.ButtonData.OK_DONE);
-        ButtonType laterBtn = new ButtonType("Maybe Later", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(upgradeBtn, laterBtn);
-
-        alert.showAndWait().ifPresent(bt -> {
-            if (bt == upgradeBtn && MainLayoutController.getInstance() != null) {
-                MainLayoutController.getInstance().handlePremium();
-            }
-        });
+        DialogUtils.showMessageDialog("Daily AI Limit", "🚀 You've reached today's AI limit!\n\n" + message, false);
     }
 
     // 🧠 Refill Dialog on Out of Brains
@@ -764,13 +813,26 @@ public class LessonPlayerController {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Out of Energy!");
-        alert.setHeaderText("🧠 You have 0 Brains left!");
-        alert.setContentText("Would you like to refill 5 Brains for 100 Coins?");
+        // Dark-themed confirmation dialog implementation
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Out of Energy!");
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.getDialogPane().setStyle("-fx-background-color: #1E293B; -fx-text-fill: white;");
 
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
+        VBox content = new VBox(12);
+        content.setPadding(new Insets(20));
+        Label msg = new Label("🧠 You have 0 Brains left!\n\nWould you like to refill 5 Brains for 100 Coins?");
+        msg.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 14px;");
+        msg.setWrapText(true);
+        content.getChildren().add(msg);
+        dialog.getDialogPane().setContent(content);
+
+        ButtonType refillBtn = new ButtonType("Refill (100 Coins)", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().setAll(refillBtn, cancelBtn);
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == refillBtn) {
                 if (user.getCoin() >= 100) {
                     boolean success = DatabaseManager.refillBrainsWithCoins(user.getUserId(), 100, 5);
                     if (success) {
@@ -780,17 +842,13 @@ public class LessonPlayerController {
                         if (MainLayoutController.getInstance() != null) {
                             MainLayoutController.getInstance().updateHeaderStats();
                         }
-
-                        Alert info = new Alert(Alert.AlertType.INFORMATION, "⚡ Brains refilled to 5!");
-                        info.showAndWait();
+                        DialogUtils.showMessageDialog("Success", "⚡ Brains refilled to 5!", false);
                     } else {
-                        Alert err = new Alert(Alert.AlertType.ERROR, "Failed to refill brains on server.");
-                        err.showAndWait();
+                        DialogUtils.showMessageDialog("Error", "Failed to refill brains on server.", true);
                         handleClose();
                     }
                 } else {
-                    Alert err = new Alert(Alert.AlertType.ERROR, "❌ Insufficient coins! You need 100 coins.");
-                    err.showAndWait();
+                    DialogUtils.showMessageDialog("Error", "❌ Insufficient coins! You need 100 coins.", true);
                     handleClose();
                 }
             } else {

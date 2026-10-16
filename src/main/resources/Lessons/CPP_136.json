@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_136_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "continue Keyword Syntax",
       "prompt": "Fill in keyword to skip processing odd numbers.",
       "codeSnippet": "if (num % 2 != 0) {\n    ___;\n}",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_136_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Trace break vs continue",
       "prompt": "What is printed by: for(int i=0;i<3;i++) { if(i==1) continue; cout<<i; }?",
       "codeSnippet": "// Output becomes ___",

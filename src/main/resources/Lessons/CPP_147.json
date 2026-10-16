@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_147_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Header Include for std::string",
       "prompt": "Fill in correct C++ standard header.",
       "codeSnippet": "#include <___>",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_147_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "c_str() Interoperability",
       "prompt": "Fill in method converting std::string to const char* for legacy C APIs.",
       "codeSnippet": "const char* cstr = str.___();",

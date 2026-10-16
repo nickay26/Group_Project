@@ -12,6 +12,7 @@
     },
     {
       "slideId": "CPP_101_S2",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Header File Inclusion",
       "prompt": "Fill in the correct header file for input/output operations.",
@@ -38,10 +39,11 @@
     },
     {
       "slideId": "CPP_101_S5",
-      "type": "MULTIPLE_CHOICE",
+      "type": "FILL_IN_BLANK",
       "title": "File Extension",
-      "prompt": "What is the standard file extension for C++ source code files?",
-      "options": [".cpp", ".c", ".java", ".exe"],
+      "prompt": "Complete the C++ source file extension in the compilation example.",
+      "codeSnippet": "g++ main___ -o main",
+      "options": [".cpp", ".c", ".h", ".exe"],
       "correctAnswer": ".cpp"
     },
     {
@@ -63,6 +65,7 @@
     },
     {
       "slideId": "CPP_101_S8",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Main Function Return Type",
       "prompt": "Fill in the correct return type for the main function.",

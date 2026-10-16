@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_240_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dereference Operator",
       "prompt": "Fill in the operator overloaded to return a reference to the value pointed to by an iterator.",
       "codeSnippet": "T& operator___() { return *ptr; }",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_240_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++20 std::iterator_interface / Concept",
       "prompt": "Fill in the C++20 concept used to verify that a type models a forward iterator.",
       "codeSnippet": "template <std::forward____ Iter>\nvoid process(Iter begin, Iter end);",

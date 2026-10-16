@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_249_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Addressable Memory Identifiers",
       "prompt": "Fill in the operator that can be applied to lvalues to retrieve their memory address, but fails on rvalues.",
       "codeSnippet": "int a = 42;\nint* ptr = ___a; // Valid because 'a' is an lvalue",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_249_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Xvalue (eXpiring Value)",
       "prompt": "Fill in the cast operator that turns an lvalue into an expiring value (xvalue).",
       "codeSnippet": "std::string name = \"C++\";\nstd::string target = std::___(name); // 'name' becomes an xvalue",

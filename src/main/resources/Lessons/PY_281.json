@@ -26,6 +26,7 @@
     {
       "slideId": "PY_281_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 2: Singleton Implementation",
       "prompt": "Fill in the magic method used to control instance creation in Python for Singleton implementation.",
       "codeSnippet": "class Singleton:\n    def ___(cls):\n        pass",
@@ -96,6 +97,7 @@
     {
       "slideId": "PY_281_S9",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Question 8: SOLID Principles - D",
       "prompt": "Fill in the term: Dependency ___ Principle states high-level modules should not depend on low-level modules; both should depend on abstractions.",
       "codeSnippet": "# Dependency ___ Principle\nclass Service:\n    def __init__(self, repo: IRepository): pass",

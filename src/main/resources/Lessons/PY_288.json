@@ -35,6 +35,7 @@
     {
       "slideId": "PYTH_288_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Thread Synchronization Lock",
       "prompt": "Fill in the class used to manage mutual exclusion locks in `threading`.",
       "codeSnippet": "lock = threading.___()",
@@ -57,6 +58,7 @@
     {
       "slideId": "PYTH_288_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Process Pool Execution",
       "prompt": "Fill in the executor class from `concurrent.futures` used for CPU-bound task pools.",
       "codeSnippet": "with ___PoolExecutor() as executor:",

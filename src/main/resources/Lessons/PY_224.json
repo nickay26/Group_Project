@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_224",
+  "title": "Generators & Iterators: Generator Functions & yield",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_224_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Generator Functions",
+      "prompt": "A generator function uses the 'yield' statement instead of 'return'. Calling a generator function returns a generator object without executing the body immediately. Values are produced lazily as requested.",
+      "codeSnippet": "def count_up_to(max_num):\n    count = 1\n    while count <= max_num:\n        yield count\n        count += 1\n\ncounter = count_up_to(3)\nprint(next(counter))  # 1\nprint(next(counter))  # 2"
+    },
+    {
+      "slideId": "PY_224_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Yield Keyword Usage",
+      "prompt": "Fill in the keyword used to pause execution and send a value back from a generator.",
+      "codeSnippet": "def simple_gen():\n    ___ \"Hello\"\n    yield \"World\"",
+      "options": ["yield", "return", "emit", "send"],
+      "correctAnswer": "yield"
+    },
+    {
+      "slideId": "PY_224_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Execution Behavior",
+      "prompt": "What happens when a generator function is invoked (e.g., `gen = my_generator()`)?",
+      "options": [
+        "A generator object is created, but no function code is executed until next() is called",
+        "The entire function runs immediately and returns a list of values",
+        "It evaluates up to the first return statement",
+        "It starts a new background thread"
+      ],
+      "correctAnswer": "A generator object is created, but no function code is executed until next() is called"
+    },
+    {
+      "slideId": "PY_224_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Return in Generator",
+      "prompt": "Fill in the statement that terminates a generator function and sets the StopIteration value.",
+      "codeSnippet": "def gen():\n    yield 1\n    ___ \"Done\"",
+      "options": ["return", "yield", "exit", "break"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "PY_224_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "State Preservation in Generators",
+      "prompt": "What happens to a generator function's local variables when it hits a `yield` statement?",
+      "options": [
+        "Local variables and execution state are frozen until the next call",
+        "Local variables are wiped and reset to None",
+        "Local variables are saved to global scope",
+        "The stack frame is destroyed permanently"
+      ],
+      "correctAnswer": "Local variables and execution state are frozen until the next call"
+    },
+    {
+      "slideId": "PY_224_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Infinite Generator Pattern",
+      "prompt": "Fill in the loop condition keyword used to build infinite streaming generators.",
+      "codeSnippet": "def infinite_sequence():\n    num = 0\n    while ___:\n        yield num\n        num += 1",
+      "options": ["True", "1", "num >= 0", "num"],
+      "correctAnswer": "True"
+    },
+    {
+      "slideId": "PY_224_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Efficiency of Generators",
+      "prompt": "Why are generators considered more memory efficient than lists for large datasets?",
+      "options": [
+        "Generators compute values lazily one at a time on demand rather than storing everything in RAM",
+        "Generators store elements using compressed binary format",
+        "Generators automatically write overflow items to swap memory disk space",
+        "Generators bypass CPython object wrapping"
+      ],
+      "correctAnswer": "Generators compute values lazily one at a time on demand rather than storing everything in RAM"
+    }
+  ]
+}

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_231_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Stack LIFO Operation",
       "prompt": "Fill in the function returning a reference to the top element of a stack.",
       "codeSnippet": "std::stack<int> st;\nint val = st.___();",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_231_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Queue FIFO Front Access",
       "prompt": "Fill in the function returning the oldest element in a std::queue.",
       "codeSnippet": "std::queue<int> q;\nint oldest = q.___();",

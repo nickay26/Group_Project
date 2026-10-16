@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_257_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Joining a Thread",
       "prompt": "Fill in the missing method name that blocks the current thread until the target thread finishes execution.",
       "codeSnippet": "std::thread t(workerFunction);\nt.___(); // Blocks until workerFunction completes",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_257_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Thread Header",
       "prompt": "Fill in the header file required for using std::thread.",
       "codeSnippet": "#include <___>\n\nstd::thread t([]() {\n    // lambda body\n});",

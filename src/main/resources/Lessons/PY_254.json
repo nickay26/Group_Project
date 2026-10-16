@@ -1,0 +1,83 @@
+{
+  "lessonId": "PY_254",
+  "title": "C-Extensions: ctypes Module & FFI",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_254_S1",
+      "type": "CONCEPT",
+      "title": "Foreign Function Interfaces with ctypes",
+      "prompt": "The `ctypes` module provides a Foreign Function Interface (FFI) to call functions in native dynamic compiled C libraries (`.so`, `.dll`, `.dylib`) and map Python types to C data types directly.",
+      "codeSnippet": "import ctypes\n\n# Load standard C library (Linux/macOS)\nlibc = ctypes.CDLL(\"libc.so.6\")\n\n# Set arguments and return type\nlibc.pow.argtypes = [ctypes.c_double, ctypes.c_double]\nlibc.pow.restype = ctypes.c_double\n\nresult = libc.pow(2.0, 3.0)\nprint(result) # 8.0"
+    },
+    {
+      "slideId": "PY_254_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "ctypes Shared Library Loader",
+      "prompt": "Fill in the class used in `ctypes` to load dynamically linked C libraries using standard C calling conventions.",
+      "codeSnippet": "import ctypes\nlib = ctypes.___('./mylib.so')",
+      "options": ["CDLL", "LoadLibrary", "CModule", "SharedLib"],
+      "correctAnswer": "CDLL"
+    },
+    {
+      "slideId": "PY_254_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Configuring C Function Return Types",
+      "prompt": "Which attribute on a `ctypes` function object specifies the expected return type from C?",
+      "options": [
+        "restype",
+        "argtypes",
+        "return_type",
+        "ctype_out"
+      ],
+      "correctAnswer": "restype"
+    },
+    {
+      "slideId": "PY_254_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "ctypes C Double Type Equivalent",
+      "prompt": "Fill in the `ctypes` type equivalent to C's `double` precision floating point number.",
+      "codeSnippet": "val = ctypes.___(3.14159)",
+      "options": ["c_double", "c_float", "double", "C_Double"],
+      "correctAnswer": "c_double"
+    },
+    {
+      "slideId": "PY_254_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Passing Pointer References in ctypes",
+      "prompt": "Which function in `ctypes` passes a variable by reference (pointer) to a native C function?",
+      "options": [
+        "ctypes.byref()",
+        "ctypes.pointer()",
+        "ctypes.address_of()",
+        "ctypes.pass_ptr()"
+      ],
+      "correctAnswer": "ctypes.byref()"
+    },
+    {
+      "slideId": "PY_254_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Configuring C Function Arguments",
+      "prompt": "Fill in the attribute name used to declare a list of expected argument types for a `ctypes` imported function.",
+      "codeSnippet": "my_c_func.___ = [ctypes.c_int, ctypes.c_char_p]",
+      "options": ["argtypes", "restype", "paramtypes", "signature"],
+      "correctAnswer": "argtypes"
+    },
+    {
+      "slideId": "PY_254_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ctypes C String Type",
+      "prompt": "Which `ctypes` type represents a NULL-terminated C character string (`char *`)?",
+      "options": [
+        "ctypes.c_char_p",
+        "ctypes.c_string",
+        "ctypes.c_str",
+        "ctypes.c_wchar"
+      ],
+      "correctAnswer": "ctypes.c_char_p"
+    }
+  ]
+}

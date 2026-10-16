@@ -73,6 +73,7 @@
     {
       "slideId": "CPP_111_S9",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Minimum Size of short",
       "prompt": "What is the minimum guaranteed size of 'short' in C++?",
       "options": ["16 bits (2 bytes)", "8 bits (1 byte)", "32 bits (4 bytes)", "64 bits (8 bytes)"],
@@ -81,6 +82,7 @@
     {
       "slideId": "CPP_111_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Long Type Declaration",
       "prompt": "Fill in the data type for a long integer.",
       "codeSnippet": "___ population = 7800000000L;",

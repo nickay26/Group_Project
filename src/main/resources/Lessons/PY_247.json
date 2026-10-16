@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_247",
+  "title": "AsyncIO Synchronization & Queues",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_247_S1",
+      "type": "CONCEPT",
+      "title": "Async Synchronization Primitives & Queues",
+      "prompt": "AsyncIO provides non-blocking synchronization primitives (`asyncio.Lock`, `Event`, `Semaphore`) and thread-safe producer-consumer pipelines (`asyncio.Queue`) tailored for async tasks.",
+      "codeSnippet": "import asyncio\n\nasync def worker(queue, lock):\n    while True:\n        item = await queue.get()\n        async with lock:\n            print(f\"Processing {item}\")\n        queue.task_done()"
+    },
+    {
+      "slideId": "PY_247_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Async Lock Context Manager",
+      "prompt": "Fill in the statement used to acquire and release an `asyncio.Lock` safely.",
+      "codeSnippet": "lock = asyncio.Lock()\n___ with lock:\n    # Protected resource access pass",
+      "options": ["async", "await", "with", "try"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_247_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Retrieving Item from Async Queue",
+      "prompt": "Which method is used to await and extract an item from an `asyncio.Queue`?",
+      "options": [
+        "await queue.get()",
+        "queue.pop()",
+        "await queue.dequeue()",
+        "queue.get_nowait()"
+      ],
+      "correctAnswer": "await queue.get()"
+    },
+    {
+      "slideId": "PY_247_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Queue Task Completion Notification",
+      "prompt": "Fill in the queue method called by a consumer task to indicate that a retrieved item has been processed.",
+      "codeSnippet": "item = await queue.get()\n# process item\nqueue.___()",
+      "options": ["task_done", "complete", "finish", "ack"],
+      "correctAnswer": "task_done"
+    },
+    {
+      "slideId": "PY_247_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Awaiting Queue Completion",
+      "prompt": "Which method blocks until all items added to an `asyncio.Queue` have been processed (`task_done()` called for each)?",
+      "options": [
+        "await queue.join()",
+        "await queue.wait_empty()",
+        "await queue.flush()",
+        "await queue.sync()"
+      ],
+      "correctAnswer": "await queue.join()"
+    },
+    {
+      "slideId": "PY_247_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Async Semaphore Limit Keyword",
+      "prompt": "Fill in the parameter used to initialize the concurrency limit of an `asyncio.Semaphore`.",
+      "codeSnippet": "sem = asyncio.Semaphore(___=5)",
+      "options": ["value", "limit", "count", "max_size"],
+      "correctAnswer": "value"
+    },
+    {
+      "slideId": "PY_247_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Thread Safety of asyncio.Queue",
+      "prompt": "Can an `asyncio.Queue` be directly used to transfer data between separate OS threads safely?",
+      "options": [
+        "No, `asyncio.Queue` is NOT thread-safe and is designed specifically for single-thread async tasks",
+        "Yes, it is fully thread-safe across process boundaries",
+        "Yes, provided GIL is enabled",
+        "No, unless wrapped in a `multiprocessing.Manager`"
+      ],
+      "correctAnswer": "No, `asyncio.Queue` is NOT thread-safe and is designed specifically for single-thread async tasks"
+    }
+  ]
+}

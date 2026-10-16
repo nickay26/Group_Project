@@ -42,6 +42,7 @@
       "slideId": "JAVA_105_S5",
       "type": "FILL_IN_BLANK",
       "title": "Fix Semicolon",
+      "Interactive": "true",
       "prompt": "Fix the error by adding the missing semicolon.",
       "codeSnippet": "System.out.println(\"Hello\")__",
       "options": [";", ":", ".", ","],

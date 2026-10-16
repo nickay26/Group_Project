@@ -128,16 +128,15 @@ public class PaymentController {
             if (success) {
                 DatabaseManager.savePaymentScreenshot(userId, newFileName, selectedMethod, amount);
 
-                // ★★★ ဒီ ၅ လိုင်း အသစ်ထည့်ပါ ★★★
                 User updatedUser = DatabaseManager.getUserById(userId);
                 if (updatedUser != null) {
                     UserSession.setCurrentUser(updatedUser);
                     System.out.println("✅ UserSession Refreshed!");
-                    System.out.println("   plan_type: " + updatedUser.getSubscriptionType());
+                    System.out.println("   plan_type: " + updatedUser.getPlanType());
+                    System.out.println("   premium_expiry: " + updatedUser.getPremiumExpiry());
                     System.out.println("   isPremium: " + updatedUser.isPremium());
                     System.out.println("   brain_count: " + updatedUser.getBrainCount());
                 }
-                // ★★★ ဒီအထိပဲ ★★★
 
                 showAlert("Success",
                         "Payment Verified!\n" +

@@ -47,6 +47,7 @@
     {
       "slideId": "CPP_149_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Removing Last Element",
       "prompt": "Fill in method removing last item without returning it.",
       "codeSnippet": "vec.___();",
@@ -81,6 +82,7 @@
     {
       "slideId": "CPP_149_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Clearing Vector Elements",
       "prompt": "Fill in method clearing all elements (resets size to 0).",
       "codeSnippet": "vec.___();",

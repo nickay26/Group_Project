@@ -1,0 +1,167 @@
+{
+  "lessonId": "PY_279",
+  "title": "Module Assessment: AsyncIO & Concurrency (PY_244 to PY_250)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_279_S1",
+      "type": "CONCEPT",
+      "title": "Module 7 Overview",
+      "prompt": "Assessment covering Event Loops, Async/Await syntax, Tasks, Futures, Gathering Coroutines, and Asynchronous Synchronization primitives.",
+      "codeSnippet": "import asyncio\n\nasync def main():\n    await asyncio.sleep(1)\n\nasyncio.run(main())"
+    },
+    {
+      "slideId": "PY_279_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: Event Loop Core Function",
+      "prompt": "What is the primary role of the AsyncIO Event Loop?",
+      "options": [
+        "To manage and execute asynchronous tasks and handle I/O events cooperatively",
+        "To execute multiple CPU-bound loops in parallel across threads",
+        "To automatically compile Python bytecode into C code",
+        "To replace standard Python garbage collection"
+      ],
+      "correctAnswer": "To manage and execute asynchronous tasks and handle I/O events cooperatively"
+    },
+    {
+      "slideId": "PY_279_S3",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Question 2: Async Function Declaration",
+      "prompt": "Fill in the keyword used to define a coroutine function.",
+      "codeSnippet": "___ def fetch_data():\n    return 'data'",
+      "options": ["async", "await", "coroutine", "concurrent"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_279_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 3: Pausing Coroutines",
+      "prompt": "Which keyword suspends execution of the current coroutine until the awaited object yields a result?",
+      "options": ["await", "yield", "pause", "defer"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PY_279_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Concurrent Execution with Gather",
+      "prompt": "Which function runs multiple awaitable objects concurrently and returns their results in order as a list?",
+      "options": [
+        "asyncio.gather()",
+        "asyncio.wait_all()",
+        "asyncio.run_parallel()",
+        "asyncio.collect()"
+      ],
+      "correctAnswer": "asyncio.gather()"
+    },
+    {
+      "slideId": "PY_279_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Creating Tasks",
+      "prompt": "Fill in the method used to schedule a coroutine to run on the event loop as a background Task.",
+      "codeSnippet": "task = asyncio._____(my_coro())",
+      "options": ["create_task", "run_task", "schedule", "dispatch"],
+      "correctAnswer": "create_task"
+    },
+    {
+      "slideId": "PY_279_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Non-blocking Sleeping",
+      "prompt": "Why should `asyncio.sleep()` be used instead of `time.sleep()` inside coroutines?",
+      "options": [
+        "time.sleep() blocks the entire event loop, while asyncio.sleep() yields control to other tasks",
+        "time.sleep() is less accurate",
+        "asyncio.sleep() uses multi-core CPU processing",
+        "time.sleep() raises a RuntimeError inside async functions"
+      ],
+      "correctAnswer": "time.sleep() blocks the entire event loop, while asyncio.sleep() yields control to other tasks"
+    },
+    {
+      "slideId": "PY_279_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 7: Task Cancellation",
+      "prompt": "What exception is raised inside a Task when its `.cancel()` method is invoked?",
+      "options": [
+        "asyncio.CancelledError",
+        "TaskInterruptedException",
+        "KeyboardInterrupt",
+        "StopAsyncIteration"
+      ],
+      "correctAnswer": "asyncio.CancelledError"
+    },
+    {
+      "slideId": "PY_279_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 8: Async Iteration Protocol",
+      "prompt": "Fill in the magic method that returns an asynchronous iterator object.",
+      "codeSnippet": "class AsyncIterable:\n    def _____(self):\n        return self",
+      "options": ["__aiter__", "__anext__", "__iter__", "__async_iter__"],
+      "correctAnswer": "__aiter__"
+    },
+    {
+      "slideId": "PY_279_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Running Blocking Code in Async",
+      "prompt": "Which method offloads blocking CPU-bound or synchronous I/O code to a thread pool executor from an event loop?",
+      "options": [
+        "loop.run_in_executor()",
+        "asyncio.run_blocking()",
+        "asyncio.to_thread_pool()",
+        "loop.offload_sync()"
+      ],
+      "correctAnswer": "loop.run_in_executor()"
+    },
+    {
+      "slideId": "PY_279_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Async Context Managers",
+      "prompt": "Which statement enters an asynchronous context manager?",
+      "options": ["async with", "with await", "await with", "async for"],
+      "correctAnswer": "async with"
+    },
+    {
+      "slideId": "PY_279_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Task Timeouts",
+      "prompt": "Fill in the function used to wrap an awaitable and enforce a maximum execution duration (Python 3.11+).",
+      "codeSnippet": "async with asyncio._____(timeout=5.0):\n    await do_work()",
+      "options": ["timeout", "wait_for", "limit", "deadline"],
+      "correctAnswer": "timeout"
+    },
+    {
+      "slideId": "PY_279_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Asynchronous Queues",
+      "prompt": "Which queue class from `asyncio` provides thread-safe producer-consumer communication for coroutines?",
+      "options": [
+        "asyncio.Queue",
+        "queue.Queue",
+        "multiprocessing.Queue",
+        "asyncio.AsyncQueue"
+      ],
+      "correctAnswer": "asyncio.Queue"
+    },
+    {
+      "slideId": "PY_279_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 13: Exception Handling in Gather",
+      "prompt": "What happens if `return_exceptions=True` is passed to `asyncio.gather()` when one task raises an exception?",
+      "options": [
+        "Exceptions are treated as successful results and included in the returned list",
+        "The gather function immediately cancels all other tasks and re-raises",
+        "Exceptions are silently ignored",
+        "It triggers a fatal process crash"
+      ],
+      "correctAnswer": "Exceptions are treated as successful results and included in the returned list"
+    },
+    {
+      "slideId": "PY_279_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 14: Task Groups (Python 3.11+)",
+      "prompt": "Fill in the modern context manager class used for structured concurrency error handling.",
+      "codeSnippet": "async with asyncio._____() as tg:\n    tg.create_task(coro1())",
+      "options": ["TaskGroup", "TaskPool", "TaskSet", "ConcurrencyGroup"],
+      "correctAnswer": "TaskGroup"
+    }
+  ]
+}

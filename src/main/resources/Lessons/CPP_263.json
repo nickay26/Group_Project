@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_263_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::lock Function",
       "prompt": "Fill in the algorithm function used to lock multiple mutexes without risking deadlock.",
       "codeSnippet": "std::mutex m1, m2;\nstd::___(m1, m2); // Deadlock-free locking algorithm",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_263_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Spinlock Mechanism",
       "prompt": "Fill in the term for a lock mechanism where a thread repeatedly polls in a busy loop until the lock becomes available.",
       "codeSnippet": "// Busy-waiting lock mechanism = ___lock",

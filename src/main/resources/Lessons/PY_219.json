@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_219",
+  "title": "Decorators & Closures: Decorators Accepting Arguments",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_219_S1",
+      "type": "CONCEPT",
+      "title": "Decorators with Arguments Architecture",
+      "prompt": "To pass arguments to a decorator itself (e.g., `@repeat(num_times=3)`), you need three nested function layers: an outer factory function that accepts parameters, a middle decorator function, and an inner wrapper function.",
+      "codeSnippet": "def repeat(num_times):\n    def decorator_repeat(func):\n        def wrapper(*args, **kwargs):\n            for _ in range(num_times):\n                result = func(*args, **kwargs)\n            return result\n        return wrapper\n    return decorator_repeat\n\n@repeat(num_times=2)\ndef greet(name):\n    print(f\"Hello {name}\")"
+    },
+    {
+      "slideId": "PY_219_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Outer Factory Layer",
+      "prompt": "Fill in the return statement for the outer factory function that delivers the decorator.",
+      "codeSnippet": "def repeat(n):\n    def decorator(func):\n        def wrapper(): func()\n        return wrapper\n    ___ decorator",
+      "options": ["return", "yield", "pass", "call"],
+      "correctAnswer": "return"
+    },
+    {
+      "slideId": "PY_219_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Evaluation of Parametrized Decorators",
+      "prompt": "What does `@repeat(3)` evaluate to before receiving the decorated function?",
+      "options": [
+        "It invokes `repeat(3)` which returns the actual decorator function (`decorator_repeat`)",
+        "It calls the decorated function 3 times immediately",
+        "It creates a tuple containing 3 function wrappers",
+        "It converts 3 into a string name"
+      ],
+      "correctAnswer": "It invokes `repeat(3)` which returns the actual decorator function (`decorator_repeat`)"
+    },
+    {
+      "slideId": "PY_219_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Optional Argument Pattern",
+      "prompt": "Fill in the parameter default used to allow a decorator to be called with or without parentheses.",
+      "codeSnippet": "def smart_dec(_func=___, *, rate=1):\n    if _func is None:\n        return lambda f: smart_dec(f, rate=rate)",
+      "options": ["None", "True", "False", "0"],
+      "correctAnswer": "None"
+    },
+    {
+      "slideId": "PY_219_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Number of Nesting Levels Required",
+      "prompt": "How many function nesting levels are required for a standard decorator that accepts custom parameters?",
+      "options": [
+        "3 levels (Factory -> Decorator -> Wrapper)",
+        "2 levels (Decorator -> Wrapper)",
+        "1 level (Wrapper only)",
+        "4 levels (Factory -> Class -> Decorator -> Wrapper)"
+      ],
+      "correctAnswer": "3 levels (Factory -> Decorator -> Wrapper)"
+    },
+    {
+      "slideId": "PY_219_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Keyword-Only Decorator Arguments",
+      "prompt": "Fill in the separator symbol used in the factory declaration to enforce keyword-only arguments.",
+      "codeSnippet": "def delay(___, seconds=1):\n    def decorator(func):\n        pass",
+      "options": ["*", "/", "**", "..."],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "PY_219_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Decorator Factory Function Purpose",
+      "prompt": "What is the sole responsibility of the outermost function in a parametrized decorator?",
+      "options": [
+        "To accept config arguments and return a customized decorator closure",
+        "To execute the underlying function with timeout limits",
+        "To override class constructor dunder methods",
+        "To validate function return type annotations"
+      ],
+      "correctAnswer": "To accept config arguments and return a customized decorator closure"
+    }
+  ]
+}

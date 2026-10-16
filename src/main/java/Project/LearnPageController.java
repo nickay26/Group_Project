@@ -356,38 +356,27 @@ public class LearnPageController {
         String courseId = UserSession.getActiveCourseId();
 
         if (userId <= 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please log in to save lessons to review.");
-            alert.show();
+            DialogUtils.showMessageDialog("Error", "Please log in to save lessons to review.", true);
             return;
         }
 
         boolean success = DatabaseManager.addLessonToReview(userId, courseId, lesson.getLessonId());
 
         if (success) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("'" + lesson.getTitle() + "' has been added to your Review list!");
-            alert.showAndWait();
+            DialogUtils.showMessageDialog("Success", "'" + lesson.getTitle() + "' has been added to your Review list!", false);
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to add to Review (or it might already exist in your review list).");
-            alert.showAndWait();
+            DialogUtils.showMessageDialog("Error", "Failed to add to Review (or it might already exist in your review list).", true);
         }
     }
 
     private void showLessonDetails(Lesson lesson, String status) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Lesson Details");
-        alert.setHeaderText(lesson.getTitle());
-        alert.setContentText(
-                "Module: " + lesson.getModuleName() + "\n" +
-                        "XP Reward: " + lesson.getXp() + " XP\n" +
-                        "Status: " + status
-        );
-        alert.showAndWait();
+        Map<String, String> details = new LinkedHashMap<>();
+        details.put("Lesson Title", lesson.getTitle());
+        details.put("Module", lesson.getModuleName());
+        details.put("XP Reward", lesson.getXp() + " XP");
+        details.put("Status", status);
+
+        DialogUtils.showDetailsDialog("Lesson Details", "Lesson Overview", details);
     }
 
     private void openLessonPage(Lesson lesson) {

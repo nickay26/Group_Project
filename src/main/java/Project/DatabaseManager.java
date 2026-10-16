@@ -8,6 +8,8 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -266,7 +268,17 @@ public class DatabaseManager {
         }
         return 0;
     }
+    public static List<Course> getCompletedCourses(int userId) {
+        List<Course> completed = new ArrayList<>();
+        List<Course> allCourses = getCoursesForUser(userId);
 
+        for (Course c : allCourses) {
+            if (c.getProgressPercent() >= 100) {
+                completed.add(c);
+            }
+        }
+        return completed;
+    }
     public static boolean updateUserProfile(int userId, String imagePath) {
         try {
             String url = BASE_URL + "/api/user/update-profile-path";
@@ -396,9 +408,25 @@ public class DatabaseManager {
                     .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (coinsAmount > 0) {
+            // ⭐ CRITICAL FIX: Server တွင် Streak အပ်ဒိတ်ဖြစ်သွားသည်နှင့်
+            // Local UserSession ကိုပါ Server မှ User Profile အသစ်ဖြင့် ချက်ချင်း Sync လုပ်ပေးခြင်း
+            if (response.statusCode() == 200 || response.statusCode() == 201) {
+                User updatedUser = getUserById(userId);
+                if (updatedUser != null && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
+                    UserSession.setCurrentUser(updatedUser);
+
+                    // UI Header တွင် Streak နှင့် အခြား Stats များကို ချက်ချင်း ပြောင်းလဲပြသရန်
+                    javafx.application.Platform.runLater(() -> {
+                        if (MainLayoutController.getInstance() != null) {
+                            MainLayoutController.getInstance().updateHeaderStats();
+                        }
+                    });
+                }
+            }
+
+            if (coinsAmount > 0 && response.statusCode() != 200 && response.statusCode() != 201) {
                 addCoinsToUser(userId, coinsAmount);
             }
         } catch (Exception e) {
@@ -512,6 +540,21 @@ public class DatabaseManager {
         return null;
     }
 
+    public static boolean deleteProject(int projectId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean updateProjectCode(int projectId, String codeContent) {
         try {
             JSONObject body = new JSONObject();
@@ -588,9 +631,24 @@ public class DatabaseManager {
         String planType = obj.optString("plan_type", obj.optString("Plan_Type", "FREE"));
         String role = obj.optString("role", obj.optString("Role", "USER"));
 
+        // ⭐ Subscription Type နဲ့ Expiry Date ထည့်
+        String subscriptionType = obj.optString("subscription_type",
+                obj.optString("Subscription_Type", "free"));
+        String premiumExpiry = obj.optString("premium_expiry",
+                obj.optString("Premium_Expiry", null));
+
         User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
         user.setPlanType(planType);
         user.setRole(role);
+        user.setSubscriptionType(subscriptionType);
+        user.setPremiumExpiry(premiumExpiry);
+
+        // ⭐ isPremium Flag ကို Plan Type အလိုက် သတ်မှတ်
+        boolean isPremium = "PREMIUM".equalsIgnoreCase(planType)
+                || "monthly".equalsIgnoreCase(subscriptionType)
+                || "yearly".equalsIgnoreCase(subscriptionType);
+        user.setPremium(isPremium);
+
         return user;
     }
 
@@ -846,5 +904,66 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
+    }
+    // ============================================
+// ⭐ PREMIUM EXPIRY CHECK
+// ============================================
+
+    /**
+     * Premium သက်တမ်း ကုန်ဆုံးပြီလား စစ်ဆေးခြင်း
+     */
+    public static JSONObject checkPremiumStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/check-premium"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static CompletableFuture<User> getUserByIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getUserById(userId));
+    }
+
+    public static CompletableFuture<String> getLastActiveCourseIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getLastActiveCourseId(userId));
+    }
+
+    // ==========================================
+    // CERTIFICATE SYSTEM
+    // ==========================================
+    public static String checkAndIssueCertificate(int userId, String courseId) {
+        try {
+            String response = ApiClient.checkAndIssueCertificateAsync(userId, courseId).join();
+            if (response != null && !response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                if (json.optBoolean("earned", false)) {
+                    return json.optString("certificate_id", null);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONArray getUserCertificates(int userId) {
+        try {
+            String response = ApiClient.getUserCertificatesAsync(userId).join();
+            if (response != null && !response.isEmpty()) {
+                return new JSONArray(response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new JSONArray();
     }
 }

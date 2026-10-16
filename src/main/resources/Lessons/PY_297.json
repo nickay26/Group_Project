@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_296_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Unittest TestCase Subclass",
       "prompt": "Fill in the class inherited when defining unit tests using the standard `unittest` framework.",
       "codeSnippet": "class TestApp(unittest.___):",

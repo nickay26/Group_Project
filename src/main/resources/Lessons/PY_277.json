@@ -1,0 +1,190 @@
+{
+  "lessonId": "PY_277",
+  "title": "Module Assessment: Context Managers & Resources (PY_230 to PY_236)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_277_S1",
+      "type": "CONCEPT",
+      "title": "Module 5 Overview",
+      "prompt": "Assessment covering the `with` statement, __enter__ / __exit__ protocols, @contextmanager, ExitStack, and resource leak prevention.",
+      "codeSnippet": "with open('file.txt', 'r') as f:\n    content = f.read()"
+    },
+    {
+      "slideId": "PY_277_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 1: The 'with' Statement",
+      "prompt": "What is the primary purpose of the `with` statement in Python?",
+      "options": [
+        "To ensure proper acquisition and release of resources, even if exceptions occur",
+        "To speed up file reading operations",
+        "To declare global variables securely",
+        "To create anonymous functions"
+      ],
+      "correctAnswer": "To ensure proper acquisition and release of resources, even if exceptions occur"
+    },
+    {
+      "slideId": "PY_277_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 2: Magic Methods",
+      "prompt": "Which two dunder methods are required to implement a custom class-based context manager?",
+      "options": [
+        "__enter__ and __exit__",
+        "__open__ and __close__",
+        "__start__ and __stop__",
+        "__init__ and __del__"
+      ],
+      "correctAnswer": "__enter__ and __exit__"
+    },
+    {
+      "slideId": "PY_277_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Question 3: Enter Return Value",
+      "prompt": "In `with MyContext() as obj:`, the `obj` receives the return value of which magic method?",
+      "codeSnippet": "def __enter__(self):\n    return ___",
+      "options": ["self", "True", "Context", "None"],
+      "correctAnswer": "self"
+    },
+    {
+      "slideId": "PY_277_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Suppressing Exceptions",
+      "prompt": "How can a context manager's `__exit__` method suppress an exception that occurred inside the `with` block?",
+      "options": [
+        "By returning True",
+        "By returning False",
+        "By raising a new Exception",
+        "By calling sys.exit()"
+      ],
+      "correctAnswer": "By returning True"
+    },
+    {
+      "slideId": "PY_277_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: Contextlib Decorator",
+      "prompt": "Fill in the decorator used to turn a generator function into a context manager.",
+      "codeSnippet": "from contextlib import ___\n\n@contextmanager\ndef my_timer():\n    yield",
+      "options": ["contextmanager", "resource", "context", "with_statement"],
+      "correctAnswer": "contextmanager"
+    },
+    {
+      "slideId": "PY_277_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Generator Context Manager",
+      "prompt": "When using `@contextmanager`, what separates the setup code from the teardown code?",
+      "options": [
+        "The `yield` statement",
+        "The `return` statement",
+        "An `if/else` block",
+        "The `await` keyword"
+      ],
+      "correctAnswer": "The `yield` statement"
+    },
+    {
+      "slideId": "PY_277_S8",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 7: Handling Multiple Contexts",
+      "prompt": "Which tool from `contextlib` is designed to programmatically manage a dynamic number of context managers?",
+      "options": [
+        "ExitStack",
+        "ContextChain",
+        "MultiContext",
+        "ContextPool"
+      ],
+      "correctAnswer": "ExitStack"
+    },
+    {
+      "slideId": "PY_277_S9",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 8: Async Context",
+      "prompt": "Fill in the syntax to enter an asynchronous context manager.",
+      "codeSnippet": "___ with aiohttp.ClientSession() as session:\n    pass",
+      "options": ["async", "await", "coroutine", "asyncio"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_277_S10",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 9: Async Magic Methods",
+      "prompt": "Which methods are required for an ASYNCHRONOUS context manager?",
+      "options": [
+        "__aenter__ and __aexit__",
+        "__async_enter__ and __async_exit__",
+        "__enter__ and __exit__",
+        "await_enter and await_exit"
+      ],
+      "correctAnswer": "__aenter__ and __aexit__"
+    },
+    {
+      "slideId": "PY_277_S11",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 10: Suppressing specific errors",
+      "prompt": "Fill in the context manager from `contextlib` used to ignore specific exceptions temporarily.",
+      "codeSnippet": "from contextlib import ___\n\nwith suppress(FileNotFoundError):\n    os.remove('fake.txt')",
+      "options": ["suppress", "ignore", "catch", "pass_error"],
+      "correctAnswer": "suppress"
+    },
+    {
+      "slideId": "PY_277_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 11: Redirecting Output",
+      "prompt": "Which `contextlib` utility temporarily redirects `sys.stdout` to another file or stream?",
+      "options": [
+        "redirect_stdout",
+        "capture_output",
+        "stdout_to",
+        "mock_print"
+      ],
+      "correctAnswer": "redirect_stdout"
+    },
+    {
+      "slideId": "PY_277_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Nested Contexts",
+      "prompt": "How can you open two files simultaneously in a single `with` statement in Python 3?",
+      "options": [
+        "with open('a.txt') as a, open('b.txt') as b:",
+        "with open('a.txt', 'b.txt') as a, b:",
+        "with [open('a.txt'), open('b.txt')] as a, b:",
+        "It is not possible without ExitStack"
+      ],
+      "correctAnswer": "with open('a.txt') as a, open('b.txt') as b:"
+    },
+    {
+      "slideId": "PY_277_S14",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 13: Reentrant Context Managers",
+      "prompt": "What defines a 'reentrant' context manager?",
+      "options": [
+        "It can be entered multiple times in nested with statements",
+        "It restarts the program upon exit",
+        "It executes in a loop automatically",
+        "It ignores all exceptions"
+      ],
+      "correctAnswer": "It can be entered multiple times in nested with statements"
+    },
+    {
+      "slideId": "PY_277_S15",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 14: Closing Utility",
+      "prompt": "Fill in the contextlib utility that calls `.close()` on an object upon exiting the block.",
+      "codeSnippet": "from contextlib import ___\n\nwith closing(urllib.request.urlopen('http://url')) as page:\n    pass",
+      "options": ["closing", "closer", "autoclose", "finish"],
+      "correctAnswer": "closing"
+    },
+    {
+      "slideId": "PY_277_S16",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 15: Error Details in __exit__",
+      "prompt": "Which of the following is NOT one of the three arguments passed to `__exit__` when an exception occurs?",
+      "options": [
+        "exc_line_number",
+        "exc_type",
+        "exc_value",
+        "exc_traceback"
+      ],
+      "correctAnswer": "exc_line_number"
+    }
+  ]
+}

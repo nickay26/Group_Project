@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_284",
-  "title": "Module Review Quiz: STL Containers (CPP_225 to CPP_232)",
+  "title": "Module Review Quiz: STL Containers",
   "isPremium": false,
   "slides": [
     {
@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_284_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "List Container Header (CPP_226)",
       "prompt": "Fill in the standard library header name required to use std::list.",
       "codeSnippet": "#include <___>\nusing namespace std;\nlist<int> myLinkedList;",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_284_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Map Access Operator (CPP_229)",
       "prompt": "Fill in the brackets operator used to access or insert values by key in a std::map.",
       "codeSnippet": "map<string, double> price;\nprice___\"apple\"___ = 1.25;",

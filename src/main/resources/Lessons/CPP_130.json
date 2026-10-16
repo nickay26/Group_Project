@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_130_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "case Label Syntax",
       "prompt": "Fill in the keyword that labels a matching value.",
       "codeSnippet": "switch (ch) {\n    ___ 'A': std::cout << \"Apple\"; break;\n}",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_130_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Case Delimiter Symbol",
       "prompt": "Which symbol follows a case value label?",
       "codeSnippet": "case 100___ std::cout << \"Max\"; break;",

@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_286_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Yield Keyword",
       "prompt": "Fill in the keyword used in a function to suspend execution and yield a value back to caller.",
       "codeSnippet": "def my_gen():\n    ___ 42",
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_286_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Context Manager Opening",
       "prompt": "Fill in the magic method executed upon entering a `with` block.",
       "codeSnippet": "def ___(self): return self",

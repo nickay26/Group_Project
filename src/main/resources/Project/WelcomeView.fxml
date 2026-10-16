@@ -20,6 +20,7 @@
         <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
     </padding>
     <stylesheets>
+        <URL value="@../Css/login.css" />
         <URL value="@../Css/welcome.css" />
         <URL value="@../Css/admin.css" />
     </stylesheets>
@@ -55,7 +56,7 @@
 
                 <StackPane>
                     <children>
-                        <TextField fx:id="usernameField" prefHeight="55.0" prefWidth="300.0">
+                        <TextField fx:id="usernameField" prefHeight="48.0" prefWidth="300.0" styleClass="login-field">
                             <StackPane.margin>
                                 <Insets left="50.0" />
                             </StackPane.margin>
@@ -70,7 +71,7 @@
                         </Label>
                     </children>
                     <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="40.0" />
                     </VBox.margin>
                 </StackPane>
 
@@ -85,7 +86,7 @@
 
                 <StackPane>
                     <children>
-                        <TextField fx:id="emailField" prefHeight="55.0" prefWidth="300.0">
+                        <TextField fx:id="emailField" prefHeight="48.0" prefWidth="300.0" styleClass="login-field">
                             <StackPane.margin>
                                 <Insets left="50.0" />
                             </StackPane.margin>
@@ -103,7 +104,7 @@
 
                 <StackPane>
                     <children>
-                        <PasswordField fx:id="passwordField" prefHeight="55.0" prefWidth="300.0">
+                        <PasswordField fx:id="passwordField" prefHeight="48.0" prefWidth="300.0" styleClass="login-field">
                             <StackPane.margin>
                                 <Insets left="50.0" />
                             </StackPane.margin>
@@ -161,13 +162,13 @@
                     </image>
                 </ImageView>
 
-                <Button fx:id="googleSignUpBtn" onAction="#handleGoogleSignUp" prefHeight="50.0" prefWidth="300.0" styleClass="google-btn" text="Sign up with Google">
+                <Button fx:id="googleSignUpBtn" onAction="#handleGoogleSignUp" prefHeight="42.0" prefWidth="300.0" styleClass="google-btn" text="🔍  Sign up with Google">
                     <VBox.margin>
                         <Insets left="50.0" top="10.0" />
                     </VBox.margin>
                 </Button>
 
-                <Button fx:id="signUpButton" onAction="#handleSignUp" prefHeight="50.0" prefWidth="300.0" styleClass="primary-btn" text="Sign Up">
+                <Button fx:id="signUpButton" onAction="#handleSignUp" prefHeight="42.0" prefWidth="300.0" styleClass="btn-primary" text="Sign Up">
                     <VBox.margin>
                         <Insets left="50.0" />
                     </VBox.margin>

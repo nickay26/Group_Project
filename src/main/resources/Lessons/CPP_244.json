@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_244_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Locking weak_ptr",
       "prompt": "Fill in the member function that converts a std::weak_ptr into a std::shared_ptr to access the object safely.",
       "codeSnippet": "if (auto shared = weakPtr.___()) {\n    // Use shared pointer safely\n}",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_244_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking Expiration",
       "prompt": "Fill in the member function that returns true if the referenced object has already been destroyed.",
       "codeSnippet": "if (weakPtr.___()) {\n    // Object no longer exists!\n}",

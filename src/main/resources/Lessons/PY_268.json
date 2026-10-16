@@ -1,0 +1,83 @@
+{
+  "lessonId": "PY_268",
+  "title": "Multiprocessing Basics & Process Pools",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_268_S1",
+      "type": "CONCEPT",
+      "title": "Parallel Computing with `multiprocessing`",
+      "prompt": "The `multiprocessing` module side-steps the GIL by creating independent Python subprocesses, each with its own memory space and Python interpreter instance. `multiprocessing.Pool` offers easy parallel function execution.",
+      "codeSnippet": "from multiprocessing import Pool\n\ndef square(x):\n    return x * x\n\nif __name__ == '__main__':\n    # Distribute computations across process pool\n    with Pool(processes=4) as pool:\n        results = pool.map(square, [1, 2, 3, 4, 5])\n        print(results)  # [1, 4, 9, 16, 25]"
+    },
+    {
+      "slideId": "PY_268_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Module Name for Subprocesses",
+      "prompt": "Fill in the standard library module name used for process-based parallelism.",
+      "codeSnippet": "import ___\n\nif __name__ == '__main__':\n    p = multiprocessing.Process(target=my_func)\n    p.start()",
+      "options": ["multiprocessing", "threading", "asyncio", "subprocesses"],
+      "correctAnswer": "multiprocessing"
+    },
+    {
+      "slideId": "PY_268_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Process Protection Guard",
+      "prompt": "Why is `if __name__ == '__main__':` mandatory when launching multiprocessing tasks in Python, especially on Windows?",
+      "options": [
+        "To prevent infinite recursive process spawning during child process import execution",
+        "To allow the GIL to bypass administrative system security checks",
+        "To ensure all variables are converted to global scope before execution",
+        "To mark memory as read-only for multi-core processors"
+      ],
+      "correctAnswer": "To prevent infinite recursive process spawning during child process import execution"
+    },
+    {
+      "slideId": "PY_268_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Mapping Iterables over Pools",
+      "prompt": "Fill in the `Pool` method used to apply a function across an iterable synchronously in parallel.",
+      "codeSnippet": "with Pool() as pool:\n    outputs = pool.___(worker_fn, input_list)",
+      "options": ["map", "apply", "execute", "parallel"],
+      "correctAnswer": "map"
+    },
+    {
+      "slideId": "PY_268_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memory Sharing in Multiprocessing",
+      "prompt": "How does memory allocation in `multiprocessing` differ from `threading`?",
+      "options": [
+        "Multiprocessing isolates memory per process; threads share the process heap memory",
+        "Multiprocessing shares all heap variables; threads run in isolated virtual spaces",
+        "Both share exact memory locations with zero copy overhead",
+        "Multiprocessing stores memory on disk rather than RAM"
+      ],
+      "correctAnswer": "Multiprocessing isolates memory per process; threads share the process heap memory"
+    },
+    {
+      "slideId": "PY_268_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Asynchronous Pool Mapping",
+      "prompt": "Fill in the non-blocking variant method of `map()` on a `Pool` object.",
+      "codeSnippet": "with Pool() as p:\n    async_result = p.___(square_fn, [1, 2, 3])\n    res = async_result.get()",
+      "options": ["map_async", "async_map", "map_parallel", "future_map"],
+      "correctAnswer": "map_async"
+    },
+    {
+      "slideId": "PY_268_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Terminating Subprocesses",
+      "prompt": "Which method on a `Process` instance abruptly forces process termination immediately?",
+      "options": [
+        "terminate()",
+        "stop()",
+        "close()",
+        "kill_thread()"
+      ],
+      "correctAnswer": "terminate()"
+    }
+  ]
+}

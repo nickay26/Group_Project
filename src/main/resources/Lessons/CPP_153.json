@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_153_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pass-by-Pointer Dereferencing",
       "prompt": "Fill in the dereference operator to update the value at the passed address.",
       "codeSnippet": "void reset(int* ptr) {\n    ___ptr = 0;\n}",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_153_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Calling Pass-by-Pointer Function",
       "prompt": "Fill in the address-of operator to pass a local variable to a pointer parameter.",
       "codeSnippet": "int val = 42;\nreset(___val);",

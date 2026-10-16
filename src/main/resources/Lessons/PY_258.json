@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_257",
+  "title": "Comprehensive Test: Memory Management & Performance (PY_251 to PY_256)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_257_S1",
+      "type": "CONCEPT",
+      "title": "Memory Management & Performance Mastery Review",
+      "prompt": "This final test evaluates your mastery across Python memory management, garbage collection, profiling tools (`cProfile`, `tracemalloc`), memory optimization (`__slots__`), foreign function interfaces (`ctypes`, `CFFI`, `Cython`), and JIT acceleration (`Numba`).",
+      "codeSnippet": "import sys\nimport gc\nfrom numba import njit\n\nclass OptimizedPoint:\n    __slots__ = ('x', 'y')\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n@njit\ndef fast_calc(val):\n    return val * 2.5"
+    },
+    {
+      "slideId": "PY_257_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Primary CPython Deallocation Mechanism",
+      "prompt": "What is CPython's primary memory management mechanism responsible for freeing objects immediately upon reference loss?",
+      "options": [
+        "Reference Counting",
+        "Generational Garbage Collection",
+        "Mark-and-Sweep",
+        "Manual Free Calls"
+      ],
+      "correctAnswer": "Reference Counting"
+    },
+    {
+      "slideId": "PY_257_S3",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Memory Optimization Attribute",
+      "prompt": "Fill in the class attribute used to prevent `__dict__` creation and optimize memory consumption.",
+      "codeSnippet": "class Node:\n    ___ = ('data', 'next')",
+      "options": ["__slots__", "__dict__", "__mem__", "__fields__"],
+      "correctAnswer": "__slots__"
+    },
+    {
+      "slideId": "PY_257_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Maximum Performance Numba Mode",
+      "prompt": "Which Numba decorator ensures maximum execution speed by guaranteeing pure machine code generation without CPython fallback?",
+      "options": [
+        "@njit",
+        "@jit(object_mode=True)",
+        "@vectorize(fallback=True)",
+        "@cprofile"
+      ],
+      "correctAnswer": "@njit"
+    },
+    {
+      "slideId": "PY_257_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Foreign C Library Class",
+      "prompt": "Fill in the `ctypes` class used to load C dynamic shared libraries.",
+      "codeSnippet": "import ctypes\nlibc = ctypes.___('libc.so.6')",
+      "options": ["CDLL", "SharedLibrary", "CModule", "DLL"],
+      "correctAnswer": "CDLL"
+    },
+    {
+      "slideId": "PY_257_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Cython GIL Release Syntax",
+      "prompt": "Which block allows Cython code to execute without holding Python's Global Interpreter Lock?",
+      "options": [
+        "with nogil:",
+        "with release_gil:",
+        "async with gil_free:",
+        "with no_lock:"
+      ],
+      "correctAnswer": "with nogil:"
+    },
+    {
+      "slideId": "PY_257_S7",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Memory Profiler Module Import",
+      "prompt": "Fill in the standard module used to trace Python memory allocation snapshots.",
+      "codeSnippet": "import ___\n\ntracemalloc.start()",
+      "options": ["tracemalloc", "memprofile", "sysmem", "gc_trace"],
+      "correctAnswer": "tracemalloc"
+    }
+  ]
+}

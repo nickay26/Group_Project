@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_105_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Elif Keyword",
       "prompt": "Fill in the keyword for secondary conditional checks in Python.",
       "codeSnippet": "if x > 10:\n    print(\"High\")\n___ x > 5:\n    print(\"Medium\")",
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_105_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Fallback Else",
       "prompt": "Fill in the final catch-all branch keyword.",
       "codeSnippet": "if num % 2 == 0:\n    print(\"Even\")\n___:\n    print(\"Odd\")",
@@ -57,6 +59,7 @@
     {
       "slideId": "PYTH_105_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "If Statement Syntax",
       "prompt": "Fill in the missing character that ends an 'if' header line.",
       "codeSnippet": "if age >= 18___\n    print(\"Adult\")",

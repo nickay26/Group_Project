@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_225_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Reserving Capacity",
       "prompt": "Fill in the method used to pre-allocate memory for a vector to avoid frequent reallocations.",
       "codeSnippet": "std::vector<int> v;\nv.___(1000); // Pre-allocate space for 1000 elements",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_225_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Shrinking Memory",
       "prompt": "Fill in the C++11 method used to reduce vector capacity to fit its current size.",
       "codeSnippet": "vec.shrink_to_fit___();",

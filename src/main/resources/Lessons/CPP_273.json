@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_273_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "SFINAE Utility Helper",
       "prompt": "Fill in the missing standard type trait used to conditionally enable function overloads.",
       "codeSnippet": "template <typename T>\ntypename std::___<std::is_arithmetic<T>::value, void>::type\nprocess(T val) {\n    // Code here\n}",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_273_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "enable_if_t Helper Alias (C++14)",
       "prompt": "Fill in the C++14 alias template suffix for enable_if.",
       "codeSnippet": "template <typename T,\n          typename = std::enable_if___<std::is_integral_v<T>>>\nvoid compute(T v) {}",

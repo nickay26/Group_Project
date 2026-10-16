@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_205",
+  "title": "Functional Programming: List, Dict, and Set Comprehensions",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_205_S1",
+      "type": "CONCEPT",
+      "title": "Comprehensions Overview",
+      "prompt": "Comprehensions provide a concise way to create lists, dictionaries, and sets from existing iterables without using explicit for-loops. They support conditional filtering and value transformations.",
+      "codeSnippet": "# List Comprehension\nsquares = [x**2 for x in range(5)]  # [0, 1, 4, 9, 16]\n\n# Set Comprehension\nunique_lengths = {len(word) for word in [\"apple\", \"banana\", \"apple\"]}  # {5, 6}\n\n# Dict Comprehension\nsquare_dict = {x: x**2 for x in range(3)}  # {0: 0, 1: 1, 2: 4}"
+    },
+    {
+      "slideId": "PY_205_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "List Comprehension Syntax",
+      "prompt": "Fill in the correct brackets used to construct a list comprehension.",
+      "codeSnippet": "evens = ___x for x in range(10) if x % 2 == 0___",
+      "options": ["[ ]", "{ }", "( )", "< >"],
+      "correctAnswer": "[ ]"
+    },
+    {
+      "slideId": "PY_205_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Filtering in Comprehensions",
+      "prompt": "Where should a single 'if' condition filter be placed inside a standard list comprehension?",
+      "options": [
+        "At the end of the comprehension statement (e.g., [x for x in data if condition])",
+        "At the very beginning before the expression",
+        "Immediately after the 'for' keyword",
+        "Inside an explicit lambda wrapper function"
+      ],
+      "correctAnswer": "At the end of the comprehension statement (e.g., [x for x in data if condition])"
+    },
+    {
+      "slideId": "PY_205_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Dictionary Comprehension Syntax",
+      "prompt": "Fill in the syntax pattern used to map key-value pairs inside a dictionary comprehension.",
+      "codeSnippet": "scores = {\"Alice\": 90, \"Bob\": 75}\npassed = {k___ v for k, v in scores.items() if v >= 80}",
+      "options": [":", "=", "->", "=>"],
+      "correctAnswer": ":"
+    },
+    {
+      "slideId": "PY_205_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Ternary Operator in List Comprehension",
+      "prompt": "How do you write an 'if-else' conditional transformation inside a list comprehension?",
+      "options": [
+        "[val1 if condition else val2 for item in iterable]",
+        "[for item in iterable if condition val1 else val2]",
+        "[val1 for item in iterable if condition else val2]",
+        "[if condition val1 else val2 for item in iterable]"
+      ],
+      "correctAnswer": "[val1 if condition else val2 for item in iterable]"
+    },
+    {
+      "slideId": "PY_205_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Set Comprehension Feature",
+      "prompt": "Fill in the bracket type used to create a Set Comprehension which automatically eliminates duplicate values.",
+      "codeSnippet": "words = [\"cat\", \"dog\", \"cat\"]\nunique_words = ___w.upper() for w in words___",
+      "options": ["{ }", "[ ]", "( )", "set( )"],
+      "correctAnswer": "{ }"
+    },
+    {
+      "slideId": "PY_205_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Nested List Comprehension",
+      "prompt": "What is the result of evaluating [[x for x in range(2)] for y in range(2)]?",
+      "options": [
+        "[[0, 1], [0, 1]]",
+        "[0, 1, 0, 1]",
+        "[[0, 0], [1, 1]]",
+        "{(0, 1), (0, 1)}"
+      ],
+      "correctAnswer": "[[0, 1], [0, 1]]"
+    }
+  ]
+}

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_157_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Function Pointer Declaration Syntax",
       "prompt": "Fill in missing parenthesis symbol to declare a pointer to a function returning void.",
       "codeSnippet": "void ___*fptr)(int);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_157_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Operator Overloading for Functors",
       "prompt": "Fill in the operator signature for a functor call operator.",
       "codeSnippet": "struct Multiplier {\n    int factor;\n    int operator___(int x) const {\n        return x * factor;\n    }\n};",
@@ -79,6 +81,7 @@
     {
       "slideId": "CPP_157_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::invoke Utility (C++17)",
       "prompt": "Fill in standard C++17 utility function that invokes any callable uniformally.",
       "codeSnippet": "std::___(funcPtr, arg1, arg2);",

@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_118_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Iter Function",
       "prompt": "Fill in the function used to convert an iterable into an iterator.",
       "codeSnippet": "my_list = [1, 2, 3]\nmy_iter = ___(my_list)",
@@ -52,6 +53,7 @@
     {
       "slideId": "PYTH_118_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "StopIteration Exception",
       "prompt": "Fill in the exception raised automatically when an iterator has no more items.",
       "codeSnippet": "except ___:\n    print(\"Iteration completed\")",

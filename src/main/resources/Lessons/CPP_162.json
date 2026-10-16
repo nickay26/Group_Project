@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_162_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Leak Cause",
       "prompt": "Fill in line causing memory leak by overwriting pointer.",
       "codeSnippet": "int* p = new int(10);\np = ___ int(20); // Lost reference to first allocation",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_162_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Out-of-Scope Memory Leak",
       "prompt": "Fill in function return type to fix local pointer heap leak.",
       "codeSnippet": "___ createData() {\n    return new int(100); // Pass ownership caller\n}",

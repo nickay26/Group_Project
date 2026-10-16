@@ -22,6 +22,7 @@
     {
       "slideId": "PYTH_111_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "String Splitting",
       "prompt": "What does 'a,b,c'.split(',') return?",
       "options": ["['a', 'b', 'c']", "('a', 'b', 'c')", "{'a', 'b', 'c'}", "'a b c'"],
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_111_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Stripping Whitespace",
       "prompt": "Fill in the method used to remove leading/trailing spaces from a string.",
       "codeSnippet": "clean_text = \"   data   \".___()",

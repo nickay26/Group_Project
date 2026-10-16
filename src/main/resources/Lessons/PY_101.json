@@ -14,6 +14,7 @@
       {
         "slideId": "PYTH_101_S2",
         "type": "FILL_IN_BLANK",
+        "interactive": true,
         "title": "Print Function",
         "prompt": "Fill in the missing function to output 'Welcome' to the screen.",
         "codeSnippet": "___(\"Welcome\")",
@@ -23,6 +24,7 @@
       {
         "slideId": "PYTH_101_S3",
         "type": "MULTIPLE_CHOICE",
+        "interactive": true,
         "title": "Python Comments",
         "prompt": "Which symbol is used to write single-line comments in Python?",
         "options": ["#", "//", "/*", "<!--"],
@@ -53,6 +55,7 @@
       {
         "slideId": "PYTH_101_S6",
         "type": "FILL_IN_BLANK",
+        "interactive": true,
         "title": "String Output",
         "prompt": "Complete the code to print the string literal 'Python 3'.",
         "codeSnippet": "print(___Python 3___)",

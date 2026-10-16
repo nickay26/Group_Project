@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_242_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Creating unique_ptr",
       "prompt": "Fill in the recommended C++14 helper function to create a std::unique_ptr safely.",
       "codeSnippet": "auto ptr = std::___<Widget>(arg1, arg2);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_242_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Transferring Ownership",
       "prompt": "Fill in the function used to move ownership from one std::unique_ptr to another.",
       "codeSnippet": "std::unique_ptr<int> u2 = std::___(u1);",
@@ -57,6 +59,7 @@
     {
       "slideId": "CPP_242_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Releasing Ownership",
       "prompt": "Fill in the member function that releases raw ownership without deleting the underlying object.",
       "codeSnippet": "int* raw = ptr.___(); // ptr becomes null, returns raw pointer",

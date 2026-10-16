@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_281",
-  "title": "Module Review Quiz: Object-Oriented Programming (CPP_201 to CPP_208)",
+  "title": "Module Review Quiz: Object-Oriented Programming",
   "isPremium": false,
   "slides": [
     {
@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_281_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Class Declaration (CPP_201)",
       "prompt": "Fill in the keyword used to define a custom data type containing data members and functions in C++.",
       "codeSnippet": "___ Student {\npublic:\n    int id;\n    string name;\n};",
@@ -71,7 +72,6 @@
       "correctAnswer": "this"
     },
     {
-      "slideId": "CPP_181_S9",
       "slideId": "CPP_281_S9",
       "type": "MULTIPLE_CHOICE",
       "title": "Copy Constructor (CPP_203)",

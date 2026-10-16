@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_283",
-  "title": "Module Review Quiz: Template Programming & Generics (CPP_217 to CPP_224)",
+  "title": "Module Review Quiz: Template Programming & Generics",
   "isPremium": false,
   "slides": [
     {
@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_283_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Function Template Syntax (CPP_218)",
       "prompt": "Fill in the missing bracket type used for specifying template parameter types.",
       "codeSnippet": "template ___typename T>\nvoid printValue(T val) {\n    cout << val;\n}",
@@ -91,6 +92,7 @@
     {
       "slideId": "CPP_283_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Full Specialization Syntax (CPP_221)",
       "prompt": "Fill in the empty template brackets required when declaring a full template specialization.",
       "codeSnippet": "template ___\nclass Printer<bool> {\n    // Specialized implementation for bool\n};",

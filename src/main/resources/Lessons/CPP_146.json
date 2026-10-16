@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_146_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "cstring Library Include",
       "prompt": "Fill in the header file required for C-string functions like strlen or strcpy.",
       "codeSnippet": "#include <___>",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_146_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C-String Concatenation",
       "prompt": "Fill in function name that appends source string to destination.",
       "codeSnippet": "std::___(dest, \" extra\");",

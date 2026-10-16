@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_285",
-  "title": "Module Review Quiz: STL Algorithms & Ranges (CPP_233 to CPP_240)",
+  "title": "Module Review Quiz: STL Algorithms & Ranges",
   "isPremium": false,
   "slides": [
     {
@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_285_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::sort Algorithm (CPP_233)",
       "prompt": "Fill in the header file required to use algorithms like std::sort and std::find.",
       "codeSnippet": "#include <___>\nusing namespace std;",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_285_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Lambda Expression Introducer (CPP_235)",
       "prompt": "Fill in the capture clause bracket pair used to start an anonymous inline Lambda expression in C++.",
       "codeSnippet": "auto print = ___ (int x) { cout << x; };",

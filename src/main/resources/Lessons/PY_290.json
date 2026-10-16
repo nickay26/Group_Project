@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_290_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Memory Optimization Slots",
       "prompt": "Fill in the attribute used in classes to prevent `__dict__` creation and restrict instance attributes.",
       "codeSnippet": "class Fast:\n    ___ = ('x', 'y')",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_290_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dataclass Freezing",
       "prompt": "Fill in the option value to make a dataclass instance read-only/immutable.",
       "codeSnippet": "@dataclass(frozen=___)",

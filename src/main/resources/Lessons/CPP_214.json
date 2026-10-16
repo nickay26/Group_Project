@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_214_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Multiple Inheritance Syntax",
       "prompt": "Fill in the separator symbol for inheriting multiple base classes.",
       "codeSnippet": "class Robot : public Device___ public AI {};",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_214_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Virtual Base Class Keyword",
       "prompt": "Fill in the keyword used to solve the Diamond Problem by sharing a single base instance.",
       "codeSnippet": "class B : ___ public A {};\nclass C : ___ public A {};",

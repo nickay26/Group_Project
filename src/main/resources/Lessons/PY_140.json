@@ -57,6 +57,7 @@
     {
       "slideId": "PYTH_140_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Rate Limiting Strategy",
       "prompt": "Fill in the algorithm pattern commonly used for API rate limiting.",
       "codeSnippet": "algorithm = '___ bucket'",

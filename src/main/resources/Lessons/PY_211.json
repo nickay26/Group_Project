@@ -1,0 +1,83 @@
+{
+  "lessonId": "PY_211",
+  "title": "Functional Programming: Recursion & Call Stack",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_211_S1",
+      "type": "CONCEPT",
+      "title": "Understanding Recursive Functions",
+      "prompt": "Recursion occurs when a function calls itself. A recursive function requires a base case to terminate execution and avoid reaching the maximum recursion limit.",
+      "codeSnippet": "def factorial(n):\n    if n <= 1:  # Base case\n        return 1\n    return n * factorial(n - 1)  # Recursive case"
+    },
+    {
+      "slideId": "PY_211_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Recursion Limit Inspection",
+      "prompt": "Fill in the module function name used to retrieve Python's current maximum recursion depth.",
+      "codeSnippet": "import sys\nprint(sys.___())",
+      "options": ["getrecursionlimit", "get_stack_depth", "recursion_max", "getdepth"],
+      "correctAnswer": "getrecursionlimit"
+    },
+    {
+      "slideId": "PY_211_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Missing Base Case Error",
+      "prompt": "What exception is raised when a recursive function lacks a valid base case and runs indefinitely?",
+      "options": [
+        "RecursionError",
+        "StackOverflowError",
+        "MemoryLimitError",
+        "InfiniteLoopError"
+      ],
+      "correctAnswer": "RecursionError"
+    },
+    {
+      "slideId": "PY_211_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Base Case Condition",
+      "prompt": "Fill in the comparison operator to complete the base case condition for Countdown.",
+      "codeSnippet": "def countdown(n):\n    if n ___ 0:\n        return\n    print(n)\n    countdown(n - 1)",
+      "options": ["<=", "==", ">=", "!="],
+      "correctAnswer": "<="
+    },
+    {
+      "slideId": "PY_211_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Tail Call Optimization in Python",
+      "prompt": "Does standard Python (CPython) perform automatic Tail Call Optimization (TCO)?",
+      "options": [
+        "No, CPython does not optimize tail calls to preserve full call stack tracebacks",
+        "Yes, it optimizes all recursive calls automatically",
+        "Yes, but only if configured with sys.setrecursionlimit",
+        "Only when using lambda recursion"
+      ],
+      "correctAnswer": "No, CPython does not optimize tail calls to preserve full call stack tracebacks"
+    },
+    {
+      "slideId": "PY_211_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Modifying Recursion Limit",
+      "prompt": "Fill in the sys module function name used to increase maximum recursion limit.",
+      "codeSnippet": "import sys\nsys.___(2000)",
+      "options": ["setrecursionlimit", "set_recursion", "change_limit", "setMaxRecursion"],
+      "correctAnswer": "setrecursionlimit"
+    },
+    {
+      "slideId": "PY_211_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Recursion vs Iteration",
+      "prompt": "Why might an iterative approach (using loops) be preferred over recursion in standard Python?",
+      "options": [
+        "To avoid function call overhead and stack depth limits (RecursionError)",
+        "Because Python loops cannot be interrupted",
+        "Because recursion only works with numeric values",
+        "Iterative loops run in multi-threaded hardware mode automatically"
+      ],
+      "correctAnswer": "To avoid function call overhead and stack depth limits (RecursionError)"
+    }
+  ]
+}

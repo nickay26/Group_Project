@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_232_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::array Declaration",
       "prompt": "Fill in the non-type template parameter defining the size in std::array.",
       "codeSnippet": "std::array<float, ___> staticArr;",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_232_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::array Fill Method",
       "prompt": "Fill in the method used to fill an std::array with a specific value across all elements.",
       "codeSnippet": "arr.___(0); // Set all elements to 0",

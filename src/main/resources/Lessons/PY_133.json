@@ -30,6 +30,7 @@
     {
       "slideId": "PYTH_133_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Index-based Selection",
       "prompt": "Fill in the property used for integer position-based selection.",
       "codeSnippet": "df.___ [0, 1]",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_133_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Groupby Operation",
       "prompt": "Fill in the method used to split data into groups for aggregation.",
       "codeSnippet": "df.___ ('category').mean()",

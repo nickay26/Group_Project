@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_229",
+  "title": "Comprehensive Test: Generators & Iterators (PY_223 to PY_228)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_229_S1",
+      "type": "CONCEPT",
+      "title": "Generators & Iterators Mastery Review",
+      "prompt": "This test evaluates your complete understanding of iterables, custom iterator classes, generator functions, generator expressions, yield from delegation, coroutine-like send/throw/close methods, and memory-efficient streaming pipelines.",
+      "codeSnippet": "def gen_a():\n    yield 1\n    yield 2\n\ndef gen_b():\n    yield from gen_a()\n    yield 3\n\nprint(sum(gen_b()))  # Outputs 6"
+    },
+    {
+      "slideId": "PY_229_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Iterator Protocol Method Pair",
+      "prompt": "Which pair of magic methods must be implemented to create a custom iterator class?",
+      "options": [
+        "__iter__() and __next__()",
+        "__start__() and __get__()",
+        "__enter__() and __exit__()",
+        "__len__() and __getitem__()"
+      ],
+      "correctAnswer": "__iter__() and __next__()"
+    },
+    {
+      "slideId": "PY_229_S3",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Generator Expression Brackets",
+      "prompt": "Fill in the syntax wrapper symbol used for generator expressions.",
+      "codeSnippet": "gen = ___x * 2 for x in [1, 2, 3])",
+      "options": ["(", "[", "{", "<"],
+      "correctAnswer": "("
+    },
+    {
+      "slideId": "PY_229_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Subgenerator Delegation Keyword",
+      "prompt": "Which expression delegates iteration directly to another generator or iterable?",
+      "options": [
+        "yield from subgenerator()",
+        "yield subgenerator()",
+        "return from subgenerator()",
+        "delegate subgenerator()"
+      ],
+      "correctAnswer": "yield from subgenerator()"
+    },
+    {
+      "slideId": "PY_229_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Sending Data to Generator Method",
+      "prompt": "Fill in the method name used to pass values back into a suspended generator.",
+      "codeSnippet": "val = generator.___(100)",
+      "options": ["send", "push", "insert", "inject"],
+      "correctAnswer": "send"
+    },
+    {
+      "slideId": "PY_229_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Generator Closure Behavior",
+      "prompt": "What exception is raised inside a generator when .close() is called on it?",
+      "options": [
+        "GeneratorExit",
+        "StopIteration",
+        "ClosedException",
+        "KeyboardInterrupt"
+      ],
+      "correctAnswer": "GeneratorExit"
+    },
+    {
+      "slideId": "PY_229_S7",
+      "type": "FILL_IN_BLANK",
+      "title": "Advancing Iterators Built-in",
+      "prompt": "Fill in the function used to manually step an iterator forward.",
+      "codeSnippet": "first_item = ___(iterator_obj)",
+      "options": ["next", "step", "get", "forward"],
+      "correctAnswer": "next"
+    }
+  ]
+}

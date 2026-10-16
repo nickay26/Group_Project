@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_250",
+  "title": "Comprehensive Test: AsyncIO & Concurrency (PY_244 to PY_249)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_250_S1",
+      "type": "CONCEPT",
+      "title": "AsyncIO & Concurrency Mastery Review",
+      "prompt": "This test evaluates your mastery across Python concurrency models, including AsyncIO event loop management, coroutines, Tasks, TaskGroups, async queues, blocking code integration, and concurrent.futures executors.",
+      "codeSnippet": "import asyncio\n\nasync def worker(val):\n    await asyncio.sleep(0.01)\n    return val * 10\n\nasync def main():\n    async with asyncio.TaskGroup() as tg:\n        t1 = tg.create_task(worker(1))\n        t2 = tg.create_task(worker(2))\n    print(t1.result() + t2.result())"
+    },
+    {
+      "slideId": "PY_250_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "GIL Bypass Mechanism",
+      "prompt": "Which concurrency approach bypasses CPython's Global Interpreter Lock (GIL) for multi-core scaling?",
+      "options": [
+        "Multiprocessing",
+        "Threading",
+        "AsyncIO",
+        "Coroutines"
+      ],
+      "correctAnswer": "Multiprocessing"
+    },
+    {
+      "slideId": "PY_250_S3",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Coroutine Pause Keyword",
+      "prompt": "Fill in the keyword used to suspend execution on an asynchronous operation within a coroutine.",
+      "codeSnippet": "async def fetch():\n    data = ___ asyncio.sleep(0.5)",
+      "options": ["await", "yield", "async", "pause"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PY_250_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Structured Concurrency Class (Python 3.11+)",
+      "prompt": "Which context manager handles structured task group concurrency in Python 3.11+?",
+      "options": [
+        "asyncio.TaskGroup",
+        "asyncio.WaitGroup",
+        "asyncio.BatchRunner",
+        "asyncio.ConcurrentSet"
+      ],
+      "correctAnswer": "asyncio.TaskGroup"
+    },
+    {
+      "slideId": "PY_250_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "High-Level Blocking Offloader",
+      "prompt": "Fill in the helper function introduced in Python 3.9 for running sync blocking functions in background threads.",
+      "codeSnippet": "res = await asyncio.___(blocking_work, arg)",
+      "options": ["to_thread", "run_sync", "offload", "exec_thread"],
+      "correctAnswer": "to_thread"
+    },
+    {
+      "slideId": "PY_250_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "concurrent.futures Completed Iterator",
+      "prompt": "Which function yields futures as they complete regardless of submission order?",
+      "options": [
+        "as_completed()",
+        "map()",
+        "gather()",
+        "get_finished()"
+      ],
+      "correctAnswer": "as_completed()"
+    },
+    {
+      "slideId": "PY_250_S7",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Queue Task Done Method",
+      "prompt": "Fill in the method invoked by an async worker to signal completion of an item retrieved from `asyncio.Queue`.",
+      "codeSnippet": "queue.___()",
+      "options": ["task_done", "complete", "ack", "finished"],
+      "correctAnswer": "task_done"
+    }
+  ]
+}

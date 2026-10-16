@@ -79,6 +79,7 @@
     {
       "slideId": "CPP_216_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "CRTP Base Class Definition",
       "prompt": "Fill in class template syntax for CRTP derived definition.",
       "codeSnippet": "class Derived : public Base<___> {};",

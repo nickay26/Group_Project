@@ -28,20 +28,22 @@ public class PracticeController {
     private ToggleGroup modeToggleGroup;
 
     // ============================================
-    // CardData — Practice Card Model
+    // CardData — Practice Card Model (Question နဲ့ တိုက်ရိုက်ချိတ်ရန်)
     // ============================================
     private static class CardData {
-        String language;   // Java, C++, Python
-        String type;       // "Variables & Types"
-        String title;      // "Variables & Types"
+        String language;
+        String title;
+        QuestionData question; // မေးခွန်း အချက်အလက်အပြည့်အစုံ
 
-        CardData(String lang, String type, String title) {
-            this.language = lang;
-            this.type = type;
-            this.title = title;
+        CardData(QuestionData q) {
+            this.language = q.getLanguage();
+            this.title = q.getTitle();
+            this.question = q;
         }
     }
 
+    private final java.util.Map<String, List<Lesson>> courseLessonsCache = new java.util.HashMap<>();
+    private final List<CardData> allCards = new ArrayList<>();
     // ============================================
     // ReviewData — Review Card Model
     // ============================================
@@ -64,8 +66,6 @@ public class PracticeController {
         public String getLanguage() { return language; }
     }
 
-    private final List<CardData> allCards = new ArrayList<>();
-
     private static final double CARD_WIDTH = 280;
     private static final double CARD_HEIGHT = 260;
 
@@ -75,7 +75,6 @@ public class PracticeController {
         categoryCombo.setValue("All");
         categoryCombo.setOnAction(e -> handleModeChange());
 
-        // ToggleGroup သတ်မှတ်ခြင်း
         modeToggleGroup = new ToggleGroup();
         practiceToggle.setToggleGroup(modeToggleGroup);
         reviewToggle.setToggleGroup(modeToggleGroup);
@@ -88,16 +87,11 @@ public class PracticeController {
             }
         });
 
-        // Practice Cards မူလ Data
-        allCards.add(new CardData("Java",   "Variables & Types", "Variables & Types"));
-        allCards.add(new CardData("Java",   "Loops", "Loops"));
-        allCards.add(new CardData("Java",   "Classes & Objects", "Classes & Objects"));
-        allCards.add(new CardData("C++",    "Pointers", "Pointers"));
-        allCards.add(new CardData("C++",    "Arrays", "Arrays"));
-        allCards.add(new CardData("C++",    "Inheritance", "Inheritance"));
-        allCards.add(new CardData("Python", "Lists & Dicts", "Lists & Dicts"));
-        allCards.add(new CardData("Python", "Functions", "Functions"));
-        allCards.add(new CardData("Python", "OOP Basics", "OOP Basics"));
+        // 🌟 JsonUtils မှတဆင့် JSON ဖိုင်များထဲရှိ မေးခွန်းအားလုံးကို Load လုပ်ခြင်း
+        List<QuestionData> loadedQuestions = JsonUtils.loadPracticeQuestions();
+        for (QuestionData q : loadedQuestions) {
+            allCards.add(new CardData(q));
+        }
 
         practiceToggle.setSelected(true);
         renderCards(allCards);
@@ -139,11 +133,12 @@ public class PracticeController {
         cardContainer.getChildren().clear();
         cardContainer.getColumnConstraints().clear();
         cardContainer.getRowConstraints().clear();
+        courseLessonsCache.clear();
 
-        // 📌 Hexagon အကွက်များ ကြားအကွာအဝေး ညီညာစေရန် Grid Alignment ညှိခြင်း
-        cardContainer.setAlignment(Pos.TOP_LEFT);
-        cardContainer.setHgap(35);
-        cardContainer.setVgap(35);
+        // 📌 Review Cards များအတွက်လည်း အလယ်ဗဟိုညှိခြင်း
+        cardContainer.setAlignment(Pos.TOP_CENTER);
+        cardContainer.setHgap(40);
+        cardContainer.setVgap(40);
         cardContainer.setPadding(new Insets(30));
 
         int userId = UserSession.getUserId();
@@ -179,7 +174,6 @@ public class PracticeController {
             return;
         }
 
-        // 📌 တစ်ကြောင်းလျှင် ၄ ခုစီ (col == 4) ညီညီညာညာ တန်းစီပေးခြင်း
         int col = 0;
         int row = 0;
         for (ReviewData rev : filteredList) {
@@ -192,6 +186,37 @@ public class PracticeController {
                 row++;
             }
         }
+    }
+
+    private List<Lesson> getCachedLessonsForCourse(String courseId) {
+        if (courseId == null) return null;
+        if (!courseLessonsCache.containsKey(courseId)) {
+            try {
+                courseLessonsCache.put(courseId, DatabaseManager.getLessonsForCourse(courseId));
+            } catch (Exception e) {
+                courseLessonsCache.put(courseId, new ArrayList<>());
+            }
+        }
+        return courseLessonsCache.get(courseId);
+    }
+
+    private String resolveLessonTitle(String courseId, String lessonId) {
+        if (courseId == null || lessonId == null) {
+            return (lessonId != null) ? lessonId : "Lesson";
+        }
+        try {
+            List<Lesson> lessons = getCachedLessonsForCourse(courseId); // 🌟 Use cache instead of direct query
+            if (lessons != null) {
+                for (Lesson l : lessons) {
+                    if (l != null && l.getLessonId() != null && l.getLessonId().equalsIgnoreCase(lessonId)) {
+                        return l.getTitle() != null ? l.getTitle() : lessonId;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Error resolving lesson title: " + e.getMessage());
+        }
+        return lessonId;
     }
 
     // LearnPage Design အတိုင်း Hexagon SVG Path ပြုလုပ်သည့် Helper
@@ -244,26 +269,6 @@ public class PracticeController {
         return stack;
     }
 
-    // Database ထဲမှ Lesson ID ဖြင့် Title အမှန် ရှာပေးသော Safe Method
-    private String resolveLessonTitle(String courseId, String lessonId) {
-        if (courseId == null || lessonId == null) {
-            return (lessonId != null) ? lessonId : "Lesson";
-        }
-        try {
-            List<Lesson> lessons = DatabaseManager.getLessonsForCourse(courseId);
-            if (lessons != null) {
-                for (Lesson l : lessons) {
-                    if (l != null && l.getLessonId() != null && l.getLessonId().equalsIgnoreCase(lessonId)) {
-                        return l.getTitle() != null ? l.getTitle() : lessonId;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("⚠️ Error resolving lesson title: " + e.getMessage());
-        }
-        return lessonId;
-    }
-
     private void openReviewLesson(ReviewData data) {
         List<Lesson> courseLessons = DatabaseManager.getLessonsForCourse(data.getCourseId());
         Lesson targetLesson = null;
@@ -298,11 +303,11 @@ public class PracticeController {
         cardContainer.getColumnConstraints().clear();
         cardContainer.getRowConstraints().clear();
 
-        // 📌 Practice Mode အတွက် Grid Alignment သီးသန့်သတ်မှတ်ခြင်း
-        cardContainer.setAlignment(Pos.TOP_LEFT);
-        cardContainer.setHgap(20);
-        cardContainer.setVgap(20);
-        cardContainer.setPadding(new Insets(15));
+        // 📌 မျက်နှာပြင် မည်မျှပင် ကြီးသည်ဖြစ်စေ အလယ်ဗဟိုကျစေရန် TOP_CENTER သို့ ပြောင်းပါ
+        cardContainer.setAlignment(Pos.TOP_CENTER);
+        cardContainer.setHgap(30); // ကြီးမားသော screen များတွင် အကွာအဝေး ညီစေရန် hgap ကို အနည်းငယ် တိုးပေးနိုင်သည်
+        cardContainer.setVgap(30);
+        cardContainer.setPadding(new Insets(20));
 
         int col = 0;
         int row = 0;
@@ -365,7 +370,13 @@ public class PracticeController {
     private void openQuestion(CardData data) {
         MainLayoutController layout = MainLayoutController.getInstance();
         if (layout != null) {
-            layout.loadPracticeQuestion(data.language, data.type);
+            FXMLLoader loader = layout.loadPage("MonacoEditorView.fxml");
+            if (loader != null) {
+                CodeEditorController controller = loader.getController();
+                if (controller != null && data.question != null) {
+                    controller.initQuestion(data.question);
+                }
+            }
         }
     }
 

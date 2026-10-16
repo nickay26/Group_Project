@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_250_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Casting Lvalue to Rvalue Reference",
       "prompt": "Fill in the static_cast type expression equivalent to std::move(x) for integer x.",
       "codeSnippet": "int x = 50;\nint&& rref = static_cast<___>(x);",

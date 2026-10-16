@@ -30,6 +30,7 @@
       "slideId": "JAVA_111_S4",
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else If",
+      "Interactive": "true",
       "prompt": "Complete the code to check if score is 80 or higher.",
       "codeSnippet": "int score = 85;\nif (score >= 90) {\n  System.out.println(\"A\");\n} ____ (score >= 80) {\n  System.out.println(\"B\");\n}",
       "options": ["else if", "else", "elif", "otherwise"],

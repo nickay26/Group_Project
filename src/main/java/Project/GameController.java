@@ -24,44 +24,30 @@ import java.util.List;
 
 public class GameController {
 
-    @FXML
-    private Label challengeTitleLabel;
-    @FXML
-    private Label progressLabel;
-    @FXML
-    private Label questionNumberLabel;
-    @FXML
-    private Label timerLabel;
-    @FXML
-    private Label scoreLabel;
-    @FXML
-    private Label questionTextLabel;
-    @FXML
-    private Label feedbackLabel;
+    @FXML private Label challengeTitleLabel;
+    @FXML private Label progressLabel;
+    @FXML private Label questionNumberLabel;
+    @FXML private Label timerLabel;
+    @FXML private Label scoreLabel;
+    @FXML private Label questionTextLabel;
+    @FXML private Label feedbackLabel;
 
-    @FXML
-    private WebView codeWebView;
+    @FXML private WebView codeWebView; // ⭐ Monaco Editor WebView integration[cite: 10, 12]
     private WebEngine webEngine;
+    private boolean isEditorReady = false;
     private String pendingSnippet = "";
-    private String pendingLanguage = "cpp";
+    private String pendingLanguage = "python";
 
-    @FXML
-    private Button option1Btn;
-    @FXML
-    private Button option2Btn;
-    @FXML
-    private Button option3Btn;
-    @FXML
-    private Button option4Btn;
+    @FXML private Button option1Btn;
+    @FXML private Button option2Btn;
+    @FXML private Button option3Btn;
+    @FXML private Button option4Btn;
 
-    @FXML
-    private VBox resultOverlay;
-    @FXML
-    private Label resultTitleLabel;
-    @FXML
-    private Label resultDescLabel;
-    @FXML
-    private Label xpLabel;
+    // ⭐ Result Overlay Dialog Components[cite: 11]
+    @FXML private VBox resultOverlay;
+    @FXML private Label resultTitleLabel;
+    @FXML private Label resultDescLabel;
+    @FXML private Label xpLabel;
 
     private List<GameQuestion> questionList = new ArrayList<>();
     private int currentQuestionIndex = 0;
@@ -71,6 +57,7 @@ public class GameController {
     private Timeline timer;
     private String selectedLanguage = "Java (Basic)";
 
+    // Multiplayer Session Variables
     private String roomId;
     private String opponentId;
     private String currentUserId;
@@ -114,62 +101,114 @@ public class GameController {
 
         if (codeWebView != null) {
             webEngine = codeWebView.getEngine();
-            loadCodeIntoWebView("// Connecting and waiting for match questions...");
+            setupMonacoEditor();
         }
 
         attachGameWebSocketListener();
     }
 
     // ============================================
-    // STABLE WEBVIEW CODE VIEWER
+    // MONACO EDITOR SETUP
     // ============================================
-    private void loadCodeIntoWebView(String code) {
-        if (codeWebView == null) return;
-        if (webEngine == null) {
-            webEngine = codeWebView.getEngine();
-        }
+    private void setupMonacoEditor() {
+        String monacoHtml = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    html, body, #container { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #1e293b; }
+                </style>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+            </head>
+            <body>
+                <div id="container"></div>
+                <script>
+                    var editor;
+                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
+                    require(['vs/editor/editor.main'], function() {
+                        monaco.editor.defineTheme('navyTheme', {
+                            base: 'vs-dark',
+                            inherit: true,
+                            rules: [
+                                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
+                                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
+                                { token: 'string', foreground: 'f43f5e' },
+                                { token: 'number', foreground: 'fbbf24' }
+                            ],
+                            colors: {
+                                'editor.background': '#1e293b',
+                                'editor.foreground': '#e2e8f0',
+                                'editor.lineHighlightBackground': '#334155',
+                                'editorLineNumber.foreground': '#475569',
+                                'editorLineNumber.activeForeground': '#38bdf8',
+                                'editorCursor.foreground': '#38bdf8'
+                            }
+                        });
 
-        String safeCode = (code != null && !code.isEmpty()) ? code : "// No code snippet provided";
+                        editor = monaco.editor.create(document.getElementById('container'), {
+                            value: '',
+                            language: 'java',
+                            theme: 'navyTheme',
+                            automaticLayout: true,
+                            fontSize: 13,
+                            readOnly: true,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false
+                        });
+                    });
 
-        String htmlContent = String.format("""
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <style>
-                        body {
-                            background-color: #1e293b;
-                            color: #38bdf8;
-                            font-family: Consolas, 'Courier New', monospace;
-                            font-size: 14px;
-                            margin: 0;
-                            padding: 16px;
-                            white-space: pre-wrap;
-                            word-wrap: break-word;
+                    function setCode(code, language) {
+                        if (editor) {
+                            editor.setValue(code || '');
+                            if (language) {
+                                monaco.editor.setModelLanguage(editor.getModel(), language);
+                            }
                         }
-                    </style>
-                </head>
-                <body>
-                    <pre><code id="codeBox">%s</code></pre>
-                </body>
-                </html>
-                """, safeCode.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
+                    }
+                </script>
+            </body>
+            </html>
+            """;
 
-        Platform.runLater(() -> {
-            if (webEngine != null) {
-                webEngine.loadContent(htmlContent);
+        webEngine.loadContent(monacoHtml);
+
+        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                isEditorReady = true;
+                if (!pendingSnippet.isEmpty()) {
+                    applyCodeToEditor(pendingSnippet, pendingLanguage);
+                }
             }
         });
+    }
+
+    private void applyCodeToEditor(String code, String language) {
+        String monacoLang = mapToMonacoLanguage(language);
+        String escapedCode = JSONObject.quote(code != null ? code : "");
+        String script = String.format("setCode(%s, '%s');", escapedCode, monacoLang);
+        webEngine.executeScript(script);
+    }
+
+    private String mapToMonacoLanguage(String lang) {
+        if (lang == null) return "plaintext";
+        String l = lang.trim().toLowerCase();
+        if (l.contains("cpp") || l.contains("c++")) return "cpp";
+        if (l.contains("python")) return "python";
+        if (l.contains("java")) return "java";
+        return "plaintext";
     }
 
     private void updateMonacoSnippet(String code, String language) {
         this.pendingSnippet = code != null ? code : "";
         this.pendingLanguage = language;
-        loadCodeIntoWebView(this.pendingSnippet);
+        if (isEditorReady) {
+            applyCodeToEditor(pendingSnippet, pendingLanguage);
+        }
     }
 
     // ============================================
-    // WEBSOCKET & GAME LISTENERS
+    // WEBSOCKET & GAME LISTENERS[cite: 11]
     // ============================================
     private void attachGameWebSocketListener() {
         WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
@@ -250,12 +289,8 @@ public class GameController {
         });
     }
 
-    // ============================================
-    // ROBUST GSON PARSER FOR QUESTIONS
-    // ============================================
     public void loadQuestionsFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
-            System.err.println("❌ JSON Response is null or empty!");
             handleLoadingFailure();
             return;
         }
@@ -388,11 +423,11 @@ public class GameController {
             });
 
         } catch (Exception e) {
-            System.err.println("❌ Critical Gson JSON Parsing Error: " + e.getMessage());
             e.printStackTrace();
             handleLoadingFailure();
         }
     }
+
     private void displayCurrentQuestion() {
         if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
             finishMatch();
@@ -408,6 +443,7 @@ public class GameController {
             questionTextLabel.setText(q.getDescription());
         }
 
+        // Update Monaco Editor Snippet
         updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
 
         if (feedbackLabel != null) feedbackLabel.setText("");
@@ -428,10 +464,6 @@ public class GameController {
 
     @FXML
     private void handleOptionClick(ActionEvent event) {
-        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
-            return;
-        }
-
         if (timer != null) timer.stop();
         disableOptionButtons(true);
 

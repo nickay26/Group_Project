@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_108_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Increment Operator Syntax",
       "prompt": "Fill in the operator to increase 'counter' by 1.",
       "codeSnippet": "counter___;",
@@ -39,6 +40,7 @@
     {
       "slideId": "CPP_108_S5",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Postfix Evaluation",
       "prompt": "If int x = 5; int y = x++; what is the value of y?",
       "options": ["5", "6", "0", "4"],
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_108_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Standalone Increment",
       "prompt": "Complete the standalone prefix increment statement.",
       "codeSnippet": "___a;",
@@ -81,6 +84,7 @@
     {
       "slideId": "CPP_108_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Loop Counter Step",
       "prompt": "Fill in the operator commonly used to step loop counters.",
       "codeSnippet": "i___;",

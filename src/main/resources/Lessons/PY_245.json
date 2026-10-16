@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_245",
+  "title": "AsyncIO Foundations: Coroutines & Event Loop",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_245_S1",
+      "type": "CONCEPT",
+      "title": "Coroutines and the Event Loop",
+      "prompt": "Coroutines are functions declared with `async def`. Calling a coroutine doesn't execute it immediately; it returns a coroutine object. `asyncio.run()` manages the event loop lifecycle and executes the entry-point coroutine.",
+      "codeSnippet": "import asyncio\n\nasync def main():\n    print(\"Hello\")\n    await asyncio.sleep(1)\n    print(\"World\")\n\nasyncio.run(main())"
+    },
+    {
+      "slideId": "PY_245_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Coroutine Definition Keyword",
+      "prompt": "Fill in the keyword used to define an asynchronous coroutine function.",
+      "codeSnippet": "___ def fetch_data():\n    return {\"status\": 200}",
+      "options": ["async", "await", "coroutine", "yield"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_245_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Result of Calling an Async Function",
+      "prompt": "What is returned when you invoke `my_async_func()` directly without using `await` or `asyncio.run()`?",
+      "options": [
+        "A coroutine object (without executing the function body)",
+        "The return value of the function",
+        "A thread handle",
+        "Raises a SyntaxError immediately"
+      ],
+      "correctAnswer": "A coroutine object (without executing the function body)"
+    },
+    {
+      "slideId": "PY_245_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Pause Keyword",
+      "prompt": "Fill in the keyword used inside an async function to pause execution and yield control to the event loop.",
+      "codeSnippet": "async def main():\n    ___ asyncio.sleep(1)",
+      "options": ["await", "yield", "pause", "async"],
+      "correctAnswer": "await"
+    },
+    {
+      "slideId": "PY_245_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Standard Event Loop Entrypoint",
+      "prompt": "Which top-level function in `asyncio` is recommended in modern Python (3.7+) to run an async main entry point?",
+      "options": [
+        "asyncio.run(main())",
+        "asyncio.get_event_loop().run_until_complete(main())",
+        "asyncio.execute(main())",
+        "asyncio.start_loop(main())"
+      ],
+      "correctAnswer": "asyncio.run(main())"
+    },
+    {
+      "slideId": "PY_245_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Non-blocking Sleep Method",
+      "prompt": "Fill in the asynchronous non-blocking equivalent of `time.sleep()` in `asyncio`.",
+      "codeSnippet": "await asyncio.___(2)",
+      "options": ["sleep", "wait", "delay", "pause"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "PY_245_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Calling await Outside Async Function",
+      "prompt": "What happens if you use `await` outside of an `async def` function in a standard Python script?",
+      "options": [
+        "SyntaxError: 'await' outside async function",
+        "TypeError: await requires event loop",
+        "The script runs synchronously",
+        "Python automatically converts the enclosing scope into a coroutine"
+      ],
+      "correctAnswer": "SyntaxError: 'await' outside async function"
+    }
+  ]
+}

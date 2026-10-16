@@ -35,6 +35,7 @@
     {
       "slideId": "PYTH_160_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parametrization in Tests",
       "prompt": "Fill in the Pytest mark decorator used to run a single test function with multiple input parameter sets.",
       "codeSnippet": "@pytest.mark.___('val,expected', [(1, 2), (2, 4)])",
@@ -74,6 +75,7 @@
     {
       "slideId": "PYTH_160_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parallel Test Execution",
       "prompt": "Fill in the plugin flag used to run tests concurrently across multiple CPU cores.",
       "codeSnippet": "pytest -n ___",

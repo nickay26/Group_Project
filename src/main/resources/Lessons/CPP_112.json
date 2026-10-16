@@ -26,6 +26,7 @@
     },
     {
       "slideId": "CPP_112_S3",
+      "interactive": true,
       "type": "MULTIPLE_CHOICE",
       "title": "Unsigned Minimum Value",
       "prompt": "What is the minimum value an unsigned integer can hold?",
@@ -93,6 +94,7 @@
     },
     {
       "slideId": "CPP_112_S8",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Unsigned Short",
       "prompt": "Fill in the data type for an unsigned short integer.",

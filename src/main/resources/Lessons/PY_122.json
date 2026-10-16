@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_122_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Current Timestamp",
       "prompt": "Fill in the method used to get the current local date and time.",
       "codeSnippet": "now = datetime.___()",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_122_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Parsing Strings to Datetime",
       "prompt": "Fill in the method used to parse a string into a datetime object using a format pattern.",
       "codeSnippet": "dt = datetime.___(\"2026-09-09\", \"%Y-%m-%d\")",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_122_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Time Sleep Function",
       "prompt": "Fill in the function in the 'time' module used to pause script execution.",
       "codeSnippet": "import time\ntime.___(2) # Pause for 2 seconds",

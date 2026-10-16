@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_286",
-  "title": "Module Review Quiz: Exception Handling & Error Management (CPP_241 to CPP_248)",
+  "title": "Module Review Quiz: Exception Handling & Error Management",
   "isPremium": false,
   "slides": [
     {
@@ -47,6 +47,7 @@
     {
       "slideId": "CPP_286_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Standard Exception Header (CPP_243)",
       "prompt": "Fill in the standard header file name required to use base class std::exception and standard exceptions.",
       "codeSnippet": "#include <___>\nusing namespace std;",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_286_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Custom Exception Class Inheritance (CPP_244)",
       "prompt": "Fill in the standard exception class commonly derived to create custom runtime exceptions.",
       "codeSnippet": "class MyException : public std::___ {\npublic:\n    const char* what() const noexcept override {\n        return \"Custom Error\";\n    }\n};",

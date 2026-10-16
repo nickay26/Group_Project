@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_158_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Capture Bracket Symbol",
       "prompt": "Fill in capture list opening bracket symbol.",
       "codeSnippet": "___ x ](int y) { return x + y; };",

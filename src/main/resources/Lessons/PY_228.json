@@ -1,0 +1,83 @@
+{
+  "lessonId": "PY_228",
+  "title": "Generators & Iterators: Streaming Data Pipelines",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_228_S1",
+      "type": "CONCEPT",
+      "title": "Generator Data Pipelines",
+      "prompt": "Generators can be chained together to process massive streaming datasets in a memory-efficient pipeline. Each processing step pulls items lazily from the previous stage without loading full datasets into RAM.",
+      "codeSnippet": "def read_lines(filename):\n    for line in [\"10,30\", \"20,INVALID\", \"15,45\"]:\n        yield line\n\ndef parse_nums(lines):\n    for line in lines:\n        parts = line.split(',')\n        if parts[1].isdigit():\n            yield int(parts[0]) + int(parts[1])\n\n# Processing pipeline\npipeline = parse_nums(read_lines(\"data.txt\"))\nprint(list(pipeline))  # [40, 60]"
+    },
+    {
+      "slideId": "PY_228_S2",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Chaining Pipeline Stages",
+      "prompt": "Fill in the variable name passed into filter_logs to establish the pipeline stream.",
+      "codeSnippet": "raw_stream = read_stream()\nfiltered_stream = filter_logs(___)",
+      "options": ["raw_stream", "read_stream", "list(raw_stream)", "stream"],
+      "correctAnswer": "raw_stream"
+    },
+    {
+      "slideId": "PY_228_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Advantage of Generator Pipelines",
+      "prompt": "What is the key architecture benefit of building data pipelines using generators?",
+      "options": [
+        "Data items are processed item-by-item through the pipeline, keeping RAM usage low regardless of file size",
+        "Pipelines run on separate GPU cores automatically",
+        "It avoids using loop statements",
+        "It guarantees transactional rollbacks for disk errors"
+      ],
+      "correctAnswer": "Data items are processed item-by-item through the pipeline, keeping RAM usage low regardless of file size"
+    },
+    {
+      "slideId": "PY_228_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Consuming Pipeline Outputs",
+      "prompt": "Fill in the built-in accumulator function used to sum outputs streaming through a pipeline.",
+      "codeSnippet": "total = ___(parse_values(stream))",
+      "options": ["sum", "add", "total", "accumulate"],
+      "correctAnswer": "sum"
+    },
+    {
+      "slideId": "PY_228_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Handling Large Files via Generator Pipelines",
+      "prompt": "Which file opening practice combined with generators ensures low memory usage for multi-gigabyte log analysis?",
+      "options": [
+        "Iterating directly over the open file object line-by-line using a generator",
+        "Calling file.read().splitlines() first",
+        "Loading lines into a dictionary before yielding",
+        "Reading the whole file into bytearray"
+      ],
+      "correctAnswer": "Iterating directly over the open file object line-by-line using a generator"
+    },
+    {
+      "slideId": "PY_228_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Lazy Mapping Pipeline",
+      "prompt": "Fill in the built-in function that lazily maps transformations across a generator stream.",
+      "codeSnippet": "cleaned = ___(str.strip, log_lines)",
+      "options": ["map", "transform", "apply", "filter"],
+      "correctAnswer": "map"
+    },
+    {
+      "slideId": "PY_228_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Pipeline Execution Evaluation Mode",
+      "prompt": "When does calculation actually take place in a multi-stage generator pipeline?",
+      "options": [
+        "Only when an end terminal action (like a for-loop, sum(), or list()) requests items",
+        "Immediately as each pipeline stage function is instantiated",
+        "When the Python script finishes execution during exit",
+        "In fixed 5-second scheduled intervals"
+      ],
+      "correctAnswer": "Only when an end terminal action (like a for-loop, sum(), or list()) requests items"
+    }
+  ]
+}

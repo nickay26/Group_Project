@@ -9,6 +9,7 @@ public class User {
     private int streak;
     private int coin;
     private int brainCount;
+    private String premiumExpiry;  // ⭐ ဒါ ထည့်
 
     // ⭐️ Premium Fields
     private boolean premium = false;
@@ -40,21 +41,7 @@ public class User {
         return role != null && role.equalsIgnoreCase("ADMIN");
     }
 
-    public boolean isPremium() {
-        if (isAdmin()) return true; // Admin gets all perks
-        if (planType == null) return false;
-
-        String plan = planType.toUpperCase();
-        return plan.contains("PREMIUM") || plan.equals("MONTHLY") || plan.equals("YEARLY");
-    }
-
-    // Setters & Getters
-    public void setPremium(boolean premium) { this.premium = premium; }
-    public void setSubscriptionType(String subscriptionType) { this.subscriptionType = subscriptionType; }
-    public void setPlanType(String planType) { this.planType = planType; }
-
     // Getters
-    // --- Getters ---
     public int getUserId() { return userId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
@@ -64,7 +51,17 @@ public class User {
     public int getCoin() { return coin; }
     public int getBrainCount() { return brainCount; }
     public String getPlanType() { return planType; }
+    public String getPremiumExpiry() { return premiumExpiry; }
+    public void setPremiumExpiry(String premiumExpiry) {
+        this.premiumExpiry = premiumExpiry;
+    }
 
+    // Setters
+    public void setPremium(boolean premium) { this.premium = premium; }
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+    public void setPlanType(String planType) { this.planType = planType; }
     public void setName(String name) { this.name = name; }
     public void setEmail(String email) { this.email = email; }
     public void setProfile(String profile) { this.profile = profile; }
@@ -73,7 +70,12 @@ public class User {
     public void setCoin(int coin) { this.coin = coin; }
     public void setBrainCount(int brainCount) { this.brainCount = brainCount; }
 
-    public String getUsername() { return name; }
-    public String getProfilePicture() { return profile; }
+    public String getUsername() {
+        return name;
+    }
+    public String getProfilePicture() {
+        return profile;
+    }
+    public boolean isPremium() { return premium; }
     public String getSubscriptionType() { return subscriptionType; }
 }

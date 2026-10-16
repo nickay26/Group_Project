@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_221",
+  "title": "Decorators & Closures: Real-World Patterns",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_221_S1",
+      "type": "CONCEPT",
+      "title": "Practical Decorator Applications",
+      "prompt": "Decorators are widely used in enterprise frameworks for cross-cutting concerns such as execution timing, user authorization, input validation, rate limiting, and memoization.",
+      "codeSnippet": "import time\nfrom functools import wraps\n\ndef timer(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        result = func(*args, **kwargs)\n        print(f\"{func.__name__} took {time.perf_counter() - start:.4f}s\")\n        return result\n    return wrapper"
+    },
+    {
+      "slideId": "PY_221_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Authentication Guard Pattern",
+      "prompt": "Fill in the exception raised when an authorization decorator denies access.",
+      "codeSnippet": "def require_admin(func):\n    def wrapper(user, *args):\n        if not user.is_admin:\n            raise ___(\"Access denied\")\n        return func(user, *args)\n    return wrapper",
+      "options": ["PermissionError", "ValueError", "TypeError", "KeyError"],
+      "correctAnswer": "PermissionError"
+    },
+    {
+      "slideId": "PY_221_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Memoization Pattern Logic",
+      "prompt": "What data structure is typically used inside a memoization closure decorator to cache results?",
+      "options": [
+        "A dictionary mapping argument tuples to computed return values",
+        "A FIFO Queue structure",
+        "An ordered list of string outputs",
+        "A temporary binary file on disk"
+      ],
+      "correctAnswer": "A dictionary mapping argument tuples to computed return values"
+    },
+    {
+      "slideId": "PY_221_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Retry Decorator Delay",
+      "prompt": "Fill in the module function used to pause execution between retries inside a retry decorator.",
+      "codeSnippet": "import time\n# inside retry loop\ntime.___(delay_seconds)",
+      "options": ["sleep", "wait", "pause", "delay"],
+      "correctAnswer": "sleep"
+    },
+    {
+      "slideId": "PY_221_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Route Decorator Pattern in Web Frameworks",
+      "prompt": "How do web frameworks like Flask or FastAPI use decorators like `@app.route('/api')`?",
+      "options": [
+        "To register the decorated view function into an internal URL routing table mapping",
+        "To compile Python functions into C extensions",
+        "To execute the function repeatedly on every HTTP request concurrently",
+        "To encrypt HTTP response body data automatically"
+      ],
+      "correctAnswer": "To register the decorated view function into an internal URL routing table mapping"
+    },
+    {
+      "slideId": "PY_221_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Timing Precision Function",
+      "prompt": "Fill in the recommended `time` module function for high-precision decorator benchmarking.",
+      "codeSnippet": "import time\nt0 = time.___()",
+      "options": ["perf_counter", "time", "clock", "monotonic_ns"],
+      "correctAnswer": "perf_counter"
+    },
+    {
+      "slideId": "PY_221_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Type Validation Decorator",
+      "prompt": "What module can be combined with decorators to inspect and enforce type hints at runtime?",
+      "options": [
+        "inspect module (`inspect.signature`)",
+        "sys module (`sys.getrefcount`)",
+        "os module (`os.path`)",
+        "gc module (`gc.collect`)"
+      ],
+      "correctAnswer": "inspect module (`inspect.signature`)"
+    }
+  ]
+}

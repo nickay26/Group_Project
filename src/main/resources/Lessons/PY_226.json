@@ -1,0 +1,82 @@
+{
+  "lessonId": "PY_226",
+  "title": "Generators & Iterators: Subgenerators & yield from",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_226_S1",
+      "type": "CONCEPT",
+      "title": "Delegating to Subgenerators with yield from",
+      "prompt": "The 'yield from' syntax allows a generator to delegate part of its operations to another generator or iterable. It simplifies nested loops and transparently establishes a bi-directional channel between caller and subgenerator.",
+      "codeSnippet": "def subgen():\n    yield 'A'\n    yield 'B'\n\ndef main_gen():\n    yield 1\n    yield from subgen()\n    yield 2\n\nprint(list(main_gen())) # Outputs [1, 'A', 'B', 2]"
+    },
+    {
+      "slideId": "PY_226_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Delegation Syntax",
+      "prompt": "Fill in the missing keyword to complete the delegation expression.",
+      "codeSnippet": "def combine(iter1, iter2):\n    yield ___ iter1\n    yield from iter2",
+      "options": ["from", "in", "to", "with"],
+      "correctAnswer": "from"
+    },
+    {
+      "slideId": "PY_226_S3",
+      "type": "MULTIPLE_CHOICE",
+      "interactive": true,
+      "title": "Flattener using yield from",
+      "prompt": "What will `list(flatten([[1, 2], [3, 4]]))` produce if `flatten` delegates each inner list via `yield from`?",
+      "options": [
+        "[1, 2, 3, 4]",
+        "[[1, 2], [3, 4]]",
+        "(1, 2, 3, 4)",
+        "[1, 3, 2, 4]"
+      ],
+      "correctAnswer": "[1, 2, 3, 4]"
+    },
+    {
+      "slideId": "PY_226_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Delegating to Iterables",
+      "prompt": "Fill in the string value to yield characters individually using yield from.",
+      "codeSnippet": "def char_gen():\n    yield from ___",
+      "options": ["\"PYTHON\"", "'PYTHON'()", "list('PYTHON')", "str"],
+      "correctAnswer": "\"PYTHON\""
+    },
+    {
+      "slideId": "PY_226_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Capturing Return Values from Subgenerators",
+      "prompt": "How does `yield from` handle a return statement value inside a subgenerator?",
+      "options": [
+        "The return value of the subgenerator becomes the value of the `yield from` expression",
+        "It raises an exception immediately",
+        "The return value is ignored completely",
+        "It yields the returned value to the outer caller automatically"
+      ],
+      "correctAnswer": "The return value of the subgenerator becomes the value of the `yield from` expression"
+    },
+    {
+      "slideId": "PY_226_S6",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Capturing Subgenerator Return Syntax",
+      "prompt": "Fill in the variable assignment operator used to capture subgenerator return value via yield from.",
+      "codeSnippet": "def delegator():\n    result ___ yield from subgenerator()\n    print(result)",
+      "options": ["=", "==", "<-", "in"],
+      "correctAnswer": "="
+    },
+    {
+      "slideId": "PY_226_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Exception Delegation in yield from",
+      "prompt": "How are exceptions sent via throw() or close() handled during yield from delegation?",
+      "options": [
+        "They are passed directly through to the active subgenerator",
+        "They are swallowed and suppressed by default",
+        "They cause an immediate UnhandledException crash in caller",
+        "They restart the main delegating generator"
+      ],
+      "correctAnswer": "They are passed directly through to the active subgenerator"
+    }
+  ]
+}

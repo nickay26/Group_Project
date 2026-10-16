@@ -1,6 +1,6 @@
 {
   "lessonId": "CPP_290",
-  "title": "Module Review Quiz: Modern C++ Features & Type Traits (CPP_273 to CPP_280)",
+  "title": "Module Review Quiz: Modern C++ Features & Type Traits",
   "isPremium": false,
   "slides": [
     {
@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_290_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "std::optional Value Presence (CPP_276)",
       "prompt": "Fill in the member function name used to check if a std::optional contains a value.",
       "codeSnippet": "std::optional<int> opt = findVal();\nif (opt.___()) {\n    cout << opt.value();\n}",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_290_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Accessing std::variant (CPP_277)",
       "prompt": "Fill in the template helper function name used to retrieve a specific type value from std::variant.",
       "codeSnippet": "std::variant<int, string> v = 42;\nint val = std::___<int>(v);",

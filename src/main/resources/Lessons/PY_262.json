@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_262",
+  "title": "Clean Architecture & Layered Design",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_262_S1",
+      "type": "CONCEPT",
+      "title": "Layers of Clean Architecture",
+      "prompt": "Clean Architecture organizes software into concentric layers: Entities (Core Business Rules), Use Cases (Application Business Rules), Controllers/Presenters (Interface Adapters), and Frameworks/DB (External Drivers). The dependency rule enforces that inner layers know nothing of outer layers.",
+      "codeSnippet": "# Inner Layer: Domain Entity\nclass Order:\n    def __init__(self, order_id, total):\n        self.order_id = order_id\n        self.total = total\n\n# Outer Layer: Use Case using interface\nclass CheckoutUseCase:\n    def __init__(self, repo):\n        self.repo = repo # Abstract repository interface"
+    },
+    {
+      "slideId": "PY_262_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Clean Architecture Dependency Direction",
+      "prompt": "Fill in the direction dependencies must point in Clean Architecture.",
+      "codeSnippet": "# Source code dependencies must point ___ towards business logic\n# Outer -> Inner",
+      "options": ["inward", "outward", "horizontally", "bi-directionally"],
+      "correctAnswer": "inward"
+    },
+    {
+      "slideId": "PY_262_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Domain Layer Independence",
+      "prompt": "Which component should NEVER be imported into the core Domain Entity layer?",
+      "options": [
+        "Database ORMs, Web Frameworks, and external API libraries",
+        "Standard Python primitive types (int, str, dict)",
+        "Dataclasses or Value Objects",
+        "Domain-specific custom Exception classes"
+      ],
+      "correctAnswer": "Database ORMs, Web Frameworks, and external API libraries"
+    },
+    {
+      "slideId": "PY_262_S4",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Repository Pattern Abstraction",
+      "prompt": "Fill in the pattern name that isolates domain entities from data persistence logic.",
+      "codeSnippet": "class AbstractOrder___(ABC):\n    @abstractmethod\n    def save(self, order): pass",
+      "options": ["Repository", "Factory", "Adapter", "Decorator"],
+      "correctAnswer": "Repository"
+    },
+    {
+      "slideId": "PY_262_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Use Case Layer Responsibility",
+      "prompt": "What is the primary role of the Use Case layer in Clean Architecture?",
+      "options": [
+        "To orchestrate data flow to and from domain entities to fulfill application requirements",
+        "To render HTML UI templates directly for client browsers",
+        "To define database table schemas and SQL migrations",
+        "To handle raw HTTP network socket connections"
+      ],
+      "correctAnswer": "To orchestrate data flow to and from domain entities to fulfill application requirements"
+    },
+    {
+      "slideId": "PY_262_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Ports and Adapters Alternative Name",
+      "prompt": "Fill in the architectural synonym commonly used for Ports and Adapters Architecture.",
+      "codeSnippet": "Ports and Adapters is also known as ___ Architecture.",
+      "options": ["Hexagonal", "Monolithic", "Event-Driven", "Micro-kernel"],
+      "correctAnswer": "Hexagonal"
+    },
+    {
+      "slideId": "PY_262_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Testability in Clean Architecture",
+      "prompt": "Why does Clean Architecture significantly improve unit testing capabilities?",
+      "options": [
+        "Core business logic can be tested in isolation using mock repositories without running a real database or server",
+        "It forces all unit tests to execute in parallel across GPU threads",
+        "It automatically generates test cases based on type annotations",
+        "It removes the need for test assertions in Python"
+      ],
+      "correctAnswer": "Core business logic can be tested in isolation using mock repositories without running a real database or server"
+    }
+  ]
+}

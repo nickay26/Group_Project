@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_109_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Accessing Dictionary Values",
       "prompt": "Fill in the key used to access the age from the dictionary.",
       "codeSnippet": "user = {\"name\": \"Bob\", \"age\": 25}\nprint(user[___])",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_109_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Adding/Updating Entries",
       "prompt": "Fill in the operator used to assign a new key-value pair.",
       "codeSnippet": "scores = {\"math\": 90}\nscores[\"science\"] ___ 95",

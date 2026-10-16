@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_233",
+  "title": "Advanced Contextlib Utilities (ExitStack, suppress, redirect_stdout)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_233_S1",
+      "type": "CONCEPT",
+      "title": "Exploring Standard `contextlib` Utilities",
+      "prompt": "The `contextlib` module offers advanced utilities: `suppress()` silently ignores specified exceptions, `redirect_stdout()` temporarily redirects `print()` output, and `ExitStack` dynamically manages a variable number of context managers.",
+      "codeSnippet": "import io\nfrom contextlib import suppress, redirect_stdout, ExitStack\n\n# Ignore specific exception\nwith suppress(FileNotFoundError):\n    open('non_existent_file.txt')\n\n# Dynamic context management\nfiles = ['file1.txt', 'file2.txt']\nwith ExitStack() as stack:\n    file_objs = [stack.enter_context(open(fname, 'w')) for fname in files]\n    # All files closed automatically upon exiting block"
+    },
+    {
+      "slideId": "PY_233_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Exception Suppression Utility",
+      "prompt": "Fill in the utility from `contextlib` used to silently swallow specified exceptions.",
+      "codeSnippet": "from contextlib import ___\n\nwith suppress(ZeroDivisionError):\n    x = 1 / 0",
+      "options": ["suppress", "ignore", "catch", "silence"],
+      "correctAnswer": "suppress"
+    },
+    {
+      "slideId": "PY_233_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ExitStack Purpose",
+      "prompt": "What problem does `contextlib.ExitStack` solve?",
+      "options": [
+        "Managing a dynamic or unknown number of context managers or programmatic cleanups",
+        "Optimizing stack frames for high-performance recursive calls",
+        "Catching call-stack overflow exceptions in Python",
+        "Thread-safe garbage collection across GIL boundaries"
+      ],
+      "correctAnswer": "Managing a dynamic or unknown number of context managers or programmatic cleanups"
+    },
+    {
+      "slideId": "PY_233_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Redirecting Output Stream",
+      "prompt": "Fill in the contextlib helper function used to temporarily redirect standard output (`sys.stdout`).",
+      "codeSnippet": "from contextlib import ___\nimport io\n\nf = io.StringIO()\nwith redirect_stdout(f):\n    print('Captured!')",
+      "options": ["redirect_stdout", "pipe_stdout", "capture_output", "set_stdout"],
+      "correctAnswer": "redirect_stdout"
+    },
+    {
+      "slideId": "PY_233_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "ExitStack Callback Registration",
+      "prompt": "Which method on an `ExitStack` instance allows you to register arbitrary cleanup callbacks without creating a custom context manager?",
+      "options": [
+        "stack.callback()",
+        "stack.add_cleanup()",
+        "stack.register()",
+        "stack.on_exit()"
+      ],
+      "correctAnswer": "stack.callback()"
+    },
+    {
+      "slideId": "PY_233_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "ExitStack Context Entry Method",
+      "prompt": "Fill in the method used to add an existing context manager into an `ExitStack` instance.",
+      "codeSnippet": "with ExitStack() as stack:\n    f = stack.___ (open('data.txt'))",
+      "options": ["enter_context", "add_context", "push_context", "register_context"],
+      "correctAnswer": "enter_context"
+    },
+    {
+      "slideId": "PY_233_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Contextlib nullcontext Usage",
+      "prompt": "What is the purpose of `contextlib.nullcontext`?",
+      "options": [
+        "To act as a no-op fallback context manager when an optional context manager is required",
+        "To clear memory allocations inside a with block",
+        "To suppress all exceptions universally across execution",
+        "To reset context variables back to default states"
+      ],
+      "correctAnswer": "To act as a no-op fallback context manager when an optional context manager is required"
+    }
+  ]
+}

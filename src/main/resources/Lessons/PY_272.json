@@ -1,0 +1,81 @@
+{
+  "lessonId": "PY_272",
+  "title": "Comprehensive Test: Concurrency & Multitasking Fundamentals (PY_265 to PY_271)",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_272_S1",
+      "type": "CONCEPT",
+      "title": "Concurrency & Multitasking Review",
+      "prompt": "This comprehensive test evaluates your knowledge of threading, multiprocessing, synchronization primitives, concurrent.futures executors, process memory models, and asyncio cooperative multitasking.",
+      "codeSnippet": "import asyncio\nfrom concurrent.futures import ProcessPoolExecutor\n\nasync def compute():\n    loop = asyncio.get_running_loop()\n    with ProcessPoolExecutor() as pool:\n        result = await loop.run_in_executor(pool, pow, 2, 10)\n        print(result)"
+    },
+    {
+      "slideId": "PY_272_S2",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Best Approach for CPU-bound Parallelism",
+      "prompt": "Which technique provides true parallel execution across multiple CPU cores for heavy calculations in Python?",
+      "options": [
+        "Multiprocessing (or ProcessPoolExecutor)",
+        "Multithreading (or ThreadPoolExecutor)",
+        "Asyncio event loop with Tasks",
+        "Sequential generator functions"
+      ],
+      "correctAnswer": "Multiprocessing (or ProcessPoolExecutor)"
+    },
+    {
+      "slideId": "PY_272_S3",
+      "type": "FILL_IN_BLANK",
+      "title": "Async Function Keyword",
+      "prompt": "Fill in the keyword prefix used to declare an asynchronous coroutine.",
+      "codeSnippet": "___ def main():\n    pass",
+      "options": ["async", "await", "thread", "parallel"],
+      "correctAnswer": "async"
+    },
+    {
+      "slideId": "PY_272_S4",
+      "type": "MULTIPLE_CHOICE",
+      "title": "CPython GIL Scope",
+      "prompt": "The GIL in CPython prevents which of the following from executing in parallel?",
+      "options": [
+        "Multiple Python threads running bytecode simultaneously within a single process",
+        "Multiple Python OS processes from running simultaneously",
+        "C extensions from executing unmanaged machine code",
+        "Network sockets receiving data on multiple interfaces"
+      ],
+      "correctAnswer": "Multiple Python threads running bytecode simultaneously within a single process"
+    },
+    {
+      "slideId": "PY_272_S5",
+      "type": "FILL_IN_BLANK",
+      "title": "Futures Completion Yielding",
+      "prompt": "Fill in the function from `concurrent.futures` used to yield completed futures as they finish.",
+      "codeSnippet": "from concurrent.futures import ___\n\nfor f in as_completed(futures):\n    print(f.result())",
+      "options": ["as_completed", "when_done", "iter_futures", "completed"],
+      "correctAnswer": "as_completed"
+    },
+    {
+      "slideId": "PY_272_S6",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Reentrant Lock Advantage",
+      "prompt": "Why would a developer select `threading.RLock()` over standard `threading.Lock()`?",
+      "options": [
+        "To allow a single thread to acquire the lock multiple times recursively without self-deadlock",
+        "To allow multiple processes to share lock state",
+        "To eliminate thread context switching overhead",
+        "To automatically cancel execution upon thread error"
+      ],
+      "correctAnswer": "To allow a single thread to acquire the lock multiple times recursively without self-deadlock"
+    },
+    {
+      "slideId": "PY_272_S7",
+      "type": "FILL_IN_BLANK",
+      "interactive": true,
+      "title": "Gathering Async Tasks",
+      "prompt": "Fill in the function used in `asyncio` to await multiple concurrent coroutines.",
+      "codeSnippet": "results = await asyncio.___(task1(), task2())",
+      "options": ["gather", "all", "wait_all", "join"],
+      "correctAnswer": "gather"
+    }
+  ]
+}

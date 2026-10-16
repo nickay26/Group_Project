@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_299_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Base Image Instruction",
       "prompt": "Fill in the Dockerfile keyword used to specify the parent image.",
       "codeSnippet": "___ python:3.11",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_299_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Container Execution Command",
       "prompt": "Fill in the Dockerfile instruction specifying the default executable command when a container starts.",
       "codeSnippet": "___ [\"gunicorn\", \"-b\", \"0.0.0.0:8000\", \"app:app\"]",

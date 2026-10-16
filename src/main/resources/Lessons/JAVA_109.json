@@ -38,6 +38,7 @@
       "slideId": "JAVA_109_S5",
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
+      "Interactive": "true",
       "prompt": "Complete the code to check if x is greater than 5.",
       "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
       "options": [">", "<", "==", "!="],
@@ -81,15 +82,6 @@
     },
     {
       "slideId": "JAVA_109_S10",
-      "type": "CODE_OUTPUT",
-      "title": "Vote Check",
-      "prompt": "What is the output?",
-      "codeSnippet": "int age = 15;\nif (age >= 18) {\n  System.out.println(\"You can vote\");\n} else {\n  System.out.println(\"You cannot vote\");\n}",
-      "options": ["You can vote", "You cannot vote", "15", "Error"],
-      "correctAnswer": "You cannot vote"
-    },
-    {
-      "slideId": "JAVA_109_S11",
       "type": "FILL_IN_BLANK",
       "title": "Complete the Condition",
       "prompt": "Complete the code to check if age is 18 or older.",
