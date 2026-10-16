@@ -670,19 +670,22 @@ public class ProfileViewController {
         // ✅ Circular Progress (ညာဘက်ခြမ်း)
         StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
-        // ✅ Status Label (Start, In Progress, Completed)
+        // ✅ Status Label (Start, In Progress, Completed) - အရောင်အသစ်များဖြင့်
         String statusText;
         String statusStyle;
 
         if (progressPercent <= 0) {
             statusText = "Start";
-            statusStyle = "-fx-background-color: #334155; -fx-text-fill: #94A3B8; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
+            // လိမ်မော်ရောင် (Orange Background & Text)
+            statusStyle = "-fx-background-color: #7C2D12; -fx-text-fill: #F97316; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
         } else if (progressPercent < 100) {
             statusText = "In Progress";
-            statusStyle = "-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
+            // အပြာရောင် (Blue Background & Text)
+            statusStyle = "-fx-background-color: #1E3A8A; -fx-text-fill: #60A5FA; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
         } else {
             statusText = "Completed";
-            statusStyle = "-fx-background-color: #1E3A8A; -fx-text-fill: #60A5FA; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
+            // အစိမ်းရောင် (Green Background & Text)
+            statusStyle = "-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
         }
 
         Label statusLabel = new Label(statusText);
