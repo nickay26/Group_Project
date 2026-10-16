@@ -13,7 +13,7 @@ public class App extends Application {
         SceneManager.setPrimaryStage(stage);
 
         // Launch initial welcome screen
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/SodexaLogo.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/Sodexa.png"))));
         stage.setMaximized(true);
         SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
     }
