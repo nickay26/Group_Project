@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_114_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Try Keyword",
       "prompt": "Fill in the keyword to start a code block monitored for exceptions.",
       "codeSnippet": "___\n    val = int(input())\nexcept ValueError:\n    print(\"Invalid number\")",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_114_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Except Alias Syntax",
       "prompt": "Fill in the keyword used to bind an exception instance to a variable name.",
       "codeSnippet": "except ZeroDivisionError ___ err:\n    print(err)",

@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_120_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "JSON Dumps Method",
       "prompt": "Fill in the method used to serialize a Python object to a JSON string.",
       "codeSnippet": "json_data = json.___({'status': 'active'})",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_120_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Writing JSON to File",
       "prompt": "Fill in the function used to write a Python object directly to a JSON file stream.",
       "codeSnippet": "with open('data.json', 'w') as f:\n    json.___(data, f)",

@@ -12,25 +12,23 @@ public class WebSocketService implements WebSocket.Listener {
 
     private static WebSocketService instance;
     private WebSocket webSocket;
-    private NotificationListener notificationListener;
+    private volatile NotificationListener notificationListener;
 
     private final StringBuilder messageBuffer = new StringBuilder();
 
     public interface NotificationListener {
         void onInviteReceived(String fromUser, String language);
 
-        // ⭐ Friend Match စတင်ချိန်တွင် opponentId နှင့် questionsJson ပါဝင်သည်
         void onGameStart(String roomId, String language, String opponentId, String questionsJson);
 
         void onQuickMatchStart(String roomId, String language, String opponentId, String questionsJson);
         void onQuickMatchTimeout();
 
-        // Game Sync အတွက် ထပ်တိုး Listener များ
         default void onOpponentProgress(String userId, int progress) {}
         default void onGameOver(String winnerId) {}
     }
 
-    public static WebSocketService getInstance() {
+    public static synchronized WebSocketService getInstance() {
         if (instance == null) {
             instance = new WebSocketService();
         }
@@ -101,7 +99,6 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // ⭐ Invite တုံ့ပြန်ရာတွင် Language ပါဝင်သော မက်သဒ်
     public void respondInvite(String toUser, String action, String language) {
         JSONObject json = new JSONObject();
         json.put("type", "INVITE_RESPONSE");
@@ -130,7 +127,6 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // Progress ပို့မည့် Method
     public void sendProgressUpdate(String roomId, String userId, int progress) {
         JSONObject json = new JSONObject();
         json.put("type", "GAME_PROGRESS");
@@ -140,7 +136,6 @@ public class WebSocketService implements WebSocket.Listener {
         sendText(json.toString());
     }
 
-    // Game Over / Match ပြီးဆုံးမှု ပို့မည့် Method
     public void sendGameOver(String roomId, String winnerId) {
         JSONObject json = new JSONObject();
         json.put("type", "GAME_OVER");
@@ -163,43 +158,88 @@ public class WebSocketService implements WebSocket.Listener {
                 String type = json.optString("type");
 
                 Platform.runLater(() -> {
-                    if (notificationListener == null) return;
+                    NotificationListener listener = notificationListener;
+                    System.out.println("📨 Handling server message type: " + type);
+                    if (listener == null) {
+                        System.err.println("❌ NotificationListener is NULL. "
+                                + "Register it with setNotificationListener(...) or connect(...).");
+                        return;
+                    }
 
-                    if ("INVITE_RECEIVED".equals(type)) {
-                        String fromUser = json.optString("fromUser", "");
-                        String language = json.optString("language", "java");
-                        notificationListener.onInviteReceived(fromUser, language);
+                    try {
+                        if ("INVITE_RECEIVED".equals(type)) {
+                            String fromUser = json.optString("fromUser", "");
+                            String language = json.optString("language", "java");
+                            listener.onInviteReceived(fromUser, language);
 
-                    } else if ("START_GAME".equals(type)) {
-                        String roomId = json.optString("roomId", "");
-                        String language = json.optString("language", "java");
-                        String opponentId = json.optString("opponentId", "Unknown");
-                        Object questionsObj = json.opt("questions");
-                        String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+                        } else if ("START_GAME".equals(type)) {
+                            String roomId = json.optString("roomId", "");
+                            String language = json.optString("language", "java");
+                            String opponentId = json.optString("opponentId", "Unknown");
+                            Object questionsObj = json.opt("questions");
+                            String questionsJson = "";
 
-                        notificationListener.onGameStart(roomId, language, opponentId, questionsJson);
+                            if (questionsObj instanceof String) {
+                                questionsJson = ((String) questionsObj).trim()
+                                        .replace("\u00a0", " ")
+                                        .replace("\u2007", " ")
+                                        .replace("\u202f", " ");
+                            } else if (questionsObj != null) {
+                                questionsJson = questionsObj.toString()
+                                        .replace("\u00a0", " ")
+                                        .replace("\u2007", " ")
+                                        .replace("\u202f", " ");
+                            }
+                            System.out.println("📦 Questions JSON length: " + questionsJson.length());
 
-                    } else if ("QUICK_MATCH_START".equals(type)) {
-                        String roomId = json.optString("roomId", "");
-                        String language = json.optString("language", "java");
-                        String opponentId = json.optString("opponentId", "Unknown");
-                        Object questionsObj = json.opt("questions");
-                        String questionsJson = questionsObj != null ? questionsObj.toString() : "";
+                            System.out.println("➡️ Calling onGameStart(); roomId=" + roomId
+                                    + ", questionsLength=" + questionsJson.length());
+                            listener.onGameStart(roomId, language, opponentId, questionsJson);
 
-                        notificationListener.onQuickMatchStart(roomId, language, opponentId, questionsJson);
+                        } else if ("QUICK_MATCH_START".equals(type)) {
+                            String roomId = json.optString("roomId", "");
+                            String language = json.optString("language", "java");
+                            String opponentId = json.optString("opponentId", "Unknown");
+                            Object questionsObj = json.opt("questions");
+                            String questionsJson = "";
 
-                    } else if ("QUICK_MATCH_TIMEOUT".equals(type)) {
-                        System.out.println("Executing Client Timeout Listener...");
-                        notificationListener.onQuickMatchTimeout();
+                            if (questionsObj instanceof String) {
+                                questionsJson = ((String) questionsObj).trim()
+                                        .replace("\u00a0", " ")
+                                        .replace("\u2007", " ")
+                                        .replace("\u202f", " ");
+                            } else if (questionsObj != null) {
+                                questionsJson = questionsObj.toString()
+                                        .replace("\u00a0", " ")
+                                        .replace("\u2007", " ")
+                                        .replace("\u202f", " ");
+                            }
+                            System.out.println("📦 Questions JSON length: " + questionsJson.length());
 
-                    } else if ("GAME_PROGRESS".equals(type)) {
-                        String userId = json.optString("userId", "");
-                        int progress = json.optInt("progress", 0);
-                        notificationListener.onOpponentProgress(userId, progress);
+                            System.out.println("➡️ Calling onQuickMatchStart(); roomId=" + roomId
+                                    + ", language=" + language
+                                    + ", opponentId=" + opponentId
+                                    + ", questionsLength=" + questionsJson.length());
+                            listener.onQuickMatchStart(roomId, language, opponentId, questionsJson);
+                            System.out.println("✅ onQuickMatchStart() callback returned.");
 
-                    } else if ("GAME_OVER".equals(type)) {
-                        String winnerId = json.optString("winnerId", "");
-                        notificationListener.onGameOver(winnerId);
+                        } else if ("QUICK_MATCH_TIMEOUT".equals(type)) {
+                            System.out.println("Executing Client Timeout Listener...");
+                            listener.onQuickMatchTimeout();
+
+                        } else if ("GAME_PROGRESS".equals(type)) {
+                            String userId = json.optString("userId", "");
+                            int progress = json.optInt("progress", 0);
+                            listener.onOpponentProgress(userId, progress);
+
+                        } else if ("GAME_OVER".equals(type)) {
+                            String winnerId = json.optString("winnerId", "");
+                            listener.onGameOver(winnerId);
+                        }
+                    } catch (Exception callbackError) {
+                        System.err.println("❌ Error while handling server message type "
+                                + type + ": " + callbackError.getMessage());
+                        callbackError.printStackTrace();
                     }
                 });
 

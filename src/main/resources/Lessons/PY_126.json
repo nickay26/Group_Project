@@ -14,6 +14,7 @@
       "slideId": "PYTH_126_S2",
       "type": "FILL_IN_BLANK",
       "title": "Enter Method",
+      "interactive": true,
       "prompt": "Fill in the dunder method called when entering a 'with' block.",
       "codeSnippet": "def ___enter___(self):\n    return self",
       "options": ["__enter__", "__start__", "__open__", "__init__"],
@@ -52,6 +53,7 @@
     {
       "slideId": "PYTH_126_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Using Context Manager Keyword",
       "prompt": "Fill in the keyword used to execute a context manager.",
       "codeSnippet": "___ open('test.txt') as f:\n    data = f.read()",

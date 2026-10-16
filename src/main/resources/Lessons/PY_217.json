@@ -13,6 +13,7 @@
     {
       "slideId": "PY_217_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Applying Decorators Syntax",
       "prompt": "Fill in the symbol used before a decorator name above a function definition.",
       "codeSnippet": "___my_decorator\ndef process():\n    pass",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_217_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Handling Generic Function Arguments",
       "prompt": "Fill in the missing keyword arguments parameter syntax inside a generic wrapper function.",
       "codeSnippet": "def wrapper(*args, ___kwargs):\n    return func(*args, **kwargs)",

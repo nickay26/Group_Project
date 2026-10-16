@@ -13,6 +13,7 @@
     {
       "slideId": "PY_254_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "ctypes Shared Library Loader",
       "prompt": "Fill in the class used in `ctypes` to load dynamically linked C libraries using standard C calling conventions.",
       "codeSnippet": "import ctypes\nlib = ctypes.___('./mylib.so')",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_254_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "ctypes C Double Type Equivalent",
       "prompt": "Fill in the `ctypes` type equivalent to C's `double` precision floating point number.",
       "codeSnippet": "val = ctypes.___(3.14159)",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_254_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Configuring C Function Arguments",
       "prompt": "Fill in the attribute name used to declare a list of expected argument types for a `ctypes` imported function.",
       "codeSnippet": "my_c_func.___ = [ctypes.c_int, ctypes.c_char_p]",

@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_274_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Conditional Type Selection",
       "prompt": "Fill in the type trait that selects between TypeA and TypeB based on a boolean condition.",
       "codeSnippet": "using SelectedType = std::___<true, int, double>::type; // int",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_274_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking Base Class Relationship",
       "prompt": "Fill in the type trait checking if Base is a base class of Derived.",
       "codeSnippet": "static_assert(std::___<Base, Derived>::value, \"Must inherit\");",

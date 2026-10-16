@@ -13,6 +13,7 @@
     {
       "slideId": "PY_252_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "__slots__ Attribute Definition",
       "prompt": "Fill in the special class attribute used to suppress `__dict__` creation and optimize instance memory.",
       "codeSnippet": "class Employee:\n    ___ = ('name', 'id')",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_252_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "tracemalloc Start Call",
       "prompt": "Fill in the method used to begin tracking Python memory allocations with `tracemalloc`.",
       "codeSnippet": "import tracemalloc\n\ntracemalloc.___()",

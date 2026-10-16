@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_229_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Insertion Result",
       "prompt": "The insert method on std::set returns a std::pair<iterator, ___>.",
       "codeSnippet": "auto [it, success] = mySet.insert(42);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_229_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking Element Existence C++20",
       "prompt": "Fill in the C++20 method to check if an element exists in a set.",
       "codeSnippet": "if (mySet.___(10)) {\n    // Element exists\n}",
@@ -79,6 +81,7 @@
     {
       "slideId": "CPP_229_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Custom Comparator Set",
       "prompt": "Fill in the comparator specifier to declare a set sorted in descending order.",
       "codeSnippet": "std::set<int, std::___<int>> descendingSet;",

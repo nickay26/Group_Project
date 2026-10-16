@@ -70,6 +70,7 @@
     {
       "slideId": "CPP_291_S7",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++20 Ranges Filter (CPP_240)",
       "prompt": "Fill in the C++20 view adaptor used to extract elements matching a condition.",
       "codeSnippet": "auto evens = nums | std::views::___([](int x){ return x % 2 == 0; });",
@@ -92,6 +93,7 @@
     {
       "slideId": "CPP_291_S9",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Exception Safety Specifier (CPP_245)",
       "prompt": "Fill in the keyword specifying that a function will not throw any exceptions.",
       "codeSnippet": "void process() ___ { /* safe code */ }",
@@ -136,6 +138,7 @@
     {
       "slideId": "CPP_291_S13",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Smart Pointer Creation (CPP_258)",
       "prompt": "Fill in the factory function recommended for allocating std::unique_ptr safely.",
       "codeSnippet": "auto ptr = std::___<int>(100);",

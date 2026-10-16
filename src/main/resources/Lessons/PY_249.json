@@ -57,6 +57,7 @@
     {
       "slideId": "PY_249_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Max Workers Parameter Name",
       "prompt": "Fill in the keyword argument name used to cap the number of worker threads/processes in an Executor.",
       "codeSnippet": "executor = ProcessPoolExecutor(___=4)",

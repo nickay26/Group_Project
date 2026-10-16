@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_281_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Class Declaration (CPP_201)",
       "prompt": "Fill in the keyword used to define a custom data type containing data members and functions in C++.",
       "codeSnippet": "___ Student {\npublic:\n    int id;\n    string name;\n};",

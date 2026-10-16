@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_294_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Displaying Plots",
       "prompt": "Fill in the Pyplot function used to display constructed figures on screen.",
       "codeSnippet": "plt.___()",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_294_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Scatter Plot Function",
       "prompt": "Fill in the Matplotlib function used to create a point cloud scatter plot.",
       "codeSnippet": "plt.___(x_data, y_data)",

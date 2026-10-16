@@ -13,6 +13,7 @@
     {
       "slideId": "PY_246_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Create Task Syntax",
       "prompt": "Fill in the function name used to wrap and schedule a coroutine into a background Task.",
       "codeSnippet": "task = asyncio.___(coro())",

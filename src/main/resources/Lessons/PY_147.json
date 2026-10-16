@@ -14,6 +14,7 @@
       "slideId": "PYTH_147_S2",
       "type": "FILL_IN_BLANK",
       "title": "Receiving Messages",
+      "interactive": true,
       "prompt": "Fill in the asynchronous method used to receive incoming WebSocket messages.",
       "codeSnippet": "data = await websocket.___ ()",
       "options": ["recv", "receive", "read", "get"],
@@ -35,6 +36,7 @@
     {
       "slideId": "PYTH_147_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Sending Messages",
       "prompt": "Fill in the async method to push data to a connected client.",
       "codeSnippet": "await websocket.___ ('Hello Client')",
@@ -52,6 +54,7 @@
     {
       "slideId": "PYTH_147_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "FastAPI WebSocket Endpoint",
       "prompt": "Fill in the decorator used for WebSocket routes in FastAPI.",
       "codeSnippet": "@app.___ ('/ws')",

@@ -13,6 +13,7 @@
     {
       "slideId": "PY_210_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Immutable Sequence Creation",
       "prompt": "Fill in the built-in data structure keyword used to create an immutable sequence of elements.",
       "codeSnippet": "point = ___(10, 20)",
@@ -36,6 +37,7 @@
       "slideId": "PY_210_S4",
       "type": "FILL_IN_BLANK",
       "title": "Freezing Sets",
+      "interactive": true,
       "prompt": "Fill in the built-in type used to make an immutable version of a Python set.",
       "codeSnippet": "frozen_keys = ___([1, 2, 3])",
       "options": ["frozenset", "immutableset", "staticset", "tuple"],

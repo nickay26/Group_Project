@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_165_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Locking Weak Pointer",
       "prompt": "Fill in method to safely convert weak_ptr to shared_ptr for access.",
       "codeSnippet": "if (auto shared = weakPtr.___()) {\n    // Safe usage\n}",

@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_124_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Ternary False Branch",
       "prompt": "Fill in the missing symbol in the ternary operator.",
       "codeSnippet": "int min = (a < b) ? a ___ b;",
@@ -64,6 +65,7 @@
     {
       "slideId": "CPP_124_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Inline Printing Ternary",
       "prompt": "Fill in the question mark for inline output ternary.",
       "codeSnippet": "std::cout << (score >= 50 ___ \"Pass\" : \"Fail\");",

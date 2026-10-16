@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_206_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "User-Defined Conversion Operator",
       "prompt": "Fill in syntax to overload implicit/explicit conversion to double.",
       "codeSnippet": "class Centimeters {\n    double cm;\npublic:\n    operator ___() const { return cm; }\n};",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_206_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Explicit Constructor Invocation",
       "prompt": "Fill in static_cast requirement for explicit constructor.",
       "codeSnippet": "Account acc = ___<Account>(100.0);",

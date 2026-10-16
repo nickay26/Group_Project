@@ -13,6 +13,7 @@
     {
       "slideId": "PY_231_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "The Setup Dunder Method",
       "prompt": "Fill in the magic method executed when entering the runtime context of a `with` statement.",
       "codeSnippet": "class Resource:\n    def ___ (self):\n        print('Acquiring resource')\n        return self",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_231_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "The Teardown Dunder Method",
       "prompt": "Fill in the magic method executed when exiting the runtime context.",
       "codeSnippet": "class Resource:\n    def ___ (self, exc_type, exc_val, exc_tb):\n        print('Releasing resource')",

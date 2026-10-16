@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_207_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Friend Function Keyword",
       "prompt": "Fill in keyword inside class definition granting access to external function.",
       "codeSnippet": "class Box {\n    double width;\n    ___ void printWidth(Box b);\n};",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_207_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Friend Class Syntax",
       "prompt": "Fill in declaration granting entire class access.",
       "codeSnippet": "class Matrix {\n    friend ___ Vector;\n};",

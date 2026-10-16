@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_278_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Concept Definition Keyword",
       "prompt": "Fill in the keyword used to define a custom concept.",
       "codeSnippet": "template <typename T>\n___ Printable = requires(T x) { std::cout << x; };",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_278_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Constrained Template Parameter Syntax",
       "prompt": "Fill in the concept name directly replacing typename in the parameter list.",
       "codeSnippet": "template <std::___ T>\n T multiply(T a, T b) { return a * b; }",
@@ -79,6 +81,7 @@
     {
       "slideId": "CPP_278_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Compound Requirement Return Type Constraint",
       "prompt": "Fill in the arrow token used in compound requirement constraints.",
       "codeSnippet": "template <typename T>\nconcept Incrementable = requires(T a) {\n    { ++a } ___ std::same_as<T&>;\n};",

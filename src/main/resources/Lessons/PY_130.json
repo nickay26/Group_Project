@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_130_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "List Index Lookup Complexity",
       "prompt": "Fill in the time complexity notation for accessing an element by index in a Python list.",
       "codeSnippet": "# Time complexity: O(___)",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_130_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Sorting Algorithm Complexity",
       "prompt": "Fill in the average time complexity for Python's Timsort algorithm (list.sort()).",
       "codeSnippet": "# Average sorting complexity: O(n ___ n)",
@@ -48,6 +50,7 @@
       "slideId": "PYTH_130_S6",
       "type": "FILL_IN_BLANK",
       "title": "Collections Deque",
+      "interactive": true,
       "prompt": "Fill in the class from 'collections' module optimized for double-ended queues.",
       "codeSnippet": "from collections import ___\nq = deque([1, 2, 3])",
       "options": ["deque", "queue", "stack", "list_queue"],

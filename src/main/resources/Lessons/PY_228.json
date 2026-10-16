@@ -13,6 +13,7 @@
     {
       "slideId": "PY_228_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Chaining Pipeline Stages",
       "prompt": "Fill in the variable name passed into filter_logs to establish the pipeline stream.",
       "codeSnippet": "raw_stream = read_stream()\nfiltered_stream = filter_logs(___)",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_228_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Consuming Pipeline Outputs",
       "prompt": "Fill in the built-in accumulator function used to sum outputs streaming through a pipeline.",
       "codeSnippet": "total = ___(parse_values(stream))",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_228_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Lazy Mapping Pipeline",
       "prompt": "Fill in the built-in function that lazily maps transformations across a generator stream.",
       "codeSnippet": "cleaned = ___(str.strip, log_lines)",

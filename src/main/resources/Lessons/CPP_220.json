@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_220_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "NTTP Declaration Syntax",
       "prompt": "Fill in the parameter type for fixed integer size NTTP.",
       "codeSnippet": "template <typename T, ___ Size>\nclass Buffer {};",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_220_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "NTTP Auto Keyword C++17",
       "prompt": "Since C++17, fill in the keyword to deduce the type of a non-type parameter automatically.",
       "codeSnippet": "template <___ Val>\nvoid printValue() {}",
@@ -79,6 +81,7 @@
     {
       "slideId": "CPP_220_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "NTTP Default Argument",
       "prompt": "Fill in the syntax to assign a default integer value to an NTTP.",
       "codeSnippet": "template <typename T, int Size ___ 100>\nclass Queue {};",

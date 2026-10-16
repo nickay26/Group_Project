@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_261_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Launch Policy Async",
       "prompt": "Fill in the launch policy flag forcing std::async to execute the task on a new asynchronous thread.",
       "codeSnippet": "auto f = std::async(std::launch::___, myTask);",

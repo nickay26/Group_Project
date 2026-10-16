@@ -35,6 +35,7 @@
     {
       "slideId": "CPP_241_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Heap Allocation operator",
       "prompt": "Fill in the operator used to dynamically allocate memory on the heap.",
       "codeSnippet": "int* ptr = ___ int(10);",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_241_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dangling Pointer Prevention",
       "prompt": "Fill in the standard value to assign to a raw pointer after deleting its memory to prevent accidental access.",
       "codeSnippet": "delete ptr;\nptr = ___;",

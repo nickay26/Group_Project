@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_239_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Constrained Algorithm Syntax",
       "prompt": "Fill in the namespace required for C++20 constrained range algorithms.",
       "codeSnippet": "std::___::sort(container);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_239_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Filtering View Pipe",
       "prompt": "Fill in the range view adapter used to filter elements based on a predicate condition.",
       "codeSnippet": "auto evens = v | std::views::___([](int x){ return x % 2 == 0; });",
@@ -79,6 +81,7 @@
     {
       "slideId": "CPP_239_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Drop View Pipe",
       "prompt": "Fill in the range view used to skip the first N elements of a range.",
       "codeSnippet": "auto rest = v | std::views::___(3);",

@@ -13,6 +13,7 @@
     {
       "slideId": "PY_271_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Defining Coroutine Functions",
       "prompt": "Fill in the keyword prefix used to declare an asynchronous coroutine function.",
       "codeSnippet": "___ def fetch_api():\n    await asyncio.sleep(0.5)",
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_271_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Concurrent Task Execution helper",
       "prompt": "Fill in the `asyncio` function used to run multiple awaitables concurrently and gather their results.",
       "codeSnippet": "async def main():\n    results = await asyncio.___(\n        fetch(1), fetch(2)\n    )",

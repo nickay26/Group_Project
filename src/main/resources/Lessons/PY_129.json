@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_129_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "HTTP GET Request",
       "prompt": "Fill in the method used to make an HTTP GET request.",
       "codeSnippet": "response = requests.___('https://api.github.com')",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_129_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "HTTP Status Code Property",
       "prompt": "Fill in the property name to check HTTP response status code.",
       "codeSnippet": "if response.___ == 200:\n    print('Success')",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_129_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Custom Request Headers",
       "prompt": "Fill in the parameter used to pass authorization tokens or custom headers in requests.",
       "codeSnippet": "res = requests.get(url, ___={'Authorization': 'Bearer token'})",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_137_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Nested Loop Syntax",
       "prompt": "Fill in the keyword to create an inner loop.",
       "codeSnippet": "for (int i = 0; i < 3; i++) {\n    ___ (int j = 0; j < 3; j++) {\n        // ...\n    }\n}",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_172_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Function Declaration (CPP_152)",
       "prompt": "Fill in the return type used for a function that does NOT return any value.",
       "codeSnippet": "___ printMessage() {\n    cout << \"Welcome!\";\n}",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_172_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Return Keyword (CPP_153)",
       "prompt": "Fill in the keyword used to send a result back to the caller from inside a function.",
       "codeSnippet": "int add(int a, int b) {\n    ___ a + b;\n}",
@@ -47,6 +49,7 @@
     {
       "slideId": "CPP_172_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Pass by Reference (CPP_154)",
       "prompt": "Fill in the symbol used in a parameter list to allow a function to modify the original argument variable.",
       "codeSnippet": "void swapValues(int ___x, int ___y) {\n    int temp = x;\n    x = y;\n    y = temp;\n}",

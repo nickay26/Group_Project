@@ -26,6 +26,7 @@
     {
       "slideId": "PY_250_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Coroutine Pause Keyword",
       "prompt": "Fill in the keyword used to suspend execution on an asynchronous operation within a coroutine.",
       "codeSnippet": "async def fetch():\n    data = ___ asyncio.sleep(0.5)",
@@ -70,6 +71,7 @@
     {
       "slideId": "PY_250_S7",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Queue Task Done Method",
       "prompt": "Fill in the method invoked by an async worker to signal completion of an item retrieved from `asyncio.Queue`.",
       "codeSnippet": "queue.___()",

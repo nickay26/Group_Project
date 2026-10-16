@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_110_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Constant Initialization",
       "prompt": "A constant must be initialized at declaration. Complete the code.",
       "codeSnippet": "const double SPEED_OF_LIGHT ___ 299792458;",

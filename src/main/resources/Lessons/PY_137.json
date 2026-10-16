@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_137_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Engine Creation",
       "prompt": "Fill in the function to initialize database connection engines.",
       "codeSnippet": "engine = ___ ('sqlite:///app.db')",
@@ -47,6 +48,7 @@
     {
       "slideId": "PYTH_137_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Adding Objects to Session",
       "prompt": "Fill in the method to stage a new instance for insertion.",
       "codeSnippet": "session.___ (user_obj)",

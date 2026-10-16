@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_201_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Default Class Access Specifier",
       "prompt": "Fill in the access specifier that restricts member access to inside the class only.",
       "codeSnippet": "class Player {\n___:\n    int health;\n};",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_201_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Object Instantiation",
       "prompt": "Fill in variable type to instantiate object on stack.",
       "codeSnippet": "___ acc;\nacc.deposit(100.0);",
@@ -101,6 +103,7 @@
     {
       "slideId": "CPP_201_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Member Access Operator",
       "prompt": "Fill in operator used to access public methods of object instance.",
       "codeSnippet": "Player p1;\np1___setHealth(100);",

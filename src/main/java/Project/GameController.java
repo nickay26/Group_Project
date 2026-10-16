@@ -1,5 +1,9 @@
 package Project;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -13,8 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import org.json.JSONArray;
+import com.google.gson.stream.JsonReader;
 import org.json.JSONObject;
+
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,53 +300,130 @@ public class GameController {
 
         try {
             questionList.clear();
-            String cleanJson = jsonResponse.trim();
-            JSONArray array = null;
+            String raw = jsonResponse.trim().replace('\u00a0', ' ');
+            System.out.println("📥 Raw JSON received length: " + raw.length());
 
-            if (cleanJson.startsWith("[")) {
-                array = new JSONArray(cleanJson);
-            } else if (cleanJson.startsWith("{")) {
-                JSONObject obj = new JSONObject(cleanJson);
-                if (obj.has("questions")) {
-                    Object qObj = obj.get("questions");
-                    if (qObj instanceof String) {
-                        array = new JSONArray((String) qObj);
-                    } else if (qObj instanceof JSONArray) {
-                        array = (JSONArray) qObj;
+            JsonArray qArray = null;
+            JsonElement rootElement = JsonParser.parseString(raw);
+
+            if (rootElement.isJsonObject()) {
+                JsonObject rootObj = rootElement.getAsJsonObject();
+                if (rootObj.has("questions")) {
+                    JsonElement qEl = rootObj.get("questions");
+                    if (qEl.isJsonArray()) {
+                        qArray = qEl.getAsJsonArray();
+                    } else if (qEl.isJsonPrimitive()) {
+                        String innerStr = qEl.getAsString();
+                        System.out.println("🔍 Parsing inner string questions with lenient reader...");
+                        try {
+                            JsonReader reader = new JsonReader(new StringReader(innerStr));
+                            reader.setLenient(true);
+                            JsonElement innerEl = JsonParser.parseReader(reader);
+                            if (innerEl.isJsonArray()) {
+                                qArray = innerEl.getAsJsonArray();
+                            }
+                        } catch (Exception e2) {
+                            System.err.println("⚠️ Lenient parse failed, trying fallback: " + e2.getMessage());
+                            String fixedStr = innerStr.replace("\\n", "\n").replace("\\\"", "\"").replace("\\\\", "\\");
+                            JsonReader reader2 = new JsonReader(new StringReader(fixedStr));
+                            reader2.setLenient(true);
+                            qArray = JsonParser.parseReader(reader2).getAsJsonArray();
+                        }
                     }
                 }
+            } else if (rootElement.isJsonArray()) {
+                qArray = rootElement.getAsJsonArray();
             }
 
-            if (array == null || array.length() == 0) {
+            if (qArray == null || qArray.size() == 0) {
+                System.err.println("❌ Parsed JsonArray is null or empty!");
                 handleLoadingFailure();
                 return;
             }
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject q = array.getJSONObject(i);
+            System.out.println("✅ Successfully parsed " + qArray.size() + " questions via Gson Lenient Parser!");
+
+            for (JsonElement el : qArray) {
+                JsonObject qObj = el.getAsJsonObject();
 
                 List<String> options = new ArrayList<>();
-                JSONArray optArr = q.getJSONArray("options");
-                for (int j = 0; j < optArr.length(); j++) {
-                    options.add(optArr.getString(j));
+                JsonElement optEl = null;
+                if (qObj.has("options")) optEl = qObj.get("options");
+                else if (qObj.has("choices")) optEl = qObj.get("choices");
+                else if (qObj.has("answers")) optEl = qObj.get("answers");
+
+                if (optEl != null) {
+                    if (optEl.isJsonArray()) {
+                        for (JsonElement o : optEl.getAsJsonArray()) {
+                            options.add(o.getAsString());
+                        }
+                    } else if (optEl.isJsonPrimitive()) {
+                        try {
+                            String optStr = optEl.getAsString();
+                            JsonReader optReader = new JsonReader(new StringReader(optStr));
+                            optReader.setLenient(true);
+                            JsonArray parsedOptArr = JsonParser.parseReader(optReader).getAsJsonArray();
+                            for (JsonElement o : parsedOptArr) {
+                                options.add(o.getAsString());
+                            }
+                        } catch (Exception ignored) {}
+                    }
                 }
 
+                if (options.isEmpty()) {
+                    options.add("Option 1");
+                    options.add("Option 2");
+                    options.add("Option 3");
+                    options.add("Option 4");
+                }
+
+                String snippet = "";
+                if (qObj.has("code_snippet")) snippet = qObj.get("code_snippet").getAsString();
+                else if (qObj.has("codeSnippet")) snippet = qObj.get("codeSnippet").getAsString();
+                else if (qObj.has("snippet")) snippet = qObj.get("snippet").getAsString();
+                else if (qObj.has("code")) snippet = qObj.get("code").getAsString();
+
+                if (snippet == null || snippet.isEmpty()) {
+                    snippet = "// No code snippet provided";
+                }
+
+                String desc = "";
+                if (qObj.has("description")) desc = qObj.get("description").getAsString();
+                else if (qObj.has("question")) desc = qObj.get("question").getAsString();
+
+                if (desc == null || desc.isEmpty()) {
+                    desc = "What will be the output of the following code snippet?";
+                }
+
+                int correctAns = 0;
+                if (qObj.has("correct_answer")) correctAns = qObj.get("correct_answer").getAsInt();
+                else if (qObj.has("correctAnswer")) correctAns = qObj.get("correctAnswer").getAsInt();
+                else if (qObj.has("answer")) correctAns = qObj.get("answer").getAsInt();
+
+                int timeLimit = 15;
+                if (qObj.has("time_limit")) timeLimit = qObj.get("time_limit").getAsInt();
+                else if (qObj.has("timeLimit")) timeLimit = qObj.get("timeLimit").getAsInt();
+
                 GameQuestion question = new GameQuestion(
-                        q.optString("type", "mcq"),
-                        q.optString("title", "Code Challenge"),
-                        q.optString("code_snippet", "// No snippet provided"),
-                        q.optString("description", "What will be the output?"),
+                        qObj.has("type") ? qObj.get("type").getAsString() : "mcq",
+                        qObj.has("title") ? qObj.get("title").getAsString() : "Code Challenge",
+                        snippet,
+                        desc,
                         options,
-                        q.optInt("correct_answer", 0),
-                        q.optInt("time_limit", 15)
+                        correctAns,
+                        timeLimit
                 );
                 questionList.add(question);
             }
 
+            System.out.println("✅ Total questions loaded into game list: " + questionList.size());
             currentQuestionIndex = 0;
             userScore = 0;
-            updateScoreDisplay();
-            displayCurrentQuestion();
+
+            Platform.runLater(() -> {
+                updateScoreDisplay();
+                displayCurrentQuestion();
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -349,15 +432,19 @@ public class GameController {
     }
 
     private void displayCurrentQuestion() {
-        if (currentQuestionIndex >= questionList.size()) {
+        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
             finishMatch();
             return;
         }
 
         GameQuestion q = questionList.get(currentQuestionIndex);
 
-        if (questionNumberLabel != null) questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
-        if (questionTextLabel != null) questionTextLabel.setText(q.getDescription());
+        if (questionNumberLabel != null) {
+            questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
+        }
+        if (questionTextLabel != null) {
+            questionTextLabel.setText(q.getDescription());
+        }
 
         // Update Monaco Editor Snippet
         updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
@@ -367,11 +454,11 @@ public class GameController {
         List<String> opts = q.getOptions();
         resetOptionButtonStyles();
 
-        if (opts.size() >= 4) {
-            option1Btn.setText("A)  " + opts.get(0));
-            option2Btn.setText("B)  " + opts.get(1));
-            option3Btn.setText("C)  " + opts.get(2));
-            option4Btn.setText("D)  " + opts.get(3));
+        if (opts != null && !opts.isEmpty()) {
+            if (option1Btn != null) option1Btn.setText("A)  " + (opts.size() > 0 ? opts.get(0) : "Option 1"));
+            if (option2Btn != null) option2Btn.setText("B)  " + (opts.size() > 1 ? opts.get(1) : "Option 2"));
+            if (option3Btn != null) option3Btn.setText("C)  " + (opts.size() > 2 ? opts.get(2) : "Option 3"));
+            if (option4Btn != null) option4Btn.setText("D)  " + (opts.size() > 3 ? opts.get(3) : "Option 4"));
         }
 
         disableOptionButtons(false);
@@ -380,9 +467,6 @@ public class GameController {
 
     @FXML
     private void handleOptionClick(ActionEvent event) {
-        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
-            return;
-        }
         if (timer != null) timer.stop();
         disableOptionButtons(true);
 
@@ -446,8 +530,10 @@ public class GameController {
                     feedbackLabel.setText("⏰ Time Out!");
                 }
 
-                GameQuestion currentQ = questionList.get(currentQuestionIndex);
-                highlightCorrectOption(currentQ.getCorrectAnswer());
+                if (questionList != null && !questionList.isEmpty() && currentQuestionIndex < questionList.size()) {
+                    GameQuestion currentQ = questionList.get(currentQuestionIndex);
+                    highlightCorrectOption(currentQ.getCorrectAnswer());
+                }
 
                 sendProgressUpdate();
 
@@ -500,10 +586,10 @@ public class GameController {
 
     private void resetOptionButtonStyles() {
         String defaultStyle = "-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;";
-        option1Btn.setStyle(defaultStyle);
-        option2Btn.setStyle(defaultStyle);
-        option3Btn.setStyle(defaultStyle);
-        option4Btn.setStyle(defaultStyle);
+        if (option1Btn != null) option1Btn.setStyle(defaultStyle);
+        if (option2Btn != null) option2Btn.setStyle(defaultStyle);
+        if (option3Btn != null) option3Btn.setStyle(defaultStyle);
+        if (option4Btn != null) option4Btn.setStyle(defaultStyle);
     }
 
     private void disableOptionButtons(boolean disable) {
@@ -520,7 +606,9 @@ public class GameController {
 
     @FXML
     public void handleBack(ActionEvent event) {
-        if (timer != null) timer.stop();
+        if (timer != null) {
+            timer.stop();
+        }
         SceneManager.switchScene("MainLayoutView.fxml");
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().loadPage("GameModeView.fxml");

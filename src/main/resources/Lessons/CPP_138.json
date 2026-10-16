@@ -30,6 +30,7 @@
     {
       "slideId": "CPP_138_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Break-Based Termination",
       "prompt": "Fill in the condition check to break an infinite while loop.",
       "codeSnippet": "while (true) {\n    if (shouldExit()) ___; \n}",

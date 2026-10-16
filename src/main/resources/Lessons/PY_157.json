@@ -35,6 +35,7 @@
     {
       "slideId": "PYTH_157_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Decoding JWT Claims",
       "prompt": "Fill in the PyJWT method used to verify and decode access tokens.",
       "codeSnippet": "payload = jwt.___ (token, SECRET_KEY, algorithms=['HS256'])",
@@ -57,6 +58,7 @@
     {
       "slideId": "PYTH_157_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Rate Limiting Protection",
       "prompt": "Fill in the middleware term used to limit excessive client request rates to prevent DDoS attacks.",
       "codeSnippet": "app.add_middleware(RateLimitMiddleware, max_requests=___)",

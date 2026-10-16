@@ -13,6 +13,7 @@
     {
       "slideId": "PY_211_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Recursion Limit Inspection",
       "prompt": "Fill in the module function name used to retrieve Python's current maximum recursion depth.",
       "codeSnippet": "import sys\nprint(sys.___())",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_211_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Base Case Condition",
       "prompt": "Fill in the comparison operator to complete the base case condition for Countdown.",
       "codeSnippet": "def countdown(n):\n    if n ___ 0:\n        return\n    print(n)\n    countdown(n - 1)",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_211_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Modifying Recursion Limit",
       "prompt": "Fill in the sys module function name used to increase maximum recursion limit.",
       "codeSnippet": "import sys\nsys.___(2000)",

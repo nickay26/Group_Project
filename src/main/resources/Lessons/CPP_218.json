@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_218_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Class Template Instantiation Syntax",
       "prompt": "Fill in the type argument specifier required when instantiating a class template prior to C++17.",
       "codeSnippet": "Box___double> doubleBox(3.14);",
@@ -57,6 +58,7 @@
     {
       "slideId": "CPP_218_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Friend Templates Syntax",
       "prompt": "To grant a template function access to private members, declare it as a ___ template.",
       "codeSnippet": "template <typename U>\n___ void display(const Box<U>& b);",

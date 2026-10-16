@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_117_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C-Style Explicit Cast",
       "prompt": "Fill in the target type in parentheses for C-style cast.",
       "codeSnippet": "double pi = 3.14;\nint integerPi = (___)pi;",
@@ -47,6 +48,7 @@
     {
       "slideId": "CPP_117_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Char to Int Implicit Cast",
       "prompt": "Assigning 'A' to int results in its ASCII code. Complete the code.",
       "codeSnippet": "int code = 'A'; // code becomes ___",

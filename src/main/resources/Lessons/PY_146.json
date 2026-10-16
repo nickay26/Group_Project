@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_146_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Hashlib Module",
       "prompt": "Fill in the standard Python library used for secure hash algorithms.",
       "codeSnippet": "import ___",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_146_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Bcrypt Hashing",
       "prompt": "Fill in the function used to generate a secure salted password hash in bcrypt.",
       "codeSnippet": "hashed = bcrypt.___ (password, bcrypt.gensalt())",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_146_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Hex Digest",
       "prompt": "Fill in the method returning a digest string formatted in hexadecimal.",
       "codeSnippet": "digest_str = hash_obj.___ ()",

@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_161_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dynamic Allocation Operator",
       "prompt": "Fill in the keyword to dynamically allocate a single integer on heap.",
       "codeSnippet": "int* ptr = ___ int(50);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_161_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Array Dynamic Allocation",
       "prompt": "Fill in the operator to allocate dynamic array of 5 elements.",
       "codeSnippet": "double* arr = new double___;",

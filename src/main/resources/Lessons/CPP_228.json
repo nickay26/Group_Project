@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_228_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Finding Keys in Map",
       "prompt": "Fill in the function returning an iterator to a key, or end() if not found.",
       "codeSnippet": "auto it = myMap.___(\"Alice\");",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_228_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++17 map try_emplace",
       "prompt": "Fill in the C++17 method that prevents creating temporary objects if a key already exists.",
       "codeSnippet": "myMap.___(\"Key\", 100);",

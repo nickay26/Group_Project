@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_217_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Template Parameter Syntax",
       "prompt": "Fill in the keyword used to introduce a template parameter list.",
       "codeSnippet": "___ <typename T>\nvoid print(T val) {}",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_217_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Explicit Template Arguments",
       "prompt": "Fill in the syntax to explicitly pass type arguments when calling a function template.",
       "codeSnippet": "auto result = maxVal___int>(10, 20.5);",

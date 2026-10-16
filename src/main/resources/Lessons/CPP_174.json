@@ -21,6 +21,7 @@
     {
       "slideId": "CPP_174_S3",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Standard Output Stream",
       "prompt": "Fill in the standard stream object used to print output to the console.",
       "codeSnippet": "___ << \"Hello C++\";",
@@ -38,6 +39,7 @@
     {
       "slideId": "CPP_174_S5",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Constant Modifier",
       "prompt": "Fill in the keyword used to prevent a variable's value from being modified after declaration.",
       "codeSnippet": "___ double PI = 3.14159;",
@@ -106,6 +108,7 @@
     {
       "slideId": "CPP_174_S13",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "C++ String Concatenation",
       "prompt": "Fill in the operator used to join two std::string variables.",
       "codeSnippet": "string full = firstName ___ lastName;",

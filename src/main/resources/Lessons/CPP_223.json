@@ -57,6 +57,7 @@
     {
       "slideId": "CPP_223_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Concepts Header",
       "prompt": "Fill in the standard C++20 header file required for standard library concepts like std::integral.",
       "codeSnippet": "#include <___>",
@@ -79,6 +80,7 @@
     {
       "slideId": "CPP_223_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Combining Constraints Operator",
       "prompt": "Fill in the logical operator used to combine concepts in a requires clause.",
       "codeSnippet": "template <typename T>\nrequires std::integral<T> ___ std::signed_integral<T>\nvoid compute(T val) {}",

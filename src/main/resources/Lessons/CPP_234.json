@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_234_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Counting Elements",
       "prompt": "Fill in the algorithm function used to count occurrences of a value in a sequence.",
       "codeSnippet": "int c = std::___(v.begin(), v.end(), 2);",
@@ -35,6 +36,7 @@
     {
       "slideId": "CPP_234_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Checking All Conditions",
       "prompt": "Fill in the algorithm function returning true if a predicate evaluates to true for all elements in a range.",
       "codeSnippet": "bool allEven = std::___(v.begin(), v.end(), [](int x){ return x % 2 == 0; });",

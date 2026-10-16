@@ -13,6 +13,7 @@
     {
       "slideId": "PY_268_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Module Name for Subprocesses",
       "prompt": "Fill in the standard library module name used for process-based parallelism.",
       "codeSnippet": "import ___\n\nif __name__ == '__main__':\n    p = multiprocessing.Process(target=my_func)\n    p.start()",
@@ -35,6 +36,7 @@
     {
       "slideId": "PY_268_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Mapping Iterables over Pools",
       "prompt": "Fill in the `Pool` method used to apply a function across an iterable synchronously in parallel.",
       "codeSnippet": "with Pool() as pool:\n    outputs = pool.___(worker_fn, input_list)",
@@ -57,6 +59,7 @@
     {
       "slideId": "PY_268_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Asynchronous Pool Mapping",
       "prompt": "Fill in the non-blocking variant method of `map()` on a `Pool` object.",
       "codeSnippet": "with Pool() as p:\n    async_result = p.___(square_fn, [1, 2, 3])\n    res = async_result.get()",

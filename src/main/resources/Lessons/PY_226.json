@@ -22,6 +22,7 @@
     {
       "slideId": "PY_226_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Flattener using yield from",
       "prompt": "What will `list(flatten([[1, 2], [3, 4]]))` produce if `flatten` delegates each inner list via `yield from`?",
       "options": [
@@ -57,6 +58,7 @@
     {
       "slideId": "PY_226_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Capturing Subgenerator Return Syntax",
       "prompt": "Fill in the variable assignment operator used to capture subgenerator return value via yield from.",
       "codeSnippet": "def delegator():\n    result ___ yield from subgenerator()\n    print(result)",

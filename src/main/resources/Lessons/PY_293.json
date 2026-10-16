@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_293_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "NumPy Array Initialization",
       "prompt": "Fill in the function used to convert a standard Python list into a NumPy array.",
       "codeSnippet": "arr = np.___([1, 2, 3])",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_293_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "CSV File Ingestion",
       "prompt": "Fill in the Pandas function used to load tabular data from a CSV file into a DataFrame.",
       "codeSnippet": "df = pd.___(\"data.csv\")",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_293_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Handling Missing Data",
       "prompt": "Fill in the Pandas method used to remove missing/NaN values from a DataFrame.",
       "codeSnippet": "clean_df = df.___()",

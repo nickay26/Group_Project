@@ -11,6 +11,7 @@
     {
       "slideId": "PYTH_300_S3",
       "type": "MULTIPLE_CHOICE",
+    "interactive": true,
       "title": "Memory Optimization Keyword",
       "prompt": "Which attribute definition restricts dynamic instance attribute creation to conserve memory?",
       "options": ["__slots__", "__dict__", "__init__", "__space__"],
@@ -19,6 +20,7 @@
     {
       "slideId": "PYTH_300_S4",
       "type": "FILL_IN_BLANK",
+    "interactive": true,
       "title": "Asynchronous Task Gathering",
       "prompt": "Fill in the asyncio function used to run multiple concurrent awaitable tasks.",
       "codeSnippet": "results = await asyncio.___(*tasks)",

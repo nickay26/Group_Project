@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_123_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Regex Module Import",
       "prompt": "Fill in the standard module used for regular expressions in Python.",
       "codeSnippet": "import ___",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_123_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Search Method",
       "prompt": "Fill in the method that scans through a string for the first location where regex matches.",
       "codeSnippet": "result = re.___(\r\"\\w+\", \"Hello World\")",
@@ -47,6 +49,7 @@
     {
       "slideId": "PYTH_123_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Raw String Notation",
       "prompt": "Fill in the string prefix character recommended for regular expression patterns.",
       "codeSnippet": "pattern = ___\"\\d{3}-\\d{3}\"",

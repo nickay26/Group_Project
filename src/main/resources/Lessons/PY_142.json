@@ -13,6 +13,7 @@
     {
       "slideId": "PYTH_142_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Importing PyTorch",
       "prompt": "Fill in the module name imported to use PyTorch.",
       "codeSnippet": "import ___",
@@ -30,6 +31,7 @@
     {
       "slideId": "PYTH_142_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Automatic Differentiation",
       "prompt": "Fill in the method used to calculate gradients automatically during backpropagation.",
       "codeSnippet": "loss.___ ()",
@@ -48,6 +50,7 @@
       "slideId": "PYTH_142_S6",
       "type": "FILL_IN_BLANK",
       "title": "Optimizer Step",
+      "interactive": true,
       "prompt": "Fill in the method used to update weights after gradient computation.",
       "codeSnippet": "optimizer.___ ()",
       "options": ["step", "update", "apply", "run"],

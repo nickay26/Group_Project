@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_140_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "begin() Method Syntax",
       "prompt": "Fill in the method obtaining the iterator to the first element.",
       "codeSnippet": "auto it = container.___();",
@@ -30,6 +31,7 @@
     {
       "slideId": "CPP_140_S4",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Dereferencing Iterator",
       "prompt": "Fill in the operator to access the value pointed to by an iterator.",
       "codeSnippet": "std::cout << ___it;",
@@ -64,6 +66,7 @@
     {
       "slideId": "CPP_140_S8",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "erase() Return Value Pattern",
       "prompt": "Fill in method that returns a valid iterator after deleting an element during iteration.",
       "codeSnippet": "if (*it == target) {\n    it = vec.___(it);\n} else {\n    ++it;\n}",
