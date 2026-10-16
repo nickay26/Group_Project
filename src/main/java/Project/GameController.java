@@ -1,10 +1,13 @@
 package Project;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,38 +16,52 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.stream.JsonReader;
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
 
-    @FXML private Label challengeTitleLabel;
-    @FXML private Label progressLabel;
-    @FXML private Label questionNumberLabel;
-    @FXML private Label timerLabel;
-    @FXML private Label scoreLabel;
-    @FXML private Label questionTextLabel;
-    @FXML private Label feedbackLabel;
+    @FXML
+    private Label challengeTitleLabel;
+    @FXML
+    private Label progressLabel;
+    @FXML
+    private Label questionNumberLabel;
+    @FXML
+    private Label timerLabel;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private Label questionTextLabel;
+    @FXML
+    private Label feedbackLabel;
 
-    @FXML private WebView codeWebView; // ⭐ Monaco Editor WebView integration[cite: 10, 12]
+    @FXML
+    private WebView codeWebView;
     private WebEngine webEngine;
-    private boolean isEditorReady = false;
     private String pendingSnippet = "";
-    private String pendingLanguage = "python";
+    private String pendingLanguage = "cpp";
 
-    @FXML private Button option1Btn;
-    @FXML private Button option2Btn;
-    @FXML private Button option3Btn;
-    @FXML private Button option4Btn;
+    @FXML
+    private Button option1Btn;
+    @FXML
+    private Button option2Btn;
+    @FXML
+    private Button option3Btn;
+    @FXML
+    private Button option4Btn;
 
-    // ⭐ Result Overlay Dialog Components[cite: 11]
-    @FXML private VBox resultOverlay;
-    @FXML private Label resultTitleLabel;
-    @FXML private Label resultDescLabel;
-    @FXML private Label xpLabel;
+    @FXML
+    private VBox resultOverlay;
+    @FXML
+    private Label resultTitleLabel;
+    @FXML
+    private Label resultDescLabel;
+    @FXML
+    private Label xpLabel;
 
     private List<GameQuestion> questionList = new ArrayList<>();
     private int currentQuestionIndex = 0;
@@ -54,7 +71,6 @@ public class GameController {
     private Timeline timer;
     private String selectedLanguage = "Java (Basic)";
 
-    // Multiplayer Session Variables
     private String roomId;
     private String opponentId;
     private String currentUserId;
@@ -98,114 +114,62 @@ public class GameController {
 
         if (codeWebView != null) {
             webEngine = codeWebView.getEngine();
-            setupMonacoEditor();
+            loadCodeIntoWebView("// Connecting and waiting for match questions...");
         }
 
         attachGameWebSocketListener();
     }
 
     // ============================================
-    // MONACO EDITOR SETUP
+    // STABLE WEBVIEW CODE VIEWER
     // ============================================
-    private void setupMonacoEditor() {
-        String monacoHtml = """
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <style>
-                    html, body, #container { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #1e293b; }
-                </style>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-            </head>
-            <body>
-                <div id="container"></div>
-                <script>
-                    var editor;
-                    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' }});
-                    require(['vs/editor/editor.main'], function() {
-                        monaco.editor.defineTheme('navyTheme', {
-                            base: 'vs-dark',
-                            inherit: true,
-                            rules: [
-                                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
-                                { token: 'keyword', foreground: '38bdf8', fontStyle: 'bold' },
-                                { token: 'string', foreground: 'f43f5e' },
-                                { token: 'number', foreground: 'fbbf24' }
-                            ],
-                            colors: {
-                                'editor.background': '#1e293b',
-                                'editor.foreground': '#e2e8f0',
-                                'editor.lineHighlightBackground': '#334155',
-                                'editorLineNumber.foreground': '#475569',
-                                'editorLineNumber.activeForeground': '#38bdf8',
-                                'editorCursor.foreground': '#38bdf8'
-                            }
-                        });
+    private void loadCodeIntoWebView(String code) {
+        if (codeWebView == null) return;
+        if (webEngine == null) {
+            webEngine = codeWebView.getEngine();
+        }
 
-                        editor = monaco.editor.create(document.getElementById('container'), {
-                            value: '',
-                            language: 'java',
-                            theme: 'navyTheme',
-                            automaticLayout: true,
-                            fontSize: 13,
-                            readOnly: true,
-                            minimap: { enabled: false },
-                            scrollBeyondLastLine: false
-                        });
-                    });
+        String safeCode = (code != null && !code.isEmpty()) ? code : "// No code snippet provided";
 
-                    function setCode(code, language) {
-                        if (editor) {
-                            editor.setValue(code || '');
-                            if (language) {
-                                monaco.editor.setModelLanguage(editor.getModel(), language);
-                            }
+        String htmlContent = String.format("""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body {
+                            background-color: #1e293b;
+                            color: #38bdf8;
+                            font-family: Consolas, 'Courier New', monospace;
+                            font-size: 14px;
+                            margin: 0;
+                            padding: 16px;
+                            white-space: pre-wrap;
+                            word-wrap: break-word;
                         }
-                    }
-                </script>
-            </body>
-            </html>
-            """;
+                    </style>
+                </head>
+                <body>
+                    <pre><code id="codeBox">%s</code></pre>
+                </body>
+                </html>
+                """, safeCode.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
 
-        webEngine.loadContent(monacoHtml);
-
-        webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.SUCCEEDED) {
-                isEditorReady = true;
-                if (!pendingSnippet.isEmpty()) {
-                    applyCodeToEditor(pendingSnippet, pendingLanguage);
-                }
+        Platform.runLater(() -> {
+            if (webEngine != null) {
+                webEngine.loadContent(htmlContent);
             }
         });
-    }
-
-    private void applyCodeToEditor(String code, String language) {
-        String monacoLang = mapToMonacoLanguage(language);
-        String escapedCode = JSONObject.quote(code != null ? code : "");
-        String script = String.format("setCode(%s, '%s');", escapedCode, monacoLang);
-        webEngine.executeScript(script);
-    }
-
-    private String mapToMonacoLanguage(String lang) {
-        if (lang == null) return "plaintext";
-        String l = lang.trim().toLowerCase();
-        if (l.contains("cpp") || l.contains("c++")) return "cpp";
-        if (l.contains("python")) return "python";
-        if (l.contains("java")) return "java";
-        return "plaintext";
     }
 
     private void updateMonacoSnippet(String code, String language) {
         this.pendingSnippet = code != null ? code : "";
         this.pendingLanguage = language;
-        if (isEditorReady) {
-            applyCodeToEditor(pendingSnippet, pendingLanguage);
-        }
+        loadCodeIntoWebView(this.pendingSnippet);
     }
 
     // ============================================
-    // WEBSOCKET & GAME LISTENERS[cite: 11]
+    // WEBSOCKET & GAME LISTENERS
     // ============================================
     private void attachGameWebSocketListener() {
         WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
@@ -286,80 +250,164 @@ public class GameController {
         });
     }
 
+    // ============================================
+    // ROBUST GSON PARSER FOR QUESTIONS
+    // ============================================
     public void loadQuestionsFromJson(String jsonResponse) {
         if (jsonResponse == null || jsonResponse.trim().isEmpty()) {
+            System.err.println("❌ JSON Response is null or empty!");
             handleLoadingFailure();
             return;
         }
 
         try {
             questionList.clear();
-            String cleanJson = jsonResponse.trim();
-            JSONArray array = null;
+            String raw = jsonResponse.trim().replace('\u00a0', ' ');
+            System.out.println("📥 Raw JSON received length: " + raw.length());
 
-            if (cleanJson.startsWith("[")) {
-                array = new JSONArray(cleanJson);
-            } else if (cleanJson.startsWith("{")) {
-                JSONObject obj = new JSONObject(cleanJson);
-                if (obj.has("questions")) {
-                    Object qObj = obj.get("questions");
-                    if (qObj instanceof String) {
-                        array = new JSONArray((String) qObj);
-                    } else if (qObj instanceof JSONArray) {
-                        array = (JSONArray) qObj;
+            JsonArray qArray = null;
+            JsonElement rootElement = JsonParser.parseString(raw);
+
+            if (rootElement.isJsonObject()) {
+                JsonObject rootObj = rootElement.getAsJsonObject();
+                if (rootObj.has("questions")) {
+                    JsonElement qEl = rootObj.get("questions");
+                    if (qEl.isJsonArray()) {
+                        qArray = qEl.getAsJsonArray();
+                    } else if (qEl.isJsonPrimitive()) {
+                        String innerStr = qEl.getAsString();
+                        System.out.println("🔍 Parsing inner string questions with lenient reader...");
+                        try {
+                            JsonReader reader = new JsonReader(new StringReader(innerStr));
+                            reader.setLenient(true);
+                            JsonElement innerEl = JsonParser.parseReader(reader);
+                            if (innerEl.isJsonArray()) {
+                                qArray = innerEl.getAsJsonArray();
+                            }
+                        } catch (Exception e2) {
+                            System.err.println("⚠️ Lenient parse failed, trying fallback: " + e2.getMessage());
+                            String fixedStr = innerStr.replace("\\n", "\n").replace("\\\"", "\"").replace("\\\\", "\\");
+                            JsonReader reader2 = new JsonReader(new StringReader(fixedStr));
+                            reader2.setLenient(true);
+                            qArray = JsonParser.parseReader(reader2).getAsJsonArray();
+                        }
                     }
                 }
+            } else if (rootElement.isJsonArray()) {
+                qArray = rootElement.getAsJsonArray();
             }
 
-            if (array == null || array.length() == 0) {
+            if (qArray == null || qArray.size() == 0) {
+                System.err.println("❌ Parsed JsonArray is null or empty!");
                 handleLoadingFailure();
                 return;
             }
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject q = array.getJSONObject(i);
+            System.out.println("✅ Successfully parsed " + qArray.size() + " questions via Gson Lenient Parser!");
+
+            for (JsonElement el : qArray) {
+                JsonObject qObj = el.getAsJsonObject();
 
                 List<String> options = new ArrayList<>();
-                JSONArray optArr = q.getJSONArray("options");
-                for (int j = 0; j < optArr.length(); j++) {
-                    options.add(optArr.getString(j));
+                JsonElement optEl = null;
+                if (qObj.has("options")) optEl = qObj.get("options");
+                else if (qObj.has("choices")) optEl = qObj.get("choices");
+                else if (qObj.has("answers")) optEl = qObj.get("answers");
+
+                if (optEl != null) {
+                    if (optEl.isJsonArray()) {
+                        for (JsonElement o : optEl.getAsJsonArray()) {
+                            options.add(o.getAsString());
+                        }
+                    } else if (optEl.isJsonPrimitive()) {
+                        try {
+                            String optStr = optEl.getAsString();
+                            JsonReader optReader = new JsonReader(new StringReader(optStr));
+                            optReader.setLenient(true);
+                            JsonArray parsedOptArr = JsonParser.parseReader(optReader).getAsJsonArray();
+                            for (JsonElement o : parsedOptArr) {
+                                options.add(o.getAsString());
+                            }
+                        } catch (Exception ignored) {}
+                    }
                 }
 
+                if (options.isEmpty()) {
+                    options.add("Option 1");
+                    options.add("Option 2");
+                    options.add("Option 3");
+                    options.add("Option 4");
+                }
+
+                String snippet = "";
+                if (qObj.has("code_snippet")) snippet = qObj.get("code_snippet").getAsString();
+                else if (qObj.has("codeSnippet")) snippet = qObj.get("codeSnippet").getAsString();
+                else if (qObj.has("snippet")) snippet = qObj.get("snippet").getAsString();
+                else if (qObj.has("code")) snippet = qObj.get("code").getAsString();
+
+                if (snippet == null || snippet.isEmpty()) {
+                    snippet = "// No code snippet provided";
+                }
+
+                String desc = "";
+                if (qObj.has("description")) desc = qObj.get("description").getAsString();
+                else if (qObj.has("question")) desc = qObj.get("question").getAsString();
+
+                if (desc == null || desc.isEmpty()) {
+                    desc = "What will be the output of the following code snippet?";
+                }
+
+                int correctAns = 0;
+                if (qObj.has("correct_answer")) correctAns = qObj.get("correct_answer").getAsInt();
+                else if (qObj.has("correctAnswer")) correctAns = qObj.get("correctAnswer").getAsInt();
+                else if (qObj.has("answer")) correctAns = qObj.get("answer").getAsInt();
+
+                int timeLimit = 15;
+                if (qObj.has("time_limit")) timeLimit = qObj.get("time_limit").getAsInt();
+                else if (qObj.has("timeLimit")) timeLimit = qObj.get("timeLimit").getAsInt();
+
                 GameQuestion question = new GameQuestion(
-                        q.optString("type", "mcq"),
-                        q.optString("title", "Code Challenge"),
-                        q.optString("code_snippet", "// No snippet provided"),
-                        q.optString("description", "What will be the output?"),
+                        qObj.has("type") ? qObj.get("type").getAsString() : "mcq",
+                        qObj.has("title") ? qObj.get("title").getAsString() : "Code Challenge",
+                        snippet,
+                        desc,
                         options,
-                        q.optInt("correct_answer", 0),
-                        q.optInt("time_limit", 15)
+                        correctAns,
+                        timeLimit
                 );
                 questionList.add(question);
             }
 
+            System.out.println("✅ Total questions loaded into game list: " + questionList.size());
             currentQuestionIndex = 0;
             userScore = 0;
-            updateScoreDisplay();
-            displayCurrentQuestion();
+
+            Platform.runLater(() -> {
+                updateScoreDisplay();
+                displayCurrentQuestion();
+            });
 
         } catch (Exception e) {
+            System.err.println("❌ Critical Gson JSON Parsing Error: " + e.getMessage());
             e.printStackTrace();
             handleLoadingFailure();
         }
     }
-
     private void displayCurrentQuestion() {
-        if (currentQuestionIndex >= questionList.size()) {
+        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
             finishMatch();
             return;
         }
 
         GameQuestion q = questionList.get(currentQuestionIndex);
 
-        if (questionNumberLabel != null) questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
-        if (questionTextLabel != null) questionTextLabel.setText(q.getDescription());
+        if (questionNumberLabel != null) {
+            questionNumberLabel.setText("QUESTION " + (currentQuestionIndex + 1) + " / " + questionList.size());
+        }
+        if (questionTextLabel != null) {
+            questionTextLabel.setText(q.getDescription());
+        }
 
-        // Update Monaco Editor Snippet
         updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
 
         if (feedbackLabel != null) feedbackLabel.setText("");
@@ -367,11 +415,11 @@ public class GameController {
         List<String> opts = q.getOptions();
         resetOptionButtonStyles();
 
-        if (opts.size() >= 4) {
-            option1Btn.setText("A)  " + opts.get(0));
-            option2Btn.setText("B)  " + opts.get(1));
-            option3Btn.setText("C)  " + opts.get(2));
-            option4Btn.setText("D)  " + opts.get(3));
+        if (opts != null && !opts.isEmpty()) {
+            if (option1Btn != null) option1Btn.setText("A)  " + (opts.size() > 0 ? opts.get(0) : "Option 1"));
+            if (option2Btn != null) option2Btn.setText("B)  " + (opts.size() > 1 ? opts.get(1) : "Option 2"));
+            if (option3Btn != null) option3Btn.setText("C)  " + (opts.size() > 2 ? opts.get(2) : "Option 3"));
+            if (option4Btn != null) option4Btn.setText("D)  " + (opts.size() > 3 ? opts.get(3) : "Option 4"));
         }
 
         disableOptionButtons(false);
@@ -380,6 +428,10 @@ public class GameController {
 
     @FXML
     private void handleOptionClick(ActionEvent event) {
+        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
+            return;
+        }
+
         if (timer != null) timer.stop();
         disableOptionButtons(true);
 
@@ -443,8 +495,10 @@ public class GameController {
                     feedbackLabel.setText("⏰ Time Out!");
                 }
 
-                GameQuestion currentQ = questionList.get(currentQuestionIndex);
-                highlightCorrectOption(currentQ.getCorrectAnswer());
+                if (questionList != null && !questionList.isEmpty() && currentQuestionIndex < questionList.size()) {
+                    GameQuestion currentQ = questionList.get(currentQuestionIndex);
+                    highlightCorrectOption(currentQ.getCorrectAnswer());
+                }
 
                 sendProgressUpdate();
 
@@ -497,10 +551,10 @@ public class GameController {
 
     private void resetOptionButtonStyles() {
         String defaultStyle = "-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand; -fx-alignment: CENTER-LEFT; -fx-padding: 0 16;";
-        option1Btn.setStyle(defaultStyle);
-        option2Btn.setStyle(defaultStyle);
-        option3Btn.setStyle(defaultStyle);
-        option4Btn.setStyle(defaultStyle);
+        if (option1Btn != null) option1Btn.setStyle(defaultStyle);
+        if (option2Btn != null) option2Btn.setStyle(defaultStyle);
+        if (option3Btn != null) option3Btn.setStyle(defaultStyle);
+        if (option4Btn != null) option4Btn.setStyle(defaultStyle);
     }
 
     private void disableOptionButtons(boolean disable) {
@@ -517,7 +571,9 @@ public class GameController {
 
     @FXML
     public void handleBack(ActionEvent event) {
-        if (timer != null) timer.stop();
+        if (timer != null) {
+            timer.stop();
+        }
         SceneManager.switchScene("MainLayoutView.fxml");
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().loadPage("GameModeView.fxml");
