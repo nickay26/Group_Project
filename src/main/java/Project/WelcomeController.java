@@ -206,18 +206,29 @@ public class WelcomeController implements Initializable {
             return;
         }
 
-        // DatabaseManager ရှိ API registerUser ကို တိုက်ရိုက် ခေါ်သုံးခြင်း
+        if (!ValidationUtils.isValidUsername(username)) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Username", "Username must be at least 3 characters long.");
+            usernameField.requestFocus();
+            return;
+        }
+
+        if (!ValidationUtils.isValidEmail(email)) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Email", "Please enter a valid email address (e.g., user@example.com).");
+            emailField.requestFocus();
+            return;
+        }
+
+        if (!ValidationUtils.isValidPassword(password)) {
+            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be at least 6 characters long.");
+            passwordField.requestFocus();
+            return;
+        }
+
         User registeredUser = DatabaseManager.registerUser(username, email, password);
 
         if (registeredUser != null) {
             UserSession.initSession(registeredUser);
-
-            // Overview (Java/CPP) မှ လာခဲ့ခြင်း ဟုတ်/မဟုတ် စစ်ဆေး၍ ရောက်ရှိမည့် View ကို ခွဲခြားခြင်း
-            if (UserSession.isRedirectedFromOverview()) {
-                SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
-            } else {
-                SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
-            }
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
         }
@@ -242,9 +253,9 @@ public class WelcomeController implements Initializable {
 
                         // Google Sign-Up အောင်မြင်ပြီးနောက် Overview မှ လာလျှင် MainLayout (Learn Screen) သို့ ပို့ပေးခြင်း
                         if (UserSession.isRedirectedFromOverview()) {
-                            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
                         } else {
-                            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
                         }
                     } else {
                         showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
@@ -265,17 +276,17 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleJavaCard() {
-        SceneManager.switchScene("JavaOverviewView.fxml", "Sodex Platform - Java Overview");
+        SceneManager.switchScene("JavaOverviewView.fxml", "Sodexa Platform - Java Overview");
     }
 
     @FXML
     private void handleCppCard() {
-        SceneManager.switchScene("CppOverviewView.fxml", "Sodex Platform - C++ Overview");
+        SceneManager.switchScene("CppOverviewView.fxml", "Sodexa Platform - C++ Overview");
     }
 
     @FXML
     private void handlePythonCard() {
-        SceneManager.switchScene("PythonOverviewView.fxml", "Sodex Platform - Python Overview");
+        SceneManager.switchScene("PythonOverviewView.fxml", "Sodexa Platform - Python Overview");
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

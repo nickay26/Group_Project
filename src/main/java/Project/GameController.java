@@ -380,6 +380,9 @@ public class GameController {
 
     @FXML
     private void handleOptionClick(ActionEvent event) {
+        if (questionList == null || questionList.isEmpty() || currentQuestionIndex >= questionList.size()) {
+            return;
+        }
         if (timer != null) timer.stop();
         disableOptionButtons(true);
 

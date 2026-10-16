@@ -51,6 +51,7 @@
       "slideId": "JAVA_107_S6",
       "type": "FILL_IN_BLANK",
       "title": "String Concatenation",
+      "Interactive": "true",
       "prompt": "Complete the code to output \"53\".",
       "codeSnippet": "System.out.println(\"5\" __ 3);",
       "options": ["+", "-", "*", "/"],

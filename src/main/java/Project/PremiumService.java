@@ -10,20 +10,29 @@ public class PremiumService {
 
     public static boolean isPremium(User user) {
         if (user == null) return false;
+
+        // 1. boolean flag စစ်
         if (user.isPremium()) return true;
 
+        // 2. Plan Type စစ် — PREMIUM_MONTHLY / PREMIUM_YEARLY
         String planType = user.getPlanType();
-        if (planType != null && "PREMIUM".equalsIgnoreCase(planType)) return true;
+        if (planType != null) {
+            String upper = planType.toUpperCase();
+            if (upper.startsWith("PREMIUM")) return true;
+            if (upper.equals("PREMIUM")) return true;
+        }
 
+        // 3. Subscription Type စစ် (ရှိရင်)
         String subType = user.getSubscriptionType();
         if (subType != null) {
-            if ("monthly".equalsIgnoreCase(subType)) return true;
-            if ("yearly".equalsIgnoreCase(subType)) return true;
+            String lower = subType.toLowerCase();
+            if (lower.contains("monthly")) return true;
+            if (lower.contains("yearly")) return true;
+            if (lower.contains("premium")) return true;
         }
 
         return false;
     }
-
     public static String getBrainDisplay(User user) {
         if (user == null) return "0";
         if (isPremium(user)) return "∞";

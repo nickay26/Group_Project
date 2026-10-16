@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_239",
+  "title": "Advanced Typing: Callables, Generics & TypeVar",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_239_S1",
+      "type": "CONCEPT",
+      "title": "Callables, Generics, and TypeVar",
+      "prompt": "`Callable[[ParamTypes], ReturnType]` annotates functions passed as arguments. `TypeVar` creates generic type variables that preserve relationships between function arguments and return types.",
+      "codeSnippet": "from collections.abc import Callable\nfrom typing import TypeVar\n\nT = TypeVar('T')\n\ndef first_item(items: list[T]) -> T:\n    return items[0]\n\ndef execute(func: Callable[[int, int], str], x: int, y: int) -> str:\n    return func(x, y)"
+    },
+    {
+      "slideId": "PY_239_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "TypeVar Declaration Import",
+      "prompt": "Fill in the construct imported from typing to instantiate a generic type variable.",
+      "codeSnippet": "from typing import ___\n\nT = TypeVar('T')",
+      "options": ["TypeVar", "Generic", "Var", "TypeVariable"],
+      "correctAnswer": "TypeVar"
+    },
+    {
+      "slideId": "PY_239_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Callable Type Hint Signature",
+      "prompt": "How do you annotate a function parameter `callback` that accepts a `str` and `int` and returns a `bool`?",
+      "options": [
+        "Callable[[str, int], bool]",
+        "Callable(str, int) -> bool",
+        "Callable[[str, int] -> bool]",
+        "Function[str, int, bool]"
+      ],
+      "correctAnswer": "Callable[[str, int], bool]"
+    },
+    {
+      "slideId": "PY_239_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Generic Class Inheriting Syntax",
+      "prompt": "Fill in the base class from typing used to define a custom generic container class.",
+      "codeSnippet": "from typing import Generic, TypeVar\n\nT = TypeVar('T')\n\nclass Stack(___[T]):\n    pass",
+      "options": ["Generic", "TypeVar", "Container", "Template"],
+      "correctAnswer": "Generic"
+    },
+    {
+      "slideId": "PY_239_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Bounded TypeVar Constraints",
+      "prompt": "How do you constrain a `TypeVar` named `T` so that it accepts only numeric types (`int` or `float`)?",
+      "options": [
+        "TypeVar('T', int, float)",
+        "TypeVar('T', bound=int | float)",
+        "TypeVar('T', types=[int, float])",
+        "TypeVar('T', constraint=(int, float))"
+      ],
+      "correctAnswer": "TypeVar('T', int, float)"
+    },
+    {
+      "slideId": "PY_239_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Callable Arbitrary Arguments Notation",
+      "prompt": "Fill in the ellipse marker used in Callable to accept any number/type of arguments: `Callable[___, ReturnType]`.",
+      "codeSnippet": "from collections.abc import Callable\n\nfunc: Callable[..., int]",
+      "options": ["...", "*args", "Any", "None"],
+      "correctAnswer": "..."
+    },
+    {
+      "slideId": "PY_239_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "TypeVar Upper Bound Keyword",
+      "prompt": "Which keyword argument in `TypeVar` specifies that a type variable must be a subclass of a specific base class?",
+      "options": [
+        "bound",
+        "subclass_of",
+        "parent",
+        "inherits"
+      ],
+      "correctAnswer": "bound"
+    }
+  ]
+}

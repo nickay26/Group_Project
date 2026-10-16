@@ -59,7 +59,7 @@
                 <StackPane VBox.vgrow="ALWAYS">
                     <children>
                         <!-- 1. DASHBOARD VIEW INCLUDE -->
-                        <fx:include fx:id="dashboardView" source="AdminDashboard.fxml" />
+                        <fx:include fx:id="dashboardView" source="AdminDashboard.fxml" visible="false" />
                         <!-- 2. MANAGE QUESTIONS VIEW INCLUDE -->
                         <fx:include fx:id="manageQuestionsView" source="ManageQuestionsView.fxml" visible="false" />
                         <!-- ✅ 3. MANAGE PRACTICE VIEW (အသစ်) -->

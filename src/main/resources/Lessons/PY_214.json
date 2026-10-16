@@ -1,0 +1,80 @@
+{
+  "lessonId": "PY_214",
+  "title": "Functional Programming: Pattern Matching & Declarative Style",
+  "isPremium": false,
+  "slides": [
+    {
+      "slideId": "PY_214_S1",
+      "type": "CONCEPT",
+      "title": "Structural Pattern Matching (match/case)",
+      "prompt": "Python 3.10 introduced structural pattern matching (`match`/`case`), allowing functional-style data decomposition and branching based on structure rather than verbose if-else ladders.",
+      "codeSnippet": "def process_command(command):\n    match command.split():\n        case [\"quit\"]:\n            return \"Exiting\"\n        case [\"go\", direction]:\n            return f\"Heading {direction}\"\n        case _:\n            return \"Unknown command\""
+    },
+    {
+      "slideId": "PY_214_S2",
+      "type": "FILL_IN_BLANK",
+      "title": "Pattern Matching Wildcard",
+      "prompt": "Fill in the wildcard pattern symbol used as a default case matching anything.",
+      "codeSnippet": "match point:\n    case (0, 0): print(\"Origin\")\n    case ___: print(\"Elsewhere\")",
+      "options": ["_", "*", "default", "else"],
+      "correctAnswer": "_"
+    },
+    {
+      "slideId": "PY_214_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Guards in Structural Pattern Matching",
+      "prompt": "How do you add an extra condition (guard) to a 'case' statement in Python structural pattern matching?",
+      "options": [
+        "By appending an 'if' clause to the case (e.g., case [x, y] if x == y:)",
+        "By placing a nested try-except inside the match block",
+        "By using the 'when' keyword",
+        "By wrapping the case in a lambda expression"
+      ],
+      "correctAnswer": "By appending an 'if' clause to the case (e.g., case [x, y] if x == y:)"
+    },
+    {
+      "slideId": "PY_214_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Matching Class Instances",
+      "prompt": "Fill in the match keyword used to evaluate against variable patterns.",
+      "codeSnippet": "___ status_code:\n    case 200: print(\"OK\")\n    case 404: print(\"Not Found\")",
+      "options": ["match", "switch", "select", "check"],
+      "correctAnswer": "match"
+    },
+    {
+      "slideId": "PY_214_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Imperative vs Declarative Style",
+      "prompt": "Which statement describes the core focus of Declarative (Functional) programming style?",
+      "options": [
+        "Focusing on 'what' to transform rather than explicit step-by-step state modifications ('how')",
+        "Focusing on mutating global object properties sequentially inside loops",
+        "Writing code without function definitions or parameters",
+        "Relying entirely on compile-time type casting"
+      ],
+      "correctAnswer": "Focusing on 'what' to transform rather than explicit step-by-step state modifications ('how')"
+    },
+    {
+      "slideId": "PY_214_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Pattern Matching Sequence Unpacking",
+      "prompt": "Fill in the rest parameter operator used inside case patterns to match variable-length sequences.",
+      "codeSnippet": "match items:\n    case [first, ___rest]:\n        print(first, rest)",
+      "options": ["*", "**", "...", "_"],
+      "correctAnswer": "*"
+    },
+    {
+      "slideId": "PY_214_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Combining Patterns with OR Operator",
+      "prompt": "Which operator is used to combine multiple alternative patterns within a single 'case' statement?",
+      "options": [
+        "| (Pipe operator)",
+        "or keyword",
+        "|| (Double pipe)",
+        ", (Comma)"
+      ],
+      "correctAnswer": "| (Pipe operator)"
+    }
+  ]
+}

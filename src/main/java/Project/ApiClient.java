@@ -516,4 +516,40 @@ public class ApiClient {
                     return null;
                 });
     }
+
+    // ==========================================
+    // 14. CERTIFICATE SYSTEM (ASYNC)
+    // ==========================================
+    public static CompletableFuture<String> checkAndIssueCertificateAsync(int userId, String courseId) {
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
+        body.put("course_id", courseId);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/certificates/check"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Check Certificate Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    public static CompletableFuture<String> getUserCertificatesAsync(int userId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/" + userId + "/certificates"))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Get User Certificates Error: " + ex.getMessage());
+                    return null;
+                });
+    }
 }

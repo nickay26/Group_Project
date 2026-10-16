@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -561,35 +562,40 @@ public class ProfileViewController {
         int userId = UserSession.getUserId();
         List<Course> courseList = DatabaseManager.getCoursesForUser(userId);
 
-        if (courseList == null || courseList.isEmpty()) {
-            Label empty = new Label("No courses available.");
-            empty.setStyle("-fx-text-fill: #94A3B8; -fx-padding: 20;");
-            coursesProgressContainer.add(empty, 0, 0);
-            return;
-        }
+        // Update UI back on JavaFX Application Thread
+        Platform.runLater(() -> {
+            coursesProgressContainer.getChildren().clear();
 
-        int col = 0;
-        int row = 0;
-
-        for (Course course : courseList) {
-            int percent = course.getProgressPercent();
-
-            StackPane item = createCourseItem(
-                    course.getCourseId(),
-                    course.getTitle(),
-                    course.getLanguage(),
-                    getCourseColor(course.getLanguage()),
-                    percent
-            );
-
-            coursesProgressContainer.add(item, col, row);
-
-            col++;
-            if (col == 2) {
-                col = 0;
-                row++;
+            if (courseList == null || courseList.isEmpty()) {
+                Label empty = new Label("No courses available.");
+                empty.setStyle("-fx-text-fill: #94A3B8; -fx-padding: 20;");
+                coursesProgressContainer.add(empty, 0, 0);
+                return;
             }
-        }
+
+            int col = 0;
+            int row = 0;
+
+            for (Course course : courseList) {
+                int percent = course.getProgressPercent();
+
+                StackPane item = createCourseItem(
+                        course.getCourseId(),
+                        course.getTitle(),
+                        course.getLanguage(),
+                        getCourseColor(course.getLanguage()),
+                        percent
+                );
+
+                coursesProgressContainer.add(item, col, row);
+
+                col++;
+                if (col == 2) {
+                    col = 0;
+                    row++;
+                }
+            }
+        });
     }
 
     private String getCourseColor(String language) {
@@ -605,7 +611,7 @@ public class ProfileViewController {
     }
 
     // ============================================
-    // CREATE COURSE ITEM (ကတ်ပြားအလိုက် နေရာတိကျစွာ ချိန်ညှိပြီး)
+    // CREATE COURSE ITEM
     // ============================================
     private StackPane createCourseItem(String courseId, String title, String language, String color, int progressPercent) {
         String cardFile = getCardImageName(courseId);
@@ -625,60 +631,18 @@ public class ProfileViewController {
             System.out.println("Card not found: " + cardFile);
         }
 
-        // ✅ Circular Progress (ညာဘက်ခြမ်း)
         StackPane progressCircle = createCircularProgressForCard(progressPercent, courseId);
 
-        // ✅ Status Label (Start, In Progress, Completed)
-        String statusText;
-        String statusStyle;
-
-        if (progressPercent <= 0) {
-            statusText = "Start";
-            statusStyle = "-fx-background-color: #334155; -fx-text-fill: #94A3B8; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
-        } else if (progressPercent < 100) {
-            statusText = "In Progress";
-            statusStyle = "-fx-background-color: #064E3B; -fx-text-fill: #34D399; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
-        } else {
-            statusText = "Completed";
-            statusStyle = "-fx-background-color: #1E3A8A; -fx-text-fill: #60A5FA; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10;";
-        }
-
-        Label statusLabel = new Label(statusText);
-        statusLabel.setStyle(statusStyle);
-        statusLabel.setMouseTransparent(true);
-
-        Pane contentPane = new Pane();
-        contentPane.setPrefSize(400, 130);
-        contentPane.setMinSize(400, 130);
-        contentPane.setMaxSize(400, 130);
-        contentPane.setMouseTransparent(true);
-
-        // ✅ courseId အလိုက် Status ဘတ်ဂျက်၏ Y တန်ဖိုးကို ကတ်ပုံစံနှင့်အညီ သီးသန့် ချိန်ညှိခြင်း
-        double statusY = 92; // Default (Java Basic ကဲ့သို့ အဆင်ပြေသောနေရာ)
-        String upperCourseId = courseId != null ? courseId.toUpperCase() : "";
-
-        if (upperCourseId.contains("CPP") || upperCourseId.contains("C++")) {
-            statusY = 98; // C++ ကတ်များအတွက် အနည်းငယ်အောက်သို့ ချရန်
-        } else if (upperCourseId.contains("PYTHON") || upperCourseId.contains("PY")) {
-            statusY = 85; // Python ကတ်များအတွက် အနည်းငယ်အပေါ်သို့ တိုးရန်
-        } else if (upperCourseId.contains("JAVA")) {
-            statusY = 92; // Java ကတ်များအတွက် (အဆင်ပြေပြီးသား နေရာ)
-        }
-
-        statusLabel.setLayoutX(115);
-        statusLabel.setLayoutY(statusY);
-
-        progressCircle.setLayoutX(320);
-        progressCircle.setLayoutY(38);
-
-        contentPane.getChildren().addAll(statusLabel, progressCircle);
+        StackPane.setAlignment(progressCircle, Pos.CENTER_RIGHT);
+        progressCircle.setTranslateX(-20);
+        progressCircle.setTranslateY(-5);
+        progressCircle.setMouseTransparent(true);
 
         StackPane cardContainer = new StackPane();
         cardContainer.setPrefSize(400, 130);
         cardContainer.setMinSize(400, 130);
         cardContainer.setMaxSize(400, 130);
-
-        cardContainer.getChildren().addAll(cardImage, contentPane);
+        cardContainer.getChildren().addAll(cardImage, progressCircle);
 
         return cardContainer;
     }
@@ -702,8 +666,8 @@ public class ProfileViewController {
         return "default.png";
     }
 
-    /// ============================================
-    // ✅ CIRCULAR PROGRESS (အပြီးသတ် ပြင်ဆင်ချက်)
+    // ============================================
+    // ✅ CIRCULAR PROGRESS
     // ============================================
     private StackPane createCircularProgressForCard(int percent, String courseId) {
         double radius = 22;
@@ -712,46 +676,31 @@ public class ProfileViewController {
         String darkerColor = getCardDarkerColor(courseId);
         String lighterColor = getCardLighterColor(courseId);
 
-        // ✅ Background Circle — Track (အနောက်ခံ မီးခိုးရောင်အဝိုင်း)
-        Circle bgCircle = new Circle(radius, radius, radius);
-        bgCircle.setFill(Color.TRANSPARENT);
+        Circle bgCircle = new Circle(radius);
+        bgCircle.setFill(Color.web(darkerColor, 0.9));
         bgCircle.setStroke(Color.web("#E2E8F0"));
         bgCircle.setStrokeWidth(strokeWidth);
 
-        // ✅ Progress Arc — safe percent (100 မကျော်ရန်)
-        int safePercent = Math.min(percent, 100);
-        double arcLength = -safePercent * 3.6;
-
-        // centerX နှင့် centerY ကို radius တန်ဖိုးအတိုင်း ထည့်ပေးခြင်းဖြင့် ဘောင်ပေါ်တွင် တိကျစွာ ပေါ်စေရန်
-        Arc progressArc = new Arc(radius, radius, radius, radius, 90, arcLength);
+        double arcLength = -percent * 3.6;
+        Arc progressArc = new Arc(0, 0, radius, radius, 90, arcLength);
         progressArc.setType(ArcType.OPEN);
         progressArc.setFill(Color.TRANSPARENT);
         progressArc.setStroke(Color.web(lighterColor));
         progressArc.setStrokeWidth(strokeWidth);
-        progressArc.setStrokeLineCap(StrokeLineCap.ROUND); // အနားသတ် ဝိုင့်ဝိုင်းလေးဖြစ်ရန်
+        progressArc.setStrokeLineCap(StrokeLineCap.ROUND);
 
-        // ✅ ဤ Pane သည် background နှင့် arc နှစ်ခုစလုံးကို အရွယ်အစား တူညီစွာ တစေးတည်း ထိန်းပေးပါမည်
-        Pane canvas = new Pane();
-        canvas.setPrefSize(radius * 2, radius * 2);
-        canvas.setMinSize(radius * 2, radius * 2);
-        canvas.setMaxSize(radius * 2, radius * 2);
-        canvas.getChildren().addAll(bgCircle, progressArc);
-
-        // ✅ Label (ရာခိုင်နှုန်း စာသား)
-        Label percentLabel = new Label(safePercent + "%");
+        Label percentLabel = new Label(percent + "%");
         percentLabel.setStyle(
-                "-fx-font-size: 11px; -fx-font-weight: bold; " +
+                "-fx-font-size: 12px; -fx-font-weight: bold; " +
                         "-fx-text-fill: white;"
         );
 
         StackPane stack = new StackPane();
-        double totalSize = radius * 2 + strokeWidth;
-        stack.setPrefSize(totalSize, totalSize);
-        stack.setMinSize(totalSize, totalSize);
-        stack.setMaxSize(totalSize, totalSize);
+        stack.setPrefSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
+        stack.setMinSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
+        stack.setMaxSize(radius * 2 + strokeWidth, radius * 2 + strokeWidth);
 
-        // ✅ Canvas (စက်ဝိုင်းပုံများ) နှင့် Label (စာသား) ကို တစ်ထပ်တည်း ထည့်ခြင်း
-        stack.getChildren().addAll(canvas, percentLabel);
+        stack.getChildren().addAll(bgCircle, progressArc, percentLabel);
         stack.setAlignment(Pos.CENTER);
 
         return stack;

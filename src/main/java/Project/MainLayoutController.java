@@ -10,6 +10,8 @@ import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -22,6 +24,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 public class MainLayoutController {
 
@@ -43,8 +47,11 @@ public class MainLayoutController {
     @FXML private Button profileBtn;
     private ContextMenu profileMenu;
     @FXML private Button premiumBtn;
+    @FXML private ImageView profileImageView;
 
     private List<Button> navButtons;
+    private Timeline premiumCheckTimer;
+
 
     // ✅ နောက်ဆုံး ဖွင့်ခဲ့တဲ့ Page — Close နှိပ်ရင် ဒီ page ပြန်
     private String currentPage = "LearnPage.fxml";
@@ -52,12 +59,20 @@ public class MainLayoutController {
     @FXML
     public void initialize() {
         instance = this;
-        navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn, leaderboardBtn, practiceBtn, gamesBtn);
+        navButtons = Arrays.asList(learnBtn, coursesBtn, playgroundBtn,
+                leaderboardBtn, practiceBtn, gamesBtn);
 
         if (topBrainLabel != null) {
             topBrainLabel.setOnMouseClicked(e -> showRefillBrainDialog());
             topBrainLabel.setStyle("-fx-cursor: hand;");
         }
+
+        // 🌟 Load User Profile Image
+        loadUserProfileImage();
+
+        // ⭐ Premium Expiry စစ်ဆေးခြင်း
+        checkAndUpdatePremiumStatus();
+        startPremiumCheckTimer();
 
         updateHeaderStats();
         updateCourseTitle();
@@ -66,6 +81,22 @@ public class MainLayoutController {
             handleNavLearn();
         } else {
             handleNavCourses();
+        }
+    }
+
+    private void loadUserProfileImage() {
+        User currentUser = UserSession.getCurrentUser();
+        String profilePath = currentUser.getProfile();
+        if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {
+            try {
+                String fullImageUrl = ApiClient.getProfileImageUrl(profilePath);
+                if (fullImageUrl != null) {
+                    Image img = new Image(fullImageUrl, true); // Async loading
+                    profileImageView.setImage(img);
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load avatar: " + e.getMessage());
+            }
         }
     }
 
@@ -380,7 +411,20 @@ public class MainLayoutController {
         if (profileMenu.isShowing()) {
             profileMenu.hide();
         } else {
-            profileMenu.show(profileBtn, Side.BOTTOM, -30, 8);
+            profileMenu.show(profileImageView, Side.BOTTOM, -30, 8);
+
+            // 🌟 ContextMenu (Popup) ထဲသို့ CSS ကို သီးသန့်ချိတ်ဆက်ပေးခြင်း
+            Platform.runLater(() -> {
+                if (profileMenu.getSkin() != null && profileMenu.getSkin().getNode() != null) {
+                    Scene popupScene = profileMenu.getSkin().getNode().getScene();
+                    if (popupScene != null) {
+                        String cssUrl = getClass().getResource("/Css/mainlayout.css").toExternalForm();
+                        if (cssUrl != null && !popupScene.getStylesheets().contains(cssUrl)) {
+                            popupScene.getStylesheets().add(cssUrl);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -390,6 +434,11 @@ public class MainLayoutController {
     }
 
     private void handleLogout() {
+        // ⭐ Timer ကို ရပ်ဆိုင်း
+        if (premiumCheckTimer != null) {
+            premiumCheckTimer.stop();
+        }
+
         UserSession.clearSession();
         SceneManager.switchScene("WelcomeView.fxml");
     }
@@ -516,5 +565,69 @@ public class MainLayoutController {
         if (contentArea != null) {
             contentArea.getChildren().setAll(wrapper);
         }
+    }
+
+    // ============================================
+// ⭐ PREMIUM EXPIRY CHECK
+// ============================================
+
+    private void checkAndUpdatePremiumStatus() {
+        User currentUser = UserSession.getCurrentUser();
+        if (currentUser == null) return;
+
+        if (!PremiumService.isPremium(currentUser)) return;
+
+        new Thread(() -> {
+            org.json.JSONObject result = DatabaseManager.checkPremiumStatus(currentUser.getUserId());
+
+            if (result != null) {
+                boolean isExpired = result.optBoolean("is_expired", false);
+
+                if (isExpired) {
+                    // ⭐ User ကို Refresh လုပ်
+                    User updatedUser = DatabaseManager.getUserById(currentUser.getUserId());
+                    if (updatedUser != null) {
+                        UserSession.setCurrentUser(updatedUser);
+                    }
+
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Premium Expired");
+                        alert.setHeaderText("⏰ Premium Subscription Expired");
+                        alert.setContentText(
+                                "Your Premium subscription has expired.\n\n" +
+                                        "You are now on the Free plan.\n" +
+                                        "Renew Premium to continue enjoying unlimited brains " +
+                                        "and all premium features."
+                        );
+
+                        ButtonType renewBtn = new ButtonType("Renew Premium",
+                                ButtonBar.ButtonData.OK_DONE);
+                        ButtonType laterBtn = new ButtonType("Later",
+                                ButtonBar.ButtonData.CANCEL_CLOSE);
+                        alert.getButtonTypes().setAll(renewBtn, laterBtn);
+
+                        alert.showAndWait().ifPresent(bt -> {
+                            if (bt == renewBtn) {
+                                handlePremium();
+                            }
+                        });
+
+                        updateHeaderStats();
+                    });
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * ⭐ ၁ နာရီ တစ်ခါ Premium Expiry စစ်တဲ့ Timer
+     */
+    private void startPremiumCheckTimer() {
+        premiumCheckTimer = new Timeline(
+                new KeyFrame(Duration.hours(1), e -> checkAndUpdatePremiumStatus())
+        );
+        premiumCheckTimer.setCycleCount(Timeline.INDEFINITE);
+        premiumCheckTimer.play();
     }
 }

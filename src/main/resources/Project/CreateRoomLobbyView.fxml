@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -8,26 +9,27 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" spacing="20" prefWidth="850" prefHeight="650"
-      style="-fx-background-color: #ffffff; -fx-padding: 30;"
+      style="-fx-padding: 30;"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Project.CreateRoomLobbyController">
 
+    <stylesheets>
+        <URL value="@../Css/createroomlobby.css" />
+    </stylesheets>
+
     <!-- Top Header & Room Code -->
     <HBox alignment="CENTER_LEFT" spacing="20">
-        <Button text="← Leave" onAction="#handleLeaveRoom"
-                style="-fx-background-color: #ffffff; -fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold; -fx-border-color: #000000; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1.5; -fx-cursor: hand;"/>
+        <Button text="← Leave" onAction="#handleLeaveRoom" styleClass="btn-outline"/>
 
-        <Label text="GAME LOBBY" style="-fx-text-fill: #000000; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label text="GAME LOBBY" styleClass="lobby-header"/>
 
         <HBox HBox.hgrow="ALWAYS"/>
 
         <!-- Room Code Display -->
-        <HBox alignment="CENTER" spacing="10"
-              style="-fx-background-color: #f8fafc; -fx-padding: 8 16; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10; -fx-border-width: 1.5;">
-            <Label text="Room Code:" style="-fx-text-fill: #666666; -fx-font-size: 13px; -fx-font-weight: bold;"/>
-            <Label fx:id="roomCodeLabel" text="X7K9P2" style="-fx-text-fill: #000000; -fx-font-size: 16px; -fx-font-weight: bold; -fx-letter-spacing: 2px;"/>
-            <Button text="📋 Copy" onAction="#handleCopyCode"
-                    style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;"/>
+        <HBox alignment="CENTER" spacing="10" styleClass="room-code-box">
+            <Label text="Room Code:" styleClass="room-code-title"/>
+            <Label fx:id="roomCodeLabel" text="X7K9P2" styleClass="room-code-value"/>
+            <Button text="📋 Copy" onAction="#handleCopyCode" styleClass="btn-primary-small"/>
         </HBox>
     </HBox>
 
@@ -35,61 +37,56 @@
     <HBox alignment="CENTER" spacing="25" prefHeight="440">
 
         <!-- Left Side: Players Matchup Slot -->
-        <VBox alignment="CENTER" spacing="20" prefWidth="440"
-              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+        <VBox alignment="CENTER" spacing="20" prefWidth="440" styleClass="lobby-card">
 
-            <Label text="PLAYERS" style="-fx-text-fill: #666666; -fx-font-size: 12px; -fx-font-weight: bold; -fx-letter-spacing: 1.5px;"/>
+            <Label text="PLAYERS" styleClass="section-title"/>
 
             <!-- Host (Left Player) Card -->
-            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380"
-                  style="-fx-background-color: #f8fafc; -fx-padding: 12 18; -fx-background-radius: 12; -fx-border-color: #000000; -fx-border-radius: 12; -fx-border-width: 1;">
+            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380" styleClass="player-card">
                 <StackPane prefWidth="50" prefHeight="50">
                     <Label fx:id="hostAvatarLabel" text="👤" style="-fx-font-size: 26px;"/>
                     <ImageView fx:id="hostAvatarImageView" fitWidth="50" fitHeight="50" preserveRatio="true"/>
                 </StackPane>
                 <VBox alignment="CENTER_LEFT">
-                    <Label fx:id="hostNameLabel" text="You (Host)" style="-fx-text-fill: #000000; -fx-font-size: 15px; -fx-font-weight: bold;"/>
-                    <Label fx:id="hostStatusLabel" text="Ready" style="-fx-text-fill: #16a34a; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                    <Label fx:id="hostNameLabel" text="You (Host)" styleClass="player-name"/>
+                    <Label fx:id="hostStatusLabel" text="Ready" styleClass="player-status-ready"/>
                 </VBox>
             </HBox>
 
-            <Label text="VS" style="-fx-text-fill: #000000; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="VS" styleClass="vs-label"/>
 
             <!-- Opponent (Right Player) Card -->
-            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380"
-                  style="-fx-background-color: #ffffff; -fx-padding: 12 18; -fx-background-radius: 12; -fx-border-color: #cccccc; -fx-border-radius: 12; -fx-border-width: 1.5; -fx-border-style: dashed;">
+            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380" styleClass="player-card-dashed">
                 <StackPane prefWidth="50" prefHeight="50">
                     <Label fx:id="opponentAvatarLabel" text="❓" style="-fx-font-size: 26px;"/>
                     <ImageView fx:id="opponentAvatarImageView" fitWidth="50" fitHeight="50" preserveRatio="true"/>
                 </StackPane>
                 <VBox alignment="CENTER_LEFT">
-                    <Label fx:id="opponentNameLabel" text="Waiting for Opponent..." style="-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: bold;"/>
-                    <Label fx:id="opponentStatusLabel" text="Send an invite or share code" style="-fx-text-fill: #94a3b8; -fx-font-size: 11px;"/>
+                    <Label fx:id="opponentNameLabel" text="Waiting for Opponent..." styleClass="player-name-muted"/>
+                    <Label fx:id="opponentStatusLabel" text="Send an invite or share code" styleClass="player-status-muted"/>
                 </VBox>
             </HBox>
 
-            <!-- Action Button (Host: Start Match / Opponent: Ready) -->
-            <Button fx:id="startMatchBtn" text="Start Match ➔" onAction="#handleStartMatch" prefWidth="380" prefHeight="44" disable="true"
-                    style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;"/>
+            <!-- Action Button -->
+            <Button fx:id="startMatchBtn" text="Start Match ➔" onAction="#handleStartMatch" prefWidth="380" prefHeight="44" disable="true" styleClass="btn-main-action"/>
         </VBox>
 
         <!-- Right Side: Following Friends List to Invite -->
-        <VBox alignment="TOP_CENTER" spacing="12" prefWidth="320"
-              style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 16; -fx-border-width: 2;">
+        <VBox alignment="TOP_CENTER" spacing="12" prefWidth="320" styleClass="lobby-card">
 
-            <Label text="INVITE FOLLOWING" style="-fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <Label text="INVITE FOLLOWING" styleClass="lobby-header" style="-fx-font-size: 14px;"/>
 
             <VBox fx:id="friendsContainer" spacing="10" prefWidth="280">
-                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #f8fafc; -fx-padding: 8 12; -fx-background-radius: 8; -fx-border-color: #e2e8f0; -fx-border-radius: 8;">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="friend-row">
                     <Label text="👤" style="-fx-font-size: 18px;"/>
-                    <Label text="Alex_Dev" style="-fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold;" HBox.hgrow="ALWAYS"/>
-                    <Button text="Invite" onAction="#handleInviteFriend" style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                    <Label text="Alex_Dev" styleClass="player-name" style="-fx-font-size: 13px;" HBox.hgrow="ALWAYS"/>
+                    <Button text="Invite" onAction="#handleInviteFriend" styleClass="btn-primary-small"/>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #f8fafc; -fx-padding: 8 12; -fx-background-radius: 8; -fx-border-color: #e2e8f0; -fx-border-radius: 8;">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="friend-row">
                     <Label text="👤" style="-fx-font-size: 18px;"/>
-                    <Label text="Sarah_Coder" style="-fx-text-fill: #000000; -fx-font-size: 13px; -fx-font-weight: bold;" HBox.hgrow="ALWAYS"/>
-                    <Button text="Invite" onAction="#handleInviteFriend" style="-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;"/>
+                    <Label text="Sarah_Coder" styleClass="player-name" style="-fx-font-size: 13px;" HBox.hgrow="ALWAYS"/>
+                    <Button text="Invite" onAction="#handleInviteFriend" styleClass="btn-primary-small"/>
                 </HBox>
             </VBox>
         </VBox>

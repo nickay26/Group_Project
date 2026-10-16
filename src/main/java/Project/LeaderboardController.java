@@ -223,9 +223,22 @@ public class LeaderboardController {
             if (leagueTitleLabel != null) leagueTitleLabel.setText("Nebula League");
         }
 
-        setCardState(nebulaImg, userLevel >= NEBULA_LEVEL);
-        setCardState(protostarImg, userLevel >= PROTOSTAR_LEVEL);
-        setCardState(supernovaImg, userLevel >= SUPERNOVA_LEVEL);
+        // 🌟 အသုံးပြုသူ လက်ရှိရောက်နေသော League Container ကိုသာ ပေါ်စေပြီး ကျန်သည်များကို ဖုံးကွယ်ခြင်း
+        if (nebulaContainer != null) {
+            boolean isNebula = (currentLeagueId == 1);
+            nebulaContainer.setVisible(isNebula);
+            nebulaContainer.setManaged(isNebula);
+        }
+        if (protostarContainer != null) {
+            boolean isProtostar = (currentLeagueId == 2);
+            protostarContainer.setVisible(isProtostar);
+            protostarContainer.setManaged(isProtostar);
+        }
+        if (supernovaContainer != null) {
+            boolean isSupernova = (currentLeagueId == 3);
+            supernovaContainer.setVisible(isSupernova);
+            supernovaContainer.setManaged(isSupernova);
+        }
 
         // Send updated league and fetch correct leaderboard
         ApiClient.addUserXpAsync(UserSession.getUserId(), null, 0, currentLeagueId);
