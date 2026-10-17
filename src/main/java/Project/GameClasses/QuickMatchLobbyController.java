@@ -119,7 +119,7 @@ public class QuickMatchLobbyController {
                             PauseTransition delay = new PauseTransition(Duration.seconds(4));
 
                             delay.setOnFinished(event -> {
-                                FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Live Coding Arena");
+                                FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Sodexa Platform");
                                 if (loader != null) {
                                     GameController gameController = loader.getController();
                                     gameController.setCourseData(selectedLanguage);
@@ -221,7 +221,7 @@ public class QuickMatchLobbyController {
     private void handleCancel() {
         WebSocketService.getInstance().cancelQuickMatch(currentUserId);
 
-        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         MainLayoutController.getInstance().loadPage("GameModeView.fxml");
     }
 }

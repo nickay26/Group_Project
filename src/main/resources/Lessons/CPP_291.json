@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_291",
   "title": "Comprehensive Final Test: C++ Intermediate Level",
-  "isPremium": true,
+  "isPremium": false,
   "slides": [
     {
       "slideId": "CPP_291_S1",

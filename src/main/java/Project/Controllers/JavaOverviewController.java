@@ -57,7 +57,7 @@ public class JavaOverviewController implements Initializable {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class JavaOverviewController implements Initializable {
         // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးမည်
         if (UserSession.getInstance() != null && UserSession.getUserId() != -1) {
             // Login ဝင်ထားပြီးပါက Main Dashboard သို့ တန်းသွားမည်
-            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         } else {
             // Login မဝင်ရသေးပါက Register Alert Dialog ပြသမည်
             showRegisterAlert();
@@ -142,7 +142,7 @@ public class JavaOverviewController implements Initializable {
         // 5. OK Button Click မှသာ Stage ပိတ်ပြီး Welcome/Register View သို့ သွားမည်
         okBtn.setOnAction(e -> {
             alertStage.close();
-            SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
+            SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
         });
 
         alertStage.show();

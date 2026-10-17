@@ -99,7 +99,7 @@ public class CreateRoomLobbyController {
             public void onGameStart(String roomId, String language, String opponentId, String questionsJson) {
                 // Host က Start Match နှိပ်လိုက်ပါက နှစ်ဦးလုံး GameView သို့ ကူးပြောင်းမည်
                 Platform.runLater(() -> {
-                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Mimo Platform - Code Challenge");
+                    FXMLLoader loader = SceneManager.switchScene("/Project/GameView.fxml", "Sodexa Platform");
 
                     if (loader != null) {
                         GameController gameController = loader.getController();
@@ -173,7 +173,7 @@ public class CreateRoomLobbyController {
 
     @FXML
     private void handleLeaveRoom() {
-        SceneManager.switchScene("/Project/FRIEND.fxml", "Play with a Friend");
+        SceneManager.switchScene("/Project/FRIEND.fxml", "Sodexa Platform");
     }
 
     private String generateRandomCode() {

@@ -145,11 +145,11 @@ public class LanguageDetailController {
 
     @FXML
     private void handleLogin() {
-        SceneManager.switchScene("LoginView.fxml", "Mimo Platform - Login");
+        SceneManager.switchScene("LoginView.fxml", "Sodexa Platform - Login");
     }
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("WelcomeView.fxml", "Mimo Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodexa  Platform - Welcome");
     }
 }

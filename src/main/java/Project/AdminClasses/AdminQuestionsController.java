@@ -98,7 +98,7 @@ public class AdminQuestionsController {
     private File getLessonsDirectory() {
         File folder = new File("src/main/resources/Lessons");
         if (!folder.exists() || !folder.isDirectory()) {
-            folder = new File(System.getProperty("user.home") + "/Sodex/Lessons");
+            folder = new File(System.getProperty("user.home") + "/Sodexa/Lessons");
         }
         if (!folder.exists()) {
             folder.mkdirs();

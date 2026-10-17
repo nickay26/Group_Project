@@ -297,7 +297,7 @@ public class LoginController {
      * MainLayoutController က redirectedFromOverview Flag ပေါ်မူတည်ပြီး Learn သို့မဟုတ် Courses Page ကို အလိုအလျောက် ရွေးဖွင့်ပါမည်။
      */
     private void navigateToNextScene() {
-        SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
+        SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
     }
 
     /** Flask Backend ကို Auth Code ပို့ */
