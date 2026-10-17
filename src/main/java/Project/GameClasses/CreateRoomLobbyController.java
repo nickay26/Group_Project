@@ -141,9 +141,9 @@ public class CreateRoomLobbyController {
     public void setSelectedLanguage(String lang) {
         if (lang != null && !lang.isEmpty()) {
             this.selectedLanguage = lang;
+            System.out.println("✅ Lobby Language Set to: " + this.selectedLanguage);
         }
     }
-
     @FXML
     private void handleCopyCode() {
         Clipboard clipboard = Clipboard.getSystemClipboard();

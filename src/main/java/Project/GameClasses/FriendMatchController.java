@@ -15,6 +15,14 @@ public class FriendMatchController {
     @FXML private Label statusLabel;
 
     private static final String SERVER_URL = "wss://websocket-server-s9ki.onrender.com";
+    private String selectedLanguage = "Java (Basic)";
+
+    // ⭐ Language လက်ခံမည့် Method ထည့်ပါ
+    public void setSelectedLanguage(String language) {
+        if (language != null && !language.isEmpty()) {
+            this.selectedLanguage = language;
+        }
+    }
 
     @FXML
     public void initialize() {
@@ -81,6 +89,7 @@ public class FriendMatchController {
         if (loader != null) {
             CreateRoomLobbyController lobbyController = loader.getController();
             if (lobbyController != null) {
+                lobbyController.setSelectedLanguage(selectedLanguage); // ⭐ Lobby ဆီသို့ Language ပို့ပေးခြင်း
                 lobbyController.setupRoom(null, true);
             }
         }

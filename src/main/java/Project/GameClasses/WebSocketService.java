@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.util.concurrent.CompletionStage;
 
+
 public class WebSocketService implements WebSocket.Listener {
 
     private static WebSocketService instance;
@@ -104,7 +105,7 @@ public class WebSocketService implements WebSocket.Listener {
         json.put("type", "INVITE_RESPONSE");
         json.put("toUser", toUser);
         json.put("action", action);
-        json.put("language", language);
+        json.put("language", language != null ? language : "Java (Basic)");
         sendText(json.toString());
     }
 
@@ -269,5 +270,8 @@ public class WebSocketService implements WebSocket.Listener {
         System.out.println("WebSocket Connection Opened Successfully.");
         webSocket.request(1);
         WebSocket.Listener.super.onOpen(webSocket);
+    }
+    public void sendMessage(String message) {
+        sendText(message);
     }
 }
