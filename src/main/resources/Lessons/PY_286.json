@@ -1,77 +1,203 @@
 {
-  "lessonId": "PYTH_286",
-  "title": "Module Review Quiz: Iterators, Generators & Context Managers",
+  "lessonId": "PY_286",
+  "title": "OOP & Core Python Modules (115 to 121)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_286_S1",
+      "slideId": "PY_286_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Iteration & Resource Protocols",
-      "prompt": "Review custom iterators, generator functions (`yield`), `contextlib`, and `__enter__`/`__exit__` methods.",
-      "codeSnippet": "class Managed:\n    def __enter__(self):\n        return self\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        pass"
+      "title": "OOP & Core Python Modules (115 to 121)",
+      "prompt": "Assessment covering Modules & Packages, Object-Oriented Programming Basics, Advanced OOP & Special Methods, Iterators & Generators, Decorators & Functional Concepts, JSON & APIs, and Virtual Environments & Package Management.",
+      "codeSnippet": "# OOP & Core Python Modules Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_286_S2",
+      "slideId": "PY_286_S2",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Yield Keyword",
-      "prompt": "Fill in the keyword used in a function to suspend execution and yield a value back to caller.",
-      "codeSnippet": "def my_gen():\n    ___ 42",
-      "options": ["yield", "return", "send", "output"],
+      "title": "Question 1: Import Statement",
+      "prompt": "Fill in the keyword to load the built-in random module.",
+      "codeSnippet": "___ random\nnum = random.randint(1, 10)",
+      "options": [
+        "import",
+        "include",
+        "require",
+        "use"
+      ],
+      "correctAnswer": "import"
+    },
+    {
+      "slideId": "PY_286_S3",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 2: From Import Syntax",
+      "prompt": "How do you import only the 'pi' constant from the 'math' module?",
+      "options": [
+        "from math import pi",
+        "import pi from math",
+        "using math.pi",
+        "include math(pi)"
+      ],
+      "correctAnswer": "from math import pi"
+    },
+    {
+      "slideId": "PY_286_S4",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 3: Class Declaration",
+      "prompt": "Fill in the keyword used to create a class in Python.",
+      "codeSnippet": "___ Student:\n    pass",
+      "options": [
+        "class",
+        "struct",
+        "object",
+        "type"
+      ],
+      "correctAnswer": "class"
+    },
+    {
+      "slideId": "PY_286_S5",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 4: Constructor Method",
+      "prompt": "What is the name of the special initializer method called when a class instance is created?",
+      "options": [
+        "__init__",
+        "__construct__",
+        "__new__",
+        "init()"
+      ],
+      "correctAnswer": "__init__"
+    },
+    {
+      "slideId": "PY_286_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: String Representation",
+      "prompt": "Fill in the method name used to return a user-friendly string representation of an object.",
+      "codeSnippet": "class User:\n    def __str__(self):\n        return self.username",
+      "options": [
+        "str",
+        "repr",
+        "print",
+        "text"
+      ],
+      "correctAnswer": "str"
+    },
+    {
+      "slideId": "PY_286_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: Length Dunder Method",
+      "prompt": "Which special method allows custom objects to work with len()?",
+      "options": [
+        "__len__",
+        "__size__",
+        "__count__",
+        "__length__"
+      ],
+      "correctAnswer": "__len__"
+    },
+    {
+      "slideId": "PY_286_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Yield Keyword",
+      "prompt": "Fill in the keyword used in a function to make it a generator.",
+      "codeSnippet": "def get_numbers():\n    ___ 1\n    ___ 2",
+      "options": [
+        "yield",
+        "return",
+        "emit",
+        "send"
+      ],
       "correctAnswer": "yield"
     },
     {
-      "slideId": "PYTH_286_S3",
+      "slideId": "PY_286_S9",
       "type": "MULTIPLE_CHOICE",
-      "title": "Iterator Protocol Dunders",
-      "prompt": "Which pair of magic methods defines the Iterator Protocol in Python?",
+      "title": "Question 8: Advancing Iterators",
+      "prompt": "Which built-in function retrieves the next item from an iterator?",
       "options": [
-        "__iter__() and __next__()",
-        "__start__() and __get__()",
-        "__enter__() and __exit__()",
-        "__init__() and __iter__()"
+        "next()",
+        "step()",
+        "get_next()",
+        "advance()"
       ],
-      "correctAnswer": "__iter__() and __next__()"
+      "correctAnswer": "next()"
     },
     {
-      "slideId": "PYTH_286_S4",
+      "slideId": "PY_286_S10",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Context Manager Opening",
-      "prompt": "Fill in the magic method executed upon entering a `with` block.",
-      "codeSnippet": "def ___(self): return self",
-      "options": ["__enter__", "__start__", "__open__", "__init__"],
-      "correctAnswer": "__enter__"
-    },
-    {
-      "slideId": "PYTH_286_S5",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Contextlib Decorator",
-      "prompt": "Which decorator from `contextlib` converts a generator into a context manager?",
-      "options": ["@contextmanager", "@with_manager", "@context_builder", "@resource_manager"],
-      "correctAnswer": "@contextmanager"
-    },
-    {
-      "slideId": "PYTH_286_S6",
-      "type": "FILL_IN_BLANK",
-      "title": "Delegating Generators",
-      "prompt": "Fill in the syntax used to delegate generator production to a sub-generator.",
-      "codeSnippet": "yield ___ sub_generator()",
-      "options": ["from", "to", "in", "with"],
-      "correctAnswer": "from"
-    },
-    {
-      "slideId": "PYTH_286_S7",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Context Exit Return Value",
-      "prompt": "What does returning `True` from `__exit__` do when an exception occurs inside a `with` block?",
+      "title": "Question 9: Decorator Syntax Symbol",
+      "prompt": "Fill in the symbol used to apply a decorator above a function definition.",
+      "codeSnippet": "___my_decorator\ndef say_hello():\n    print(\"Hello\")",
       "options": [
-        "Suppresses the exception",
-        "Reraises the exception",
-        "Converts it to RuntimeError",
-        "Restarts the with block"
+        "@",
+        "#",
+        "$",
+        "&"
       ],
-      "correctAnswer": "Suppresses the exception"
+      "correctAnswer": "@"
+    },
+    {
+      "slideId": "PY_286_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: First-Class Functions",
+      "prompt": "What does it mean that functions are 'first-class citizens' in Python?",
+      "options": [
+        "They can be passed as arguments, returned, and assigned to variables",
+        "They execute with higher priority",
+        "They can only be defined at class scope",
+        "They are pre-compiled into C code"
+      ],
+      "correctAnswer": "They can be passed as arguments, returned, and assigned to variables"
+    },
+    {
+      "slideId": "PY_286_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: JSON Dumps Method",
+      "prompt": "Fill in the method used to serialize a Python object to a JSON string.",
+      "codeSnippet": "json_data = json.___({'status': 'active'})",
+      "options": [
+        "dumps",
+        "dump",
+        "stringify",
+        "to_json"
+      ],
+      "correctAnswer": "dumps"
+    },
+    {
+      "slideId": "PY_286_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: JSON Loads Method",
+      "prompt": "Which function parses a JSON formatted string into a Python dictionary/list?",
+      "options": [
+        "json.loads()",
+        "json.parse()",
+        "json.load()",
+        "json.decode()"
+      ],
+      "correctAnswer": "json.loads()"
+    },
+    {
+      "slideId": "PY_286_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Creating Virtual Environment",
+      "prompt": "Fill in the module name used to create a virtual environment.",
+      "codeSnippet": "python -m ___ myenv",
+      "options": [
+        "venv",
+        "env",
+        "virtualenv",
+        "pipenv"
+      ],
+      "correctAnswer": "venv"
+    },
+    {
+      "slideId": "PY_286_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Installing Packages",
+      "prompt": "Which package manager CLI tool is standard for installing Python packages from PyPI?",
+      "options": [
+        "pip",
+        "npm",
+        "get-pip",
+        "pyinstall"
+      ],
+      "correctAnswer": "pip"
     }
   ]
 }

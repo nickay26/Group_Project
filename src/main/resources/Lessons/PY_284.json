@@ -1,71 +1,203 @@
 {
-  "lessonId": "PYTH_284",
-  "title": "Module Review Quiz: Advanced Functional Programming",
+  "lessonId": "PY_284",
+  "title": "Module Assessment: Python Fundamentals (Concise)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_284_S1",
+      "slideId": "PY_284_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Advanced Functional Programming",
-      "prompt": "This Module Review Quiz tests your knowledge on higher-order functions, partial application, currying, pure functions, and generator expressions.",
-      "codeSnippet": "from functools import partial\ndef mul(a, b): return a * b\ndouble = partial(mul, 2)\nprint(double(10)) # 20"
+      "title": "Module Assessment: Python Fundamentals (PY_101 to PY_107)",
+      "prompt": "Assessment covering Introduction & Print Output, Variables & Data Types, User Input, Operators, Conditional Statements, Lists, and Loops.",
+      "codeSnippet": "# Python Fundamentals Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_284_S2",
+      "slideId": "PY_284_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Partial Application Syntax",
-      "prompt": "Fill in the module required to construct partial functions.",
-      "codeSnippet": "from ___ import partial",
-      "options": ["functools", "itertools", "operator", "sys"],
-      "correctAnswer": "functools"
-    },
-    {
-      "slideId": "PYTH_284_S3",
-      "type": "MULTIPLE_CHOICE",
-      "title": "Pure Function Properties",
-      "prompt": "Which condition is essential for a function to be considered pure?",
+      "title": "Question 1: Print Function",
+      "prompt": "Fill in the missing function to output 'Welcome' to the screen.",
+      "codeSnippet": "___(\"Welcome\")",
       "options": [
-        "It returns the same output for identical inputs with zero side effects",
-        "It must use a lambda expression internally",
-        "It modifies global scope variables directly",
-        "It executes asynchronously"
+        "print",
+        "output",
+        "display",
+        "write"
       ],
-      "correctAnswer": "It returns the same output for identical inputs with zero side effects"
+      "correctAnswer": "print"
     },
     {
-      "slideId": "PYTH_284_S4",
-      "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Immutable Collections",
-      "prompt": "Fill in the function name used to convert a list into an immutable set.",
-      "codeSnippet": "frozen_keys = ___([1, 2, 3])",
-      "options": ["frozenset", "tuple", "set", "immutable"],
-      "correctAnswer": "frozenset"
-    },
-    {
-      "slideId": "PYTH_284_S5",
+      "slideId": "PY_284_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Operator Module Usage",
-      "prompt": "Which function from the `operator` module corresponds to standard addition (`+`)?",
-      "options": ["operator.add", "operator.plus", "operator.sum", "operator.concat"],
-      "correctAnswer": "operator.add"
+      "title": "Question 2: Case Sensitivity",
+      "prompt": "Is Python case-sensitive when writing function names like Print() vs print()?",
+      "options": [
+        "Yes, print() is correct and Print() will cause an error",
+        "No, both work identically",
+        "Only in Windows",
+        "Only inside strings"
+      ],
+      "correctAnswer": "Yes, print() is correct and Print() will cause an error"
     },
     {
-      "slideId": "PYTH_284_S6",
+      "slideId": "PY_284_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Advancing Generators",
-      "prompt": "Fill in the built-in function used to request the next value from a generator.",
-      "codeSnippet": "val = ___(gen_iter)",
-      "options": ["next", "get", "advance", "pop"],
-      "correctAnswer": "next"
+      "title": "Question 3: Variable Assignment",
+      "prompt": "Fill in the operator used to assign a value to a variable.",
+      "codeSnippet": "age ___ 25",
+      "options": [
+        "=",
+        "==",
+        ":=",
+        "->"
+      ],
+      "correctAnswer": "="
     },
     {
-      "slideId": "PYTH_284_S7",
+      "slideId": "PY_284_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Generator Exhaustion",
-      "prompt": "What exception is raised when a generator runs out of elements?",
-      "options": ["StopIteration", "IndexError", "KeyError", "GeneratorExit"],
-      "correctAnswer": "StopIteration"
+      "title": "Question 4: Type Checking",
+      "prompt": "Which built-in function returns the data type of an object?",
+      "options": [
+        "type()",
+        "typeof()",
+        "gettype()",
+        "class()"
+      ],
+      "correctAnswer": "type()"
+    },
+    {
+      "slideId": "PY_284_S6",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 5: User Input Function",
+      "prompt": "Fill in the function to read input from standard input.",
+      "codeSnippet": "name = ___(\"Enter your name: \")",
+      "options": [
+        "input",
+        "read",
+        "scan",
+        "get_line"
+      ],
+      "correctAnswer": "input"
+    },
+    {
+      "slideId": "PY_284_S7",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 6: String Conversion",
+      "prompt": "Which function converts a numeric value into a string?",
+      "options": [
+        "str()",
+        "string()",
+        "to_str()",
+        "text()"
+      ],
+      "correctAnswer": "str()"
+    },
+    {
+      "slideId": "PY_284_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Modulus Operator",
+      "prompt": "Fill in the operator used to find the remainder of a division.",
+      "codeSnippet": "remainder = 15 ___ 4",
+      "options": [
+        "%",
+        "/",
+        "//",
+        "**"
+      ],
+      "correctAnswer": "%"
+    },
+    {
+      "slideId": "PY_284_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Floor Division",
+      "prompt": "What is the output of 7 // 2 in Python?",
+      "options": [
+        "3",
+        "3.5",
+        "4",
+        "3.0"
+      ],
+      "correctAnswer": "3"
+    },
+    {
+      "slideId": "PY_284_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Elif Keyword",
+      "prompt": "Fill in the keyword for secondary conditional checks in Python.",
+      "codeSnippet": "if x > 10:\n    print(\"High\")\n___ x > 5:\n    print(\"Medium\")",
+      "options": [
+        "elif",
+        "else if",
+        "elseif",
+        "then"
+      ],
+      "correctAnswer": "elif"
+    },
+    {
+      "slideId": "PY_284_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Nested Conditions",
+      "prompt": "Can an 'if' statement be placed inside another 'if' statement in Python?",
+      "options": [
+        "Yes, this is called nesting",
+        "No, Python forbids nested conditions",
+        "Only inside functions",
+        "Only up to 2 levels"
+      ],
+      "correctAnswer": "Yes, this is called nesting"
+    },
+    {
+      "slideId": "PY_284_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Adding List Items",
+      "prompt": "Fill in the method used to add an item to the end of a list.",
+      "codeSnippet": "numbers = [1, 2, 3]\nnumbers.___ (4)",
+      "options": [
+        "append",
+        "add",
+        "push",
+        "insert"
+      ],
+      "correctAnswer": "append"
+    },
+    {
+      "slideId": "PY_284_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Negative Indexing",
+      "prompt": "What does list_item[-1] retrieve?",
+      "options": [
+        "The last element",
+        "The first element",
+        "The second element",
+        "Causes an IndexError"
+      ],
+      "correctAnswer": "The last element"
+    },
+    {
+      "slideId": "PY_284_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: For Loop Syntax",
+      "prompt": "Fill in the keyword used in a 'for' loop declaration.",
+      "codeSnippet": "___ item in items:\n    print(item)",
+      "options": [
+        "for",
+        "foreach",
+        "loop",
+        "while"
+      ],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "PY_284_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Loop Control - Break",
+      "prompt": "Which statement terminates the current loop immediately?",
+      "options": [
+        "break",
+        "continue",
+        "pass",
+        "stop"
+      ],
+      "correctAnswer": "break"
     }
   ]
 }

@@ -1,65 +1,203 @@
 {
-  "lessonId": "PYTH_291",
-  "title": "Module Review Quiz: Web Development with FastAPI & Flask",
+  "lessonId": "PY_291",
+  "title": "Security, WebSockets & Enterprise Architecture (144 to 150)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_291_S1",
+      "slideId": "PY_291_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Web Frameworks",
-      "prompt": "Review core web framework concepts in Python including routing, request handlers, dependency injection, and Pydantic validation.",
-      "codeSnippet": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get(\"/\")\ndef root():\n    return {\"message\": \"Hello World\"}"
+      "title": "Security, WebSockets & Enterprise Architecture (144 to 150)",
+      "prompt": "Assessment covering PySide6, GraphQL, Security & Cryptography, WebSockets, CLI Building, CI/CD, and Enterprise Standards.",
+      "codeSnippet": "# Security, WebSockets & Enterprise Architecture Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_291_S2",
+      "slideId": "PY_291_S2",
       "type": "FILL_IN_BLANK",
-      "title": "FastAPI Route Decorator",
-      "prompt": "Fill in the decorator method used to handle HTTP GET requests in FastAPI.",
-      "codeSnippet": "@app.___(\"/items\")\nasync def get_items(): pass",
-      "options": ["get", "route", "fetch", "request"],
-      "correctAnswer": "get"
+      "title": "Question 1: QApplication Instance",
+      "prompt": "Fill in the required application class that manages GUI control flow.",
+      "codeSnippet": "app = ___ ([])",
+      "options": [
+        "QApplication",
+        "QWidget",
+        "QMainWindow",
+        "QGui"
+      ],
+      "correctAnswer": "QApplication"
     },
     {
-      "slideId": "PYTH_291_S3",
+      "slideId": "PY_291_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Flask Application Instance",
-      "prompt": "Which parameter is typically passed to instantiate a Flask application `app = Flask(...)`?",
-      "options": ["__name__", "__file__", "self", "None"],
-      "correctAnswer": "__name__"
+      "title": "Question 2: Main Event Loop",
+      "prompt": "Which method starts the Qt application's event loop?",
+      "options": [
+        "app.exec()",
+        "app.start()",
+        "app.run()",
+        "app.loop()"
+      ],
+      "correctAnswer": "app.exec()"
     },
     {
-      "slideId": "PYTH_291_S4",
+      "slideId": "PY_291_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Data Validation Model",
-      "prompt": "Fill in the Pydantic base class used to construct data validation schemas in FastAPI.",
-      "codeSnippet": "class Item(BaseModel):",
-      "options": ["BaseModel", "Schema", "Model", "DataClass"],
-      "correctAnswer": "BaseModel"
+      "title": "Question 3: HTTP Method for GraphQL",
+      "prompt": "Fill in the standard HTTP verb used for GraphQL queries.",
+      "codeSnippet": "response = requests.___ (url, json={'query': q})",
+      "options": [
+        "post",
+        "get",
+        "put",
+        "fetch"
+      ],
+      "correctAnswer": "post"
     },
     {
-      "slideId": "PYTH_291_S5",
+      "slideId": "PY_291_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "ASGI vs WSGI Server",
-      "prompt": "Which server specification is natively required to run asynchronous FastAPI applications?",
-      "options": ["ASGI", "WSGI", "HTTP/1.0", "CGI"],
-      "correctAnswer": "ASGI"
+      "title": "Question 4: GraphQL Schema Definition",
+      "prompt": "What defines the data types and operational queries available in GraphQL?",
+      "options": [
+        "Schema",
+        "Database Table",
+        "API Blueprint",
+        "Manifest"
+      ],
+      "correctAnswer": "Schema"
     },
     {
-      "slideId": "PYTH_291_S6",
+      "slideId": "PY_291_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Flask Template Rendering",
-      "prompt": "Fill in the function name used to render HTML templates in Flask.",
-      "codeSnippet": "return ___template(\"index.html\")",
-      "options": ["render", "view", "display", "show"],
-      "correctAnswer": "render"
+      "title": "Question 5: Hashlib Module",
+      "prompt": "Fill in the standard Python library used for secure hash algorithms.",
+      "codeSnippet": "import ___",
+      "options": [
+        "hashlib",
+        "crypto",
+        "secrets",
+        "security"
+      ],
+      "correctAnswer": "hashlib"
     },
     {
-      "slideId": "PYTH_291_S7",
+      "slideId": "PY_291_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "HTTP Status Code for Not Found",
-      "prompt": "Which standard HTTP status code signifies that a requested resource was not found?",
-      "options": ["404", "200", "500", "403"],
-      "correctAnswer": "404"
+      "title": "Question 6: Secure Random Numbers",
+      "prompt": "Which module should be used for generating cryptographically strong random numbers?",
+      "options": [
+        "secrets",
+        "random",
+        "numpy.random",
+        "math"
+      ],
+      "correctAnswer": "secrets"
+    },
+    {
+      "slideId": "PY_291_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Receiving Messages",
+      "prompt": "Fill in the asynchronous method used to receive incoming WebSocket messages.",
+      "codeSnippet": "data = await websocket.___ ()",
+      "options": [
+        "recv",
+        "receive",
+        "read",
+        "get"
+      ],
+      "correctAnswer": "recv"
+    },
+    {
+      "slideId": "PY_291_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: WebSocket vs HTTP",
+      "prompt": "What is a primary distinction between WebSockets and standard HTTP?",
+      "options": [
+        "WebSockets allow bi-directional, full-duplex real-time streaming",
+        "WebSockets only support text messages",
+        "HTTP is faster for continuous live chat applications",
+        "WebSockets require a new TCP connection for every message"
+      ],
+      "correctAnswer": "WebSockets allow bi-directional, full-duplex real-time streaming"
+    },
+    {
+      "slideId": "PY_291_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Typer Command Decorator",
+      "prompt": "Fill in the decorator registering a function as a CLI command.",
+      "codeSnippet": "@app.___\ndef main():",
+      "options": [
+        "command",
+        "cli",
+        "route",
+        "action"
+      ],
+      "correctAnswer": "command"
+    },
+    {
+      "slideId": "PY_291_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Argparse vs Click/Typer",
+      "prompt": "What is a key benefit of Typer over built-in argparse?",
+      "options": [
+        "Uses standard type annotations for argument parsing and auto-generated help docs",
+        "Runs Python code without an interpreter",
+        "Supports web browser rendering",
+        "Eliminates command-line execution"
+      ],
+      "correctAnswer": "Uses standard type annotations for argument parsing and auto-generated help docs"
+    },
+    {
+      "slideId": "PY_291_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Test Coverage Tool",
+      "prompt": "Fill in the Pytest plugin used to generate code coverage metrics.",
+      "codeSnippet": "pytest --___ =src",
+      "options": [
+        "cov",
+        "coverage",
+        "check",
+        "metric"
+      ],
+      "correctAnswer": "cov"
+    },
+    {
+      "slideId": "PY_291_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Linter & Formatter",
+      "prompt": "Which fast tool serves as an all-in-one Python linter and code formatter?",
+      "options": [
+        "ruff",
+        "pip",
+        "pytest",
+        "sphinx"
+      ],
+      "correctAnswer": "ruff"
+    },
+    {
+      "slideId": "PY_291_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Structured Logging",
+      "prompt": "Fill in the module level function used to output informational log statements.",
+      "codeSnippet": "logging.___ ('Processing complete')",
+      "options": [
+        "info",
+        "log",
+        "write",
+        "print"
+      ],
+      "correctAnswer": "info"
+    },
+    {
+      "slideId": "PY_291_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: 12-Factor App Config",
+      "prompt": "Where should environment configurations (e.g., DB credentials) be stored according to 12-Factor principles?",
+      "options": [
+        "Environment Variables (.env / system environment)",
+        "Hardcoded directly in application source code",
+        "Stored inside public Git commits",
+        "In static text files inside the codebase root"
+      ],
+      "correctAnswer": "Environment Variables (.env / system environment)"
     }
   ]
 }

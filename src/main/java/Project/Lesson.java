@@ -1,5 +1,7 @@
 package Project;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Lesson {
     private int xp;
     private String lessonType;
     private String moduleName;
+    @SerializedName(value = "isPremium", alternate = {"is_premium", "is-premium"})
     private boolean isPremium;
     private List<Slide> slides; // Slide မေးခွန်းများ သိမ်းဆည်းရန် List
 

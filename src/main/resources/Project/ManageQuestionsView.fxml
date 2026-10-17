@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -46,13 +47,18 @@
 
                 <TextField fx:id="correctAnswerInput" promptText="Correct Answer Text" styleClass="input-field" />
 
+                <!-- Checkboxes for Premium and Interactive Options -->
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <children>
+                        <CheckBox fx:id="isPremiumCheckBox" text="Is Premium Lesson" style="-fx-text-fill: #94A3B8; -fx-font-size: 13px; -fx-cursor: hand;" />
+                        <CheckBox fx:id="isInteractiveCheckBox" text="Is Interactive Slide" style="-fx-text-fill: #94A3B8; -fx-font-size: 13px; -fx-cursor: hand;" />
+                    </children>
+                </HBox>
+
                 <HBox spacing="10.0">
                     <children>
                         <Button maxWidth="1.7976931348623157E308" onAction="#handleSaveQuestion" styleClass="primary-btn" text="Save Slide" HBox.hgrow="ALWAYS" />
                         <Button maxWidth="1.7976931348623157E308" onAction="#handleDeleteQuestion" style="-fx-background-color: #dc2626;" styleClass="primary-btn" text="Delete Selected" HBox.hgrow="ALWAYS" />
-                        <Button text="🗑 Delete Lesson File"
-                                onAction="#handleDeleteLessonFile"
-                                style="-fx-background-color: #7F1D1D; -fx-text-fill: #FCA5A5; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;"/>
                     </children>
                 </HBox>
             </children>

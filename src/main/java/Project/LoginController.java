@@ -2,7 +2,15 @@ package Project;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.json.JSONObject;
 
 public class LoginController {
 
@@ -305,7 +313,7 @@ public class LoginController {
 
     @FXML
     private void handleForgotPassword() {
-        showAlert(Alert.AlertType.INFORMATION, "Reset Password", "Please contact admin or check your email for reset instructions.");
+        DialogUtils.showForgotPasswordDialog();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {

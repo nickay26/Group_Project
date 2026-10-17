@@ -46,6 +46,38 @@ public class DatabaseManager {
     // 2. USER AUTHENTICATION & PROFILE MANAGEMENT
     // ==========================================
 
+    public static JSONObject requestPasswordReset(String email) {
+        try {
+            String res = ApiClient.requestPasswordResetAsync(email).join();
+            if (res != null) return new JSONObject(res);
+        } catch (Exception e) { e.printStackTrace(); }
+        return null;
+    }
+
+    public static boolean confirmPasswordReset(String email, String code, String newPassword) {
+        try {
+            String res = ApiClient.confirmPasswordResetAsync(email, code, newPassword).join();
+            if (res != null) {
+                JSONObject json = new JSONObject(res);
+                return json.optBoolean("success", false);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return false;
+    }
+
+    public static boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        try {
+            String res = ApiClient.updatePasswordAsync(userId, currentPassword, newPassword).join();
+            if (res != null) {
+                JSONObject json = new JSONObject(res);
+                return json.optBoolean("success", false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static User getUserById(int userId) {
         if (userId <= 0) return null;
 
@@ -161,6 +193,19 @@ public class DatabaseManager {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static boolean resetPasswordByEmail(String email, String newPassword) {
+        try {
+            String response = ApiClient.resetPasswordAsync(email, newPassword).join();
+            if (response != null && !response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                return json.has("message") && json.getString("message").contains("successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static boolean updateUserInfoByAdmin(int userId, String name, String email, String role, String planType, int xp, int coin) {
@@ -358,6 +403,20 @@ public class DatabaseManager {
                     String lessonType = obj.optString("lesson_type", obj.optString("Lesson_Type", "LESSON"));
                     String moduleName = obj.optString("Module_Name", obj.optString("module_name", "General"));
 
+                    // 🔍 Check local JSON file in resources for is_premium
+                    boolean isPremium = false;
+                    try {
+                        String jsonFileName = "/lessons/" + lessonId + ".json";
+                        java.io.InputStream inputStream = DatabaseManager.class.getResourceAsStream(jsonFileName);
+                        if (inputStream != null) {
+                            String jsonContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                            JSONObject localJson = new JSONObject(jsonContent);
+                            isPremium = localJson.optBoolean("is_premium", localJson.optBoolean("isPremium", false));
+                        }
+                    } catch (Exception e) {
+                        // Fallback if local file isn't found
+                    }
+
                     lessons.add(new Lesson(
                             lessonId,
                             cId,
@@ -366,7 +425,7 @@ public class DatabaseManager {
                             xp,
                             lessonType,
                             moduleName,
-                            false,
+                            isPremium,
                             new ArrayList<>()
                     ));
                 }

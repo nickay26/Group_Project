@@ -1,67 +1,176 @@
 {
-  "lessonId": "PYTH_290",
-  "title": "Module Review Quiz: Complete Advanced Foundations",
+  "lessonId": "PY_290",
+  "title": "Backend Infrastructure & Machine Learning (137 to 143)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_290_S1",
+      "slideId": "PY_290_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Advanced Foundations Assessment",
-      "prompt": "This final module review test synthesizes advanced Python topics: OOP Design, Metaprogramming, Async, Parallelism, and Type Safety.",
-      "codeSnippet": "# Final Comprehensive Sync & Async Evaluation\nimport asyncio\nasync def verify():\n    return \"Advanced Python Certified\"\nprint(asyncio.run(verify()))"
+      "title": "Backend Infrastructure & Machine Learning (137 to 143)",
+      "prompt": "Assessment covering Performance Optimization, NumPy, Pandas, Matplotlib & Seaborn, BeautifulSoup, and FastAPI.",
+      "codeSnippet": "# Backend Infrastructure & Machine Learning Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_290_S2",
+      "slideId": "PY_290_S2",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Memory Optimization Slots",
-      "prompt": "Fill in the attribute used in classes to prevent `__dict__` creation and restrict instance attributes.",
-      "codeSnippet": "class Fast:\n    ___ = ('x', 'y')",
-      "options": ["__slots__", "__attrs__", "__fields__", "__members__"],
-      "correctAnswer": "__slots__"
+      "title": "Question 1: Timeit Module",
+      "prompt": "Fill in the module used to time execution of small Python code snippets.",
+      "codeSnippet": "import ___",
+      "options": [
+        "timeit",
+        "time",
+        "profile",
+        "benchmark"
+      ],
+      "correctAnswer": "timeit"
     },
     {
-      "slideId": "PYTH_290_S3",
+      "slideId": "PY_290_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "LRU Caching Decorator",
-      "prompt": "Which `functools` decorator provides automatic memoization caching for functions?",
-      "options": ["@lru_cache", "@memoize", "@cache_func", "@store_results"],
-      "correctAnswer": "@lru_cache"
+      "title": "Question 2: CProfile Tool",
+      "prompt": "What is cProfile used for in Python development?",
+      "options": [
+        "Deterministic profiling of function calls and execution times",
+        "Compiling Python code directly to C",
+        "Automatic refactoring of class structures",
+        "Checking syntax errors"
+      ],
+      "correctAnswer": "Deterministic profiling of function calls and execution times"
     },
     {
-      "slideId": "PYTH_290_S4",
+      "slideId": "PY_290_S4",
       "type": "FILL_IN_BLANK",
-      "title": "Context Manager Decorator",
-      "prompt": "Fill in the contextlib decorator used for generator context managers.",
-      "codeSnippet": "@___manager\ndef open_resource():",
-      "options": ["context", "resource", "file", "with"],
-      "correctAnswer": "context"
+      "title": "Question 3: Importing NumPy",
+      "prompt": "Fill in the standard alias used when importing NumPy.",
+      "codeSnippet": "import numpy as ___",
+      "options": [
+        "np",
+        "num",
+        "numpy",
+        "n"
+      ],
+      "correctAnswer": "np"
     },
     {
-      "slideId": "PYTH_290_S5",
+      "slideId": "PY_290_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Abstract Class Instantiation",
-      "prompt": "What error is raised when instantiating a subclass of `ABC` that hasn't overridden all `@abstractmethod` methods?",
-      "options": ["TypeError", "SyntaxError", "AttributeError", "ValueError"],
-      "correctAnswer": "TypeError"
+      "title": "Question 4: Array Dimensions",
+      "prompt": "Which attribute returns the shape dimensions of a NumPy array?",
+      "options": [
+        ".shape",
+        ".size",
+        ".dim",
+        ".length"
+      ],
+      "correctAnswer": ".shape"
     },
     {
-      "slideId": "PYTH_290_S6",
+      "slideId": "PY_290_S6",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Dataclass Freezing",
-      "prompt": "Fill in the option value to make a dataclass instance read-only/immutable.",
-      "codeSnippet": "@dataclass(frozen=___)",
-      "options": ["True", "False", "None", "1"],
-      "correctAnswer": "True"
+      "title": "Question 5: Reading CSV Files",
+      "prompt": "Fill in the function used to load data from a CSV file into a DataFrame.",
+      "codeSnippet": "df = pd.___ ('data.csv')",
+      "options": [
+        "read_csv",
+        "load_csv",
+        "open_csv",
+        "get_csv"
+      ],
+      "correctAnswer": "read_csv"
     },
     {
-      "slideId": "PYTH_290_S7",
+      "slideId": "PY_290_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Bypassing GIL Execution",
-      "prompt": "Which module allows true parallel execution across multiple CPU cores in CPython?",
-      "options": ["multiprocessing", "threading", "asyncio", "queue"],
-      "correctAnswer": "multiprocessing"
+      "title": "Question 6: DataFrame Selection",
+      "prompt": "Which property is used for label-based indexing in Pandas?",
+      "options": [
+        ".loc",
+        ".iloc",
+        ".idx",
+        ".at_label"
+      ],
+      "correctAnswer": ".loc"
+    },
+    {
+      "slideId": "PY_290_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Matplotlib Pyplot Import",
+      "prompt": "Fill in the submodule alias convention for Matplotlib.",
+      "codeSnippet": "import matplotlib.pyplot as ___",
+      "options": [
+        "plt",
+        "plot",
+        "mpl",
+        "py"
+      ],
+      "correctAnswer": "plt"
+    },
+    {
+      "slideId": "PY_290_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Displaying Plots",
+      "prompt": "Which command renders and displays the active plot window?",
+      "options": [
+        "plt.show()",
+        "plt.render()",
+        "plt.display()",
+        "plt.draw()"
+      ],
+      "correctAnswer": "plt.show()"
+    },
+    {
+      "slideId": "PY_290_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: BeautifulSoup Import",
+      "prompt": "Fill in the module from which BeautifulSoup is imported.",
+      "codeSnippet": "from ___ import BeautifulSoup",
+      "options": [
+        "bs4",
+        "bs",
+        "beautifulsoup",
+        "scraper"
+      ],
+      "correctAnswer": "bs4"
+    },
+    {
+      "slideId": "PY_290_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Finding Single Element",
+      "prompt": "Which method returns the first matching HTML element tag?",
+      "options": [
+        "soup.find()",
+        "soup.find_all()",
+        "soup.get()",
+        "soup.select_one()"
+      ],
+      "correctAnswer": "soup.find()"
+    },
+    {
+      "slideId": "PY_290_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Creating App Instance",
+      "prompt": "Fill in the instantiation for the main FastAPI web application.",
+      "codeSnippet": "app = ___ ()",
+      "options": [
+        "FastAPI",
+        "Api",
+        "Application",
+        "Server"
+      ],
+      "correctAnswer": "FastAPI"
+    },
+    {
+      "slideId": "PY_290_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Route Decorator",
+      "prompt": "Which decorator handles HTTP GET endpoint routes?",
+      "options": [
+        "@app.get()",
+        "@app.route_get()",
+        "@app.fetch()",
+        "@app.request_get()"
+      ],
+      "correctAnswer": "@app.get()"
     }
   ]
 }

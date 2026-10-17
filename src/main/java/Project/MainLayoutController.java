@@ -82,6 +82,11 @@ public class MainLayoutController {
         } else {
             handleNavCourses();
         }
+
+        if (topStreakLabel != null) {
+            topStreakLabel.setOnMouseClicked(e -> DialogUtils.showStreakDialog());
+            topStreakLabel.setStyle("-fx-cursor: hand;");
+        }
     }
 
     public void loadUserProfileImage() {

@@ -1,5 +1,6 @@
 package Project;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -488,37 +489,50 @@ public class SettingsController {
 
     @FXML
     private void handleChangePassword() {
-        User user = UserSession.getCurrentUser();
-        if (user == null) return;
+        String currentPass = currentPasswordField.isVisible() ? currentPasswordField.getText().trim() : currentPasswordVisible.getText().trim();
+        String newPass = newPasswordField.isVisible() ? newPasswordField.getText().trim() : newPasswordVisible.getText().trim();
 
-        String currentPw = currentPasswordField != null ? currentPasswordField.getText() : "";
-        String newPw = newPasswordField != null ? newPasswordField.getText() : "";
-        String confirmPw = confirmPasswordField != null ? confirmPasswordField.getText() : "";
-
-        if (currentPw.isEmpty() || newPw.isEmpty() || confirmPw.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all password fields.");
+        if (currentPass.isEmpty() || newPass.isEmpty()) {
+            DialogUtils.showErrorDialog("Please fill in all password fields.");
             return;
         }
 
-        if (!newPw.equals(confirmPw)) {
-            showAlert(Alert.AlertType.ERROR, "Error", "New password and confirm password do not match.");
+        if (newPass.length() < 6) {
+            DialogUtils.showErrorDialog("New password must be at least 6 characters long.");
             return;
         }
 
-        if (newPw.length() < 6) {
-            showAlert(Alert.AlertType.ERROR, "Error", "New password must be at least 6 characters long.");
+        if (UserSession.getCurrentUser() == null) {
+            DialogUtils.showErrorDialog("No active user session found. Please log in again.");
             return;
         }
 
-        boolean success = DatabaseManager.changePassword(user.getUserId(), currentPw, newPw);
-        if (success) {
-            if (currentPasswordField != null) currentPasswordField.clear();
-            if (newPasswordField != null) newPasswordField.clear();
-            if (confirmPasswordField != null) confirmPasswordField.clear();
-            showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Password changed successfully!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to change password. Please verify your current password.");
+        int userId = UserSession.getCurrentUser().getUserId();
+
+        if (changeBtn != null) {
+            changeBtn.setDisable(true);
+            changeBtn.setText("Updating...");
         }
+
+        new Thread(() -> {
+            boolean success = DatabaseManager.updatePassword(userId, currentPass, newPass);
+            Platform.runLater(() -> {
+                if (changeBtn != null) {
+                    changeBtn.setDisable(false);
+                    changeBtn.setText("Change");
+                }
+                if (success) {
+                    currentPasswordField.clear();
+                    if (currentPasswordVisible != null) currentPasswordVisible.clear();
+                    newPasswordField.clear();
+                    if (newPasswordVisible != null) newPasswordVisible.clear();
+
+                    DialogUtils.showSuccessDialog("Your password has been changed successfully!");
+                } else {
+                    DialogUtils.showErrorDialog("Incorrect current password or server error. Please try again.");
+                }
+            });
+        }).start();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

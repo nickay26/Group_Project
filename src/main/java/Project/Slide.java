@@ -1,5 +1,6 @@
 package Project;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Slide {
@@ -11,6 +12,9 @@ public class Slide {
     private List<String> options;
     private String correctAnswer;
 
+    @SerializedName(value = "isInteractive", alternate = {"is_interactive", "is-interactive"})
+    private boolean isInteractive;
+
     public Slide() {}
 
     public Slide(String slideId, String type, String title, String prompt, String codeSnippet, List<String> options, String correctAnswer) {
@@ -21,6 +25,18 @@ public class Slide {
         this.codeSnippet = codeSnippet;
         this.options = options;
         this.correctAnswer = correctAnswer;
+        this.isInteractive = false;
+    }
+
+    public Slide(String slideId, String type, String title, String prompt, String codeSnippet, List<String> options, String correctAnswer, boolean isInteractive) {
+        this.slideId = slideId;
+        this.type = type;
+        this.title = title;
+        this.prompt = prompt;
+        this.codeSnippet = codeSnippet;
+        this.options = options;
+        this.correctAnswer = correctAnswer;
+        this.isInteractive = isInteractive;
     }
 
     // Getters and Setters
@@ -44,4 +60,7 @@ public class Slide {
 
     public String getCorrectAnswer() { return correctAnswer; }
     public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
+
+    public boolean isInteractive() { return isInteractive; }
+    public void setInteractive(boolean isInteractive) { this.isInteractive = isInteractive; }
 }

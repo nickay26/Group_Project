@@ -1,68 +1,176 @@
 {
-  "lessonId": "PYTH_293",
-  "title": "Module Review Quiz: Data Analysis with Pandas & NumPy",
+  "lessonId": "PY_293",
+  "title": "Cloud Native, Testing & Advanced Communication (158 to 163)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_293_S1",
+      "slideId": "PY_293_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: NumPy & Pandas",
-      "prompt": "Review numerical computations, vectorization, NumPy arrays, Pandas DataFrames, filtering, and aggregation.",
-      "codeSnippet": "import pandas as pd\nimport numpy as np\ndf = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})"
+      "title": "Cloud Native, Testing & Advanced Communication (158 to 163)",
+      "prompt": "Assessment covering Docker Containerization, Kubernetes Orchestration, Pytest, OpenTelemetry, API Gateways, and GraphQL/gRPC.",
+      "codeSnippet": "# Cloud Native, Testing & Advanced Communication Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_293_S2",
+      "slideId": "PY_293_S2",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "NumPy Array Initialization",
-      "prompt": "Fill in the function used to convert a standard Python list into a NumPy array.",
-      "codeSnippet": "arr = np.___([1, 2, 3])",
-      "options": ["array", "asarray", "matrix", "vector"],
-      "correctAnswer": "array"
+      "title": "Question 1: Dockerfile Base Image",
+      "prompt": "Fill in the Dockerfile keyword used to define the parent runtime image.",
+      "codeSnippet": "___ python:3.11-slim",
+      "options": [
+        "FROM",
+        "BASE",
+        "IMAGE",
+        "USE"
+      ],
+      "correctAnswer": "FROM"
     },
     {
-      "slideId": "PYTH_293_S3",
+      "slideId": "PY_293_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Index-Based DataFrame Selection",
-      "prompt": "Which accessor is used in Pandas to select rows/columns by integer-location indexing?",
-      "options": ["iloc", "loc", "at", "ix"],
-      "correctAnswer": "iloc"
+      "title": "Question 2: Multi-Stage Docker Builds",
+      "prompt": "Why are multi-stage Docker builds recommended for Python production images?",
+      "options": [
+        "They significantly reduce final image size by discarding build tools and compilers",
+        "They allow running multiple web servers inside one container",
+        "They bypass container permission checks",
+        "They eliminate the need for requirements.txt"
+      ],
+      "correctAnswer": "They significantly reduce final image size by discarding build tools and compilers"
     },
     {
-      "slideId": "PYTH_293_S4",
+      "slideId": "PY_293_S4",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "CSV File Ingestion",
-      "prompt": "Fill in the Pandas function used to load tabular data from a CSV file into a DataFrame.",
-      "codeSnippet": "df = pd.___(\"data.csv\")",
-      "options": ["read_csv", "load_csv", "import_csv", "parse_csv"],
-      "correctAnswer": "read_csv"
+      "title": "Question 3: Basic Compute Unit",
+      "prompt": "Fill in the smallest deployable computing unit in Kubernetes that wraps one or more containers.",
+      "codeSnippet": "kind: ___",
+      "options": [
+        "Pod",
+        "Node",
+        "Cluster",
+        "Service"
+      ],
+      "correctAnswer": "Pod"
     },
     {
-      "slideId": "PYTH_293_S5",
+      "slideId": "PY_293_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "DataFrame Grouping",
-      "prompt": "Which method splits data into groups according to specified categorical column values?",
-      "options": ["groupby()", "pivot()", "aggregate()", "split()"],
-      "correctAnswer": "groupby()"
+      "title": "Question 4: Horizontal Pod Autoscaler (HPA)",
+      "prompt": "What metric does the Horizontal Pod Autoscaler typically monitor to scale Python API pods dynamically?",
+      "options": [
+        "CPU utilization and memory usage limits",
+        "Number of git commits pushed",
+        "Database total row counts",
+        "File system disk size"
+      ],
+      "correctAnswer": "CPU utilization and memory usage limits"
     },
     {
-      "slideId": "PYTH_293_S6",
+      "slideId": "PY_293_S6",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Handling Missing Data",
-      "prompt": "Fill in the Pandas method used to remove missing/NaN values from a DataFrame.",
-      "codeSnippet": "clean_df = df.___()",
-      "options": ["dropna", "fillna", "remove_na", "clean"],
-      "correctAnswer": "dropna"
+      "title": "Question 5: Reusable Test Setup Fixtures",
+      "prompt": "Fill in the Pytest decorator used to define reusable test setup and teardown components.",
+      "codeSnippet": "@pytest.___ \ndef db_session():",
+      "options": [
+        "fixture",
+        "setup",
+        "context",
+        "before"
+      ],
+      "correctAnswer": "fixture"
     },
     {
-      "slideId": "PYTH_293_S7",
+      "slideId": "PY_293_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Array Shape Property",
-      "prompt": "Which attribute of a NumPy array returns a tuple containing its dimensions?",
-      "options": ["shape", "size", "ndim", "length"],
-      "correctAnswer": "shape"
+      "title": "Question 6: Mocking External Dependencies",
+      "prompt": "Which library or fixture is used to replace slow or external network calls during unit testing?",
+      "options": [
+        "unittest.mock (or monkeypatch fixture)",
+        "asyncio.sleep",
+        "sys.exit",
+        "pydantic.BaseModel"
+      ],
+      "correctAnswer": "unittest.mock (or monkeypatch fixture)"
+    },
+    {
+      "slideId": "PY_293_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Tracing Context Spans",
+      "prompt": "Fill in the OpenTelemetry method used to create a trace context block for operational measurement.",
+      "codeSnippet": "with tracer.___('db_query'):\n    execute_sql()",
+      "options": [
+        "start_as_current_span",
+        "create_span",
+        "trace_block",
+        "begin_trace"
+      ],
+      "correctAnswer": "start_as_current_span"
+    },
+    {
+      "slideId": "PY_293_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Prometheus Metrics Types",
+      "prompt": "Which Prometheus metric type is ideal for measuring memory usage or current active worker threads?",
+      "options": [
+        "Gauge",
+        "Counter",
+        "Histogram",
+        "Summary"
+      ],
+      "correctAnswer": "Gauge"
+    },
+    {
+      "slideId": "PY_293_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Reverse Proxy Routing",
+      "prompt": "Fill in the Nginx directive used to pass incoming HTTP requests to a backend Python server.",
+      "codeSnippet": "location /api/ {\n    ___ http://backend_apps;\n}",
+      "options": [
+        "proxy_pass",
+        "forward_to",
+        "route_to",
+        "target"
+      ],
+      "correctAnswer": "proxy_pass"
+    },
+    {
+      "slideId": "PY_293_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Load Balancing Algorithms",
+      "prompt": "Which load balancing algorithm distributes requests sequentially across all available healthy backend nodes?",
+      "options": [
+        "Round Robin",
+        "IP Hash",
+        "Least Connections",
+        "Random Selection"
+      ],
+      "correctAnswer": "Round Robin"
+    },
+    {
+      "slideId": "PY_293_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: GraphQL Single Endpoint",
+      "prompt": "Fill in the standard HTTP method used to execute GraphQL query and mutation requests.",
+      "codeSnippet": "@app.___('/graphql')",
+      "options": [
+        "post",
+        "get",
+        "put",
+        "patch"
+      ],
+      "correctAnswer": "post"
+    },
+    {
+      "slideId": "PY_293_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Protocol Buffers Advantage",
+      "prompt": "Why is gRPC Protocol Buffer serialization faster than standard REST JSON over HTTP/1.1?",
+      "options": [
+        "It uses binary serialization and multiplexed HTTP/2 streams",
+        "It compresses data using plain zip files",
+        "It skips data validation steps entirely",
+        "It stores all messages directly in Redis cache"
+      ],
+      "correctAnswer": "It uses binary serialization and multiplexed HTTP/2 streams"
     }
   ]
 }

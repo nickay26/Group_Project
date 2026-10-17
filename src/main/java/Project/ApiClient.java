@@ -27,6 +27,55 @@ public class ApiClient {
     // PROFILE IMAGE HELPERS & APIS (OPTIMIZED)
     // ==========================================
 
+    public static CompletableFuture<String> requestPasswordResetAsync(String email) {
+        JSONObject body = new JSONObject();
+        body.put("email", email);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/auth/request-reset"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> null);
+    }
+
+    public static CompletableFuture<String> confirmPasswordResetAsync(String email, String code, String newPassword) {
+        JSONObject body = new JSONObject();
+        body.put("email", email);
+        body.put("code", code);
+        body.put("new_password", newPassword);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/auth/confirm-reset"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> null);
+    }
+
+    public static CompletableFuture<String> updatePasswordAsync(int userId, String currentPassword, String newPassword) {
+        JSONObject body = new JSONObject();
+        body.put("user_id", userId);
+        body.put("current_password", currentPassword);
+        body.put("new_password", newPassword);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/auth/update-password"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> null);
+    }
+
     public static String getProfileImageUrl(String profilePath) {
         if (profilePath == null || profilePath.trim().isEmpty()) {
             return null;
@@ -142,6 +191,25 @@ public class ApiClient {
                 }
             }
         });
+    }
+
+    public static CompletableFuture<String> resetPasswordAsync(String email, String newPassword) {
+        JSONObject body = new JSONObject();
+        body.put("email", email);
+        body.put("new_password", newPassword);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/auth/reset-password"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Reset Password Error: " + ex.getMessage());
+                    return null;
+                });
     }
 
     // ==========================================
@@ -434,11 +502,12 @@ public class ApiClient {
     }
 
     public static CompletableFuture<String> getLeaderboardAsync(String seasonId, int leagueId) {
+        int userId = UserSession.getUserId(); // Pass the active user ID
         String url = BASE_URL + "/api/leaderboard";
         if (seasonId != null && !seasonId.trim().isEmpty() && !seasonId.equalsIgnoreCase("current")) {
             url += "/" + URLEncoder.encode(seasonId, StandardCharsets.UTF_8);
         }
-        url += "?league_id=" + leagueId;
+        url += "?league_id=" + leagueId + "&user_id=" + userId;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))

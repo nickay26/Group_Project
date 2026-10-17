@@ -1,6 +1,7 @@
 {
   "lessonId": "JAVA_103",
   "title": "Video Game Score",
+  "isPremium": true,
   "slides": [
     {
       "slideId": "JAVA_103_S1",

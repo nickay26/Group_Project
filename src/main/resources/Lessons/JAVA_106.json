@@ -92,7 +92,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare Double",
       "prompt": "Complete the code to declare a double variable 'price' with value 19.99.",
-      "codeSnippet": "____ price = 19.99;",
+      "codeSnippet": "___ price = 19.99;",
       "options": ["double", "int", "float", "decimal"],
       "correctAnswer": "double"
     }

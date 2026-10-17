@@ -1,67 +1,203 @@
 {
-  "lessonId": "PYTH_292",
-  "title": "Module Review Quiz: Database Integration & ORM (SQLAlchemy)",
+  "lessonId": "PY_292",
+  "title": "High-Performance & Async Microservices (151 to 157)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_292_S1",
+      "slideId": "PY_292_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Databases & SQLAlchemy",
-      "prompt": "Review relational database connections, SQL queries, object-relational mapping (ORM), and session transaction handling.",
-      "codeSnippet": "from sqlalchemy import create_engine\nengine = create_engine('sqlite:///:memory:')"
+      "title": "High-Performance & Async Microservices (151 to 157)",
+      "prompt": "Assessment covering Advanced Concurrency, Polars, FastAPI V2, Kafka & RabbitMQ, SQLAlchemy 2.0 & Alembic, Redis Caching, and Enterprise Security & OAuth2.",
+      "codeSnippet": "# High-Performance & Async Microservices Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_292_S2",
+      "slideId": "PY_292_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Creating Engine Connection",
-      "prompt": "Fill in the function used to establish a database engine connection in SQLAlchemy.",
-      "codeSnippet": "engine = create_engine(\"sqlite:///app.db\")",
-      "options": ["create_engine", "connect_db", "make_engine", "get_db"],
-      "correctAnswer": "create_engine"
+      "title": "Question 1: Awaiting Coroutines",
+      "prompt": "Fill in the keyword used to pause execution until an asynchronous coroutine returns a result.",
+      "codeSnippet": "result = ___ fetch_data_from_api()",
+      "options": [
+        "await",
+        "async",
+        "yield",
+        "defer"
+      ],
+      "correctAnswer": "await"
     },
     {
-      "slideId": "PYTH_292_S3",
+      "slideId": "PY_292_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Transaction Commit",
-      "prompt": "Which method persists pending database modifications within an active ORM session?",
-      "options": ["session.commit()", "session.save()", "session.flush()", "session.push()"],
-      "correctAnswer": "session.commit()"
+      "title": "Question 2: Multiprocessing vs Threading",
+      "prompt": "Which Python module is best suited for bypassing the Global Interpreter Lock (GIL) on CPU-bound operations?",
+      "options": [
+        "multiprocessing",
+        "threading",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor"
+      ],
+      "correctAnswer": "multiprocessing"
     },
     {
-      "slideId": "PYTH_292_S4",
+      "slideId": "PY_292_S4",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Column Primary Key Constraint",
-      "prompt": "Fill in the keyword argument used to mark a column as the primary key in SQLAlchemy.",
-      "codeSnippet": "id = Column(Integer, ___=True)",
-      "options": ["primary_key", "is_primary", "key", "main_key"],
-      "correctAnswer": "primary_key"
+      "title": "Question 3: Lazy Evaluation",
+      "prompt": "Fill in the method used to transform a standard Polars DataFrame into a LazyFrame for query optimization.",
+      "codeSnippet": "lazy_df = df.___ ()",
+      "options": [
+        "lazy",
+        "to_lazy",
+        "defer",
+        "optimize"
+      ],
+      "correctAnswer": "lazy"
     },
     {
-      "slideId": "PYTH_292_S5",
+      "slideId": "PY_292_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Rolling Back Transactions",
-      "prompt": "Which method reverts uncommitted changes when an exception occurs during a session?",
-      "options": ["session.rollback()", "session.undo()", "session.cancel()", "session.reset()"],
-      "correctAnswer": "session.rollback()"
+      "title": "Question 4: Memory Optimization",
+      "prompt": "Why is Polars significantly faster and more memory-efficient than traditional Pandas 1.x?",
+      "options": [
+        "It leverages Rust, Apache Arrow memory layout, and parallel query optimization",
+        "It converts all data into Python dictionaries",
+        "It forces all processing onto GPU only",
+        "It ignores type checking"
+      ],
+      "correctAnswer": "It leverages Rust, Apache Arrow memory layout, and parallel query optimization"
     },
     {
-      "slideId": "PYTH_292_S6",
+      "slideId": "PY_292_S6",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Querying All Records",
-      "prompt": "Fill in the query method to retrieve all matching database rows.",
-      "codeSnippet": "users = session.query(User).___()",
-      "options": ["all", "get", "fetch", "list"],
-      "correctAnswer": "all"
+      "title": "Question 5: Pydantic Schema Validation",
+      "prompt": "Fill in the base class used to construct data validation schemas in Pydantic.",
+      "codeSnippet": "from pydantic import ___\n\nclass UserSchema(___):\n    id: int",
+      "options": [
+        "BaseModel",
+        "Schema",
+        "DataClass",
+        "Model"
+      ],
+      "correctAnswer": "BaseModel"
     },
     {
-      "slideId": "PYTH_292_S7",
+      "slideId": "PY_292_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "SQLAlchemy Model Inheritance",
-      "prompt": "What declarative base class is traditionally used to define SQLAlchemy ORM models?",
-      "options": ["DeclarativeBase", "BaseModel", "SQLModel", "EntityBase"],
-      "correctAnswer": "DeclarativeBase"
+      "title": "Question 6: ASGI Web Servers",
+      "prompt": "Which production-grade ASGI web server is commonly paired with FastAPI to serve concurrent HTTP requests?",
+      "options": [
+        "Uvicorn",
+        "WSGI",
+        "Gunicorn-sync",
+        "Apache mod_wsgi"
+      ],
+      "correctAnswer": "Uvicorn"
+    },
+    {
+      "slideId": "PY_292_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: Kafka Message Publishing",
+      "prompt": "Fill in the core entity responsible for publishing events to Kafka topics.",
+      "codeSnippet": "producer = Kafka___ (bootstrap_servers='localhost:9092')",
+      "options": [
+        "Producer",
+        "Publisher",
+        "Sender",
+        "Writer"
+      ],
+      "correctAnswer": "Producer"
+    },
+    {
+      "slideId": "PY_292_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: Message Broker Protocols",
+      "prompt": "Which messaging protocol does RabbitMQ natively utilize for queue communication?",
+      "options": [
+        "AMQP",
+        "HTTP/2",
+        "gRPC",
+        "MQTT"
+      ],
+      "correctAnswer": "AMQP"
+    },
+    {
+      "slideId": "PY_292_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Async Session Context",
+      "prompt": "Fill in the session class used to issue asynchronous queries in SQLAlchemy 2.0.",
+      "codeSnippet": "async with Async___ (engine) as session:",
+      "options": [
+        "Session",
+        "Connection",
+        "Transaction",
+        "Client"
+      ],
+      "correctAnswer": "Session"
+    },
+    {
+      "slideId": "PY_292_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Alembic Migrations",
+      "prompt": "Which command-line utility is standard for managing database schema migrations alongside SQLAlchemy?",
+      "options": [
+        "Alembic",
+        "Flyway",
+        "Prisma",
+        "Django-Admin"
+      ],
+      "correctAnswer": "Alembic"
+    },
+    {
+      "slideId": "PY_292_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: Setting Cache Expiration (TTL)",
+      "prompt": "Fill in the Redis method parameter used to set Time-To-Live (TTL) in seconds.",
+      "codeSnippet": "r.set('session_token', 'xyz123', ___=3600)",
+      "options": [
+        "ex",
+        "ttl",
+        "expire",
+        "timeout"
+      ],
+      "correctAnswer": "ex"
+    },
+    {
+      "slideId": "PY_292_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: Cache Invalidation Strategies",
+      "prompt": "Which caching pattern updates the cache immediately when database data changes?",
+      "options": [
+        "Write-Through Caching",
+        "Cache-Aside (Lazy Loading)",
+        "Time-Based Eviction",
+        "Random Invalidation"
+      ],
+      "correctAnswer": "Write-Through Caching"
+    },
+    {
+      "slideId": "PY_292_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Secure Password Hashing",
+      "prompt": "Fill in the library function used to hash passwords securely using bcrypt or argon2.",
+      "codeSnippet": "from passlib.context import CryptContext\npwd_context = CryptContext(schemes=['___'])",
+      "options": [
+        "bcrypt",
+        "md5",
+        "sha1",
+        "plain"
+      ],
+      "correctAnswer": "bcrypt"
+    },
+    {
+      "slideId": "PY_292_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Role-Based Access Control (RBAC)",
+      "prompt": "How should administrative route protection be enforced in enterprise APIs?",
+      "options": [
+        "Via role verification claims embedded in authenticated JWT payloads or database checks",
+        "By relying on client-side frontend code to hide buttons",
+        "By using unencrypted HTTP basic auth headers",
+        "By masking database column names"
+      ],
+      "correctAnswer": "Via role verification claims embedded in authenticated JWT payloads or database checks"
     }
   ]
 }

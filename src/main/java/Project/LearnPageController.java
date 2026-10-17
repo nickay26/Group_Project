@@ -39,8 +39,29 @@ public class LearnPageController {
         refreshUserData();
         String activeCourseId = UserSession.getActiveCourseId();
         loadCoursePath(activeCourseId);
-        // ✅ ဖြေလက်စ lesson ကို scroll လုပ်ဖို့
         Platform.runLater(this::scrollToActiveLesson);
+    }
+
+    private boolean isUserPremium() {
+        return UserSession.getCurrentUser() != null && UserSession.getCurrentUser().isPremium();
+    }
+
+    private int getActiveLessonOrder(int completedCount) {
+        boolean premiumUser = isUserPremium();
+        System.out.println("🔍 [Debug] getActiveLessonOrder: completedCount=" + completedCount + ", isUserPremium=" + premiumUser);
+
+        for (Lesson lesson : currentLessons) {
+            System.out.println("   - Checking lesson: order=" + lesson.getLessonOrder() + ", title=" + lesson.getTitle() + ", isPremium=" + lesson.isPremium());
+            if (lesson.getLessonOrder() > completedCount) {
+                if (!premiumUser && lesson.isPremium()) {
+                    System.out.println("     ⏩ Skipping premium lesson: " + lesson.getTitle());
+                    continue;
+                }
+                System.out.println("     ⭐ Selected active lesson: " + lesson.getTitle() + " (Order: " + lesson.getLessonOrder() + ")");
+                return lesson.getLessonOrder();
+            }
+        }
+        return completedCount + 1;
     }
 
     private void scrollToActiveLesson() {
@@ -49,24 +70,24 @@ public class LearnPageController {
         int userId = UserSession.getUserId();
         int completedCount = DatabaseManager.getCompletedLessonCount(
                 userId, UserSession.getActiveCourseId());
-// ✅ ဖြေလက်စ (ACTIVE) lesson ကို ရှာ
+
+        int activeOrder = getActiveLessonOrder(completedCount);
+
         int targetIndex = -1;
         for (int i = 0; i < currentLessons.size(); i++) {
             Lesson lesson = currentLessons.get(i);
-            if (lesson.getLessonOrder() == completedCount + 1) {
+            if (lesson.getLessonOrder() == activeOrder) {
                 targetIndex = i;
                 break;
             }
         }
-        // ✅ ဘာမှ မဖြေရသေးရင် 1st lesson (index 0)
+
         if (targetIndex == -1) {
             targetIndex = 0;
         }
 
-        // ✅ Scroll position တွက်
         double targetY = 40.0 + (targetIndex * VERTICAL_SPACING);
 
-        // ✅ ScrollPane ရဲ့ vvalue ကို set
         if (roadmapScrollPane != null) {
             double totalHeight = roadmapPane.getPrefHeight();
             if (totalHeight > 0) {
@@ -74,7 +95,6 @@ public class LearnPageController {
                 roadmapScrollPane.setVvalue(Math.min(scrollValue, 1.0));
             }
         }
-
     }
 
     private void refreshUserData() {
@@ -252,9 +272,16 @@ public class LearnPageController {
     private String getLessonStatus(Lesson lesson, int completedCount) {
         if (lesson.getLessonOrder() <= completedCount) {
             return "COMPLETED";
-        } else if (lesson.getLessonOrder() == completedCount + 1) {
+        }
+
+        int activeOrder = getActiveLessonOrder(completedCount);
+        if (lesson.getLessonOrder() == activeOrder) {
             return "ACTIVE";
         } else {
+            // အကယ်၍ လော့ခ်ကျနေပြီး ပရီမီယံလည်း ဖြစ်နေပါက
+            if (lesson.isPremium()) {
+                return "PREMIUM_LOCKED";
+            }
             return "LOCKED";
         }
     }
@@ -293,7 +320,17 @@ public class LearnPageController {
                 stack.setStyle("-fx-cursor: hand;");
                 break;
 
-            default: // LOCKED
+            case "PREMIUM_LOCKED": // ⭐ ပရီမီယံ လော့ခ်ကျနေသော သင်ခန်းစာများအတွက် ရွှေရောင်စတိုင်
+                fillColor = Color.web("#1E293B");
+                strokeColor = Color.web("#F59E0B"); // ရွှေရောင်/လိမ္မော်ရောင် ဘောင်
+                icon = "⭐"; // သို့မဟုတ် 👑 ပုံစံသုံးနိုင်ပါသည်
+                glow.setColor(Color.web("#F59E0B", 0.5));
+                glow.setRadius(18);
+                stack.setEffect(glow);
+                stack.setStyle("-fx-cursor: hand;");
+                break;
+
+            default: // LOCKED (ရိုးရိုး အခမဲ့သင်ခန်းစာ လော့ခ်ကျခြင်း)
                 fillColor = Color.web("#1E293B");
                 strokeColor = Color.web("#475569");
                 icon = "🔒";
@@ -320,7 +357,10 @@ public class LearnPageController {
 
         stack.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                if (!status.equals("LOCKED")) {
+                if (status.equals("PREMIUM_LOCKED")) {
+                    // ပရီမီယံသင်ခန်းစာကို နှိပ်မိပါက Upgrade Dialog ကို ခေါ်ပြရန်
+                    DialogUtils.showUpgradePromptDialog("This next lesson is a Supernova Premium feature! Upgrade your plan to continue.");
+                } else if (!status.equals("LOCKED")) {
                     openLessonPage(lesson);
                 }
             } else if (event.getButton() == MouseButton.SECONDARY) {

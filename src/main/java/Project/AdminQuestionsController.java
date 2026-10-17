@@ -27,6 +27,10 @@ public class AdminQuestionsController {
     @FXML private TextField optA, optB, optC, optD;
     @FXML private TextField correctAnswerInput;
 
+    // CheckBoxes for Premium and Interactive
+    @FXML private CheckBox isPremiumCheckBox;
+    @FXML private CheckBox isInteractiveCheckBox;
+
     // TableView Components
     @FXML private TableView<Slide> slideTable;
     @FXML private TableColumn<Slide, String> colId;
@@ -89,7 +93,6 @@ public class AdminQuestionsController {
         return category.toUpperCase() + "_";
     }
 
-    // ✅ FIXED: External File Path သို့ ရေးသားခြင်းဖြစ်၍ .jar သို့မဟုတ် IDE နှစ်ခုလုံးတွင် Error မတက်ပါ
     private File getLessonsDirectory() {
         File folder = new File("src/main/resources/Lessons");
         if (!folder.exists() || !folder.isDirectory()) {
@@ -145,7 +148,6 @@ public class AdminQuestionsController {
         }
     }
 
-    // ✅ FIXED: MULTIPLE_CHOICE မေးခွန်းများတွင်လည်း Code Snippet Area ကို ဖွင့်ပေးထားပါသည်
     @FXML
     private void handleTypeChange() {
         String type = typeCombo.getValue();
@@ -191,8 +193,15 @@ public class AdminQuestionsController {
             try (Reader reader = new FileReader(file)) {
                 currentLesson = gson.fromJson(reader, Lesson.class);
 
-                if (currentLesson != null && currentLesson.getSlides() != null) {
-                    slideObservableList.setAll(currentLesson.getSlides());
+                if (currentLesson != null) {
+                    if (isPremiumCheckBox != null) {
+                        isPremiumCheckBox.setSelected(currentLesson.isPremium());
+                    }
+                    if (currentLesson.getSlides() != null) {
+                        slideObservableList.setAll(currentLesson.getSlides());
+                    } else {
+                        slideObservableList.clear();
+                    }
                 } else {
                     slideObservableList.clear();
                 }
@@ -202,6 +211,9 @@ public class AdminQuestionsController {
         } else {
             slideObservableList.clear();
             currentLesson = null;
+            if (isPremiumCheckBox != null) {
+                isPremiumCheckBox.setSelected(false);
+            }
         }
 
         clearInputs();
@@ -234,6 +246,7 @@ public class AdminQuestionsController {
             String title = slideTitleInput != null ? slideTitleInput.getText() : "";
             String prompt = promptArea != null ? promptArea.getText() : "";
             String codeSnippet = (codeSnippetArea != null) ? codeSnippetArea.getText() : null;
+            boolean isInteractive = (isInteractiveCheckBox != null) && isInteractiveCheckBox.isSelected();
 
             List<String> options = null;
             String correctAnswer = null;
@@ -249,6 +262,7 @@ public class AdminQuestionsController {
             }
 
             Slide newSlide = new Slide(slideId, type, title, prompt, codeSnippet, options, correctAnswer);
+            newSlide.setInteractive(isInteractive);
 
             if (selectedSlideForEdit != null) {
                 int index = slideObservableList.indexOf(selectedSlideForEdit);
@@ -271,51 +285,6 @@ public class AdminQuestionsController {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Save လုပ်ရာတွင် အမှားအယွင်း ဖြစ်ပေါ်ခဲ့သည်: " + e.getMessage());
         }
-    }
-
-    @FXML
-    private void handleDeleteLessonFile() {
-        if (categoryCombo == null || lessonCombo == null) return;
-
-        String category = categoryCombo.getValue();
-        String lessonNo = lessonCombo.getValue();
-
-        if (category == null || lessonNo == null || lessonNo.trim().isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Selection Error", "ကျေးဇူးပြု၍ ဖျက်လိုသော Lesson ကို ရွေးချယ်ပါ!");
-            return;
-        }
-
-        String prefix = getPrefixForCategory(category);
-        String fileName = prefix + lessonNo.trim() + ".json";
-        File folder = getLessonsDirectory();
-        File targetFile = new File(folder, fileName);
-
-        if (!targetFile.exists()) {
-            showAlert(Alert.AlertType.ERROR, "File Not Found", "Lesson file မရှိပါ: " + fileName);
-            return;
-        }
-
-        // Confirmation Dialog
-        Alert confirmAlert = new Alert(
-                Alert.AlertType.CONFIRMATION,
-                "ဒီ Lesson File တစ်ခုလုံး (" + fileName + ") ကို ဖျက်ရန် သေချာပါသလား?\nဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။",
-                ButtonType.YES,
-                ButtonType.NO
-        );
-
-        confirmAlert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                if (targetFile.delete()) {
-                    slideObservableList.clear();
-                    clearInputs();
-                    loadLessonList(); // Dropdown list ကို Refresh လုပ်ပါမည်
-
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Lesson File (" + fileName + ") ကို အောင်မြင်စွာ ဖျက်ပြီးပါပြီ!");
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Error", "File ဖျက်ရာတွင် အမှားအယွင်း ဖြစ်ပေါ်ခဲ့ပါသည်။");
-                }
-            }
-        });
     }
 
     @FXML
@@ -362,6 +331,10 @@ public class AdminQuestionsController {
             currentLesson.setTitle(category + " Lesson " + lessonNo);
         }
 
+        if (isPremiumCheckBox != null) {
+            currentLesson.setPremium(isPremiumCheckBox.isSelected());
+        }
+
         currentLesson.setSlides(new ArrayList<>(slideObservableList));
 
         try (Writer writer = new FileWriter(file)) {
@@ -381,6 +354,10 @@ public class AdminQuestionsController {
         if (codeSnippetArea != null) codeSnippetArea.setText(slide.getCodeSnippet() != null ? slide.getCodeSnippet() : "");
         if (correctAnswerInput != null) correctAnswerInput.setText(slide.getCorrectAnswer() != null ? slide.getCorrectAnswer() : "");
 
+        if (isInteractiveCheckBox != null) {
+            isInteractiveCheckBox.setSelected(slide.isInteractive());
+        }
+
         List<String> opts = slide.getOptions();
         if (opts != null) {
             if (optA != null) optA.setText(opts.size() > 0 ? opts.get(0) : "");
@@ -392,7 +369,6 @@ public class AdminQuestionsController {
         }
     }
 
-    // ✅ ADDED: FXML မှ "New Slide" သို့မဟုတ် "Clear Selection" Button ဖြင့် ချိတ်ဆက်နိုင်သော မက်သဒ်
     @FXML
     private void handleNewSlide() {
         clearInputs();
@@ -405,6 +381,7 @@ public class AdminQuestionsController {
         if (slideTitleInput != null) slideTitleInput.clear();
         if (promptArea != null) promptArea.clear();
         if (codeSnippetArea != null) codeSnippetArea.clear();
+        if (isInteractiveCheckBox != null) isInteractiveCheckBox.setSelected(false);
         clearOptionInputs();
     }
 

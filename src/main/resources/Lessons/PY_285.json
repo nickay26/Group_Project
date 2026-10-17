@@ -1,66 +1,203 @@
 {
-  "lessonId": "PYTH_285",
-  "title": "Module Review Quiz: Advanced Decorators & Metaprogramming",
+  "lessonId": "PY_285",
+  "title": "Data Structures & Function Foundations (108 to 114)",
   "isPremium": true,
   "slides": [
     {
-      "slideId": "PYTH_285_S1",
+      "slideId": "PY_285_S1",
       "type": "CONCEPT",
-      "title": "Module Overview: Decorators & Metaprogramming",
-      "prompt": "Review decorators, arguments in decorators, class-based decorators, `@wraps`, and metaclasses.",
-      "codeSnippet": "from functools import wraps\ndef my_dec(f):\n    @wraps(f)\n    def wrapper(*args, **kwargs):\n        return f(*args, **kwargs)\n    return wrapper"
+      "title": "Data Structures & Function Foundations (108 to 114)",
+      "prompt": "Assessment covering Functions, Dictionaries, Tuples & Sets, String Formatting, List Comprehensions, File I/O, and Exception Handling.",
+      "codeSnippet": "# Python Intermediate Assessment\nprint('Starting Comprehensive Test')"
     },
     {
-      "slideId": "PYTH_285_S2",
+      "slideId": "PY_285_S2",
       "type": "FILL_IN_BLANK",
-      "title": "Preserving Metadata",
-      "prompt": "Fill in the decorator from `functools` used to preserve original function name and docstring.",
-      "codeSnippet": "@___(func)\ndef wrapper(*args, **kwargs): pass",
-      "options": ["wraps", "copy_meta", "preserve", "keep"],
-      "correctAnswer": "wraps"
+      "title": "Question 1: Function Definition",
+      "prompt": "Fill in the keyword used to define a custom function in Python.",
+      "codeSnippet": "___ greet(name):\n    print(\"Hello \", name)",
+      "options": [
+        "def",
+        "function",
+        "func",
+        "create"
+      ],
+      "correctAnswer": "def"
     },
     {
-      "slideId": "PYTH_285_S3",
+      "slideId": "PY_285_S3",
       "type": "MULTIPLE_CHOICE",
-      "title": "Decorator Syntax",
-      "prompt": "Which symbol is used to apply a decorator to a Python function?",
-      "options": ["@", "#", "$", "&"],
-      "correctAnswer": "@"
+      "title": "Question 2: Return Statement",
+      "prompt": "Which keyword sends a value back from a function to its caller?",
+      "options": [
+        "return",
+        "send",
+        "yield",
+        "output"
+      ],
+      "correctAnswer": "return"
     },
     {
-      "slideId": "PYTH_285_S4",
+      "slideId": "PY_285_S4",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
-      "title": "Class Decorator Method",
-      "prompt": "Fill in the magic method required to make a class instance callable as a decorator wrapper.",
-      "codeSnippet": "def ___(self, *args, **kwargs):",
-      "options": ["__call__", "__init__", "__exec__", "__run__"],
-      "correctAnswer": "__call__"
+      "title": "Question 3: Accessing Dictionary Values",
+      "prompt": "Fill in the key used to access the age from the dictionary.",
+      "codeSnippet": "user = {\"name\": \"Bob\", \"age\": 25}\nprint(user[___])",
+      "options": [
+        "\"age\"",
+        "age",
+        "1",
+        "get_age"
+      ],
+      "correctAnswer": "\"age\""
     },
     {
-      "slideId": "PYTH_285_S5",
+      "slideId": "PY_285_S5",
       "type": "MULTIPLE_CHOICE",
-      "title": "Metaclass Base Type",
-      "prompt": "Which base class must custom metaclasses inherit from in Python?",
-      "options": ["type", "object", "Meta", "BaseClass"],
-      "correctAnswer": "type"
+      "title": "Question 4: Dictionary Syntax",
+      "prompt": "Which brackets are used to create a dictionary literal in Python?",
+      "options": [
+        "Curly braces {}",
+        "Square brackets []",
+        "Parentheses ()",
+        "Angle brackets <>"
+      ],
+      "correctAnswer": "Curly braces {}"
     },
     {
-      "slideId": "PYTH_285_S6",
+      "slideId": "PY_285_S6",
       "type": "FILL_IN_BLANK",
-      "title": "Assigning Metaclass",
-      "prompt": "Fill in the keyword argument used in a class definition header to specify a custom metaclass.",
-      "codeSnippet": "class CustomClass(metaclass=___):",
-      "options": ["MetaType", "type", "Object", "Base"],
-      "correctAnswer": "MetaType"
+      "title": "Question 5: Creating Tuples",
+      "prompt": "Fill in the correct enclosure for defining a tuple.",
+      "codeSnippet": "coords = ___10, 20___",
+      "options": [
+        "()",
+        "[]",
+        "{}",
+        "<>"
+      ],
+      "correctAnswer": "()"
     },
     {
-      "slideId": "PYTH_285_S7",
+      "slideId": "PY_285_S7",
       "type": "MULTIPLE_CHOICE",
-      "title": "Decorator Arguments Structure",
-      "prompt": "How many nested function levels are typically needed for a decorator that accepts arguments?",
-      "options": ["3 levels", "2 levels", "1 level", "4 levels"],
-      "correctAnswer": "3 levels"
+      "title": "Question 6: Tuple Immutability",
+      "prompt": "What happens if you try to modify an element of a tuple (e.g., my_tuple[0] = 5)?",
+      "options": [
+        "Raises a TypeError",
+        "Updates the tuple successfully",
+        "Converts the tuple to a list",
+        "Silently fails without error"
+      ],
+      "correctAnswer": "Raises a TypeError"
+    },
+    {
+      "slideId": "PY_285_S8",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 7: f-String Prefix",
+      "prompt": "Fill in the prefix letter required to create an formatted string literal.",
+      "codeSnippet": "msg = ___\"User: {name}\"",
+      "options": [
+        "f",
+        "r",
+        "b",
+        "s"
+      ],
+      "correctAnswer": "f"
+    },
+    {
+      "slideId": "PY_285_S9",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 8: String Splitting",
+      "prompt": "What does 'a,b,c'.split(',') return?",
+      "options": [
+        "['a', 'b', 'c']",
+        "('a', 'b', 'c')",
+        "{'a', 'b', 'c'}",
+        "'a b c'"
+      ],
+      "correctAnswer": "['a', 'b', 'c']"
+    },
+    {
+      "slideId": "PY_285_S10",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 9: Basic List Comprehension",
+      "prompt": "Fill in the missing keyword in the list comprehension expression.",
+      "codeSnippet": "nums = [x * 2 ___ x in range(5)]",
+      "options": [
+        "for",
+        "in",
+        "each",
+        "loop"
+      ],
+      "correctAnswer": "for"
+    },
+    {
+      "slideId": "PY_285_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 10: Filtered List Comprehension",
+      "prompt": "What will [x for x in range(5) if x > 2] evaluate to?",
+      "options": [
+        "[3, 4]",
+        "[2, 3, 4]",
+        "[0, 1, 2]",
+        "[3, 4, 5]"
+      ],
+      "correctAnswer": "[3, 4]"
+    },
+    {
+      "slideId": "PY_285_S12",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 11: File Open Function",
+      "prompt": "Fill in the function used to open a file stream.",
+      "codeSnippet": "file = ___(\"config.json\", \"r\")",
+      "options": [
+        "open",
+        "read_file",
+        "file",
+        "load"
+      ],
+      "correctAnswer": "open"
+    },
+    {
+      "slideId": "PY_285_S13",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 12: File Append Mode",
+      "prompt": "Which file mode flag appends new content to the end of an existing file?",
+      "options": [
+        "\"a\"",
+        "\"w\"",
+        "\"r\"",
+        "\"x\""
+      ],
+      "correctAnswer": "\"a\""
+    },
+    {
+      "slideId": "PY_285_S14",
+      "type": "FILL_IN_BLANK",
+      "title": "Question 13: Try Keyword",
+      "prompt": "Fill in the keyword to start a code block monitored for exceptions.",
+      "codeSnippet": "___\n    val = int(input())\nexcept ValueError:\n    print(\"Invalid number\")",
+      "options": [
+        "try",
+        "catch",
+        "do",
+        "test"
+      ],
+      "correctAnswer": "try"
+    },
+    {
+      "slideId": "PY_285_S15",
+      "type": "MULTIPLE_CHOICE",
+      "title": "Question 14: Catching Exceptions",
+      "prompt": "Which keyword is used in Python to catch and handle exceptions?",
+      "options": [
+        "except",
+        "catch",
+        "handle",
+        "rescue"
+      ],
+      "correctAnswer": "except"
     }
   ]
 }
