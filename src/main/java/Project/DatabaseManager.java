@@ -20,6 +20,10 @@ public class DatabaseManager {
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
+    // ==========================================
+    // 1. ADMIN ANALYTICS
+    // ==========================================
+
     public static JSONObject getAdminAnalytics() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
@@ -39,7 +43,7 @@ public class DatabaseManager {
     }
 
     // ==========================================
-    // 1. USER AUTHENTICATION, FETCH & SYNC
+    // 2. USER AUTHENTICATION & PROFILE MANAGEMENT
     // ==========================================
 
     public static User getUserById(int userId) {
@@ -138,21 +142,25 @@ public class DatabaseManager {
         return null;
     }
 
-    public static String getLastActiveCourseId(int userId) {
-        if (userId <= 0) return "CPP_BASIC";
-
+    public static boolean updateUserInfo(int userId, String name, String email) {
         try {
-            String response = sendGetRequest("/api/user/last-course/" + userId);
-            if (!response.isEmpty()) {
-                JSONObject json = new JSONObject(response);
-                if (json.has("course_id")) {
-                    return json.getString("course_id");
-                }
-            }
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("name", name);
+            body.put("email", email);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return "CPP_BASIC";
     }
 
     public static boolean updateUserInfoByAdmin(int userId, String name, String email, String role, String planType, int xp, int coin) {
@@ -180,13 +188,16 @@ public class DatabaseManager {
         }
     }
 
-    // Save profile information (Name, Email)
-    public static boolean updateUserInfo(int userId, String name, String email) {
+    public static boolean updateUserProfile(int userId, String name, String profile) {
         try {
             JSONObject body = new JSONObject();
             body.put("user_id", userId);
             body.put("name", name);
-            body.put("email", email);
+            if (profile != null) {
+                body.put("profile", profile);
+            } else {
+                body.put("profile", JSONObject.NULL);
+            }
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/api/user/update"))
@@ -198,11 +209,52 @@ public class DatabaseManager {
             return response.statusCode() == 200;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateUserProfile(int userId, String imagePath) {
+        try {
+            String url = BASE_URL + "/api/user/update-profile-path";
+            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
+            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .header("Accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 
-    // Change user password
+    public static boolean updateUserProfilePath(int userId, String imagePath) {
+        try {
+            String url = BASE_URL + "/api/user/update-profile-path";
+            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
+            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Content-Type", "application/json")
+                    .header("Accept", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean changePassword(int userId, String oldPassword, String newPassword) {
         try {
             JSONObject body = new JSONObject();
@@ -224,94 +276,26 @@ public class DatabaseManager {
         }
     }
 
-    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
+    // ==========================================
+    // 3. COURSES, LESSONS & REVIEWS
+    // ==========================================
+
+    public static String getLastActiveCourseId(int userId) {
+        if (userId <= 0) return "CPP_BASIC";
+
         try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("coins", coinsToAdd);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            boolean success = response.statusCode() == 200 || response.statusCode() == 201;
-
-            // ⭐️ CRITICAL FIX: Instantly update Java Memory so UI reflects new coins
-            if (success && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
-                User user = UserSession.getCurrentUser();
-                user.setCoin(user.getCoin() + coinsToAdd);
-
-                // Update Top Bar UI if loaded
-                javafx.application.Platform.runLater(() -> {
-                    if (MainLayoutController.getInstance() != null) {
-                        MainLayoutController.getInstance().updateHeaderStats();
-                    }
-                });
+            String response = sendGetRequest("/api/user/last-course/" + userId);
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                if (json.has("course_id")) {
+                    return json.getString("course_id");
+                }
             }
-
-            return success;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return "CPP_BASIC";
     }
-
-    public static int getCompletedLessonCount(int userId, String courseId) {
-        List<Course> courses = getCoursesForUser(userId);
-        for (Course c : courses) {
-            if (c.getCourseId().equalsIgnoreCase(courseId)) {
-                return c.getCompletedLessons();
-            }
-        }
-        return 0;
-    }
-    public static List<Course> getCompletedCourses(int userId) {
-        List<Course> completed = new ArrayList<>();
-        List<Course> allCourses = getCoursesForUser(userId);
-
-        for (Course c : allCourses) {
-            if (c.getProgressPercent() >= 100) {
-                completed.add(c);
-            }
-        }
-        return completed;
-    }
-    public static boolean updateUserProfile(int userId, String imagePath) {
-        try {
-            String url = BASE_URL + "/api/user/update-profile-path";
-
-            String safePath = (imagePath != null) ? imagePath.replace("\\", "\\\\") : "";
-            String jsonInputString = String.format("{\"user_id\": %d, \"profile_path\": \"%s\"}", userId, safePath);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", "application/json")
-                    .header("Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                System.out.println("Profile updated successfully: " + response.body());
-                return true;
-            } else {
-                System.err.println("Failed to update profile. Server responded with status: " + response.statusCode());
-                return false;
-            }
-        } catch (Exception e) {
-            System.err.println("Error updating profile in DatabaseManager: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // ==========================================
-    // 2. COURSES & LESSONS
-    // ==========================================
 
     public static List<Course> getCoursesForUser(int userId) {
         List<Course> courses = new ArrayList<>();
@@ -393,6 +377,28 @@ public class DatabaseManager {
         return lessons;
     }
 
+    public static int getCompletedLessonCount(int userId, String courseId) {
+        List<Course> courses = getCoursesForUser(userId);
+        for (Course c : courses) {
+            if (c.getCourseId().equalsIgnoreCase(courseId)) {
+                return c.getCompletedLessons();
+            }
+        }
+        return 0;
+    }
+
+    public static List<Course> getCompletedCourses(int userId) {
+        List<Course> completed = new ArrayList<>();
+        List<Course> allCourses = getCoursesForUser(userId);
+
+        for (Course c : allCourses) {
+            if (c.getProgressPercent() >= 100) {
+                completed.add(c);
+            }
+        }
+        return completed;
+    }
+
     public static void completeLessonAndAddXP(int userId, String courseId, int lessonOrder, int xpAmount, int coinsAmount) {
         try {
             JSONObject body = new JSONObject();
@@ -410,14 +416,11 @@ public class DatabaseManager {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // ⭐ CRITICAL FIX: Server တွင် Streak အပ်ဒိတ်ဖြစ်သွားသည်နှင့်
-            // Local UserSession ကိုပါ Server မှ User Profile အသစ်ဖြင့် ချက်ချင်း Sync လုပ်ပေးခြင်း
             if (response.statusCode() == 200 || response.statusCode() == 201) {
                 User updatedUser = getUserById(userId);
                 if (updatedUser != null && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
                     UserSession.setCurrentUser(updatedUser);
 
-                    // UI Header တွင် Streak နှင့် အခြား Stats များကို ချက်ချင်း ပြောင်းလဲပြသရန်
                     javafx.application.Platform.runLater(() -> {
                         if (MainLayoutController.getInstance() != null) {
                             MainLayoutController.getInstance().updateHeaderStats();
@@ -432,224 +435,6 @@ public class DatabaseManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static boolean refillBrainsWithCoins(int userId, int costCoins, int addBrains) {
-        // 1. Valid User ID စစ်ဆေးခြင်း
-        if (userId <= 0 && UserSession.getCurrentUser() != null) {
-            userId = UserSession.getCurrentUser().getUserId();
-        }
-
-        try {
-            // Backend API ဆီ Request ပို့ကြည့်မည်
-            String response = ApiClient.refillBrainsAsync(userId, costCoins).join();
-
-            if (response != null && !response.toLowerCase().contains("error")) {
-                updateLocalSession(costCoins, addBrains);
-                return true;
-            }
-        } catch (Exception e) {
-            System.err.println("API Connection Failed, switching to local state update: " + e.getMessage());
-        }
-
-        // 2. Server မရှိပါက (သို့မဟုတ် API Error ဖြစ်ပါက) Local Session ထဲတွင် တိုက်ရိုက် နှုတ်/ဖြည့် ပေးမည်
-        if (UserSession.getCurrentUser() != null) {
-            int currentCoins = UserSession.getCurrentUser().getCoin();
-            if (currentCoins >= costCoins) {
-                updateLocalSession(costCoins, addBrains);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private static void updateLocalSession(int costCoins, int addBrains) {
-        if (UserSession.getCurrentUser() != null) {
-            int newCoins = Math.max(0, UserSession.getCurrentUser().getCoin() - costCoins);
-            int currentBrains = UserSession.getCurrentUser().getBrainCount();
-
-            UserSession.getCurrentUser().setCoin(newCoins);
-            UserSession.getCurrentUser().setBrainCount(Math.min(5, currentBrains + addBrains));
-        }
-    }
-
-    // ==========================================
-    // 3. PLAYGROUND PROJECTS
-    // ==========================================
-
-    public static List<Project> getUserProjects(int userId) {
-        List<Project> projects = new ArrayList<>();
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/projects"))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                JSONArray arr = new JSONArray(response.body());
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject obj = arr.getJSONObject(i);
-                    projects.add(new Project(
-                            obj.has("project_id") ? obj.getInt("project_id") : obj.optInt("Project_ID", 0),
-                            obj.has("User_id") ? obj.getInt("User_id") : obj.optInt("user_id", userId),
-                            obj.optString("title", obj.optString("Title", "Untitled Project")),
-                            obj.optString("Language", obj.optString("language", "C++")),
-                            obj.optString("Code_Content", obj.optString("code_content", ""))
-                    ));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return projects;
-    }
-
-    public static Project createProject(int userId, String title, String language, String codeContent) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("title", title);
-            body.put("language", language);
-            body.put("code_content", codeContent);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/projects/create"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 201) {
-                JSONObject res = new JSONObject(response.body());
-                int projectId = res.optInt("project_id", res.optInt("Project_ID", 0));
-                return new Project(
-                        projectId,
-                        userId,
-                        title,
-                        language,
-                        codeContent
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static boolean deleteProject(int projectId) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
-                    .DELETE()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean updateProjectCode(int projectId, String codeContent) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("project_id", projectId);
-            body.put("code_content", codeContent);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/projects/update"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static boolean updateUserProfile(int userId, String name, String profile) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("name", name);
-            if (profile != null) {
-                body.put("profile", profile);
-            } else {
-                body.put("profile", JSONObject.NULL);
-            }
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/update"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    private static String sendGetRequest(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            return response.body();
-        }
-        return "";
-    }
-
-    private static User mapJsonToUser(JSONObject obj) {
-        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
-        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
-        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
-        String profile = obj.optString("Profile", obj.optString("profile", null));
-        int xp = obj.optInt("XP", obj.optInt("xp", 0));
-        int streak = obj.optInt("Streak", obj.optInt("streak", 0));
-
-        int coin = 0;
-        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
-        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
-        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
-        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
-
-        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
-        String planType = obj.optString("plan_type", obj.optString("Plan_Type", "FREE"));
-        String role = obj.optString("role", obj.optString("Role", "USER"));
-
-        // ⭐ Subscription Type နဲ့ Expiry Date ထည့်
-        String subscriptionType = obj.optString("subscription_type",
-                obj.optString("Subscription_Type", "free"));
-        String premiumExpiry = obj.optString("premium_expiry",
-                obj.optString("Premium_Expiry", null));
-
-        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
-        user.setPlanType(planType);
-        user.setRole(role);
-        user.setSubscriptionType(subscriptionType);
-        user.setPremiumExpiry(premiumExpiry);
-
-        // ⭐ isPremium Flag ကို Plan Type အလိုက် သတ်မှတ်
-        boolean isPremium = "PREMIUM".equalsIgnoreCase(planType)
-                || "monthly".equalsIgnoreCase(subscriptionType)
-                || "yearly".equalsIgnoreCase(subscriptionType);
-        user.setPremium(isPremium);
-
-        return user;
     }
 
     public static boolean addLessonToReview(int userId, String courseId, String lessonId) {
@@ -712,8 +497,287 @@ public class DatabaseManager {
     }
 
     // ==========================================
-    // 5. PREMIUM & PAYMENTS
+    // 4. PLAYGROUND PROJECTS
     // ==========================================
+
+    public static List<Project> getUserProjects(int userId) {
+        List<Project> projects = new ArrayList<>();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/projects"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                JSONArray arr = new JSONArray(response.body());
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    projects.add(new Project(
+                            obj.has("project_id") ? obj.getInt("project_id") : obj.optInt("Project_ID", 0),
+                            obj.has("User_id") ? obj.getInt("User_id") : obj.optInt("user_id", userId),
+                            obj.optString("title", obj.optString("Title", "Untitled Project")),
+                            obj.optString("Language", obj.optString("language", "C++")),
+                            obj.optString("Code_Content", obj.optString("code_content", ""))
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return projects;
+    }
+
+    public static Project createProject(int userId, String title, String language, String codeContent) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("title", title);
+            body.put("language", language);
+            body.put("code_content", codeContent);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/create"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 201) {
+                JSONObject res = new JSONObject(response.body());
+                int projectId = res.optInt("project_id", res.optInt("Project_ID", 0));
+                return new Project(projectId, userId, title, language, codeContent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean deleteProject(int projectId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean updateProjectCode(int projectId, String codeContent) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("project_id", projectId);
+            body.put("code_content", codeContent);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/projects/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // ==========================================
+    // 5. BRAINS, COINS & ENERGY SYSTEM
+    // ==========================================
+
+    public static boolean addCoinsToUser(int userId, int coinsToAdd) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("coins", coinsToAdd);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/add-coins"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            boolean success = response.statusCode() == 200 || response.statusCode() == 201;
+
+            if (success && UserSession.getCurrentUser() != null && UserSession.getUserId() == userId) {
+                User user = UserSession.getCurrentUser();
+                user.setCoin(user.getCoin() + coinsToAdd);
+
+                javafx.application.Platform.runLater(() -> {
+                    if (MainLayoutController.getInstance() != null) {
+                        MainLayoutController.getInstance().updateHeaderStats();
+                    }
+                });
+            }
+
+            return success;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static JSONObject getBrainStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/brains"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject deductBrain(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject refillBrains(int userId, int cost) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("cost", cost);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean refillBrainsWithCoins(int userId, int costCoins, int addBrains) {
+        if (userId <= 0 && UserSession.getCurrentUser() != null) {
+            userId = UserSession.getCurrentUser().getUserId();
+        }
+
+        try {
+            String response = ApiClient.refillBrainsAsync(userId, costCoins).join();
+
+            if (response != null && !response.toLowerCase().contains("error")) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("API Connection Failed: " + e.getMessage());
+        }
+
+        if (UserSession.getCurrentUser() != null) {
+            int currentCoins = UserSession.getCurrentUser().getCoin();
+            if (currentCoins >= costCoins) {
+                updateLocalSession(costCoins, addBrains);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static void updateLocalSession(int costCoins, int addBrains) {
+        if (UserSession.getCurrentUser() != null) {
+            int newCoins = Math.max(0, UserSession.getCurrentUser().getCoin() - costCoins);
+            int currentBrains = UserSession.getCurrentUser().getBrainCount();
+
+            UserSession.getCurrentUser().setCoin(newCoins);
+            UserSession.getCurrentUser().setBrainCount(Math.min(5, currentBrains + addBrains));
+        }
+    }
+
+    public static boolean updateBrainCount(int userId, int newCount) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+            body.put("brain_count", newCount);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.statusCode() == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // ==========================================
+    // 6. AI ASK COUNTS & PREMIUM / PAYMENTS
+    // ==========================================
+
+    public static int getTodayAIAskCount(int userId) {
+        try {
+            String response = sendGetRequest("/api/users/" + userId + "/ai-ask-count");
+            if (!response.isEmpty()) {
+                JSONObject json = new JSONObject(response);
+                return json.optInt("ask_count", 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static void incrementAIAskCount(int userId) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("user_id", userId);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/ai-ask"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
+                    .build();
+
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static boolean subscribePremium(int userId, int planId, String durationType) {
         try {
@@ -756,6 +820,23 @@ public class DatabaseManager {
         return false;
     }
 
+    public static JSONObject checkPremiumStatus(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/check-premium"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return new JSONObject(response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean savePaymentScreenshot(int userId, String fileName, String method, int amount) {
         try {
             JSONObject body = new JSONObject();
@@ -779,167 +860,10 @@ public class DatabaseManager {
         return false;
     }
 
-    public static int getTodayAIAskCount(int userId) {
-        try {
-            String response = sendGetRequest("/api/users/" + userId + "/ai-ask-count");
-            if (!response.isEmpty()) {
-                JSONObject json = new JSONObject(response);
-                return json.optInt("ask_count", 0);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    /**
-     * AI မေးတဲ့အခါ Count တိုးခြင်း
-     */
-    public static void incrementAIAskCount(int userId) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/ai-ask"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     // ==========================================
-    // 5. BRAIN & ENERGY SYSTEM
+    // 7. CERTIFICATES & ASYNC WRAPPERS
     // ==========================================
 
-    /**
-     * Retrieves current brain count, coins, and premium status for a user.
-     */
-    public static JSONObject getBrainStatus(int userId) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/brains"))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                return new JSONObject(response.body());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * Deducts 1 brain upon an incorrect answer.
-     * Premium users are automatically exempted on the backend.
-     */
-    public static JSONObject deductBrain(int userId) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/brains/deduct"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                return new JSONObject(response.body());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * Spends user coins to refill brains to max capacity (5).
-     */
-    public static JSONObject refillBrains(int userId, int cost) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("cost", cost);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/brains/refill"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                return new JSONObject(response.body());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static boolean updateBrainCount(int userId, int newCount) {
-        try {
-            JSONObject body = new JSONObject();
-            body.put("user_id", userId);
-            body.put("brain_count", newCount);
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/brain/update"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.statusCode() == 200;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    // ============================================
-// ⭐ PREMIUM EXPIRY CHECK
-// ============================================
-
-    /**
-     * Premium သက်တမ်း ကုန်ဆုံးပြီလား စစ်ဆေးခြင်း
-     */
-    public static JSONObject checkPremiumStatus(int userId) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId + "/check-premium"))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                return new JSONObject(response.body());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static CompletableFuture<User> getUserByIdAsync(int userId) {
-        return CompletableFuture.supplyAsync(() -> getUserById(userId));
-    }
-
-    public static CompletableFuture<String> getLastActiveCourseIdAsync(int userId) {
-        return CompletableFuture.supplyAsync(() -> getLastActiveCourseId(userId));
-    }
-
-    // ==========================================
-    // CERTIFICATE SYSTEM
-    // ==========================================
     public static String checkAndIssueCertificate(int userId, String courseId) {
         try {
             String response = ApiClient.checkAndIssueCertificateAsync(userId, courseId).join();
@@ -965,5 +889,65 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return new JSONArray();
+    }
+
+    public static CompletableFuture<User> getUserByIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getUserById(userId));
+    }
+
+    public static CompletableFuture<String> getLastActiveCourseIdAsync(int userId) {
+        return CompletableFuture.supplyAsync(() -> getLastActiveCourseId(userId));
+    }
+
+    // ==========================================
+    // 8. PRIVATE UTILITY & MAPPING METHODS
+    // ==========================================
+
+    private static String sendGetRequest(String path) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            return response.body();
+        }
+        return "";
+    }
+
+    private static User mapJsonToUser(JSONObject obj) {
+        int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
+        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
+        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+        String profile = obj.optString("Profile", obj.optString("profile", null));
+        int xp = obj.optInt("XP", obj.optInt("xp", 0));
+        int streak = obj.optInt("Streak", obj.optString("streak", "0").isEmpty() ? 0 : Integer.parseInt(obj.optString("streak", "0")));
+
+        int coin = 0;
+        if (obj.has("coins") && !obj.isNull("coins")) coin = obj.optInt("coins");
+        else if (obj.has("Coin") && !obj.isNull("Coin")) coin = obj.optInt("Coin");
+        else if (obj.has("Coins") && !obj.isNull("Coins")) coin = obj.optInt("Coins");
+        else if (obj.has("coin") && !obj.isNull("coin")) coin = obj.optInt("coin");
+
+        int brainCount = obj.optInt("brain_count", obj.optInt("Brain_Count", 5));
+        String planType = obj.optString("plan_type", obj.optString("Plan_Type", "FREE"));
+        String role = obj.optString("role", obj.optString("Role", "USER"));
+
+        String subscriptionType = obj.optString("subscription_type", obj.optString("Subscription_Type", "free"));
+        String premiumExpiry = obj.optString("premium_expiry", obj.optString("Premium_Expiry", null));
+
+        User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
+        user.setPlanType(planType);
+        user.setRole(role);
+        user.setSubscriptionType(subscriptionType);
+        user.setPremiumExpiry(premiumExpiry);
+
+        boolean isPremium = "PREMIUM".equalsIgnoreCase(planType)
+                || "monthly".equalsIgnoreCase(subscriptionType)
+                || "yearly".equalsIgnoreCase(subscriptionType);
+        user.setPremium(isPremium);
+
+        return user;
     }
 }

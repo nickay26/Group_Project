@@ -12,6 +12,7 @@
     },
     {
       "slideId": "CPP_104_S2",
+      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Character Literal",
       "prompt": "Fill in the missing data type for single characters.",

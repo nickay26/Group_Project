@@ -84,7 +84,7 @@ public class MainLayoutController {
         }
     }
 
-    private void loadUserProfileImage() {
+    public void loadUserProfileImage() {
         User currentUser = UserSession.getCurrentUser();
         String profilePath = currentUser.getProfile();
         if (profilePath != null && !profilePath.trim().isEmpty() && !"null".equalsIgnoreCase(profilePath.trim())) {

@@ -24,7 +24,7 @@ public class ApiClient {
             .build();
 
     // ==========================================
-    // PROFILE IMAGE HELPERS & APIS
+    // PROFILE IMAGE HELPERS & APIS (OPTIMIZED)
     // ==========================================
 
     public static String getProfileImageUrl(String profilePath) {
@@ -45,6 +45,49 @@ public class ApiClient {
         return BASE_URL + "/uploads/profiles/" + trimmed;
     }
 
+    /**
+     * Compresses and resizes large images locally before uploading
+     * to prevent SSL timeouts and speed up network transmission.
+     */
+    private static File compressImage(File originalFile) {
+        try {
+            java.awt.image.BufferedImage originalImage = javax.imageio.ImageIO.read(originalFile);
+            if (originalImage == null) {
+                return originalFile; // Fallback if format isn't readable
+            }
+
+            int targetWidth = 300;
+            int targetHeight = 300;
+
+            int originalWidth = originalImage.getWidth();
+            int originalHeight = originalImage.getHeight();
+
+            // Skip compression if already small enough
+            if (originalWidth <= targetWidth && originalHeight <= targetHeight && originalFile.length() < 200 * 1024) {
+                return originalFile;
+            }
+
+            double ratio = (double) originalWidth / originalHeight;
+            if (ratio > 1) {
+                targetHeight = (int) (targetWidth / ratio);
+            } else {
+                targetWidth = (int) (targetHeight * ratio);
+            }
+
+            java.awt.image.BufferedImage resizedImage = new java.awt.image.BufferedImage(targetWidth, targetHeight, java.awt.image.BufferedImage.TYPE_INT_RGB);
+            java.awt.Graphics2D g2d = resizedImage.createGraphics();
+            g2d.drawImage(originalImage.getScaledInstance(targetWidth, targetHeight, java.awt.Image.SCALE_SMOOTH), 0, 0, null);
+            g2d.dispose();
+
+            File compressedFile = File.createTempFile("avatar_compressed_", ".jpg");
+            javax.imageio.ImageIO.write(resizedImage, "jpg", compressedFile);
+            return compressedFile;
+        } catch (Exception e) {
+            System.err.println("Image compression failed, using original: " + e.getMessage());
+            return originalFile;
+        }
+    }
+
     private static byte[] createMultipartBody(int userId, File file, String boundary) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         String lineFeed = "\r\n";
@@ -55,7 +98,7 @@ public class ApiClient {
 
         String mimeType = Files.probeContentType(file.toPath());
         if (mimeType == null) {
-            mimeType = "image/png";
+            mimeType = "image/jpeg";
         }
 
         baos.write(("--" + boundary + lineFeed).getBytes(StandardCharsets.UTF_8));
@@ -70,32 +113,41 @@ public class ApiClient {
     }
 
     public static CompletableFuture<String> uploadProfileImageAsync(int userId, File imageFile) {
-        try {
-            String boundary = "----JavaHttpClientBoundary" + System.currentTimeMillis();
-            byte[] multipartBody = createMultipartBody(userId, imageFile, boundary);
+        return CompletableFuture.supplyAsync(() -> {
+            File compressedFile = null;
+            try {
+                // 1. Compress image locally first
+                compressedFile = compressImage(imageFile);
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/user/upload-profile"))
-                    .header("Content-Type", "multipart/form-data; boundary=" + boundary)
-                    .POST(HttpRequest.BodyPublishers.ofByteArray(multipartBody))
-                    .build();
+                String boundary = "----JavaHttpClientBoundary" + System.currentTimeMillis();
+                byte[] multipartBody = createMultipartBody(userId, compressedFile, boundary);
 
-            return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                    .thenApply(HttpResponse::body)
-                    .exceptionally(ex -> {
-                        System.err.println("Upload Profile Error: " + ex.getMessage());
-                        return null;
-                    });
-        } catch (Exception e) {
-            CompletableFuture<String> failed = new CompletableFuture<>();
-            failed.completeExceptionally(e);
-            return failed;
-        }
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(BASE_URL + "/api/user/upload-profile"))
+                        .header("Content-Type", "multipart/form-data; boundary=" + boundary)
+                        .header("Connection", "keep-alive")
+                        .timeout(Duration.ofSeconds(30))
+                        .POST(HttpRequest.BodyPublishers.ofByteArray(multipartBody))
+                        .build();
+
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                return response.body();
+            } catch (Exception ex) {
+                System.err.println("Upload Profile Error: " + ex.getMessage());
+                return null;
+            } finally {
+                // Clean up temp compressed file if created
+                if (compressedFile != null && compressedFile != imageFile && compressedFile.exists()) {
+                    compressedFile.delete();
+                }
+            }
+        });
     }
 
     // ==========================================
-    // 1. EXECUTE PLAYGROUND CODE (ASYNC)
+    // 2. CODE EXECUTION & AI SERVICES (ASYNC)
     // ==========================================
+
     public static CompletableFuture<String> executeCodeAsync(String language, String code) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -115,9 +167,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 2. GEMINI AI CODE REVIEW (ASYNC)
-    // ==========================================
     public static CompletableFuture<String> reviewCodeAsync(String language, String code) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -138,9 +187,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 3. DIRECT CODE CHALLENGE GENERATION
-    // ==========================================
     public static CompletableFuture<String> generateCodeChallengeAsync(String language, String level) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -160,9 +206,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 4. PRACTICE QUESTIONS REVIEW API
-    // ==========================================
     public static CompletableFuture<String> reviewPracticeCodeAsync(String language, String code, String task) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -184,30 +227,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 5. SAVE PROJECT CODE
-    // ==========================================
-    public static CompletableFuture<String> saveProjectCodeAsync(int projectId, String codeContent) {
-        JSONObject body = new JSONObject();
-        body.put("code_content", codeContent);
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
-                .header("Content-Type", "application/json")
-                .PUT(HttpRequest.BodyPublishers.ofString(body.toString()))
-                .build();
-
-        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .exceptionally(ex -> {
-                    System.err.println("Save Project Error: " + ex.getMessage());
-                    return null;
-                });
-    }
-
-    // ==========================================
-    // 6. SINGLE QUESTION GENERATION
-    // ==========================================
     public static CompletableFuture<String> generateQuestionAsync(String language, String topic, int level) {
         String[] types = {"fill-blank", "drag-drop", "write-code"};
         String type = types[(int)(Math.random() * types.length)];
@@ -232,9 +251,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 7. BATCH AI QUESTIONS GENERATION
-    // ==========================================
     public static CompletableFuture<String> fetchAiQuestionsBatchAsync(String language, String level, int count) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -256,8 +272,31 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 8. MATCHMAKING ROOM CREATION & JOINING
+    // 3. PROJECT MANAGEMENT (ASYNC)
     // ==========================================
+
+    public static CompletableFuture<String> saveProjectCodeAsync(int projectId, String codeContent) {
+        JSONObject body = new JSONObject();
+        body.put("code_content", codeContent);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/projects/" + projectId))
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.ofString(body.toString()))
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Save Project Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
+    // ==========================================
+    // 4. MATCHMAKING & ROOMS (ASYNC)
+    // ==========================================
+
     public static CompletableFuture<String> createMatchRoomAsync(String language, String level) {
         JSONObject body = new JSONObject();
         body.put("language", language);
@@ -293,45 +332,9 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 9. AI TEXT CLEANING HELPER METHOD
+    // 5. BRAIN & ENERGY SYSTEM (ASYNC)
     // ==========================================
-    public static String cleanAndFormatAiText(String rawResponse) {
-        if (rawResponse == null || rawResponse.trim().isEmpty()) {
-            return "";
-        }
 
-        String extractedText = rawResponse;
-
-        try {
-            JSONObject json = new JSONObject(rawResponse);
-            if (json.has("review")) {
-                extractedText = json.getString("review");
-            } else if (json.has("result")) {
-                extractedText = json.getString("result");
-            } else if (json.has("explanation")) {
-                extractedText = json.getString("explanation");
-            } else if (json.has("output")) {
-                extractedText = json.getString("output");
-            }
-        } catch (Exception e) {
-            // Raw text fallback
-        }
-
-        return extractedText
-                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")
-                .replaceAll("###\\s*", "")
-                .replaceAll("##\\s*", "")
-                .replaceAll("#\\s*", "")
-                .replaceAll("```[a-zA-Z]*", "")
-                .replaceAll("`", "")
-                .replaceAll("\\$\\$(.*?)\\$\\$", "$1")
-                .replaceAll("\\$(.*?)\\$", "$1")
-                .trim();
-    }
-
-    // ==========================================
-    // 10. BRAIN & ENERGY SYSTEM (ASYNC)
-    // ==========================================
     public static CompletableFuture<String> deductBrainAsync(int userId) {
         JSONObject body = new JSONObject();
         body.put("user_id", userId);
@@ -384,8 +387,9 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 11. LESSON PROGRESS & STREAK SYSTEM (ASYNC)
+    // 6. LESSON PROGRESS & STREAK SYSTEM (ASYNC)
     // ==========================================
+
     public static CompletableFuture<String> completeLessonAsync(int userId, String courseId, int lessonOrder, int xp) {
         JSONObject body = new JSONObject();
         body.put("user_id", userId);
@@ -422,8 +426,9 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 12. LEADERBOARD SYSTEM (ASYNC)
+    // 7. LEADERBOARD & XP SYSTEM (ASYNC)
     // ==========================================
+
     public static CompletableFuture<String> getLeaderboardAsync(int leagueId) {
         return getLeaderboardAsync(null, leagueId);
     }
@@ -499,8 +504,9 @@ public class ApiClient {
     }
 
     // ==========================================
-    // 13. FETCH USER PROFILE DATA
+    // 8. USER PROFILE & CERTIFICATE SYSTEM (ASYNC)
     // ==========================================
+
     public static CompletableFuture<String> getUserProfileAsync(String userId) {
         String url = BASE_URL + "/api/user/" + userId.trim();
 
@@ -517,9 +523,6 @@ public class ApiClient {
                 });
     }
 
-    // ==========================================
-    // 14. CERTIFICATE SYSTEM (ASYNC)
-    // ==========================================
     public static CompletableFuture<String> checkAndIssueCertificateAsync(int userId, String courseId) {
         JSONObject body = new JSONObject();
         body.put("user_id", userId);
@@ -551,5 +554,43 @@ public class ApiClient {
                     System.err.println("Get User Certificates Error: " + ex.getMessage());
                     return null;
                 });
+    }
+
+    // ==========================================
+    // 9. HELPER METHODS
+    // ==========================================
+
+    public static String cleanAndFormatAiText(String rawResponse) {
+        if (rawResponse == null || rawResponse.trim().isEmpty()) {
+            return "";
+        }
+
+        String extractedText = rawResponse;
+
+        try {
+            JSONObject json = new JSONObject(rawResponse);
+            if (json.has("review")) {
+                extractedText = json.getString("review");
+            } else if (json.has("result")) {
+                extractedText = json.getString("result");
+            } else if (json.has("explanation")) {
+                extractedText = json.getString("explanation");
+            } else if (json.has("output")) {
+                extractedText = json.getString("output");
+            }
+        } catch (Exception e) {
+            // Raw text fallback
+        }
+
+        return extractedText
+                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")
+                .replaceAll("###\\s*", "")
+                .replaceAll("##\\s*", "")
+                .replaceAll("#\\s*", "")
+                .replaceAll("```[a-zA-Z]*", "")
+                .replaceAll("`", "")
+                .replaceAll("\\$\\$(.*?)\\$\\$", "$1")
+                .replaceAll("\\$(.*?)\\$", "$1")
+                .trim();
     }
 }

@@ -112,11 +112,26 @@ public class SettingsController {
                     imageUrl = ApiClient.getProfileImageUrl(profilePath);
                 }
 
-                Image img = new Image(imageUrl, 100, 100, false, true, true);
-                avatarPreview.setImage(img);
-                avatarPreview.setVisible(true);
-                avatarInitialLabel.setVisible(false);
-                return;
+                if (imageUrl != null) {
+                    // Background loading = true (prevents UI freeze while downloading image)
+                    Image img = new Image(imageUrl, 100, 100, false, true, true);
+
+                    // Set listener for image loading error
+                    img.errorProperty().addListener((obs, oldVal, newVal) -> {
+                        if (newVal) {
+                            javafx.application.Platform.runLater(() -> showInitialAvatar(name));
+                        }
+                    });
+
+                    avatarPreview.setImage(img);
+                    avatarPreview.setVisible(true);
+                    avatarInitialLabel.setVisible(false);
+
+                    // Set proper clip on avatarPreview
+                    Circle imgClip = new Circle(50, 50, 50);
+                    avatarPreview.setClip(imgClip);
+                    return;
+                }
             } catch (Exception e) {
                 System.err.println("Failed to load avatar image: " + e.getMessage());
             }
@@ -367,6 +382,13 @@ public class SettingsController {
                                     deleteBtn.setManaged(true);
                                     hasNewAvatar = false;
 
+                                    // Reload avatar locally immediately
+                                    loadUserProfileImage(savedFileName, user.getName());
+
+                                    // Update main layout top bar avatar
+                                    if (MainLayoutController.getInstance() != null) {
+                                        MainLayoutController.getInstance().loadUserProfileImage();
+                                    }
                                     showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile picture uploaded successfully!");
                                 }
                             } catch (Exception e) {

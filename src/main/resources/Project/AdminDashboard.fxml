@@ -42,7 +42,7 @@
                 <Label styleClass="section-title" text="User Daily Activity (Weekly Overview)" />
                 <LineChart fx:id="userActivityChart" createSymbols="true" legendVisible="false" VBox.vgrow="ALWAYS">
                     <xAxis>
-                        <CategoryAxis label="Days" tickLabelRotation="0" />
+                        <CategoryAxis label="Days" tickLabelRotation="45" />
                     </xAxis>
                     <yAxis>
                         <NumberAxis label="Active Users" />

@@ -51,7 +51,6 @@
                                 <Label fx:id="pageSubTitle" styleClass="header-sub" text="Monitor real-time user statistics and system performance" />
                             </children>
                         </VBox>
-                        <TextField promptText="🔍 Search questions..." styleClass="search-field" />
                     </children>
                 </HBox>
 
