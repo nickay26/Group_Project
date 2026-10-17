@@ -13,11 +13,6 @@ public class FormValidator {
         return email != null && email.matches(EMAIL_REGEX);
     }
 
-    // Validate Password length (minimum 6 characters)
-    public static boolean isValidPassword(String password) {
-        return password != null && password.length() >= 6;
-    }
-
     // Setup live email validation listener
     public static void setupEmailValidation(TextField emailField, Label errorLabel) {
         if (emailField == null || errorLabel == null) return;
