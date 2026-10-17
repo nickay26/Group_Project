@@ -55,7 +55,7 @@ public class CppOverviewController implements Initializable {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
     }
 
     @FXML
@@ -78,7 +78,7 @@ public class CppOverviewController implements Initializable {
         // 3. User Login ဝင်ထားခြင်း ရှိ/မရှိ စစ်ဆေးမည်
         if (UserSession.getInstance() != null && UserSession.getUserId() != -1) {
             // Login ဝင်ထားပါက Dashboard / Main Layout သို့ တိုက်ရိုက်သွားမည်
-            SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         } else {
             // Login မဝင်ရသေးပါက Register Alert Box ကို ပြသမည်
             showRegisterAlert();
@@ -140,7 +140,7 @@ public class CppOverviewController implements Initializable {
         // 5. OK Button Click မှသာ Stage ပိတ်ပြီး Welcome/Register Page သို့ သွားမည်
         okBtn.setOnAction(e -> {
             alertStage.close();
-            SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Login");
+            SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Login");
         });
 
         alertStage.show();

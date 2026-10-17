@@ -85,7 +85,7 @@ public class FriendMatchController {
 
     @FXML
     private void handleBack() {
-        SceneManager.switchScene("MainLayoutView.fxml", "Select Game Mode");
+        SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().loadPage("GameModeView.fxml");
         }

@@ -228,7 +228,7 @@ public class WelcomeController implements Initializable {
 
         if (registeredUser != null) {
             UserSession.initSession(registeredUser);
-            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
+            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
         }
@@ -253,9 +253,9 @@ public class WelcomeController implements Initializable {
 
                         // Google Sign-Up အောင်မြင်ပြီးနောက် Overview မှ လာလျှင် MainLayout (Learn Screen) သို့ ပို့ပေးခြင်း
                         if (UserSession.isRedirectedFromOverview()) {
-                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
                         } else {
-                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
+                            SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
                         }
                     } else {
                         showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
