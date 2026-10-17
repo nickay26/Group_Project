@@ -3,17 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-
 <?import javafx.scene.shape.Circle?>
-<BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
+
+<BorderPane prefHeight="700.0" prefWidth="950.0" styleClass="root-pane" stylesheets="@../Css/mainlayout.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.MainLayoutController">
 
     <!-- PERMANENT LEFT SIDEBAR MENU -->
     <left>
@@ -22,7 +21,7 @@
                 <Insets bottom="20.0" left="15.0" right="15.0" top="25.0" />
             </padding>
             <children>
-                <Label styleClass="sidebar-title" text="Mimo Platform" />
+                <Label styleClass="sidebar-title" text="Sodexa Platform" />
 
                 <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                     <padding>
@@ -57,8 +56,8 @@
                     <children>
                         <!-- CURRENT COURSE DISPLAY -->
                         <HBox alignment="CENTER_LEFT" spacing="8.0">
-                            <Label text="Course:" style="-fx-font-size: 14px; -fx-text-fill: #64748B; -fx-font-weight: bold;" />
-                            <Label fx:id="currentCourseLabel" text="Loading..." style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #64748B; -fx-font-weight: bold;" text="Course:" />
+                            <Label fx:id="currentCourseLabel" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="Loading..." />
                         </HBox>
 
                         <!-- PUSHES STATS & BUTTONS TO THE RIGHT -->
@@ -75,7 +74,7 @@
                             </graphic>
                         </Label>
 
-                        <Label fx:id="topBrainLabel" onMouseClicked="#showRefillBrainDialog" styleClass="header-stat" style="-fx-cursor: hand;" text=" 0">
+                        <Label fx:id="topBrainLabel" onMouseClicked="#showRefillBrainDialog" style="-fx-cursor: hand;" styleClass="header-stat" text=" 0">
                             <graphic>
                                 <ImageView fitHeight="35.0" fitWidth="30.0" preserveRatio="true">
                                     <image>
@@ -95,8 +94,8 @@
                             </graphic>
                         </Label>
 
-                        <Button fx:id="premiumBtn" styleClass="premium-button" text="Premium" onAction="#handlePremium" />
-                        <ImageView fx:id="profileImageView" fitHeight="36.0" fitWidth="36.0" preserveRatio="true" style="-fx-cursor: hand;" onMouseClicked="#handleProfileClick">
+                        <Button fx:id="premiumBtn" onAction="#handlePremium" styleClass="premium-button" text="Premium" />
+                        <ImageView fx:id="profileImageView" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#handleProfileClick" preserveRatio="true" style="-fx-cursor: hand;">
                             <image>
                                 <Image url="@../Images/defaultProfile.jpg" />
                             </image>
