@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.PremiumController">
+<BorderPane stylesheets="@../Css/premium.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.PremiumController">
 
     <!-- ★ Top Bar (Cross Button အပေါ်ညာဘက်ထောင့်) ★ -->
     <top>

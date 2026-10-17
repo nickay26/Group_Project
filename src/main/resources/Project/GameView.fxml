@@ -9,7 +9,7 @@
 
 <StackPane prefWidth="1000" prefHeight="750"
            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="Project.GameController">
+           fx:controller="Project.GameClasses.GameController">
 
     <!-- Main Game Workspace VBox -->
     <VBox alignment="TOP_CENTER" spacing="14"

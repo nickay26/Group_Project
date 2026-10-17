@@ -5,7 +5,7 @@
 
 <VBox spacing="20" style="-fx-padding: 24; -fx-background-color: #0B0F19;"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Project.UserAnalyticsController">
+      fx:controller="Project.AdminClasses.UserAnalyticsController">
 
     <!-- Summary Stat Cards -->
     <HBox spacing="16">

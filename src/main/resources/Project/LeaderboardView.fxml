@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #0E1424; -fx-background-color: #0E1424; -fx-padding: 0;" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LeaderboardController">
+<ScrollPane fx:id="mainScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #0E1424; -fx-background-color: #0E1424; -fx-padding: 0;" vbarPolicy="AS_NEEDED" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LeaderboardController">
     <content>
         <!-- Main Background Layer -->
         <HBox alignment="CENTER" spacing="30.0" style="-fx-background-color: #0E1424;">

@@ -17,7 +17,7 @@
         styleClass="practice-root"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Project.PracticeController">
+            fx:controller="Project.Controllers.PracticeController">
     <stylesheets>
         <URL value="@../Css/practice.css" />
     </stylesheets>

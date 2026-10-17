@@ -13,7 +13,7 @@
         style="-fx-background-color: #0f172a;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Project.PracticeQuestionController">
+            fx:controller="Project.Controllers.PracticeQuestionController">
 
     <!-- TOP BAR -->
     <top>

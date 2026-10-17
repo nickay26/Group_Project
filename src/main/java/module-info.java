@@ -19,4 +19,16 @@ module com.example.group_project {
     opens Project to javafx.fxml, com.google.gson;
 
     exports Project;
+    exports Project.API_Database;
+    opens Project.API_Database to com.google.gson, javafx.fxml;
+    exports Project.AdminClasses;
+    opens Project.AdminClasses to com.google.gson, javafx.fxml;
+    exports Project.Helpers;
+    opens Project.Helpers to com.google.gson, javafx.fxml;
+    exports Project.GameClasses;
+    opens Project.GameClasses to com.google.gson, javafx.fxml;
+    exports Project.Controllers;
+    opens Project.Controllers to com.google.gson, javafx.fxml;
+    exports Project.Getters_Setters;
+    opens Project.Getters_Setters to com.google.gson, javafx.fxml;
 }

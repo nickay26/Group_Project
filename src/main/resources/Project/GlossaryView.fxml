@@ -13,7 +13,7 @@
 <BorderPane style="-fx-background-color: #0F172A;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Project.GlossaryController">
+            fx:controller="Project.Controllers.GlossaryController">
 
     <stylesheets>
         <URL value="@../Css/help.css" />

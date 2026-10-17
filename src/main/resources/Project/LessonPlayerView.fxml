@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Css/lesson_player.css" styleClass="root-container" style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LessonPlayerController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Css/lesson_player.css" styleClass="root-container" style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LessonPlayerController">
 
     <!-- Header with Close Button and Progress Bar -->
     <top>

@@ -7,7 +7,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Project.PaymentController"
+            fx:controller="Project.Controllers.PaymentController"
             stylesheets="@../Css/payment.css"
             style="-fx-background-color: #0F172A;">
 

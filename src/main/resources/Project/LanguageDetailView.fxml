@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f172a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LanguageDetailController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #0f172a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LanguageDetailController">
     <padding>
         <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
     </padding>

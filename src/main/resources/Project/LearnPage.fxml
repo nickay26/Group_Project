@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 
-<AnchorPane styleClass="learn-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.LearnPageController">
+<AnchorPane styleClass="learn-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LearnPageController">
     <stylesheets>
             <URL value = "@../Css/learn_page.css" />
     </stylesheets>
