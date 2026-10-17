@@ -1,6 +1,8 @@
 {
   "lessonId": "CPP_103",
-  "title": "Variables & Memory Basics",
+  "lessonOrder": 0,
+  "title": "Variables \u0026 Memory Basics",
+  "xp": 0,
   "isPremium": false,
   "slides": [
     {
@@ -8,86 +10,159 @@
       "type": "CONCEPT",
       "title": "What is a Variable?",
       "prompt": "A variable is a named storage location in memory that holds a value.",
-      "codeSnippet": "int age = 25;\nage = 26; // Value updated"
+      "codeSnippet": "int age \u003d 25;\nage \u003d 26; // Value updated",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S2",
       "type": "FILL_IN_BLANK",
       "title": "Variable Declaration",
-      "prompt": "Fill in the correct keyword to declare an integer variable named 'score'.",
-      "codeSnippet": "___ score = 100;",
-      "options": ["int", "var", "integer", "number"],
-      "correctAnswer": "int"
+      "prompt": "Fill in the correct keyword to declare an integer variable named \u0027score\u0027.",
+      "codeSnippet": "___ score \u003d 100;",
+      "options": [
+        "int",
+        "var",
+        "integer",
+        "number"
+      ],
+      "correctAnswer": "int",
+      "isInteractive": true
     },
     {
       "slideId": "CPP_103_S3",
       "type": "MULTIPLE_CHOICE",
       "title": "Valid Naming Rules",
       "prompt": "Which of the following is a VALID variable name in C++?",
-      "options": ["my_variable", "1stNumber", "int", "user-age"],
-      "correctAnswer": "my_variable"
+      "options": [
+        "my_variable",
+        "1stNumber",
+        "int",
+        "user-age"
+      ],
+      "correctAnswer": "my_variable",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S4",
-      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Variable Assignment",
       "prompt": "Fill in the operator used to assign a value to a variable.",
       "codeSnippet": "int total ___ 50;",
-      "options": ["=", "==", ":=", "->"],
-      "correctAnswer": "="
+      "options": [
+        "\u003d",
+        "\u003d\u003d",
+        ":\u003d",
+        "-\u003e"
+      ],
+      "correctAnswer": "\u003d",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S5",
       "type": "MULTIPLE_CHOICE",
       "title": "Reserved Keywords",
-      "prompt": "Can you use keywords like 'return' or 'class' as variable names?",
-      "options": ["No, keywords are reserved", "Yes, anytime", "Only inside main()", "Yes, if capitalized"],
-      "correctAnswer": "No, keywords are reserved"
+      "prompt": "Can you use keywords like \u0027return\u0027 or \u0027class\u0027 as variable names?",
+      "options": [
+        "No, keywords are reserved",
+        "Yes, anytime",
+        "Only inside main()",
+        "Yes, if capitalized"
+      ],
+      "correctAnswer": "No, keywords are reserved",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S6",
       "type": "FILL_IN_BLANK",
-      "interactive": true,
       "title": "Multiple Declarations",
       "prompt": "Fill in the separator symbol to declare multiple variables of the same type.",
-      "codeSnippet": "int a = 5___ b = 10;",
-      "options": [",", ";", ":", "&"],
-      "correctAnswer": ","
+      "codeSnippet": "int a \u003d 5___ b \u003d 10;",
+      "options": [
+        ",",
+        ";",
+        ":",
+        "\u0026"
+      ],
+      "correctAnswer": ",",
+      "isInteractive": true
     },
     {
       "slideId": "CPP_103_S7",
       "type": "MULTIPLE_CHOICE",
       "title": "Uninitialized Variables",
       "prompt": "What value does an uninitialized local variable hold in C++?",
-      "options": ["Garbage (undefined) value", "0", "null", "false"],
-      "correctAnswer": "Garbage (undefined) value"
+      "options": [
+        "Garbage (undefined) value",
+        "0",
+        "null",
+        "false"
+      ],
+      "correctAnswer": "Garbage (undefined) value",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S8",
       "type": "FILL_IN_BLANK",
       "title": "Camel Case Naming",
       "prompt": "Complete the variable name following standard CamelCase convention.",
-      "codeSnippet": "int my___Count = 3;",
-      "options": ["Item", "item", "ITEM", "_item"],
-      "correctAnswer": "Item"
+      "codeSnippet": "int my___Count \u003d 3;",
+      "options": [
+        "Item",
+        "item",
+        "ITEM",
+        "_item"
+      ],
+      "correctAnswer": "Item",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S9",
       "type": "MULTIPLE_CHOICE",
       "title": "Case Sensitivity in Variables",
-      "prompt": "Are 'myVar' and 'myvar' treated as the same variable in C++?",
-      "options": ["No, they are two separate variables", "Yes, C++ ignores capitalization", "Only if declared together", "Causes a syntax error"],
-      "correctAnswer": "No, they are two separate variables"
+      "prompt": "Are \u0027myVar\u0027 and \u0027myvar\u0027 treated as the same variable in C++?",
+      "options": [
+        "No, they are two separate variables",
+        "Yes, C++ ignores capitalization",
+        "Only if declared together",
+        "Causes a syntax error"
+      ],
+      "correctAnswer": "No, they are two separate variables",
+      "isInteractive": false
     },
     {
       "slideId": "CPP_103_S10",
       "type": "FILL_IN_BLANK",
       "title": "Updating Variables",
-      "prompt": "Fill in the variable name to add 5 to 'count'.",
-      "codeSnippet": "___ = count + 5;",
-      "options": ["count", "int count", "var count", "new count"],
-      "correctAnswer": "count"
+      "prompt": "Fill in the variable name to add 5 to \u0027count\u0027.",
+      "codeSnippet": "___ \u003d count + 5;",
+      "options": [
+        "count",
+        "int count",
+        "var count",
+        "new count"
+      ],
+      "correctAnswer": "count",
+      "isInteractive": true
+    },
+    {
+      "slideId": "CPP_103_S11",
+      "type": "MULTIPLE_CHOICE",
+      "title": "",
+      "prompt": "",
+      "codeSnippet": "",
+      "options": [],
+      "correctAnswer": "",
+      "isInteractive": false
+    },
+    {
+      "slideId": "CPP_103_S12",
+      "type": "MULTIPLE_CHOICE",
+      "title": "",
+      "prompt": "",
+      "codeSnippet": "",
+      "options": [],
+      "correctAnswer": "",
+      "isInteractive": false
     }
   ]
 }
