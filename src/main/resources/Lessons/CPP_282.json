@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_282",
   "title": "Module Review Quiz: Inheritance & Polymorphism",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_282_S1",

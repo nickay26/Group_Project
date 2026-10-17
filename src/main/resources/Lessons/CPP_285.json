@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_285",
   "title": "Module Review Quiz: STL Algorithms & Ranges",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_285_S1",

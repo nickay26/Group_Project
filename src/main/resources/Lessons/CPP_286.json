@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_286",
   "title": "Module Review Quiz: Exception Handling & Error Management",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_286_S1",

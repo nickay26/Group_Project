@@ -1,6 +1,7 @@
 {
   "lessonId": "JAVA_270_Mquiz",
   "title": "Module Quiz - Multithreading",
+  "isPremium": true,
   "slides": [
     {
       "slideId": "JAVA_270_Mquiz_S1",
