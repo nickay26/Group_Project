@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_174" ,
   "title": "Final Comprehensive Test: C++ Basics (CPP_101 to CPP_173)",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_174_S1",

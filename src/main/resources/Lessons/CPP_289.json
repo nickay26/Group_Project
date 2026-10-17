@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_289",
   "title": "Module Review Quiz: File I/O Stream Manipulation",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_289_S1",

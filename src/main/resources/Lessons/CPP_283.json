@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_283",
   "title": "Module Review Quiz: Template Programming & Generics",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_283_S1",

@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_169" ,
   "title": "Module Review Quiz: Conditionals & Control Flow (CPP_127 to CPP_136)",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_169_S1",

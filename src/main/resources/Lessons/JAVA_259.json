@@ -1,6 +1,7 @@
 {
   "lessonId": "JAVA_259_Mquiz",
-  "title": "Module Quiz - Arrays",
+  "title": "Module Quiz - Program Structure",
+  "isPremium": true,
   "slides": [
     {
       "slideId": "JAVA_259_Mquiz_S1",

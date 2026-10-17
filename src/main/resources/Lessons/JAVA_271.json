@@ -1,6 +1,7 @@
 {
   "lessonId": "JAVA_271_Mquiz",
   "title": "Module Quiz - File I/O",
+  "isPremium": true,
   "slides": [
     {
       "slideId": "JAVA_271_Mquiz_S1",

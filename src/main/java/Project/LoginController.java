@@ -79,7 +79,7 @@ public class LoginController {
     /** Register Button (Top Right) နှိပ်ရင် Welcome Page ကို သွား */
     @FXML
     private void handleRegister() {
-        SceneManager.switchScene("WelcomeView.fxml", "Sodex Platform - Welcome");
+        SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
     }
 
     @FXML
@@ -299,7 +299,7 @@ public class LoginController {
      * MainLayoutController က redirectedFromOverview Flag ပေါ်မူတည်ပြီး Learn သို့မဟုတ် Courses Page ကို အလိုအလျောက် ရွေးဖွင့်ပါမည်။
      */
     private void navigateToNextScene() {
-        SceneManager.switchScene("MainLayoutView.fxml", "Sodex Platform - Dashboard");
+        SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform - Dashboard");
     }
 
     /** Flask Backend ကို Auth Code ပို့ */

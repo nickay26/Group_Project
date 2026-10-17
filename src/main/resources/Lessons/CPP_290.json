@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_290",
   "title": "Module Review Quiz: Modern C++ Features & Type Traits",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_290_S1",

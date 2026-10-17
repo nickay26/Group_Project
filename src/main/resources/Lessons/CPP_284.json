@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_284",
   "title": "Module Review Quiz: STL Containers",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_284_S1",

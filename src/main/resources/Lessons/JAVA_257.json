@@ -1,6 +1,7 @@
 {
   "lessonId": "JAVA_257_Mquiz",
-  "title": "Module Quiz - Basic Concepts",
+  "title": "Module Quiz - Getting Started with Java",
+  "isPremium": true,
   "slides": [
     {
       "slideId": "JAVA_257_Mquiz_S1",

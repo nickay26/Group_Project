@@ -75,7 +75,7 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleLogin() {
-        SceneManager.switchScene("LoginView.fxml", "Sodex Platform - Login");
+        SceneManager.switchScene("LoginView.fxml", "Sodexa Platform - Login");
     }
 
     @FXML
@@ -266,7 +266,7 @@ public class WelcomeController implements Initializable {
     }
 
     private void navigateToDetail(String title, String subtitle, String details, String[] lessonTitles, String[] lessonDescriptions) {
-        FXMLLoader loader = SceneManager.switchScene("LanguageDetailView.fxml", "Sodex Platform - " + title + " Overview");
+        FXMLLoader loader = SceneManager.switchScene("LanguageDetailView.fxml", "Sodexa Platform - " + title + " Overview");
 
         if (loader != null) {
             LanguageDetailController controller = loader.getController();

@@ -1,7 +1,7 @@
 {
   "lessonId": "CPP_287",
   "title": "Module Review Quiz: Move Semantics & Rvalue References",
-  "isPremium": false,
+  "isPremium": true,
   "slides": [
     {
       "slideId": "CPP_287_S1",
