@@ -55,7 +55,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Inheritance Keyword",
       "prompt": "Complete the inheritance.",
-      "codeSnippet": "class Dog ______ Animal {\n}",
+      "codeSnippet": "class Dog ___ Animal {\n}",
       "options": ["extends", "implements", "inherits", "super"],
       "correctAnswer": "extends"
     },

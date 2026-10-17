@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import FileReader",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.io.________;",
+      "codeSnippet": "import java.io.___;",
       "options": ["FileReader", "FileWriter", "File", "Reader"],
       "correctAnswer": "FileReader"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create FileReader",
       "prompt": "Complete the code to create a FileReader.",
-      "codeSnippet": "FileReader reader = new ________(\"test.txt\");",
+      "codeSnippet": "FileReader reader = new ___(\"test.txt\");",
       "options": ["FileReader", "FileWriter", "File", "Reader"],
       "correctAnswer": "FileReader"
     },

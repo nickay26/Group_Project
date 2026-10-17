@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import HashSet",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.______;",
+      "codeSnippet": "import java.util.___;",
       "options": ["HashSet", "Set", "Hash", "List"],
       "correctAnswer": "HashSet"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Add Element",
       "prompt": "Complete the code to add an element.",
-      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.____(\"Java\");",
+      "codeSnippet": "HashSet<String> set = new HashSet<>();\nset.___(\"Java\");",
       "options": ["add", "put", "insert", "set"],
       "correctAnswer": "add"
     },

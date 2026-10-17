@@ -5,6 +5,7 @@
     {
       "slideId": "JAVA_112_S1",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "If-Else Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
@@ -14,6 +15,7 @@
     {
       "slideId": "JAVA_112_S2",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Else If Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 10;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
@@ -23,6 +25,7 @@
     {
       "slideId": "JAVA_112_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Else Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 2;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
@@ -34,7 +37,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else If",
       "prompt": "Complete the code to output 'B'.",
-      "codeSnippet": "int x = 10;\nif (x > 15) {\n  System.out.println(\"A\");\n} ____ (x > 5) {\n  System.out.println(\"B\");\n}",
+      "codeSnippet": "int x = 10;\nif (x > 15) {\n  System.out.println(\"A\");\n} ___ (x > 5) {\n  System.out.println(\"B\");\n}",
       "options": ["else if", "else", "elif", "otherwise"],
       "correctAnswer": "else if"
     },
@@ -43,13 +46,14 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else",
       "prompt": "Complete the code to output 'C'.",
-      "codeSnippet": "int x = 2;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} ____ {\n  System.out.println(\"C\");\n}",
+      "codeSnippet": "int x = 2;\nif (x > 15) {\n  System.out.println(\"A\");\n} else if (x > 5) {\n  System.out.println(\"B\");\n} ___ {\n  System.out.println(\"C\");\n}",
       "options": ["else", "else if", "elif", "otherwise"],
       "correctAnswer": "else"
     },
     {
       "slideId": "JAVA_112_S6",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Score Output",
       "prompt": "What is the output?",
       "codeSnippet": "int score = 85;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
@@ -59,6 +63,7 @@
     {
       "slideId": "JAVA_112_S7",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Score Output",
       "prompt": "What is the output?",
       "codeSnippet": "int score = 92;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
@@ -68,6 +73,7 @@
     {
       "slideId": "JAVA_112_S8",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Score Output",
       "prompt": "What is the output?",
       "codeSnippet": "int score = 70;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else {\n  System.out.println(\"C\");\n}",
@@ -77,6 +83,7 @@
     {
       "slideId": "JAVA_112_S9",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Grade Output",
       "prompt": "What is the output?",
       "codeSnippet": "int score = 75;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",
@@ -86,6 +93,7 @@
     {
       "slideId": "JAVA_112_S10",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Grade Output",
       "prompt": "What is the output?",
       "codeSnippet": "int score = 65;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} else if (score >= 70) {\n  System.out.println(\"C\");\n} else {\n  System.out.println(\"F\");\n}",

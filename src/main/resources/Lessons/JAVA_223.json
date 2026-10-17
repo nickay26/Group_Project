@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Generic Object",
       "prompt": "Complete the generic object declaration.",
-      "codeSnippet": "Box____ box = new Box<>();",
+      "codeSnippet": "Box___ box = new Box<>();",
       "options": ["<String>", "(String)", "[String]", "{String}"],
       "correctAnswer": "<String>"
     },

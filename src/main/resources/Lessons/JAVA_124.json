@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method with two parameters.",
-      "codeSnippet": "static int add(int a, ____ b) {\n  return a + b;\n}",
+      "codeSnippet": "static int add(int a, ___ b) {\n  return a + b;\n}",
       "options": ["int", "String", "void", "boolean"],
       "correctAnswer": "int"
     },

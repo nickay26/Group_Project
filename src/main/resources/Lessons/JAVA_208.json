@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import ArrayList",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.________;",
+      "codeSnippet": "import java.util.___;",
       "options": ["ArrayList", "List", "Array", "Collections"],
       "correctAnswer": "ArrayList"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Add Element",
       "prompt": "Complete the code to add an element.",
-      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.____(\"Java\");",
+      "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.___(\"Java\");",
       "options": ["add", "put", "insert", "append"],
       "correctAnswer": "add"
     },

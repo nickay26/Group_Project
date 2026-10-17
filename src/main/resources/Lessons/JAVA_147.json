@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Throw",
       "prompt": "Complete the code to throw an exception.",
-      "codeSnippet": "_____ new ArithmeticException(\"Error\");",
+      "codeSnippet": "___ new ArithmeticException(\"Error\");",
       "options": ["throw", "throws", "catch", "try"],
       "correctAnswer": "throw"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Exception",
       "prompt": "Complete the code to throw an exception with a message.",
-      "codeSnippet": "throw new ArithmeticException(________);",
+      "codeSnippet": "throw new ArithmeticException(___);",
       "options": ["\"Error\"", "Error", "new", "throw"],
       "correctAnswer": "\"Error\""
     },

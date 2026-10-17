@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Switch",
       "prompt": "Complete the code to break out of the switch.",
-      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ___;\n}",
       "options": ["break", "continue", "return", "exit"],
       "correctAnswer": "break"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Default",
       "prompt": "Complete the code to handle no matching case.",
-      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); break;\n  ____: System.out.println(\"Other\");\n}",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); break;\n  ___: System.out.println(\"Other\");\n}",
       "options": ["default", "else", "otherwise", "final"],
       "correctAnswer": "default"
     },
@@ -64,6 +64,7 @@
     {
       "slideId": "JAVA_113_S8",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 5;\nswitch (x) {\n  case 1: System.out.println(\"One\"); break;\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -73,6 +74,7 @@
     {
       "slideId": "JAVA_113_S9",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int day = 3;\nswitch (day) {\n  case 1: System.out.println(\"Monday\"); break;\n  case 2: System.out.println(\"Tuesday\"); break;\n  case 3: System.out.println(\"Wednesday\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -82,6 +84,7 @@
     {
       "slideId": "JAVA_113_S10",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Fall-Through",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 1;\nswitch (x) {\n  case 1: System.out.println(\"One\");\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -91,6 +94,7 @@
     {
       "slideId": "JAVA_113_S11",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Complete the Case",
       "prompt": "Complete the code to print \"One\" when x is 1.",
       "codeSnippet": "switch (x) {\n  ____ 1: System.out.println(\"One\"); break;\n}",

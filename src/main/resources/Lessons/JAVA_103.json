@@ -45,6 +45,7 @@
     {
       "slideId": "JAVA_103_S6",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Complete the Addition",
       "prompt": "Complete the code to output 8.",
       "codeSnippet": "System.out.println(5 __ 3);",
@@ -54,6 +55,7 @@
     {
       "slideId": "JAVA_103_S7",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Complete the Multiplication",
       "prompt": "Complete the code to output 21.",
       "codeSnippet": "System.out.println(7 __ 3);",

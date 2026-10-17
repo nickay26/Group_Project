@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method declaration.",
-      "codeSnippet": "public ____ void main(String[] args) {\n}",
+      "codeSnippet": "public ___ void main(String[] args) {\n}",
       "options": ["static", "final", "abstract", "public"],
       "correctAnswer": "static"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method that returns nothing.",
-      "codeSnippet": "____ greet() {\n  System.out.println(\"Hello\");\n}",
+      "codeSnippet": "___ greet() {\n  System.out.println(\"Hello\");\n}",
       "options": ["void", "int", "String", "boolean"],
       "correctAnswer": "void"
     },

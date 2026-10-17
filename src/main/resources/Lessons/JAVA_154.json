@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "File Import",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.io.______;",
+      "codeSnippet": "import java.io.___;",
       "options": ["File", "FileReader", "FileWriter", "Files"],
       "correctAnswer": "File"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Exists Method",
       "prompt": "Complete the code to check if a file exists.",
-      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.______());",
+      "codeSnippet": "File file = new File(\"test.txt\");\nSystem.out.println(file.___());",
       "options": ["exists", "isFile", "isDirectory", "check"],
       "correctAnswer": "exists"
     },

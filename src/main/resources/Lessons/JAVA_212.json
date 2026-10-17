@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import Stack",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.______;",
+      "codeSnippet": "import java.util.___;",
       "options": ["Stack", "Queue", "List", "Array"],
       "correctAnswer": "Stack"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Push Element",
       "prompt": "Complete the code to push an element.",
-      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.____(\"Java\");",
+      "codeSnippet": "Stack<String> stack = new Stack<>();\nstack.___(\"Java\");",
       "options": ["push", "add", "insert", "put"],
       "correctAnswer": "push"
     },
