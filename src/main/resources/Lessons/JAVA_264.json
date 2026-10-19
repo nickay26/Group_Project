@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Length",
       "prompt": "Complete the code to get the array length.",
-      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.______);",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.___);",
       "options": ["length", "size", "count", "len"],
       "correctAnswer": "length"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Element",
       "prompt": "Complete the code to access the last element.",
-      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[arr.length - __]);",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[arr.length - ___]);",
       "options": ["1", "2", "0", "3"],
       "correctAnswer": "1"
     },

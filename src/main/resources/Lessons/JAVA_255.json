@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import URL",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.net.______;",
+      "codeSnippet": "import java.net.___;",
       "options": ["URL", "URI", "Link", "Web"],
       "correctAnswer": "URL"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Open URL Stream",
       "prompt": "Complete the code to open a URL stream.",
-      "codeSnippet": "Scanner sc = new Scanner(url.__________());",
+      "codeSnippet": "Scanner sc = new Scanner(url.___());",
       "options": ["openStream", "open", "connect", "read"],
       "correctAnswer": "openStream"
     },

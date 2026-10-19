@@ -97,7 +97,7 @@
       "interactive": true,
       "title": "Complete the Case",
       "prompt": "Complete the code to print \"One\" when x is 1.",
-      "codeSnippet": "switch (x) {\n  ____ 1: System.out.println(\"One\"); break;\n}",
+      "codeSnippet": "switch (x) {\n  ___ 1: System.out.println(\"One\"); break;\n}",
       "options": ["case", "default", "switch", "if"],
       "correctAnswer": "case"
     }

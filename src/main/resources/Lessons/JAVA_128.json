@@ -34,7 +34,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method.",
-      "codeSnippet": "static int square(int x) {\n  return x __ x;\n}",
+      "codeSnippet": "static int square(int x) {\n  return x ___ x;\n}",
       "options": ["*", "+", "-", "/"],
       "correctAnswer": "*"
     },
@@ -43,7 +43,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method Call",
       "prompt": "Complete the method call to output 16.",
-      "codeSnippet": "System.out.println(square(__));",
+      "codeSnippet": "System.out.println(square(___));",
       "options": ["4", "2", "8", "16"],
       "correctAnswer": "4"
     },

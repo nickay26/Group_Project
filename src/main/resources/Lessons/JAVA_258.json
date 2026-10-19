@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Print Same Line",
       "prompt": "Complete the code to print \"Hello World\" on the same line.",
-      "codeSnippet": "System.out.____(\"Hello \");\nSystem.out.print(\"World\");",
+      "codeSnippet": "System.out.___(\"Hello \");\nSystem.out.print(\"World\");",
       "options": ["print", "println", "write", "output"],
       "correctAnswer": "print"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Multiple Println",
       "prompt": "Complete the code to print \"A\" and \"B\" on separate lines.",
-      "codeSnippet": "System.out.____(\"A\");\nSystem.out.println(\"B\");",
+      "codeSnippet": "System.out.___(\"A\");\nSystem.out.println(\"B\");",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },

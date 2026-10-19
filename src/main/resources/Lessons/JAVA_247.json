@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "File Class",
       "prompt": "Complete the File object creation.",
-      "codeSnippet": "File file = new ______(\"test.txt\");",
+      "codeSnippet": "File file = new ___(\"test.txt\");",
       "options": ["File", "FileReader", "FileWriter", "Files"],
       "correctAnswer": "File"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Exists Method",
       "prompt": "Complete the code to check if a file exists.",
-      "codeSnippet": "System.out.println(file.______());",
+      "codeSnippet": "System.out.println(file.___());",
       "options": ["exists", "isFile", "isDirectory", "check"],
       "correctAnswer": "exists"
     },

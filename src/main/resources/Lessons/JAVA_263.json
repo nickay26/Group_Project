@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete While Loop",
       "prompt": "Complete the while loop.",
-      "codeSnippet": "int i = 1;\n_____ (i <= 5) {\n  System.out.println(i);\n  i++;\n}",
+      "codeSnippet": "int i = 1;\n___ (i <= 5) {\n  System.out.println(i);\n  i++;\n}",
       "options": ["while", "for", "do", "if"],
       "correctAnswer": "while"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete Continue",
       "prompt": "Complete the code to skip 3.",
-      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) _____;\n  System.out.println(i);\n}",
+      "codeSnippet": "for (int i = 0; i < 5; i++) {\n  if (i == 3) ___;\n  System.out.println(i);\n}",
       "options": ["continue", "break", "skip", "pass"],
       "correctAnswer": "continue"
     },

@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Constructor Body",
       "prompt": "Complete the constructor body.",
-      "codeSnippet": "class Car {\n  String model;\n  Car(String m) {\n    model __ m;\n  }\n}",
+      "codeSnippet": "class Car {\n  String model;\n  Car(String m) {\n    model ___ m;\n  }\n}",
       "options": ["=", "==", "!=", ":"],
       "correctAnswer": "="
     },

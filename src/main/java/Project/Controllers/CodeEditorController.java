@@ -242,7 +242,7 @@ public class CodeEditorController {
             return;
         }
 
-        aiReviewArea.setText("🤖 Analyzing with Gemini AI...");
+        aiReviewArea.setText("🤖 Analyzing with AI...");
         reviewBtn.setDisable(true);
 
         CompletableFuture<String> future;

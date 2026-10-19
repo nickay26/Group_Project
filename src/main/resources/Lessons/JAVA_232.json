@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Functional Interface",
       "prompt": "Complete the annotation.",
-      "codeSnippet": "@____________\ninterface Greeting {\n  void sayHello();\n}",
+      "codeSnippet": "@___\ninterface Greeting {\n  void sayHello();\n}",
       "options": ["FunctionalInterface", "Interface", "Function", "Lambda"],
       "correctAnswer": "FunctionalInterface"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Interface Declaration",
       "prompt": "Complete the interface declaration.",
-      "codeSnippet": "interface Greeting {\n  ____ sayHello();\n}",
+      "codeSnippet": "interface Greeting {\n  ___ sayHello();\n}",
       "options": ["void", "int", "String", "boolean"],
       "correctAnswer": "void"
     },

@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Access",
       "prompt": "Complete the code to access the first element.",
-      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[___]);",
       "options": ["0", "1", "2", "3"],
       "correctAnswer": "0",
       "interactive": true
@@ -52,7 +52,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Declaration",
       "prompt": "Complete the code to declare an array of 5 integers.",
-      "codeSnippet": "int[] arr = new int[__];",
+      "codeSnippet": "int[] arr = new int[___];",
       "options": ["5", "4", "6", "10"],
       "correctAnswer": "5",
       "interactive": true

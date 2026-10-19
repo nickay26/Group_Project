@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Substring",
       "prompt": "Complete the code to output \"av\".",
-      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(__, 3));",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(___, 3));",
       "options": ["1", "0", "2", "3"],
       "correctAnswer": "1"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Substring",
       "prompt": "Complete the code to output \"Ja\".",
-      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(0, __));",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.substring(0, ___));",
       "options": ["2", "1", "3", "4"],
       "correctAnswer": "2"
     },

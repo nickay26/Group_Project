@@ -7,7 +7,7 @@
       "slideId": "JAVA_268_Mquiz_S1",
       "type": "MULTIPLE_CHOICE",
       "title": "Functional Interface",
-      "prompt": "A functional interface has exactly ___________ abstract method(s).",
+      "prompt": "A functional interface has exactly ___ abstract method(s).",
       "options": ["1", "2", "3", "0"],
       "correctAnswer": "1"
     },
@@ -16,7 +16,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Functional Annotation",
       "prompt": "Complete the annotation.",
-      "codeSnippet": "@____________\ninterface Greeting {\n  void sayHello();\n}",
+      "codeSnippet": "@___\ninterface Greeting {\n  void sayHello();\n}",
       "options": ["FunctionalInterface", "Interface", "Function", "Lambda"],
       "correctAnswer": "FunctionalInterface"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Interface Method",
       "prompt": "Complete the interface declaration.",
-      "codeSnippet": "interface Greeting {\n  ____ sayHello();\n}",
+      "codeSnippet": "interface Greeting {\n  ___ sayHello();\n}",
       "options": ["void", "int", "String", "boolean"],
       "correctAnswer": "void"
     },

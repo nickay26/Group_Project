@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import Socket",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.net.______;",
+      "codeSnippet": "import java.net.___;",
       "options": ["Socket", "ServerSocket", "Connection", "Network"],
       "correctAnswer": "Socket"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Accept Connection",
       "prompt": "Complete the code to accept a connection.",
-      "codeSnippet": "Socket client = serverSocket.______();",
+      "codeSnippet": "Socket client = serverSocket.___();",
       "options": ["accept", "connect", "receive", "listen"],
       "correctAnswer": "accept"
     },
@@ -65,7 +65,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Open URL Stream",
       "prompt": "Complete the code to open a URL stream.",
-      "codeSnippet": "Scanner sc = new Scanner(url.__________());",
+      "codeSnippet": "Scanner sc = new Scanner(url.___());",
       "options": ["openStream", "open", "connect", "read"],
       "correctAnswer": "openStream"
     },

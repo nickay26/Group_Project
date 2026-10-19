@@ -17,7 +17,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
       "prompt": "Complete the code to check if x is less than 5.",
-      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Small\");\n}",
+      "codeSnippet": "int x = 3;\nif (x ___ 5) {\n  System.out.println(\"Small\");\n}",
       "options": ["<", ">", "==", "!="],
       "correctAnswer": "<",
       "interactive": true
@@ -27,7 +27,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
       "prompt": "Complete the code to check if x is equal to 5.",
-      "codeSnippet": "int x = 5;\nif (x __ 5) {\n  System.out.println(\"Equal\");\n}",
+      "codeSnippet": "int x = 5;\nif (x ___ 5) {\n  System.out.println(\"Equal\");\n}",
       "options": ["==", "=", "!=", ">"],
       "correctAnswer": "==",
       "interactive": true
@@ -37,7 +37,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
       "prompt": "Complete the code to check if x is not equal to 5.",
-      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Not Equal\");\n}",
+      "codeSnippet": "int x = 3;\nif (x ___ 5) {\n  System.out.println(\"Not Equal\");\n}",
       "options": ["!=", "==", ">", "<"],
       "correctAnswer": "!=",
       "interactive": true
@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
       "prompt": "Complete the code to check if x is greater than or equal to 5.",
-      "codeSnippet": "int x = 5;\nif (x __ 5) {\n  System.out.println(\"Big or Equal\");\n}",
+      "codeSnippet": "int x = 5;\nif (x ___ 5) {\n  System.out.println(\"Big or Equal\");\n}",
       "options": [">=", ">", "<=", "<"],
       "correctAnswer": ">=",
       "interactive": true
@@ -57,7 +57,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If-Else",
       "prompt": "Complete the code to output 'B'.",
-      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ___ {\n  System.out.println(\"B\");\n}",
       "options": ["else", "else if", "elif", "otherwise"],
       "correctAnswer": "else",
       "interactive": true
@@ -67,7 +67,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else If",
       "prompt": "Complete the code to check if x is greater than 3.",
-      "codeSnippet": "int x = 5;\nif (x > 10) {\n  System.out.println(\"A\");\n} ____ (x > 3) {\n  System.out.println(\"B\");\n}",
+      "codeSnippet": "int x = 5;\nif (x > 10) {\n  System.out.println(\"A\");\n} ___ (x > 3) {\n  System.out.println(\"B\");\n}",
       "options": ["else if", "else", "elif", "otherwise"],
       "correctAnswer": "else if",
       "interactive": true
@@ -77,7 +77,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Switch",
       "prompt": "Complete the code to break out of the switch.",
-      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ___;\n}",
       "options": ["break", "continue", "return", "exit"],
       "correctAnswer": "break",
       "interactive": true
@@ -87,7 +87,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Ternary",
       "prompt": "Complete the code to output 'Big'.",
-      "codeSnippet": "int x = 10;\nString r = (x > 5) __ \"Big\" : \"Small\";",
+      "codeSnippet": "int x = 10;\nString r = (x > 5) ___ \"Big\" : \"Small\";",
       "options": ["?", ":", "=", "=="],
       "correctAnswer": "?",
       "interactive": true

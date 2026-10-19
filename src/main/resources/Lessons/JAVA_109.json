@@ -49,7 +49,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else",
       "prompt": "Complete the code to output 'B'.",
-      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ____ {\n  System.out.println(\"B\");\n}",
+      "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} ___ {\n  System.out.println(\"B\");\n}",
       "options": ["else", "else if", "elif", "otherwise"],
       "correctAnswer": "else"
     },
@@ -88,7 +88,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Condition",
       "prompt": "Complete the code to check if age is 18 or older.",
-      "codeSnippet": "int age = 18;\nif (age __ 18) {\n  System.out.println(\"Adult\");\n}",
+      "codeSnippet": "int age = 18;\nif (age ___ 18) {\n  System.out.println(\"Adult\");\n}",
       "options": [">=", "<=", "==", "!="],
       "correctAnswer": ">="
     }

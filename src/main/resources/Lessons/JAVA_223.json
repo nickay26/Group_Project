@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Generic Class",
       "prompt": "Complete the generic class declaration.",
-      "codeSnippet": "class Box____ {\n  private T value;\n}",
+      "codeSnippet": "class Box___ {\n  private T value;\n}",
       "options": ["<T>", "(T)", "[T]", "{T}"],
       "correctAnswer": "<T>"
     },

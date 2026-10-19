@@ -106,7 +106,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Print Hello World",
       "prompt": "Insert the missing part of the code to output \"Hello World\".",
-      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ____ (\"Hello World\");\n  }\n}",
+      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ___ (\"Hello World\");\n  }\n}",
       "options": [
         "System.out.println",
         "print",

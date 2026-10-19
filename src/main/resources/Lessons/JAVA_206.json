@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Interface",
       "prompt": "Complete the interface declaration.",
-      "codeSnippet": "________ Animal {\n  void sound();\n}",
+      "codeSnippet": "___ Animal {\n  void sound();\n}",
       "options": ["interface", "abstract", "class", "extends"],
       "correctAnswer": "interface"
     },

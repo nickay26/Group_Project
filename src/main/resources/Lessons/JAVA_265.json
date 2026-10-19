@@ -7,7 +7,7 @@
       "slideId": "JAVA_265_Mquiz_S1",
       "type": "MULTIPLE_CHOICE",
       "title": "TreeMap Type",
-      "prompt": "A TreeMap stores data in ___________ order.",
+      "prompt": "A TreeMap stores data in ___ order.",
       "options": ["Sorted", "Random", "Reverse", "Unordered"],
       "correctAnswer": "Sorted"
     },
@@ -16,7 +16,7 @@
       "type": "FILL_IN_BLANK",
       "title": "TreeMap Import",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.______;",
+      "codeSnippet": "import java.util.___;",
       "options": ["TreeMap", "HashMap", "Map", "Tree"],
       "correctAnswer": "TreeMap"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "TreeMap Put",
       "prompt": "Complete the code to add an element.",
-      "codeSnippet": "TreeMap<Integer, String> map = new TreeMap<>();\nmap.____(1, \"One\");",
+      "codeSnippet": "TreeMap<Integer, String> map = new TreeMap<>();\nmap.___(1, \"One\");",
       "options": ["put", "add", "insert", "set"],
       "correctAnswer": "put"
     },

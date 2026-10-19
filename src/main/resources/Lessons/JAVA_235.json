@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Stream Filter",
       "prompt": "Complete the filter method.",
-      "codeSnippet": "list.stream().______(n -> n % 2 == 0)",
+      "codeSnippet": "list.stream().___(n -> n % 2 == 0)",
       "options": ["filter", "map", "collect", "forEach"],
       "correctAnswer": "filter"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Stream Collect",
       "prompt": "Complete the collect method.",
-      "codeSnippet": "list.stream().collect(Collectors.______())",
+      "codeSnippet": "list.stream().collect(Collectors.___())",
       "options": ["toList", "toSet", "toMap", "toArray"],
       "correctAnswer": "toList"
     },

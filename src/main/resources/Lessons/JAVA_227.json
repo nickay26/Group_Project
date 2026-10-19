@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Bounded Type",
       "prompt": "Complete the bounded type parameter.",
-      "codeSnippet": "public static <T ______ Number> void print(T value) {\n}",
+      "codeSnippet": "public static <T ___ Number> void print(T value) {\n}",
       "options": ["extends", "implements", "super", "this"],
       "correctAnswer": "extends"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Bounded Type Class",
       "prompt": "Complete the bounded type parameter.",
-      "codeSnippet": "class Box<T ______ Number> {\n}",
+      "codeSnippet": "class Box<T ___ Number> {\n}",
       "options": ["extends", "implements", "super", "this"],
       "correctAnswer": "extends"
     },

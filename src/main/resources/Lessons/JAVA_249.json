@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import Scanner",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.______;",
+      "codeSnippet": "import java.util.___;",
       "options": ["Scanner", "Reader", "Input", "Buffer"],
       "correctAnswer": "Scanner"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Read Line",
       "prompt": "Complete the code to read a line.",
-      "codeSnippet": "String name = sc.________();",
+      "codeSnippet": "String name = sc.___();",
       "options": ["nextLine", "nextString", "readLine", "getLine"],
       "correctAnswer": "nextLine"
     },

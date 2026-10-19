@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Out of Bounds",
       "prompt": "Complete the code to access the last element.",
-      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr[arr.length - __]);",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr[arr.length - ___]);",
       "options": ["1", "2", "0", "5"],
       "correctAnswer": "1"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Out of Bounds",
       "prompt": "Complete the code to access the first element.",
-      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr[__]);",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr[___]);",
       "options": ["0", "1", "2", "3"],
       "correctAnswer": "0"
     },

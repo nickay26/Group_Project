@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Call",
       "prompt": "Complete the method call.",
-      "codeSnippet": "int result = add(5, __);",
+      "codeSnippet": "int result = add(5, ___);",
       "options": ["3", "5", "10", "15"],
       "correctAnswer": "3"
     },

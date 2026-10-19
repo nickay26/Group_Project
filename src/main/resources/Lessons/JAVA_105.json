@@ -44,7 +44,7 @@
       "title": "Fix Semicolon",
       "interactive": true,
       "prompt": "Fix the error by adding the missing semicolon.",
-      "codeSnippet": "System.out.println(\"Hello\")__",
+      "codeSnippet": "System.out.println(\"Hello\")___",
       "options": [";", ":", ".", ","],
       "correctAnswer": ";"
     },
@@ -91,7 +91,7 @@
       "interactive": true,
       "title": "Fix the Error",
       "prompt": "Complete the code to fix the error.",
-      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\")__;\n  }\n}",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello\")___;\n  }\n}",
       "options": [";", ":", ".", ","],
       "correctAnswer": ";"
     },
