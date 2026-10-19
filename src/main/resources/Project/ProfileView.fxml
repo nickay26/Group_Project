@@ -100,9 +100,10 @@
 
                         <HBox spacing="15.0">
                             <children>
+                                <!-- Streak Card -->
                                 <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                                             <image><Image url="@../Images/fire.png" /></image>
                                         </ImageView>
                                         <Label fx:id="streakLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
@@ -110,17 +111,23 @@
                                     </children>
                                 </VBox>
 
+                                <!-- XP Card (⭐ Image အသစ် ထည့်ထားသည်) -->
                                 <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3B82F6;" text="⚡" />
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true" smooth="true">
+                                            <image>
+                                                <Image url="@../Images/Xp.png" requestedWidth="60.0" requestedHeight="60.0" preserveRatio="true" smooth="true"/>
+                                            </image>
+                                        </ImageView>
                                         <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" fx:id="xpLabel" />
                                         <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Total XP" />
                                     </children>
                                 </VBox>
 
+                                <!-- Coin Card -->
                                 <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                                             <image><Image url="@../Images/coin.png" /></image>
                                         </ImageView>
                                         <Label fx:id="coinLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="0" />
@@ -128,13 +135,14 @@
                                     </children>
                                 </VBox>
 
+                                <!-- Brain Card -->
                                 <VBox alignment="CENTER" prefHeight="100.0" styleClass="stat-card" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                                             <image><Image url="@../Images/brain.png" /></image>
                                         </ImageView>
                                         <Label fx:id="brainLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="5" />
-                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Hearts / Brains" />
+                                        <Label style="-fx-font-size: 12px; -fx-text-fill: #94A3B8;" text="Brains" />
                                     </children>
                                 </VBox>
                             </children>

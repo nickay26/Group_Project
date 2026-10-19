@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -383,8 +384,9 @@ public class LessonPlayerController {
         rewardsBox.setAlignment(Pos.CENTER);
         rewardsBox.setPadding(new Insets(10, 0, 10, 0));
 
-        VBox xpBox = createRewardBadge("⚡ +" + xp + " XP", "#F59E0B");
-        VBox coinBox = createRewardBadge("🪙 +" + coins + " Coins", "#10B981");
+        // ⭐ ဒီနေရာမှာ ပုံရဲ့ Path တွေကို ထည့်ပေးလိုက်ပါတယ် (Emoji တွေ ဖျက်ထားပါတယ်)
+        VBox xpBox = createRewardBadge("+" + xp + " XP", "#F59E0B", "/Images/Xp.png");
+        VBox coinBox = createRewardBadge("+" + coins + " Coins", "#10B981", "/Images/coin.png");
 
         rewardsBox.getChildren().addAll(xpBox, coinBox);
         content.getChildren().addAll(titleLabel, descLabel, rewardsBox);
@@ -395,7 +397,6 @@ public class LessonPlayerController {
         dialog.getDialogPane().getButtonTypes().setAll(collectBtnType);
 
         dialog.setOnShown(e -> {
-            // 🔊 Play reward sound effect
             SoundHelper.playReward();
 
             javafx.animation.ScaleTransition st = new javafx.animation.ScaleTransition(javafx.util.Duration.millis(350), dialog.getDialogPane());
@@ -414,7 +415,7 @@ public class LessonPlayerController {
         });
     }
 
-    private VBox createRewardBadge(String text, String colorHex) {
+    private VBox createRewardBadge(String text, String colorHex, String iconPath) {
         VBox box = new VBox();
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(12, 20, 12, 20));
@@ -424,9 +425,32 @@ public class LessonPlayerController {
                         "-fx-border-radius: 12px; " +
                         "-fx-background-radius: 12px;"
         );
+
+        // ⭐ ပုံနဲ့ စာသားကို ဘေးချင်းယှဉ်ထားဖို့ HBox ဆောက်တယ်
+        HBox contentBox = new HBox(6);
+        contentBox.setAlignment(Pos.CENTER);
+
+        // ⭐ ပုံလေး ထည့်ခြင်း
+        try {
+            InputStream is = getClass().getResourceAsStream(iconPath);
+            if (is != null) {
+                Image img = new Image(is);
+                javafx.scene.image.ImageView iconView = new javafx.scene.image.ImageView(img);
+                iconView.setFitWidth(20);  // ပုံအရွယ်အစား
+                iconView.setFitHeight(20);
+                iconView.setPreserveRatio(true);
+                contentBox.getChildren().add(iconView);
+            }
+        } catch (Exception e) {
+            System.err.println("Icon မတွေ့ပါ: " + iconPath);
+        }
+
+        // စာသားထည့်ခြင်း
         Label label = new Label(text);
         label.setStyle("-fx-text-fill: " + colorHex + "; -fx-font-size: 16px; -fx-font-weight: bold;");
-        box.getChildren().add(label);
+        contentBox.getChildren().add(label);
+
+        box.getChildren().add(contentBox);
         return box;
     }
 
