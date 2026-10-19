@@ -316,7 +316,7 @@ public class MainLayoutController {
 
         StackPane root = new StackPane(dialogContent);
         root.setPadding(new Insets(20));
-        root.setStyle("-fx-background-color: rgba(0, 0, 0, 0.65);");
+        root.setStyle("-fx-background-color: transparent;");
 
         Scene scene = new Scene(root, 420, 330);
         scene.setFill(null);

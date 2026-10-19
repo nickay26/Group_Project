@@ -14,7 +14,11 @@ import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
@@ -24,7 +28,6 @@ import com.google.gson.stream.JsonReader;
 import org.json.JSONObject;
 
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class GameController {
     @FXML private Label questionTextLabel;
     @FXML private Label feedbackLabel;
 
-    @FXML private WebView codeWebView; // ⭐ Monaco Editor WebView integration[cite: 10, 12]
+    @FXML private WebView codeWebView;
     private WebEngine webEngine;
     private boolean isEditorReady = false;
     private String pendingSnippet = "";
@@ -49,7 +52,7 @@ public class GameController {
     @FXML private Button option3Btn;
     @FXML private Button option4Btn;
 
-    // ⭐ Result Overlay Dialog Components[cite: 11]
+    // ⭐ Result Overlay Dialog Components
     @FXML private VBox resultOverlay;
     @FXML private Label resultTitleLabel;
     @FXML private Label resultDescLabel;
@@ -59,7 +62,7 @@ public class GameController {
     private int currentQuestionIndex = 0;
     private int userScore = 0;
 
-    private int timeRemaining = 15;
+    private int timeRemaining = 30;
     private Timeline timer;
     private String selectedLanguage = "Java (Basic)";
 
@@ -113,9 +116,6 @@ public class GameController {
         attachGameWebSocketListener();
     }
 
-    // ============================================
-    // MONACO EDITOR SETUP
-    // ============================================
     private void setupMonacoEditor() {
         String monacoHtml = """
             <!DOCTYPE html>
@@ -213,9 +213,6 @@ public class GameController {
         }
     }
 
-    // ============================================
-    // WEBSOCKET & GAME LISTENERS[cite: 11]
-    // ============================================
     private void attachGameWebSocketListener() {
         WebSocketService.getInstance().setNotificationListener(new WebSocketService.NotificationListener() {
             @Override
@@ -304,7 +301,6 @@ public class GameController {
         try {
             questionList.clear();
             String raw = jsonResponse.trim().replace('\u00a0', ' ');
-            System.out.println("📥 Raw JSON received length: " + raw.length());
 
             JsonArray qArray = null;
             JsonElement rootElement = JsonParser.parseString(raw);
@@ -317,7 +313,6 @@ public class GameController {
                         qArray = qEl.getAsJsonArray();
                     } else if (qEl.isJsonPrimitive()) {
                         String innerStr = qEl.getAsString();
-                        System.out.println("🔍 Parsing inner string questions with lenient reader...");
                         try {
                             JsonReader reader = new JsonReader(new StringReader(innerStr));
                             reader.setLenient(true);
@@ -326,7 +321,6 @@ public class GameController {
                                 qArray = innerEl.getAsJsonArray();
                             }
                         } catch (Exception e2) {
-                            System.err.println("⚠️ Lenient parse failed, trying fallback: " + e2.getMessage());
                             String fixedStr = innerStr.replace("\\n", "\n").replace("\\\"", "\"").replace("\\\\", "\\");
                             JsonReader reader2 = new JsonReader(new StringReader(fixedStr));
                             reader2.setLenient(true);
@@ -339,12 +333,9 @@ public class GameController {
             }
 
             if (qArray == null || qArray.size() == 0) {
-                System.err.println("❌ Parsed JsonArray is null or empty!");
                 handleLoadingFailure();
                 return;
             }
-
-            System.out.println("✅ Successfully parsed " + qArray.size() + " questions via Gson Lenient Parser!");
 
             for (JsonElement el : qArray) {
                 JsonObject qObj = el.getAsJsonObject();
@@ -403,7 +394,7 @@ public class GameController {
                 else if (qObj.has("correctAnswer")) correctAns = qObj.get("correctAnswer").getAsInt();
                 else if (qObj.has("answer")) correctAns = qObj.get("answer").getAsInt();
 
-                int timeLimit = 15;
+                int timeLimit = 30;
                 if (qObj.has("time_limit")) timeLimit = qObj.get("time_limit").getAsInt();
                 else if (qObj.has("timeLimit")) timeLimit = qObj.get("timeLimit").getAsInt();
 
@@ -419,7 +410,6 @@ public class GameController {
                 questionList.add(question);
             }
 
-            System.out.println("✅ Total questions loaded into game list: " + questionList.size());
             currentQuestionIndex = 0;
             userScore = 0;
 
@@ -449,7 +439,6 @@ public class GameController {
             questionTextLabel.setText(q.getDescription());
         }
 
-        // Update Monaco Editor Snippet
         updateMonacoSnippet(q.getCodeSnippet(), selectedLanguage);
 
         if (feedbackLabel != null) feedbackLabel.setText("");
@@ -465,7 +454,7 @@ public class GameController {
         }
 
         disableOptionButtons(false);
-        startQuestionTimer(q.getTimeLimit() > 0 ? q.getTimeLimit() : 15);
+        startQuestionTimer(q.getTimeLimit() > 0 ? q.getTimeLimit() : 30);
     }
 
     @FXML
@@ -566,7 +555,6 @@ public class GameController {
         if (!isGameOverSent && roomId != null && !roomId.isEmpty()) {
             isGameOverSent = true;
 
-            // ⭐ Server ဘက်မှ အမှတ်နှင့် အချိန်ကို တိုက်စစ်နိုင်ရန် score ပါ ထည့်ပို့ခြင်း
             JsonObject finishObj = new JsonObject();
             finishObj.addProperty("type", "GAME_OVER");
             finishObj.addProperty("roomId", roomId);
@@ -575,7 +563,9 @@ public class GameController {
 
             WebSocketService.getInstance().sendText(finishObj.toString());
         }
-    }    private void updateScoreDisplay() {
+    }
+
+    private void updateScoreDisplay() {
         if (scoreLabel != null) {
             scoreLabel.setText("Score: " + userScore);
         }
@@ -598,7 +588,7 @@ public class GameController {
         if (option1Btn != null) option1Btn.setStyle(defaultStyle);
         if (option2Btn != null) option2Btn.setStyle(defaultStyle);
         if (option3Btn != null) option3Btn.setStyle(defaultStyle);
-        if (option4Btn != null) option4Btn.setStyle(defaultStyle);
+        if (option4Btn != option4Btn) option4Btn.setStyle(defaultStyle);
     }
 
     private void disableOptionButtons(boolean disable) {
@@ -613,8 +603,67 @@ public class GameController {
         disableOptionButtons(true);
     }
 
+    // ⭐ Top-left [X] ခလုတ်ကို နှိပ်မှသာ Dark Theme Styled Exit Dialog ပေါ်မည်
+
     @FXML
     public void handleBack(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Match");
+        alert.setHeaderText(null);
+        alert.setGraphic(null); // 👈 ဘေးက question mark ပုံပါသည့် icon ကို လုံးဝဖယ်ရှားရန်
+
+        ButtonType confirmBtn = new ButtonType("Confirm", ButtonBar.ButtonData.OK_DONE);
+        ButtonType noBtn = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(confirmBtn, noBtn);
+
+        // Dialog Pane ၏ နောက်ခံဒီဇိုင်း
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setStyle("-fx-background-color: #1e293b; -fx-padding: 15px;");
+
+        // "Are you sure" ကို Bold ဖြင့် အရောင်ထည့်သွင်းရန် Custom Header
+        Label customHeader = new Label("Are you sure");
+        customHeader.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #38bdf8; -fx-padding: 0 0 8 0;");
+        dialogPane.setHeader(customHeader);
+
+        // အောက်ဘက် content စာသား
+        Label contentLabel = new Label("If you leave now, your opponent will win the match.");
+        contentLabel.setStyle("-fx-text-fill: #e2e8f0; -fx-font-size: 13px;");
+        dialogPane.setContent(contentLabel);
+
+        // Confirm နှင့် No ခလုတ်များအတွက် ဒီဇိုင်း
+        Button confirmButton = (Button) dialogPane.lookupButton(confirmBtn);
+        if (confirmButton != null) {
+            confirmButton.setStyle("-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 6 14;");
+        }
+
+        Button noButton = (Button) dialogPane.lookupButton(noBtn);
+        if (noButton != null) {
+            noButton.setStyle("-fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 6 14;");
+        }
+
+        alert.showAndWait().ifPresent(type -> {
+            if (type == confirmBtn) {
+                if (timer != null) {
+                    timer.stop();
+                }
+
+                if (roomId != null && !roomId.isEmpty() && currentUserId != null) {
+                    JsonObject surrenderObj = new JsonObject();
+                    surrenderObj.addProperty("type", "SURRENDER");
+                    surrenderObj.addProperty("roomId", roomId);
+                    surrenderObj.addProperty("userId", currentUserId);
+                    WebSocketService.getInstance().sendText(surrenderObj.toString());
+                }
+
+                SceneManager.switchScene("MainLayoutView.fxml");
+                if (MainLayoutController.getInstance() != null) {
+                    MainLayoutController.getInstance().loadPage("GameModeView.fxml");
+                }
+            }
+        });
+    }    @FXML
+    public void handleContinueMatch(ActionEvent event) {
         if (timer != null) {
             timer.stop();
         }
@@ -623,4 +672,5 @@ public class GameController {
             MainLayoutController.getInstance().loadPage("GameModeView.fxml");
         }
     }
-}
+
+    }
