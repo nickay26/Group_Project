@@ -273,10 +273,8 @@ public class DialogUtils {
         dialog.showAndWait();
     }
 
-    /**
-     * Reusable Dark-themed Confirmation Dialog
-     */
-    public static boolean showConfirmationDialog(String title, String message) {
+    // ⭐ ခလုတ်စာသား (confirmBtnText) ကို ပါ ထည့်လို့ရအောင် ပြင်ထားတဲ့ Method
+    public static boolean showConfirmationDialog(String title, String message, String confirmBtnText) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -297,14 +295,17 @@ public class DialogUtils {
 
         dialog.getDialogPane().setContent(content);
 
-        ButtonType confirmButtonType = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        // ⭐ ပို့လိုက်တဲ့ စာသားကို သုံးမယ် (ဥပမာ - "Log out" သို့မဟုတ် "Delete")
+        ButtonType confirmButtonType = new ButtonType(confirmBtnText, ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().setAll(confirmButtonType, cancelButtonType);
 
         javafx.scene.Node confirmButton = dialog.getDialogPane().lookupButton(confirmButtonType);
         if (confirmButton != null) {
+            // Delete ဆိုရင် အနီရောင်၊ ကျန်တာဆိုရင် အပြာရောင် ပေးမယ်
+            String bgColor = confirmBtnText.equalsIgnoreCase("Delete") ? "#DC2626" : "#2563EB";
             confirmButton.setStyle(
-                    "-fx-background-color: #DC2626; " +
+                    "-fx-background-color: " + bgColor + "; " +
                             "-fx-text-fill: white; " +
                             "-fx-font-weight: bold; " +
                             "-fx-cursor: hand; " +
@@ -324,6 +325,12 @@ public class DialogUtils {
         }
 
         return dialog.showAndWait().filter(response -> response == confirmButtonType).isPresent();
+    }
+
+    // ⭐ မူရင်း Method (အခြားနေရာတွေမှာ ခေါ်သုံးနေကျဖြစ်လို့ ဒါကို မဖျက်ပါနဲ့)
+    // ဒီ Method ကို ခေါ်ရင် Default အနေနဲ့ "Delete" လို့ပဲ ပေါ်မယ်။
+    public static boolean showConfirmationDialog(String title, String message) {
+        return showConfirmationDialog(title, message, "Delete");
     }
 
     public static void showStreakDialog() {
