@@ -287,27 +287,6 @@ public class CodeEditorController {
     }
 
     // ============================================
-    // SHOW SOLUTION
-    // ============================================
-    @FXML
-    public void handleShowSolution() {
-        if (currentQuestion == null || currentQuestion.getSolutionCode() == null) {
-            return;
-        }
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Show Solution");
-        alert.setHeaderText("👁 Solution");
-        alert.setContentText("Are you sure? Try solving it first!\n\nSolution:\n"
-                + currentQuestion.getSolutionCode());
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                setCode(currentQuestion.getSolutionCode(), getLanguage());
-            }
-        });
-    }
-
-    // ============================================
     // SAVE
     // ============================================
     @FXML

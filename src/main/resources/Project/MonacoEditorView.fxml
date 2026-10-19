@@ -22,14 +22,10 @@
         <HBox spacing="10" alignment="CENTER_RIGHT">
             <Button fx:id="hintBtn" text="💡 Hint" onAction="#handleHint"
                     style="-fx-background-color: #1e293b; -fx-text-fill: #f8fafc; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8. 14; -fx-cursor: hand; -fx-border-color: #334155; -fx-border-radius: 8px;"/>
-            <Button fx:id="solutionBtn" text="👁 Solution" onAction="#handleShowSolution"
-                    style="-fx-background-color: #1e293b; -fx-text-fill: #f8fafc; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 14; -fx-cursor: hand; -fx-border-color: #334155; -fx-border-radius: 8px;"/>
             <Button fx:id="reviewBtn" text="✨ AI Review" onAction="#handleReviewCode"
                     style="-fx-background-color: #8b5cf6; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16; -fx-cursor: hand;"/>
             <Button fx:id="runBtn" text="▶ Run Code" onAction="#handleRunCode"
                     style="-fx-background-color: #334155; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16; -fx-cursor: hand;"/>
-            <Button fx:id="checkBtn" text="✅ Check Answer" onAction="#handleCheckCode"
-                    style="-fx-background-color: #10b981; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 18; -fx-cursor: hand;"/>
         </HBox>
     </HBox>
 

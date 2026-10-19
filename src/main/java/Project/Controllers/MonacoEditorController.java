@@ -201,12 +201,6 @@ public class MonacoEditorController {
     }
 
     @FXML
-    private void handleCheckCode() {
-        showTerminal();
-        handleRunCode();
-    }
-
-    @FXML
     private void handleBack() {
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().loadPage("PracticeView.fxml");
