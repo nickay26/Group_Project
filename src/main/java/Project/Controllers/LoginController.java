@@ -24,6 +24,11 @@ public class LoginController {
     // ============================================
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
+
+    // ⭐ Password ပြသရန် အသစ်ထည့်သွင်းထားသော Controls များ
+    @FXML private TextField visiblePasswordField;
+    @FXML private Button togglePasswordBtn;
+
     @FXML private CheckBox rememberCheck;
     @FXML private Hyperlink forgotLink;
     @FXML private Button loginBtn;
@@ -40,6 +45,40 @@ public class LoginController {
     public void initialize() {
         setupFloatingLabel(emailField, emailFloatLabel);
         setupFloatingLabel(passwordField, passwordFloatLabel);
+
+        // ⭐ visiblePasswordField အတွက်ပါ ထည့်ပါ (Floating Label အတွက်)
+        setupFloatingLabel(visiblePasswordField, passwordFloatLabel);
+
+        // ⭐ PasswordField နဲ့ visiblePasswordField ရဲ့ စာသားတွေကို အတူတူဖြစ်နေအောင် ချိတ်ဆက်ခြင်း
+        visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
+
+        // ⭐ မျက်လုံးကို နှိပ်ထားရင် (Press) Password ပြမယ်
+        togglePasswordBtn.setOnMousePressed(event -> {
+            visiblePasswordField.setVisible(true);
+            visiblePasswordField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+
+            // Focus ကို ရွှေ့ပေးပြီး Cursor ကို အဆုံးမှာထားမယ်
+            visiblePasswordField.requestFocus();
+            visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
+
+            togglePasswordBtn.setText("🙈"); // မျက်လုံးပိတ်ပုံပြောင်းမယ်
+        });
+
+        // ⭐ မျက်လုံးကို လွှတ်လိုက်ရင် (Release) ပြန်ဝှက်မယ်
+        togglePasswordBtn.setOnMouseReleased(event -> {
+            visiblePasswordField.setVisible(false);
+            visiblePasswordField.setManaged(false);
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+
+            // Focus ကို ပြန်ရွှေ့ပေးမယ်
+            passwordField.requestFocus();
+            passwordField.positionCaret(passwordField.getText().length());
+
+            togglePasswordBtn.setText("👁"); // မျက်လုံးပုံ ပြန်ထားမယ်
+        });
     }
 
     private void setupFloatingLabel(TextField field, Label label) {
@@ -204,7 +243,7 @@ public class LoginController {
     @FXML
     private void handleLogin() {
         String email = emailField.getText().trim();
-        String password = passwordField.getText().trim();
+        String password = passwordField.getText().trim(); // PasswordField ကနေ ယူလို့ရပါတယ်
 
         // Validation
         if (email.isEmpty() || password.isEmpty()) {
