@@ -1042,22 +1042,4 @@ public class DatabaseManager {
 
         return user;
     }
-
-    public static boolean deleteUser(int userId) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
-                    .DELETE() // DELETE Request ပို့ခြင်း
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            return response.statusCode() == 200 || response.statusCode() == 204;
-
-        } catch (Exception e) {
-            System.err.println("Error deleting user: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
 }

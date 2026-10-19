@@ -6,6 +6,7 @@ import Project.Helpers.AvatarCropDialog;
 import Project.Helpers.DialogUtils;
 import Project.Getters_Setters.User;
 import Project.Getters_Setters.UserSession;
+import Project.Helpers.SceneManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -396,7 +397,7 @@ public class SettingsController {
                                     if (MainLayoutController.getInstance() != null) {
                                         MainLayoutController.getInstance().loadUserProfileImage();
                                     }
-                                    showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile picture uploaded successfully!");
+                                    DialogUtils.showSuccessDialog("Profile picture uploaded successfully!");
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -548,57 +549,38 @@ public class SettingsController {
 
     @FXML
     private void handleDeleteAccount() {
-        User user = UserSession.getCurrentUser();
-        if (user == null) {
+        int userId = UserSession.getUserId();
+        if (userId <= 0) {
             DialogUtils.showErrorDialog("No active user session found.");
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Account");
-        alert.setHeaderText("Are you sure you want to delete your account?");
-        alert.setContentText("This action is permanent and cannot be undone. All your progress, projects, and certificates will be lost.");
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                boolean success = DatabaseManager.deleteAccount(user.getUserId());
-                if (success) {
-                    // Session ကို ရှင်းလင်းခြင်း
-                    // UserSession.clear(); (သို့မဟုတ် သင့်ပရောဂျက်ရှိ Session ဖျက်သည့်ပုံစံအတိုင်း)
-                    DialogUtils.showSuccessDialog("Your account has been successfully deleted.");
-
-                    // Login / Welcome မျက်နှာပြင်သို့ ပြန်လည်ပို့ဆောင်ခြင်း
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/LoginView.fxml"));
-                        Parent root = loader.load();
-                        deleteSection.getScene().setRoot(root);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.exit(0);
-                    }
-                } else {
-                    DialogUtils.showErrorDialog("Failed to delete account from server. Please try again.");
-                }
-        // ⭐ Dark Theme Confirmation Dialog ခေါ်ခြင်း (OK/Cancel ပါမယ်)
+        // Dark Theme / Standard Confirmation Dialog ခေါ်ခြင်း
         boolean isConfirmed = DialogUtils.showConfirmationDialog(
                 "Delete Account",
-                "Are you sure you want to delete your account?\nThis action cannot be undone!"
+                "Are you sure you want to delete your account?\nThis action is permanent and cannot be undone. All your progress, projects, and certificates will be lost."
         );
 
         if (isConfirmed) {
-            int userId = UserSession.getUserId();
-            boolean isDeleted = DatabaseManager.deleteUser(userId);
+            boolean success = DatabaseManager.deleteAccount(userId);
 
-            if (isDeleted) {
-                // အောင်မြင်ရင် Success Dialog ပြ
-                DialogUtils.showSuccessDialog("Your account has been deleted successfully.");
-                UserSession.clearSession();
-                SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
+            if (success) {
+                DialogUtils.showSuccessDialog("Your account has been successfully deleted.");
+
+                // Session ရှင်းလင်းခြင်းနှင့် Login မျက်နှာပြင်သို့ ပြန်လည်ပို့ဆောင်ခြင်း
+                try {
+                    // လိုအပ်ပါက UserSession.clear(); ကို ဤနေရာတွင် ထည့်ပါ
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/LoginView.fxml"));
+                    Parent root = loader.load();
+                    deleteSection.getScene().setRoot(root);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
             } else {
-                // မအောင်မြင်ရင် Error Dialog ပြ
-                DialogUtils.showErrorDialog("Failed to delete account. Please try again.");
+                DialogUtils.showErrorDialog("Failed to delete account from server. Please try again.");
             }
-        });
+        }
     }
 
     @FXML
