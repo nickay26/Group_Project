@@ -248,7 +248,15 @@ public class LoginController {
                 System.out.println("❌ Server says NOT premium");
             }
 
-            navigateToNextScene();
+            // ⭐ ADMIN CHECK (Admin Email ဖြစ်ရင် Admin Dashboard ကို ပို့မယ်)
+            if ("admin@gmail.com".equalsIgnoreCase(user.getEmail())) {
+                System.out.println("Admin logged in. Redirecting to Admin Dashboard...");
+                SceneManager.switchScene("AdminView.fxml", "Sodexa Platform - Admin Dashboard");
+            } else {
+                // ကျန်တဲ့ သာမန် User တွေ အတွက် ပုံမှန် Dashboard
+                navigateToNextScene();
+            }
+
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed",
                     "Invalid email/username or password. Please try again.");
@@ -270,7 +278,7 @@ public class LoginController {
                         UserSession.initSession(dbUser);
                         System.out.println("Session started for Google User ID: " + dbUser.getUserId());
 
-                        // ⭐ PREMIUM CHECK (ဒီနေရာမှာ ထည့်)
+                        // ⭐ PREMIUM CHECK
                         boolean serverPremium = DatabaseManager.isPremium(dbUser.getUserId());
                         System.out.println("Server premium check: " + serverPremium);
                         if (serverPremium) {
@@ -282,8 +290,14 @@ public class LoginController {
                             System.out.println("❌ Server says NOT premium");
                         }
 
-                        sendAuthCodeToFlask(authCode);
-                        navigateToNextScene();
+                        // ⭐ ADMIN CHECK (Google Login နဲ့ Admin ဝင်လာရင်လည်း စစ်မယ်)
+                        if ("admin@gmail.com".equalsIgnoreCase(dbUser.getEmail())) {
+                            System.out.println("Admin logged in via Google. Redirecting to Admin Dashboard...");
+                            SceneManager.switchScene("AdminView.fxml", "Sodexa Platform - Admin Dashboard");
+                        } else {
+                            sendAuthCodeToFlask(authCode);
+                            navigateToNextScene();
+                        }
                     });
                 } else {
                     System.err.println("Failed to sync Google user with local database.");
@@ -294,7 +308,6 @@ public class LoginController {
 
     /**
      * Dashboard (MainLayoutView) သို့ သွားမည်။
-     * MainLayoutController က redirectedFromOverview Flag ပေါ်မူတည်ပြီး Learn သို့မဟုတ် Courses Page ကို အလိုအလျောက် ရွေးဖွင့်ပါမည်။
      */
     private void navigateToNextScene() {
         SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
