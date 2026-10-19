@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import HashMap",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.______;",
+      "codeSnippet": "import java.util.___;",
       "options": ["HashMap", "Map", "Hash", "Table"],
       "correctAnswer": "HashMap"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Put Value",
       "prompt": "Complete the code to add a key-value pair.",
-      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.____(\"Java\", 1995);",
+      "codeSnippet": "HashMap<String, Integer> map = new HashMap<>();\nmap.___(\"Java\", 1995);",
       "options": ["put", "add", "insert", "set"],
       "correctAnswer": "put"
     },

@@ -13,6 +13,7 @@
     {
       "slideId": "JAVA_110_S2",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Output of If",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 10;\nif (x > 5) {\n  System.out.println(\"Big\");\n}",
@@ -22,6 +23,7 @@
     {
       "slideId": "JAVA_110_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Output of If-Else",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 3;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
@@ -32,7 +34,7 @@
       "slideId": "JAVA_110_S4",
       "type": "MULTIPLE_CHOICE",
       "title": "Comparison Operator",
-      "Interactive": "true",
+      "interactive": true,
       "prompt": "Which operator means 'greater than or equal to'?",
       "options": [">=", ">", "<=", "<"],
       "correctAnswer": ">="
@@ -58,6 +60,7 @@
     {
       "slideId": "JAVA_110_S7",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "If Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 7;\nif (x > 5) {\n  System.out.println(\"Yes\");\n}",
@@ -67,6 +70,7 @@
     {
       "slideId": "JAVA_110_S8",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "If-Else Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 2;\nif (x > 5) {\n  System.out.println(\"A\");\n} else {\n  System.out.println(\"B\");\n}",
@@ -77,7 +81,7 @@
       "slideId": "JAVA_110_S9",
       "type": "CODE_OUTPUT",
       "title": "Even or Odd",
-      "Interactive": "true",
+      "interactive": true,
       "prompt": "What is the output?",
       "codeSnippet": "int x = 4;\nif (x % 2 == 0) {\n  System.out.println(\"Even\");\n} else {\n  System.out.println(\"Odd\");\n}",
       "options": ["Even", "Odd", "4", "Error"],
@@ -86,6 +90,7 @@
     {
       "slideId": "JAVA_110_S10",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Even or Odd",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 5;\nif (x % 2 == 0) {\n  System.out.println(\"Even\");\n} else {\n  System.out.println(\"Odd\");\n}",

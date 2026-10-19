@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Inheritance Keyword",
       "prompt": "Complete the class declaration with inheritance.",
-      "codeSnippet": "class Dog _____ Animal {\n}",
+      "codeSnippet": "class Dog ___ Animal {\n}",
       "options": ["extends", "implements", "inherits", "super"],
       "correctAnswer": "extends"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Inheritance Keyword",
       "prompt": "Complete the class declaration with inheritance.",
-      "codeSnippet": "class Car _____ Vehicle {\n}",
+      "codeSnippet": "class Car ___ Vehicle {\n}",
       "options": ["extends", "implements", "inherits", "super"],
       "correctAnswer": "extends"
     },

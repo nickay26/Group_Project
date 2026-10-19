@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Field",
       "prompt": "Complete the code to make the field private.",
-      "codeSnippet": "class Person {\n  ______ String name;\n}",
+      "codeSnippet": "class Person {\n  ___ String name;\n}",
       "options": ["private", "public", "protected", "static"],
       "correctAnswer": "private"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Getter",
       "prompt": "Complete the getter method.",
-      "codeSnippet": "public String ________() {\n  return name;\n}",
+      "codeSnippet": "public String ___() {\n  return name;\n}",
       "options": ["getName", "setName", "name", "get"],
       "correctAnswer": "getName"
     },

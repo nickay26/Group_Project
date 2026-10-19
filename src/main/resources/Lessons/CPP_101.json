@@ -6,13 +6,13 @@
     {
       "slideId": "CPP_101_S1",
       "type": "CONCEPT",
+      "interactive": true,
       "title": "Basic Syntax Overview",
       "prompt": "Every C++ program starts with a main() function and uses standard header files like iostream.",
       "codeSnippet": "#include <iostream>\nint main() {\n    std::cout << \"Hello World!\";\n    return 0;\n}"
     },
     {
       "slideId": "CPP_101_S2",
-      "interactive": true,
       "type": "FILL_IN_BLANK",
       "title": "Header File Inclusion",
       "prompt": "Fill in the correct header file for input/output operations.",

@@ -32,6 +32,7 @@ import static Project.API_Database.ApiClient.cleanAndFormatAiText;
 public class LessonPlayerController {
 
     @FXML private Button closeBtn;
+    @FXML private Button backBtn; // ⭐ Back Button Added
     @FXML private ProgressBar progressBar;
     @FXML private StackPane cardContainer;
     @FXML private Button continueBtn;
@@ -139,6 +140,14 @@ public class LessonPlayerController {
         if (progressBar != null) {
             double progress = (double) (currentSlideIndex + 1) / slides.length();
             progressBar.setProgress(progress);
+        }
+
+        // ⭐ Handle Back Button state (Disable on first slide)
+        if (backBtn != null) {
+            backBtn.setDisable(currentSlideIndex == 0);
+            backBtn.setStyle(currentSlideIndex == 0
+                    ? "-fx-background-color: transparent; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #475569; -fx-opacity: 0.5;"
+                    : "-fx-background-color: transparent; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #94A3B8; -fx-cursor: hand;");
         }
 
         cardContainer.getChildren().clear();
@@ -280,28 +289,46 @@ public class LessonPlayerController {
         cardContainer.getChildren().add(scrollPane);
     }
 
+    // ⭐ Handle Back Button Action
+    @FXML
+    private void handleBack() {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            renderCurrentSlide();
+        }
+    }
+
     private void handleLessonCompletion() {
         if (continueBtn != null) {
             continueBtn.setDisable(true);
         }
 
         new Thread(() -> {
-            int earnedXP = currentLesson != null ? currentLesson.getXp() : 10;
-            int earnedCoins = 10;
+            int userId = UserSession.getUserId();
+            String courseId = UserSession.getActiveCourseId();
 
-            if (totalQuestionCount > 0) {
-                double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
-                if (percentage >= 50.0) {
-                    earnedCoins = 10;
-                } else {
-                    earnedCoins = 5;
+            // ⭐ ဤသင်ခန်းစာသည် အရင်ကတည်းက ပြီးသွားပြီးသား ဟုတ်မဟုတ် စစ်ဆေးခြင်း
+            // (completed lesson order ထက် လက်ရှိ lesson order က နိမ့်နေလျှင် သို့မဟုတ် ညီနေလျှင် ပြီးပြီးသား ဖြစ်သည်)
+            int completedCount = DatabaseManager.getCompletedLessonCount(userId, courseId);
+            boolean isAlreadyCompleted = (currentLesson != null && currentLesson.getLessonOrder() <= completedCount);
+
+            int earnedXP = 0;
+            int earnedCoins = 0;
+
+            // ⭐ အကယ်၍ ပထမဆုံးအကြိမ် ဖြေဆိုခြင်း ဖြစ်မှသာ XP နှင့် Coins ပေးမည်
+            if (!isAlreadyCompleted) {
+                earnedXP = currentLesson != null ? currentLesson.getXp() : 10;
+                if (totalQuestionCount > 0) {
+                    double percentage = ((double) correctAnswerCount / totalQuestionCount) * 100.0;
+                    if (percentage >= 50.0) {
+                        earnedCoins = 10;
+                    } else {
+                        earnedCoins = 5;
+                    }
                 }
             }
 
             if (currentLesson != null) {
-                int userId = UserSession.getUserId();
-                String courseId = UserSession.getActiveCourseId();
-
                 DatabaseManager.completeLessonAndAddXP(
                         userId,
                         courseId,
@@ -315,7 +342,15 @@ public class LessonPlayerController {
             final int finalCoins = earnedCoins;
 
             Platform.runLater(() -> {
-                showRewardAnimationDialog(finalXp, finalCoins);
+                if (isAlreadyCompleted) {
+                    // အကယ်၍ အရင်ကတည်းက ပြီးထားပြီးသားဆိုလျှင် ဆုလာဘ် Dialog မပြဘဲ Learn စာမျက်နှာသို့ တိုက်ရိုက်ပြန်သွားမည်
+                    if (MainLayoutController.getInstance() != null) {
+                        MainLayoutController.getInstance().loadPage("LearnPage.fxml");
+                    }
+                } else {
+                    // ပထမဆုံးအကြိမ် ပြီးဆုံးခြင်းအတွက်သာ ဆုလာဘ် Dialog ပြမည်
+                    showRewardAnimationDialog(finalXp, finalCoins);
+                }
             });
         }).start();
     }
@@ -325,7 +360,6 @@ public class LessonPlayerController {
         dialog.setTitle("Lesson Completed! 🎉");
         dialog.initModality(Modality.APPLICATION_MODAL);
 
-        // Dark theme styling to match your app
         dialog.getDialogPane().setStyle(
                 "-fx-background-color: #1E293B; " +
                         "-fx-background-radius: 20px; " +
@@ -344,7 +378,6 @@ public class LessonPlayerController {
         Label descLabel = new Label("You have successfully completed the lesson.");
         descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 14px;");
 
-        // Rewards Box (XP & Coins)
         HBox rewardsBox = new HBox(20);
         rewardsBox.setAlignment(Pos.CENTER);
         rewardsBox.setPadding(new Insets(10, 0, 10, 0));
@@ -360,7 +393,6 @@ public class LessonPlayerController {
         ButtonType collectBtnType = new ButtonType("CONTINUE", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().setAll(collectBtnType);
 
-        // Apply Pop-up Scale Animation when dialog shows
         dialog.setOnShown(e -> {
             javafx.animation.ScaleTransition st = new javafx.animation.ScaleTransition(javafx.util.Duration.millis(350), dialog.getDialogPane());
             st.setFromX(0.5);
@@ -637,10 +669,9 @@ public class LessonPlayerController {
             if (isCorrect) {
                 correctAnswerCount++;
             } else {
-                // 🧠 DEDUCT BRAIN ON WRONG ANSWER
                 User user = UserSession.getCurrentUser();
                 if (user != null && !user.isPremium()) {
-                    UserSession.deductOneBrain(); // Decrements RAM & calls ApiClient.deductBrainAsync
+                    UserSession.deductOneBrain();
 
                     if (MainLayoutController.getInstance() != null) {
                         MainLayoutController.getInstance().updateHeaderStats();
@@ -672,7 +703,6 @@ public class LessonPlayerController {
             } else {
                 showFeedback(false, "Incorrect! Correct answer: " + correctAnswer, explanation);
 
-                // 🧠 Check if user ran out of brains
                 User user = UserSession.getCurrentUser();
                 if (user != null && !user.isPremium() && user.getBrainCount() <= 0) {
                     isAnswerChecked = true;
@@ -812,7 +842,6 @@ public class LessonPlayerController {
         DialogUtils.showMessageDialog("Daily AI Limit", "🚀 You've reached today's AI limit!\n\n" + message, false);
     }
 
-    // 🧠 Refill Dialog on Out of Brains
     private void showOutOfBrainsDialog() {
         User user = UserSession.getCurrentUser();
         if (user == null) {
@@ -820,7 +849,6 @@ public class LessonPlayerController {
             return;
         }
 
-        // Dark-themed confirmation dialog implementation
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Out of Energy!");
         dialog.initModality(Modality.APPLICATION_MODAL);

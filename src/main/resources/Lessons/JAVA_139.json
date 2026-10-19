@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Uppercase",
       "prompt": "Complete the code to convert to uppercase.",
-      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.________());",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.___());",
       "options": ["toUpperCase", "toLower", "upper", "toUpper"],
       "correctAnswer": "toUpperCase"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Uppercase",
       "prompt": "Complete the code to convert to uppercase.",
-      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.________());",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.___());",
       "options": ["toUpperCase", "toLower", "upper", "toUpper"],
       "correctAnswer": "toUpperCase"
     },

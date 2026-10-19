@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Override",
       "prompt": "Complete the subclass method.",
-      "codeSnippet": "class Dog extends Animal {\n  ______ sound() {\n    System.out.println(\"Bark\");\n  }\n}",
+      "codeSnippet": "class Dog extends Animal {\n  ___ sound() {\n    System.out.println(\"Bark\");\n  }\n}",
       "options": ["void", "int", "String", "boolean"],
       "correctAnswer": "void"
     },

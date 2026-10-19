@@ -38,7 +38,7 @@
       "slideId": "JAVA_101_TEST_S5",
       "type": "MULTIPLE_CHOICE",
       "title": "Java Type",
-      "prompt": "Java is a ___________ programming language.",
+      "prompt": "Java is a ___ programming language.",
       "options": ["Object-Oriented", "Procedural", "Functional", "Scripting"],
       "correctAnswer": "Object-Oriented"
     },
@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Print Hello World",
       "prompt": "Complete the code to output \"Hello World\".",
-      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello World\");\n  }\n}",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.___(\"Hello World\");\n  }\n}",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },
@@ -89,7 +89,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare Integer",
       "prompt": "Complete the code to declare an integer variable 'age' with value 25.",
-      "codeSnippet": "____ age = 25;",
+      "codeSnippet": "___ age = 25;",
       "options": ["int", "double", "String", "boolean"],
       "correctAnswer": "int"
     },

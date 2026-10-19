@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create Object",
       "prompt": "Complete the code to create an object of class Dog.",
-      "codeSnippet": "Dog d = _____ Dog();",
+      "codeSnippet": "Dog d = ___ Dog();",
       "options": ["new", "create", "make", "object"],
       "correctAnswer": "new"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create Object with Constructor",
       "prompt": "Complete the code to create an object with a constructor.",
-      "codeSnippet": "Car c = new Car(____);",
+      "codeSnippet": "Car c = new Car(___);",
       "options": ["\"Toyota\"", "Toyota", "new", "Car"],
       "correctAnswer": "\"Toyota\""
     },

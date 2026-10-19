@@ -72,7 +72,14 @@ public class GameModeController {
                     }
                 }
             } else if ("FRIEND".equals(mode)) {
-                SceneManager.switchScene("FRIEND.fxml");
+                // ⭐ FRIEND.fxml သို့ ကူးပြောင်းစဉ် ရွေးချယ်ထားသော language ကို လွှဲပေးခြင်း
+                FXMLLoader loader = SceneManager.switchScene("/Project/FRIEND.fxml", "Sodexa Platform");
+                if (loader != null) {
+                    FriendMatchController controller = loader.getController();
+                    if (controller != null) {
+                        controller.setSelectedLanguage(language);
+                    }
+                }
             }
             System.out.println("Starting " + mode + " Match with language: " + language);
         } catch (Exception e) {

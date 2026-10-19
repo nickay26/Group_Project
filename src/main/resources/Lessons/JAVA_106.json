@@ -30,7 +30,7 @@
       "slideId": "JAVA_106_S4",
       "type": "MULTIPLE_CHOICE",
       "title": "String Declaration",
-      "prompt": "A String variable is declared with ___________.",
+      "prompt": "A String variable is declared with ___.",
       "options": ["String", "string", "Str", "Text"],
       "correctAnswer": "String"
     },
@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare Integer",
       "prompt": "Complete the code to declare an integer variable 'age' with value 25.",
-      "codeSnippet": "____ age = 25;",
+      "codeSnippet": "___ age = 25;",
       "options": ["int", "double", "String", "boolean"],
       "correctAnswer": "int"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare String",
       "prompt": "Complete the code to declare a String variable 'name' with value \"John\".",
-      "codeSnippet": "____ name = \"John\";",
+      "codeSnippet": "___ name = \"John\";",
       "options": ["String", "string", "Str", "Text"],
       "correctAnswer": "String"
     },
@@ -72,6 +72,7 @@
     {
       "slideId": "JAVA_106_S9",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "String Output",
       "prompt": "What is the output?",
       "codeSnippet": "String name = \"John\";\nSystem.out.println(name);",
@@ -81,6 +82,7 @@
     {
       "slideId": "JAVA_106_S10",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Addition Output",
       "prompt": "What is the output?",
       "codeSnippet": "int a = 5;\nint b = 3;\nSystem.out.println(a + b);",

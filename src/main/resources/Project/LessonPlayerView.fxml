@@ -10,7 +10,7 @@
 
 <BorderPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../Css/lesson_player.css" styleClass="root-container" style="-fx-background-color: #0F172A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LessonPlayerController">
 
-    <!-- Header with Close Button and Progress Bar -->
+    <!-- Header with Close Button, Progress Bar and Back Button -->
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20.0">
             <padding>
@@ -19,6 +19,7 @@
             <children>
                 <Button fx:id="closeBtn" onAction="#handleClose" style="-fx-background-color: transparent; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #94A3B8; -fx-cursor: hand;" text="✕" />
                 <ProgressBar fx:id="progressBar" maxWidth="1.0E30" prefHeight="10.0" progress="0.1" style="-fx-accent: #3B82F6; -fx-control-inner-background: #1E293B;" HBox.hgrow="ALWAYS" />
+                <Button fx:id="backBtn" onAction="#handleBack" style="-fx-background-color: transparent; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #94A3B8; -fx-cursor: hand;" text="← Back" />
             </children>
         </HBox>
     </top>

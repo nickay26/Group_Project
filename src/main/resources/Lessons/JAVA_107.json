@@ -5,6 +5,7 @@
     {
       "slideId": "JAVA_107_S1",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"5\" + 3);",
@@ -14,6 +15,7 @@
     {
       "slideId": "JAVA_107_S2",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(5 + \"3\");",
@@ -23,6 +25,7 @@
     {
       "slideId": "JAVA_107_S3",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Empty String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(5 + 3 + \"\");",
@@ -32,6 +35,7 @@
     {
       "slideId": "JAVA_107_S4",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Empty String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"\" + 5 + 3);",
@@ -41,6 +45,7 @@
     {
       "slideId": "JAVA_107_S5",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Mixed Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(1 + 2 + \"3\" + 4 + 5);",
@@ -69,6 +74,7 @@
     {
       "slideId": "JAVA_107_S8",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"Java\" + \" \" + \"Rocks\");",
@@ -78,6 +84,7 @@
     {
       "slideId": "JAVA_107_S9",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "String Number Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"Java\" + 5);",
@@ -87,6 +94,7 @@
     {
       "slideId": "JAVA_107_S10",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Number String Concatenation",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(5 + \"Java\");",

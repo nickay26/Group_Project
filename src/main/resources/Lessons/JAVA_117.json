@@ -8,7 +8,8 @@
       "title": "Array Index Start",
       "prompt": "Array indices start at:",
       "options": ["0", "1", "-1", "10"],
-      "correctAnswer": "0"
+      "correctAnswer": "0",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S2",
@@ -17,7 +18,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[1]);",
       "options": ["10", "20", "30", "Error"],
-      "correctAnswer": "20"
+      "correctAnswer": "20",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S3",
@@ -26,7 +28,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[2]);",
       "options": ["10", "20", "30", "Error"],
-      "correctAnswer": "30"
+      "correctAnswer": "30",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S4",
@@ -35,7 +38,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[3]);",
       "options": ["10", "20", "30", "ArrayIndexOutOfBoundsException"],
-      "correctAnswer": "ArrayIndexOutOfBoundsException"
+      "correctAnswer": "ArrayIndexOutOfBoundsException",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S5",
@@ -44,7 +48,8 @@
       "prompt": "Complete the code to access the first element.",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
       "options": ["0", "1", "2", "3"],
-      "correctAnswer": "0"
+      "correctAnswer": "0",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S6",
@@ -53,7 +58,8 @@
       "prompt": "Complete the code to access the second element.",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
       "options": ["1", "0", "2", "3"],
-      "correctAnswer": "1"
+      "correctAnswer": "1",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S7",
@@ -62,7 +68,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr[0] + arr[1]);",
       "options": ["3", "12", "1", "2"],
-      "correctAnswer": "3"
+      "correctAnswer": "3",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S8",
@@ -71,7 +78,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[2]);",
       "options": ["5", "10", "15", "Error"],
-      "correctAnswer": "15"
+      "correctAnswer": "15",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S9",
@@ -80,7 +88,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[0]);",
       "options": ["5", "10", "15", "Error"],
-      "correctAnswer": "5"
+      "correctAnswer": "5",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S10",
@@ -89,7 +98,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[1]);",
       "options": ["5", "10", "15", "Error"],
-      "correctAnswer": "10"
+      "correctAnswer": "10",
+      "interactive": true
     },
     {
       "slideId": "JAVA_117_S11",
@@ -97,7 +107,8 @@
       "title": "Array Index Range",
       "prompt": "What is the valid index range for an array of length 5?",
       "options": ["0 to 4", "1 to 5", "0 to 5", "1 to 4"],
-      "correctAnswer": "0 to 4"
+      "correctAnswer": "0 to 4",
+      "interactive": true
     }
   ]
 }

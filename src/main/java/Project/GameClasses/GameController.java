@@ -565,11 +565,17 @@ public class GameController {
 
         if (!isGameOverSent && roomId != null && !roomId.isEmpty()) {
             isGameOverSent = true;
-            WebSocketService.getInstance().sendGameOver(roomId, currentUserId);
-        }
-    }
 
-    private void updateScoreDisplay() {
+            // ⭐ Server ဘက်မှ အမှတ်နှင့် အချိန်ကို တိုက်စစ်နိုင်ရန် score ပါ ထည့်ပို့ခြင်း
+            JsonObject finishObj = new JsonObject();
+            finishObj.addProperty("type", "GAME_OVER");
+            finishObj.addProperty("roomId", roomId);
+            finishObj.addProperty("userId", currentUserId);
+            finishObj.addProperty("score", userScore);
+
+            WebSocketService.getInstance().sendText(finishObj.toString());
+        }
+    }    private void updateScoreDisplay() {
         if (scoreLabel != null) {
             scoreLabel.setText("Score: " + userScore);
         }

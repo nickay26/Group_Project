@@ -6,6 +6,7 @@
     {
       "slideId": "CPP_102_S1",
       "type": "CONCEPT",
+      "interactive": true,
       "title": "Single-line vs Multi-line Comments",
       "prompt": "Comments are ignored by the compiler and are used to explain code. Try running this code to see how comments are skipped.",
       "codeSnippet": "#include <iostream>\nint main() {\n    // This is a single-line comment\n    std::cout << \"Hello, Comments!\" << std::endl;\n    /* \n      This is a multi-line comment\n      Explaining block execution\n    */\n    return 0;\n}"

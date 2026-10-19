@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Field",
       "prompt": "Complete the code to make the field private.",
-      "codeSnippet": "class Person {\n  ______ String name;\n}",
+      "codeSnippet": "class Person {\n  ___ String name;\n}",
       "options": ["private", "public", "protected", "static"],
       "correctAnswer": "private"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Setter",
       "prompt": "Complete the setter method.",
-      "codeSnippet": "public void ________(String n) {\n  name = n;\n}",
+      "codeSnippet": "public void ___(String n) {\n  name = n;\n}",
       "options": ["setName", "getName", "name", "set"],
       "correctAnswer": "setName"
     },

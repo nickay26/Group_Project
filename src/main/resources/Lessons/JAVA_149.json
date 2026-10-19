@@ -34,7 +34,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Catch",
       "prompt": "Complete the catch block for ArithmeticException.",
-      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (________ e) {\n  System.out.println(\"Error\");\n}",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (___ e) {\n  System.out.println(\"Error\");\n}",
       "options": ["ArithmeticException", "Exception", "Error", "Throwable"],
       "correctAnswer": "ArithmeticException"
     },
@@ -43,7 +43,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Catch",
       "prompt": "Complete the catch block for NullPointerException.",
-      "codeSnippet": "try {\n  String s = null;\n  s.length();\n} catch (________ e) {\n  System.out.println(\"Error\");\n}",
+      "codeSnippet": "try {\n  String s = null;\n  s.length();\n} catch (___ e) {\n  System.out.println(\"Error\");\n}",
       "options": ["NullPointerException", "Exception", "Error", "Throwable"],
       "correctAnswer": "NullPointerException"
     },

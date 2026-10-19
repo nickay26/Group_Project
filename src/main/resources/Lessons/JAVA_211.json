@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import LinkedList",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.________;",
+      "codeSnippet": "import java.util.___;",
       "options": ["LinkedList", "List", "Array", "Collections"],
       "correctAnswer": "LinkedList"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Add First",
       "prompt": "Complete the code to add at the beginning.",
-      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.________(\"Java\");",
+      "codeSnippet": "LinkedList<String> list = new LinkedList<>();\nlist.___(\"Java\");",
       "options": ["addFirst", "addLast", "add", "insert"],
       "correctAnswer": "addFirst"
     },
