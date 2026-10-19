@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static Project.API_Database.ApiClient.cleanAndFormatAiText;
+import Project.Helpers.SoundHelper;
 
 public class LessonPlayerController {
 
@@ -394,6 +395,9 @@ public class LessonPlayerController {
         dialog.getDialogPane().getButtonTypes().setAll(collectBtnType);
 
         dialog.setOnShown(e -> {
+            // 🔊 Play reward sound effect
+            SoundHelper.playReward();
+
             javafx.animation.ScaleTransition st = new javafx.animation.ScaleTransition(javafx.util.Duration.millis(350), dialog.getDialogPane());
             st.setFromX(0.5);
             st.setFromY(0.5);
@@ -668,7 +672,10 @@ public class LessonPlayerController {
 
             if (isCorrect) {
                 correctAnswerCount++;
+                SoundHelper.playCorrect();   // 🔊 Correct sound
             } else {
+                SoundHelper.playWrong();     // 🔊 Wrong sound
+
                 User user = UserSession.getCurrentUser();
                 if (user != null && !user.isPremium()) {
                     UserSession.deductOneBrain();

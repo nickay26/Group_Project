@@ -1,6 +1,7 @@
 module com.example.group_project {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
     requires java.net.http;
     requires jdk.httpserver;
     requires java.desktop;
