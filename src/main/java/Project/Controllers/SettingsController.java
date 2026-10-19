@@ -576,7 +576,7 @@ public class SettingsController {
     @FXML
     private void handleUpgradePlan() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PremiumView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/PremiumView.fxml"));
             Parent premiumView = loader.load();
 
             Button backBtn = new Button("← Back");

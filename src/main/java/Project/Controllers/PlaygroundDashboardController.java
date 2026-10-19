@@ -215,7 +215,7 @@ public class PlaygroundDashboardController {
 
     private void openWorkspace(Project project) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CodeEditorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/CodeEditorView.fxml"));
             Parent workspaceView = loader.load();
 
             CodeEditorController controller = loader.getController();

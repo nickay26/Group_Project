@@ -175,7 +175,7 @@ public class ApiClient {
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(BASE_URL + "/api/user/upload-profile"))
                         .header("Content-Type", "multipart/form-data; boundary=" + boundary)
-                        .header("Connection", "keep-alive")
+                        // ❌ .header("Connection", "keep-alive") ကို ဤနေရာမှ ဖယ်ရှားလိုက်ပါ (Restricted Header ဖြစ်သောကြောင့် Error တက်ပါသည်)
                         .timeout(Duration.ofSeconds(30))
                         .POST(HttpRequest.BodyPublishers.ofByteArray(multipartBody))
                         .build();

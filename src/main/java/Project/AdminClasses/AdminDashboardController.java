@@ -1,64 +1,93 @@
 package Project.AdminClasses;
 
+import Project.API_Database.DatabaseManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable {
 
-    @FXML private VBox dashboardView;
+    @FXML
+    private VBox dashboardView;
 
     // Stat Cards Labels
-    @FXML private Label totalActiveUsersLabel;
-    @FXML private Label totalTimeSpentLabel;
-    @FXML private Label quizCompletionRateLabel;
+    @FXML
+    private Label totalActiveUsersLabel;
+    @FXML
+    private Label totalTimeSpentLabel; // Total Questions ပြသရန်
+    @FXML
+    private Label quizCompletionRateLabel;
 
     // Line Chart Controls
-    @FXML private LineChart<String, Number> userActivityChart;
+    @FXML
+    private LineChart<String, Number> userActivityChart;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadDashboardData();
-        setupActivityChart();
+        loadDashboardDataAsync();
     }
 
     /**
-     * Stat Card များအတွက် Data များကို ဖြည့်သွင်းပေးသည့် Method
+     * DatabaseManager မှတဆင့် Backend API သို့ ချိတ်ဆက်၍ Admin ဒေတာများကို ယူဆောင်ခြင်း
      */
-    private void loadDashboardData() {
-        // API သို့မဟုတ် Database မှ Data ယူ၍ ပြင်ဆင်နိုင်ပါသည်
-        totalActiveUsersLabel.setText("1,248");
-        totalTimeSpentLabel.setText("450");
-        quizCompletionRateLabel.setText("88.4%");
+    private void loadDashboardDataAsync() {
+        new Thread(() -> {
+            JSONObject analytics = DatabaseManager.getAdminAnalytics();
+
+            if (analytics != null) {
+                // JSON မှ လိုအပ်သော တန်ဖိုးများကို ထုတ်ယူခြင်း
+                int activeToday = analytics.optInt("active_today", 0);
+                int totalUsers = analytics.optInt("total_users", 0);
+                int totalLessonsCompleted = analytics.optInt("total_lessons_completed", 0);
+                JSONArray weeklyActivity = analytics.optJSONArray("weekly_activity");
+
+                // UI ကို JavaFX Application Thread ပေါ်တွင် Update လုပ်ခြင်း
+                Platform.runLater(() -> {
+                    // 1. Stat Cards များကို တကယ့်ဒေတာဖြင့် ချိတ်ရန်
+                    totalActiveUsersLabel.setText(String.format("%,d", activeToday));
+                    totalTimeSpentLabel.setText(String.format("%,d", totalLessonsCompleted));
+                    // Completion Rate အတွက် လိုအပ်ပါက တွက်ချက်ထည့်နိုင်သည် (ဥပမာ နှုန်းထားတခုခု)
+                    quizCompletionRateLabel.setText("88.4%");
+
+                    // 2. Weekly Line Chart တွင် Dynamic Data များ ထည့်သွင်းခြင်း
+                    setupActivityChart(weeklyActivity);
+                });
+            }
+        }).start();
     }
 
     /**
-     * User Activity Line Chart ထဲသို့ Sample Data ဖြည့်သွင်းပေးသည့် Method
+     * Backend မှ ရလာသော နေ့အလိုက် Weekly Activity ဒေတာများဖြင့် Line Chart ကို တည်ဆောက်ခြင်း
      */
-    private void setupActivityChart() {
+    private void setupActivityChart(JSONArray weeklyActivity) {
         if (userActivityChart == null) return;
 
-        // Chart Data Series ဖန်တီးခြင်း
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Active Users");
+        // Chart ၏ Layout Width တိုင်းတာပြီးစီးမှသာ Run ရန် Platform.runLater ကို သုံးပါ
+        javafx.application.Platform.runLater(() -> {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Active Users");
 
-        // တစ်ပတ်စာ Sample Data များထည့်ခြင်း
-        series.getData().add(new XYChart.Data<>("Mon", 850));
-        series.getData().add(new XYChart.Data<>("Tue", 920));
-        series.getData().add(new XYChart.Data<>("Wed", 1100));
-        series.getData().add(new XYChart.Data<>("Thu", 1050));
-        series.getData().add(new XYChart.Data<>("Fri", 1248));
-        series.getData().add(new XYChart.Data<>("Sat", 980));
-        series.getData().add(new XYChart.Data<>("Sun", 890));
+            if (weeklyActivity != null && weeklyActivity.length() > 0) {
+                for (int i = 0; i < weeklyActivity.length(); i++) {
+                    JSONObject dayObj = weeklyActivity.getJSONObject(i);
+                    String dayName = dayObj.optString("day", "");
+                    int count = dayObj.optInt("count", 0);
 
-        // Chart ထဲသို့ Series ထည့်သွင်းခြင်း
-        userActivityChart.getData().clear();
-        userActivityChart.getData().add(series);
+                    series.getData().add(new XYChart.Data<>(dayName, count));
+                }
+            }
+
+            userActivityChart.getData().clear();
+            userActivityChart.getData().add(series);
+        });
     }
 }
