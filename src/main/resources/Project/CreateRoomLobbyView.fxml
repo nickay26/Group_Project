@@ -33,16 +33,16 @@
         </HBox>
     </HBox>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area (Centred PLAYERS Card) -->
     <HBox alignment="CENTER" spacing="25" prefHeight="440">
 
         <!-- Left Side: Players Matchup Slot -->
-        <VBox alignment="CENTER" spacing="20" prefWidth="440" styleClass="lobby-card">
+        <VBox alignment="CENTER" spacing="20" prefWidth="480" styleClass="lobby-card">
 
             <Label text="PLAYERS" styleClass="section-title"/>
 
-            <!-- Host (Left Player) Card -->
-            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380" styleClass="player-card">
+            <!-- Host Player Card -->
+            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="420" styleClass="player-card">
                 <StackPane prefWidth="50" prefHeight="50">
                     <Label fx:id="hostAvatarLabel" text="👤" style="-fx-font-size: 26px;"/>
                     <ImageView fx:id="hostAvatarImageView" fitWidth="50" fitHeight="50" preserveRatio="true"/>
@@ -55,8 +55,9 @@
 
             <Label text="VS" styleClass="vs-label"/>
 
-            <!-- Opponent (Right Player) Card -->
-            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="380" styleClass="player-card-dashed">
+            <!-- Opponent Player Ca
+            rd -->
+            <HBox alignment="CENTER_LEFT" spacing="15" prefWidth="420" styleClass="player-card-dashed">
                 <StackPane prefWidth="50" prefHeight="50">
                     <Label fx:id="opponentAvatarLabel" text="❓" style="-fx-font-size: 26px;"/>
                     <ImageView fx:id="opponentAvatarImageView" fitWidth="50" fitHeight="50" preserveRatio="true"/>
@@ -68,27 +69,7 @@
             </HBox>
 
             <!-- Action Button -->
-            <Button fx:id="startMatchBtn" text="Start Match ➔" onAction="#handleStartMatch" prefWidth="380" prefHeight="44" disable="true" styleClass="btn-main-action"/>
-        </VBox>
-
-        <!-- Right Side: Following Friends List to Invite -->
-        <VBox alignment="TOP_CENTER" spacing="12" prefWidth="320" styleClass="lobby-card">
-
-            <Label text="INVITE FOLLOWING" styleClass="lobby-header" style="-fx-font-size: 14px;"/>
-
-            <VBox fx:id="friendsContainer" spacing="10" prefWidth="280">
-                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="friend-row">
-                    <Label text="👤" style="-fx-font-size: 18px;"/>
-                    <Label text="Alex_Dev" styleClass="player-name" style="-fx-font-size: 13px;" HBox.hgrow="ALWAYS"/>
-                    <Button text="Invite" onAction="#handleInviteFriend" styleClass="btn-primary-small"/>
-                </HBox>
-
-                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="friend-row">
-                    <Label text="👤" style="-fx-font-size: 18px;"/>
-                    <Label text="Sarah_Coder" styleClass="player-name" style="-fx-font-size: 13px;" HBox.hgrow="ALWAYS"/>
-                    <Button text="Invite" onAction="#handleInviteFriend" styleClass="btn-primary-small"/>
-                </HBox>
-            </VBox>
+            <Button fx:id="startMatchBtn" text="Start Match ➔" onAction="#handleStartMatch" prefWidth="420" prefHeight="44" disable="true" styleClass="btn-main-action"/>
         </VBox>
 
     </HBox>
