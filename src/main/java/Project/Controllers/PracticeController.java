@@ -292,7 +292,7 @@ public class PracticeController {
             if (loader != null) {
                 LessonPlayerController controller = loader.getController();
                 if (controller != null) {
-                    controller.startLesson(targetLesson);
+                    controller.startLesson(targetLesson, true);
                 }
             }
         } else {

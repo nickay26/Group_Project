@@ -50,6 +50,7 @@ public class LessonPlayerController {
     private boolean isAnswerChecked = false;
     private VBox feedbackBox;
     private VBox optionsBox;
+    private boolean isFromReview = false;
 
     private String originalCodeSnippet = null;
     private String originalPrompt = null;
@@ -77,12 +78,14 @@ public class LessonPlayerController {
         }
     }
 
-    public void startLesson(Lesson lesson) {
+    public void startLesson(Lesson lesson, boolean isFromReview) {
+        this.isFromReview = isFromReview;
         this.currentLesson = lesson;
         startLessonById(lesson.getLessonId());
     }
 
-    public void startLesson(String lessonId) {
+    public void startLesson(String lessonId, boolean isFromReview) {
+        this.isFromReview = isFromReview;
         startLessonById(lessonId);
     }
 
@@ -309,15 +312,12 @@ public class LessonPlayerController {
             int userId = UserSession.getUserId();
             String courseId = UserSession.getActiveCourseId();
 
-            // ⭐ ဤသင်ခန်းစာသည် အရင်ကတည်းက ပြီးသွားပြီးသား ဟုတ်မဟုတ် စစ်ဆေးခြင်း
-            // (completed lesson order ထက် လက်ရှိ lesson order က နိမ့်နေလျှင် သို့မဟုတ် ညီနေလျှင် ပြီးပြီးသား ဖြစ်သည်)
             int completedCount = DatabaseManager.getCompletedLessonCount(userId, courseId);
             boolean isAlreadyCompleted = (currentLesson != null && currentLesson.getLessonOrder() <= completedCount);
 
             int earnedXP = 0;
             int earnedCoins = 0;
 
-            // ⭐ အကယ်၍ ပထမဆုံးအကြိမ် ဖြေဆိုခြင်း ဖြစ်မှသာ XP နှင့် Coins ပေးမည်
             if (!isAlreadyCompleted) {
                 earnedXP = currentLesson != null ? currentLesson.getXp() : 10;
                 if (totalQuestionCount > 0) {
@@ -345,12 +345,8 @@ public class LessonPlayerController {
 
             Platform.runLater(() -> {
                 if (isAlreadyCompleted) {
-                    // အကယ်၍ အရင်ကတည်းက ပြီးထားပြီးသားဆိုလျှင် ဆုလာဘ် Dialog မပြဘဲ Learn စာမျက်နှာသို့ တိုက်ရိုက်ပြန်သွားမည်
-                    if (MainLayoutController.getInstance() != null) {
-                        MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-                    }
+                    navigateBack();
                 } else {
-                    // ပထမဆုံးအကြိမ် ပြီးဆုံးခြင်းအတွက်သာ ဆုလာဘ် Dialog ပြမည်
                     showRewardAnimationDialog(finalXp, finalCoins);
                 }
             });
@@ -410,8 +406,8 @@ public class LessonPlayerController {
         dialog.showAndWait().ifPresent(response -> {
             if (MainLayoutController.getInstance() != null) {
                 MainLayoutController.getInstance().updateHeaderStats();
-                MainLayoutController.getInstance().loadPage("LearnPage.fxml");
             }
+            navigateBack();
         });
     }
 
@@ -829,9 +825,7 @@ public class LessonPlayerController {
 
     @FXML
     private void handleClose() {
-        if (MainLayoutController.getInstance() != null) {
-            MainLayoutController.getInstance().loadPage("LearnPage.fxml");
-        }
+        navigateBack();
     }
 
     private void renderErrorCard(String message) {
@@ -921,5 +915,15 @@ public class LessonPlayerController {
                 handleClose();
             }
         });
+    }
+
+    private void navigateBack() {
+        if (MainLayoutController.getInstance() != null) {
+            if (isFromReview) {
+                MainLayoutController.getInstance().loadPage("PracticeView.fxml"); // Practice/Review active ဖြစ်နေလျှင်
+            } else {
+                MainLayoutController.getInstance().loadPage("LearnPage.fxml"); // Learn active ဖြစ်နေလျှင်
+            }
+        }
     }
 }

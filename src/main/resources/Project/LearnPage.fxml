@@ -2,29 +2,29 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 
-<AnchorPane styleClass="learn-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LearnPageController">
+<StackPane styleClass="learn-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.LearnPageController">
     <stylesheets>
-            <URL value = "@../Css/learn_page.css" />
+        <URL value="@../Css/learn_page.css" />
     </stylesheets>
     <children>
         <!-- SCROLLABLE ROADMAP CONTENT -->
-        <ScrollPane fx:id="roadmapScrollPane" fitToWidth="true" styleClass="learn-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="roadmapScrollPane" fitToWidth="true" styleClass="learn-scroll-pane">
             <content>
-                <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #0F172A;" VBox.vgrow="ALWAYS">
+                <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets bottom="40.0" top="20.0" />
                     </padding>
                     <children>
                         <!-- DYNAMIC DRAWING CANVAS PANE -->
-                        <Pane fx:id="roadmapPane" maxWidth="600.0" prefWidth="600.0" style="-fx-background-color: #0F172A;" />
+                        <Pane fx:id="roadmapPane" maxWidth="600.0" prefWidth="600.0" style="-fx-background-color: transparent;" />
                     </children>
                 </VBox>
             </content>
         </ScrollPane>
     </children>
-</AnchorPane>
+</StackPane>

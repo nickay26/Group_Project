@@ -8,17 +8,17 @@
 }
 
 .learn-scroll-pane {
-    -fx-background-color: #0F172A;
-    -fx-background: #0F172A; /* Overrides default JavaFX viewport background */
-    -fx-viewport-background-color: #0F172A;
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-viewport-background-color: transparent;
 }
 
 .learn-scroll-pane > .viewport {
-    -fx-background-color: #0F172A;
+    -fx-background-color: transparent;
 }
 
 .learn-scroll-pane > .corner {
-    -fx-background-color: #0F172A;
+    -fx-background-color: transparent;
 }
 
 /* Course Selector Dropdown */

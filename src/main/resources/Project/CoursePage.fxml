@@ -8,11 +8,15 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
-<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.CoursesPageController">
+<StackPane styleClass="course-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controllers.CoursesPageController">
+    <stylesheets>
+        <URL value="@../Css/course_theme.css" />
+    </stylesheets>
     <children>
         <!-- Main Content -->
-        <AnchorPane style="-fx-background-color: #0F172A;">
+        <AnchorPane style="-fx-background-color: transparent;">
             <children>
                 <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <padding>

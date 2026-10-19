@@ -438,7 +438,7 @@ public class LearnPageController {
         if (loader != null) {
             LessonPlayerController controller = loader.getController();
             if (controller != null) {
-                controller.startLesson(lesson);
+                controller.startLesson(lesson, false);
             }
         }
     }

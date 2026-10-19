@@ -331,8 +331,13 @@ public class CodeEditorController {
     @FXML
     public void handleBackToDashboard() {
         if (currentProject != null) handleSaveCode();
+
         SceneManager.switchScene("MainLayoutView.fxml");
-        MainLayoutController.getInstance().loadPage("PlaygroundDashboardView.fxml");
+        if (currentQuestion == null) {
+            MainLayoutController.getInstance().loadPage("PlaygroundDashboardView.fxml");
+        } else {
+            MainLayoutController.getInstance().loadPage("PracticeView.fxml");
+        }
     }
 
     // ============================================
