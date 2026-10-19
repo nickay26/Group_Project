@@ -9,7 +9,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -31,6 +30,10 @@ public class WelcomeController implements Initializable {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
 
+    // ⭐ Password ပြသရန် အသစ်ထည့်သွင်းထားသော Controls များ (ဒီနေရာမှာ ထည့်ရပါမယ်)
+    @FXML private TextField visiblePasswordField;
+    @FXML private Button togglePasswordBtn;
+
     // Floating Label များအတွက် UI Variable များ
     @FXML private Label usernameLabel;
     @FXML private Label emailLabel;
@@ -46,8 +49,38 @@ public class WelcomeController implements Initializable {
         setupFloatingLabel(emailField, emailLabel, "Email", "Enter Email");
         setupFloatingLabel(passwordField, passwordLabel, "Password", "Enter Password");
 
+        // ⭐ visiblePasswordField အတွက်ပါ ထည့်ပါ
+        setupFloatingLabel(visiblePasswordField, passwordLabel, "Password", "Enter Password");
+
         FormValidator.setupEmailValidation(emailField, emailErrorLabel);
         FormValidator.setupPasswordValidation(passwordField, passwordErrorLabel);
+
+        // ⭐ PasswordField နဲ့ visiblePasswordField ရဲ့ စာသားတွေကို အတူတူဖြစ်နေအောင် ချိတ်ဆက်ခြင်း
+        visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
+
+        // ⭐ မျက်လုံးကို နှိပ်ထားရင် (Press) Password ပြမယ်
+        togglePasswordBtn.setOnMousePressed(event -> {
+            visiblePasswordField.setVisible(true);
+            visiblePasswordField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+
+            visiblePasswordField.requestFocus();
+            visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
+            togglePasswordBtn.setText("\uD83D\uDC41\u200D\uD83D\uDDE8");
+        });
+
+        // ⭐ မျက်လုံးကို လွှတ်လိုက်ရင် (Release) ပြန်ဝှက်မယ်
+        togglePasswordBtn.setOnMouseReleased(event -> {
+            visiblePasswordField.setVisible(false);
+            visiblePasswordField.setManaged(false);
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+
+            passwordField.requestFocus();
+            passwordField.positionCaret(passwordField.getText().length());
+            togglePasswordBtn.setText("\uD83D\uDC41\u200D\uD83D\uDDE8");
+        });
     }
 
     // Pointer ထောက်လိုက်လျှင် စာသား အပေါ်သို့ ရောက်သွားစေမည့် Helper Method
@@ -196,7 +229,6 @@ public class WelcomeController implements Initializable {
                 "• Click on Java, C++, or Python to preview language courses.\n" +
                 "• Already have an account? Click Login at the top right.";
 
-        // Assuming DialogUtils is imported
         DialogUtils.showMessageDialog("Help & Support", message, false);
     }
 
@@ -207,24 +239,24 @@ public class WelcomeController implements Initializable {
         String password = passwordField.getText().trim();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Form Incomplete", "Please fill in all fields to complete registration.");
+            DialogUtils.showErrorDialog("Please fill in all fields to complete registration.");
             return;
         }
 
         if (!ValidationUtils.isValidUsername(username)) {
-            showAlert(Alert.AlertType.WARNING, "Invalid Username", "Username must be at least 3 characters long.");
+            DialogUtils.showErrorDialog("Username must be at least 3 characters long.");
             usernameField.requestFocus();
             return;
         }
 
         if (!ValidationUtils.isValidEmail(email)) {
-            showAlert(Alert.AlertType.WARNING, "Invalid Email", "Please enter a valid email address (e.g., user@example.com).");
+            DialogUtils.showErrorDialog("Please enter a valid email address (e.g., user@example.com).");
             emailField.requestFocus();
             return;
         }
 
         if (!ValidationUtils.isValidPassword(password)) {
-            showAlert(Alert.AlertType.WARNING, "Weak Password", "Password must be at least 6 characters long.");
+            DialogUtils.showErrorDialog("Password must be at least 6 characters long.");
             passwordField.requestFocus();
             return;
         }
@@ -235,7 +267,7 @@ public class WelcomeController implements Initializable {
             UserSession.initSession(registeredUser);
             SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
         } else {
-            showAlert(Alert.AlertType.ERROR, "Registration Error", "Failed to register. Email might already exist or network error.");
+            DialogUtils.showErrorDialog("Failed to register. Email might already exist or network error.");
         }
     }
 
@@ -263,7 +295,7 @@ public class WelcomeController implements Initializable {
                             SceneManager.switchScene("MainLayoutView.fxml", "Sodexa Platform");
                         }
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Login Sync Error", "Error syncing Google login with server.");
+                        DialogUtils.showErrorDialog("Error syncing Google login with server.");
                     }
                 });
             });
@@ -292,13 +324,5 @@ public class WelcomeController implements Initializable {
     @FXML
     private void handlePythonCard() {
         SceneManager.switchScene("PythonOverviewView.fxml", "Sodexa Platform - Python Overview");
-    }
-
-    private void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
     }
 }

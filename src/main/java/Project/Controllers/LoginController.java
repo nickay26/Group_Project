@@ -63,7 +63,7 @@ public class LoginController {
             visiblePasswordField.requestFocus();
             visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
 
-            togglePasswordBtn.setText("🙈"); // မျက်လုံးပိတ်ပုံပြောင်းမယ်
+            togglePasswordBtn.setText("\uD83D\uDC41\u200D\uD83D\uDDE8"); // မျက်လုံးပိတ်ပုံပြောင်းမယ်
         });
 
         // ⭐ မျက်လုံးကို လွှတ်လိုက်ရင် (Release) ပြန်ဝှက်မယ်
@@ -77,7 +77,7 @@ public class LoginController {
             passwordField.requestFocus();
             passwordField.positionCaret(passwordField.getText().length());
 
-            togglePasswordBtn.setText("👁"); // မျက်လုံးပုံ ပြန်ထားမယ်
+            togglePasswordBtn.setText("\uD83D\uDC41\u200D\uD83D\uDDE8"); // မျက်လုံးပုံ ပြန်ထားမယ်
         });
     }
 

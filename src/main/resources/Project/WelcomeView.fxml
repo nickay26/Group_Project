@@ -109,6 +109,11 @@
                                 <Insets left="50.0" />
                             </StackPane.margin>
                         </PasswordField>
+                        <TextField fx:id="visiblePasswordField" prefHeight="48.0" prefWidth="300.0" styleClass="login-field" visible="false" managed="false">
+                            <StackPane.margin>
+                                <Insets left="50.0" />
+                            </StackPane.margin>
+                        </TextField>
                         <Label fx:id="passwordLabel" text="Password" textFill="#ccdeeb">
                             <padding>
                                 <Insets left="-140.0" />
@@ -117,6 +122,14 @@
                                 <Insets left="50.0" />
                             </StackPane.margin>
                         </Label>
+                        <!-- မျက်လုံးပုံ Button -->
+                        <Button fx:id="togglePasswordBtn" text="👁"
+                                style="-fx-background-color: transparent; -fx-cursor: hand; -fx-text-fill: #94a3b8; -fx-font-size: 16px;"
+                                StackPane.alignment="CENTER_RIGHT">
+                            <StackPane.margin>
+                                <Insets right="20.0" /> <!-- ဒီနေရာမှာ ညာဘက်ကို ဆွဲထားတယ် -->
+                            </StackPane.margin>
+                        </Button>
                     </children>
                 </StackPane>
 
