@@ -551,13 +551,37 @@ public class SettingsController {
 
     @FXML
     private void handleDeleteAccount() {
+        User user = UserSession.getCurrentUser();
+        if (user == null) {
+            DialogUtils.showErrorDialog("No active user session found.");
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Account");
-        alert.setHeaderText("Are you sure?");
-        alert.setContentText("This action cannot be undone!");
+        alert.setHeaderText("Are you sure you want to delete your account?");
+        alert.setContentText("This action is permanent and cannot be undone. All your progress, projects, and certificates will be lost.");
+
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                System.out.println("Account deleted");
+                boolean success = DatabaseManager.deleteAccount(user.getUserId());
+                if (success) {
+                    // Session ကို ရှင်းလင်းခြင်း
+                    // UserSession.clear(); (သို့မဟုတ် သင့်ပရောဂျက်ရှိ Session ဖျက်သည့်ပုံစံအတိုင်း)
+                    DialogUtils.showSuccessDialog("Your account has been successfully deleted.");
+
+                    // Login / Welcome မျက်နှာပြင်သို့ ပြန်လည်ပို့ဆောင်ခြင်း
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project/LoginView.fxml"));
+                        Parent root = loader.load();
+                        deleteSection.getScene().setRoot(root);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.exit(0);
+                    }
+                } else {
+                    DialogUtils.showErrorDialog("Failed to delete account from server. Please try again.");
+                }
             }
         });
     }

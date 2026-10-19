@@ -324,6 +324,27 @@ public class DatabaseManager {
         }
     }
 
+    public static boolean deleteAccount(int userId) {
+        try {
+            String response = ApiClient.deleteAccountAsync(userId).join();
+            if (response != null && !response.trim().isEmpty()) {
+                String trimmed = response.trim();
+                // Server က JSON ပြန်လာရင်
+                if (trimmed.startsWith("{")) {
+                    JSONObject json = new JSONObject(trimmed);
+                    return json.has("message") && !json.has("error");
+                }
+                // Server က Plain Text (ဥပမာ- "Account deleted successfully") ပြန်လာရင်
+                else if (trimmed.toLowerCase().contains("success") || trimmed.toLowerCase().contains("deleted")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // ==========================================
     // 3. COURSES, LESSONS & REVIEWS
     // ==========================================

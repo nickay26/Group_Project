@@ -28,6 +28,20 @@ public class ApiClient {
     // PROFILE IMAGE HELPERS & APIS (OPTIMIZED)
     // ==========================================
 
+    public static CompletableFuture<String> deleteAccountAsync(int userId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                .DELETE()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Delete Account Error: " + ex.getMessage());
+                    return null;
+                });
+    }
+
     public static CompletableFuture<String> requestPasswordResetAsync(String email) {
         JSONObject body = new JSONObject();
         body.put("email", email);
