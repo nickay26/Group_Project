@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import Socket",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.net.______;",
+      "codeSnippet": "import java.net.___;",
       "options": ["Socket", "ServerSocket", "Connection", "Network"],
       "correctAnswer": "Socket"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create Socket",
       "prompt": "Complete the code to create a client socket.",
-      "codeSnippet": "Socket socket = new ______(\"localhost\", 8080);",
+      "codeSnippet": "Socket socket = new ___(\"localhost\", 8080);",
       "options": ["Socket", "ServerSocket", "Connection", "Client"],
       "correctAnswer": "Socket"
     },

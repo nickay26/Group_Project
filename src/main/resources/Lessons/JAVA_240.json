@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Synchronized Method",
       "prompt": "Complete the synchronized method.",
-      "codeSnippet": "public __________ void increment() {\n  count++;\n}",
+      "codeSnippet": "public ___ void increment() {\n  count++;\n}",
       "options": ["synchronized", "sync", "thread", "lock"],
       "correctAnswer": "synchronized"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Synchronized Block",
       "prompt": "Complete the synchronized block.",
-      "codeSnippet": "__________ (this) {\n  count++;\n}",
+      "codeSnippet": "___ (this) {\n  count++;\n}",
       "options": ["synchronized", "sync", "thread", "lock"],
       "correctAnswer": "synchronized"
     },

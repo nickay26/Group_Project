@@ -44,7 +44,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the If",
       "prompt": "Complete the code to check if x is greater than 5.",
-      "codeSnippet": "int x = 10;\nif (x __ 5) {\n  System.out.println(\"Big\");\n}",
+      "codeSnippet": "int x = 10;\nif (x ___ 5) {\n  System.out.println(\"Big\");\n}",
       "options": [">", "<", "==", "!="],
       "correctAnswer": ">"
     },
@@ -102,7 +102,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Condition",
       "prompt": "Complete the code to check if x is equal to 10.",
-      "codeSnippet": "int x = 10;\nif (x __ 10) {\n  System.out.println(\"Ten\");\n}",
+      "codeSnippet": "int x = 10;\nif (x ___ 10) {\n  System.out.println(\"Ten\");\n}",
       "options": ["==", "=", "!=", ">="],
       "correctAnswer": "=="
     }

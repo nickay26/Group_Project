@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare String",
       "prompt": "Complete the code to declare a String variable.",
-      "codeSnippet": "____ name = \"Alice\";",
+      "codeSnippet": "___ name = \"Alice\";",
       "options": ["String", "string", "Str", "Text"],
       "correctAnswer": "String"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Declare Double",
       "prompt": "Complete the code to declare a double variable.",
-      "codeSnippet": "____ price = 19.99;",
+      "codeSnippet": "___ price = 19.99;",
       "options": ["double", "int", "float", "decimal"],
       "correctAnswer": "double"
     },

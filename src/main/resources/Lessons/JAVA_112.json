@@ -105,7 +105,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Condition",
       "prompt": "Complete the code to check if x is less than 5.",
-      "codeSnippet": "int x = 3;\nif (x __ 5) {\n  System.out.println(\"Small\");\n}",
+      "codeSnippet": "int x = 3;\nif (x ___ 5) {\n  System.out.println(\"Small\");\n}",
       "options": ["<", ">", "==", "!="],
       "correctAnswer": "<"
     }

@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Sum",
       "prompt": "Complete the code to output 15.",
-      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum __ arr[i];\n}\nSystem.out.println(sum);",
+      "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n  sum ___ arr[i];\n}\nSystem.out.println(sum);",
       "options": ["+=", "-=", "*=", "/="],
       "correctAnswer": "+=",
       "interactive": true
@@ -43,7 +43,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Sum",
       "prompt": "Complete the code to start with 0.",
-      "codeSnippet": "int[] arr = {1, 2, 3};\nint sum = __;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nint sum = ___;\nfor (int i = 0; i < arr.length; i++) {\n  sum += arr[i];\n}",
       "options": ["0", "1", "10", "-1"],
       "correctAnswer": "0",
       "interactive": true

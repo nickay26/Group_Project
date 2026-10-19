@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete Multiplication",
       "prompt": "Complete the code to output 20.",
-      "codeSnippet": "System.out.println(5 __ 4);",
+      "codeSnippet": "System.out.println(5 ___ 4);",
       "options": ["*", "+", "-", "/"],
       "correctAnswer": "*"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete Division",
       "prompt": "Complete the code to output 5.",
-      "codeSnippet": "System.out.println(10 __ 2);",
+      "codeSnippet": "System.out.println(10 ___ 2);",
       "options": ["/", "*", "+", "-"],
       "correctAnswer": "/"
     },

@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Extend Thread",
       "prompt": "Complete the thread class.",
-      "codeSnippet": "class MyThread ______ Thread {\n  public void run() {\n    System.out.println(\"Running\");\n  }\n}",
+      "codeSnippet": "class MyThread ___ Thread {\n  public void run() {\n    System.out.println(\"Running\");\n  }\n}",
       "options": ["extends", "implements", "inherits", "super"],
       "correctAnswer": "extends"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Start Thread",
       "prompt": "Complete the code to start a thread.",
-      "codeSnippet": "MyThread t = new MyThread();\nt._____();",
+      "codeSnippet": "MyThread t = new MyThread();\nt.___();",
       "options": ["start", "run", "begin", "execute"],
       "correctAnswer": "start"
     },

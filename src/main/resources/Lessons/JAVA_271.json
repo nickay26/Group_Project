@@ -16,7 +16,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import FileWriter",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.io.________;",
+      "codeSnippet": "import java.io.___;",
       "options": ["FileWriter", "FileReader", "File", "Writer"],
       "correctAnswer": "FileWriter"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Write to File",
       "prompt": "Complete the code to write to a file.",
-      "codeSnippet": "FileWriter writer = new FileWriter(\"test.txt\");\nwriter.______(\"Hello\");",
+      "codeSnippet": "FileWriter writer = new FileWriter(\"test.txt\");\nwriter.___(\"Hello\");",
       "options": ["write", "read", "print", "output"],
       "correctAnswer": "write"
     },

@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Main Method",
       "prompt": "Complete the main method declaration.",
-      "codeSnippet": "public static void main(String[] ____) {\n}",
+      "codeSnippet": "public static void main(String[] ___) {\n}",
       "options": ["args", "main", "String", "void"],
       "correctAnswer": "args"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Static Keyword",
       "prompt": "Complete the main method declaration.",
-      "codeSnippet": "public ______ void main(String[] args) {\n}",
+      "codeSnippet": "public ___ void main(String[] args) {\n}",
       "options": ["static", "final", "abstract", "private"],
       "correctAnswer": "static"
     },

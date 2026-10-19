@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Method Reference",
       "prompt": "Complete the method reference.",
-      "codeSnippet": "list.forEach(System.out::______);",
+      "codeSnippet": "list.forEach(System.out::___);",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Method Reference Syntax",
       "prompt": "Complete the method reference syntax.",
-      "codeSnippet": "ClassName____methodName",
+      "codeSnippet": "ClassName___methodName",
       "options": ["::", "->", ".", "=>"],
       "correctAnswer": "::"
     },

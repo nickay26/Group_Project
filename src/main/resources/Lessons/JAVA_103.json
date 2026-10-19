@@ -48,7 +48,7 @@
       "interactive": true,
       "title": "Complete the Addition",
       "prompt": "Complete the code to output 8.",
-      "codeSnippet": "System.out.println(5 __ 3);",
+      "codeSnippet": "System.out.println(5 ___ 3);",
       "options": ["+", "-", "*", "/"],
       "correctAnswer": "+"
     },
@@ -58,7 +58,7 @@
       "interactive": true,
       "title": "Complete the Multiplication",
       "prompt": "Complete the code to output 21.",
-      "codeSnippet": "System.out.println(7 __ 3);",
+      "codeSnippet": "System.out.println(7 ___ 3);",
       "options": ["*", "+", "-", "/"],
       "correctAnswer": "*"
     },

@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Generic Class",
       "prompt": "Complete the generic class declaration.",
-      "codeSnippet": "class Box____ {\n  private T value;\n}",
+      "codeSnippet": "class Box___ {\n  private T value;\n}",
       "options": ["<T>", "(T)", "[T]", "{T}"],
       "correctAnswer": "<T>"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Generic Method",
       "prompt": "Complete the generic method declaration.",
-      "codeSnippet": "public static ____ void print(T value) {\n}",
+      "codeSnippet": "public static ___ void print(T value) {\n}",
       "options": ["<T>", "(T)", "[T]", "{T}"],
       "correctAnswer": "<T>"
     },
@@ -65,7 +65,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Bounded Type",
       "prompt": "Complete the bounded type parameter.",
-      "codeSnippet": "public static <T ______ Number> void print(T value) {\n}",
+      "codeSnippet": "public static <T ___ Number> void print(T value) {\n}",
       "options": ["extends", "implements", "super", "this"],
       "correctAnswer": "extends"
     },

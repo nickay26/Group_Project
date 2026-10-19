@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Generic Method",
       "prompt": "Complete the generic method declaration.",
-      "codeSnippet": "public static ____ void print(T value) {\n  System.out.println(value);\n}",
+      "codeSnippet": "public static ___ void print(T value) {\n  System.out.println(value);\n}",
       "options": ["<T>", "(T)", "[T]", "{T}"],
       "correctAnswer": "<T>"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Return Type",
       "prompt": "Complete the generic method that returns T.",
-      "codeSnippet": "public static <T> T ____(T value) {\n  return value;\n}",
+      "codeSnippet": "public static <T> T ___(T value) {\n  return value;\n}",
       "options": ["identity", "get", "value", "return"],
       "correctAnswer": "identity"
     },

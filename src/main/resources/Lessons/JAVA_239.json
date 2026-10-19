@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Implement Runnable",
       "prompt": "Complete the Runnable implementation.",
-      "codeSnippet": "class MyRunnable ________ Runnable {\n  public void run() { }\n}",
+      "codeSnippet": "class MyRunnable ___ Runnable {\n  public void run() { }\n}",
       "options": ["implements", "extends", "inherits", "super"],
       "correctAnswer": "implements"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create Thread",
       "prompt": "Complete the code to create a Thread with Runnable.",
-      "codeSnippet": "Thread t = new Thread(new ________());\nt.start();",
+      "codeSnippet": "Thread t = new Thread(new ___());\nt.start();",
       "options": ["MyRunnable", "Thread", "Runnable", "Object"],
       "correctAnswer": "MyRunnable"
     },

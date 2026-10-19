@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Try",
       "prompt": "Complete the try block.",
-      "codeSnippet": "_____ {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
+      "codeSnippet": "___ {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n}",
       "options": ["try", "catch", "finally", "throw"],
       "correctAnswer": "try"
     },

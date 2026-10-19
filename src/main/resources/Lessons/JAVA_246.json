@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import BufferedWriter",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.io._____________;",
+      "codeSnippet": "import java.io.___;",
       "options": ["BufferedWriter", "FileWriter", "File", "Writer"],
       "correctAnswer": "BufferedWriter"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Write Text",
       "prompt": "Complete the code to write text.",
-      "codeSnippet": "bw.______(\"Hello\");",
+      "codeSnippet": "bw.___(\"Hello\");",
       "options": ["write", "print", "output", "save"],
       "correctAnswer": "write"
     },

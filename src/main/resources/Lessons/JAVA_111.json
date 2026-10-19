@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Else",
       "prompt": "Complete the code to output 'F' when no conditions match.",
-      "codeSnippet": "int score = 50;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} ____ {\n  System.out.println(\"F\");\n}",
+      "codeSnippet": "int score = 50;\nif (score >= 90) {\n  System.out.println(\"A\");\n} else if (score >= 80) {\n  System.out.println(\"B\");\n} ___ {\n  System.out.println(\"F\");\n}",
       "options": ["else", "else if", "elif", "otherwise"],
       "correctAnswer": "else"
     },
@@ -80,7 +80,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Condition",
       "prompt": "Complete the code to check if score is 90 or higher.",
-      "codeSnippet": "int score = 95;\nif (score __ 90) {\n  System.out.println(\"A\");\n}",
+      "codeSnippet": "int score = 95;\nif (score ___ 90) {\n  System.out.println(\"A\");\n}",
       "options": [">=", ">", "<=", "<"],
       "correctAnswer": ">="
     },

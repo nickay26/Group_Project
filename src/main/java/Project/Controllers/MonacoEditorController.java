@@ -235,7 +235,7 @@ public class MonacoEditorController {
             return;
         }
 
-        consoleOutput.setText("🤖 Analyzing code with Gemini AI...");
+        consoleOutput.setText("🤖 Analyzing code with AI...");
         ApiClient.reviewCodeAsync(currentLanguage, code).thenAccept(response -> {
             Platform.runLater(() -> {
                 if (response != null && !response.isEmpty()) {

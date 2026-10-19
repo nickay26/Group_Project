@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Lambda Syntax",
       "prompt": "Complete the lambda expression.",
-      "codeSnippet": "Greeting g = () ____ System.out.println(\"Hello!\");",
+      "codeSnippet": "Greeting g = () ___ System.out.println(\"Hello!\");",
       "options": ["->", "=>", "::", ">>"],
       "correctAnswer": "->"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Lambda Empty Body",
       "prompt": "Complete the lambda expression with no parameters.",
-      "codeSnippet": "Greeting g = ____ -> System.out.println(\"Hi\");",
+      "codeSnippet": "Greeting g = ___ -> System.out.println(\"Hi\");",
       "options": ["()", "(x)", "[ ]", "{ }"],
       "correctAnswer": "()"
     },

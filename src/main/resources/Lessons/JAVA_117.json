@@ -46,7 +46,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Access",
       "prompt": "Complete the code to access the first element.",
-      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[___]);",
       "options": ["0", "1", "2", "3"],
       "correctAnswer": "0",
       "interactive": true
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Access",
       "prompt": "Complete the code to access the second element.",
-      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
+      "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[___]);",
       "options": ["1", "0", "2", "3"],
       "correctAnswer": "1",
       "interactive": true

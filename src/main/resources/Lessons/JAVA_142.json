@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "CharAt",
       "prompt": "Complete the code to output \"J\".",
-      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(__));",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(___));",
       "options": ["0", "1", "2", "3"],
       "correctAnswer": "0"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "CharAt",
       "prompt": "Complete the code to output \"n\".",
-      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(__));",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.charAt(___));",
       "options": ["3", "0", "1", "2"],
       "correctAnswer": "3"
     },

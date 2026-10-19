@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import ServerSocket",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.net.__________;",
+      "codeSnippet": "import java.net.___;",
       "options": ["ServerSocket", "Socket", "Connection", "Network"],
       "correctAnswer": "ServerSocket"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Accept Connection",
       "prompt": "Complete the code to accept a connection.",
-      "codeSnippet": "Socket client = serverSocket.______();",
+      "codeSnippet": "Socket client = serverSocket.___();",
       "options": ["accept", "connect", "receive", "listen"],
       "correctAnswer": "accept"
     },

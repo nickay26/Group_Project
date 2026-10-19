@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import BufferedReader",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.io._____________;",
+      "codeSnippet": "import java.io.___;",
       "options": ["BufferedReader", "FileReader", "File", "Reader"],
       "correctAnswer": "BufferedReader"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Read Line",
       "prompt": "Complete the code to read a line.",
-      "codeSnippet": "String line = br.________();",
+      "codeSnippet": "String line = br.___();",
       "options": ["readLine", "read", "nextLine", "getLine"],
       "correctAnswer": "readLine"
     },

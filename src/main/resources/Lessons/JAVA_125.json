@@ -34,7 +34,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method.",
-      "codeSnippet": "static int square(int x) {\n  return x __ x;\n}",
+      "codeSnippet": "static int square(int x) {\n  return x ___ x;\n}",
       "options": ["*", "+", "-", "/"],
       "correctAnswer": "*"
     },
@@ -43,7 +43,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method Call",
       "prompt": "Complete the method call.",
-      "codeSnippet": "int result = add(5, __);",
+      "codeSnippet": "int result = add(5, ___);",
       "options": ["3", "5", "10", "15"],
       "correctAnswer": "3"
     },

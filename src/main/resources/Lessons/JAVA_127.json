@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method declaration for method overloading.",
-      "codeSnippet": "int add(int a, int b) { return a + b; }\nint add(int a, int b, int __) { return a + b + c; }",
+      "codeSnippet": "int add(int a, int b) { return a + b; }\nint add(int a, int b, int ___) { return a + b + c; }",
       "options": ["c", "d", "e", "f"],
       "correctAnswer": "c"
     },

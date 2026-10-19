@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Print Statement",
       "prompt": "Complete the code to print \"Java Rocks\".",
-      "codeSnippet": "System.out.____(\"Java Rocks\");",
+      "codeSnippet": "System.out.___(\"Java Rocks\");",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Class Keyword",
       "prompt": "Complete the class declaration.",
-      "codeSnippet": "public ______ Main {\n  public static void main(String[] args) {\n  }\n}",
+      "codeSnippet": "public ___ Main {\n  public static void main(String[] args) {\n  }\n}",
       "options": ["class", "Class", "interface", "struct"],
       "correctAnswer": "class"
     },

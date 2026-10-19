@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Sleep Thread",
       "prompt": "Complete the code to pause a thread.",
-      "codeSnippet": "Thread.______(1000);",
+      "codeSnippet": "Thread.___(1000);",
       "options": ["sleep", "wait", "pause", "stop"],
       "correctAnswer": "sleep"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Join Thread",
       "prompt": "Complete the code to wait for a thread.",
-      "codeSnippet": "t._____();",
+      "codeSnippet": "t.___();",
       "options": ["join", "wait", "sleep", "yield"],
       "correctAnswer": "join"
     },

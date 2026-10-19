@@ -34,7 +34,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Length",
       "prompt": "Complete the code to get the length.",
-      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.______);",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr.___);",
       "options": ["length", "size", "count", "len"],
       "correctAnswer": "length",
       "interactive": true
@@ -44,7 +44,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Array Length Loop",
       "prompt": "Complete the loop to use the array length.",
-      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.______; i++) {\n  System.out.println(arr[i]);\n}",
+      "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.___; i++) {\n  System.out.println(arr[i]);\n}",
       "options": ["length", "size", "count", "len"],
       "correctAnswer": "length",
       "interactive": true

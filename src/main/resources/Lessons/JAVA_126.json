@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method declaration for method overloading.",
-      "codeSnippet": "int add(int a, int b) { return a + b; }\ndouble add(____ a, double b) { return a + b; }",
+      "codeSnippet": "int add(int a, int b) { return a + b; }\ndouble add(___ a, double b) { return a + b; }",
       "options": ["double", "int", "String", "boolean"],
       "correctAnswer": "double"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Method",
       "prompt": "Complete the method declaration for method overloading.",
-      "codeSnippet": "int add(int a, int b) { return a + b; }\nint add(int a, int b, int __) { return a + b + c; }",
+      "codeSnippet": "int add(int a, int b) { return a + b; }\nint add(int a, int b, int ___) { return a + b + c; }",
       "options": ["c", "d", "e", "f"],
       "correctAnswer": "c"
     },

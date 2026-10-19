@@ -24,7 +24,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete Else If",
       "prompt": "Complete the code to check if x is 80 or higher.",
-      "codeSnippet": "int x = 85;\nif (x >= 90) {\n  System.out.println(\"A\");\n} ____ (x >= 80) {\n  System.out.println(\"B\");\n}",
+      "codeSnippet": "int x = 85;\nif (x >= 90) {\n  System.out.println(\"A\");\n} ___ (x >= 80) {\n  System.out.println(\"B\");\n}",
       "options": ["else if", "else", "elif", "otherwise"],
       "correctAnswer": "else if"
     },
@@ -33,7 +33,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete Switch",
       "prompt": "Complete the switch statement.",
-      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ____;\n}",
+      "codeSnippet": "switch (x) {\n  case 1: System.out.println(\"One\"); ___;\n}",
       "options": ["break", "continue", "return", "exit"],
       "correctAnswer": "break"
     },

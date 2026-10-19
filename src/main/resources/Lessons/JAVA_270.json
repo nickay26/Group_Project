@@ -16,7 +16,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Start Thread",
       "prompt": "Complete the code to start a thread.",
-      "codeSnippet": "MyThread t = new MyThread();\nt._____();",
+      "codeSnippet": "MyThread t = new MyThread();\nt.___();",
       "options": ["start", "run", "begin", "execute"],
       "correctAnswer": "start"
     },
@@ -42,7 +42,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Implement Runnable",
       "prompt": "Complete the Runnable implementation.",
-      "codeSnippet": "class MyRunnable ________ Runnable {\n  public void run() { }\n}",
+      "codeSnippet": "class MyRunnable ___ Runnable {\n  public void run() { }\n}",
       "options": ["implements", "extends", "inherits", "super"],
       "correctAnswer": "implements"
     },
@@ -68,7 +68,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Sleep Thread",
       "prompt": "Complete the code to pause a thread.",
-      "codeSnippet": "Thread.______(1000);",
+      "codeSnippet": "Thread.___(1000);",
       "options": ["sleep", "wait", "pause", "stop"],
       "correctAnswer": "sleep"
     }
