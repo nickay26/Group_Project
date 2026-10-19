@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -94,9 +95,73 @@ public class MainLayoutController {
         }
 
         if (topStreakLabel != null) {
-            topStreakLabel.setOnMouseClicked(e -> DialogUtils.showStreakDialog());
+            // ⭐ DialogUtils အစား ကိုယ်ပိုင် Method ကို ခေါ်လိုက်ပါတယ်
+            topStreakLabel.setOnMouseClicked(e -> showCustomStreakDialog());
             topStreakLabel.setStyle("-fx-cursor: hand;");
         }
+    }
+
+    // ⭐ အမည်းကွက်ကြီး မပေါ်စေရန် ကိုယ်တိုင် ပြင်ရေးထားသော Streak Dialog
+    private void showCustomStreakDialog() {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
+
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        VBox dialogContent = new VBox(16);
+        dialogContent.setAlignment(Pos.CENTER);
+        dialogContent.setPadding(new Insets(24));
+        dialogContent.setStyle(
+                "-fx-background-color: #0F172A; " +
+                        "-fx-border-color: #334155; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" // အရိပ်ကို လျှော့ချထားတယ်
+        );
+
+        Label titleLabel = new Label("🔥 " + user.getStreak() + " Day Streak!");
+        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 20px; -fx-font-weight: bold;");
+
+        Label descLabel = new Label("Complete at least one lesson every day to keep your streak burning bright!");
+        descLabel.setWrapText(true);
+        descLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 13px; -fx-alignment: center;");
+        descLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+
+        VBox infoBox = new VBox(10);
+        infoBox.setAlignment(Pos.CENTER);
+        infoBox.setStyle("-fx-background-color: #1E293B; -fx-padding: 14; -fx-background-radius: 12px;");
+
+        Label statusLbl = new Label(user.getStreak() > 0 ? "You're doing amazing! Keep the momentum going." : "Complete your first lesson today to start your streak!");
+        statusLbl.setWrapText(true);
+        statusLbl.setStyle("-fx-text-fill: #38BDF8; -fx-font-size: 13px; -fx-font-weight: bold; -fx-alignment: center;");
+        statusLbl.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        infoBox.getChildren().add(statusLbl);
+
+        Button closeBtn = new Button("Got it!");
+        closeBtn.setStyle(
+                "-fx-background-color: #2563EB; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-padding: 10 24 10 24; " +
+                        "-fx-background-radius: 10px; " +
+                        "-fx-cursor: hand;"
+        );
+        closeBtn.setOnAction(e -> dialog.close());
+
+        dialogContent.getChildren().addAll(titleLabel, descLabel, infoBox, closeBtn);
+
+        StackPane root = new StackPane(dialogContent);
+        // ⭐ Padding ကို လုံးဝ ဖျက်လိုက်ပါပြီ (အမည်းကွက် မပေါ်စေရန်)
+        root.setStyle("-fx-background-color: transparent;");
+
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        dialog.setScene(scene);
+        dialog.sizeToScene(); // ⭐ Content အတိုင်း အလိုအလျောက် အရွယ်အစား ယူစေရန်
+        dialog.showAndWait();
     }
 
     public void loadUserProfileImage() {
@@ -215,9 +280,6 @@ public class MainLayoutController {
                     "You are a Premium user. Enjoy unlimited brains — no refill needed!\n\n" +
                     "Your brain count is ∞ (infinity).";
             DialogUtils.showMessageDialog("Premium Brains", message, false);
-
-            // ⭐ အရေးကြီးဆုံးအချက် - ဒီနေရာမှာ ရပ်လိုက်ရပါမယ်။
-            // အောက်က Refill Dialog ကို ဆက်မပေါ်စေရပါဘူး။
             return;
         }
 
@@ -234,7 +296,7 @@ public class MainLayoutController {
                         "-fx-border-color: #334155; " +
                         "-fx-border-radius: 20px; " +
                         "-fx-background-radius: 20px; " +
-                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 10);"
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);"
         );
 
         Label titleLabel = new Label("GET MORE BRAINS! 🧠");
@@ -315,12 +377,12 @@ public class MainLayoutController {
         dialogContent.getChildren().addAll(titleLabel, descLabel, infoBox, refillBtn, statusLabel, closeBtn);
 
         StackPane root = new StackPane(dialogContent);
-        root.setPadding(new Insets(20));
         root.setStyle("-fx-background-color: transparent;");
 
-        Scene scene = new Scene(root, 420, 330);
-        scene.setFill(null);
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
         dialog.setScene(scene);
+        dialog.sizeToScene();
         dialog.showAndWait();
     }
 

@@ -152,7 +152,7 @@
                         <VBox spacing="15.0" style="-fx-padding: 20 0 0 0;">
                             <children>
                                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F8FAFC;" text="Courses Progress" />
-                                <GridPane fx:id="coursesProgressContainer" hgap="15.0" vgap="15.0" />
+                                <GridPane fx:id="coursesProgressContainer" hgap="25.0" vgap="25.0" />
                             </children>
                         </VBox>
 
