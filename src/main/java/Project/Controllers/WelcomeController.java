@@ -1,10 +1,7 @@
 package Project.Controllers;
 
 import Project.API_Database.DatabaseManager;
-import Project.Helpers.FormValidator;
-import Project.Helpers.GoogleAuthService;
-import Project.Helpers.SceneManager;
-import Project.Helpers.ValidationUtils;
+import Project.Helpers.*;
 import Project.Getters_Setters.User;
 import Project.Getters_Setters.UserSession;
 import javafx.animation.TranslateTransition;
@@ -194,13 +191,13 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void handleHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Help & Support");
-        alert.setHeaderText("Getting Started");
-        alert.setContentText("• Register an account to track your learning progress.\n" +
+        String message = "Getting Started\n\n" +
+                "• Register an account to track your learning progress.\n" +
                 "• Click on Java, C++, or Python to preview language courses.\n" +
-                "• Already have an account? Click Login at the top right.");
-        alert.showAndWait();
+                "• Already have an account? Click Login at the top right.";
+
+        // Assuming DialogUtils is imported
+        DialogUtils.showMessageDialog("Help & Support", message, false);
     }
 
     @FXML

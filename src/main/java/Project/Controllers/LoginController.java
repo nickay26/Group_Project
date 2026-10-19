@@ -228,12 +228,13 @@ public class LoginController {
     /** Help Dialog ဖွင့် */
     @FXML
     private void handleHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Help & Support");
-        alert.setHeaderText("Login Assistance");
-        alert.setContentText("• Enter your registered email/username and password.\n" +
-                "• If you don't have an account yet, click 'Register' at the top right.");
-        alert.showAndWait();
+        // 1. စာသားများကို ပေါင်းစပ်ခြင်း (Header + Content)
+        String message = "Login Assistance\n\n" +
+                "• Enter your registered email/username and password.\n" +
+                "• If you don't have an account yet, click 'Register' at the top right.";
+
+        // 2. DialogUtils ကို ခေါ်သုံးခြင်း (Dark Theme)
+        DialogUtils.showMessageDialog("Help & Support", message, false);
     }
 
     // ============================================

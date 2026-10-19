@@ -211,16 +211,16 @@ public class MainLayoutController {
         if (user == null) return;
 
         if (PremiumService.isPremium(user)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Premium Brains");
-            alert.setHeaderText("🧠 Unlimited Brains");
-            alert.setContentText(
+            String message = "🧠 Unlimited Brains\n\n" +
                     "You are a Premium user. Enjoy unlimited brains — no refill needed!\n\n" +
-                            "Your brain count is ∞ (infinity)."
-            );
-            alert.showAndWait();
+                    "Your brain count is ∞ (infinity).";
+            DialogUtils.showMessageDialog("Premium Brains", message, false);
+
+            // ⭐ အရေးကြီးဆုံးအချက် - ဒီနေရာမှာ ရပ်လိုက်ရပါမယ်။
+            // အောက်က Refill Dialog ကို ဆက်မပေါ်စေရပါဘူး။
             return;
         }
+
 
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
