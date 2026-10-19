@@ -16,7 +16,8 @@
       "title": "Array Definition",
       "prompt": "What is an array?",
       "options": ["A collection of elements", "A single variable", "A method", "A class"],
-      "correctAnswer": "A collection of elements"
+      "correctAnswer": "A collection of elements",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S3",
@@ -24,7 +25,8 @@
       "title": "Array Data Type",
       "prompt": "What data type can an array store?",
       "options": ["Same data type elements", "Different data types", "Only integers", "Only strings"],
-      "correctAnswer": "Same data type elements"
+      "correctAnswer": "Same data type elements",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S4",
@@ -32,7 +34,8 @@
       "title": "Array Index Start",
       "prompt": "Array indices start at:",
       "options": ["0", "1", "-1", "10"],
-      "correctAnswer": "0"
+      "correctAnswer": "0",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S5",
@@ -41,7 +44,8 @@
       "prompt": "Complete the code to access the first element.",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[__]);",
       "options": ["0", "1", "2", "3"],
-      "correctAnswer": "0"
+      "correctAnswer": "0",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S6",
@@ -50,7 +54,8 @@
       "prompt": "Complete the code to declare an array of 5 integers.",
       "codeSnippet": "int[] arr = new int[__];",
       "options": ["5", "4", "6", "10"],
-      "correctAnswer": "5"
+      "correctAnswer": "5",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S7",
@@ -59,7 +64,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {1, 2, 3};\nSystem.out.println(arr[0]);",
       "options": ["1", "2", "3", "Error"],
-      "correctAnswer": "1"
+      "correctAnswer": "1",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S8",
@@ -68,7 +74,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {10, 20, 30};\nSystem.out.println(arr[2]);",
       "options": ["10", "20", "30", "Error"],
-      "correctAnswer": "30"
+      "correctAnswer": "30",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S9",
@@ -77,7 +84,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr.length);",
       "options": ["5", "4", "6", "Error"],
-      "correctAnswer": "5"
+      "correctAnswer": "5",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S10",
@@ -86,7 +94,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {5, 10, 15};\nSystem.out.println(arr[1] + arr[2]);",
       "options": ["25", "20", "15", "30"],
-      "correctAnswer": "25"
+      "correctAnswer": "25",
+      "interactive": true
     },
     {
       "slideId": "JAVA_116_S11",
@@ -95,7 +104,8 @@
       "prompt": "What is the output?",
       "codeSnippet": "int[] arr = {1, 2, 3};\nfor (int i = 0; i < arr.length; i++) {\n  System.out.println(arr[i]);\n}",
       "options": ["1 2 3 (separate lines)", "0 1 2", "1 2", "3 2 1"],
-      "correctAnswer": "1 2 3 (separate lines)"
+      "correctAnswer": "1 2 3 (separate lines)",
+      "interactive": true
     }
   ]
 }

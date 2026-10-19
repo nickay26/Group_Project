@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -15,6 +17,8 @@ import Project.Controllers.PracticeController;
 import Project.Getters_Setters.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static java.sql.DriverManager.getConnection;
 
 public class DatabaseManager {
 
@@ -322,6 +326,27 @@ public class DatabaseManager {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static boolean deleteAccount(int userId) {
+        try {
+            String response = ApiClient.deleteAccountAsync(userId).join();
+            if (response != null && !response.trim().isEmpty()) {
+                String trimmed = response.trim();
+                // Server က JSON ပြန်လာရင်
+                if (trimmed.startsWith("{")) {
+                    JSONObject json = new JSONObject(trimmed);
+                    return json.has("message") && !json.has("error");
+                }
+                // Server က Plain Text (ဥပမာ- "Account deleted successfully") ပြန်လာရင်
+                else if (trimmed.toLowerCase().contains("success") || trimmed.toLowerCase().contains("deleted")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     // ==========================================

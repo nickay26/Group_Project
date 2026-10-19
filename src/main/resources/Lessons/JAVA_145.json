@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Finally",
       "prompt": "Complete the finally block.",
-      "codeSnippet": "try {\n  int x = 10 / 2;\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "codeSnippet": "try {\n  int x = 10 / 2;\n} ___ {\n  System.out.println(\"Done\");\n}",
       "options": ["finally", "catch", "throw", "throws"],
       "correctAnswer": "finally"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Finally",
       "prompt": "Complete the finally block.",
-      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} _____ {\n  System.out.println(\"Done\");\n}",
+      "codeSnippet": "try {\n  int x = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(\"Error\");\n} ___ {\n  System.out.println(\"Done\");\n}",
       "options": ["finally", "catch", "throw", "throws"],
       "correctAnswer": "finally"
     },

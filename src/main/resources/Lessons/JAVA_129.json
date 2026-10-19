@@ -39,7 +39,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Class Declaration",
       "prompt": "Complete the class declaration.",
-      "codeSnippet": "____ MyClass {\n}",
+      "codeSnippet": "___ MyClass {\n}",
       "options": ["class", "Class", "interface", "struct"],
       "correctAnswer": "class"
     },
@@ -48,7 +48,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Create Object",
       "prompt": "Complete the code to create an object of class Dog.",
-      "codeSnippet": "Dog d = _____ Dog();",
+      "codeSnippet": "Dog d = ___ Dog();",
       "options": ["new", "create", "make", "object"],
       "correctAnswer": "new"
     },

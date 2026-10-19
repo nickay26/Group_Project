@@ -7,7 +7,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Print Hello World",
       "prompt": "Insert the missing part of the code to output \"Hello World\".",
-      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ____.____.____(\"Hello World\");\n  }\n}",
+      "codeSnippet": "public class MyClass {\n  public static void main(String[] args) {\n    ___(\"Hello World\");\n  }\n}",
       "options": ["System.out.println", "print", "console.log", "echo"],
       "correctAnswer": "System.out.println"
     },
@@ -15,9 +15,9 @@
       "slideId": "JAVA_108_S2",
       "type": "FILL_IN_BLANK",
       "title": "Print Hello",
-      "Interactive": "true",
+      "interactive": true,
       "prompt": "Complete the code to print \"Hello\".",
-      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.____(\"Hello\");\n  }\n}",
+      "codeSnippet": "public class Main {\n  public static void main(String[] args) {\n    System.out.___(\"Hello\");\n  }\n}",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },
@@ -26,13 +26,14 @@
       "type": "FILL_IN_BLANK",
       "title": "Print World",
       "prompt": "Complete the code to print \"World\".",
-      "codeSnippet": "System.out.____(\"World\");",
+      "codeSnippet": "System.out.___(\"World\");",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },
     {
       "slideId": "JAVA_108_S4",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Hello World Output",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"Hello World\");",
@@ -42,6 +43,7 @@
     {
       "slideId": "JAVA_108_S5",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Two Lines Output",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"Hello\");\nSystem.out.println(\"World\");",
@@ -51,6 +53,7 @@
     {
       "slideId": "JAVA_108_S6",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Same Line Output",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.print(\"Hello \");\nSystem.out.print(\"World\");",
@@ -70,7 +73,6 @@
       "slideId": "JAVA_108_S8",
       "type": "MULTIPLE_CHOICE",
       "title": "Println Method",
-      "Interactive": "true",
       "prompt": "Which method prints text and adds a new line?",
       "options": ["println()", "print()", "write()", "output()"],
       "correctAnswer": "println()"
@@ -86,6 +88,7 @@
     {
       "slideId": "JAVA_108_S10",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Java Programming Output",
       "prompt": "What is the output?",
       "codeSnippet": "System.out.println(\"Java\");\nSystem.out.println(\"Programming\");",
@@ -95,6 +98,7 @@
     {
       "slideId": "JAVA_108_S11",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Print with New Line",
       "prompt": "Complete the code to print \"Hello\" with a new line.",
       "codeSnippet": "System.out.____(\"Hello\");",

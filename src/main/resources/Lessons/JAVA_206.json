@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Abstract",
       "prompt": "Complete the abstract class.",
-      "codeSnippet": "______ class Animal {\n  abstract void sound();\n}",
+      "codeSnippet": "___ class Animal {\n  abstract void sound();\n}",
       "options": ["abstract", "interface", "extends", "implements"],
       "correctAnswer": "abstract"
     },

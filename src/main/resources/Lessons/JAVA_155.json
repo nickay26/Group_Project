@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Close FileReader",
       "prompt": "Complete the code to close the FileReader.",
-      "codeSnippet": "FileReader reader = new FileReader(\"test.txt\");\nreader.______();",
+      "codeSnippet": "FileReader reader = new FileReader(\"test.txt\");\nreader.___();",
       "options": ["close", "end", "stop", "exit"],
       "correctAnswer": "close"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Close FileWriter",
       "prompt": "Complete the code to close the FileWriter.",
-      "codeSnippet": "FileWriter writer = new FileWriter(\"test.txt\");\nwriter.______();",
+      "codeSnippet": "FileWriter writer = new FileWriter(\"test.txt\");\nwriter.___();",
       "options": ["close", "end", "stop", "exit"],
       "correctAnswer": "close"
     },

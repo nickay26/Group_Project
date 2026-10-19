@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "String Length",
       "prompt": "Complete the code to get the length.",
-      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.______());",
+      "codeSnippet": "String s = \"Java\";\nSystem.out.println(s.___());",
       "options": ["length", "size", "count", "len"],
       "correctAnswer": "length"
     },
@@ -40,7 +40,7 @@
       "type": "FILL_IN_BLANK",
       "title": "String Length",
       "prompt": "Complete the code to get the length.",
-      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.______());",
+      "codeSnippet": "String name = \"John\";\nSystem.out.println(name.___());",
       "options": ["length", "size", "count", "len"],
       "correctAnswer": "length"
     },

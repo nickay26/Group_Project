@@ -49,7 +49,7 @@
       "title": "Main Method Parameter",
       "Interactive": "true",
       "prompt": "Complete the main method declaration.",
-      "codeSnippet": "public static void main(String[] ____) {\n}",
+      "codeSnippet": "public static void main(String[] ___) {\n}",
       "options": ["args", "main", "String", "void"],
       "correctAnswer": "args"
     },
@@ -58,7 +58,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Class Declaration",
       "prompt": "Complete the class declaration.",
-      "codeSnippet": "public ____ Program {\n}",
+      "codeSnippet": "public ___ Program {\n}",
       "options": ["class", "Class", "interface", "struct"],
       "correctAnswer": "class"
     },
@@ -74,6 +74,7 @@
     {
       "slideId": "JAVA_104_S9",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Output Check",
       "prompt": "What is the output?",
       "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello\");\n        System.out.println(\"World\");\n    }\n}",
@@ -83,9 +84,10 @@
     {
       "slideId": "JAVA_104_S10",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Print Java",
       "prompt": "Complete the code to print \"Java\".",
-      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.____(\"Java\");\n    }\n}",
+      "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        System.out.___(\"Java\");\n    }\n}",
       "options": ["println", "print", "write", "output"],
       "correctAnswer": "println"
     },

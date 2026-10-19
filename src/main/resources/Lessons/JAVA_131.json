@@ -31,7 +31,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Constructor",
       "prompt": "Complete the constructor declaration.",
-      "codeSnippet": "class Car {\n  String model;\n  ____(String m) {\n    model = m;\n  }\n}",
+      "codeSnippet": "class Car {\n  String model;\n  ___(String m) {\n    model = m;\n  }\n}",
       "options": ["Car", "car", "Constructor", "String"],
       "correctAnswer": "Car"
     },
@@ -92,7 +92,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Constructor Call",
       "prompt": "Complete the object creation with constructor.",
-      "codeSnippet": "Car c = new Car(____);",
+      "codeSnippet": "Car c = new Car(___);",
       "options": ["\"Toyota\"", "Toyota", "new", "Car"],
       "correctAnswer": "\"Toyota\""
     }

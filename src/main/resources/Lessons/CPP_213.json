@@ -13,6 +13,7 @@
     {
       "slideId": "CPP_213_S2",
       "type": "FILL_IN_BLANK",
+      "interactive": true,
       "title": "Virtual Destructor Declaration",
       "prompt": "Fill in the keyword to declare a safe polymorphic base destructor.",
       "codeSnippet": "class Base {\npublic:\n    ___ ~Base() = default;\n};",

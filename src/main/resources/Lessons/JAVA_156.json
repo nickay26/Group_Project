@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Catch FileNotFoundException",
       "prompt": "Complete the catch block.",
-      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (__________ e) {\n  System.out.println(\"File not found\");\n}",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (___ e) {\n  System.out.println(\"File not found\");\n}",
       "options": ["FileNotFoundException", "IOException", "Exception", "NullPointerException"],
       "correctAnswer": "FileNotFoundException"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Catch IOException",
       "prompt": "Complete the catch block for IOException.",
-      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (________ e) {\n  System.out.println(\"IO Error\");\n}",
+      "codeSnippet": "try {\n  FileReader reader = new FileReader(\"missing.txt\");\n} catch (___ e) {\n  System.out.println(\"IO Error\");\n}",
       "options": ["IOException", "FileNotFoundException", "Exception", "NullPointerException"],
       "correctAnswer": "IOException"
     },

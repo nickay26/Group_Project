@@ -40,9 +40,11 @@
         <VBox styleClass="glass-panel" VBox.vgrow="ALWAYS">
             <children>
                 <Label styleClass="section-title" text="User Daily Activity (Weekly Overview)" />
-                <LineChart fx:id="userActivityChart" createSymbols="true" legendVisible="false" VBox.vgrow="ALWAYS">
+
+                <!-- animated="false" နှင့် prefHeight="350" ကို ထည့်သွင်းပါ -->
+                <LineChart fx:id="userActivityChart" animated="false" prefHeight="350" createSymbols="true" legendVisible="false" VBox.vgrow="ALWAYS">
                     <xAxis>
-                        <CategoryAxis label="Days" tickLabelRotation="45" />
+                        <CategoryAxis label="Days" tickLabelRotation="0" />
                     </xAxis>
                     <yAxis>
                         <NumberAxis label="Active Users" />

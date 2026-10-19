@@ -5,6 +5,7 @@
     {
       "slideId": "JAVA_114_S1",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 2;\nswitch (x) {\n  case 1: System.out.println(\"One\"); break;\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -14,6 +15,7 @@
     {
       "slideId": "JAVA_114_S2",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 3;\nswitch (x) {\n  case 1: System.out.println(\"One\"); break;\n  case 2: System.out.println(\"Two\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -23,6 +25,7 @@
     {
       "slideId": "JAVA_114_S3",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int day = 1;\nswitch (day) {\n  case 1: System.out.println(\"Monday\"); break;\n  case 2: System.out.println(\"Tuesday\"); break;\n  default: System.out.println(\"Other\");\n}",
@@ -32,6 +35,7 @@
     {
       "slideId": "JAVA_114_S4",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Switch Fall-Through",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 1;\nswitch (x) {\n  case 1: System.out.println(\"One\");\n  case 2: System.out.println(\"Two\"); break;\n}",
@@ -59,6 +63,7 @@
     {
       "slideId": "JAVA_114_S7",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 2;\nswitch (x) {\n  case 1: System.out.println(\"A\"); break;\n  case 2: System.out.println(\"B\"); break;\n  case 3: System.out.println(\"C\"); break;\n}",
@@ -68,6 +73,7 @@
     {
       "slideId": "JAVA_114_S8",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 1;\nswitch (x) {\n  case 1: System.out.println(\"A\"); break;\n  case 2: System.out.println(\"B\"); break;\n  default: System.out.println(\"C\");\n}",
@@ -77,6 +83,7 @@
     {
       "slideId": "JAVA_114_S9",
       "type": "CODE_OUTPUT",
+      "interactive": true,
       "title": "Switch Output",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 5;\nswitch (x) {\n  case 1: System.out.println(\"A\"); break;\n  case 2: System.out.println(\"B\"); break;\n  default: System.out.println(\"C\");\n}",
@@ -86,6 +93,7 @@
     {
       "slideId": "JAVA_114_S10",
       "type": "MULTIPLE_CHOICE",
+      "interactive": true,
       "title": "Switch Fall-Through",
       "prompt": "What is the output?",
       "codeSnippet": "int x = 1;\nswitch (x) {\n  case 1: System.out.println(\"A\");\n  case 2: System.out.println(\"B\");\n  default: System.out.println(\"C\");\n}",
@@ -97,7 +105,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Complete the Case",
       "prompt": "Complete the code to print \"Two\" when x is 2.",
-      "codeSnippet": "switch (x) {\n  ____ 2: System.out.println(\"Two\"); break;\n}",
+      "codeSnippet": "switch (x) {\n  ___ 2: System.out.println(\"Two\"); break;\n}",
       "options": ["case", "default", "switch", "if"],
       "correctAnswer": "case"
     }

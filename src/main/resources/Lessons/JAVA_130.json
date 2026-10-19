@@ -32,7 +32,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Class Declaration",
       "prompt": "Complete the class declaration.",
-      "codeSnippet": "____ MyClass {\n}",
+      "codeSnippet": "___ MyClass {\n}",
       "options": ["class", "Class", "interface", "struct"],
       "correctAnswer": "class"
     },
@@ -41,7 +41,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Class Field",
       "prompt": "Complete the class field declaration.",
-      "codeSnippet": "class Dog {\n  ____ name = \"Buddy\";\n}",
+      "codeSnippet": "class Dog {\n  ___ name = \"Buddy\";\n}",
       "options": ["String", "int", "void", "boolean"],
       "correctAnswer": "String"
     },

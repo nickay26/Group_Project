@@ -1,5 +1,8 @@
 package Project.AdminClasses;
 
+import Project.Helpers.DialogUtils; // ⭐ ထည့်ရန်
+import Project.Helpers.SceneManager; // ⭐ ထည့်ရန်
+import Project.Getters_Setters.UserSession; // ⭐ ထည့်ရန်
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +25,9 @@ public class AdminController {
     @FXML private Button btnManagePractice;
     @FXML private Button btnUserAnalytics;
     @FXML private Button btnSettings;
+
+    // ⭐ Logout Button အသစ်
+    @FXML private Button btnLogout;
 
     // Header
     @FXML private Label pageTitle;
@@ -69,12 +75,30 @@ public class AdminController {
     }
 
     // ============================================
+    // ✅ Log out လုပ်ဆောင်ချက်
+    // ============================================
+    @FXML
+    private void handleLogout() {
+        // ⭐ ခလုတ်စာသားကို "Log out" လို့ အတိအကျ ထည့်ပေးလိုက်ပါ
+        boolean isConfirmed = DialogUtils.showConfirmationDialog(
+                "Log out",
+                "Are you sure you want to log out?",
+                "Log out"
+        );
+
+        if (isConfirmed) {
+            UserSession.clearSession();
+            SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
+        }
+    }
+
+    // ============================================
     // ✅ ဒါ အဓိက — managePracticeView ထည့်ထား
     // ============================================
     private void hideAllViews() {
         if (dashboardView != null) dashboardView.setVisible(false);
         if (manageQuestionsView != null) manageQuestionsView.setVisible(false);
-        if (managePracticeView != null) managePracticeView.setVisible(false);   // ← ဒါ ထည့်
+        if (managePracticeView != null) managePracticeView.setVisible(false);
         if (userAnalyticsView != null) userAnalyticsView.setVisible(false);
         if (settingsView != null) settingsView.setVisible(false);
     }

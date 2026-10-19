@@ -47,7 +47,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Import Iterator",
       "prompt": "Complete the import statement.",
-      "codeSnippet": "import java.util.________;",
+      "codeSnippet": "import java.util.___;",
       "options": ["Iterator", "Iterable", "List", "Collection"],
       "correctAnswer": "Iterator"
     },
@@ -56,7 +56,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Get Iterator",
       "prompt": "Complete the code to get an Iterator.",
-      "codeSnippet": "Iterator<String> it = list.________();",
+      "codeSnippet": "Iterator<String> it = list.___();",
       "options": ["iterator", "getIterator", "iter", "get"],
       "correctAnswer": "iterator"
     },

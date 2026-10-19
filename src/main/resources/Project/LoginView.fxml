@@ -80,13 +80,26 @@
                         </VBox>
 
                         <!-- Password Field with Floating Label -->
+                        <!-- Password Field with Floating Label -->
                         <VBox spacing="4.0">
                             <children>
                                 <Label fx:id="passwordFloatLabel" styleClass="floating-label" text="Password" />
+
                                 <StackPane alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="320.0" styleClass="field-wrapper">
                                     <children>
                                         <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="login-field" />
+
+                                        <TextField fx:id="visiblePasswordField" promptText="Enter your password" styleClass="login-field" visible="false" managed="false" />
+
                                         <Label styleClass="field-icon" translateX="14.0" />
+
+                                        <Button fx:id="togglePasswordBtn" text="👁"
+                                                style="-fx-background-color: transparent; -fx-cursor: hand; -fx-text-fill: #94a3b8; -fx-font-size: 16px;"
+                                                StackPane.alignment="CENTER_RIGHT">
+                                            <StackPane.margin>
+                                                <Insets right="15.0" />
+                                            </StackPane.margin>
+                                        </Button>
                                     </children>
                                 </StackPane>
                             </children>

@@ -34,7 +34,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Object Output",
       "prompt": "Complete the code to output 'Buddy'.",
-      "codeSnippet": "class Dog {\n  String name = \"Buddy\";\n}\nDog d = new Dog();\nSystem.out.println(d.____);",
+      "codeSnippet": "class Dog {\n  String name = \"Buddy\";\n}\nDog d = new Dog();\nSystem.out.println(d.___);",
       "options": ["name", "Dog", "Buddy", "String"],
       "correctAnswer": "name"
     },
@@ -43,7 +43,7 @@
       "type": "FILL_IN_BLANK",
       "title": "Object Output",
       "prompt": "Complete the code to output 'Toyota'.",
-      "codeSnippet": "class Car {\n  String model = \"Toyota\";\n}\nCar c = new Car();\nSystem.out.println(c.____);",
+      "codeSnippet": "class Car {\n  String model = \"Toyota\";\n}\nCar c = new Car();\nSystem.out.println(c.___);",
       "options": ["model", "Car", "Toyota", "String"],
       "correctAnswer": "model"
     },

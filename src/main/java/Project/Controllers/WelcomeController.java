@@ -1,6 +1,7 @@
 package Project.Controllers;
 
 import Project.API_Database.DatabaseManager;
+import Project.Helpers.FormValidator;
 import Project.Helpers.GoogleAuthService;
 import Project.Helpers.SceneManager;
 import Project.Helpers.ValidationUtils;
@@ -38,12 +39,18 @@ public class WelcomeController implements Initializable {
     @FXML private Label emailLabel;
     @FXML private Label passwordLabel;
 
+    @FXML private Label emailErrorLabel;
+    @FXML private Label passwordErrorLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Form field တိုင်းကို Floating Animation ချိတ်ဆက်ခြင်း
         setupFloatingLabel(usernameField, usernameLabel, "Username", "Enter Username");
         setupFloatingLabel(emailField, emailLabel, "Email", "Enter Email");
         setupFloatingLabel(passwordField, passwordLabel, "Password", "Enter Password");
+
+        FormValidator.setupEmailValidation(emailField, emailErrorLabel);
+        FormValidator.setupPasswordValidation(passwordField, passwordErrorLabel);
     }
 
     // Pointer ထောက်လိုက်လျှင် စာသား အပေါ်သို့ ရောက်သွားစေမည့် Helper Method
