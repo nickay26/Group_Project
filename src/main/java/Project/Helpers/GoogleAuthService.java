@@ -25,7 +25,7 @@ public class GoogleAuthService {
 
     private static final int PORT = 8888;
     // Must match GOOGLE_CLIENT_ID in your flask_app.py
-    private static final String CLIENT_ID = "784664347763-vvt49ns53p2gau9afp6sdn5hpobo265h.apps.googleusercontent.com";
+    private static final String CLIENT_ID = "929038060577-24kqfelbq62kqcsmrv0706e7523ql7fl.apps.googleusercontent.com";
     private static final String REDIRECT_URI = "http://localhost:" + PORT + "/callback";
 
     // Replace with your actual PythonAnywhere URL
