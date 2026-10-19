@@ -6,6 +6,7 @@ import Project.Helpers.AvatarCropDialog;
 import Project.Helpers.DialogUtils;
 import Project.Getters_Setters.User;
 import Project.Getters_Setters.UserSession;
+import Project.Helpers.SceneManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -396,7 +397,8 @@ public class SettingsController {
                                     if (MainLayoutController.getInstance() != null) {
                                         MainLayoutController.getInstance().loadUserProfileImage();
                                     }
-                                    showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile picture uploaded successfully!");
+                                    // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+                                    DialogUtils.showSuccessDialog("Profile picture uploaded successfully!");
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -479,7 +481,8 @@ public class SettingsController {
         String newEmail = emailField.getText().trim();
 
         if (newName.isEmpty() || newEmail.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Username and Email cannot be empty.");
+            // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+            DialogUtils.showErrorDialog("Username and Email cannot be empty.");
             return;
         }
 
@@ -487,9 +490,11 @@ public class SettingsController {
         if (success) {
             user.setName(newName);
             user.setEmail(newEmail);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "✅ Profile information updated successfully!");
+            // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+            DialogUtils.showSuccessDialog("Profile information updated successfully!");
         } else {
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to update information on server.");
+            // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+            DialogUtils.showErrorDialog("Failed to update information on server.");
         }
     }
 
@@ -541,25 +546,31 @@ public class SettingsController {
         }).start();
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    // ⭐ မူရင်း showAlert method ကို ဖျက်ပစ်လိုက်ပါပြီ (အသုံးမလိုတော့ပါ)
 
+    // Delete Button ကို နှိပ်လိုက်ရင်
     @FXML
     private void handleDeleteAccount() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Account");
-        alert.setHeaderText("Are you sure?");
-        alert.setContentText("This action cannot be undone!");
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                System.out.println("Account deleted");
+        // ⭐ Dark Theme Confirmation Dialog ခေါ်ခြင်း (OK/Cancel ပါမယ်)
+        boolean isConfirmed = DialogUtils.showConfirmationDialog(
+                "Delete Account",
+                "Are you sure you want to delete your account?\nThis action cannot be undone!"
+        );
+
+        if (isConfirmed) {
+            int userId = UserSession.getUserId();
+            boolean isDeleted = DatabaseManager.deleteUser(userId);
+
+            if (isDeleted) {
+                // အောင်မြင်ရင် Success Dialog ပြ
+                DialogUtils.showSuccessDialog("Your account has been deleted successfully.");
+                UserSession.clearSession();
+                SceneManager.switchScene("WelcomeView.fxml", "Sodexa Platform - Welcome");
+            } else {
+                // မအောင်မြင်ရင် Error Dialog ပြ
+                DialogUtils.showErrorDialog("Failed to delete account. Please try again.");
             }
-        });
+        }
     }
 
     @FXML

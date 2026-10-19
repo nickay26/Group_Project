@@ -5,6 +5,7 @@ import Project.API_Database.DatabaseManager;
 import Project.Getters_Setters.Course;
 import Project.Getters_Setters.User;
 import Project.Getters_Setters.UserSession;
+import Project.Helpers.DialogUtils; // ⭐ ဒီ Import လိုင်း ထည့်ထားပါတယ်
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -491,7 +492,7 @@ public class ProfileViewController {
                 completedText,
                 courseLabel,
                 descLabel,
-                logoBox, // 👈 ပုံနှစ်ပုံ ဘေးချင်းယှဉ်ပါသော HBox
+                logoBox,
                 dateLabel,
                 certIdLabel,
                 verifiedLabel
@@ -534,19 +535,13 @@ public class ProfileViewController {
                             "png", file
                     );
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText(null);
-                    alert.setContentText("✅ Certificate saved successfully!");
-                    alert.showAndWait();
+                    // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+                    DialogUtils.showSuccessDialog("Certificate saved successfully!");
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("❌ Failed to save: " + ex.getMessage());
-                    alert.showAndWait();
+                    // ⭐ Alert အစား DialogUtils ကို ခေါ်သုံးခြင်း
+                    DialogUtils.showErrorDialog("Failed to save: " + ex.getMessage());
                 }
             }
         });

@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -15,6 +17,8 @@ import Project.Controllers.PracticeController;
 import Project.Getters_Setters.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static java.sql.DriverManager.getConnection;
 
 public class DatabaseManager {
 
@@ -1016,5 +1020,23 @@ public class DatabaseManager {
         user.setPremium(isPremium);
 
         return user;
+    }
+
+    public static boolean deleteUser(int userId) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/api/users/" + userId))
+                    .DELETE() // DELETE Request ပို့ခြင်း
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return response.statusCode() == 200 || response.statusCode() == 204;
+
+        } catch (Exception e) {
+            System.err.println("Error deleting user: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 }
