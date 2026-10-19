@@ -111,11 +111,29 @@ public class CoursesPageController {
         });
         ribbon.setStyle("-fx-fill: #2563EB;");
 
-        Label ribbonText = new Label("Start Learning");
+        // ⭐ ရာခိုင်နှုန်းအလိုက် စာသားနှင့် နေရာကို ပြောင်းလဲခြင်း
+        int progress = course.getProgressPercent();
+        String ribbonLabelString;
+        double textX = 10;
+        double textY = 192;
+
+        if (progress >= 100) {
+            ribbonLabelString = "Completed!";
+            textX = 20;  // စာသားတိုသွားလို့ ညာဘက်ကို နည်းနည်းရွှေ့မယ်
+            textY = 192; // အပေါ်ကို နည်းနည်းတင်မယ်
+        } else if (progress > 0) {
+            ribbonLabelString = "In Progress";
+            textX = 22;
+            textY = 192;
+        } else {
+            ribbonLabelString = "Start Learning";
+        }
+
+        Label ribbonText = new Label(ribbonLabelString);
         ribbonText.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-size: 13px;");
         ribbonText.setRotate(45.0);
-        ribbonText.setLayoutX(10);
-        ribbonText.setLayoutY(188);
+        ribbonText.setLayoutX(textX);
+        ribbonText.setLayoutY(textY);
 
         Group cornerButton = new Group(ribbon, ribbonText);
         cornerButton.setCursor(Cursor.HAND);
