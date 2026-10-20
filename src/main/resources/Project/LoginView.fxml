@@ -107,7 +107,6 @@
 
                         <HBox alignment="CENTER_LEFT" prefWidth="320.0" spacing="80.0">
                             <children>
-                                <CheckBox fx:id="rememberCheck" styleClass="remember-check" text="Remember me" />
                                 <Hyperlink fx:id="forgotLink" onAction="#handleForgotPassword" styleClass="hyperlink" text="Forgot password?">
                            <HBox.margin>
                               <Insets left="100.0" />

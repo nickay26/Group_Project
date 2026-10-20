@@ -29,7 +29,7 @@ public class LoginController {
     @FXML private TextField visiblePasswordField;
     @FXML private Button togglePasswordBtn;
 
-    @FXML private CheckBox rememberCheck;
+    //@FXML private CheckBox rememberCheck;
     @FXML private Hyperlink forgotLink;
     @FXML private Button loginBtn;
     @FXML private Button googleBtn;
@@ -265,9 +265,9 @@ public class LoginController {
             return;
         }
 
-        boolean remember = rememberCheck != null && rememberCheck.isSelected();
-        System.out.println("Remember me: " + remember);
-        System.out.println("Attempting login for: " + email);
+        //boolean remember = rememberCheck != null && rememberCheck.isSelected();
+        //System.out.println("Remember me: " + remember);
+        //System.out.println("Attempting login for: " + email);
 
         // Database မှ Authenticate လုပ်ခြင်း
         User user = DatabaseManager.authenticateUser(email, password);
