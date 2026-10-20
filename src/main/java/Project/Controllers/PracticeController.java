@@ -345,7 +345,7 @@ public class PracticeController {
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        Button startBtn = new Button("Start (" + data.questions.size() + " Qs)");
+        Button startBtn = new Button("Start Learning");
         startBtn.getStyleClass().add("card-start-btn");
         startBtn.setMaxWidth(Double.MAX_VALUE);
         startBtn.setOnAction(e -> openTopic(data));
