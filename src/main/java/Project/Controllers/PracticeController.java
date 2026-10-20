@@ -22,6 +22,8 @@ import javafx.scene.text.FontWeight;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class PracticeController {
 
@@ -32,26 +34,21 @@ public class PracticeController {
 
     private ToggleGroup modeToggleGroup;
 
-    // ============================================
-    // CardData — Practice Card Model (Question နဲ့ တိုက်ရိုက်ချိတ်ရန်)
-    // ============================================
-    private static class CardData {
+    private static class TopicCardData {
         String language;
-        String title;
-        QuestionData question; // မေးခွန်း အချက်အလက်အပြည့်အစုံ
+        String topicName;
+        List<QuestionData> questions;
 
-        CardData(QuestionData q) {
-            this.language = q.getLanguage();
-            this.title = q.getTitle();
-            this.question = q;
+        TopicCardData(String language, String topicName, List<QuestionData> questions) {
+            this.language = language;
+            this.topicName = topicName;
+            this.questions = questions;
         }
     }
 
     private final java.util.Map<String, List<Lesson>> courseLessonsCache = new java.util.HashMap<>();
-    private final List<CardData> allCards = new ArrayList<>();
-    // ============================================
-    // ReviewData — Review Card Model
-    // ============================================
+    private final List<TopicCardData> allCards = new ArrayList<>();
+
     public static class ReviewData {
         private String lessonId;
         private String courseId;
@@ -92,10 +89,22 @@ public class PracticeController {
             }
         });
 
-        // 🌟 JsonUtils မှတဆင့် JSON ဖိုင်များထဲရှိ မေးခွန်းအားလုံးကို Load လုပ်ခြင်း
         List<QuestionData> loadedQuestions = JsonUtils.loadPracticeQuestions();
+
+        Map<String, Map<String, List<QuestionData>>> groupedData = new HashMap<>();
         for (QuestionData q : loadedQuestions) {
-            allCards.add(new CardData(q));
+            String lang = q.getLanguage();
+            String topic = q.getQuestionType() != null ? q.getQuestionType() : "General";
+
+            groupedData.computeIfAbsent(lang, k -> new HashMap<>())
+                    .computeIfAbsent(topic, k -> new ArrayList<>())
+                    .add(q);
+        }
+
+        for (String lang : groupedData.keySet()) {
+            for (String topic : groupedData.get(lang).keySet()) {
+                allCards.add(new TopicCardData(lang, topic, groupedData.get(lang).get(topic)));
+            }
         }
 
         practiceToggle.setSelected(true);
@@ -121,8 +130,8 @@ public class PracticeController {
         if (selected == null || selected.equals("All")) {
             renderCards(allCards);
         } else {
-            List<CardData> filtered = new ArrayList<>();
-            for (CardData c : allCards) {
+            List<TopicCardData> filtered = new ArrayList<>();
+            for (TopicCardData c : allCards) {
                 if (c.language != null && c.language.equalsIgnoreCase(selected)) {
                     filtered.add(c);
                 }
@@ -131,16 +140,12 @@ public class PracticeController {
         }
     }
 
-    // ============================================
-    // 📌 LOAD & RENDER REVIEW CARDS
-    // ============================================
     private void loadReviewCards() {
         cardContainer.getChildren().clear();
         cardContainer.getColumnConstraints().clear();
         cardContainer.getRowConstraints().clear();
         courseLessonsCache.clear();
 
-        // 📌 Review Cards များအတွက်လည်း အလယ်ဗဟိုညှိခြင်း
         cardContainer.setAlignment(Pos.TOP_CENTER);
         cardContainer.setHgap(40);
         cardContainer.setVgap(40);
@@ -155,12 +160,10 @@ public class PracticeController {
         }
 
         String selectedCategory = categoryCombo.getValue();
-
         List<ReviewData> filteredList = new ArrayList<>();
         if (reviewList != null) {
             for (ReviewData rev : reviewList) {
                 if (rev == null) continue;
-
                 boolean matchesCategory = selectedCategory == null
                         || selectedCategory.equalsIgnoreCase("All")
                         || (rev.getLanguage() != null && rev.getLanguage().equalsIgnoreCase(selectedCategory));
@@ -184,7 +187,6 @@ public class PracticeController {
         for (ReviewData rev : filteredList) {
             StackPane hexCard = createPureHexagonCard(rev);
             cardContainer.add(hexCard, col, row);
-
             col++;
             if (col == 4) {
                 col = 0;
@@ -210,7 +212,7 @@ public class PracticeController {
             return (lessonId != null) ? lessonId : "Lesson";
         }
         try {
-            List<Lesson> lessons = getCachedLessonsForCourse(courseId); // 🌟 Use cache instead of direct query
+            List<Lesson> lessons = getCachedLessonsForCourse(courseId);
             if (lessons != null) {
                 for (Lesson l : lessons) {
                     if (l != null && l.getLessonId() != null && l.getLessonId().equalsIgnoreCase(lessonId)) {
@@ -218,23 +220,17 @@ public class PracticeController {
                     }
                 }
             }
-        } catch (Exception e) {
-            System.err.println("⚠️ Error resolving lesson title: " + e.getMessage());
-        }
+        } catch (Exception e) {}
         return lessonId;
     }
 
-    // LearnPage Design အတိုင်း Hexagon SVG Path ပြုလုပ်သည့် Helper
     private StackPane createPureHexagonCard(ReviewData data) {
         StackPane stack = new StackPane();
-
-        // 📌 Hexagon Card Dimension သတ်မှတ်ခြင်း
         stack.setPrefSize(140, 160);
         stack.setMinSize(140, 160);
         stack.setMaxSize(140, 160);
         stack.setStyle("-fx-cursor: hand;");
 
-        // Hexagon SVG Path
         SVGPath hexPath = new SVGPath();
         hexPath.setContent("M 70 0 L 140 40 L 140 120 L 70 160 L 0 120 L 0 40 Z");
         hexPath.setStrokeWidth(3.5);
@@ -242,7 +238,6 @@ public class PracticeController {
         Color fillColor = Color.web("#2563EB");
         Color strokeColor = Color.web("#60A5FA");
 
-        // Glow Effect
         DropShadow glow = new DropShadow();
         glow.setColor(Color.web("#3B82F6", 0.8));
         glow.setRadius(20);
@@ -251,7 +246,6 @@ public class PracticeController {
         hexPath.setFill(fillColor);
         hexPath.setStroke(strokeColor);
 
-        // Lesson Title အမှန်
         String lessonTitle = resolveLessonTitle(data.getCourseId(), data.getLessonId());
 
         VBox content = new VBox(6);
@@ -268,9 +262,7 @@ public class PracticeController {
         content.getChildren().addAll(iconLabel, titleLabel);
         stack.getChildren().addAll(hexPath, content);
 
-        // Card နှိပ်လိုက်ပါက LessonPlayer သို့ တိုက်ရိုက် ရောက်ရှိမည်
         stack.setOnMouseClicked(e -> openReviewLesson(data));
-
         return stack;
     }
 
@@ -295,31 +287,24 @@ public class PracticeController {
                     controller.startLesson(targetLesson, true);
                 }
             }
-        } else {
-            System.err.println("❌ Review Lesson ရှာမတွေ့ပါ: " + data.getLessonId());
         }
     }
 
-    // ============================================
-    // RENDER PRACTICE CARDS
-    // ============================================
-    private void renderCards(List<CardData> cards) {
+    private void renderCards(List<TopicCardData> cards) {
         cardContainer.getChildren().clear();
         cardContainer.getColumnConstraints().clear();
         cardContainer.getRowConstraints().clear();
 
-        // 📌 မျက်နှာပြင် မည်မျှပင် ကြီးသည်ဖြစ်စေ အလယ်ဗဟိုကျစေရန် TOP_CENTER သို့ ပြောင်းပါ
         cardContainer.setAlignment(Pos.TOP_CENTER);
-        cardContainer.setHgap(30); // ကြီးမားသော screen များတွင် အကွာအဝေး ညီစေရန် hgap ကို အနည်းငယ် တိုးပေးနိုင်သည်
+        cardContainer.setHgap(30);
         cardContainer.setVgap(30);
         cardContainer.setPadding(new Insets(20));
 
         int col = 0;
         int row = 0;
-        for (CardData c : cards) {
+        for (TopicCardData c : cards) {
             VBox card = createCard(c, CARD_WIDTH, CARD_HEIGHT);
             cardContainer.add(card, col, row);
-
             col++;
             if (col == 3) {
                 col = 0;
@@ -328,7 +313,7 @@ public class PracticeController {
         }
     }
 
-    private VBox createCard(CardData data, double width, double height) {
+    private VBox createCard(TopicCardData data, double width, double height) {
         VBox card = new VBox(10);
         card.setPrefSize(width, height);
         card.setMinSize(width, height);
@@ -343,19 +328,16 @@ public class PracticeController {
         if (imagePath != null) {
             try (InputStream is = getClass().getResourceAsStream(imagePath)) {
                 if (is != null) {
-                    Image img = new Image(is);
-                    iconImage.setImage(img);
+                    iconImage.setImage(new Image(is));
                     iconImage.setFitWidth(100);
                     iconImage.setFitHeight(100);
                     iconImage.setPreserveRatio(true);
                     iconImage.setSmooth(true);
                 }
-            } catch (Exception e) {
-                System.err.println("❌ Error: " + e.getMessage());
-            }
+            } catch (Exception e) {}
         }
 
-        Label title = new Label(data.title);
+        Label title = new Label(data.topicName);
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 16));
         title.getStyleClass().add("card-title");
         title.setWrapText(true);
@@ -363,23 +345,24 @@ public class PracticeController {
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        Button startBtn = new Button("Start Learning");
+        Button startBtn = new Button("Start (" + data.questions.size() + " Qs)");
         startBtn.getStyleClass().add("card-start-btn");
         startBtn.setMaxWidth(Double.MAX_VALUE);
-        startBtn.setOnAction(e -> openQuestion(data));
+        startBtn.setOnAction(e -> openTopic(data));
 
         card.getChildren().addAll(iconImage, title, spacer, startBtn);
         return card;
     }
 
-    private void openQuestion(CardData data) {
+    // 🌟 မူရင်း UI အတိုင်း MonacoEditorView.fxml ကို ပြန်ခေါ်သုံးထားပါတယ်
+    private void openTopic(TopicCardData data) {
         MainLayoutController layout = MainLayoutController.getInstance();
         if (layout != null) {
-            FXMLLoader loader = layout.loadPage("MonacoEditorView.fxml");
+            FXMLLoader loader = layout.loadPage("MonacoEditorView.fxml"); // ဒီနေရာမှာ မူရင်း FXML ကို ပြန်ထည့်ထားပါတယ်
             if (loader != null) {
                 CodeEditorController controller = loader.getController();
-                if (controller != null && data.question != null) {
-                    controller.initQuestion(data.question);
+                if (controller != null && data.questions != null && !data.questions.isEmpty()) {
+                    controller.initQuestions(data.questions); // CodeEditorController ထဲကို မေးခွန်း ၁၀ ခု ပို့မယ်
                 }
             }
         }

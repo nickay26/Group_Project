@@ -12,6 +12,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +32,9 @@ public class CodeEditorController {
     @FXML private Button reviewBtn;
     @FXML private Button checkBtn;
 
+    // 🌟 အသစ်ထည့်လိုက်တဲ့ Continue ခလုတ်
+    @FXML private Button continueBtn;
+
     private WebEngine webEngine;
     private boolean isEditorReady = false;
     private String pendingCode = "";
@@ -38,6 +42,10 @@ public class CodeEditorController {
 
     private Project currentProject;
     private QuestionData currentQuestion;
+
+    // မေးခွန်း ၁၀ ခုကို သိမ်းဆည်းရန် Variables
+    private List<QuestionData> questionList;
+    private int currentIndex = 0;
 
     @FXML
     public void initialize() {
@@ -47,11 +55,8 @@ public class CodeEditorController {
         }
     }
 
-    // Monaco Editor HTML & JS Setup with Custom Navy Theme
-    // Monaco Editor HTML & JS Setup loading from shared resource file
     private void setupMonacoEditor() {
         if (webEngine == null) return;
-
         webEngine.setJavaScriptEnabled(true);
 
         java.net.URL htmlUrl = getClass().getResource("/Monaco/monaco_editor.html");
@@ -61,10 +66,6 @@ public class CodeEditorController {
 
         if (htmlUrl != null) {
             webEngine.load(htmlUrl.toExternalForm());
-        } else {
-            if (outputConsole != null) {
-                outputConsole.setText("Error: monaco_editor.html not found in resources!");
-            }
         }
 
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
@@ -85,9 +86,7 @@ public class CodeEditorController {
     }
 
     private String getCode() {
-        if (!isEditorReady) {
-            return pendingCode;
-        }
+        if (!isEditorReady) return pendingCode;
         Object result = webEngine.executeScript("getCode()");
         return result != null ? result.toString() : "";
     }
@@ -95,10 +94,7 @@ public class CodeEditorController {
     private void setCode(String code, String language) {
         this.pendingCode = code != null ? code : "";
         this.pendingLanguage = language;
-
-        if (isEditorReady) {
-            applyCodeToEditor(pendingCode, pendingLanguage);
-        }
+        if (isEditorReady) applyCodeToEditor(pendingCode, pendingLanguage);
     }
 
     private String mapToMonacoLanguage(String lang) {
@@ -107,17 +103,21 @@ public class CodeEditorController {
             case "c++", "cpp" -> "cpp";
             case "python" -> "python";
             case "java" -> "java";
-//            case "javascript", "js" -> "javascript";
-//            case "sql" -> "sql";
-//            case "html" -> "html";
-//            case "css" -> "css";
             default -> "plaintext";
         };
     }
 
     // ============================================
-    // INIT — Question (Mimo Style)
+    // မေးခွန်း ၁၀ ခုကို လက်ခံရန် Method
     // ============================================
+    public void initQuestions(List<QuestionData> questions) {
+        this.questionList = questions;
+        this.currentIndex = 0;
+        if (questionList != null && !questionList.isEmpty()) {
+            initQuestion(questionList.get(0));
+        }
+    }
+
     public void initQuestion(QuestionData question) {
         this.currentQuestion = question;
         this.currentProject = null;
@@ -132,11 +132,20 @@ public class CodeEditorController {
 
         if (outputConsole != null) outputConsole.clear();
         if (aiReviewArea != null) aiReviewArea.clear();
+
+        // 🌟 မေးခွန်းအသစ်ရောက်တိုင်း Run ခလုတ်ပြန်၊ Continue ခလုတ်ဖျောက်
+        if (runBtn != null) {
+            runBtn.setVisible(true);
+            runBtn.setManaged(true);
+            runBtn.setDisable(false);
+            runBtn.setText("▶ Run Code");
+        }
+        if (continueBtn != null) {
+            continueBtn.setVisible(false);
+            continueBtn.setManaged(false);
+        }
     }
 
-    // ============================================
-    // INIT — Project (Playground)
-    // ============================================
     public void initData(Project project) {
         this.currentProject = project;
         this.currentQuestion = null;
@@ -150,7 +159,7 @@ public class CodeEditorController {
     }
 
     // ============================================
-    // RUN CODE
+    // RUN CODE (Pop-up မပါတော့ဘဲ Continue ခလုတ်ပေါ်လာမယ်)
     // ============================================
     @FXML
     public void handleRunCode() {
@@ -169,8 +178,38 @@ public class CodeEditorController {
 
         ApiClient.executeCodeAsync(lang, code)
                 .thenAccept(responseJson -> Platform.runLater(() -> {
-                    outputConsole.setText(extractJsonField(responseJson, "output"));
+                    String actualOutput = extractJsonField(responseJson, "output");
+                    outputConsole.setText(actualOutput);
                     runBtn.setDisable(false);
+
+                    // 🌟 Practice Mode ဖြစ်ရင် အဖြေမှန်မမှန် စစ်ဆေးမယ်
+                    if (currentQuestion != null) {
+                        String expected = currentQuestion.getExpectedOutput().trim();
+                        if (actualOutput.trim().equals(expected)) {
+                            // အဖြေမှန်သွားရင်
+                            outputConsole.setText("✅ Correct! Well done.\n\n" + actualOutput);
+
+                            if (questionList != null && !questionList.isEmpty()) {
+                                // Run ခလုတ်ကို ဖျောက်ပြီး Continue ခလုတ်ကို ပေါ်လာအောင် လုပ်မယ်
+                                runBtn.setVisible(false);
+                                runBtn.setManaged(false);
+
+                                if (continueBtn != null) {
+                                    continueBtn.setVisible(true);
+                                    continueBtn.setManaged(true);
+
+                                    // နောက်ဆုံးမေးခွန်းဖြစ်ရင် "Finish" လို့ပြမယ်
+                                    if (currentIndex >= questionList.size() - 1) {
+                                        continueBtn.setText("Finish 🎉");
+                                    } else {
+                                        continueBtn.setText("Continue →");
+                                    }
+                                }
+                            }
+                        } else {
+                            outputConsole.setText(actualOutput + "\n\n❌ Output doesn't match expected output.");
+                        }
+                    }
                 }))
                 .exceptionally(ex -> {
                     Platform.runLater(() -> {
@@ -182,8 +221,27 @@ public class CodeEditorController {
     }
 
     // ============================================
-    // CHECK — Mimo Style
+    // 🌟 CONTINUE BUTTON နှိပ်ရင် အလုပ်လုပ်မယ့် Method
     // ============================================
+    @FXML
+    public void handleContinue() {
+        if (questionList == null || questionList.isEmpty()) return;
+
+        if (currentIndex < questionList.size() - 1) {
+            // နောက်မေးခွန်းကို ဆက်သွားမယ်
+            currentIndex++;
+            initQuestion(questionList.get(currentIndex));
+        } else {
+            // အားလုံးပြီးသွားရင် Alert လေးပြပြီး ပြန်ထွက်မယ်
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Completed");
+            alert.setHeaderText("🎉 All questions completed!");
+            alert.setContentText("You have finished all questions in this topic.");
+            alert.showAndWait();
+            handleBackToDashboard();
+        }
+    }
+
     @FXML
     public void handleCheckCode() {
         if (currentQuestion == null) {
@@ -228,9 +286,6 @@ public class CodeEditorController {
                 });
     }
 
-    // ============================================
-    // AI REVIEW
-    // ============================================
     @FXML
     public void handleReviewCode() {
         String lang = getLanguage();
@@ -265,9 +320,6 @@ public class CodeEditorController {
                 });
     }
 
-    // ============================================
-    // HINT
-    // ============================================
     @FXML
     public void handleHint() {
         if (currentQuestion == null) {
@@ -286,13 +338,9 @@ public class CodeEditorController {
         alert.showAndWait();
     }
 
-    // ============================================
-    // SAVE
-    // ============================================
     @FXML
     public void handleSaveCode() {
         if (currentProject == null) return;
-
         String updatedCode = getCode();
         currentProject.setCodeContent(updatedCode);
 
@@ -304,9 +352,6 @@ public class CodeEditorController {
                 }));
     }
 
-    // ============================================
-    // BACK
-    // ============================================
     @FXML
     public void handleBackToDashboard() {
         if (currentProject != null) handleSaveCode();
@@ -319,9 +364,6 @@ public class CodeEditorController {
         }
     }
 
-    // ============================================
-    // HELPERS
-    // ============================================
     private String getLanguage() {
         if (currentQuestion != null) return currentQuestion.getLanguage().toLowerCase();
         if (currentProject != null) return currentProject.getLanguage().toLowerCase();

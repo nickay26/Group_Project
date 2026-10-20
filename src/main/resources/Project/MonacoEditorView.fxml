@@ -21,15 +21,21 @@
         <!-- Action Buttons on Top Right -->
         <HBox spacing="10" alignment="CENTER_RIGHT">
             <Button fx:id="hintBtn" text="💡 Hint" onAction="#handleHint"
-                    style="-fx-background-color: #1e293b; -fx-text-fill: #f8fafc; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8. 14; -fx-cursor: hand; -fx-border-color: #334155; -fx-border-radius: 8px;"/>
+                    style="-fx-background-color: #1e293b; -fx-text-fill: #f8fafc; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 14; -fx-cursor: hand; -fx-border-color: #334155; -fx-border-radius: 8px;"/>
             <Button fx:id="reviewBtn" text="✨ AI Review" onAction="#handleReviewCode"
                     style="-fx-background-color: #8b5cf6; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16; -fx-cursor: hand;"/>
+
+            <!-- Run Button -->
             <Button fx:id="runBtn" text="▶ Run Code" onAction="#handleRunCode"
                     style="-fx-background-color: #334155; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 16; -fx-cursor: hand;"/>
+
+            <!-- Continue Button -->
+            <Button fx:id="continueBtn" text="Continue →" onAction="#handleContinue" visible="false" managed="false"
+                    style="-fx-background-color: #10b981; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8 20; -fx-cursor: hand;"/>
         </HBox>
     </HBox>
 
-    <!-- 🎯 Mimo-Style Practice Instructions Card -->
+    <!-- 🎯 Practice Instructions Card -->
     <VBox spacing="6" style="-fx-background-color: #1e293b; -fx-background-radius: 10px; -fx-border-color: #334155; -fx-border-radius: 10px; -fx-padding: 12;">
         <HBox spacing="10" alignment="CENTER_LEFT">
             <Label text="📖 INSTRUCTIONS:" style="-fx-text-fill: #38bdf8; -fx-font-size: 11px; -fx-font-weight: bold;"/>
@@ -45,30 +51,29 @@
         </HBox>
     </VBox>
 
-    <!-- Main Adjustable Split Pane Layout -->
+    <!-- Main Split Pane Layout -->
     <SplitPane fx:id="mainSplitPane" dividerPositions="0.55" VBox.vgrow="ALWAYS"
                style="-fx-background-color: #0d1322; -fx-box-border: transparent; -fx-padding: 0;">
 
         <!-- Left Side: Code Editor -->
         <VBox spacing="6" style="-fx-background-color: #0d1322; -fx-padding: 0 5 0 0;">
             <Label text="CODE EDITOR" style="-fx-text-fill: #38bdf8; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <!-- ဒီနေရာမှာ minHeight ကို ထည့်ထားပါတယ် -->
             <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: #0d1322; -fx-background-radius: 8px; -fx-border-color: #1e293b; -fx-border-radius: 8px; -fx-padding: 4;">
-                <WebView fx:id="codeWebView" VBox.vgrow="ALWAYS"/>
+                <WebView fx:id="codeWebView" VBox.vgrow="ALWAYS" minHeight="300" minWidth="300"/>
             </VBox>
         </VBox>
 
-        <!-- Right Side: Terminal Output & AI Review Split Vertically -->
+        <!-- Right Side: Terminal Output & AI Review -->
         <SplitPane orientation="VERTICAL" dividerPositions="0.6"
                    style="-fx-background-color: #0d1322; -fx-box-border: transparent; -fx-padding: 0 0 0 5;">
 
-            <!-- Top Right: Terminal Output -->
             <VBox spacing="6" style="-fx-background-color: #0d1322; -fx-padding: 0 0 5 0;">
                 <Label text="TERMINAL OUTPUT" style="-fx-text-fill: #38bdf8; -fx-font-size: 11px; -fx-font-weight: bold;"/>
                 <TextArea fx:id="outputConsole" editable="false" wrapText="true" VBox.vgrow="ALWAYS"
-                          style="-fx-control-inner-background: #0d1322; -fx-font-family: 'Consolas', monospace; -fx-font-size: 12px; -fx-text-fill: #e2e8f0; -fx-border-color: #1e293b; -fx-border-radius: 8px;"/>
+                          style="-fx-control-inner-background: #0d1322; -fx-font-family: 'Consolas', monospace; -fx-font-size: 16px; -fx-text-fill: #e2e8f0; -fx-border-color: #1e293b; -fx-border-radius: 8px;"/>
             </VBox>
 
-            <!-- Bottom Right: AI Code Review -->
             <VBox spacing="6" style="-fx-background-color: #0d1322; -fx-padding: 5 0 0 0;">
                 <Label text="✨ AI CODE REVIEW" style="-fx-text-fill: #a78bfa; -fx-font-size: 11px; -fx-font-weight: bold;"/>
                 <TextArea fx:id="aiReviewArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"

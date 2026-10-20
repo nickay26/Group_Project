@@ -38,9 +38,10 @@ public class PracticeQuestionController {
     private List<Button> allChoiceButtons = new ArrayList<>();
     private String currentType = null;
 
-    // ============================================
-// ✅ SET OUTPUT STYLE — Border ပါ
-// ============================================
+    // 🌟 မေးခွန်း ၁၀ ခုကို သိမ်းဆည်းရန် အသစ်ထည့်ထားသော Variables များ
+    private List<QuestionData> questionList;
+    private int currentIndex = 0;
+
     private void setOutputStyle(String textColor) {
         outputConsole.setStyle(
                 "-fx-text-fill: " + textColor + "; " +
@@ -54,6 +55,17 @@ public class PracticeQuestionController {
                         "-fx-font-size: 13px; " +
                         "-fx-padding: 10;"
         );
+    }
+
+    // ============================================
+    // 🌟 မေးခွန်း ၁၀ ခုကို လက်ခံရန် Method အသစ်
+    // ============================================
+    public void initQuestions(List<QuestionData> questions) {
+        this.questionList = questions;
+        this.currentIndex = 0;
+        if (questionList != null && !questionList.isEmpty()) {
+            setQuestion(questionList.get(0));
+        }
     }
 
     // ============================================
@@ -258,27 +270,26 @@ public class PracticeQuestionController {
     }
 
     // ============================================
-    // NEXT
+    // 🌟 NEXT (အစီအစဉ်လိုက် နောက်မေးခွန်းကို ပြရန် ပြင်ဆင်ထားသည်)
     // ============================================
     @FXML
     public void handleNext() {
-        if (currentQuestion == null) return;
+        if (questionList == null || questionList.isEmpty()) return;
 
-        List<QuestionData> list = JsonUtils.getPracticeListByType(
-                currentLanguage, currentType);
+        currentIndex++;
+        if (currentIndex < questionList.size()) {
+            // နောက်မေးခွန်းကို ဆက်ပြမယ်
+            setQuestion(questionList.get(currentIndex));
+        } else {
+            // မေးခွန်းအားလုံး ပြီးသွားရင် ပြမယ်
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Practice Complete");
+            alert.setHeaderText("🎉 Topic Completed!");
+            alert.setContentText("You have finished all " + questionList.size() + " questions in this topic.");
+            alert.showAndWait();
 
-        if (list == null || list.isEmpty()) return;
-
-        list.removeIf(q -> q.getTitle().equals(currentQuestion.getTitle()));
-
-        if (list.isEmpty()) {
-            list = JsonUtils.getPracticeListByType(currentLanguage, currentType);
+            handleBack(); // Main Page ကို ပြန်သွားမယ်
         }
-
-        java.util.Random rand = new java.util.Random();
-        QuestionData nextQ = list.get(rand.nextInt(list.size()));
-
-        setQuestion(nextQ);
     }
 
     // ============================================
@@ -421,7 +432,6 @@ public class PracticeQuestionController {
     // ============================================
     @FXML
     public void handleBack() {
-        // ✅ MainLayoutController ကို ခေါ်
         MainLayoutController layout = MainLayoutController.getInstance();
         if (layout != null) {
             layout.loadPage("PracticeView.fxml");
