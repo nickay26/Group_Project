@@ -1004,9 +1004,17 @@ public class DatabaseManager {
     }
 
     private static User mapJsonToUser(JSONObject obj) {
+        // ⭐ Name နှင့် Email ကို Case-insensitive ဖြင့် သေချာစွာ ရှာယူခြင်း
         int userId = obj.has("User_ID") ? obj.getInt("User_ID") : obj.optInt("user_id", -1);
-        String name = obj.has("Name") ? obj.getString("Name") : obj.optString("name", "User");
-        String email = obj.has("Email") ? obj.getString("Email") : obj.optString("email", "");
+
+        String name = "User";
+        if (obj.has("Name") && !obj.isNull("Name")) name = obj.getString("Name");
+        else if (obj.has("name") && !obj.isNull("name")) name = obj.getString("name");
+
+        String email = "";
+        if (obj.has("Email") && !obj.isNull("Email")) email = obj.getString("Email");
+        else if (obj.has("email") && !obj.isNull("email")) email = obj.getString("email");
+
         String profile = obj.optString("Profile", obj.optString("profile", null));
         int xp = obj.optInt("XP", obj.optInt("xp", 0));
         int streak = obj.optInt("Streak", obj.optString("streak", "0").isEmpty() ? 0 : Integer.parseInt(obj.optString("streak", "0")));
@@ -1024,13 +1032,13 @@ public class DatabaseManager {
         String subscriptionType = obj.optString("subscription_type", obj.optString("Subscription_Type", "free"));
         String premiumExpiry = obj.optString("premium_expiry", obj.optString("Premium_Expiry", null));
 
+        // ⭐ User Constructor ထဲသို့ (userId, name, email, ...) အစဉ်အတိုင်း မှန်ကန်စွာ ထည့်သွင်းခြင်း
         User user = new User(userId, name, email, profile, xp, streak, coin, brainCount);
         user.setPlanType(planType);
         user.setRole(role);
         user.setSubscriptionType(subscriptionType);
         user.setPremiumExpiry(premiumExpiry);
 
-        // ⭐ ပြင်ဆင်ချက်: ဆာဗာမှ is_premium (true/false) ပါလာလျှင်ပါ, သို့မဟုတ် plan_type ကို စစ်ပါ
         boolean serverIsPremium = obj.optBoolean("is_premium", obj.optBoolean("isPremium", false));
         boolean isPremium = serverIsPremium
                 || "PREMIUM".equalsIgnoreCase(planType)
