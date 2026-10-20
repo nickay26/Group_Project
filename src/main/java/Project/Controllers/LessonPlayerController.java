@@ -348,6 +348,7 @@ public class LessonPlayerController {
                         earnedXP,
                         earnedCoins
                 );
+                DatabaseManager.checkAndIssueCertificate(userId, courseId);
             }
 
             final int finalXp = earnedXP;

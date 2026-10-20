@@ -227,6 +227,12 @@ public class CoursesPageController {
         // 1. Session ထဲတွင် Active Course ID သတ်မှတ်ခြင်း
         UserSession.setActiveCourseId(course.getCourseId());
 
+        // ⭐ သင်တန်းက 100% ပြီးဆုံးသွားပြီဆိုလျှင် Certificate ကို ကြိုတင်စစ်ဆေးနိုင်သည်
+        int userId = UserSession.getUserId();
+        if (course.getProgressPercent() >= 100) {
+            DatabaseManager.checkAndIssueCertificate(userId, course.getCourseId());
+        }
+
         // 2. Main Layout Header ပေါ်ရှိ Course Title စာသားကို ချက်ချင်း Update ပြုလုပ်ခြင်း
         if (MainLayoutController.getInstance() != null) {
             MainLayoutController.getInstance().updateCourseTitle();
