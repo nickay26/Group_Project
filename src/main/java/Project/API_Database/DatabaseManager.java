@@ -381,6 +381,9 @@ public class DatabaseManager {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
+                // 💡 စမ်းသပ်ရန် - API က ဘာတွေ ပြန်ပေးလဲဆိုတာ Console မှာ ထုတ်ကြည့်ပါ
+                System.out.println("API Response: " + response.body());
+
                 JSONArray arr = new JSONArray(response.body());
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
@@ -389,14 +392,25 @@ public class DatabaseManager {
                     int total = obj.optInt("total_lessons", 0);
                     int completed = obj.optInt("completed_lessons", 0);
 
-                    courses.add(new Course(
+                    // ✅ ၁။ API JSON ထဲကနေ ရက်စွဲကို ဆွဲထုတ်မယ်
+                    // (သင့် API က completion_date လို့ ပို့လား၊ issued_date လို့ ပို့လား စစ်ပါ)
+                    String completionDate = obj.optString("completion_date",
+                            obj.optString("issued_date",
+                                    obj.optString("completedDate", "")));
+
+                    Course course = new Course(
                             courseId,
                             title,
                             "Master " + title + " with interactive lessons.",
                             courseId.split("_")[0],
                             total,
                             completed
-                    ));
+                    );
+
+                    // ✅ ၂။ ရလာတဲ့ ရက်စွဲကို Course object ထဲကို ထည့်မယ်
+                    course.setCompletedDate(completionDate);
+
+                    courses.add(course);
                 }
             }
         } catch (Exception e) {
@@ -404,7 +418,6 @@ public class DatabaseManager {
         }
         return courses;
     }
-
     public static List<Lesson> getLessonsForCourse(String courseId) {
         List<Lesson> lessons = new ArrayList<>();
         try {
@@ -478,8 +491,38 @@ public class DatabaseManager {
         List<Course> completed = new ArrayList<>();
         List<Course> allCourses = getCoursesForUser(userId);
 
+        // ✅ Certificate Data တွေကို API ကနေ ဆွဲယူမယ်
+        org.json.JSONArray certArray = getUserCertificates(userId);
+
+        // ရှာရလွယ်အောင် Map တစ်ခု ဆောက်မယ် (Course_ID -> JSONObject)
+        java.util.Map<String, org.json.JSONObject> certMap = new java.util.HashMap<>();
+        if (certArray != null) {
+            for (int i = 0; i < certArray.length(); i++) {
+                org.json.JSONObject certObj = certArray.getJSONObject(i);
+                // API က ဘယ်လို Key နဲ့ ပို့ပို့ ယူနိုင်အောင် ကာကွယ်ထားတယ်
+                String cId = certObj.optString("course_id", certObj.optString("Course_ID", ""));
+                if (!cId.isEmpty()) {
+                    certMap.put(cId.toUpperCase(), certObj);
+                }
+            }
+        }
+
         for (Course c : allCourses) {
             if (c.getProgressPercent() >= 100) {
+                // ✅ ဒီ Course အတွက် Certificate ရှိရင် Data တွေ ထည့်မယ်
+                if (certMap.containsKey(c.getCourseId().toUpperCase())) {
+                    org.json.JSONObject certData = certMap.get(c.getCourseId().toUpperCase());
+
+                    String issuedDate = certData.optString("issued_date",
+                            certData.optString("Issue_Date",
+                                    certData.optString("completion_date", "")));
+
+                    String certId = certData.optString("certificate_id",
+                            certData.optString("Certificate_ID", ""));
+
+                    c.setCompletedDate(issuedDate);
+                    c.setCertificateId(certId);
+                }
                 completed.add(c);
             }
         }
@@ -731,7 +774,12 @@ public class DatabaseManager {
         }
         return null;
     }
-
+    // DatabaseManager.java ထဲက getCompletedCourses method ထဲတွင်
+// SQL query ကို အောက်ပါအတိုင်း issued_date ပါ ပါလာအောင် ပြင်ပါ
+    /*String query = "SELECT c.*, uc.issued_date as completedDate " +
+            "FROM course_table c " +
+            "JOIN user_certificate uc ON c.Course_ID = uc.course_id " +
+            "WHERE uc.user_id = ?";*/
     public static JSONObject deductBrain(int userId) {
         try {
             JSONObject body = new JSONObject();

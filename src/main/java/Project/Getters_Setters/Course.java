@@ -40,4 +40,23 @@ public class Course {
         double calculated = ((double) completedLessons / totalLessons) * 100;
         return (int) Math.round(Math.min(100.0, calculated));
     }
+    private String completedDate;
+
+    public String getCompletedDate() {
+        return completedDate;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
+    }
+    // Course.java ထဲမှာ ဒီကုဒ်တွေ ထည့်ပါ
+    private String certificateId;
+
+    public String getCertificateId() {
+        return certificateId;
+    }
+
+    public void setCertificateId(String certificateId) {
+        this.certificateId = certificateId;
+    }
 }

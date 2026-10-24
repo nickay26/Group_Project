@@ -244,7 +244,7 @@ public class ProfileViewController {
 
         VBox titleBox = new VBox(2);
         Label titleLabel = new Label(course.getTitle());
-        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 18px; -fx-font-weight: bold;");
+        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 24px; -fx-font-weight: bold;");
 
         Label subTitle = new Label("Certificate of Completion");
         subTitle.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 11px;");
@@ -257,7 +257,7 @@ public class ProfileViewController {
         descLabel.setWrapText(true);
         descLabel.setMaxWidth(340);
 
-        Button viewBtn = new Button("📜  View Certificate  →");
+        Button viewBtn = new Button("View Certificate  →");
         viewBtn.setStyle(
                 "-fx-background-color: #1E40AF; " +
                         "-fx-text-fill: #F8FAFC; " +
@@ -458,18 +458,28 @@ public class ProfileViewController {
 
         logoBox.getChildren().addAll(logoIcon, logoWord);
 
-        // ✅ Date — "Issued on"
-        Label dateLabel = new Label("Issued on " + java.time.LocalDate.now());
+        // ✅ Database ကနေ ရလာတဲ့ ရက်စွဲကို ယူမယ်
+        String issueDate = course.getCompletedDate();
+        if (issueDate == null || issueDate.trim().isEmpty() || issueDate.equalsIgnoreCase("null")) {
+            issueDate = "Unknown Date"; // ရက်စွဲမရှိရင် ဒီလိုပြပါ
+        }
+
+        Label dateLabel = new Label("Issued on " + issueDate);
         dateLabel.setStyle(
                 "-fx-text-fill: #475569; " +
                         "-fx-font-size: 10px; " +
                         "-fx-font-family: 'Georgia', serif;"
         );
 
-        // ✅ Certificate ID
-        String certId = "CERT-" + java.time.Year.now() + "-" +
-                course.getCourseId().toUpperCase() + "-" +
-                String.format("%04d", user.getUserId());
+        // ✅ Database ကနေ ရလာတဲ့ Certificate ID ကို ယူမယ်
+        String certId = course.getCertificateId();
+
+        // တကယ်လို့ Database မှာ Certificate ID မရှိသေးရင် ယာယီဆောက်ပြမယ် (Fallback)
+        if (certId == null || certId.trim().isEmpty() || certId.equalsIgnoreCase("null")) {
+            certId = "CERT-" + java.time.Year.now() + "-" +
+                    course.getCourseId().toUpperCase() + "-" +
+                    String.format("%04d", user.getUserId());
+        }
 
         Label certIdLabel = new Label("Certificate ID: " + certId);
         certIdLabel.setStyle(
