@@ -161,7 +161,17 @@ public class LessonPlayerController {
         String title = slide.optString("title", "");
         originalPrompt = slide.optString("prompt", "");
         originalCodeSnippet = slide.optString("codeSnippet", slide.optString("starterCode", null));
-        String language = slide.optString("language", "cpp");
+        String courseId = UserSession.getActiveCourseId(); // Active Course ID ကို ယူမည်
+        String defaultLang = "cpp";
+        if (courseId != null) {
+            String upperCourse = courseId.toUpperCase();
+            if (upperCourse.contains("JAVA")) {
+                defaultLang = "java";
+            } else if (upperCourse.contains("PYTHON") || upperCourse.contains("PY")) {
+                defaultLang = "python";
+            }
+        }
+        String language = slide.optString("language", defaultLang);
 
         boolean hasQuestion = slide.has("correctAnswer") && !slide.isNull("correctAnswer");
         boolean isInteractive = slide.optBoolean("interactive", false) || slide.optBoolean("isInteractive", false);
@@ -338,6 +348,7 @@ public class LessonPlayerController {
                         earnedXP,
                         earnedCoins
                 );
+                DatabaseManager.checkAndIssueCertificate(userId, courseId);
             }
 
             final int finalXp = earnedXP;
