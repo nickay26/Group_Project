@@ -2,6 +2,7 @@ package Project.Controllers;
 
 import Project.API_Database.DatabaseManager;
 import Project.Helpers.DialogUtils;
+import Project.Getters_Setters.Course;
 import Project.Getters_Setters.Lesson;
 import Project.Getters_Setters.User;
 import Project.Getters_Setters.UserSession;
@@ -10,18 +11,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.*;
 
 public class LearnPageController {
@@ -38,39 +40,57 @@ public class LearnPageController {
     private final Set<String> expandedModules = new HashSet<>();
     private List<Lesson> currentLessons = new ArrayList<>();
 
+    // ⭐ Certificate ပြပြီးသား Course တွေကို မှတ်ထားဖို့ (ထပ်ခါထပ်ခါ မပေါ်စေရန်)
+    private static final Set<String> shownCertificates = new HashSet<>();
+
     @FXML
     public void initialize() {
         refreshUserData();
         String activeCourseId = UserSession.getActiveCourseId();
         loadCoursePath(activeCourseId);
+
+        // ⭐ Course ပြီးသွားရင် Certificate ပေါ်လာအောင် စစ်ဆေးမယ်
+        checkAndShowCertificate(activeCourseId);
+
         Platform.runLater(this::scrollToActiveLesson);
+    }
+
+    // ============================================
+    // ⭐ Certificate စစ်ဆေးပြီး ပြမယ့် Method အသစ်
+    // ============================================
+    private void checkAndShowCertificate(String courseId) {
+        int userId = UserSession.getUserId();
+        List<Course> completedCourses = DatabaseManager.getCompletedCourses(userId);
+
+        for (Course course : completedCourses) {
+            if (course.getCourseId().equalsIgnoreCase(courseId)) {
+                // Certificate ရပြီးသားလား API ကို စစ်မယ်
+                String certId = DatabaseManager.checkAndIssueCertificate(userId, courseId);
+
+                // တကယ်လို့ Certificate ရပြီး၊ ဒီ Session မှာ မပြရသေးဘူးဆိုရင် ပြမယ်
+                if (certId != null && !shownCertificates.contains(certId)) {
+                    shownCertificates.add(certId); // ပြပြီးသားအဖြစ် မှတ်မယ်
+                    Platform.runLater(() -> showCertificateDialog(course));
+                }
+                break;
+            }
+        }
     }
 
     private boolean isUserPremium() {
         User user = UserSession.getCurrentUser();
-        if (user == null) {
-            System.out.println("[Debug] UserSession.getCurrentUser() is NULL!");
-            return false;
-        }
-        System.out.println("[Debug] User found -> Name: " + user.getName() +
-                ", isPremium(): " + user.isPremium() +
-                ", PlanType: " + user.getPlanType() +
-                ", SubscriptionType: " + user.getSubscriptionType());
+        if (user == null) return false;
         return user.isPremium();
     }
 
     private int getActiveLessonOrder(int completedCount) {
         boolean premiumUser = isUserPremium();
-        System.out.println("🔍 [Debug] getActiveLessonOrder: completedCount=" + completedCount + ", isUserPremium=" + premiumUser);
 
         for (Lesson lesson : currentLessons) {
-            System.out.println("   - Checking lesson: order=" + lesson.getLessonOrder() + ", title=" + lesson.getTitle() + ", isPremium=" + lesson.isPremium());
             if (lesson.getLessonOrder() > completedCount) {
                 if (!premiumUser && lesson.isPremium()) {
-                    System.out.println("     ⏩ Skipping premium lesson: " + lesson.getTitle());
                     continue;
                 }
-                System.out.println("     ⭐ Selected active lesson: " + lesson.getTitle() + " (Order: " + lesson.getLessonOrder() + ")");
                 return lesson.getLessonOrder();
             }
         }
@@ -291,7 +311,6 @@ public class LearnPageController {
         if (lesson.getLessonOrder() == activeOrder) {
             return "ACTIVE";
         } else {
-            // ⭐ အကယ်၍ သင်ခန်းစာက Premium ဖြစ်ပြီး၊ User ကိုယ်တိုင်ကလည်း Premium မဟုတ်မှသာလျှင် PREMIUM_LOCKED ဖြစ်ရပါမည်
             if (lesson.isPremium() && !isUserPremium()) {
                 return "PREMIUM_LOCKED";
             }
@@ -333,17 +352,17 @@ public class LearnPageController {
                 stack.setStyle("-fx-cursor: hand;");
                 break;
 
-            case "PREMIUM_LOCKED": // ⭐ ပရီမီယံ လော့ခ်ကျနေသော သင်ခန်းစာများအတွက် ရွှေရောင်စတိုင်
+            case "PREMIUM_LOCKED":
                 fillColor = Color.web("#1E293B");
-                strokeColor = Color.web("#F59E0B"); // ရွှေရောင်/လိမ္မော်ရောင် ဘောင်
-                icon = "⭐"; // သို့မဟုတ် 👑 ပုံစံသုံးနိုင်ပါသည်
+                strokeColor = Color.web("#F59E0B");
+                icon = "⭐";
                 glow.setColor(Color.web("#F59E0B", 0.5));
                 glow.setRadius(18);
                 stack.setEffect(glow);
                 stack.setStyle("-fx-cursor: hand;");
                 break;
 
-            default: // LOCKED (ရိုးရိုး အခမဲ့သင်ခန်းစာ လော့ခ်ကျခြင်း)
+            default: // LOCKED
                 fillColor = Color.web("#1E293B");
                 strokeColor = Color.web("#475569");
                 icon = "🔒";
@@ -371,7 +390,6 @@ public class LearnPageController {
         stack.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 if (status.equals("PREMIUM_LOCKED")) {
-                    // ပရီမီယံသင်ခန်းစာကို နှိပ်မိပါက Upgrade Dialog ကို ခေါ်ပြရန်
                     DialogUtils.showUpgradePromptDialog("This next lesson is a Supernova Premium feature! Upgrade your plan to continue.");
                 } else if (!status.equals("LOCKED")) {
                     openLessonPage(lesson);
@@ -460,5 +478,160 @@ public class LearnPageController {
 
         curve.setEndX(endX);
         curve.setEndY(endY);
+    }
+
+    // ============================================
+    // ⭐ Certificate ပြမယ့် Popup Method (ProfileViewController ကနေ ယူထားပါတယ်)
+    // ============================================
+    private void showCertificateDialog(Course course) {
+        User user = UserSession.getCurrentUser();
+        if (user == null) return;
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Certificate of Achievement");
+        dialog.setHeaderText(null);
+
+        StackPane certStack = new StackPane();
+        certStack.setPrefSize(720, 500);
+        certStack.setMinSize(720, 500);
+        certStack.setMaxSize(720, 500);
+
+        try {
+            InputStream is = getClass().getResourceAsStream("/Images/certificate_template.png");
+            if (is != null) {
+                Image certImg = new Image(is, 1440, 1000, true, true);
+                ImageView certBg = new ImageView(certImg);
+                certBg.setFitWidth(720);
+                certBg.setFitHeight(500);
+                certBg.setPreserveRatio(false);
+                certBg.setSmooth(true);
+                certBg.setCache(true);
+                certStack.getChildren().add(certBg);
+            }
+        } catch (Exception e) {
+            System.out.println("Certificate template not found");
+        }
+
+        VBox overlay = new VBox(6);
+        overlay.setAlignment(Pos.CENTER);
+        overlay.setPadding(new Insets(130, 60, 30, 60));
+        overlay.setMaxWidth(720);
+        overlay.setMaxHeight(500);
+
+        Label certifyText = new Label("This is to certify that");
+        certifyText.setStyle("-fx-text-fill: #475569; -fx-font-size: 11px; -fx-font-style: italic; -fx-font-family: 'Georgia', serif;");
+
+        Label nameLabel = new Label(user.getName());
+        nameLabel.setStyle("-fx-text-fill: #0F172A; -fx-font-size: 26px; -fx-font-weight: bold; -fx-font-family: 'Georgia', serif; -fx-padding: 3 0 3 0;");
+
+        Label completedText = new Label("has successfully completed the course");
+        completedText.setStyle("-fx-text-fill: #475569; -fx-font-size: 11px; -fx-font-style: italic; -fx-font-family: 'Georgia', serif;");
+
+        Label courseLabel = new Label(course.getTitle());
+        courseLabel.setStyle("-fx-text-fill: #1E40AF; -fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Georgia', serif; -fx-padding: 2 0 2 0;");
+
+        Label descLabel = new Label("in recognition of successfully mastering the course curriculum, demonstrating proficiency in problem-solving, and completing all lessons and quizzes.");
+        descLabel.setStyle("-fx-text-fill: #64748B; -fx-font-size: 9.5px; -fx-font-style: italic; -fx-font-family: 'Georgia', serif; -fx-text-alignment: center;");
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(480);
+        descLabel.setAlignment(Pos.CENTER);
+
+        HBox logoBox = new HBox(8);
+        logoBox.setAlignment(Pos.CENTER);
+        logoBox.setPadding(new Insets(5, 0, 2, 0));
+
+        ImageView logoIcon = new ImageView();
+        ImageView logoWord = new ImageView();
+
+        try {
+            InputStream is1 = getClass().getResourceAsStream("/Images/Sodexa.png");
+            if (is1 != null) {
+                Image img1 = new Image(is1, 35, 35, true, true);
+                logoIcon.setImage(img1);
+                logoIcon.setFitWidth(30);
+                logoIcon.setFitHeight(30);
+                logoIcon.setPreserveRatio(true);
+            }
+            InputStream is2 = getClass().getResourceAsStream("/Images/sodexword.png");
+            if (is2 != null) {
+                Image img2 = new Image(is2, 100, 35, true, true);
+                logoWord.setImage(img2);
+                logoWord.setFitWidth(85);
+                logoWord.setFitHeight(25);
+                logoWord.setPreserveRatio(true);
+            }
+        } catch (Exception e) {
+            System.out.println("Logo images not found: " + e.getMessage());
+        }
+
+        logoBox.getChildren().addAll(logoIcon, logoWord);
+
+        String issueDate = course.getCompletedDate();
+        if (issueDate == null || issueDate.trim().isEmpty() || issueDate.equalsIgnoreCase("null")) {
+            issueDate = "Unknown Date";
+        }
+
+        Label dateLabel = new Label("Issued on " + issueDate);
+        dateLabel.setStyle("-fx-text-fill: #475569; -fx-font-size: 10px; -fx-font-family: 'Georgia', serif;");
+
+        String certId = course.getCertificateId();
+        if (certId == null || certId.trim().isEmpty() || certId.equalsIgnoreCase("null")) {
+            certId = "CERT-" + java.time.Year.now() + "-" + course.getCourseId().toUpperCase() + "-" + String.format("%04d", user.getUserId());
+        }
+
+        Label certIdLabel = new Label("Certificate ID: " + certId);
+        certIdLabel.setStyle("-fx-text-fill: #94A3B8; -fx-font-size: 8px; -fx-font-family: 'Georgia', serif;");
+
+        Label verifiedLabel = new Label("✔ Verified");
+        verifiedLabel.setStyle("-fx-text-fill: #10B981; -fx-font-size: 9px; -fx-font-weight: bold;");
+
+        overlay.getChildren().addAll(certifyText, nameLabel, completedText, courseLabel, descLabel, logoBox, dateLabel, certIdLabel, verifiedLabel);
+
+        certStack.getChildren().add(overlay);
+        StackPane.setAlignment(overlay, Pos.CENTER);
+
+        Button downloadBtn = new Button("📥 Download Image");
+        downloadBtn.setStyle("-fx-background-color: #10B981; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 10 25; -fx-cursor: hand;");
+
+        downloadBtn.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Certificate");
+            fileChooser.setInitialFileName("Certificate_" + course.getTitle().replaceAll("\\s+", "_") + ".png");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Image", "*.png"));
+
+            File file = fileChooser.showSaveDialog(dialog.getOwner());
+            if (file != null) {
+                try {
+                    javafx.scene.SnapshotParameters params = new javafx.scene.SnapshotParameters();
+                    params.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                    javafx.scene.image.WritableImage snapshot = certStack.snapshot(params, null);
+
+                    javax.imageio.ImageIO.write(javafx.embed.swing.SwingFXUtils.fromFXImage(snapshot, null), "png", file);
+                    DialogUtils.showSuccessDialog("Certificate saved successfully!");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    DialogUtils.showErrorDialog("Failed to save: " + ex.getMessage());
+                }
+            }
+        });
+
+        HBox buttonBar = new HBox(15);
+        buttonBar.setAlignment(Pos.CENTER_RIGHT);
+        buttonBar.setPadding(new Insets(15, 25, 15, 25));
+        buttonBar.setStyle("-fx-background-color: #0F172A;");
+        buttonBar.getChildren().add(downloadBtn);
+
+        VBox dialogContent = new VBox(0);
+        dialogContent.getChildren().addAll(certStack, buttonBar);
+        dialogContent.setStyle("-fx-background-color: #0F172A;");
+
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.getDialogPane().setStyle("-fx-background-color: #0F172A;");
+
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setVisible(false);
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setManaged(false);
+
+        dialog.showAndWait();
     }
 }
