@@ -244,7 +244,7 @@ public class ProfileViewController {
 
         VBox titleBox = new VBox(2);
         Label titleLabel = new Label(course.getTitle());
-        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 24px; -fx-font-weight: bold;");
+        titleLabel.setStyle("-fx-text-fill: #F8FAFC; -fx-font-size: 16px; -fx-font-weight: bold;");
 
         Label subTitle = new Label("Certificate of Completion");
         subTitle.setStyle("-fx-text-fill: #60A5FA; -fx-font-size: 11px;");
@@ -330,7 +330,7 @@ public class ProfileViewController {
     // ============================================
     // ✅ SHOW CERTIFICATE — Popup
     // ============================================
-    private void showCertificate(Course course) {
+    public static void showCertificate(Course course) {
         User user = UserSession.getCurrentUser();
         if (user == null) return;
 
@@ -346,7 +346,7 @@ public class ProfileViewController {
 
         // ✅ Certificate Template ပုံ — 2x size နဲ့ load → ရှင်းလင်း
         try {
-            InputStream is = getClass().getResourceAsStream("/Images/certificate_template.png");
+            InputStream is = ProfileViewController.class.getResourceAsStream("/Images/certificate_template.png");
             if (is != null) {
                 Image certImg = new Image(is, 1440, 1000, true, true);
                 ImageView certBg = new ImageView(certImg);
@@ -381,7 +381,7 @@ public class ProfileViewController {
         Label nameLabel = new Label(user.getName());
         nameLabel.setStyle(
                 "-fx-text-fill: #0F172A; " +
-                        "-fx-font-size: 26px; " +
+                        "-fx-font-size: 16px; " +
                         "-fx-font-weight: bold; " +
                         "-fx-font-family: 'Georgia', serif; " +
                         "-fx-padding: 3 0 3 0;"
@@ -400,7 +400,7 @@ public class ProfileViewController {
         Label courseLabel = new Label(course.getTitle());
         courseLabel.setStyle(
                 "-fx-text-fill: #1E40AF; " +
-                        "-fx-font-size: 18px; " +
+                        "-fx-font-size: 26px; " +
                         "-fx-font-weight: bold; " +
                         "-fx-font-family: 'Georgia', serif; " +
                         "-fx-padding: 2 0 2 0;"
@@ -434,7 +434,7 @@ public class ProfileViewController {
 
         try {
             // ပထမပုံ (Sodexa.png - သင်္ကေတ လိုဂို)
-            InputStream is1 = getClass().getResourceAsStream("/Images/Sodexa.png");
+            InputStream is1 = ProfileViewController.class.getResourceAsStream("/Images/Sodexa.png");
             if (is1 != null) {
                 Image img1 = new Image(is1, 35, 35, true, true);
                 logoIcon.setImage(img1);
@@ -444,7 +444,7 @@ public class ProfileViewController {
             }
 
             // ဒုတိယပုံ (sodexword.png - စာသား လိုဂို)
-            InputStream is2 = getClass().getResourceAsStream("/Images/sodexword.png");
+            InputStream is2 = ProfileViewController.class.getResourceAsStream("/Images/sodexword.png");
             if (is2 != null) {
                 Image img2 = new Image(is2, 100, 35, true, true);
                 logoWord.setImage(img2);
